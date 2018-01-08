@@ -1,0 +1,21 @@
+<<<<<<< HEAD
+=======
+*.zip
+>>>>>>> origin/profile-settings
+/node_modules
+/public/storage
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+/public_html/public/socketjs/config-server.js
+/public/build
+/public/css
+/public/js
+/demo
+<<<<<<< HEAD
+=======
+.htaccess
+/public/images/events/*
+>>>>>>> origin/profile-settings

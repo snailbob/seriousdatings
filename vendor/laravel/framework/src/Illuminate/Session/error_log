@@ -1,0 +1,1 @@
+[27-Oct-2017 04:29:17 UTC] PHP Fatal error:  Interface 'Illuminate\Session\ExistenceAwareInterface' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Session/DatabaseSessionHandler.php on line 10

@@ -1,0 +1,107 @@
+/*---------------morris Chart-----*/
+.chart-panel { border: 1px solid @panel-default-border; padding: 10px; margin-bottom: 20px; .box-shadow(0 1px 5px rgba(0,0,0,.1)); background: @body-bg;}
+.morris-hover {
+	position: absolute;
+	z-index: 1000;
+        &.morris-default-style {
+	padding: 3px;
+	color: @gray;
+	background: rgba(255,255,255,0.8);
+	border: solid 1px rgba(230,230,230,0.8);
+	font-family: sans-serif;
+	font-size: 10px;
+    font-weight: 600;
+	text-align: center;
+        .morris-hover-row-label {
+        font-weight: bold;
+        margin: 0.25em 0
+    }
+    .morris-hover-point {
+	white-space: nowrap;
+	margin: 0.1em 0
+}
+}
+}
+.morris-chart { margin-left: -20px;  margin-right: -20px; height: 150px;
+    text {font-size: 10px !important; font-weight: 600 !important; color: @gray-base !important;}
+}
+
+
+
+// Chat Widget
+
+.chat {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+        li {
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 1px dotted @gray-light;
+    }
+    &.left .chat-body {
+    margin-left: 60px;
+}
+    &.right .chat-body {
+    margin-right: 60px;
+}
+    .chat-body p {
+    margin: 0;
+}
+
+}
+
+.panel .slidedown .glyphicon,
+.chat .glyphicon {
+    margin-right: 5px;
+}
+
+.chat-panel .panel-body {
+    height: 350px;
+    overflow-y: scroll;
+}
+
+// Flot Charts Containers
+
+.flot-chart {
+    display: block;
+    height: 305px;
+}
+.chart-heading { font-size: 18px; padding: 5px 10px 10px 10px;}
+.flot-chart-content {
+    width: 100%;
+    height: 100%;
+}
+
+/**---------------------------*/
+
+.easypiechart {
+	position: relative;
+	display: block;
+	width: 85px;
+	height: 85px; 
+	margin: 5px auto;
+	text-align: center;
+	canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+        width: 85px;
+        height: 85px;
+	}
+    .percent{
+	display: inline-block;
+	line-height: 85px;
+        font-weight: 600;
+	z-index: 2;
+
+	&:after{
+		content: '%';
+		margin-left: 0.1em;
+		font-size: .8em;
+	}
+}
+}
+.easypiechart-panel { padding: 10px; 
+    h1,h2, h3,h4 , h5, h6 { margin: 0 7px; padding: 0;}
+}

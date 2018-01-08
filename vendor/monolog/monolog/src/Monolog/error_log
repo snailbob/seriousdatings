@@ -1,0 +1,2 @@
+[21-Oct-2017 13:05:37 UTC] PHP Fatal error:  Interface 'Psr\Log\LoggerInterface' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Logger.php on line 28
+[22-Oct-2017 20:03:21 UTC] PHP Fatal error:  Interface 'Psr\Log\LoggerInterface' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Logger.php on line 28

@@ -1,0 +1,11 @@
+[22-Oct-2017 01:31:19 UTC] PHP Fatal error:  Interface 'Mockery\ExpectationInterface' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/Expectation.php on line 24
+[22-Oct-2017 11:36:41 UTC] PHP Fatal error:  Interface 'Mockery\ExpectationInterface' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/Expectation.php on line 24
+[23-Oct-2017 08:24:53 UTC] PHP Fatal error:  Interface 'Mockery\ExpectationInterface' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/Expectation.php on line 24
+[23-Oct-2017 12:15:40 UTC] PHP Fatal error:  Class 'Mockery\Expectation' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/VerificationExpectation.php on line 6
+[24-Oct-2017 16:42:34 UTC] PHP Fatal error:  Class 'Mockery\Expectation' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/VerificationExpectation.php on line 6
+[24-Oct-2017 19:10:07 UTC] PHP Fatal error:  Interface 'Mockery\MockInterface' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/Mock.php on line 26
+[25-Oct-2017 03:48:28 UTC] PHP Fatal error:  Interface 'Mockery\MockInterface' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/Mock.php on line 26
+[25-Oct-2017 07:16:33 UTC] PHP Fatal error:  Interface 'Mockery\MockInterface' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/Mock.php on line 26
+[26-Oct-2017 06:40:13 UTC] PHP Fatal error:  Interface 'Mockery\MockInterface' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/Mock.php on line 26
+[26-Oct-2017 15:14:45 UTC] PHP Fatal error:  Interface 'Mockery\ExpectationInterface' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/CompositeExpectation.php on line 24
+[26-Oct-2017 23:22:48 UTC] PHP Fatal error:  Interface 'Mockery\ExpectationInterface' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/CompositeExpectation.php on line 24

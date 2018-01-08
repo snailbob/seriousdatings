@@ -1,0 +1,2 @@
+[30-Oct-2017 22:51:06 UTC] PHP Fatal error:  Class 'PhpSpec\Formatter\ConsoleFormatter' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/src/PhpSpec/Formatter/PrettyFormatter.php on line 21
+[31-Oct-2017 08:18:36 UTC] PHP Fatal error:  Class 'PhpSpec\Formatter\ConsoleFormatter' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/src/PhpSpec/Formatter/PrettyFormatter.php on line 21

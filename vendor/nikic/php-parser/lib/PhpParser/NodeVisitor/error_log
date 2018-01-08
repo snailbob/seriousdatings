@@ -1,0 +1,1 @@
+[30-Oct-2017 21:46:47 UTC] PHP Fatal error:  Class 'PhpParser\NodeVisitorAbstract' not found in /home/seriousdatings/public_html/vendor/nikic/php-parser/lib/PhpParser/NodeVisitor/NameResolver.php on line 14

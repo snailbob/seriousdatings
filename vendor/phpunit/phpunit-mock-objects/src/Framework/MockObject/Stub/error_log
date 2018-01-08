@@ -1,0 +1,2 @@
+[27-Oct-2017 04:59:09 UTC] PHP Fatal error:  Interface 'PHPUnit_Framework_MockObject_Stub' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub/Exception.php on line 19
+[27-Oct-2017 09:11:22 UTC] PHP Fatal error:  Interface 'PHPUnit_Framework_MockObject_Stub' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub/ConsecutiveCalls.php on line 19

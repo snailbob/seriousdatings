@@ -1,0 +1,2 @@
+[18-Oct-2017 11:33:53 UTC] PHP Fatal error:  Class 'Predis\PubSub\AbstractConsumer' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/PubSub/Consumer.php on line 26
+[20-Oct-2017 06:07:50 UTC] PHP Fatal error:  Class 'Predis\PubSub\AbstractConsumer' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/PubSub/Consumer.php on line 26

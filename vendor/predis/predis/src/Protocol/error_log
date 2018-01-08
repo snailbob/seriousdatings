@@ -1,0 +1,4 @@
+[24-Oct-2017 20:03:05 UTC] PHP Fatal error:  Class 'Predis\CommunicationException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Protocol/ProtocolException.php on line 23
+[25-Oct-2017 04:11:10 UTC] PHP Fatal error:  Class 'Predis\CommunicationException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Protocol/ProtocolException.php on line 23
+[25-Oct-2017 07:39:15 UTC] PHP Fatal error:  Class 'Predis\CommunicationException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Protocol/ProtocolException.php on line 23
+[26-Oct-2017 07:02:55 UTC] PHP Fatal error:  Class 'Predis\CommunicationException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Protocol/ProtocolException.php on line 23

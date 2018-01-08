@@ -1,0 +1,4 @@
+[27-Oct-2017 10:17:24 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/Matcher/ArrayContainMatcherSpec.php on line 11
+[30-Oct-2017 23:44:04 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/Matcher/IdentityMatcherSpec.php on line 12
+[31-Oct-2017 03:08:22 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/Matcher/CallbackMatcherSpec.php on line 11
+[31-Oct-2017 04:35:23 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/Matcher/TypeMatcherSpec.php on line 14

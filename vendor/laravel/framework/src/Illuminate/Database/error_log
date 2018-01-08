@@ -1,0 +1,2 @@
+[30-Oct-2017 22:35:58 UTC] PHP Fatal error:  Class 'Illuminate\Database\Connection' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Database/PostgresConnection.php on line 12
+[31-Oct-2017 08:11:04 UTC] PHP Fatal error:  Class 'Illuminate\Database\Connection' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Database/PostgresConnection.php on line 12

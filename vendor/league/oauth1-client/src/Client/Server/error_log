@@ -1,0 +1,1 @@
+[27-Oct-2017 09:47:08 UTC] PHP Fatal error:  Class 'League\OAuth1\Client\Server\Server' not found in /home/seriousdatings/public_html/vendor/league/oauth1-client/src/Client/Server/Trello.php on line 8

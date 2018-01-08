@@ -1,0 +1,8 @@
+[26-Oct-2017 15:50:03 UTC] PHP Fatal error:  Interface 'Psy\Exception\Exception' not found in /home/seriousdatings/public_html/vendor/psy/psysh/src/Psy/Exception/ErrorException.php on line 18
+[26-Oct-2017 20:11:48 UTC] PHP Fatal error:  Interface 'Psy\Exception\Exception' not found in /home/seriousdatings/public_html/vendor/psy/psysh/src/Psy/Exception/TypeErrorException.php on line 18
+[26-Oct-2017 23:11:40 UTC] PHP Fatal error:  Interface 'Psy\Exception\Exception' not found in /home/seriousdatings/public_html/vendor/psy/psysh/src/Psy/Exception/RuntimeException.php on line 18
+[27-Oct-2017 02:11:17 UTC] PHP Fatal error:  Class 'Psy\Exception\RuntimeException' not found in /home/seriousdatings/public_html/vendor/psy/psysh/src/Psy/Exception/DeprecatedException.php on line 18
+[27-Oct-2017 09:21:20 UTC] PHP Fatal error:  Interface 'Psy\Exception\Exception' not found in /home/seriousdatings/public_html/vendor/psy/psysh/src/Psy/Exception/BreakException.php on line 18
+[27-Oct-2017 09:58:21 UTC] PHP Fatal error:  Class 'PhpParser\Error' not found in /home/seriousdatings/public_html/vendor/psy/psysh/src/Psy/Exception/ParseErrorException.php on line 17
+[27-Oct-2017 12:08:46 UTC] PHP Fatal error:  Interface 'Psy\Exception\Exception' not found in /home/seriousdatings/public_html/vendor/psy/psysh/src/Psy/Exception/ThrowUpException.php on line 18
+[27-Oct-2017 12:30:13 UTC] PHP Fatal error:  Interface 'Psy\Exception\Exception' not found in /home/seriousdatings/public_html/vendor/psy/psysh/src/Psy/Exception/FatalErrorException.php on line 18

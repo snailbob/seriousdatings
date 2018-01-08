@@ -1,0 +1,8 @@
+[27-Oct-2017 00:04:25 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/swiftmailer/swiftmailer/tests/bug/Swift/Bug35Test.php on line 4
+[27-Oct-2017 00:42:16 UTC] PHP Fatal error:  Class 'SwiftMailerTestCase' not found in /home/seriousdatings/public_html/vendor/swiftmailer/swiftmailer/tests/bug/Swift/Bug51Test.php on line 4
+[27-Oct-2017 05:33:37 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/swiftmailer/swiftmailer/tests/bug/Swift/Bug35Test.php on line 4
+[27-Oct-2017 08:46:35 UTC] PHP Fatal error:  Class 'SwiftMailerTestCase' not found in /home/seriousdatings/public_html/vendor/swiftmailer/swiftmailer/tests/bug/Swift/Bug51Test.php on line 4
+[27-Oct-2017 10:28:45 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/swiftmailer/swiftmailer/tests/bug/Swift/Bug118Test.php on line 4
+[27-Oct-2017 11:40:38 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/swiftmailer/swiftmailer/tests/bug/Swift/Bug35Test.php on line 4
+[27-Oct-2017 12:07:08 UTC] PHP Fatal error:  Class 'SwiftMailerTestCase' not found in /home/seriousdatings/public_html/vendor/swiftmailer/swiftmailer/tests/bug/Swift/Bug51Test.php on line 4
+[30-Oct-2017 21:16:52 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/swiftmailer/swiftmailer/tests/bug/Swift/Bug650Test.php on line 4

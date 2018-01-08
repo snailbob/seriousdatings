@@ -1,0 +1,1 @@
+[27-Oct-2017 09:20:38 UTC] PHP Fatal error:  Class 'Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeSessionHandler' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Session/Storage/Handler/NativeFileSessionHandler.php on line 22

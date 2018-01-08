@@ -1,0 +1,14 @@
+[13-Oct-2017 21:58:21 UTC] PHP Fatal error:  Interface 'Collective\Remote\ConnectionInterface' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/Connection.php on line 11
+[13-Oct-2017 21:58:37 UTC] PHP Fatal error:  Class 'Illuminate\Support\Facades\Facade' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/RemoteFacade.php on line 12
+[13-Oct-2017 21:58:54 UTC] PHP Fatal error:  Interface 'Collective\Remote\GatewayInterface' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/SecLibGateway.php on line 12
+[13-Oct-2017 21:59:34 UTC] PHP Fatal error:  Interface 'Collective\Remote\ConnectionInterface' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/MultiConnection.php on line 8
+[13-Oct-2017 22:01:43 UTC] PHP Fatal error:  Class 'Illuminate\Support\ServiceProvider' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/RemoteServiceProvider.php on line 9
+[14-Oct-2017 04:35:52 UTC] PHP Fatal error:  Class 'Illuminate\Support\ServiceProvider' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/RemoteServiceProvider.php on line 9
+[14-Oct-2017 04:36:12 UTC] PHP Fatal error:  Interface 'Collective\Remote\ConnectionInterface' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/Connection.php on line 11
+[14-Oct-2017 07:45:45 UTC] PHP Fatal error:  Class 'Illuminate\Support\ServiceProvider' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/RemoteServiceProvider.php on line 9
+[14-Oct-2017 07:46:36 UTC] PHP Fatal error:  Interface 'Collective\Remote\ConnectionInterface' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/Connection.php on line 11
+[15-Oct-2017 02:33:38 UTC] PHP Fatal error:  Interface 'Collective\Remote\ConnectionInterface' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/Connection.php on line 11
+[15-Oct-2017 02:47:28 UTC] PHP Fatal error:  Class 'Illuminate\Support\Facades\Facade' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/RemoteFacade.php on line 12
+[15-Oct-2017 02:50:06 UTC] PHP Fatal error:  Interface 'Collective\Remote\GatewayInterface' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/SecLibGateway.php on line 12
+[15-Oct-2017 02:56:50 UTC] PHP Fatal error:  Interface 'Collective\Remote\ConnectionInterface' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/MultiConnection.php on line 8
+[15-Oct-2017 13:16:35 UTC] PHP Fatal error:  Class 'Illuminate\Support\ServiceProvider' not found in /home/seriousdatings/public_html/vendor/laravelcollective/remote/src/RemoteServiceProvider.php on line 9

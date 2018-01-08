@@ -1,0 +1,2 @@
+[27-Oct-2017 04:06:35 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Collection/IsTraversableWithSizeTest.php on line 5
+[27-Oct-2017 12:33:37 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Collection/IsTraversableWithSizeTest.php on line 5

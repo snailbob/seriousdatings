@@ -1,0 +1,1 @@
+[31-Oct-2017 05:39:42 UTC] PHP Fatal error:  Class 'PHP_CodeCoverage_Exception' not found in /home/seriousdatings/public_html/vendor/phpunit/php-code-coverage/src/CodeCoverage/Exception/UnintentionallyCoveredCode.php on line 17

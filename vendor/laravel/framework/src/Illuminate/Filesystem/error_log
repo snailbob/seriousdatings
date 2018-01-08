@@ -1,0 +1,1 @@
+[31-Oct-2017 04:42:57 UTC] PHP Fatal error:  Interface 'Illuminate\Contracts\Filesystem\Factory' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php on line 20

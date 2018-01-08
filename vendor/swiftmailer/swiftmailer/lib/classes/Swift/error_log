@@ -1,0 +1,1 @@
+[27-Oct-2017 01:31:45 UTC] PHP Fatal error:  Class 'Swift_SwiftException' not found in /home/seriousdatings/public_html/vendor/swiftmailer/swiftmailer/lib/classes/Swift/IoException.php on line 17

@@ -1,0 +1,1 @@
+[20-Oct-2017 08:35:27 UTC] PHP Fatal error:  Class 'Symfony\Component\EventDispatcher\Event' not found in /home/seriousdatings/public_html/vendor/guzzle/guzzle/src/Guzzle/Common/Event.php on line 10

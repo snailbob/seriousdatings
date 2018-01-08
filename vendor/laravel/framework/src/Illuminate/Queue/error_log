@@ -1,0 +1,2 @@
+[30-Oct-2017 19:07:53 UTC] PHP Fatal error:  Class 'Illuminate\Queue\Queue' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Queue/BeanstalkdQueue.php on line 10
+[31-Oct-2017 07:37:01 UTC] PHP Fatal error:  Class 'Illuminate\Queue\Queue' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Queue/IronQueue.php on line 11

@@ -1,0 +1,1 @@
+[31-Oct-2017 01:14:52 UTC] PHP Fatal error:  Interface 'PhpSpec\CodeAnalysis\NamespaceResolver' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/src/PhpSpec/CodeAnalysis/TokenizedNamespaceResolver.php on line 17

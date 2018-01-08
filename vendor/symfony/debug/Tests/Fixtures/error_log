@@ -1,0 +1,1 @@
+[24-Oct-2017 19:55:31 UTC] PHP Warning:  Class 'Symfony\Component\Debug\Tests\Fixtures\NotPSR0bis' not found in /home/seriousdatings/public_html/vendor/symfony/debug/Tests/Fixtures/ClassAlias.php on line 3

@@ -1,0 +1,1 @@
+[31-Oct-2017 06:47:48 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/Listener/NamedConstructorNotFoundListenerSpec.php on line 15

@@ -1,0 +1,2 @@
+[27-Oct-2017 09:16:51 UTC] PHP Fatal error:  Class 'Monolog\Formatter\NormalizerFormatter' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Formatter/ElasticaFormatter.php on line 22
+[31-Oct-2017 07:23:16 UTC] PHP Fatal error:  Interface 'Monolog\Formatter\FormatterInterface' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Formatter/MongoDBFormatter.php on line 20

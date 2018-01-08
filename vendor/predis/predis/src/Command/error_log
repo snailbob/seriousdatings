@@ -1,0 +1,2 @@
+[19-Oct-2017 14:36:40 UTC] PHP Fatal error:  Class 'Predis\Command\GeospatialGeoRadius' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Command/GeospatialGeoRadiusByMember.php on line 20
+[20-Oct-2017 02:09:03 UTC] PHP Fatal error:  Class 'Predis\Command\Command' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Command/ZSetScan.php on line 20

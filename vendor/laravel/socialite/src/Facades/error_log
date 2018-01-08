@@ -1,0 +1,2 @@
+[25-Oct-2017 15:09:30 UTC] PHP Fatal error:  Class 'Illuminate\Support\Facades\Facade' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Facades/Socialite.php on line 11
+[26-Oct-2017 19:47:09 UTC] PHP Fatal error:  Class 'Illuminate\Support\Facades\Facade' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Facades/Socialite.php on line 11

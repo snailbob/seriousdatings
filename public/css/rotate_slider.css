@@ -1,0 +1,120 @@
+.rotated-sloider .button{
+  background: #FE2E2E;
+  color: white;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+}
+.rotated-sloider h1 {
+	font-size:13px;
+	line-height: 24px;
+	margin:60px 10px 10px 10px;
+}
+.rotated-sloider h2 {
+	font-family: sans-serif;
+	font-size:16px;
+	line-height: 24px;
+	margin:10px 10px 10px 10px;
+}
+
+.rotated-sloider .no-touch a:hover, a:active {
+	color:#3c3c3c;
+	background:#ffe9e9;
+	box-shadow:3px 3px 2px #eaeaea;
+ 
+}
+[id^="example1a-"], [id^="example1b-"], [id^="example101b-"], [id^="example2-"], [id^="example3a-"], [id^="example3b-"], [id^="example3d-"], [id^="example3f-"], [id^="example4a-"], [id^="example4b-"], [id^="example7a-"], .example7a-inside, [id^="example7b-"], .example8a-inside, [id^="example8b-"], [id^="example9-"], [id^="example10-"], [id^="example11-"], [id^="example12-"], [id^="example13-"], [id^="example14-"], [id^="example15-"] {
+	font-family: sans-serif;
+	color:#3c3c3c;
+	background: #fcfcfc;
+	border: 1px solid #b3b3b3;
+	border-radius: 15px;
+	text-decoration: none;
+	width:550px;
+	height:150px;
+	margin:50px;
+	font-size:20px;
+}
+
+<%--Arrow--%>
+[id^="example1b-"], [id^="example101b-"], [id^="example3b-"], [id^="example3d-"], [id^="example3f-"], [id^="example7b-"], [id^="example8b-"], #example2-click-prev, #example2-click-next, #example7a-click-prev, #example7a-click-next, #example9-click-prev, #example9-click-next, [id^="example12-"], [id^="example13-"], [id^="example14-"], [id^="example15-"] {
+	text-decoration: none;
+	display:block;
+	position:relative;
+	float:left;
+	width:50px;
+	height:16px;
+	font-size:12px;
+	padding:5px 20px 5px 10px;
+	margin:25px;
+	top:500px;
+}
+ 
+[id^="example9-"], [id^="example11-"] {
+	display:block;
+	position:absolute;
+	width:100px;
+	height:100px;
+	border-radius:50%;
+	margin:5PX;
+}
+   
+[id^="example9-"].active{
+ 
+ 	-webkit-transform:
+		scaleY(.5) 
+	skewX(2deg)
+        skewY(-2deg);
+-webkit-box-shadow: 0px 100px 20px -25px rgba(0,0,0,.25);
+ 
+
+}
+.rotated-sloider .no-touch [id^="example1b-"]:hover, .no-touch [id^="example101b-"]:hover, .no-touch [id^="example2-"]:hover, .no-touch [id^="example3a-"]:hover, .no-touch [id^="example3b-"]:hover, .no-touch [id^="example3d-"]:hover, .no-touch [id^="example3f-"]:hover, .no-touch [id^="example4a-"]:hover, .no-touch [id^="example4b-"]:hover, .no-touch [id^="example7a-"]:hover, .no-touch [id^="example7b-"]:hover, .no-touch [id^="example8b-"]:hover, .no-touch [id^="example9-"]:hover, .no-touch [id^="example10-"]:hover, .no-touch [id^="example11-"]:hover, .no-touch [id^="example12-"]:hover, .no-touch [id^="example13-"]:hover, .no-touch [id^="example14-"]:hover, .no-touch [id^="example15-"]:hover, [id^="example1b-"].active, [id^="example101b-"].active, [id^="example3b-"].active, [id^="example3d-"].active, [id^="example3f-"].active, [id^="example4a-"].active, [id^="example4b-"].active, [id^="example7b-"].active, [id^="example8b-"].active, [id^="example9-"].active, [id^="example10-"].active, [id^="example11-"].active, [id^="example12-"].active, [id^="example13-"].active, [id^="example14-"].active, [id^="example15-"].active {
+	background:#92e8ff;
+}
+ 
+.rotated-sloider #example9-click-prev, #example9-click-next {
+	   background: #FE2E2E;
+  color: white;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 7px;
+}
+
+.rotated-sloider #example9-click-prev:hover, #example9-click-next:hover {
+	   background: #CC0033;
+  color: white;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 7px;
+  
+}
+.rotated-sloider #mycounter {
+	text-decoration: none;
+	display:block;
+	position:relative;
+	float:left;
+	font-size:12px;
+	padding:10px;
+	margin:6px 0px;
+}
+ .img-circle {
+    border-radius: 50%;
+    width:100px;
+	height:100px;
+	box-shadow:2px 2px 3px #ffe9e9;
+}
+ 
+/* scrolls */

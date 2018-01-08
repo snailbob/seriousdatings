@@ -1,0 +1,2 @@
+[27-Oct-2017 04:02:48 UTC] PHP Fatal error:  Class 'Illuminate\Support\ServiceProvider' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Bus/BusServiceProvider.php on line 8
+[27-Oct-2017 12:29:50 UTC] PHP Fatal error:  Class 'Illuminate\Support\ServiceProvider' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Bus/BusServiceProvider.php on line 8

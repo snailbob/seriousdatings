@@ -1,0 +1,1 @@
+[31-Oct-2017 05:05:39 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Framework/Constraint/ExceptionMessageRegExpTest.php on line 16

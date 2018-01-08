@@ -1,0 +1,2 @@
+[27-Oct-2017 03:32:32 UTC] PHP Fatal error:  Interface 'PHP_CodeCoverage_Driver' not found in /home/seriousdatings/public_html/vendor/phpunit/php-code-coverage/src/CodeCoverage/Driver/Xdebug.php on line 18
+[27-Oct-2017 12:18:29 UTC] PHP Fatal error:  Interface 'PHP_CodeCoverage_Driver' not found in /home/seriousdatings/public_html/vendor/phpunit/php-code-coverage/src/CodeCoverage/Driver/Xdebug.php on line 18

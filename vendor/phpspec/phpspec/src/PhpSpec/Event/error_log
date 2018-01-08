@@ -1,0 +1,2 @@
+[27-Oct-2017 06:34:09 UTC] PHP Fatal error:  Class 'Symfony\Component\EventDispatcher\Event' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/src/PhpSpec/Event/ExpectationEvent.php on line 23
+[31-Oct-2017 06:17:32 UTC] PHP Fatal error:  Class 'Symfony\Component\EventDispatcher\Event' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/src/PhpSpec/Event/SpecificationEvent.php on line 22

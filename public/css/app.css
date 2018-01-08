@@ -1,0 +1,318 @@
+
+/*Custom Style*/
+a{
+    cursor: pointer;
+}
+@media (min-width: 1200px){
+
+	.col-lg-2.cols5{
+	    width: 20% !important;
+	}
+
+}
+.btn-group.table-action.custom ul.dropdown-menu{
+	min-width: auto !important;
+}
+.btn-group.table-action.custom ul.dropdown-menu button{
+	background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    display: block;
+    padding: 3px 25px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #777;
+    white-space: nowrap;
+}
+.btn-group.table-action.custom ul.dropdown-menu>li>a>.fa{
+	margin: 0 !important;
+}
+.btn-group.table-action.custom ul.dropdown-menu button:hover{
+    background-color: #e1e3e9;
+}
+/* .dropdown-menu>li>a{
+	text-align: center;
+} */
+.ImgeInput {
+    /* position: absolute; */
+    z-index: 1;
+    /* left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0; */
+    cursor: pointer;
+    width: 100%;
+    text-indent: -9999px;
+}
+.file-upload {
+    width: auto;
+    height: 200px;
+    border: 1px solid #cccccc;
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+.file-upload .targetImage {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    height: 100%;
+}
+.desc1 {
+    max-height: 310px;
+    overflow-y: auto;
+}
+
+#calendar .fc-header-toolbar .fc-right .fc-button-group{
+    display: none;
+}
+.external-event{
+    cursor: pointer;
+}
+
+
+/*verify modal*/
+.dating-modal .modal-content{
+    padding: 20px;
+}
+.dating-modal .modal-content h1{
+    font-size: 32px;
+    font-weight: 500;
+}
+.dating-modal .modal-content img{
+    width: 100%;
+}
+.dating-modal .modal-content .info{
+    padding-top: 20px;
+}
+.dating-modal .modal-content .info p{
+    margin-bottom: 10px;
+}
+.dating-modal .modal-content .btn-modal{
+    font-weight: bold;
+    width: 100px;
+    float: right;
+}
+
+
+/*signup frame style*/
+.profile-img-styling{
+    margin-top: 30px;
+}
+.profile-img-styling .select-type{
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #222;
+    margin-bottom: 22px;
+    margin-left: 50px;
+}
+.profile-img-styling .img-blocks{
+    text-align: center;
+    padding-bottom: 30px;
+}
+.profile-img-styling .img-blocks .images-style-bg{
+    width: 100%;
+    padding: 8px;
+    background: #fff;
+    height: 124px;
+    position: relative;
+    border: solid 1px #e9e9e9;
+    width: 124px;
+    float: none;
+    margin: auto;
+}
+.profile-img-styling .img-blocks .checkbox-bg{
+    margin-top: 10px;
+    position: absolute;
+    margin-left: 30px;
+}
+
+.font-styling{
+    font-size: 25px;
+    font-weight: 900;
+    font-style: italic;
+
+}
+.font-styling2{
+    font-size: 15px;
+    font-weight: 800;
+
+}
+.font-styling-head{
+        font-size: 30px;
+    font-weight: 900;
+    font-style: italic;
+
+}
+.inside-box{
+    padding: 10px 10px 10px;
+}
+.frame-map2{
+    max-width: 100%;
+    max-height: 100%;
+}
+.frame-map{
+    width: 100%;
+    height: 500px;
+}
+
+.frame-map-new{
+    display:block;
+    width:100%;
+    height: 700px;
+}
+
+.new-header{
+    background-color: #fc575e;
+    color: #fff;
+}
+.coll-marging{
+    margin-top: 5px;
+}
+.section-scroll-infos
+{
+     height: 500px;
+    overflow: scroll;
+}
+#startOVER-btn{
+  
+    width: 610px;
+    height: 150px;
+     background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+
+}
+
+.membership-banner{
+    position: relative; 
+}
+
+.membership-banner button#startOVER-btn{
+    float:left;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+
+#hiddenSocket{
+    width: 550px; height: 250px;
+}
+
+
+
+
+
+.container-fab {
+  bottom: 0;
+  position: fixed;
+  margin: 1em;
+  right: 0px;
+}
+
+.buttons-fab {
+  box-shadow: 0px 5px 11px -2px rgba(0, 0, 0, 0.18), 
+              0px 4px 12px -7px rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  display: block;
+  width: 56px;
+  height: 56px;
+  margin: 20px auto 0;
+  position: relative;
+  -webkit-transition: all .1s ease-out;
+          transition: all .1s ease-out;  
+}
+
+.buttons-fab:active, 
+.buttons-fab:focus, 
+.buttons-fab:hover {
+  box-shadow: 0 0 4px rgba(0,0,0,.14),
+    0 4px 8px rgba(0,0,0,.28);
+}
+
+.buttons-fab:not(:last-child) {
+  width: 40px;
+  height: 40px;
+  margin: 20px auto 0;
+  opacity: 0;
+  -webkit-transform: translateY(50px);
+      -ms-transform: translateY(50px);
+          transform: translateY(50px);
+}
+
+.container-fab:hover 
+.buttons-fab:not(:last-child) {
+  opacity: 1;
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+  margin: 15px auto 0;
+}
+
+/* Unessential styling for sliding up buttons-fab at differnt speeds */
+
+.buttons-fab:nth-last-child(1) {
+  -webkit-transition-delay: 25ms;
+          transition-delay: 25ms;
+  background-image: url("../images/vchat_icon.png");
+  background-size: contain;
+}
+
+
+
+/* Show tooltip content on hover */
+
+[tooltip]:before {
+  bottom: 25%;
+  font-family: arial;
+  font-weight: 600;
+  border-radius: 2px;
+  background: #585858;
+  color: #fff;
+  content: attr(tooltip);
+  font-size: 12px;
+  visibility: hidden;
+  opacity: 0;
+  padding: 5px 7px;
+  margin-right: 12px;
+  position: absolute;
+  right: 100%;
+  white-space: nowrap;
+}
+
+[tooltip]:hover:before,
+[tooltip]:hover:after {
+  visibility: visible;
+  opacity: 1;
+}
+
+.notify-badge{
+    z-index: 900;
+    position: absolute;
+    right:-10px;
+    top:6px;
+    background:red;
+    text-align: center;
+    border-radius: 30px 30px 30px 30px;
+    color:white;
+    padding:5px 10px;
+    font-size:16px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+#chatFrame{
+  height: 500px;
+  width: 550px;
+
+}
+
+.padding-top-15{
+    padding-top: 15px;
+}

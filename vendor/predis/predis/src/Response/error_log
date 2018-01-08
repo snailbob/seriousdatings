@@ -1,0 +1,14 @@
+[20-Oct-2017 11:33:12 UTC] PHP Fatal error:  Interface 'Predis\Response\ResponseInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/ErrorInterface.php on line 21
+[21-Oct-2017 19:50:26 UTC] PHP Fatal error:  Interface 'Predis\Response\ResponseInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/ErrorInterface.php on line 21
+[23-Oct-2017 21:20:28 UTC] PHP Fatal error:  Interface 'Predis\Response\ResponseInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/Status.php on line 20
+[24-Oct-2017 04:17:14 UTC] PHP Fatal error:  Interface 'Predis\Response\ResponseInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/Status.php on line 20
+[24-Oct-2017 06:37:14 UTC] PHP Fatal error:  Interface 'Predis\Response\ResponseInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/Status.php on line 20
+[24-Oct-2017 11:36:57 UTC] PHP Fatal error:  Interface 'Predis\Response\ErrorInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/Error.php on line 21
+[24-Oct-2017 12:59:21 UTC] PHP Fatal error:  Interface 'Predis\Response\ResponseInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/Status.php on line 20
+[25-Oct-2017 10:18:09 UTC] PHP Fatal error:  Interface 'Predis\Response\ResponseInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/Status.php on line 20
+[25-Oct-2017 12:26:47 UTC] PHP Fatal error:  Interface 'Predis\Response\ErrorInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/Error.php on line 21
+[25-Oct-2017 23:17:34 UTC] PHP Fatal error:  Class 'Predis\PredisException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/ServerException.php on line 21
+[26-Oct-2017 08:14:48 UTC] PHP Fatal error:  Class 'Predis\PredisException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/ServerException.php on line 21
+[26-Oct-2017 10:12:05 UTC] PHP Fatal error:  Class 'Predis\PredisException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/ServerException.php on line 21
+[26-Oct-2017 17:12:03 UTC] PHP Fatal error:  Class 'Predis\PredisException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/ServerException.php on line 21
+[27-Oct-2017 14:19:34 UTC] PHP Fatal error:  Class 'Predis\PredisException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Response/ServerException.php on line 21

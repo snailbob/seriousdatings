@@ -1,0 +1,9 @@
+[15-Oct-2017 02:12:28 UTC] PHP Fatal error:  Interface 'Laravel\Socialite\Contracts\User' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/AbstractUser.php on line 8
+[15-Oct-2017 02:27:04 UTC] PHP Fatal error:  Class 'Illuminate\Support\Manager' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/SocialiteManager.php on line 12
+[15-Oct-2017 07:34:01 UTC] PHP Fatal error:  Interface 'Laravel\Socialite\Contracts\User' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/AbstractUser.php on line 8
+[15-Oct-2017 10:38:50 UTC] PHP Fatal error:  Class 'Illuminate\Support\Manager' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/SocialiteManager.php on line 12
+[15-Oct-2017 12:35:08 UTC] PHP Fatal error:  Class 'Illuminate\Support\ServiceProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/SocialiteServiceProvider.php on line 8
+[15-Oct-2017 19:23:37 UTC] PHP Fatal error:  Interface 'Laravel\Socialite\Contracts\User' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/AbstractUser.php on line 8
+[16-Oct-2017 07:56:58 UTC] PHP Fatal error:  Class 'Illuminate\Support\ServiceProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/SocialiteServiceProvider.php on line 8
+[16-Oct-2017 15:15:36 UTC] PHP Fatal error:  Class 'Illuminate\Support\Manager' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/SocialiteManager.php on line 12
+[26-Oct-2017 21:25:36 UTC] PHP Fatal error:  Interface 'Laravel\Socialite\Contracts\User' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/AbstractUser.php on line 8

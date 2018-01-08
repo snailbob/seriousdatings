@@ -1,0 +1,2 @@
+[26-Oct-2017 17:05:00 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/php-code-coverage/tests/PHP/CodeCoverage/UtilTest.php on line 17
+[26-Oct-2017 22:19:13 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/php-code-coverage/tests/PHP/CodeCoverage/FilterTest.php on line 25

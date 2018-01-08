@@ -1,0 +1,5 @@
+[25-Oct-2017 19:57:02 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Formatter/NormalizerFormatterTest.php on line 18
+[26-Oct-2017 21:52:01 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Formatter/NormalizerFormatterTest.php on line 18
+[27-Oct-2017 03:21:35 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Formatter/ScalarFormatterTest.php on line 15
+[27-Oct-2017 12:14:43 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Formatter/ScalarFormatterTest.php on line 15
+[30-Oct-2017 18:41:24 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Formatter/FlowdockFormatterTest.php on line 18

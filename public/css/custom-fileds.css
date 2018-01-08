@@ -1,0 +1,211 @@
+.sbHolder {
+  background-color: #ffffff;
+  border: solid 1px #dfdfdf;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  height: 38px;
+  position: relative;
+  width: 200px;
+}
+
+.sbHolder:focus .sbSelector {}
+
+.sbSelector {
+  display: block;
+  height: 36px;
+  left: 0;
+  line-height: 36px;
+  outline: none;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 10px;
+  top: 0;
+  width: 100%;
+}
+
+.sbSelector:link,
+.sbSelector:visited,
+.sbSelector:hover {
+  color: #999999;
+  outline: none;
+  text-decoration: none;
+}
+
+.sbToggle {
+  background: url(../images/icon-sprite.png) 0 -23px no-repeat;
+  display: block;
+  height: 36px;
+  outline: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 36px;
+}
+
+.sbToggle:hover {
+  background: url(../images/icon-sprite.png) 0 -62px no-repeat;
+}
+
+.sbToggleOpen {
+  background: url(../images/icon-sprite.png) 0 -62px no-repeat;
+}
+
+.sbToggleOpen:hover {
+  background: url(../images/icon-sprite.png) 0 -62px no-repeat;
+}
+
+.sbHolderDisabled {
+  background-color: #3C3C3C;
+  border: solid 1px #515151;
+}
+
+.sbHolderDisabled .sbHolder {}
+
+.sbHolderDisabled .sbToggle {}
+
+.sbOptions {
+  background-color: #fff;
+  border: solid 1px #dfdfdf;
+  list-style: none;
+  left: -1px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  z-index: 1;
+  overflow-y: auto;
+}
+
+.sbOptions li {
+  padding: 0 7px;
+}
+
+.sbOptions a {
+  border-bottom: solid 1px #dfdfdf;
+  display: block;
+  outline: none;
+  padding: 7px 0 7px 3px;
+}
+
+.sbOptions a:link,
+.sbOptions a:visited {
+  color: #444;
+  text-decoration: none;
+}
+
+.sbOptions a:hover,
+.sbOptions a:focus,
+.sbOptions a.sbFocus {
+  color: #000;
+}
+
+.sbOptions li.last a {
+  border-bottom: none;
+}
+
+.sbOptions li:last-child a {
+  border-bottom: none;
+}
+
+.sbOptions .sbDisabled {
+  border-bottom: solid 1px #515151;
+  color: #999;
+  display: block;
+  padding: 7px 0 7px 3px;
+}
+
+.sbOptions .sbGroup {
+  border-bottom: solid 1px #515151;
+  color: #EBB52D;
+  display: block;
+  font-weight: bold;
+  padding: 7px 0 7px 3px;
+}
+
+.sbOptions .sbSub {
+  padding-left: 17px;
+}
+
+
+/*-------- custom checkbox ----------*/
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"]+label {
+  font-size: 13px;
+  line-height: 23px;
+  margin: 5px 0;
+  display: block;
+  min-height: inherit;
+  margin: 0;
+}
+
+input[type="checkbox"]+label span {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  background: #0C6;
+}
+
+input[type="checkbox"]+label span {
+  background: #fff url(../images/check-box.png) no-repeat;
+  height: 11px;
+  width: 11px;
+}
+
+input[type="checkbox"]:checked+label span {
+  background-position: 0 -12px;
+}
+
+input[type="checkbox"]+label span,
+input[type="checkbox"]:checked+label span {
+  -webkit-transition: background-color 0.4s linear;
+  -o-transition: background-color 0.4s linear;
+  -moz-transition: background-color 0.4s linear;
+  transition: background-color 0.4s linear;
+}
+
+
+/*------------ input type file ---------*/
+
+.uploadFile {
+  width: 100%;
+  height: 20px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  height: 40px;
+  border: solid 1px #4fd2c2;
+  text-align: center;
+}
+
+.fileUpload {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 40px;
+  color: #fff;
+  margin-top: 10px;
+  line-height: 36px;
+  text-align: center;
+}
+
+.fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  width: 100%;
+}

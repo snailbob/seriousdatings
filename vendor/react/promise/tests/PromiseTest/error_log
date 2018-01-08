@@ -1,0 +1,2 @@
+[21-Oct-2017 01:48:22 UTC] PHP Fatal error:  Trait 'React\Promise\PromiseTest\PromisePendingTestTrait' not found in /home/seriousdatings/public_html/vendor/react/promise/tests/PromiseTest/FullTestTrait.php on line 7
+[22-Oct-2017 14:34:09 UTC] PHP Fatal error:  Trait 'React\Promise\PromiseTest\PromisePendingTestTrait' not found in /home/seriousdatings/public_html/vendor/react/promise/tests/PromiseTest/FullTestTrait.php on line 7

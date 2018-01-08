@@ -1,0 +1,2 @@
+[18-Oct-2017 03:51:52 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/ServiceContainerSpec.php on line 8
+[20-Oct-2017 18:44:35 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/ServiceContainerSpec.php on line 8

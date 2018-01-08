@@ -1,0 +1,1 @@
+[27-Oct-2017 07:31:38 UTC] PHP Fatal error:  Interface 'Predis\Cluster\Distributor\DistributorInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Cluster/Distributor/HashRing.php on line 24

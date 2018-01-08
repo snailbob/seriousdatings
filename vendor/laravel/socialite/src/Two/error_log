@@ -1,0 +1,17 @@
+[18-Oct-2017 14:50:38 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/GithubProvider.php on line 8
+[20-Oct-2017 06:22:58 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/GithubProvider.php on line 8
+[21-Oct-2017 20:05:34 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/GoogleProvider.php on line 7
+[22-Oct-2017 03:09:18 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/FacebookProvider.php on line 8
+[22-Oct-2017 03:20:39 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/GoogleProvider.php on line 7
+[22-Oct-2017 09:35:15 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/GoogleProvider.php on line 7
+[22-Oct-2017 12:10:23 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/FacebookProvider.php on line 8
+[22-Oct-2017 12:29:18 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/GoogleProvider.php on line 7
+[22-Oct-2017 15:08:12 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/GoogleProvider.php on line 7
+[23-Oct-2017 05:11:56 UTC] PHP Fatal error:  Interface 'Laravel\Socialite\Contracts\Provider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/AbstractProvider.php on line 14
+[23-Oct-2017 08:58:56 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/FacebookProvider.php on line 8
+[23-Oct-2017 13:38:54 UTC] PHP Fatal error:  Interface 'Laravel\Socialite\Contracts\Provider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/AbstractProvider.php on line 14
+[24-Oct-2017 05:51:50 UTC] PHP Fatal error:  Interface 'Laravel\Socialite\Contracts\Provider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/AbstractProvider.php on line 14
+[24-Oct-2017 08:38:18 UTC] PHP Fatal error:  Class 'Laravel\Socialite\AbstractUser' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/User.php on line 8
+[24-Oct-2017 23:16:03 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/LinkedInProvider.php on line 7
+[25-Oct-2017 11:22:28 UTC] PHP Fatal error:  Class 'Laravel\Socialite\AbstractUser' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/User.php on line 8
+[25-Oct-2017 21:42:58 UTC] PHP Fatal error:  Class 'Laravel\Socialite\Two\AbstractProvider' not found in /home/seriousdatings/public_html/vendor/laravel/socialite/src/Two/LinkedInProvider.php on line 7

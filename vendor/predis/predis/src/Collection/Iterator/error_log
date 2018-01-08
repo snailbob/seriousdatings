@@ -1,0 +1,3 @@
+[27-Oct-2017 08:57:56 UTC] PHP Fatal error:  Class 'Predis\Collection\Iterator\CursorBasedIterator' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Collection/Iterator/SetKey.php on line 25
+[27-Oct-2017 13:15:14 UTC] PHP Fatal error:  Class 'Predis\Collection\Iterator\CursorBasedIterator' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Collection/Iterator/SortedSetKey.php on line 25
+[30-Oct-2017 21:50:34 UTC] PHP Fatal error:  Class 'Predis\Collection\Iterator\CursorBasedIterator' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Collection/Iterator/Keyspace.php on line 25

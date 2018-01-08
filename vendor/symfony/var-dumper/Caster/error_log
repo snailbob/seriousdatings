@@ -1,0 +1,7 @@
+[15-Oct-2017 02:08:40 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Cloner\Stub' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Caster/CutStub.php on line 22
+[15-Oct-2017 02:14:13 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Cloner\Stub' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Caster/ConstStub.php on line 22
+[15-Oct-2017 07:30:16 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Cloner\Stub' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Caster/CutStub.php on line 22
+[15-Oct-2017 07:35:43 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Cloner\Stub' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Caster/ConstStub.php on line 22
+[15-Oct-2017 18:00:22 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Cloner\Stub' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Caster/CutStub.php on line 22
+[15-Oct-2017 20:01:27 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Cloner\Stub' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Caster/ConstStub.php on line 22
+[17-Oct-2017 09:42:29 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Cloner\Stub' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Caster/CutStub.php on line 22

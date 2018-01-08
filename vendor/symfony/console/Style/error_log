@@ -1,0 +1,6 @@
+[15-Oct-2017 02:09:42 UTC] PHP Fatal error:  Interface 'Symfony\Component\Console\Output\OutputInterface' not found in /home/seriousdatings/public_html/vendor/symfony/console/Style/OutputStyle.php on line 23
+[15-Oct-2017 02:13:20 UTC] PHP Fatal error:  Class 'Symfony\Component\Console\Style\OutputStyle' not found in /home/seriousdatings/public_html/vendor/symfony/console/Style/SymfonyStyle.php on line 33
+[15-Oct-2017 07:31:17 UTC] PHP Fatal error:  Interface 'Symfony\Component\Console\Output\OutputInterface' not found in /home/seriousdatings/public_html/vendor/symfony/console/Style/OutputStyle.php on line 23
+[15-Oct-2017 07:34:52 UTC] PHP Fatal error:  Class 'Symfony\Component\Console\Style\OutputStyle' not found in /home/seriousdatings/public_html/vendor/symfony/console/Style/SymfonyStyle.php on line 33
+[15-Oct-2017 18:23:04 UTC] PHP Fatal error:  Interface 'Symfony\Component\Console\Output\OutputInterface' not found in /home/seriousdatings/public_html/vendor/symfony/console/Style/OutputStyle.php on line 23
+[15-Oct-2017 19:42:32 UTC] PHP Fatal error:  Class 'Symfony\Component\Console\Style\OutputStyle' not found in /home/seriousdatings/public_html/vendor/symfony/console/Style/SymfonyStyle.php on line 33

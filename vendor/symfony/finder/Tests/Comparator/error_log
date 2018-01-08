@@ -1,0 +1,12 @@
+[20-Oct-2017 07:38:38 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/DateComparatorTest.php on line 17
+[21-Oct-2017 18:04:30 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/DateComparatorTest.php on line 17
+[22-Oct-2017 21:26:35 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/NumberComparatorTest.php on line 17
+[23-Oct-2017 03:18:26 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/NumberComparatorTest.php on line 17
+[23-Oct-2017 06:12:29 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/NumberComparatorTest.php on line 17
+[23-Oct-2017 12:19:27 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/NumberComparatorTest.php on line 17
+[23-Oct-2017 18:56:42 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/NumberComparatorTest.php on line 17
+[25-Oct-2017 22:51:05 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/ComparatorTest.php on line 17
+[26-Oct-2017 05:24:33 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/ComparatorTest.php on line 17
+[26-Oct-2017 08:07:14 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/ComparatorTest.php on line 17
+[26-Oct-2017 13:13:41 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/ComparatorTest.php on line 17
+[27-Oct-2017 14:08:12 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Comparator/ComparatorTest.php on line 17

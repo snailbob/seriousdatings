@@ -1,0 +1,189 @@
+.new_blog_header {
+  float: left;
+  width: 100%;
+  padding: 25px 0px 10px 0px;
+}
+
+.new_blog_header h3 {
+  float: left;
+  width: 100%;
+  margin: 0px;
+  font-size: 30px;
+  color: #000;
+  font-family: inherit;
+}
+
+.blog_inner_box {
+  float: left;
+  width: 100%;
+  padding: 15px 0px;
+}
+
+.blog_inner_box_left {
+  float: left;
+  width: 140px;
+  margin-right: 10px;
+}
+
+.blog_inner_box_left img {
+  float: left;
+  max-width: 100%;
+}
+
+.blog_inner_box_right {
+  float: left;
+  width: 71%;
+  height: auto;
+}
+
+.blog_inner_box_right h3 {
+  float: left;
+  width: 100%;
+  font-size: 20px;
+  font-family: inherit;
+  color: #000;
+  margin: 0px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.blog_inner_box_right ul {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  float: left;
+}
+
+.blog_inner_box_right ul li {
+  list-style: none;
+  float: left;
+  margin: 5px 10px 0px 0px;
+}
+
+.blog_inner_box_right ul li span {
+  float: left;
+  font-size: 14px;
+  color: #ccc;
+  font-family: inherit;
+  margin: 5px 0px;
+}
+
+.blog_inner_box_right ul li span {
+  float: left;
+  font-size: 14px;
+  color: #ccc;
+  font-family: inherit;
+  margin: 5px 0px;
+}
+
+.blog_inner_box_right p {
+  float: left;
+  font-size: 15px;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 22px;
+  font-family: inherit;
+  position: relative;
+  margin-top: 0px;
+}
+
+.blog_inner_box_right a {
+  float: left;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: inherit;
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  -o-transition: 0.4s;
+}
+
+.modal-dialog {
+  margin-top: 9%;
+}
+
+.section {
+  transition: all 0.4s ease-in-out;
+  float: left;
+  max-width: 570px;
+  margin-right: 0px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.border_line {
+  border: 1px dashed #ccc;
+  clear: both;
+  padding: 0px;
+  margin: 0px 0px;
+  display: block;
+  width: 100%;
+  max-width: 570px;
+}
+
+.absrow {
+  margin: 10px 0px;
+  width: 100%;
+  max-width: 570px;
+}
+
+.popfullinput {
+  width: 95%!important;
+  margin-left: 15px;
+}
+
+.next_scrol_box {
+  width: 100%;
+  margin: 10px 0px;
+}
+
+.gift-cert {
+  float: left;
+  width: 100%;
+  border-top: solid 1px #dcdcdc;
+  border-bottom: solid 1px #dcdcdc;
+  height: auto;
+  padding: 30px 0;
+}
+
+.gift-cert ul{
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.gift-cert ul img{
+  height: 50px;
+}
+  
+
+
+/*
+ * ==== hexagon
+ */
+ .hexa, .hexa div {
+  margin: 0 auto;
+  transform-origin: 50% 50%;
+  overflow: hidden;
+  width: 130px;
+  height: 130px;
+}
+.hexa {
+  width: 130px;
+  height: 130px;
+}
+.hexa div {
+  width: 100%;
+  height: 100%;
+}
+.hexa {
+  transform: rotate(120deg);
+}
+.hex1 {
+  transform: rotate(-60deg);
+}
+.hex2 {
+  transform: rotate(-60deg);
+}

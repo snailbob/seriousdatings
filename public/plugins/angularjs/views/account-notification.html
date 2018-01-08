@@ -1,0 +1,26 @@
+<div class="popup-bg">
+	<div class="popup-inner">
+    <a href="#" class="popup-close" ng-click="close()">X</a>
+    	<div class="popup-content-bg">
+        <div class="popup-header">
+        	<h2 class="text-shedow"><i class="icon-sprite invite-frd"></i>Account Notification</h2>
+         </div>
+          
+            <div class="clear"></div>
+        	<div class="notification-container">
+            	<div class="lovers-bg">
+                	<img src="{{notify.from.photo}}" alt="lovers">
+                </div>
+                <div class="lovers-details-bg">
+                	<div class="lovers-name">Dear {{notify.users.firstName}},</div>
+                    <div class="lovers-match">{{notify.from.firstName}} has visited your Profile </div>
+                    <div class="breaf-name">Don't miss out on this opportunity to communicate with {{notify.from.firstName}}</div>
+                    <div class="review-match">Visit {{ called }} <span>Profile</span> now.</div>
+                    <a href="{{baseUrl+'/profile/'+notify.from.username}}" class="common-red-btn button">Click Here <i class="icon-sprite buton-next-arrow"></i></a>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

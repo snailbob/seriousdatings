@@ -1,0 +1,1 @@
+[27-Oct-2017 07:04:25 UTC] PHP Fatal error:  Interface 'PhpSpec\Wrapper\WrapperInterface' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/src/PhpSpec/Wrapper/Collaborator.php on line 19

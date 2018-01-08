@@ -1,0 +1,1 @@
+[31-Oct-2017 03:57:33 UTC] PHP Fatal error:  Interface 'Mockery\Generator\Generator' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/library/Mockery/Generator/StringManipulationGenerator.php on line 8

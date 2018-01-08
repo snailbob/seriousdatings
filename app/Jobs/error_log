@@ -1,0 +1,2 @@
+[15-Oct-2017 22:58:20 UTC] PHP Fatal error:  Trait 'Illuminate\Bus\Queueable' not found in /home/seriousdatings/public_html/app/Jobs/Job.php on line 20
+[24-Oct-2017 06:20:18 UTC] PHP Fatal error:  Trait 'Illuminate\Bus\Queueable' not found in /home/seriousdatings/public_html/app/Jobs/Job.php on line 20

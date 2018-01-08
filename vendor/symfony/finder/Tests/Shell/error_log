@@ -1,0 +1,2 @@
+[24-Oct-2017 08:53:26 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Shell/CommandTest.php on line 17
+[25-Oct-2017 11:30:02 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/Shell/CommandTest.php on line 17

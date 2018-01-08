@@ -1,0 +1,4 @@
+[22-Oct-2017 22:57:23 UTC] PHP Fatal error:  Class 'Psr\Log\Test\LoggerInterfaceTest' not found in /home/seriousdatings/public_html/vendor/symfony/console/Tests/Logger/ConsoleLoggerTest.php on line 26
+[23-Oct-2017 09:48:07 UTC] PHP Fatal error:  Class 'Psr\Log\Test\LoggerInterfaceTest' not found in /home/seriousdatings/public_html/vendor/symfony/console/Tests/Logger/ConsoleLoggerTest.php on line 26
+[23-Oct-2017 15:47:32 UTC] PHP Fatal error:  Class 'Psr\Log\Test\LoggerInterfaceTest' not found in /home/seriousdatings/public_html/vendor/symfony/console/Tests/Logger/ConsoleLoggerTest.php on line 26
+[24-Oct-2017 14:49:04 UTC] PHP Fatal error:  Class 'Psr\Log\Test\LoggerInterfaceTest' not found in /home/seriousdatings/public_html/vendor/symfony/console/Tests/Logger/ConsoleLoggerTest.php on line 26

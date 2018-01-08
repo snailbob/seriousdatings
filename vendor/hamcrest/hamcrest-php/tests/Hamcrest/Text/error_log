@@ -1,0 +1,4 @@
+[25-Oct-2017 19:49:28 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Text/StringContainsTest.php on line 5
+[26-Oct-2017 21:44:26 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Text/StringContainsTest.php on line 5
+[30-Oct-2017 22:09:29 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Text/StringContainsIgnoringCaseTest.php on line 5
+[31-Oct-2017 03:04:35 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Text/MatchesPatternTest.php on line 5

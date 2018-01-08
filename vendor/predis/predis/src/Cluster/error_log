@@ -1,0 +1,9 @@
+[21-Oct-2017 09:03:30 UTC] PHP Fatal error:  Class 'Predis\Cluster\ClusterStrategy' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Cluster/PredisStrategy.php on line 23
+[22-Oct-2017 16:04:58 UTC] PHP Fatal error:  Class 'Predis\Cluster\ClusterStrategy' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Cluster/PredisStrategy.php on line 23
+[26-Oct-2017 01:45:07 UTC] PHP Fatal error:  Interface 'Predis\Cluster\StrategyInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Cluster/ClusterStrategy.php on line 23
+[26-Oct-2017 03:31:03 UTC] PHP Fatal error:  Class 'Predis\Cluster\ClusterStrategy' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Cluster/RedisStrategy.php on line 25
+[26-Oct-2017 09:19:07 UTC] PHP Fatal error:  Interface 'Predis\Cluster\StrategyInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Cluster/ClusterStrategy.php on line 23
+[26-Oct-2017 11:08:50 UTC] PHP Fatal error:  Class 'Predis\Cluster\ClusterStrategy' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Cluster/RedisStrategy.php on line 25
+[26-Oct-2017 13:51:31 UTC] PHP Fatal error:  Class 'Predis\Cluster\ClusterStrategy' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Cluster/RedisStrategy.php on line 25
+[26-Oct-2017 18:23:55 UTC] PHP Fatal error:  Interface 'Predis\Cluster\StrategyInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Cluster/ClusterStrategy.php on line 23
+[27-Oct-2017 14:53:37 UTC] PHP Fatal error:  Interface 'Predis\Cluster\StrategyInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Cluster/ClusterStrategy.php on line 23

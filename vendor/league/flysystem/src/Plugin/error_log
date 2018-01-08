@@ -1,0 +1,16 @@
+[18-Oct-2017 11:18:45 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/EmptyDir.php on line 6
+[18-Oct-2017 11:49:01 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/ListWith.php on line 6
+[20-Oct-2017 00:50:00 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/EmptyDir.php on line 6
+[20-Oct-2017 06:11:37 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/ListWith.php on line 6
+[20-Oct-2017 11:06:43 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/ListPaths.php on line 6
+[21-Oct-2017 08:02:56 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/ForcedRename.php on line 8
+[21-Oct-2017 19:42:52 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/ListPaths.php on line 6
+[22-Oct-2017 15:49:50 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/ForcedRename.php on line 8
+[23-Oct-2017 12:00:32 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/ForcedCopy.php on line 8
+[23-Oct-2017 23:29:42 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/ListFiles.php on line 6
+[23-Oct-2017 23:44:50 UTC] PHP Fatal error:  Interface 'League\Flysystem\PluginInterface' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/AbstractPlugin.php on line 9
+[24-Oct-2017 16:31:35 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/ForcedCopy.php on line 8
+[25-Oct-2017 01:28:29 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/ListFiles.php on line 6
+[25-Oct-2017 01:39:50 UTC] PHP Fatal error:  Interface 'League\Flysystem\PluginInterface' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/AbstractPlugin.php on line 9
+[25-Oct-2017 09:02:29 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/GetWithMetadata.php on line 8
+[26-Oct-2017 13:02:20 UTC] PHP Fatal error:  Class 'League\Flysystem\Plugin\AbstractPlugin' not found in /home/seriousdatings/public_html/vendor/league/flysystem/src/Plugin/GetWithMetadata.php on line 8

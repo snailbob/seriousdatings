@@ -1,0 +1,6 @@
+[15-Oct-2017 02:11:06 UTC] PHP Fatal error:  Class 'Psr\Log\NullLogger' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Log/NullLogger.php on line 23
+[15-Oct-2017 02:33:07 UTC] PHP Fatal error:  Interface 'Psr\Log\LoggerInterface' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Log/LoggerInterface.php on line 24
+[15-Oct-2017 07:32:39 UTC] PHP Fatal error:  Class 'Psr\Log\NullLogger' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Log/NullLogger.php on line 23
+[15-Oct-2017 10:44:48 UTC] PHP Fatal error:  Interface 'Psr\Log\LoggerInterface' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Log/LoggerInterface.php on line 24
+[15-Oct-2017 18:53:21 UTC] PHP Fatal error:  Class 'Psr\Log\NullLogger' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Log/NullLogger.php on line 23
+[16-Oct-2017 16:08:38 UTC] PHP Fatal error:  Interface 'Psr\Log\LoggerInterface' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Log/LoggerInterface.php on line 24

@@ -1,0 +1,2 @@
+[31-Oct-2017 00:44:36 UTC] PHP Fatal error:  Interface 'Psy\Formatter\Formatter' not found in /home/seriousdatings/public_html/vendor/psy/psysh/src/Psy/Formatter/DocblockFormatter.php on line 21
+[31-Oct-2017 08:26:29 UTC] PHP Fatal error:  Interface 'Psy\Formatter\Formatter' not found in /home/seriousdatings/public_html/vendor/psy/psysh/src/Psy/Formatter/DocblockFormatter.php on line 21

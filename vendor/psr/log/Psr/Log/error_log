@@ -1,0 +1,8 @@
+[16-Oct-2017 12:17:33 UTC] PHP Fatal error:  Class 'Psr\Log\AbstractLogger' not found in /home/seriousdatings/public_html/vendor/psr/log/Psr/Log/NullLogger.php on line 14
+[16-Oct-2017 12:30:51 UTC] PHP Fatal error:  Interface 'Psr\Log\LoggerInterface' not found in /home/seriousdatings/public_html/vendor/psr/log/Psr/Log/AbstractLogger.php on line 13
+[21-Oct-2017 11:16:32 UTC] PHP Fatal error:  Class 'Psr\Log\AbstractLogger' not found in /home/seriousdatings/public_html/vendor/psr/log/Psr/Log/NullLogger.php on line 14
+[22-Oct-2017 19:25:30 UTC] PHP Fatal error:  Class 'Psr\Log\AbstractLogger' not found in /home/seriousdatings/public_html/vendor/psr/log/Psr/Log/NullLogger.php on line 14
+[26-Oct-2017 01:18:38 UTC] PHP Fatal error:  Interface 'Psr\Log\LoggerInterface' not found in /home/seriousdatings/public_html/vendor/psr/log/Psr/Log/AbstractLogger.php on line 13
+[26-Oct-2017 09:03:59 UTC] PHP Fatal error:  Interface 'Psr\Log\LoggerInterface' not found in /home/seriousdatings/public_html/vendor/psr/log/Psr/Log/AbstractLogger.php on line 13
+[26-Oct-2017 18:08:47 UTC] PHP Fatal error:  Interface 'Psr\Log\LoggerInterface' not found in /home/seriousdatings/public_html/vendor/psr/log/Psr/Log/AbstractLogger.php on line 13
+[27-Oct-2017 14:38:29 UTC] PHP Fatal error:  Interface 'Psr\Log\LoggerInterface' not found in /home/seriousdatings/public_html/vendor/psr/log/Psr/Log/AbstractLogger.php on line 13

@@ -1,0 +1,9 @@
+[20-Oct-2017 20:41:52 UTC] PHP Fatal error:  Class 'Symfony\Component\Finder\Adapter\AbstractAdapter' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/FakeAdapter/FailingAdapter.php on line 21
+[21-Oct-2017 06:32:08 UTC] PHP Fatal error:  Class 'Symfony\Component\Finder\Adapter\AbstractAdapter' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/FakeAdapter/FailingAdapter.php on line 21
+[22-Oct-2017 05:25:31 UTC] PHP Fatal error:  Class 'Symfony\Component\Finder\Adapter\AbstractAdapter' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/FakeAdapter/FailingAdapter.php on line 21
+[25-Oct-2017 06:04:40 UTC] PHP Fatal error:  Class 'Symfony\Component\Finder\Adapter\AbstractAdapter' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/FakeAdapter/DummyAdapter.php on line 20
+[25-Oct-2017 14:35:27 UTC] PHP Fatal error:  Class 'Symfony\Component\Finder\Adapter\AbstractAdapter' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/FakeAdapter/NamedAdapter.php on line 20
+[25-Oct-2017 18:30:01 UTC] PHP Fatal error:  Class 'Symfony\Component\Finder\Adapter\AbstractAdapter' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/FakeAdapter/UnsupportedAdapter.php on line 20
+[26-Oct-2017 12:09:22 UTC] PHP Fatal error:  Class 'Symfony\Component\Finder\Adapter\AbstractAdapter' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/FakeAdapter/DummyAdapter.php on line 20
+[26-Oct-2017 19:20:40 UTC] PHP Fatal error:  Class 'Symfony\Component\Finder\Adapter\AbstractAdapter' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/FakeAdapter/NamedAdapter.php on line 20
+[26-Oct-2017 21:17:57 UTC] PHP Fatal error:  Class 'Symfony\Component\Finder\Adapter\AbstractAdapter' not found in /home/seriousdatings/public_html/vendor/symfony/finder/Tests/FakeAdapter/UnsupportedAdapter.php on line 20

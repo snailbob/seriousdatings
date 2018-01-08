@@ -1,0 +1,6 @@
+[15-Oct-2017 02:14:24 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Cloner\AbstractCloner' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Cloner/VarCloner.php on line 18
+[15-Oct-2017 02:40:13 UTC] PHP Fatal error:  Interface 'Symfony\Component\VarDumper\Cloner\ClonerInterface' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Cloner/AbstractCloner.php on line 23
+[15-Oct-2017 07:35:53 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Cloner\AbstractCloner' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Cloner/VarCloner.php on line 18
+[15-Oct-2017 10:51:36 UTC] PHP Fatal error:  Interface 'Symfony\Component\VarDumper\Cloner\ClonerInterface' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Cloner/AbstractCloner.php on line 23
+[15-Oct-2017 20:05:14 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Cloner\AbstractCloner' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Cloner/VarCloner.php on line 18
+[16-Oct-2017 18:39:58 UTC] PHP Fatal error:  Interface 'Symfony\Component\VarDumper\Cloner\ClonerInterface' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Cloner/AbstractCloner.php on line 23

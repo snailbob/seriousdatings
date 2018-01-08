@@ -1,0 +1,8 @@
+[11-Oct-2017 11:24:58 UTC] PHP Fatal error:  Call to undefined function session() in /home/seriousdatings/public_html/resources/views/signup_form.blade.php on line 38
+[11-Oct-2017 14:10:48 UTC] PHP Fatal error:  Class 'DB' not found in /home/seriousdatings/public_html/resources/views/header_bottom.blade.php on line 407
+[11-Oct-2017 14:43:24 UTC] PHP Fatal error:  Class 'DB' not found in /home/seriousdatings/public_html/resources/views/match.blade.php on line 254
+[11-Oct-2017 22:23:20 UTC] PHP Fatal error:  Call to undefined function url() in /home/seriousdatings/public_html/resources/views/homepage.blade.php on line 1445
+[20-Oct-2017 06:56:40 UTC] PHP Fatal error:  Class 'DB' not found in /home/seriousdatings/public_html/resources/views/match.blade.php on line 254
+[20-Oct-2017 07:11:27 UTC] PHP Fatal error:  Call to undefined function url() in /home/seriousdatings/public_html/resources/views/homepage.blade.php on line 1445
+[20-Oct-2017 07:13:13 UTC] PHP Fatal error:  Call to undefined function session() in /home/seriousdatings/public_html/resources/views/signup_form.blade.php on line 38
+[20-Oct-2017 10:10:29 UTC] PHP Fatal error:  Class 'DB' not found in /home/seriousdatings/public_html/resources/views/header_bottom.blade.php on line 407

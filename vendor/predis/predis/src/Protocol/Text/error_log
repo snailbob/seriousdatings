@@ -1,0 +1,2 @@
+[26-Oct-2017 21:36:52 UTC] PHP Fatal error:  Interface 'Predis\Protocol\ResponseReaderInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Protocol/Text/ResponseReader.php on line 27
+[27-Oct-2017 00:23:21 UTC] PHP Fatal error:  Interface 'Predis\Protocol\ProtocolProcessorInterface' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Protocol/Text/CompositeProtocolProcessor.php on line 29

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="Serious Datings">
+    <serverData>
+      <paths name="Serious Datings">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="seriousdatings_app" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

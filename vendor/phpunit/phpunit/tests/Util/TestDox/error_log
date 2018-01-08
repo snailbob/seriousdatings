@@ -1,0 +1,2 @@
+[27-Oct-2017 13:24:46 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Util/TestDox/NamePrettifierTest.php on line 15
+[30-Oct-2017 18:56:32 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Util/TestDox/NamePrettifierTest.php on line 15

@@ -1,0 +1,20 @@
+[
+    {
+        "question" : "How important in a relationship is...",
+        "continuetext" : "My partner\"s dependability",
+        "choice_text": {
+            "lowest" : "Not at all",
+            "middle" : "Somewhat",
+            "highest" : "Very important"
+        }
+    },
+    {
+        "question" : "How strongly do you agree with...",
+        "continuetext" : "When I get romantically ",
+        "choice_text": {
+            "lowest" : "Not at all",
+            "middle" : "Somewhat",
+            "highest" : "Very important"
+        }
+    }
+]

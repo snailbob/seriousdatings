@@ -1,0 +1,3 @@
+[17-Oct-2017 16:37:01 UTC] PHP Fatal error:  Interface 'Guzzle\Http\EntityBodyInterface' not found in /home/seriousdatings/public_html/vendor/guzzle/guzzle/src/Guzzle/Http/AbstractEntityBodyDecorator.php on line 11
+[27-Oct-2017 02:51:30 UTC] PHP Fatal error:  Interface 'Guzzle\Http\EntityBodyInterface' not found in /home/seriousdatings/public_html/vendor/guzzle/guzzle/src/Guzzle/Http/AbstractEntityBodyDecorator.php on line 11
+[31-Oct-2017 07:52:07 UTC] PHP Fatal error:  Interface 'Symfony\Component\EventDispatcher\EventSubscriberInterface' not found in /home/seriousdatings/public_html/vendor/guzzle/guzzle/src/Guzzle/Http/RedirectPlugin.php on line 20

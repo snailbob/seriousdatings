@@ -1,0 +1,11 @@
+[27-Oct-2017 02:47:08 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Handler/GroupHandlerTest.php on line 18
+[27-Oct-2017 03:09:50 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Handler/RavenHandlerTest.php on line 19
+[30-Oct-2017 22:32:11 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Handler/BufferHandlerTest.php on line 18
+[30-Oct-2017 23:28:56 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Handler/SwiftMailerHandlerTest.php on line 18
+[30-Oct-2017 23:51:56 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Handler/NativeMailerHandlerTest.php on line 24
+[31-Oct-2017 01:45:08 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Handler/PushoverHandlerTest.php on line 24
+[31-Oct-2017 03:12:09 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Handler/ChromePHPHandlerTest.php on line 21
+[31-Oct-2017 07:06:43 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Handler/PsrHandlerTest.php on line 21
+[31-Oct-2017 08:03:28 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Handler/HipChatHandlerTest.php on line 22
+[31-Oct-2017 08:07:15 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Handler/BufferHandlerTest.php on line 18
+[31-Oct-2017 08:45:05 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Handler/SlackHandlerTest.php on line 23

@@ -1,0 +1,287 @@
+[15-Oct-2017 02:17:54 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 02:25:18 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 02:25:38 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 02:29:48 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 02:36:22 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 02:43:20 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 02:47:49 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 02:49:45 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 02:51:59 UTC] PHP Fatal error:  Uncaught exception 'Predis\ClientException' with message 'No sentinel server available for autodiscovery.' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php:268
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(455): Predis\Connection\Aggregate\SentinelReplication->getSentinelConnection()
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(480): Predis\Connection\Aggregate\SentinelReplication->getSlaves()
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(495): Predis\Connection\Aggregate\SentinelReplication->pickSlave()
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(536): Predis\Connection\Aggregate\SentinelReplication->getConnectionInternal(Object(Predis\Command\KeyExists))
+#4 /home/seriousdatings/public_html/vendor/pre in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php on line 268
+[15-Oct-2017 02:57:33 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 02:58:17 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 07:39:18 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 10:37:08 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 10:37:28 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 10:41:34 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 10:47:52 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 10:54:40 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 10:58:56 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 11:00:48 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 11:02:51 UTC] PHP Fatal error:  Uncaught exception 'Predis\ClientException' with message 'No sentinel server available for autodiscovery.' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php:268
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(455): Predis\Connection\Aggregate\SentinelReplication->getSentinelConnection()
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(480): Predis\Connection\Aggregate\SentinelReplication->getSlaves()
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(495): Predis\Connection\Aggregate\SentinelReplication->pickSlave()
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(536): Predis\Connection\Aggregate\SentinelReplication->getConnectionInternal(Object(Predis\Command\KeyExists))
+#4 /home/seriousdatings/public_html/vendor/pre in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php on line 268
+[15-Oct-2017 11:08:07 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 11:08:38 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 12:37:24 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 12:41:11 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 12:50:42 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 13:09:01 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[15-Oct-2017 21:20:54 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[16-Oct-2017 08:41:54 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[16-Oct-2017 09:50:00 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[16-Oct-2017 11:09:27 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[16-Oct-2017 11:20:48 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[16-Oct-2017 15:13:54 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[16-Oct-2017 15:14:14 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[16-Oct-2017 15:20:13 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[16-Oct-2017 17:16:44 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[16-Oct-2017 19:48:04 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[17-Oct-2017 09:45:52 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[17-Oct-2017 09:47:44 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[17-Oct-2017 09:49:46 UTC] PHP Fatal error:  Uncaught exception 'Predis\ClientException' with message 'No sentinel server available for autodiscovery.' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php:268
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(455): Predis\Connection\Aggregate\SentinelReplication->getSentinelConnection()
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(480): Predis\Connection\Aggregate\SentinelReplication->getSlaves()
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(495): Predis\Connection\Aggregate\SentinelReplication->pickSlave()
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php(536): Predis\Connection\Aggregate\SentinelReplication->getConnectionInternal(Object(Predis\Command\KeyExists))
+#4 /home/seriousdatings/public_html/vendor/pre in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/Aggregate/SentinelReplication.php on line 268
+[17-Oct-2017 09:55:00 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155
+[17-Oct-2017 09:55:31 UTC] PHP Fatal error:  Uncaught exception 'Predis\Connection\ConnectionException' with message 'Connection refused [tcp://127.0.0.1:6379]' in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php:155
+Stack trace:
+#0 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(128): Predis\Connection\AbstractConnection->onConnectionError('Connection refu...', 111)
+#1 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(178): Predis\Connection\StreamConnection->createStreamSocket(Object(Predis\Connection\Parameters), 'tcp://127.0.0.1...', 4)
+#2 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/StreamConnection.php(100): Predis\Connection\StreamConnection->tcpStreamInitializer(Object(Predis\Connection\Parameters))
+#3 /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php(81): Predis\Connection\StreamConnection->createResource()
+#4 /home/seriousdatings/public_html/vendor/predis/ in /home/seriousdatings/public_html/vendor/predis/predis/src/Connection/AbstractConnection.php on line 155

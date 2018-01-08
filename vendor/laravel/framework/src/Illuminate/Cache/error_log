@@ -1,0 +1,6 @@
+[27-Oct-2017 00:08:12 UTC] PHP Fatal error:  Class 'Illuminate\Cache\TaggableStore' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Cache/XCacheStore.php on line 7
+[27-Oct-2017 05:37:24 UTC] PHP Fatal error:  Class 'Illuminate\Cache\TaggableStore' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Cache/XCacheStore.php on line 7
+[27-Oct-2017 05:44:59 UTC] PHP Fatal error:  Interface 'Illuminate\Contracts\Cache\Store' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Cache/FileStore.php on line 11
+[27-Oct-2017 11:44:25 UTC] PHP Fatal error:  Class 'Illuminate\Cache\TaggableStore' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Cache/XCacheStore.php on line 7
+[27-Oct-2017 13:03:53 UTC] PHP Fatal error:  Interface 'Illuminate\Contracts\Cache\Store' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Cache/FileStore.php on line 11
+[30-Oct-2017 23:47:51 UTC] PHP Fatal error:  Class 'Illuminate\Cache\TaggedCache' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Cache/RedisTaggedCache.php on line 6

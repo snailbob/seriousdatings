@@ -1,0 +1,5 @@
+[25-Oct-2017 23:47:50 UTC] PHP Fatal error:  Interface 'React\Promise\PromiseAdapter\PromiseAdapterInterface' not found in /home/seriousdatings/public_html/vendor/react/promise/tests/PromiseAdapter/CallbackPromiseAdapter.php on line 8
+[26-Oct-2017 08:26:18 UTC] PHP Fatal error:  Interface 'React\Promise\PromiseAdapter\PromiseAdapterInterface' not found in /home/seriousdatings/public_html/vendor/react/promise/tests/PromiseAdapter/CallbackPromiseAdapter.php on line 8
+[26-Oct-2017 10:23:26 UTC] PHP Fatal error:  Interface 'React\Promise\PromiseAdapter\PromiseAdapterInterface' not found in /home/seriousdatings/public_html/vendor/react/promise/tests/PromiseAdapter/CallbackPromiseAdapter.php on line 8
+[26-Oct-2017 17:31:48 UTC] PHP Fatal error:  Interface 'React\Promise\PromiseAdapter\PromiseAdapterInterface' not found in /home/seriousdatings/public_html/vendor/react/promise/tests/PromiseAdapter/CallbackPromiseAdapter.php on line 8
+[27-Oct-2017 14:31:59 UTC] PHP Fatal error:  Interface 'React\Promise\PromiseAdapter\PromiseAdapterInterface' not found in /home/seriousdatings/public_html/vendor/react/promise/tests/PromiseAdapter/CallbackPromiseAdapter.php on line 8

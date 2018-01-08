@@ -1,0 +1,6 @@
+[15-Oct-2017 02:33:48 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/sebastian/environment/tests/ConsoleTest.php on line 16
+[15-Oct-2017 02:33:58 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/sebastian/environment/tests/RuntimeTest.php on line 16
+[15-Oct-2017 10:45:18 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/sebastian/environment/tests/ConsoleTest.php on line 16
+[15-Oct-2017 10:45:28 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/sebastian/environment/tests/RuntimeTest.php on line 16
+[16-Oct-2017 16:19:59 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/sebastian/environment/tests/ConsoleTest.php on line 16
+[16-Oct-2017 16:23:46 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/sebastian/environment/tests/RuntimeTest.php on line 16
