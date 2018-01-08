@@ -53,7 +53,7 @@
                   <tr>
                     <th width="25%" >Title</th>
                     <th width="10%">Video</th>
-                    <th width="15%">Link</th>
+                    <!-- <th width="15%">Link</th> -->
                     <th width="15%">Status</th>
                     <th width="60%">Description</th>
                     <th width="80px" class"text-center">Action</th>
@@ -74,7 +74,7 @@
                       </td>
                         
 
-                      <td>{!! $video->link !!}</td>
+                      <!-- <td>{!! $video->link !!}</td> -->
                       <td>{{ ($video->featured != 'Y') ? 'Reserved' : 'Primary' }}</td>
                       <td><div class="table-description"><p>{{ strip_tags($video->description) }}</p></div></td>
                       <td><div class="btn-group table-action pull-right custom"> <a class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-pencil"></i> Action <span class="caret"></span> </a>

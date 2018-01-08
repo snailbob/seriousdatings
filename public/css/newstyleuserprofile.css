@@ -6581,7 +6581,7 @@ input.margin_5 {
     margin: 0 0 12px;
 }
 .advertise-left {
-    width: 50%;
+    width: 100%;
     float: left;
 }
 .advertise-img,
