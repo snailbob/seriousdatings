@@ -3828,6 +3828,17 @@ input[type="radio"]:checked+label span {
     margin-right: 0;
 }
 
+
+@media (max-width: 991px) {
+    
+    .form-row .four-cols{
+        width: 100%;
+        
+    }
+
+}
+
+
 .four-col-row .four-cols {
     padding-bottom: 20px;
 }
@@ -7123,7 +7134,7 @@ custom rules
         padding: 0px !important;
         box-sizing: border-box;
         margin: 30px auto 0 auto !important;
-        max-width: 375px !important;
+        max-width: 100% !important;
         background: #fafafa;
         border: solid 1px #f0f0f0;
     }
@@ -7792,7 +7803,7 @@ custom rules
         padding: 10px 0px !important;
         box-sizing: border-box;
         margin: 30px auto 0 auto !important;
-        max-width: 375px !important;
+        max-width: 100% !important;
         background: #fafafa;
         border: solid 1px #f0f0f0;
     }
@@ -8443,7 +8454,7 @@ custom rules
         padding: 10px 0px !important;
         box-sizing: border-box;
         margin: 30px auto 0 auto !important;
-        max-width: 375px !important;
+        max-width: 100% !important;
         background: #fafafa;
         border: solid 1px #f0f0f0;
     }

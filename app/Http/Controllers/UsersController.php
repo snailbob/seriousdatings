@@ -182,6 +182,7 @@ class UsersController extends Controller {
     public function onlineChatPage(){
         $gender  = Auth::user()->gender;
         $online = \DB::table('users')->where('gender', 'not like', $gender)->get();
+        $me = \DB::table('users')->where('gender', 'not like', $gender)->get();
         
         $count = 0;
         // foreach ($online as $on) {
@@ -514,9 +515,38 @@ class UsersController extends Controller {
         return $user;
     }
 
+    public function delete_account(){
+        $user_id = (Auth::check()) ? Auth::user()->id : '';
+
+        $status = 'is_admin';
+        $message = 'Cannot delete your admin account.';
+        if(!empty($user_id)){
+            $role = DB::table('role_user')->where('user_id', $user_id)->first();
+
+            if($role->role_id != 2){
+                User::find($user_id)->delete();
+                DB::table('about_your_date')->where('user_id', $user_id)->delete();
+               
+                Auth::logout();
+                DB::table('user_online')->where('user_id', '=', $user_id)->delete();
+                \Session::flush();
+
+                $message = 'You have successfully deleted your account.';
+                $status = 'ok';
+            }
+        }
+
+        $arr = array(
+            'message'=>$message,
+            'status'=>$status
+        );
+        
+        return response()->json($arr);
+    }
+
 
     public function my_movies($user_id){
-        $current_movies = DB::table('like_movies')->where('user_id', $user_id)->get();
+        $current_movies = DB::table('like_movies')->where('user_id', Auth::user()->username)->get();
         
         $arr = array();
 

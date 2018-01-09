@@ -1794,7 +1794,45 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
     };
     angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
 
+    $scope.deleteAccount = function(){
 
+        $ngConfirm({
+            title: 'Delete Account',
+            content: 'Are you sure you want to delete your SeriousDatings account permanently?',
+            scope: $scope,
+            buttons: {
+                sayBoo: {
+                    text: 'Confirm',
+                    btnClass: 'btn-danger',
+                    action: function(scope, button){
+                        console.log('yeah');
+                        myHttpService.post('delete_account', {}).then(function(res){
+                            console.log(res.data);
+                            $.alert({
+                                title: (res.data.status == 'ok') ? 'Account Deleted' : 'Account Admin',
+                                content: res.data.message,
+                                onDestroy: function () {
+                                    // when the modal is removed from DOM
+                                    window.location.reload(true);
+                                },
+                            });
+
+                        });
+                    }
+                },
+                cancel: {
+                    text: 'Cancel',
+                    btnClass: 'btn-default',
+                    action: function(scope, button){
+                        console.log('yeah');
+                    }
+                },
+
+            }
+        });
+
+
+    }
 
     $scope.checklist = [
         'I\'m new to the area',
