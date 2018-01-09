@@ -1,5 +1,0 @@
-[27-Oct-2017 10:59:01 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Core/IsTest.php on line 5
-[30-Oct-2017 19:00:19 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Core/IsEqualTest.php on line 20
-[31-Oct-2017 03:31:04 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Core/CombinableMatcherTest.php on line 5
-[31-Oct-2017 04:46:44 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Core/EveryTest.php on line 5
-[31-Oct-2017 05:43:29 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Core/IsAnythingTest.php on line 5

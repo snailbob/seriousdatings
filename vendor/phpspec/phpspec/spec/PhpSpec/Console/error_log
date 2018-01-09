@@ -1,1 +1,0 @@
-[31-Oct-2017 01:18:39 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/Console/ResultConverterSpec.php on line 10

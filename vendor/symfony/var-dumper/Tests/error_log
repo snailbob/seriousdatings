@@ -1,9 +1,0 @@
-[15-Oct-2017 02:26:11 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Test\VarDumperTestCase' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Tests/CliDumperTest.php on line 22
-[15-Oct-2017 02:30:09 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Tests/VarClonerTest.php on line 20
-[15-Oct-2017 02:31:42 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Tests/HtmlDumperTest.php on line 21
-[15-Oct-2017 10:37:59 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Test\VarDumperTestCase' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Tests/CliDumperTest.php on line 22
-[15-Oct-2017 10:41:54 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Tests/VarClonerTest.php on line 20
-[15-Oct-2017 10:43:26 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Tests/HtmlDumperTest.php on line 21
-[16-Oct-2017 15:14:45 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Test\VarDumperTestCase' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Tests/CliDumperTest.php on line 22
-[16-Oct-2017 15:22:01 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Tests/VarClonerTest.php on line 20
-[16-Oct-2017 15:38:22 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Tests/HtmlDumperTest.php on line 21

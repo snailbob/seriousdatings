@@ -1,3 +1,0 @@
-[22-Oct-2017 17:47:08 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/examples/starship/StarshipTest.php on line 8
-[23-Oct-2017 01:47:38 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/examples/starship/StarshipTest.php on line 8
-[23-Oct-2017 18:45:24 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/mockery/mockery/examples/starship/StarshipTest.php on line 8

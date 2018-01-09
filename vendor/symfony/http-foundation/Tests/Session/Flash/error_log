@@ -1,1 +1,0 @@
-[31-Oct-2017 08:29:58 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Tests/Session/Flash/AutoExpireFlashBagTest.php on line 22

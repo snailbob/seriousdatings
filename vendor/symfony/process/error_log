@@ -1,5 +1,0 @@
-[13-Oct-2017 21:50:13 UTC] PHP Fatal error:  Class 'Symfony\Component\Process\Process' not found in /home/seriousdatings/public_html/vendor/symfony/process/PhpProcess.php on line 26
-[14-Oct-2017 04:36:32 UTC] PHP Fatal error:  Class 'Symfony\Component\Process\Process' not found in /home/seriousdatings/public_html/vendor/symfony/process/PhpProcess.php on line 26
-[14-Oct-2017 07:45:55 UTC] PHP Fatal error:  Class 'Symfony\Component\Process\Process' not found in /home/seriousdatings/public_html/vendor/symfony/process/PhpProcess.php on line 26
-[15-Oct-2017 01:57:23 UTC] PHP Fatal error:  Class 'Symfony\Component\Process\Process' not found in /home/seriousdatings/public_html/vendor/symfony/process/PhpProcess.php on line 26
-[20-Oct-2017 01:27:49 UTC] PHP Fatal error:  Class 'Symfony\Component\Process\Process' not found in /home/seriousdatings/public_html/vendor/symfony/process/PhpProcess.php on line 26

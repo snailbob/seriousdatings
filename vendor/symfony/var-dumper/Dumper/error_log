@@ -1,9 +1,0 @@
-[15-Oct-2017 02:14:03 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Dumper\AbstractDumper' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Dumper/CliDumper.php on line 22
-[15-Oct-2017 02:20:47 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Dumper\CliDumper' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Dumper/HtmlDumper.php on line 23
-[15-Oct-2017 02:41:46 UTC] PHP Fatal error:  Interface 'Symfony\Component\VarDumper\Dumper\DataDumperInterface' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Dumper/AbstractDumper.php on line 22
-[15-Oct-2017 07:35:33 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Dumper\AbstractDumper' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Dumper/CliDumper.php on line 22
-[15-Oct-2017 07:42:02 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Dumper\CliDumper' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Dumper/HtmlDumper.php on line 23
-[15-Oct-2017 10:53:08 UTC] PHP Fatal error:  Interface 'Symfony\Component\VarDumper\Dumper\DataDumperInterface' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Dumper/AbstractDumper.php on line 22
-[15-Oct-2017 19:57:40 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Dumper\AbstractDumper' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Dumper/CliDumper.php on line 22
-[15-Oct-2017 22:21:41 UTC] PHP Fatal error:  Class 'Symfony\Component\VarDumper\Dumper\CliDumper' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Dumper/HtmlDumper.php on line 23
-[16-Oct-2017 19:14:01 UTC] PHP Fatal error:  Interface 'Symfony\Component\VarDumper\Dumper\DataDumperInterface' not found in /home/seriousdatings/public_html/vendor/symfony/var-dumper/Dumper/AbstractDumper.php on line 22

@@ -1,2 +1,0 @@
-[23-Oct-2017 12:04:19 UTC] PHP Fatal error:  Class 'SebastianBergmann\Comparator\ObjectComparator' not found in /home/seriousdatings/public_html/vendor/sebastian/comparator/tests/_files/TestClassComparator.php on line 13
-[24-Oct-2017 16:35:00 UTC] PHP Fatal error:  Class 'SebastianBergmann\Comparator\ObjectComparator' not found in /home/seriousdatings/public_html/vendor/sebastian/comparator/tests/_files/TestClassComparator.php on line 13

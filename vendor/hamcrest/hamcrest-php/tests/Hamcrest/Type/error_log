@@ -1,2 +1,0 @@
-[27-Oct-2017 07:19:34 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Type/IsScalarTest.php on line 5
-[31-Oct-2017 00:29:28 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Type/IsResourceTest.php on line 5

@@ -1,4 +1,0 @@
-[16-Oct-2017 04:58:41 UTC] PHP Fatal error:  Interface 'SebastianBergmann\RecursionContext\Exception' not found in /home/seriousdatings/public_html/vendor/sebastian/recursion-context/src/InvalidArgumentException.php on line 16
-[18-Oct-2017 07:20:23 UTC] PHP Fatal error:  Interface 'SebastianBergmann\RecursionContext\Exception' not found in /home/seriousdatings/public_html/vendor/sebastian/recursion-context/src/InvalidArgumentException.php on line 16
-[18-Oct-2017 16:21:27 UTC] PHP Fatal error:  Interface 'SebastianBergmann\RecursionContext\Exception' not found in /home/seriousdatings/public_html/vendor/sebastian/recursion-context/src/InvalidArgumentException.php on line 16
-[19-Oct-2017 17:57:32 UTC] PHP Fatal error:  Interface 'SebastianBergmann\RecursionContext\Exception' not found in /home/seriousdatings/public_html/vendor/sebastian/recursion-context/src/InvalidArgumentException.php on line 16

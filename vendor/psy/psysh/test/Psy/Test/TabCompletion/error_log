@@ -1,1 +1,0 @@
-[17-Oct-2017 17:47:17 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/psy/psysh/test/Psy/Test/TabCompletion/AutoCompleterTest.php on line 22

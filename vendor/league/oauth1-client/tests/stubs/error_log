@@ -1,2 +1,0 @@
-[18-Oct-2017 04:31:05 UTC] PHP Fatal error:  Class 'League\OAuth1\Client\Server\Server' not found in /home/seriousdatings/public_html/vendor/league/oauth1-client/tests/stubs/ServerStub.php on line 10
-[22-Oct-2017 02:08:46 UTC] PHP Fatal error:  Class 'League\OAuth1\Client\Server\Server' not found in /home/seriousdatings/public_html/vendor/league/oauth1-client/tests/stubs/ServerStub.php on line 10

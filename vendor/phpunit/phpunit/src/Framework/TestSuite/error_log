@@ -1,3 +1,0 @@
-[19-Oct-2017 04:29:31 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestSuite' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Framework/TestSuite/DataProvider.php on line 15
-[26-Oct-2017 22:29:50 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestSuite' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Framework/TestSuite/DataProvider.php on line 15
-[27-Oct-2017 01:08:44 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestSuite' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Framework/TestSuite/DataProvider.php on line 15

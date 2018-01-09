@@ -1,2 +1,0 @@
-[21-Oct-2017 02:18:38 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/debug/Tests/Exception/FlattenExceptionTest.php on line 31
-[22-Oct-2017 14:53:04 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/debug/Tests/Exception/FlattenExceptionTest.php on line 31

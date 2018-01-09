@@ -1,3 +1,0 @@
-[15-Oct-2017 02:10:24 UTC] PHP Fatal error:  Interface 'Symfony\Component\CssSelector\Parser\ParserInterface' not found in /home/seriousdatings/public_html/vendor/symfony/css-selector/Parser/Parser.php on line 27
-[15-Oct-2017 07:31:58 UTC] PHP Fatal error:  Interface 'Symfony\Component\CssSelector\Parser\ParserInterface' not found in /home/seriousdatings/public_html/vendor/symfony/css-selector/Parser/Parser.php on line 27
-[15-Oct-2017 18:38:12 UTC] PHP Fatal error:  Interface 'Symfony\Component\CssSelector\Parser\ParserInterface' not found in /home/seriousdatings/public_html/vendor/symfony/css-selector/Parser/Parser.php on line 27

@@ -1,4 +1,0 @@
-[24-Oct-2017 12:10:10 UTC] PHP Fatal error:  Interface 'SebastianBergmann\GlobalState\TestFixture\BlacklistedInterface' not found in /home/seriousdatings/public_html/vendor/sebastian/global-state/tests/_fixture/BlacklistedImplementor.php on line 16
-[25-Oct-2017 06:34:56 UTC] PHP Fatal error:  Class 'SebastianBergmann\GlobalState\TestFixture\BlacklistedClass' not found in /home/seriousdatings/public_html/vendor/sebastian/global-state/tests/_fixture/BlacklistedChildClass.php on line 16
-[25-Oct-2017 12:34:21 UTC] PHP Fatal error:  Interface 'SebastianBergmann\GlobalState\TestFixture\BlacklistedInterface' not found in /home/seriousdatings/public_html/vendor/sebastian/global-state/tests/_fixture/BlacklistedImplementor.php on line 16
-[26-Oct-2017 12:28:17 UTC] PHP Fatal error:  Class 'SebastianBergmann\GlobalState\TestFixture\BlacklistedClass' not found in /home/seriousdatings/public_html/vendor/sebastian/global-state/tests/_fixture/BlacklistedChildClass.php on line 16

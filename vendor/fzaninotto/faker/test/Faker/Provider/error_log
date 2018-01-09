@@ -1,5 +1,0 @@
-[27-Oct-2017 07:23:21 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/fzaninotto/faker/test/Faker/Provider/ImageTest.php on line 8
-[27-Oct-2017 07:42:16 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/fzaninotto/faker/test/Faker/Provider/MiscellaneousTest.php on line 8
-[27-Oct-2017 09:01:43 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/fzaninotto/faker/test/Faker/Provider/LocalizationTest.php on line 8
-[31-Oct-2017 03:27:17 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/fzaninotto/faker/test/Faker/Provider/BaseTest.php on line 8
-[31-Oct-2017 07:33:12 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/fzaninotto/faker/test/Faker/Provider/UserAgentTest.php on line 8

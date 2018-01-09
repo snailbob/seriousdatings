@@ -1,4 +1,0 @@
-[22-Oct-2017 01:34:43 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/guzzlehttp/streams/tests/Exception/SeekExceptionTest.php on line 8
-[22-Oct-2017 11:40:07 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/guzzlehttp/streams/tests/Exception/SeekExceptionTest.php on line 8
-[23-Oct-2017 08:28:40 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/guzzlehttp/streams/tests/Exception/SeekExceptionTest.php on line 8
-[27-Oct-2017 10:07:14 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/guzzlehttp/streams/tests/Exception/SeekExceptionTest.php on line 8

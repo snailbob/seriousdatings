@@ -1,3 +1,0 @@
-[26-Oct-2017 03:49:58 UTC] PHP Fatal error:  Interface 'phpDocumentor\Reflection\DocBlock\TagFactory' not found in /home/seriousdatings/public_html/vendor/phpdocumentor/reflection-docblock/src/DocBlock/StandardTagFactory.php on line 39
-[26-Oct-2017 11:20:11 UTC] PHP Fatal error:  Interface 'phpDocumentor\Reflection\DocBlock\TagFactory' not found in /home/seriousdatings/public_html/vendor/phpdocumentor/reflection-docblock/src/DocBlock/StandardTagFactory.php on line 39
-[26-Oct-2017 14:02:52 UTC] PHP Fatal error:  Interface 'phpDocumentor\Reflection\DocBlock\TagFactory' not found in /home/seriousdatings/public_html/vendor/phpdocumentor/reflection-docblock/src/DocBlock/StandardTagFactory.php on line 39

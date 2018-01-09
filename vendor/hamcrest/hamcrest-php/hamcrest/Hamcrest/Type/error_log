@@ -1,2 +1,0 @@
-[27-Oct-2017 10:43:53 UTC] PHP Fatal error:  Class 'Hamcrest\Core\IsTypeOf' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsNumeric.php on line 13
-[31-Oct-2017 00:21:54 UTC] PHP Fatal error:  Class 'Hamcrest\Core\IsTypeOf' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsCallable.php on line 13

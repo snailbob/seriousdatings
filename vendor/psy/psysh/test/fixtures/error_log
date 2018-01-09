@@ -1,4 +1,0 @@
-[17-Oct-2017 00:14:30 UTC] PHP Fatal error:  Call to a member function setRuntimeDir() on null in /home/seriousdatings/public_html/vendor/psy/psysh/test/fixtures/config.php on line 12
-[18-Oct-2017 03:38:54 UTC] PHP Fatal error:  Call to a member function setRuntimeDir() on null in /home/seriousdatings/public_html/vendor/psy/psysh/test/fixtures/config.php on line 12
-[20-Oct-2017 04:23:35 UTC] PHP Fatal error:  Call to a member function setRuntimeDir() on null in /home/seriousdatings/public_html/vendor/psy/psysh/test/fixtures/config.php on line 12
-[25-Oct-2017 16:25:26 UTC] PHP Fatal error:  Call to a member function setRuntimeDir() on null in /home/seriousdatings/public_html/vendor/psy/psysh/test/fixtures/config.php on line 12

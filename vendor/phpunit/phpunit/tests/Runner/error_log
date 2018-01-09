@@ -1,4 +1,0 @@
-[18-Oct-2017 11:52:44 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Runner/BaseTestRunnerTest.php on line 16
-[26-Oct-2017 15:18:32 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Runner/BaseTestRunnerTest.php on line 16
-[26-Oct-2017 23:26:51 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Runner/BaseTestRunnerTest.php on line 16
-[27-Oct-2017 09:37:31 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Runner/BaseTestRunnerTest.php on line 16

@@ -1,6 +1,0 @@
-[25-Oct-2017 08:43:34 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Tests/CacheWarmer/CacheWarmerTest.php on line 17
-[26-Oct-2017 01:56:28 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Tests/CacheWarmer/CacheWarmerAggregateTest.php on line 17
-[26-Oct-2017 09:26:42 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Tests/CacheWarmer/CacheWarmerAggregateTest.php on line 17
-[26-Oct-2017 12:54:46 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Tests/CacheWarmer/CacheWarmerTest.php on line 17
-[26-Oct-2017 18:31:29 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Tests/CacheWarmer/CacheWarmerAggregateTest.php on line 17
-[27-Oct-2017 15:01:11 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Tests/CacheWarmer/CacheWarmerAggregateTest.php on line 17

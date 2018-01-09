@@ -1,7 +1,0 @@
-[24-Oct-2017 08:23:10 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/console/Tests/Formatter/OutputFormatterStyleTest.php on line 17
-[25-Oct-2017 11:14:54 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/console/Tests/Formatter/OutputFormatterStyleTest.php on line 17
-[26-Oct-2017 03:57:32 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/console/Tests/Formatter/OutputFormatterTest.php on line 18
-[26-Oct-2017 11:23:58 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/console/Tests/Formatter/OutputFormatterTest.php on line 18
-[26-Oct-2017 14:06:39 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/console/Tests/Formatter/OutputFormatterTest.php on line 18
-[26-Oct-2017 15:48:48 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/console/Tests/Formatter/OutputFormatterStyleStackTest.php on line 18
-[26-Oct-2017 23:45:30 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/console/Tests/Formatter/OutputFormatterStyleStackTest.php on line 18

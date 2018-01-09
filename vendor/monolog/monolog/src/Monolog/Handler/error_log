@@ -1,9 +1,0 @@
-[30-Oct-2017 19:41:56 UTC] PHP Fatal error:  Class 'Monolog\Handler\AbstractProcessingHandler' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Handler/PHPConsoleHandler.php on line 41
-[30-Oct-2017 20:31:15 UTC] PHP Fatal error:  Class 'Monolog\Handler\AbstractHandler' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Handler/FingersCrossedHandler.php on line 31
-[30-Oct-2017 21:08:57 UTC] PHP Fatal error:  Class 'Monolog\Handler\AbstractProcessingHandler' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Handler/ChromePHPHandler.php on line 25
-[31-Oct-2017 00:06:46 UTC] PHP Fatal error:  Class 'Monolog\Handler\AbstractProcessingHandler' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Handler/AmqpHandler.php on line 21
-[31-Oct-2017 02:45:40 UTC] PHP Fatal error:  Interface 'Monolog\Handler\HandlerInterface' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Handler/HandlerWrapper.php on line 32
-[31-Oct-2017 04:16:36 UTC] PHP Fatal error:  Class 'Monolog\Handler\AbstractProcessingHandler' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Handler/GelfHandler.php on line 28
-[31-Oct-2017 04:39:10 UTC] PHP Fatal error:  Class 'Monolog\Handler\AbstractProcessingHandler' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Handler/ZendMonitorHandler.php on line 22
-[31-Oct-2017 08:52:39 UTC] PHP Fatal error:  Class 'Monolog\Handler\AbstractProcessingHandler' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Handler/AbstractSyslogHandler.php on line 21
-[31-Oct-2017 09:07:47 UTC] PHP Fatal error:  Class 'Monolog\Handler\AbstractProcessingHandler' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/src/Monolog/Handler/MailHandler.php on line 20

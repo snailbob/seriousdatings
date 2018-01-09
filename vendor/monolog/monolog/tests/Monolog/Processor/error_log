@@ -1,5 +1,0 @@
-[25-Oct-2017 19:53:15 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Processor/TagProcessorTest.php on line 17
-[25-Oct-2017 20:16:39 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Processor/PsrLogMessageProcessorTest.php on line 15
-[26-Oct-2017 21:48:13 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Processor/TagProcessorTest.php on line 17
-[26-Oct-2017 22:03:21 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Processor/PsrLogMessageProcessorTest.php on line 15
-[31-Oct-2017 01:48:55 UTC] PHP Fatal error:  Class 'Monolog\TestCase' not found in /home/seriousdatings/public_html/vendor/monolog/monolog/tests/Monolog/Processor/UidProcessorTest.php on line 17

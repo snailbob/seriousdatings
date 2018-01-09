@@ -1,5 +1,0 @@
-[22-Oct-2017 08:52:03 UTC] PHP Fatal error:  Class 'Illuminate\Support\Facades\Facade' not found in /home/seriousdatings/public_html/vendor/vinkla/pusher/src/Facades/Pusher.php on line 22
-[22-Oct-2017 15:34:42 UTC] PHP Fatal error:  Class 'Illuminate\Support\Facades\Facade' not found in /home/seriousdatings/public_html/vendor/vinkla/pusher/src/Facades/Pusher.php on line 22
-[22-Oct-2017 18:17:24 UTC] PHP Fatal error:  Class 'Illuminate\Support\Facades\Facade' not found in /home/seriousdatings/public_html/vendor/vinkla/pusher/src/Facades/Pusher.php on line 22
-[23-Oct-2017 00:24:24 UTC] PHP Fatal error:  Class 'Illuminate\Support\Facades\Facade' not found in /home/seriousdatings/public_html/vendor/vinkla/pusher/src/Facades/Pusher.php on line 22
-[23-Oct-2017 18:15:05 UTC] PHP Fatal error:  Class 'Illuminate\Support\Facades\Facade' not found in /home/seriousdatings/public_html/vendor/vinkla/pusher/src/Facades/Pusher.php on line 22

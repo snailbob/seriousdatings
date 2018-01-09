@@ -1,2 +1,0 @@
-[24-Oct-2017 22:57:08 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpdocumentor/type-resolver/tests/unit/TypeResolverTest.php on line 25
-[25-Oct-2017 21:35:24 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpdocumentor/type-resolver/tests/unit/TypeResolverTest.php on line 25

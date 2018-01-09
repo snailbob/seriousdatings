@@ -1,5 +1,0 @@
-[17-Oct-2017 17:42:52 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/psy/psysh/test/Psy/Test/Exception/ErrorExceptionTest.php on line 18
-[17-Oct-2017 17:45:55 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/psy/psysh/test/Psy/Test/Exception/FatalErrorExceptionTest.php on line 18
-[17-Oct-2017 17:46:16 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/psy/psysh/test/Psy/Test/Exception/BreakExceptionTest.php on line 18
-[17-Oct-2017 17:46:26 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/psy/psysh/test/Psy/Test/Exception/ParseErrorExceptionTest.php on line 18
-[17-Oct-2017 17:46:57 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/psy/psysh/test/Psy/Test/Exception/RuntimeExceptionTest.php on line 18

@@ -1,8 +1,0 @@
-[18-Oct-2017 17:22:25 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Extensions/PhptTestCaseTest.php on line 12
-[18-Oct-2017 19:44:26 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Extensions/RepeatedTestTest.php on line 16
-[23-Oct-2017 11:52:58 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Extensions/PhptTestCaseTest.php on line 12
-[23-Oct-2017 14:51:51 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Extensions/RepeatedTestTest.php on line 16
-[24-Oct-2017 16:27:26 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Extensions/PhptTestCaseTest.php on line 12
-[24-Oct-2017 17:05:16 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Extensions/RepeatedTestTest.php on line 16
-[26-Oct-2017 18:08:01 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Extensions/RepeatedTestTest.php on line 16
-[27-Oct-2017 00:43:09 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/tests/Extensions/PhptTestCaseTest.php on line 12

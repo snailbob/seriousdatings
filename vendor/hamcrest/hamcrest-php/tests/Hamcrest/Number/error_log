@@ -1,3 +1,0 @@
-[27-Oct-2017 00:30:55 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Number/OrderingComparisonTest.php on line 5
-[27-Oct-2017 08:35:14 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Number/OrderingComparisonTest.php on line 5
-[27-Oct-2017 11:56:38 UTC] PHP Fatal error:  Class 'Hamcrest\AbstractMatcherTest' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/tests/Hamcrest/Number/OrderingComparisonTest.php on line 5

@@ -1,8 +1,0 @@
-[23-Oct-2017 19:49:40 UTC] PHP Fatal error:  Class 'Predis\ClientException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Replication/MissingMasterException.php on line 22
-[24-Oct-2017 03:46:58 UTC] PHP Fatal error:  Class 'Predis\ClientException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Replication/MissingMasterException.php on line 22
-[24-Oct-2017 06:06:58 UTC] PHP Fatal error:  Class 'Predis\ClientException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Replication/MissingMasterException.php on line 22
-[24-Oct-2017 12:29:05 UTC] PHP Fatal error:  Class 'Predis\ClientException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Replication/MissingMasterException.php on line 22
-[25-Oct-2017 09:47:53 UTC] PHP Fatal error:  Class 'Predis\ClientException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Replication/MissingMasterException.php on line 22
-[26-Oct-2017 00:29:27 UTC] PHP Fatal error:  Class 'Predis\CommunicationException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Replication/RoleException.php on line 23
-[26-Oct-2017 08:52:38 UTC] PHP Fatal error:  Class 'Predis\CommunicationException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Replication/RoleException.php on line 23
-[26-Oct-2017 17:57:26 UTC] PHP Fatal error:  Class 'Predis\CommunicationException' not found in /home/seriousdatings/public_html/vendor/predis/predis/src/Replication/RoleException.php on line 23

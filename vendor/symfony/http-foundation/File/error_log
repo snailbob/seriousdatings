@@ -1,3 +1,0 @@
-[15-Oct-2017 02:43:30 UTC] PHP Fatal error:  Class 'Symfony\Component\HttpFoundation\File\File' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/File/UploadedFile.php on line 26
-[15-Oct-2017 10:54:50 UTC] PHP Fatal error:  Class 'Symfony\Component\HttpFoundation\File\File' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/File/UploadedFile.php on line 26
-[16-Oct-2017 19:51:51 UTC] PHP Fatal error:  Class 'Symfony\Component\HttpFoundation\File\File' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/File/UploadedFile.php on line 26

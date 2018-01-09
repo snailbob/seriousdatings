@@ -1,2 +1,0 @@
-[20-Oct-2017 01:05:09 UTC] PHP Fatal error:  Cannot redeclare class SessionHandlerInterface in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php on line 32
-[21-Oct-2017 05:01:51 UTC] PHP Fatal error:  Cannot redeclare class SessionHandlerInterface in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php on line 32

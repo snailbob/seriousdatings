@@ -1,6 +1,0 @@
-[18-Oct-2017 13:38:26 UTC] PHP Fatal error:  Class 'PHPUnit_Util_Printer' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Util/Log/JSON.php on line 16
-[18-Oct-2017 20:58:20 UTC] PHP Fatal error:  Class 'PHPUnit_Util_Printer' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Util/Log/TAP.php on line 17
-[19-Oct-2017 01:00:20 UTC] PHP Fatal error:  Class 'PHPUnit_Util_Printer' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Util/Log/JUnit.php on line 18
-[27-Oct-2017 02:39:13 UTC] PHP Fatal error:  Class 'PHPUnit_Util_Printer' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Util/Log/JUnit.php on line 18
-[27-Oct-2017 08:12:41 UTC] PHP Fatal error:  Class 'PHPUnit_Util_Printer' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Util/Log/JSON.php on line 16
-[27-Oct-2017 13:47:10 UTC] PHP Fatal error:  Class 'PHPUnit_Util_Printer' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Util/Log/TAP.php on line 17

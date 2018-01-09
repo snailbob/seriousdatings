@@ -1,5 +1,0 @@
-[26-Oct-2017 22:33:37 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/Util/InstantiatorSpec.php on line 9
-[27-Oct-2017 05:29:50 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/Util/InstantiatorSpec.php on line 9
-[27-Oct-2017 08:54:09 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/Util/ReservedWordsMethodNameCheckerSpec.php on line 9
-[27-Oct-2017 11:36:51 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/Util/InstantiatorSpec.php on line 9
-[31-Oct-2017 04:31:41 UTC] PHP Fatal error:  Class 'PhpSpec\ObjectBehavior' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/spec/PhpSpec/Util/ClassFileAnalyserSpec.php on line 9

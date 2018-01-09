@@ -1,8 +1,0 @@
-[24-Oct-2017 18:17:09 UTC] PHP Fatal error:  Interface 'Behat\Behat\Context\Context' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/features/bootstrap/IsolatedProcessContext.php on line 10
-[25-Oct-2017 03:21:59 UTC] PHP Fatal error:  Interface 'Behat\Behat\Context\Context' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/features/bootstrap/IsolatedProcessContext.php on line 10
-[25-Oct-2017 11:03:33 UTC] PHP Fatal error:  Interface 'Behat\Behat\Context\Context' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/features/bootstrap/IsolatedProcessContext.php on line 10
-[25-Oct-2017 17:18:08 UTC] PHP Fatal error:  Interface 'Behat\Behat\Context\Context' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/features/bootstrap/ApplicationContext.php on line 15
-[26-Oct-2017 06:13:44 UTC] PHP Fatal error:  Interface 'Behat\Behat\Context\Context' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/features/bootstrap/IsolatedProcessContext.php on line 10
-[26-Oct-2017 15:56:55 UTC] PHP Fatal error:  Interface 'Behat\Behat\Context\Context' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/features/bootstrap/FilesystemContext.php on line 12
-[26-Oct-2017 20:43:54 UTC] PHP Fatal error:  Interface 'Behat\Behat\Context\Context' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/features/bootstrap/ApplicationContext.php on line 15
-[26-Oct-2017 23:49:17 UTC] PHP Fatal error:  Interface 'Behat\Behat\Context\Context' not found in /home/seriousdatings/public_html/vendor/phpspec/phpspec/features/bootstrap/FilesystemContext.php on line 12

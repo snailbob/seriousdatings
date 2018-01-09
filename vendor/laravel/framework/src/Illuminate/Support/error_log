@@ -1,1 +1,0 @@
-[30-Oct-2017 19:45:43 UTC] PHP Fatal error:  Interface 'Illuminate\Contracts\Support\Arrayable' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Support/Collection.php on line 16

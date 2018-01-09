@@ -1,4 +1,0 @@
-[20-Oct-2017 23:17:01 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/routing/Tests/Generator/UrlGeneratorTest.php on line 21
-[21-Oct-2017 06:58:37 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/routing/Tests/Generator/UrlGeneratorTest.php on line 21
-[21-Oct-2017 10:38:04 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/routing/Tests/Generator/UrlGeneratorTest.php on line 21
-[22-Oct-2017 12:17:57 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/routing/Tests/Generator/UrlGeneratorTest.php on line 21

@@ -1,1 +1,0 @@
-[30-Oct-2017 23:02:27 UTC] PHP Fatal error:  Interface 'League\OAuth1\Client\Signature\SignatureInterface' not found in /home/seriousdatings/public_html/vendor/league/oauth1-client/src/Client/Signature/Signature.php on line 9

@@ -1,5 +1,0 @@
-[21-Oct-2017 21:13:40 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Tests/Bundle/BundleTest.php on line 20
-[22-Oct-2017 05:36:52 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Tests/Bundle/BundleTest.php on line 20
-[22-Oct-2017 10:01:44 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Tests/Bundle/BundleTest.php on line 20
-[22-Oct-2017 12:55:47 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Tests/Bundle/BundleTest.php on line 20
-[23-Oct-2017 06:31:38 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-kernel/Tests/Bundle/BundleTest.php on line 20

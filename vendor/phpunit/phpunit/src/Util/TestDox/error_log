@@ -1,3 +1,0 @@
-[19-Oct-2017 10:51:27 UTC] PHP Fatal error:  Class 'PHPUnit_Util_Printer' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Util/TestDox/ResultPrinter.php on line 16
-[26-Oct-2017 18:32:09 UTC] PHP Fatal error:  Class 'PHPUnit_Util_Printer' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Util/TestDox/ResultPrinter.php on line 16
-[31-Oct-2017 00:02:59 UTC] PHP Fatal error:  Class 'PHPUnit_Util_Printer' not found in /home/seriousdatings/public_html/vendor/phpunit/phpunit/src/Util/TestDox/ResultPrinter.php on line 16

@@ -1,1 +1,0 @@
-[31-Oct-2017 04:24:02 UTC] PHP Fatal error:  Interface 'Illuminate\Contracts\Broadcasting\Factory' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Broadcasting/BroadcastManager.php on line 15

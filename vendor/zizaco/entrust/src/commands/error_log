@@ -1,4 +1,0 @@
-[20-Oct-2017 10:06:58 UTC] PHP Fatal error:  Class 'Illuminate\Console\Command' not found in /home/seriousdatings/public_html/vendor/zizaco/entrust/src/commands/MigrationCommand.php on line 15
-[21-Oct-2017 19:23:57 UTC] PHP Fatal error:  Class 'Illuminate\Console\Command' not found in /home/seriousdatings/public_html/vendor/zizaco/entrust/src/commands/MigrationCommand.php on line 15
-[24-Oct-2017 08:57:13 UTC] PHP Fatal error:  Class 'Illuminate\Console\Command' not found in /home/seriousdatings/public_html/vendor/zizaco/entrust/src/commands/ClassCreatorCommand.php on line 15
-[25-Oct-2017 11:33:49 UTC] PHP Fatal error:  Class 'Illuminate\Console\Command' not found in /home/seriousdatings/public_html/vendor/zizaco/entrust/src/commands/ClassCreatorCommand.php on line 15

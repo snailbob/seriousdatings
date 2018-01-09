@@ -1,1 +1,0 @@
-[30-Oct-2017 23:21:22 UTC] PHP Fatal error:  Class 'Illuminate\Support\Manager' not found in /home/seriousdatings/public_html/vendor/laravel/framework/src/Illuminate/Auth/AuthManager.php on line 9

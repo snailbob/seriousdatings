@@ -1,6 +1,0 @@
-[17-Oct-2017 16:36:19 UTC] PHP Fatal error:  Interface 'Guzzle\Inflection\InflectorInterface' not found in /home/seriousdatings/public_html/vendor/guzzle/guzzle/src/Guzzle/Inflection/MemoizingInflector.php on line 9
-[17-Oct-2017 16:36:30 UTC] PHP Fatal error:  Interface 'Guzzle\Inflection\InflectorInterface' not found in /home/seriousdatings/public_html/vendor/guzzle/guzzle/src/Guzzle/Inflection/Inflector.php on line 9
-[17-Oct-2017 16:36:41 UTC] PHP Fatal error:  Interface 'Guzzle\Inflection\InflectorInterface' not found in /home/seriousdatings/public_html/vendor/guzzle/guzzle/src/Guzzle/Inflection/PreComputedInflector.php on line 9
-[27-Oct-2017 04:40:38 UTC] PHP Fatal error:  Interface 'Guzzle\Inflection\InflectorInterface' not found in /home/seriousdatings/public_html/vendor/guzzle/guzzle/src/Guzzle/Inflection/Inflector.php on line 9
-[30-Oct-2017 19:38:09 UTC] PHP Fatal error:  Interface 'Guzzle\Inflection\InflectorInterface' not found in /home/seriousdatings/public_html/vendor/guzzle/guzzle/src/Guzzle/Inflection/MemoizingInflector.php on line 9
-[31-Oct-2017 05:51:03 UTC] PHP Fatal error:  Interface 'Guzzle\Inflection\InflectorInterface' not found in /home/seriousdatings/public_html/vendor/guzzle/guzzle/src/Guzzle/Inflection/PreComputedInflector.php on line 9

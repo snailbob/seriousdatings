@@ -1,2 +1,0 @@
-[27-Oct-2017 14:00:38 UTC] PHP Fatal error:  Class 'Hamcrest\FeatureMatcher' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/hamcrest/Hamcrest/Collection/IsTraversableWithSize.php on line 15
-[30-Oct-2017 20:16:58 UTC] PHP Fatal error:  Class 'Hamcrest\BaseMatcher' not found in /home/seriousdatings/public_html/vendor/hamcrest/hamcrest-php/hamcrest/Hamcrest/Collection/IsEmptyTraversable.php on line 14

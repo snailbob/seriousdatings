@@ -1,8 +1,0 @@
-[20-Oct-2017 04:10:24 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Tests/File/FileTest.php on line 18
-[20-Oct-2017 09:35:55 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Tests/File/UploadedFileTest.php on line 17
-[20-Oct-2017 19:52:41 UTC] PHP Fatal error:  Class 'Symfony\Component\HttpFoundation\File\File' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Tests/File/FakeFile.php on line 17
-[21-Oct-2017 05:58:04 UTC] PHP Fatal error:  Class 'Symfony\Component\HttpFoundation\File\File' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Tests/File/FakeFile.php on line 17
-[21-Oct-2017 19:05:02 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Tests/File/UploadedFileTest.php on line 17
-[22-Oct-2017 04:52:02 UTC] PHP Fatal error:  Class 'Symfony\Component\HttpFoundation\File\File' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Tests/File/FakeFile.php on line 17
-[25-Oct-2017 08:17:05 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Tests/File/FileTest.php on line 18
-[26-Oct-2017 12:43:25 UTC] PHP Fatal error:  Class 'PHPUnit_Framework_TestCase' not found in /home/seriousdatings/public_html/vendor/symfony/http-foundation/Tests/File/FileTest.php on line 18
