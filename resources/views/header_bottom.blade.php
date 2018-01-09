@@ -26,137 +26,59 @@
 <div class="top-nav">
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
-                <div class="left">
-                    <div class="language">
-                     <span id="google_translate_element" style="height:38px;font-size: 13px;color: #666;border-color: #ccc;" ></span>
-                 </div>
-             </div>
-         </div>
-         <div class="col-md-10">
-
-            @if(Auth::check())
-            <div class="text_center_sm flt_right_md custom">
-
-                <div class="btn-group">
-                    <a href="{!! url() !!}/profile" class="btn btn-default">{!! Auth::user() -> firstName !!} {!! Auth::user() -> lastName !!}</a>
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{url().'/profile_settings'}}"><i class="fa fa-user fa-fw" aria-hidden="true"></i> Profile Settings</a></li>
-                        <li><a href="{{url().'/privacy_settings'}}"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> Privacy Setting</a></li>
-                        <li><a href="{!! url() !!}/logout"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout</a></li>
-                    </ul>
-                </div>
-
-                <div class="hidden-sm hidden-xs">
-                    <li id="notification_li" class="notifica_li">
-                        <a href="#" id="notificationLink">
-                            <button type="button" class="btn btn-danger">Notifications <span class="badge">@{{ unread_noti_count }}</span>
-                            </button>
-                        </a>
-
-                        <div id="notificationContainer">
-
-                            <div id="notificationTitle">
-                                <a class="pull-left" ng-click="markAllNotiRead()">Mark all as read</a>
-                                Notifications
-                            </div>
-                            <div id="notificationsBody" class="notifications">
-                                <div class="list-group">
-                                    <a ng-click="viewNoti(noti)" class="list-group-item text-left" ng-repeat="noti in notifications">
-                                        <small class="pull-right opacity-6">
-                                            @{{ noti.ago }}
-                                        </small>
-                                        <img ng-src="@{{noti.from_info.photo}}" alt="" class="pull-left img-thumbnail img-circle" width="40">
-                                        <span ng-class="{'text-strong' : !noti.is_read}">@{{ noti.message }}</span>
-                                    </a>
-                                </div>
-
-                            </div>
-                            {{--  <div id="notificationFooter"><a href="#">See All</a></div>  --}}
-                        </div>
-                    </li>
-                </div>
-                <div class="hidden-lg hidden-md">
-                    <li id="notification_li" class="notifica_li">
-                        <a href="#" id="notificationLink">
-                            <button type="button" class="btn btn-danger"><i class="fa fa-bell"></i> <span class="badge">@{{ unread_noti_count }}</span>
-                            </button>
-                        </a>
-
-                        <div id="notificationContainer">
-
-                            <div id="notificationTitle">
-                                <a class="pull-left" ng-click="markAllNotiRead()">Mark all as read</a>
-                                Notifications
-                            </div>
-                            <div id="notificationsBody" class="notifications">
-                                <div class="list-group">
-                                    <a ng-click="viewNoti(noti)" class="list-group-item text-left" ng-repeat="noti in notifications">
-                                        <small class="pull-right opacity-6">
-                                            @{{ noti.ago }}
-                                        </small>
-                                        <img ng-src="@{{noti.from_info.photo}}" alt="" class="pull-left img-thumbnail img-circle" width="40">
-                                        <span ng-class="{'text-strong' : !noti.is_read}">@{{ noti.message }}</span>
-                                    </a>
-                                </div>
-
-                            </div>
-                            {{--  <div id="notificationFooter"><a href="#">See All</a></div>  --}}
-                        </div>
-                    </li>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <div class="language">
+                    <span id="google_translate_element"></span>
                 </div>
             </div>
-
-            @else
-
-            <ul class=" navbar-right login-right-nav">
-                <li class="dropdown">
-                    <a class="btn btn-danger dropdown-toggle btn-login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>Login</b> <span class="caret"></span></a>
-                    <ul id="login-dp" class="dropdown-menu">
-                        <li>
-                            <div class="row">
-                             <div id="errorMessageLog"></div>
-                             <div class="col-md-12">
-                                {!! Form::open(array('url' => 'login', 'class' => 'form', 'id' => 'login-nav')) !!}
-                                <div class="form-group">
-                                    <label class="sr-only" for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="sr-only" for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                                    <!-- <div class="help-block text-right"><a href="{!! url() !!}/forgotPassword">Forget the password ?</a></div> -->
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="remember" name="check" checked> keep me logged-in
-
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                    <div class="help-block text-right"><a href="{!! url() !!}/forgotPassword">Forget the password ?</a></div>
-                                </div>
-                                {!! Form::close() !!}
-                            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" id="header-btn">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="btn-group">
+                            <a href="{!! url() !!}/profile" class="btn btn-default">{!! Auth::user() -> firstName !!} {!! Auth::user() -> lastName !!}</a>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{url().'/profile_settings'}}"><i class="fa fa-user fa-fw" aria-hidden="true"></i> Profile Settings</a></li>
+                                <li><a href="{{url().'/privacy_settings'}}"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> Privacy Setting</a></li>
+                                <li><a href="{!! url() !!}/logout"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout</a></li>
+                            </ul>
                         </div>
-                    </li>
-                </ul>
-            </li>
-            <li><a class="btn btn-success" href="{{ url() }}/users/create">Join Now</a></li>
-            <li><a class="btn btn-info btn-fb" aria-label="Left Align" onclick="checkLoginState()"><span class="fa fa-facebook-f"></span> Login with Facebook</a></li>
-        </ul>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <li id="notification_li" class="notifica_li">
+                            <a href="#" id="notificationLink">
+                                <button type="button" class="btn btn-danger">
+                                    <span class="text">Notifications</span>
+                                    <span class="badge">@{{ unread_noti_count }}</span>
+                                </button>
+                            </a>
+                            <div id="notificationContainer">
+                                <div id="notificationTitle">
+                                    <a class="pull-left" ng-click="markAllNotiRead()">Mark all as read</a>
+                                    Notifications
+                                </div>
+                                <div id="notificationsBody" class="notifications">
+                                    <div class="list-group">
+                                        <a ng-click="viewNoti(noti)" class="list-group-item text-left" ng-repeat="noti in notifications">
+                                            <small class="pull-right opacity-6">
+                                                @{{ noti.ago }}
+                                            </small>
+                                            <img ng-src="@{{noti.from_info.photo}}" alt="" class="pull-left img-thumbnail img-circle" width="40">
+                                            <span ng-class="{'text-strong' : !noti.is_read}">@{{ noti.message }}</span>
+                                        </a>
+                                    </div>
 
-        {{-- @include('login_form') --}}
-
-        @endif
-
+                                </div>
+                                {{--  <div id="notificationFooter"><a href="#">See All</a></div>  --}}
+                            </div>
+                        </li>
+                    </div>
+                </div>
+        </div>
     </div>
-</div>
 </div>
 </div>
 <div class="header-botom">
