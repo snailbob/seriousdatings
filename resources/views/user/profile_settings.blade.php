@@ -889,9 +889,19 @@
                             <a href="{{url().'/users/'.Auth::user()->username.'/like_movies'}}" class="list-group-item">
                                 <i class="fa fa-fw fa-list" aria-hidden="true"></i> Update Like Movies
                             </a>
-
+                            
+                            @if(!Session::get('fb_id'))
                             <a class="list-group-item" onclick="checkLoginState()">
                                 <i class="fa fa-fw fa-facebook-square" aria-hidden="true"></i> Connect Facebook
+                            </a>
+                            @else
+                            <a class="list-group-item">
+                                <i class="fa fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook Connected
+                            </a>
+                            @endif
+
+                            <a class="list-group-item" ng-click="deleteAccount()">
+                                <i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete Account
                             </a>
                         </div>
                     </div>

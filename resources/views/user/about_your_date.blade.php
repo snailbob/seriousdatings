@@ -20,7 +20,7 @@
                         <div class="about-date-top-form">
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-sm-2">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label>Looking For:</label>
                                             <select class="form-control" name="gender" ng-model="formData.gender" required>
@@ -30,7 +30,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label>Between Age</label>
                                             <select class="form-control" name="age_from" ng-model="formData.age_from" id="date_age" required>
@@ -41,7 +41,7 @@
                                             </select>    
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label>To</label>
                                             <select class="form-control" name="age_to" ng-model="formData.age_to" id="date_age_to" required>
@@ -52,13 +52,13 @@
                                             </select>   
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label> From zipcode:</label>
                                             <input type="tel" class="form-control" name="zipcode" ng-model="formData.zipcode" placeholder="" id="zipCode" required />
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                                 <label>Within (Miles)</label>
                                                 <select class="form-control" name="rangeOfMiles" ng-model="formData.rangeOfMiles" id="date_rangeOfMiles" required>
