@@ -126,6 +126,7 @@ function getAllUserLocation(map){
 }
 var menuDialog;
 var ifClicked = false;
+var eahIndexForLoop = [];
 function getMenus(){
 
 	if (ifClicked) {
@@ -134,30 +135,34 @@ function getMenus(){
 		$("#listOFdata").width(52.05).height(40);
 		$("#listOFdata").html("");
 		$("#floating-panel").css("overflow-y","");
+        $(".toggle-menus-data").html("Menu");
 
 	}else{
 		$("#floating-panel").css("overflow-y","scroll");
 		$("#floating-panel").width(500).height(600);
 		$("#listOFdata").width(500).height(600);
-		
+		$("#floating-panel2").css("display","none");
+		$(".toggle-menus-data").html("Minimize");
 		
 			$.each(all_data,function(index,key){
 				setTimeout(function(){
 					console.log("index",index);
 					console.log("key",key);
 
+                    eahIndexForLoop.push({"NewIndex": index, "NewID": all_data[index].id});
+
 		$("#listOFdata").append('<div class="upcoming-event-people">'+
 	              '<div class="upcoming-people-row">'+
 	                '<div class="left-upcoming-user"><a href="#" ><img src="'+all_data[index].photo+'"  alt=""></a></div>'+
 	                '<div class="upcoming-user-list">'+
 	                  '<div class="upcoming-user-icon">'+
-	                    '<i class="fa fa-user-plus" ng-click="addFriendByUserID('+all_data[index].id+')" uib-tooltip="Add as Friend"></i>'+
+	                    /*'<i class="fa fa-user-plus" ng-click="addFriendByUserID('+all_data[index].id+')" uib-tooltip="Add as Friend"></i>'+
 	                    '<i class="fa fa-gift" uib-tooltip="Send Gift"></i>'+
 	                    '<i class="fa fa-fast-forward" ng-click="gotoliveChat('+all_data[index].id+')" uib-tooltip="Speed Dating"></i>'+
-	                    '<i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>'+
+	                    '<i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>'+*/
 	                  '</div>'+
-	                  '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+Math.floor(Math.random() * 16) + 5+'%</span></h2>'+
-	                  '  <p>'+all_data[index].location+'</p>'+
+	                  '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+Math.floor(Math.random() * 16) + 5+'%</span></h2>'+
+	                  '  <p><a href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">view more options..</a></p>'+
 	                '</div>'+
 	              '</div>'+
 	            '</div>');
@@ -166,10 +171,10 @@ function getMenus(){
 				},300)
 
 			});
-			
 
 
-		
+
+
 
 
 		ifClicked =true;
@@ -372,7 +377,7 @@ function viewAllDetails(id){
 		            text: 'More Info',
 		            btnClass: 'btn-red',
 		            action: function(){
-		            	functionMoreInfoUser(resultObject.id);
+		            	functionMoreInfoUser(resultObject.id,0);
 		            }
 		        },	
 		       messageB: {
@@ -402,79 +407,89 @@ function viewAllDetails(id){
 
 }
 
- function functionMoreInfoUser(id){
- 	
-	var resultObjectInfo ="";
-	 resultObjectInfo = SearhValueOFdata(id);
+
+function  NextPreviousValue(id) {
+    var resultObjectInfo ="";
+    resultObjectInfo = SearhValueOFdata(id);
+
+    var info_item = '<div>'+
+        '<img src="'+resultObjectInfo.photo+'" class="del" alt="delete"  title="Remove" />'+
+        '<span>'+
+        '<a class="astext">'+
+        '<p style="margin-left:5px;">'+resultObjectInfo.firstName+' '+resultObjectInfo.lastName+
+        '<br>'+resultObjectInfo.location+'</p>'+
+        '</a>'+
+        '</span>'+
+        '</div>'+
+        '<label>Select Options</label>'+
+        '<div class="plug-menu-option">'+
+        '<ul class="option-menus">'+
+
+        '<li class="fa fa-microphone" title="Voice call"></li>'+
+        '<li class="fa fa-fast-forward" title="Speed dating video chat"></li>'+
+        '<li class="fa fa-gift" title="Virtual Gift"></li>'+
+        '<li class="fa fa-user" title="profile"></li>'+
+        '<li class="fa fa-comments" title="Send Message"></li>'+
+        '<li class="fa fa-eye" title="wink"></li>'+
+        '<li class="fa fa-user-plus" title="Add User"></li>'+
+        '</ul>'+
+        '</div>';
 
 
+    info_item  += '<ul class="list-group">'+
+        '<li class="list-group-item hearderUL">BACKGROUND/VALUES</li>'+
+        '<li class="list-group-item TUalign2">Relationship goal: '+resultObjectInfo.relationshipGoal+'</li>'+
+        '<li class="list-group-item TUalign2">Ethnicity: '+resultObjectInfo.ethnicity+'</li>'+
+        '<li class="list-group-item TUalign2">Faith: '+resultObjectInfo.religiousBeliefs+'</li>'+
+        '<li class="list-group-item TUalign2">Education: '+resultObjectInfo.educationLevel+'</li>'+
+        '<li class="list-group-item TUalign2">Language: '+resultObjectInfo.language+'</li>'+
+        '</ul>';
+    info_item += 	'<br>'+
+        '<ul class="list-group">'+
+        '<li class="list-group-item hearderUL">LIFESTYLE</li>'+
+        '<li class="list-group-item TUalign2">Smoke: '+resultObjectInfo.smoke+'</li>'+
+        '<li class="list-group-item TUalign2">Drink: '+resultObjectInfo.drink+'</li>'+
+        '<li class="list-group-item TUalign2">Excercise frequency: '+resultObjectInfo.excercise+'</li>'+
+        '<li class="list-group-item TUalign2">Has kids: '+resultObjectInfo.haveChildren+'</li>'+
+        '<li class="list-group-item TUalign2">Occupation: '+resultObjectInfo.occupation+'</li>'+
+        '<li class="list-group-item TUalign2">Salary range: '+resultObjectInfo.income+'</li>'+
+        '<li class="list-group-item TUalign2">Zodiac Sign: '+resultObjectInfo.zodicSign+'</li>'+
+        '</ul>'
+    info_item += 	'<br>'+
+        '<ul class="list-group">'+
+        '<li class="list-group-item hearderUL">APPEARANCE</li>'+
+        '<li class="list-group-item TUalign2">Height: '+resultObjectInfo.height+'</li>'+
+        '<li class="list-group-item TUalign2">Body type: '+resultObjectInfo.bodyType+'</li>'+
+        '<li class="list-group-item TUalign2">Eye color: '+resultObjectInfo.eyeColor+'</li>'+
+        '<li class="list-group-item TUalign2">Hair color: '+resultObjectInfo.hairColor+'</li>'+
+        '</ul>';
+    return info_item;
 
-	// var info_item = '<div class="row-head"><img src="'+resultObjectInfo.photo+'" class="more-view-image"  alt="" />'+
-	// 			'<ul class="ul-link">'+
-	// 			'<li><label class="profile-link2">'+resultObjectInfo.firstName+' '+resultObjectInfo.lastName+'</label></li>'+
-	// 			'<li><label class="profile-link2">'+resultObjectInfo.location+'</label></li>'+
-	// 			'</ul>'+
-	// 		'</div>';
+}
+var setTitleLastFirstName = function (id) {
+    objectData = SearhValueOFdata(id);
+    return objectData.lastName+","+objectData.firstName;
+}
+
+ function nextProject(index) {
+     $.each(all_data,function(index,key){
+         setTimeout(function(){
+            return all_data[index+1].id;
+         },300)
+
+     });
+
+ }
 
 
-	var info_item = '<div>'+
-			'<img src="'+resultObjectInfo.photo+'" class="del" alt="delete"  title="Remove" />'+
-			    '<span>'+
-			        '<a class="astext">'+
-			            '<p style="margin-left:5px;">'+resultObjectInfo.firstName+' '+resultObjectInfo.lastName+
-			            '<br>'+resultObjectInfo.location+'</p>'+
-			           '</a>'+
-			    '</span>'+
-				'</div>'+
-				'<label>Select Options</label>'+
-				'<div class="plug-menu-option">'+
-					'<ul class="option-menus">'+
-						'<li class="fa fa-user-plus" ><a href="#home">Add</a></li>'+
-						'<li><a href="#news">News</a></li>'+
-						'<li><a href="#contact">Contact</a></li>'+
-						'<li><a href="#about">About</a></li>'+
-					'</ul>'+
-				'</div>';
-
-				// '<div class="upcoming-user-icon">'+
-				// 	  '<i class="fa fa-user-plus" ></i>'+
-				// 	  '<i class="fa fa-gift" ></i>'+
-				// 	  '<i class="fa fa-comments" title="Message"></i>'+					  
-                // '</div>';
-
-
-		 info_item  += '<ul class="list-group">'+
-			    	'<li class="list-group-item hearderUL">BACKGROUND/VALUES</li>'+
-			    	'<li class="list-group-item TUalign2">Relationship goal: '+resultObjectInfo.relationshipGoal+'</li>'+
-			    	'<li class="list-group-item TUalign2">Ethnicity: '+resultObjectInfo.ethnicity+'</li>'+
-			    	'<li class="list-group-item TUalign2">Faith: '+resultObjectInfo.religiousBeliefs+'</li>'+
-			    	'<li class="list-group-item TUalign2">Education: '+resultObjectInfo.educationLevel+'</li>'+
-			    	'<li class="list-group-item TUalign2">Language: '+resultObjectInfo.language+'</li>'+
-			   '</ul>';
-		info_item += 	'<br>'+
-			'<ul class="list-group">'+
-			    	'<li class="list-group-item hearderUL">LIFESTYLE</li>'+
-			    	'<li class="list-group-item TUalign2">Smoke: '+resultObjectInfo.smoke+'</li>'+
-			    	'<li class="list-group-item TUalign2">Drink: '+resultObjectInfo.drink+'</li>'+
-			    	'<li class="list-group-item TUalign2">Excercise frequency: '+resultObjectInfo.excercise+'</li>'+
-			    	'<li class="list-group-item TUalign2">Has kids: '+resultObjectInfo.haveChildren+'</li>'+
-			    	'<li class="list-group-item TUalign2">Occupation: '+resultObjectInfo.occupation+'</li>'+
-			    	'<li class="list-group-item TUalign2">Salary range: '+resultObjectInfo.income+'</li>'+
-			    	'<li class="list-group-item TUalign2">Zodiac Sign: '+resultObjectInfo.zodicSign+'</li>'+
-			   '</ul>'
-		info_item += 	'<br>'+
-			'<ul class="list-group">'+
-			    	'<li class="list-group-item hearderUL">APPEARANCE</li>'+
-			    	'<li class="list-group-item TUalign2">Height: '+resultObjectInfo.height+'</li>'+
-			    	'<li class="list-group-item TUalign2">Body type: '+resultObjectInfo.bodyType+'</li>'+
-			    	'<li class="list-group-item TUalign2">Eye color: '+resultObjectInfo.eyeColor+'</li>'+
-			    	'<li class="list-group-item TUalign2">Hair color: '+resultObjectInfo.hairColor+'</li>'+
-			   '</ul>'
+     function functionMoreInfoUser(id,index){
+    var counter = index;
+    console.log("index" ,index);
 
 	$.confirm({
-		    title: resultObjectInfo.lastName+","+resultObjectInfo.firstName,
+		    title: '<div id="title-item-dialog">'+setTitleLastFirstName(id)+'</div>',
 		    columnClass: 'col-md-6 col-md-offset-3',
-		    content: info_item,
+		    content: '<div id="list-item-dialog">'+NextPreviousValue(id)+'</div>',
 		    theme: 'material',
 		    type: 'red',
 		    icon: 'fa fa-user',
@@ -487,6 +502,28 @@ function viewAllDetails(id){
 		            	
 		            }
 		        },
+           NextBtn: {
+                    text: 'Previous',
+                    btnClass: 'btn-blue pull-left',
+                    action: function(){
+
+                        $("#list-item-dialog").html(NextPreviousValue(eahIndexForLoop[counter--].NewID));
+                        $("#title-item-dialog").html(setTitleLastFirstName(eahIndexForLoop[counter--].NewID));
+
+                        console.log("index" ,eahIndexForLoop[counter--].NewID);
+                    return false;
+                    }
+                },
+            PrevBtn: {
+                    text: 'Next',
+                    btnClass: 'btn-green pull-left',
+                    action: function(){
+                        $("#list-item-dialog").html(NextPreviousValue(eahIndexForLoop[counter++].NewID));
+                        $("#title-item-dialog").html(setTitleLastFirstName(eahIndexForLoop[counter++].NewID));
+                        console.log("index" ,eahIndexForLoop[counter++].NewID);
+                    return false;
+                    }
+                },
 		    }
 		});
 
@@ -502,3 +539,11 @@ function SearhValueOFdata(searchKey){
 	 }
 	
 }
+
+$(document).ready(function () {
+        setTimeout(function () {
+            if ($("#current_page").val() == 0) {
+                $("#floating-panel").css("display","none");
+            }
+       },300)
+});

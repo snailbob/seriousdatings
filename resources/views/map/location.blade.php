@@ -10,7 +10,7 @@
 
 <div id="map" class="map-class"></div>
 
-<div id="floating-panel"><a href="javascript:getMenus();">MENU</a>
+<div id="floating-panel"><a href="javascript:getMenus();" class="toggle-menus-data">MENU</a>
 	<div id="listOFdata"></div>
 </div>
 
@@ -22,5 +22,5 @@
       <option value="BICYCLING">Bicycling</option>
       <option value="TRANSIT">Transit</option>
     </select>
-    </div>
+</div>
 @extends('map.script-js')
