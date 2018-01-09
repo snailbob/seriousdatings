@@ -50,10 +50,25 @@ class liveCHatController extends Controller
 		$format_users = $user_ctrl->format_user($user);
 		return $user;
 	}
+
 	public function getAllUserLocation(){
 		$user_id = Auth::user()->id;
-		$user  = DB::table('users')->where('id','!=' ,$user_id)->get();
-		return $user;
+		
+		$user_ctrl = new UsersController();
+		// $user = User::find($id);
+
+		$users  = User::where('id','!=' ,$user_id)->get();
+
+        $format_user = array();
+
+        if(!empty($users)){
+            foreach($users as $r=>$value){
+                $format_user[] = $user_ctrl->format_user($value);
+            }
+        }
+
+
+		return $format_user;
 	}
 
 	public function validateUserMoreThanOneDay(){

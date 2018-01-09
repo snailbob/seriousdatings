@@ -378,7 +378,7 @@ ngApp.controller('bodyController', [
             }
             $('.v-msg').attr('src', $scope.image_src + $scope.image_name);
 
-        }, 4000);
+        }, 10000);
     };
 
     /*END ================MARK   2017-11-27*/

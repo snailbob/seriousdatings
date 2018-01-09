@@ -351,7 +351,7 @@
                                 <option value="Homemaker">-  Homemaker</option>
                                 <option value="Other Occupation">-  Other Occupation</option>
                                 <option value="Don't Know">-  Don't Know</option>
-                                <option value="Not Applicable">-  Not Applicable</option>
+                                <option value="N/A">-  N/A</option>
                                 </optgroup>
                             </select>
 
@@ -362,7 +362,8 @@
                             <option value="Business">Business</option>
                             <option value="Self-employed">Self-employed</option>
                             <option value="Constraction">Constraction</option>
-                        </select>  --}}
+                            <option value="N/A">N/A</option>
+                            </select>  --}}
                     </div>
                 </div>
 
@@ -425,6 +426,7 @@
                             <option value="">--Select--</option>
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -485,7 +487,7 @@
                             @foreach ($countries as $country)
                             <option value="{{$country->short_name}}">{{$country->short_name}}</option>
                             @endforeach
-                            <option value="Not Applicable">Not Applicable</option>
+                            <option value="N/A">N/A</option>
 
                         </select>
                     </div>
@@ -498,6 +500,7 @@
                             <option value="Very Important">Very Important</option>
                             <option value="Important">Important</option>
                             <option value="Somewhat Important">Somewhat Important</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -514,6 +517,7 @@
                             <option value="2 years">2 Years</option>
                             <option value="3-6 years">3-6 Years</option>
                             <option value="longer">Longer</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -529,6 +533,7 @@
                             <option value="Judaism">Judaism</option>
                             <option value="Buddhists">Buddhists</option>
                             <option value="Jews">Jews</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -542,6 +547,7 @@
                             <option value="Somewhat Important">Somewhat Important</option>
                             <option value="What every happen">What every happen</option>
                             <option value="Unsure">Unsure</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -558,6 +564,7 @@
                             <option value="What is that">What is that</option>
                             <option value="Very Important">Very Important</option>
                             <option value="Important">Important</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -570,6 +577,7 @@
                             <option value="Very Important">Very Important</option>
                             <option value="Important">Important</option>
                             <option value="Somewhat Important">Somewhat Important</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -612,6 +620,7 @@
                             <option value="Red Hot Cinnamon">Red Hot Cinnamon</option>
                             <option value="Expresso">Expresso</option>
                             <option value="Jet Black">Jet Black</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -641,6 +650,7 @@
                             <option value="Natural">Natural</option>
                             <option value="Straight">Straight</option>
                             <option value="Curly and Wavy">Curly and Wavy</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -658,6 +668,7 @@
                             <option value="Blue">Blue</option>
                             <option value="Amber">Amber</option>
                             <option value="Chestnut brown">Chestnut brown</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -697,6 +708,7 @@
                             <option value="Excellent Posture">Excellent Posture</option>
                             <option value="Gains Muscle Easily">Gains Muscle Easily</option>
                             <option value="Fat">Fat</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -762,7 +774,7 @@
                                 of knowledge,
 
                             </option>
-                            <option value="Not Applicable">Not Applicable</option>
+                            <option value="N/A">N/A</option>
 
 
                         </select>
@@ -832,6 +844,7 @@
                             <option value="jogging">jogging</option>
                             <option value="gym">gym</option>
                             <option value="swimming">swimming</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>
@@ -848,6 +861,7 @@
                             <option value="Level 7- Masters ">Level 7- Masters </option>
                             <option value="Level 8- Doctorate  ">Level 8- Doctorate </option>
                             <option value="Level AA">Level AA</option>
+                            <option value="N/A">N/A</option>
                         </select>
                     </div>
                 </div>

@@ -48,10 +48,10 @@
                       <input type="text" class="form-control"   placeholder="Enter your title" name="title" required >
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group hidden">
                     <label class="col-sm-2 control-label">Link <span class="symbol required"></span></label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="" placeholder="www.exaple.com" name="link" required>
+                      <input type="text" class="form-control" id="" value="www.exaple.com" name="link">
                     </div>
                   </div>
                   <div class="form-group">

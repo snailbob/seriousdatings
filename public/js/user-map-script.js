@@ -156,7 +156,7 @@ function getMenus(){
 	                    '<i class="fa fa-fast-forward" ng-click="gotoliveChat('+all_data[index].id+')" uib-tooltip="Speed Dating"></i>'+
 	                    '<i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>'+
 	                  '</div>'+
-	                  '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+Math.floor(Math.random() * 16) + 5+'%</span></h2>'+
+	                  '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+all_data[index].percent+'%</span></h2>'+
 	                  '  <p>'+all_data[index].location+'</p>'+
 	                '</div>'+
 	              '</div>'+
