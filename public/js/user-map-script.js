@@ -156,7 +156,7 @@ function getMenus(){
 	                    '<i class="fa fa-fast-forward" ng-click="gotoliveChat('+all_data[index].id+')" uib-tooltip="Speed Dating"></i>'+
 	                    '<i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>'+
 	                  '</div>'+
-	                  '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+all_data[index].percent+'%</span></h2>'+
+	                  '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+Math.floor(Math.random() * 16) + 5+'%</span></h2>'+
 	                  '  <p>'+all_data[index].location+'</p>'+
 	                '</div>'+
 	              '</div>'+
@@ -425,7 +425,22 @@ function viewAllDetails(id){
 			            '<br>'+resultObjectInfo.location+'</p>'+
 			           '</a>'+
 			    '</span>'+
-			    '</div>';
+				'</div>'+
+				'<label>Select Options</label>'+
+				'<div class="plug-menu-option">'+
+					'<ul class="option-menus">'+
+						'<li class="fa fa-user-plus" ><a href="#home">Add</a></li>'+
+						'<li><a href="#news">News</a></li>'+
+						'<li><a href="#contact">Contact</a></li>'+
+						'<li><a href="#about">About</a></li>'+
+					'</ul>'+
+				'</div>';
+
+				// '<div class="upcoming-user-icon">'+
+				// 	  '<i class="fa fa-user-plus" ></i>'+
+				// 	  '<i class="fa fa-gift" ></i>'+
+				// 	  '<i class="fa fa-comments" title="Message"></i>'+					  
+                // '</div>';
 
 
 		 info_item  += '<ul class="list-group">'+
