@@ -2040,7 +2040,8 @@ header {
     float: left;
     margin-right: 0px;
     position: relative;
-    z-index: 9999;
+    z-index: 997;
+    padding-bottom: 5px;
     border: 0px;
 }
 
@@ -2700,7 +2701,7 @@ padding:0 10px; color:#999999; outline: 0;} */
 }
 
 .notifica_li {
-    z-index: 10000;
+    z-index: 999;
     float: none;
     list-style-type: none;
     display: inline-block;
