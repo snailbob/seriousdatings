@@ -8017,3 +8017,13 @@ button.list-group-item {
 	padding-right: 0;
 	padding-left: 0;
   }  */
+
+  @media (max-width: 767px) {
+	  
+	.scroll-level-content ul.list-inline > li{
+		display: block;
+	}
+
+  }
+
+	 

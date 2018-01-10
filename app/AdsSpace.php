@@ -19,7 +19,7 @@ class AdsSpace extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'days', 'paid', 'link', 'image'];
+    protected $fillable = ['user_id', 'days', 'paid', 'link', 'business_name', 'image'];
 
     /**
      * The attributes excluded from the model's JSON form.

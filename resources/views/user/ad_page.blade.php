@@ -66,6 +66,10 @@
                             <input type="url" class="form-control" name="link" ng-model="user.link" required/>
                         </div>
                         <div class="form-group">
+                            <label for="">Business Name</label>
+                            <input type="text" class="form-control" name="business_name" ng-model="user.business_name" required/>
+                        </div>
+                        <div class="form-group">
                             <label for="">Select Days</label>
                             <select name="days" id="" class="form-control" ng-model="user.days" required>
                                 <option value="">--Select--</option>
