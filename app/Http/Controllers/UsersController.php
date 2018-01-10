@@ -181,33 +181,70 @@ class UsersController extends Controller {
     
     public function onlineChatPage(){
         $gender  = Auth::user()->gender;
-        $online = \DB::table('users')->where('gender', 'not like', $gender)->get();
-        $me = \DB::table('users')->where('gender', 'not like', $gender)->get();
+        $online = User::where('gender', 'not like', $gender)->get();
+        $me = User::where('gender', 'not like', $gender)->get();
         
         $count = 0;
-        // foreach ($online as $on) {
-        //     $count = $count++;
-        //     $on->online = 0;
-        //     if ($count == 0) {
-        //         $on->count = 1;
-        //     } else if ($count < 6) {
-        //         $on->count = 0;
-        //     } else if ($count == 6) {
-        //         $on->count = 2;
-        //         $count = 0;
-        //     }
-        //     if (strlen($on->time) > 0) {
-        //         $on->online = 1;
+
+        $format_users = $this->format_friends($online);
+        // if(!empty($online)){
+        //     foreach($online as $r=>$value){
+        //         $format_users[] = $this->format_user($value);
         //     }
         // }
+        
         $arr = array(
-            'online_users'=>$online,
+            'online_users'=>$format_users,
             'count'=>$count
         );
         return View::make('user.online_chat')->with($arr);
         
         // return response()->json($online);
         
+    }
+
+    public function get_online_chat(){
+        $logged_id  = Auth::user()->id;
+        $gender  = Auth::user()->gender;
+
+        $count = \DB::table('user_online')->leftJoin('users', 'users.id', '=', 'user_online.user_id')
+        ->where('gender', 'not like', $gender)
+        ->where('id', 'not like', $logged_id)
+        ->count();
+
+
+        $online = User::where('gender', 'not like', $gender)->get();
+        // $me = User::where('gender', 'not like', $gender)->get();
+
+        $filter_blocked = $this->filter_blocked($online);
+        
+
+        $format_users = $this->format_friends($filter_blocked);
+
+        $arr = array(
+            'users'=>$format_users,
+            'count'=>$count,
+            // 'user_id'=>$logged_id
+        );
+
+        return response()->json($arr);
+
+    }
+
+    public function filter_blocked($users){
+        $filtered_users = [];
+        $logged_id  = Auth::user()->id;
+        
+        if(!empty($users)){
+            foreach($users as $r=>$value){
+                $is_blocked = DB::table('user_blocks')->where('user_id', $logged_id)->where('user_blocked_id', $value->id)->count();
+                if(empty($is_blocked)){
+                    $filtered_users[] = $value;
+                }
+            }
+        }
+
+        return $filtered_users;
     }
 
     public function homepage_search_people(Request $request){
@@ -455,6 +492,7 @@ class UsersController extends Controller {
                     $aboutdate = User::find($value->id)->aboutdate()->first();
                     $value->aboutdate = $aboutdate;
                     $value->is_friend = ($relation + $relation2) ? true : false;
+                    $value->is_online = \DB::table('user_online')->where('user_id', $value->id)->count();
                     $value->myage = $this->calc_age($value->birthdate);
 
                     //get percentage
