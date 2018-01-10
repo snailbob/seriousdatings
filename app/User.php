@@ -91,10 +91,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'verify_key',
         'latitude',
         'longitude',
-        'phone',
         'location',
         'city',
         'country',
+        'country_code',
+        'phone',
+        'admin_pause',
         'birthdate',
         'wouldBirthFatherAndMotherAre'
     ];
