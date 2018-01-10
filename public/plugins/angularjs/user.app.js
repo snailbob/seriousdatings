@@ -2889,11 +2889,16 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     }
 
     $scope.startCall = function(type, user, i){
-        $scope.callStarted = true;
 
         if(type != 'text'){
             $scope.startVideoCall(i, user);
+            $scope.callStarted = true;
         }
+    }
+
+    $scope.viewBoxes = function(){
+        $scope.callStarted = false;
+
     }
 
 

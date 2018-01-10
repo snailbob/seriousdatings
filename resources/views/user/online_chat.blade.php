@@ -151,6 +151,11 @@
                         </div>
                     </div>
 
+                    <button class="btn btn-default" ng-click="viewBoxes()">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i> Back
+                    </button>
+
+
 
                 </div>
                 <div class="col-sm-9">
