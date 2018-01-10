@@ -16,15 +16,12 @@ var addAppointMent = function (id) {
 
 
             somethingElse: {
-                text: 'OK',
+                text: 'close',
                 btnClass: 'btn-blue',
                 keys: ['enter', 'shift'],
                 action: function(){
 
                 }
-            },
-            cancel: function () {
-
             },
         }
     });
