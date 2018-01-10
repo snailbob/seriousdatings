@@ -15,7 +15,7 @@
 	}
 </style>
 <div class="right-aside" style="cursor: pointer;">
-    <div class="advertise-here">
+    <div class="advertise-here" ng-if="active_ads.length">
         <h2>Advertise here</h2>
         <div class="container-fluid">
           <div class="row no-gutter">
@@ -25,7 +25,7 @@
                   <div class="advertise-left">
                     <div class="advertise-img"><img ng-src="@{{ads.image}}" alt=""></div>
                     <div class="advertise-user-detail">
-                      <h4>Alia Bhutt</h4>
+                      <h4>@{{ads.business_name}}</h4>
                       <span>Age: 21</span>
                       <p>Lorem Lipsum</p>
                       <ul>
@@ -63,7 +63,7 @@
 
     </div>
 
-    <div ng-if="active_ads.length < 3">
+    <div ng-if="active_ads.length < 3" onclick="window.location.href = base_url+'/advertise'">
     
       <div class="advertise-here" ng-repeat="ads in [0, 1]">
           <h2>Advertise here</h2>
