@@ -11,6 +11,10 @@
 <div id="map" class="map-class"></div>
 
 <div id="floating-panel"><a href="javascript:getMenus();" class="toggle-menus-data">MENU</a>
+    <div class="filter-option-map pull-right" style="display: none">
+
+        <a id="filtering-btn-map"><i class="fa fa-cog" aria-hidden="true"></i> Filter Map </a>
+    </div>
 	<div id="listOFdata"></div>
 </div>
 

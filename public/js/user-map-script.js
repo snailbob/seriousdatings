@@ -136,6 +136,7 @@ function getMenus(){
 		$("#listOFdata").html("");
 		$("#floating-panel").css("overflow-y","");
         $(".toggle-menus-data").html("Menu");
+        $(".filter-option-map").css("display","none");
 
 	}else{
 		$("#floating-panel").css("overflow-y","scroll");
@@ -143,34 +144,33 @@ function getMenus(){
 		$("#listOFdata").width(500).height(600);
 		$("#floating-panel2").css("display","none");
 		$(".toggle-menus-data").html("Minimize");
+		$(".filter-option-map").css("display","");
 		
 			$.each(all_data,function(index,key){
 				setTimeout(function(){
-					console.log("index",index);
-					console.log("key",key);
 
-                    eahIndexForLoop.push({"NewIndex": index, "NewID": all_data[index].id});
+            eahIndexForLoop.push({"NewIndex": index, "NewID": all_data[index].id});
 
-		$("#listOFdata").append('<div class="upcoming-event-people">'+
-	              '<div class="upcoming-people-row">'+
-	                '<div class="left-upcoming-user"><a href="#" ><img src="'+all_data[index].photo+'"  alt=""></a></div>'+
-	                '<div class="upcoming-user-list">'+
-	                  '<div class="upcoming-user-icon">'+
-	                    /*'<i class="fa fa-user-plus" ng-click="addFriendByUserID('+all_data[index].id+')" uib-tooltip="Add as Friend"></i>'+
-	                    '<i class="fa fa-gift" uib-tooltip="Send Gift"></i>'+
-	                    '<i class="fa fa-fast-forward" ng-click="gotoliveChat('+all_data[index].id+')" uib-tooltip="Speed Dating"></i>'+
-	                    '<i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>'+*/
-	                  '</div>'+
-	                  '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+Math.floor(Math.random() * 16) + 5+'%</span></h2>'+
-	                  '  <p><a href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">view more options..</a></p>'+
-	                '</div>'+
-	              '</div>'+
-	            '</div>');
+            $("#listOFdata").append('<div class="upcoming-event-people">'+
+                      '<div class="upcoming-people-row">'+
+                        '<div class="left-upcoming-user"><a href="#" ><img src="'+all_data[index].photo+'"  alt=""></a></div>'+
+                        '<div class="upcoming-user-list">'+
+                          '<div class="upcoming-user-icon">'+
+                            /*'<i class="fa fa-user-plus" ng-click="addFriendByUserID('+all_data[index].id+')" uib-tooltip="Add as Friend"></i>'+
+                            '<i class="fa fa-gift" uib-tooltip="Send Gift"></i>'+
+                            '<i class="fa fa-fast-forward" ng-click="gotoliveChat('+all_data[index].id+')" uib-tooltip="Speed Dating"></i>'+
+                            '<i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>'+*/
+                          '</div>'+
+                          '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+Math.floor(Math.random() * 16) + 5+'%</span></h2>'+
+                          '  <p><a href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">view more options..</a></p>'+
+                        '</div>'+
+                      '</div>'+
+                    '</div>');
 
 
-				},300)
+                    },300)
 
-			});
+                });
 
 
 
@@ -179,41 +179,54 @@ function getMenus(){
 
 		ifClicked =true;
 	}
-	
-	
-	
 
 
-	// 	var menu_item  ='<b>'+
-	// 			    '<ul class="list-group">'+
-	// 			   /* '<li class="list-group-item TUalign" onclick="getNearestLocation();"><i class="fa fa-location-arrow" aria-hidden="true"></i> Just Nearest</li>'+*/
-	// 			    '<li class="list-group-item TUalign" onclick="HIdeAllMale();"><i class="fa fa-venus" aria-hidden="true"></i>Show Female only</li>'+
-	// 			    '<li class="list-group-item TUalign" onclick="HIdeAllFemale();"  ><i class="fa fa-mars" aria-hidden="true"></i> Show Male only</li>'+
-	// 			    '<li class="list-group-item TUalign" onclick="showBothGender();"><i class="fa fa-mars" aria-hidden="true"></i><i class="fa fa-venus" aria-hidden="true"></i> Both Male & Female</li>'+
-	// 			   '</ul>';	
-	// menuDialog =$.confirm({
-	// 	    title: 'Menu',
-	// 	    columnClass: 'col-md-4 col-md-offset-4',
-	// 	    content: 'Select menu<b>'+menu_item,
-	// 	    theme: 'material',
-	// 	    type: 'red',
-	// 	    icon: 'fa fa-bars',
-	// 	    buttons: {
 
-		      
-	// 	        somethingElse: {
-	// 	            text: 'OK',
-	// 	            btnClass: 'btn-blue',
-	// 	            keys: ['enter', 'shift'],
-	// 	            action: function(){
-		              
-	// 	            }
-	// 	        },
-	// 	        cancel: function () {
+}
 
-	// 	        },
-	// 	    }
-	// 	});
+/*Click Filter Map Menue
+
+* */
+$("#filtering-btn-map").click(function () {
+    filterMapOption();
+});
+
+function filterMapOption() {
+
+
+    	var menu_item  ='<br>'+
+    			    '<ul class="list-group">'+
+    			   /* '<li class="list-group-item TUalign" onclick="getNearestLocation();"><i class="fa fa-location-arrow" aria-hidden="true"></i> Just Nearest</li>'+*/
+    			    '<li class="list-group-item TUalign" onclick="HIdeAllMale();"><i class="fa fa-venus" aria-hidden="true"></i>Show Female only</li>'+
+    			    '<li class="list-group-item TUalign" onclick="HIdeAllFemale();"  ><i class="fa fa-mars" aria-hidden="true"></i> Show Male only</li>'+
+    			    '<li class="list-group-item TUalign" onclick="showBothGender();"><i class="fa fa-mars" aria-hidden="true"></i><i class="fa fa-venus" aria-hidden="true"></i> Both Male & Female</li>'+
+    			   '</ul>';
+
+    		menu_item +='</br>'+
+                        'How many people do you want to see at a time ?';
+    menuDialog =$.confirm({
+    	    title: 'Filter map options',
+    	    columnClass: 'col-md-6 col-md-offset-3',
+    	    content: 'Select menu<b>'+menu_item,
+    	    theme: 'material',
+    	    type: 'red',
+    	    icon: 'fa fa-bars',
+    	    buttons: {
+
+
+    	        somethingElse: {
+    	            text: 'OK',
+    	            btnClass: 'btn-blue',
+    	            keys: ['enter', 'shift'],
+    	            action: function(){
+
+    	            }
+    	        },
+    	        cancel: function () {
+
+    	        },
+    	    }
+    	});
 }
 
 
@@ -349,7 +362,6 @@ function navigateuser(dlat,dlong){
           // "property."
           travelMode: google.maps.TravelMode[selectedMode]
         }, function(response, status) {
-        	console.log(response);
           if (status == 'OK') {
             directionsDisplay.setDirections(response);
           } else {
@@ -408,9 +420,13 @@ function viewAllDetails(id){
 }
 
 
-function  NextPreviousValue(id) {
+function  NextPreviousValue(id,element) {
     var resultObjectInfo ="";
     resultObjectInfo = SearhValueOFdata(id);
+    if(resultObjectInfo === undefined){
+        $("."+element).css("display","none");
+
+    }
 
     var info_item = '<div>'+
         '<img src="'+resultObjectInfo.photo+'" class="del" alt="delete"  title="Remove" />'+
@@ -428,10 +444,10 @@ function  NextPreviousValue(id) {
         '<li class="fa fa-microphone" title="Voice call"></li>'+
         '<li class="fa fa-fast-forward" title="Speed dating video chat"></li>'+
         '<li class="fa fa-gift" title="Virtual Gift"></li>'+
-        '<li class="fa fa-user" title="profile"></li>'+
         '<li class="fa fa-comments" title="Send Message"></li>'+
         '<li class="fa fa-eye" title="wink"></li>'+
         '<li class="fa fa-user-plus" title="Add User"></li>'+
+        '<li class="fa fa-calendar-check-o" title="Appointment"></li>'+
         '</ul>'+
         '</div>';
 
@@ -471,25 +487,24 @@ var setTitleLastFirstName = function (id) {
     return objectData.lastName+","+objectData.firstName;
 }
 
- function nextProject(index) {
-     $.each(all_data,function(index,key){
-         setTimeout(function(){
-            return all_data[index+1].id;
-         },300)
+ function nextValueData(index) {
+     for (var i=0; i < eahIndexForLoop.length; i++) {
 
-     });
+         if (eahIndexForLoop[i].NewIndex == index) {
+             return eahIndexForLoop[i].NewID;
+         }
+     }
 
  }
 
 
-     function functionMoreInfoUser(id,index){
+ function functionMoreInfoUser(id,index){
     var counter = index;
-    console.log("index" ,index);
 
 	$.confirm({
 		    title: '<div id="title-item-dialog">'+setTitleLastFirstName(id)+'</div>',
 		    columnClass: 'col-md-6 col-md-offset-3',
-		    content: '<div id="list-item-dialog">'+NextPreviousValue(id)+'</div>',
+		    content: '<div id="list-item-dialog">'+NextPreviousValue(id,'')+'</div>',
 		    theme: 'material',
 		    type: 'red',
 		    icon: 'fa fa-user',
@@ -504,23 +519,23 @@ var setTitleLastFirstName = function (id) {
 		        },
            NextBtn: {
                     text: 'Previous',
-                    btnClass: 'btn-blue pull-left',
+                    btnClass: 'btn-blue pull-left hide-previous',
                     action: function(){
-
-                        $("#list-item-dialog").html(NextPreviousValue(eahIndexForLoop[counter--].NewID));
-                        $("#title-item-dialog").html(setTitleLastFirstName(eahIndexForLoop[counter--].NewID));
-
-                        console.log("index" ,eahIndexForLoop[counter--].NewID);
+                        counter--;
+                        $("#list-item-dialog").html(NextPreviousValue(nextValueData(counter),'hide-previous'));
+                        $("#title-item-dialog").html(setTitleLastFirstName(nextValueData(counter)));
+						$(".hide-next").css("display","");
                     return false;
                     }
                 },
             PrevBtn: {
                     text: 'Next',
-                    btnClass: 'btn-green pull-left',
+                    btnClass: 'btn-green pull-left hide-next',
                     action: function(){
-                        $("#list-item-dialog").html(NextPreviousValue(eahIndexForLoop[counter++].NewID));
-                        $("#title-item-dialog").html(setTitleLastFirstName(eahIndexForLoop[counter++].NewID));
-                        console.log("index" ,eahIndexForLoop[counter++].NewID);
+                    	 counter++;
+                        $("#list-item-dialog").html(NextPreviousValue(nextValueData(counter),'hide-next'));
+                        $("#title-item-dialog").html(setTitleLastFirstName(nextValueData(counter)));
+                        $(".hide-previous").css("display","");
                     return false;
                     }
                 },
