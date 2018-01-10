@@ -7759,6 +7759,13 @@ ul li.arrowpoint:first-child:before {
 	padding-top: 60px;
 }
 
+@media (max-width: 767px) {
+	.compatible-modal .padding-top-plus{
+		padding-top: 5px;
+	}
+}
+
+
 .compatible-modal .panel-heading{
 	font-size: 20px;
     text-transform: uppercase;
