@@ -134,6 +134,9 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('aboutdate', 'UsersController@postAboutdate');
     Route::get('selectmates', 'UsersController@selectmates');
     Route::post('delete_account', 'UsersController@delete_account');
+
+    Route::get('online_chat', 'UsersController@get_online_chat');
+
     
     Route::get('usermates/{username}', 'UsersController@selectmates');
     Route::post('add_friend', 'UserFriendshipController@store');

@@ -2824,11 +2824,139 @@ ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '
 }]);
 
 ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer) {
+
+    $scope.isLoading = false;
+    $scope.data = {};
+    $scope.base_url = window.base_url;
+    $scope.callStarted = false;
+    $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
+
+
+    $scope.startVideoCall = function(i, user){
+        $scope.currentUser = user;
+
+        //play ringing
+        $scope.callAudio.play();
+
+        $scope.myInterval = 0;
         
-    $scope.blockUser = function(e, i){
-        console.log(e, i);
-        $(e.currentTarget).closest('.list-group-item').hide();
+        var jc = $ngConfirm({
+            title: 'Calling',
+            content: '<i class="fa fa-video-camera"></i> Waiting for {{currentUser.firstName}}',
+            scope: $scope,
+            buttons: {
+                Calling: {
+                    text: 'Calling..',
+                    btnClass: 'btn-danger',
+                    action: function(scope, button){
+                        // scope.name = 'Booo!!';
+                        return false; // prevent close;
+                    }
+                },
+                dropCall: {
+                    text: 'Drop',
+                    btnClass: 'btn-default',
+                    action: function(scope, button){
+                        $scope.myInterval = 3000;
+
+                        $scope.callAudio.pause();
+                        $scope.callAudio.currentTime = 0;
+                    }
+                }
+            }
+
+        });
+
+        $scope.callAudio.onended = function(){
+            // alert("The audio has ended");
+
+            jc.close();
+            $ngConfirm({
+                title: 'No Answer',
+                content: '<i class="fa fa-video-camera"></i> No answer from {{currentUser.firstName}}',
+                scope: $scope,
+                buttons: {
+                    dropCall: {
+                        text: 'OK',
+                        btnClass: 'btn-default',
+                        action: function(scope, button){
+
+                        }
+                    }
+                }
+            });
+        }
     }
+
+    $scope.startCall = function(type, user, i){
+        $scope.callStarted = true;
+
+        if(type != 'text'){
+            $scope.startVideoCall(i, user);
+        }
+    }
+
+
+    $scope.blockUser = function(i, u){
+        console.log(i, u);
+        $scope.showToast('You have successfully blocked user.');
+        $scope.data.users.splice(i, 1);
+
+        myHttpService.post('block_user', u).then(function(res){
+            console.log()
+        });
+    }
+
+    $scope.addUser = function(u){
+        if(!$scope.data.user_id){
+            $.alert({
+                title: 'Opps!',
+                content: 'Please login to add user as friend.',
+                onDestroy: function () {
+                    // when the modal is removed from DOM
+                    window.location.href = base_url + '/users/create';
+                },
+            });
+            return false;
+        }
+        u.is_friend = !u.is_friend;
+
+        if(!u.is_friend){
+            var action = myHttpService.post('delete_friend', {id: u.id}).then(function(res){
+                console.log(res);
+                var mess = 'User successfully removed.';
+                $scope.showToast(mess);
+            });
+        }
+        else{
+            myHttpService.post('add_friend', {id: u.id}).then(function(res){
+                console.log(res);
+                var mess = 'User successfully picked up.';
+                $scope.showToast(mess);
+            });
+        }
+        
+    }
+
+
+    $scope.getData = function(offset){
+        $scope.isLoading = true;
+        
+        myHttpService.getWithParams('online_chat', {}).then(function(res){
+            $scope.isLoading = false;
+            $scope.data = res.data;
+            console.log(res.data, 'online_chat');
+        });
+    }
+    var init = function(){
+        $scope.getData();
+    }
+    init();
+
+    // $scope.blockUser = function(e, i){
+    //     console.log(e, i);
+    //     $(e.currentTarget).closest('.list-group-item').hide();
+    // }
 }]);
 
 
