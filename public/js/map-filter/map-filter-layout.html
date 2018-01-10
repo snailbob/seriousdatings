@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <ul class="list-group">
+        <li class="list-group-item TUalign" onclick="getNearestLocation();"><i class="fa fa-location-arrow" aria-hidden="true"></i> Just Nearest</li>
+        <li class="list-group-item TUalign" onclick="HIdeAllMale();"><i class="fa fa-venus" aria-hidden="true"></i>Show Female only</li>
+        <li class="list-group-item TUalign" onclick="HIdeAllFemale();"  ><i class="fa fa-mars" aria-hidden="true"></i> Show Male only</li>
+        <li class="list-group-item TUalign" onclick="showBothGender();"><i class="fa fa-mars" aria-hidden="true"></i><i class="fa fa-venus" aria-hidden="true"></i> Both Male & Female</li>
+    </ul>
+
+    <div class="form-group">
+        <label for="email"> How many people do you want to see at a time?</label>
+        <input type="number" class="form-control" id="email" style="width: 100px;">
+    </div>
+    <hr>
+
+    <div class="form-group">
+        <label for="email">Occupation</label>
+        <select class="form-control ng-empty ng-dirty ng-valid-parse ng-invalid ng-invalid-required ng-touched" required="" name="occupation" ng-model="user.occupation">
+            <option value="" disabled="disabled" selected="selected">--Select--</option>
+            <optgroup label="Healthcare Practitioners and Technical Occupations:">
+                <option value="Chiropractor">-  Chiropractor</option>
+                <option value="Dentist">-  Dentist</option>
+                <option value="Dietitian or Nutritionist">-  Dietitian or Nutritionist</option>
+                <option value="Optometrist">-  Optometrist</option>
+                <option value="Pharmacist">-  Pharmacist</option>
+                <option value="Physician">-  Physician</option>
+                <option value="Physician Assistant">-  Physician Assistant</option>
+                <option value="Podiatrist">-  Podiatrist</option>
+                <option value="Registered Nurse">-  Registered Nurse</option>
+                <option value="Therapist">-  Therapist</option>
+                <option value="Veterinarian">-  Veterinarian</option>
+                <option value="Health Technologist or Technician">-  Health Technologist or Technician</option>
+                <option value="Other Healthcare Practitioners and Technical Occupation">-  Other Healthcare Practitioners and Technical Occupation</option>
+            </optgroup>
+            <optgroup label="Healthcare Support Occupations:">
+                <option value="Nursing, Psychiatric, or Home Health Aide">-  Nursing, Psychiatric, or Home Health Aide</option>
+                <option value="Occupational and Physical Therapist Assistant or Aide">-  Occupational and Physical Therapist Assistant or Aide</option>
+                <option value="Other Healthcare Support Occupation">-  Other Healthcare Support Occupation</option>
+            </optgroup>
+            <optgroup label="Business, Executive, Management, and Financial Occupations:">
+                <option value="Chief Executive">-  Chief Executive</option>
+                <option value="General and Operations Manager">-  General and Operations Manager</option>
+                <option value="Advertising, Marketing, Promotions, Public Relations, and Sales Manager">-  Advertising, Marketing, Promotions, Public Relations, and Sales Manager</option>
+                <option value="Operations Specialties Manager (e.g., IT or HR Manager)">-  Operations Specialties Manager (e.g., IT or HR Manager)</option>
+                <option value="Construction Manager">-  Construction Manager</option>
+                <option value="Engineering Manage">-  Engineering Manager</option>
+                <option value="Accountant, Auditor">-  Accountant, Auditor</option>
+                <option value="Business Operations or Financial Specialis">-  Business Operations or Financial Specialist</option>
+                <option value="Business Owner">-  Business Owner</option>
+                <option value="Other Business, Executive, Management, Financial Occupation">-  Other Business, Executive, Management, Financial Occupation</option>
+            </optgroup>
+            <optgroup label="Architecture and Engineering Occupations:">
+                <option value="Architect, Surveyor, or Cartographer">-  Architect, Surveyor, or Cartographer</option>
+                <option value="Enginee">-  Engineer</option>
+                <option value="Other Architecture and Engineering Occupation">-  Other Architecture and Engineering Occupation</option>
+            </optgroup>
+            <optgroup label="Education, Training, and Library Occupations:">
+                <option value="Postsecondary Teacher (e.g., College Professor)">-  Postsecondary Teacher (e.g., College Professor)</option>
+                <option value="Primary, Secondary, or Special Education School Teacher">-  Primary, Secondary, or Special Education School Teacher</option>
+                <option value="Other Teacher or Instructor">-  Other Teacher or Instructor</option>
+                <option value="Other Education, Training, and Library Occupation">-  Other Education, Training, and Library Occupation</option>
+            </optgroup>
+            <optgroup label="Other Professional Occupations:">
+                <option value="Arts, Design, Entertainment, Sports, and Media Occupations">-  Arts, Design, Entertainment, Sports, and Media Occupations</option>
+                <option value="Computer Specialist, Mathematical Science">-  Computer Specialist, Mathematical Science</option>
+                <option value="Counselor, Social Worker, or Other Community and Social Service Specialist">-  Counselor, Social Worker, or Other Community and Social Service Specialist</option>
+                <option value="Lawyer, Judge">-  Lawyer, Judge</option>
+                <option value="Life Scientist (e.g., Animal, Food, Soil, or Biological Scientist, Zoologist)">-  Life Scientist (e.g., Animal, Food, Soil, or Biological Scientist, Zoologist)</option>
+                <option value="Physical Scientist (e.g., Astronomer, Physicist, Chemist, Hydrologist)">-  Physical Scientist (e.g., Astronomer, Physicist, Chemist, Hydrologist)</option>
+                <option value="Religious Worker (e.g., Clergy, Director of Religious Activities or Education)">-  Religious Worker (e.g., Clergy, Director of Religious Activities or Education)</option>
+                <option value="Social Scientist and Related Worker">-  Social Scientist and Related Worker</option>
+                <option value="Other Professional Occupation">-  Other Professional Occupation</option>
+            </optgroup>
+            <optgroup label="Office and Administrative Support Occupations:">
+                <option value="Supervisor of Administrative Support Workers">-  Supervisor of Administrative Support Workers</option>
+                <option value="Financial Clerk">-  Financial Clerk</option>
+                <option value="Secretary or Administrative Assistant">-  Secretary or Administrative Assistant</option>
+                <option value="Material Recording, Scheduling, and Dispatching Worker">-  Material Recording, Scheduling, and Dispatching Worker</option>
+                <option value="Other Office and Administrative Support Occupation">-  Other Office and Administrative Support Occupation</option>
+            </optgroup>
+            <optgroup label="Services Occupations:">
+                <option value="Protective Service (e.g., Fire Fighting, Police Officer, Correctional Officer)">-  Protective Service (e.g., Fire Fighting, Police Officer, Correctional Officer)</option>
+                <option value="Chef or Head Cook">-  Chef or Head Cook</option>
+                <option value="Cook or Food Preparation Worker">-  Cook or Food Preparation Worker</option>
+                <option value="Food and Beverage Serving Worker (e.g., Bartender, Waiter, Waitress)">-  Food and Beverage Serving Worker (e.g., Bartender, Waiter, Waitress)</option>
+                <option value="Building and Grounds Cleaning and Maintenance">-  Building and Grounds Cleaning and Maintenance</option>
+                <option value="Personal Care and Service (e.g., Hairdresser, Flight Attendant, Concierge)">-  Personal Care and Service (e.g., Hairdresser, Flight Attendant, Concierge)</option>
+                <option value="Sales Supervisor, Retail Sales">-  Sales Supervisor, Retail Sales</option>
+                <option value="Retail Sales Worker">-  Retail Sales Worker</option>
+                <option value="Insurance Sales Agent">-  Insurance Sales Agent</option>
+                <option value="Sales Representative">-  Sales Representative</option>
+                <option value="Real Estate Sales Agent">-  Real Estate Sales Agent</option>
+                <option value="Other Services Occupation">-  Other Services Occupation</option>
+            </optgroup>
+            <optgroup label="Agriculture, Maintenance, Repair, and Skilled Crafts Occupations:">
+                <option value="Construction and Extraction (e.g., Construction Laborer, Electrician)">-  Construction and Extraction (e.g., Construction Laborer, Electrician)</option>
+                <option value="Farming, Fishing, and Forestry">-  Farming, Fishing, and Forestry</option>
+                <option value="Installation, Maintenance, and Repair">-  Installation, Maintenance, and Repair</option>
+                <option value="Production Occupations">-  Production Occupations</option>
+                <option value="Other Agriculture, Maintenance, Repair, and Skilled Crafts Occupation">-  Other Agriculture, Maintenance, Repair, and Skilled Crafts Occupation</option>
+            </optgroup>
+            <optgroup label="Transportation Occupations:">
+                <option value="Aircraft Pilot or Flight Engineer">-  Aircraft Pilot or Flight Engineer</option>
+                <option value="Motor Vehicle Operator (e.g., Ambulance, Bus, Taxi, or Truck Driver)">-  Motor Vehicle Operator (e.g., Ambulance, Bus, Taxi, or Truck Driver)</option>
+                <option value="Other Transportation Occupation">-  Other Transportation Occupation</option>
+            </optgroup>
+            <optgroup label="Other Occupations:">
+                <option value="Military">-  Military</option>
+                <option value="Homemaker">-  Homemaker</option>
+                <option value="Other Occupation">-  Other Occupation</option>
+                <option value="Don't Know">-  Don't Know</option>
+                <option value="N/A">-  N/A</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Income</label>
+        <select class="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched" required="" name="income" ng-model="user.income">
+            <option value="" selected="selected">--Select--</option>
+            <option value="Less than $5000">Less than $5000</option>
+            <option value="1-5000">$1-$5000</option>
+            <option value="5000-10000">$5000-$10,000</option>
+            <option value="10000-30000">$10,000-$30,000</option>
+            <option value="30000-50000">$30,000-$50,000</option>
+            <option value="50000-100000">$50,000-$100,000</option>
+            <option value="100000-300000">$100,000-$300,000</option>
+            <option value="300000-1000000">$300,000-$1,000,000</option>
+            <option value="N/A">N/A</option>
+        </select>
+    </div>
+    <hr>
+    <div class="form-group">
+        <label for="email">Destination</label>
+        <input type="text" class="form-control" id="email" >
+    </div>
+    <div class="form-group">
+        <label for="email">Zipcode</label>
+        <input type="number" class="form-control" id="email" style="width: 200px;" >
+    </div>
+    <div class="form-group">
+        <label for="email">City</label>
+        <input type="text" class="form-control" id="email" >
+    </div>
+    <form class="form-inline" action="">
+        <div class="form-group">
+            <label for="email">Nearby Location:</label>
+            <input type="radio" name="optradio">YES
+        </div>
+    </form>
+    <div class="form-group">
+        <label for="email">How Far</label>
+        <input type="number" class="form-control" id="email" style="width: 200px;"  > miles/km
+    </div>
+    <hr>
+    <label><b>Compatible Match</b></label>
+
+    <form class="form-inline" action="/action_page.php">
+        <div class="form-group">
+            <label for="email">Show percentile:</label>
+            <input type="radio" name="optradio">YES
+            <input type="radio" name="optradio">NO
+        </div>
+        </br>
+        <div class="form-group">
+            <label for="email">Online User:</label>
+            <input type="checkbox" name="optradio">YES
+        </div>
+        </br>
+        <div class="form-group">
+            <label for="email">Offline User:</label>
+            <input type="checkbox" name="optradio">YES
+        </div>
+        </br>
+        <div class="form-group">
+            <label for="email">Children:</label>
+            <input type="radio" name="optradio">YES
+            <input type="radio" name="optradio">NO
+        </div>
+        </br>
+        <div class="form-group">
+            <label for="email">Smoker:</label>
+            <input type="radio" name="optradio">YES
+            <input type="radio" name="optradio">NO
+        </div>
+        </br>
+        <div class="form-group">
+            <label for="email">Pets:</label>
+            <input type="radio" name="optradio">YES
+            <input type="radio" name="optradio">NO
+        </div>
+        </br>
+        <div class="form-group">
+            <label for="email">Body Type:</label>
+            <input type="radio" name="optradio">YES
+            <input type="radio" name="optradio">NO
+        </div>
+        </br>
+        <div class="form-group">
+            <label for="email">Ethnicity:</label>
+            <input type="radio" name="optradio">YES
+            <input type="radio" name="optradio">NO
+        </div>
+        </br>
+        <div class="form-group">
+            <label for="email">Hair Color:</label>
+            <select >
+                <option value="" selected="selected">--Select--</option>
+                <option value="Light Ash Blonde">Light Ash Blonde</option>
+                <option value="Light Blonde">Light Blonde</option>
+                <option value="Light Golden Blonde">Light Golden Blonde</option>
+                <option value="Beeline Honey">Beeline Honey</option>
+                <option value="Medium Champagne">Medium Champagne</option>
+                <option value="Butterscotch">Butterscotch</option>
+                <option value="Light Cool Brown">Light Cool Brown</option>
+                <option value="Light Brown">Light Brown</option>
+                <option value="Light Golden Brown">Light Golden Brown</option>
+                <option value="Chocolate Brown">Chocolate Brown</option>
+                <option value="Dark Golden Brown">Dark Golden Brown</option>
+                <option value="Medium Ash Brown">Medium Ash Brown</option>
+                <option value="Reddish Blonde">Reddish Blonde</option>
+                <option value="Light Auburn">Light Auburn</option>
+                <option value="Medium Auburn">Medium Auburn</option>
+                <option value="Red Hot Cinnamon">Red Hot Cinnamon</option>
+                <option value="Expresso">Expresso</option>
+                <option value="Jet Black">Jet Black</option>
+                <option value="N/A">N/A</option>
+            </select>
+        </div>
+        </br>
+        <div class="form-group">
+            <label for="email">Eye Color:</label>
+            <select>
+                <option value="" selected="selected">--Select--</option>
+                <option value="Hazel Eye ">Hazel Eye </option>
+                <option value="Green Eye">Green Eye</option>
+                <option value="Gray">Gray</option>
+                <option value="Black">Black</option>
+                <option value="Brown">Brown</option>
+                <option value="Blue">Blue</option>
+                <option value="Amber">Amber</option>
+                <option value="Chestnut brown">Chestnut brown</option>
+                <option value="N/A">N/A</option>
+            </select>
+        </div>
+    </form>
+
+
+</body>
+</html>

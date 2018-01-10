@@ -110,6 +110,7 @@ function getAllUserLocation(map){
             }).done(function (response) {
             	
             	$.each(response,function(val,key){
+            	    console.log(key);
             		all_data.push(key);
             		new CustomMarker(
 					new google.maps.LatLng(key.latitude,key.longitude), 
@@ -161,8 +162,8 @@ function getMenus(){
                             '<i class="fa fa-fast-forward" ng-click="gotoliveChat('+all_data[index].id+')" uib-tooltip="Speed Dating"></i>'+
                             '<i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>'+*/
                           '</div>'+
-                          '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+Math.floor(Math.random() * 16) + 5+'%</span></h2>'+
-                          '  <p><a href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">view more options..</a></p>'+
+                          '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+all_data[index].percent+'%</span></h2>'+
+                          '  <p><a href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">view more options and details..</a></p>'+
                         '</div>'+
                       '</div>'+
                     '</div>');
@@ -191,75 +192,9 @@ $("#filtering-btn-map").click(function () {
     filterMapOption();
 });
 
-function filterMapOption() {
 
 
-    	var menu_item  ='<br>'+
-    			    '<ul class="list-group">'+
-    			   /* '<li class="list-group-item TUalign" onclick="getNearestLocation();"><i class="fa fa-location-arrow" aria-hidden="true"></i> Just Nearest</li>'+*/
-    			    '<li class="list-group-item TUalign" onclick="HIdeAllMale();"><i class="fa fa-venus" aria-hidden="true"></i>Show Female only</li>'+
-    			    '<li class="list-group-item TUalign" onclick="HIdeAllFemale();"  ><i class="fa fa-mars" aria-hidden="true"></i> Show Male only</li>'+
-    			    '<li class="list-group-item TUalign" onclick="showBothGender();"><i class="fa fa-mars" aria-hidden="true"></i><i class="fa fa-venus" aria-hidden="true"></i> Both Male & Female</li>'+
-    			   '</ul>';
 
-    		menu_item +='</br>'+
-                        'How many people do you want to see at a time ?';
-    menuDialog =$.confirm({
-    	    title: 'Filter map options',
-    	    columnClass: 'col-md-6 col-md-offset-3',
-    	    content: 'Select menu<b>'+menu_item,
-    	    theme: 'material',
-    	    type: 'red',
-    	    icon: 'fa fa-bars',
-    	    buttons: {
-
-
-    	        somethingElse: {
-    	            text: 'OK',
-    	            btnClass: 'btn-blue',
-    	            keys: ['enter', 'shift'],
-    	            action: function(){
-
-    	            }
-    	        },
-    	        cancel: function () {
-
-    	        },
-    	    }
-    	});
-}
-
-
-function HIdeAllFemale(){
-	$('.Female').each(function(i, obj) {
-    		$(this).css("display","none");
-	});
-	$('.Male').each(function(i, obj) {
-    		$(this).css("display","");
-	});
-	menuDialog.close();
-}
-
-
-function HIdeAllMale(){
-	$('.Male').each(function(i, obj) {
-    		$(this).css("display","none");
-	});
-	$('.Female').each(function(i, obj) {
-    		$(this).css("display","");
-	});
-	menuDialog.close();
-}
-
-function showBothGender(){
-	$('.Male').each(function(i, obj) {
-    		$(this).css("display","");
-	});
-	$('.Female').each(function(i, obj) {
-    		$(this).css("display","");
-	});
-	menuDialog.close();
-}
 
 // down vote
 // accepted
@@ -432,7 +367,7 @@ function  NextPreviousValue(id,element) {
         '<img src="'+resultObjectInfo.photo+'" class="del" alt="delete"  title="Remove" />'+
         '<span>'+
         '<a class="astext">'+
-        '<p style="margin-left:5px;">'+resultObjectInfo.firstName+' '+resultObjectInfo.lastName+
+        '<p style="margin-left:5px;">'+resultObjectInfo.firstName+' '+resultObjectInfo.lastName+' '+resultObjectInfo.percent+'%'+
         '<br>'+resultObjectInfo.location+'</p>'+
         '</a>'+
         '</span>'+
@@ -447,7 +382,7 @@ function  NextPreviousValue(id,element) {
         '<li class="fa fa-comments" title="Send Message"></li>'+
         '<li class="fa fa-eye" title="wink"></li>'+
         '<li class="fa fa-user-plus" title="Add User"></li>'+
-        '<li class="fa fa-calendar-check-o" title="Appointment"></li>'+
+        '<li class="fa fa-calendar-check-o" title="Appointment" onclick="addAppointMent(\''+resultObjectInfo.id+'\')"></li>'+
         '</ul>'+
         '</div>';
 
