@@ -74,4 +74,4 @@
   <script>
     angular.module("seriousDatingApp").constant("CSRF_TOKEN", '{{ csrf_token() }}');
   </script>
- {{--comment for updated master--}}
+ {{--comment for updated master v1.1.1.1--}}
