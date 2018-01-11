@@ -28,8 +28,10 @@
                     </h3>
 
                     <div class="padding-top">
-                        <ul class="nav-justified" ng-if="currentQuestion.type == 'level'">
-                            <li class="text-center" ng-repeat="i in getNumber(choiceLength) track by $index">
+                        <div class="scroll-level-content">
+                            <div class="min-width-level">
+                                <ul class="list-inline nav-justified" ng-if="currentQuestion.type == 'level'">
+                                    <li class="text-center" ng-repeat="i in getNumber(choiceLength) track by $index">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                         <p class="lead">
@@ -40,11 +42,14 @@
                                         </p>
                                     </div>
                                 </div>
-                                <span ng-if="$index == 0">@{{ currentQuestion.lowest_text }}</span>
-                                <span ng-if="$index == 3">@{{ currentQuestion.middle_text }}</span>
-                                <span ng-if="$index == 6">@{{ currentQuestion.highest_text }}</span>
-                            </li>
-                        </ul>
+                                        <span ng-if="$index == 0">@{{ currentQuestion.lowest_text }}</span>
+                                        <span ng-if="$index == 3">@{{ currentQuestion.middle_text }}</span>
+                                        <span ng-if="$index == 6">@{{ currentQuestion.highest_text }}</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
 
                         <div class="row">
                             <div class="col-md-8 col-md-offset-2">

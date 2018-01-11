@@ -226,6 +226,33 @@
 
                     <div class="col-sm-4">
                         <div class="form-group">
+                            <label>Country Code</label>
+
+                            <select class="form-control" required name="country_code" ng-model="user.country_code">
+                                <option value="">--Select--</option>
+                                @foreach ($countries as $country)
+                                <option value="{{$country->calling_code}}">{{$country->short_name}} (+{{$country->calling_code}})</option>
+                                @endforeach
+                                <option value="N/A">N/A</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="">Phone</label>
+                            <input class="form-control form-control-number" type="tel" name="phone" ng-model="user.phone" placeholder="Phone Number" required />
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
                             <label for="">Password</label>
                             <input class="form-control" type="password" name="password" ng-model="user.password" id="password_orig" placeholder="Password" required />
                         </div>
@@ -475,13 +502,7 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label>Where your father and mother born?</label>
-                        <!-- <select class="form-control" required name="wouldBirthFatherAndMotherAre" ng-model="user.wouldBirthFatherAndMotherAre">
-                            <option value="">--Select--</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                        </select> -->
+
                         <select class="form-control" required name="wouldBirthFatherAndMotherAre" ng-model="user.wouldBirthFatherAndMotherAre">
                             <option value="">--Select--</option>
                             @foreach ($countries as $country)

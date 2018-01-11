@@ -7759,6 +7759,13 @@ ul li.arrowpoint:first-child:before {
 	padding-top: 60px;
 }
 
+@media (max-width: 767px) {
+	.compatible-modal .padding-top-plus{
+		padding-top: 5px;
+	}
+}
+
+
 .compatible-modal .panel-heading{
 	font-size: 20px;
     text-transform: uppercase;
@@ -8007,3 +8014,23 @@ button.list-group-item {
     padding-right:0;
     padding-left:0;
 }
+
+/* .row.no-gutter {
+	margin-right: 0;
+	margin-left: 0;
+  }
+  .row.no-gutter > [class^="col-"],
+  .row.no-gutter > [class*=" col-"] {
+	padding-right: 0;
+	padding-left: 0;
+  }  */
+
+  @media (max-width: 767px) {
+	  
+	.scroll-level-content ul.list-inline > li{
+		display: block;
+	}
+
+  }
+
+	 

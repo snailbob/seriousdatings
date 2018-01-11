@@ -459,7 +459,7 @@
                             </div>
                             <!--video-event-bg-->
 
-                            <div class="gift-cert">
+                            <!-- <div class="gift-cert">
                                 <div class="container">
                                     <ul class="list-inline">
                                         <li ng-repeat="gift in data.giftCards">
@@ -469,7 +469,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="new_blog_box">
                                 <div class="container">
