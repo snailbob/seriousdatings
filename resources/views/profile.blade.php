@@ -81,16 +81,12 @@
           <div class="next-carousel">
             <ul class="carousel carousel-profile">
 
-              <div id="profileCarousel" class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                  @foreach($data['friends'] as $ind=>$single_user)
 
-                  <li class="item" style="background: url('{{ $single_user->photo }}') no-repeat center"></li>
+              @foreach($data['friends'] as $ind=>$single_user)
 
-                  @endforeach
+              <li class="item" style="background: url('{{ $single_user->photo }}') no-repeat center"></li>
 
-                </div>
-              </div>
+              @endforeach
             </ul>
           </div>
         </div>
