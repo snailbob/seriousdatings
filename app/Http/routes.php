@@ -11,10 +11,10 @@
   |
  */
 
-use Illuminate\Support\Facades\App;
-use App\Http\Controllers\SubscriptionCheckController;
-use App\User;
-use App\AboutYourDate;
+  use Illuminate\Support\Facades\App;
+  use App\Http\Controllers\SubscriptionCheckController;
+  use App\User;
+  use App\AboutYourDate;
 /* Route::get('test', function () {
 
 
@@ -23,7 +23,7 @@ use App\AboutYourDate;
   $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}"));
   dd($details);
 
-  }); */
+}); */
 
 //Route::get('checkemail','UsersController@checkEmail');
 Route::resource('users', 'UsersController');
@@ -122,7 +122,7 @@ Route::post('login_facebook', 'UsersController@login_facebook');
 Route::get('user_session', 'AboutYourDateController@userSession');
 
 Route::group(['prefix' => 'api'], function () {
-    
+
     Route::get('body_contents', 'UsersController@getBodyContents');
     Route::match(['get', 'post'], 'homepage', 'UsersController@homepage');
     Route::post('homepage_search_people', 'UsersController@homepage_search_people');
@@ -205,7 +205,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('verified', 'VerifyController@send_verification_mail');
     // Route::get('emailertest', function(){
     //     $user = User::find(147);
-        
+
     //     $data = [
     //         'email' => $user['email'],
     //         'image' => $user['photo'],
@@ -217,7 +217,7 @@ Route::group(['prefix' => 'api'], function () {
     //     ];
     
     //     return response()->view('email.verification', $data);
-        
+
     // });
     
     
@@ -236,8 +236,8 @@ Route::group(array('before' => 'admin'), function() {
     Route::get('admin/users/{id}/removePicture', function ($id) {
 
         DB::table('users')
-                ->where('id', $id)
-                ->update(['photo' => 'placeholder.png']);
+        ->where('id', $id)
+        ->update(['photo' => 'placeholder.png']);
         $username = DB::table('users')->where('id', $id)->pluck("username");
         $file = public_path() . '\images\placeholder.png';
         $dest = public_path() . '\images\users\\' . $username . '\placeholder.png';
@@ -253,7 +253,7 @@ Route::group(array('before' => 'admin'), function() {
     Route::get('admin/calendar/{id}', 'AdminCalendarEveController@showCalendarByEvent'); //  BY AK
     Route::get('admin/sendmail', 'AdminCalendarEveController@showComposeMail'); //  BY AK
     Route::get('admin/events/addEventType', 'EventManagementController@eventTypeForm');
-    Route::post('admin/events/type', 'EventManagementController@eventTypePost');
+    Route::post('/events/type', 'EventManagementController@eventTypePost');
     Route::get('admin/events/manage_eventtypes', 'EventManagementController@manage_eventtypes');
     Route::delete('admin/events/delete_eventtypes/{id}', 'EventManagementController@delete_eventtypes');
     Route::get('admin/events/eventtype/{id}/edit', 'EventManagementController@update_eventtypes');
@@ -281,6 +281,7 @@ Route::group(array('before' => 'admin'), function() {
     Route::controller('admin', 'AdminDashboardController');
     //Route::get('admin/calendar', 'CalendarController@showCalendar');
 
+
     /** Admin New Section* */
     //Route::resource('admin_new', 'AdminDashboardController@admin_new');
     // Route::resource('admin_new/slide/new', 'NSlideManagementController');
@@ -289,6 +290,13 @@ Route::group(array('before' => 'admin'), function() {
 
     /** Admin New Section* */
 });
+
+/* Manage User Actions */
+Route::post('blockUser', 'AdminUserListController@blockUser');
+Route::post('pauseUser', 'AdminUserListController@pauseUser');
+Route::post('deleteUser', 'AdminUserListController@deleteUser');
+/* End of Manage User Actions */
+
 
 Route::get('/test', 'AdminDashboardController@getTest');
 
