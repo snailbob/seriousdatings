@@ -31,6 +31,7 @@
                     <span id="google_translate_element"></span>
                 </div>
             </div>
+            @if(Auth::check())
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" id="header-btn">
                 <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -76,6 +77,47 @@
                             </div>
                         </li>
                     </div>
+                    @else
+                        <ul class=" navbar-right login-right-nav">
+                            <li class="dropdown">
+                                <a class="btn btn-danger dropdown-toggle btn-login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>Login</b> <span class="caret"></span></a>
+                                <ul id="login-dp" class="dropdown-menu">
+                                    <li>
+                                        <div class="row">
+                                            <div id="errorMessageLog"></div>
+                                            <div class="col-md-12">
+                                                {!! Form::open(array('url' => 'login', 'class' => 'form', 'id' => 'login-nav')) !!}
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="username">Username</label>
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="password">Password</label>
+                                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                                <!-- <div class="help-block text-right"><a href="{!! url() !!}/forgotPassword">Forget the password ?</a></div> -->
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" id="remember" name="check" checked> keep me logged-in
+
+                                                    </label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                                    <div class="help-block text-right"><a href="{!! url() !!}/forgotPassword">Forget the password ?</a></div>
+                                                </div>
+                                                {!! Form::close() !!}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="btn btn-success" href="{{ url() }}/users/create">Join Now</a></li>
+                            <li><a class="btn btn-info btn-fb" aria-label="Left Align" onclick="checkLoginState()"><span class="fa fa-facebook-f"></span> Login with Facebook</a></li>
+                        </ul>
+
+                        {{-- @include('login_form') --}}
+                        @endif
                 </div>
         </div>
     </div>
@@ -275,7 +317,7 @@
 
 
 
-        //Document Click hiding the popup 
+        //Document Click hiding the popup
 
         $(document).click(function ()
 
@@ -340,7 +382,7 @@ tbody tr
 
 
 
-@media only screen and (max-width: 464px) 
+@media only screen and (max-width: 464px)
 
 {
 
@@ -468,4 +510,4 @@ tbody tr
 
     });
 
-</script> 
+</script>
