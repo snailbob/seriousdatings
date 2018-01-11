@@ -8,15 +8,15 @@
 	width: 500px;
 	width: 100%;
 	/*margin-left: -470px;*/
-	margin-left: -15px;
-	overflow: hidden;
+	/*margin-left: -15px;*/
+	/*overflow: hidden;*/
 	height: 500px;
 	top: 0px;
 }
 
 .carousel.carousel-profile .item {
-	width: 300px;
-	height: 300px;
+	width: 250px;
+	height: 250px;
 	border-radius: 50%;
 	background: url('../../../../images/avatar.png') no-repeat center;
 	/*background: url('http://placehold.it/350x250') top left no-repeat;*/
