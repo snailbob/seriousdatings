@@ -9,10 +9,12 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
+    use SoftDeletes;
     use Authenticatable;
     use CanResetPassword;
     use EntrustUserTrait;
@@ -39,6 +41,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'lastName',
         'verified',
         'admin_blocked',
+        'admin_pause',
         'profileType',
         'photo',
         'photoType',
@@ -101,6 +104,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'wouldBirthFatherAndMotherAre'
     ];
 
+    protected $dates = ['deleted_at', 'create_at', 'updated_at'];
+
     /**
      * The attributes excluded from the model's JSON form.
      *
@@ -138,8 +143,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function friendOf()
     {
         return $this->belongsToMany('App\User', 'user_friendships', 'friend_id', 'user_id')
-            ->wherePivot('accepted', '=', 1)
-            ->withPivot('accepted');
+        ->wherePivot('accepted', '=', 1)
+        ->withPivot('accepted');
     }
 
     // accessor allowing you call $user->friends

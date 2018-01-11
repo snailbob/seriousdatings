@@ -198,5 +198,4 @@ class AjaxRequestController extends Controller
       }
       return "1";
     }
-
 }
