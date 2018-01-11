@@ -8,8 +8,9 @@
 
 @include('header_new')
 @include('header_bottom')
+@section('css-scripts')
 {!! HTML::style('public/css/homepage-style.css') !!}
-
+@endsection
 
     <script src="https://connect.facebook.net/en_US/all.js"></script>
 

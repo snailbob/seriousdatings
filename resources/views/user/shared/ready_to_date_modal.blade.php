@@ -28,14 +28,18 @@
                     </h3>
 
                     <div class="padding-top">
-                        <ul class="list-inline nav-justified" ng-if="currentQuestion.type == 'level'">
+                        <ul class="nav-justified" ng-if="currentQuestion.type == 'level'">
                             <li class="text-center" ng-repeat="i in getNumber(choiceLength) track by $index">
-                                <p class="lead">
-                                    <span class="fa-stack fa-lg text-shade-@{{$index + 1}}" ng-class="{'shade-selected' : currentQuestion.answer == $index }" ng-click="selectAsnwer($index)">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i ng-if="currentQuestion.answer == $index" class="fa fa-check fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </p>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                                        <p class="lead">
+                                            <span class="fa-stack fa-lg text-shade-@{{$index + 1}}" ng-class="{'shade-selected' : currentQuestion.answer == $index }" ng-click="selectAsnwer($index)">
+                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                <i ng-if="currentQuestion.answer == $index" class="fa fa-check fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
                                 <span ng-if="$index == 0">@{{ currentQuestion.lowest_text }}</span>
                                 <span ng-if="$index == 3">@{{ currentQuestion.middle_text }}</span>
                                 <span ng-if="$index == 6">@{{ currentQuestion.highest_text }}</span>
@@ -53,7 +57,7 @@
                                         @{{i}}
                                     </a>
                                 </div>
-                            
+
                             </div>
                         </div>
 

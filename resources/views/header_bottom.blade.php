@@ -26,108 +26,61 @@
 <div class="top-nav">
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
-                <div class="left">
-                    <div class="language">
-                       <span id="google_translate_element" style="height:38px;font-size: 13px;color: #666;border-color: #ccc;" ></span>
-                    </div>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <div class="language">
+                    <span id="google_translate_element"></span>
                 </div>
             </div>
-            <div class="col-md-10">
-
-                @if(Auth::check())
-                <div class="text_center_sm flt_right_md custom">
-
-                    <div class="btn-group">
-                        <a href="{!! url() !!}/profile" class="btn btn-default">{!! Auth::user() -> firstName !!} {!! Auth::user() -> lastName !!}</a>
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{url().'/profile_settings'}}"><i class="fa fa-user fa-fw" aria-hidden="true"></i> Profile Settings</a></li>
-                            <li><a href="{{url().'/privacy_settings'}}"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> Privacy Setting</a></li>
-                            <li><a href="{!! url() !!}/logout"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout</a></li>
-                        </ul>
-                    </div>
-
-
-                    <li id="notification_li" class="notifica_li">
-                        <a href="#" id="notificationLink">
-                            <button type="button" class="btn btn-danger">Notifications <span class="badge">@{{ unread_noti_count }}</span></button>
-                        </a>
-
-                        <div id="notificationContainer">
-
-                            <div id="notificationTitle">
-                                <a class="pull-left" ng-click="markAllNotiRead()">Mark all as read</a>
-                                Notifications
-                            </div>
-                            <div id="notificationsBody" class="notifications">
-                                <div class="list-group">
-                                    <a ng-click="viewNoti(noti)" class="list-group-item text-left" ng-repeat="noti in notifications">
-                                        <small class="pull-right opacity-6">
-                                            @{{ noti.ago }}
-                                        </small>
-                                        <img ng-src="@{{noti.from_info.photo}}" alt="" class="pull-left img-thumbnail img-circle" width="40">
-                                        <span ng-class="{'text-strong' : !noti.is_read}">@{{ noti.message }}</span>
-                                    </a>
-                                </div>
-
-                            </div>
-                            {{--  <div id="notificationFooter"><a href="#">See All</a></div>  --}}
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" id="header-btn">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <div class="btn-group">
+                            <a href="{!! url() !!}/profile" class="btn btn-default">{!! Auth::user() -> firstName !!} {!! Auth::user() -> lastName !!}</a>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{url().'/profile_settings'}}"><i class="fa fa-user fa-fw" aria-hidden="true"></i> Profile Settings</a></li>
+                                <li><a href="{{url().'/privacy_settings'}}"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> Privacy Setting</a></li>
+                                <li><a href="{!! url() !!}/logout"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout</a></li>
+                            </ul>
                         </div>
-                    </li>
-                </div>
-
-                @else
-                    
-                <ul class=" navbar-right login-right-nav">
-                    <li class="dropdown">
-                        <a class="btn btn-danger dropdown-toggle btn-login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b>Login</b> <span class="caret"></span></a>
-                        <ul id="login-dp" class="dropdown-menu">
-                            <li>
-                                <div class="row">
-                                   <div id="errorMessageLog"></div>
-                                    <div class="col-md-12">
-                                        {!! Form::open(array('url' => 'login', 'class' => 'form', 'id' => 'login-nav')) !!}
-                                        <div class="form-group">
-                                            <label class="sr-only" for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                                            <!-- <div class="help-block text-right"><a href="{!! url() !!}/forgotPassword">Forget the password ?</a></div> -->
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="remember" name="check" checked> keep me logged-in
-
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                            <div class="help-block text-right"><a href="{!! url() !!}/forgotPassword">Forget the password ?</a></div>
-                                        </div>
-                                        {!! Form::close() !!}
-                                    </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <li id="notification_li" class="notifica_li">
+                            <a href="#" id="notificationLink">
+                                <button type="button" class="btn btn-danger">
+                                    <span class="text">Notifications</span>
+                                    <span class="badge">@{{ unread_noti_count }}</span>
+                                </button>
+                            </a>
+                            <div id="notificationContainer">
+                                <div id="notificationTitle">
+                                    <a class="pull-left" ng-click="markAllNotiRead()">Mark all as read</a>
+                                    Notifications
                                 </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a class="btn btn-success" href="{{ url() }}/users/create">Join Now</a></li>
-                    <li><a class="btn btn-info btn-fb" aria-label="Left Align" onclick="checkLoginState()"><span class="fa fa-facebook-f"></span> Login with Facebook</a></li>
-                </ul>
+                                <div id="notificationsBody" class="notifications">
+                                    <div class="list-group">
+                                        <a ng-click="viewNoti(noti)" class="list-group-item text-left" ng-repeat="noti in notifications">
+                                            <small class="pull-right opacity-6">
+                                                @{{ noti.ago }}
+                                            </small>
+                                            <img ng-src="@{{noti.from_info.photo}}" alt="" class="pull-left img-thumbnail img-circle" width="40">
+                                            <span ng-class="{'text-strong' : !noti.is_read}">@{{ noti.message }}</span>
+                                        </a>
+                                    </div>
 
-                {{-- @include('login_form') --}}
-
-                @endif
-
-            </div>
+                                </div>
+                                {{--  <div id="notificationFooter"><a href="#">See All</a></div>  --}}
+                            </div>
+                        </li>
+                    </div>
+                </div>
         </div>
     </div>
-  </div>
+</div>
+</div>
 <div class="header-botom">
 
     <div class="container">
@@ -158,14 +111,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-              </button>
-            </div>
+            </button>
+        </div>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-              <ul class="nav navbar-nav nav-justified">
-                {{--  <li><a href="{!! url() !!}">Home <span class="sr-only">(current)</span></a></li>  --}}
-                <li><a href="{!! url() !!}/profile">Profile</a></li>
-                <li><a href="{!! url() !!}/speeddatingnew">Speed Dating</a></li>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+          <ul class="nav navbar-nav nav-justified">
+            {{--  <li><a href="{!! url() !!}">Home <span class="sr-only">(current)</span></a></li>  --}}
+            <li><a href="{!! url() !!}/profile">Profile</a></li>
+            <li><a href="{!! url() !!}/speeddatingnew">Speed Dating</a></li>
                 <!-- <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My Content</a>
                   <ul class="dropdown-menu" role="menu">
@@ -174,45 +127,45 @@
                     <li><a href="{!! url() !!}/profile/video">Videos</a></li>
                     <li><a href="{!! url() !!}/profile/music">Music</a></li>
                   </ul>
-                </li> -->
-                <li><a href="{!! url() !!}/events">Events</a></li>
+              </li> -->
+              <li><a href="{!! url() !!}/events">Events</a></li>
 
-                <li class="dropdown">
+              <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Services</a>
                   <ul class="dropdown-menu" role="menu">
                     <li class="tlign"><a href="{!! url() !!}/datingPlan">Dating Plans</a></li>
                     {{--  <li class="tlign"><a href="{!! url() !!}/paidServices">Paid Services</a></li>  --}}
                     {{--  <li class="tlign"><a href="{!! url() !!}/meetPeople">Meet People</a></li>  --}}
                     <li class="tlign"><a href="{!! url() !!}/video_chat">Video Chat</a></li>
-                  </ul>
-                </li>
+                </ul>
+            </li>
 
-                <li><a href="{!! url() !!}/browse">Browse</a></li>
-                <li><a ng-click="randomCompatibleModal()">Compatibilty</a></li>
-                <li><a ng-click="inviteFriendsModal()">Invite Friends</a></li>
-                <li><a href="{!! url() !!}/online_chat">Online Chat</a></li>
+            <li><a href="{!! url() !!}/browse">Browse</a></li>
+            <li><a ng-click="randomCompatibleModal()">Compatibilty</a></li>
+            <li><a ng-click="inviteFriendsModal()">Invite Friends</a></li>
+            <li><a href="{!! url() !!}/online_chat">Online Chat</a></li>
 
-                {{--  <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About</a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li class="tlign"><a href="{!! url() !!}/pages/about us">About Us</a></li>
-                    <li class="tlign"><a href="{!! url() !!}/success_story">Success Story</a></li>
-                    <li class="tlign"><a href="{!! url() !!}/pages/news">News</a></li>
-                    <li class="tlign"><a href="{!! url() !!}/pages/policy">Privacy Policy</a></li>
-                    <li class="tlign"><a href="{!! url() !!}/pages/Terms and condiitions">Terms of Use</a></li>
-                  </ul>
-                </li>  --}}
+            {{--  <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About</a>
+              <ul class="dropdown-menu" role="menu">
+                <li class="tlign"><a href="{!! url() !!}/pages/about us">About Us</a></li>
+                <li class="tlign"><a href="{!! url() !!}/success_story">Success Story</a></li>
+                <li class="tlign"><a href="{!! url() !!}/pages/news">News</a></li>
+                <li class="tlign"><a href="{!! url() !!}/pages/policy">Privacy Policy</a></li>
+                <li class="tlign"><a href="{!! url() !!}/pages/Terms and condiitions">Terms of Use</a></li>
+            </ul>
+        </li>  --}}
 
-                {{--  <li><a href="{!! url() !!}/contact">Contact</a></li>  --}}
-                @if(Auth::User())
-                <input type="hidden" name="logged_in" id="logged_in" value="{!! Auth::User() -> id !!}">
-                @endif
-              </ul>
-            </div>
-        </nav>
+        {{--  <li><a href="{!! url() !!}/contact">Contact</a></li>  --}}
+        @if(Auth::User())
+        <input type="hidden" name="logged_in" id="logged_in" value="{!! Auth::User() -> id !!}">
         @endif
+    </ul>
+</div>
+</nav>
+@endif
 
-    </div>
+</div>
 
     <!--<div class="container" style="margin-bottom: 4%; margin-top: 1%;">
 
@@ -361,45 +314,45 @@
 
 
 
-    thead tr
+thead tr
 
-    {font-size: 18px;background: #EFEFEF!important;height: 50px !important;}
+{font-size: 18px;background: #EFEFEF!important;height: 50px !important;}
 
-    thead tr th
+thead tr th
 
-    {padding: 10px !important;}
+{padding: 10px !important;}
 
-    tbody tr
+tbody tr
 
-    {font-size: 16px !important;height: 70px !important;}
+{font-size: 16px !important;height: 70px !important;}
 
-    .fc-button-today
+.fc-button-today
 
-    {background: #E11C23 !important;color: #FFF !important; font-size: 16px; font-weight: bold !important;opacity:1}
+{background: #E11C23 !important;color: #FFF !important; font-size: 16px; font-weight: bold !important;opacity:1}
 
-    .fc-event-inner
+.fc-event-inner
 
-    {background: #E11C23 !important;color: #FFF !important;}
+{background: #E11C23 !important;color: #FFF !important;}
 
-    .calendar-outer
+.calendar-outer
 
-    {margin-left: 5px !important;}
+{margin-left: 5px !important;}
 
 
 
-    @media only screen and (max-width: 464px) 
+@media only screen and (max-width: 464px) 
 
-    {
+{
 
-        .right-content-section
+    .right-content-section
 
-        {width:100% !important; }
+    {width:100% !important; }
 
-        tbody
+    tbody
 
-        {width: 100% !important;}
+    {width: 100% !important;}
 
-    }
+}
 
 
 
