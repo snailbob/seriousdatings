@@ -8,13 +8,13 @@
 
 
     <h2>Appointment Form</h2>
-    <form  id="appointment-form">
+    <form  id="appointment-form" method="post">
 
         <div class="form-group has-warning">
             <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
                 Location of appointment
             </label>
-            <input type="text" class="form-control input-sm" id="inputWarning" placeholder="Enter ...">
+            <input type="text" class="form-control input-sm" name="streetAdd" id="inputWarning" placeholder="Enter ...">
             <span class="help-block"><small>Street Address</small></span>
         </div>
 
@@ -188,9 +188,6 @@
             <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
             <span class="help-block"><small>Detail of appointment here</small></span>
         </div>
-        <center>
-            <button type="submit" class="btn btn-primary btn-block">Save</button>
-        </center>
 
 
     </form>

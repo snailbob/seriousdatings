@@ -14,15 +14,26 @@ var addAppointMent = function (id) {
 
         buttons: {
 
-
-            somethingElse: {
-                text: 'close',
+            formSubmit: {
+                text: 'Submit',
                 btnClass: 'btn-blue',
-                keys: ['enter', 'shift'],
-                action: function(){
-
+                action: function () {
+                    var name = this.$content.find('#appointment-form').serialize();
+                   console.log("form-ser",name);
                 }
             },
+            cancel: function () {
+                //close
+            }
+        },
+        onContentReady: function () {
+            // bind to events
+            var jc = this;
+            this.$content.find('form').on('submit', function (e) {
+                // if the user submits the form by pressing enter in the field.
+                e.preventDefault();
+                jc.$$formSubmit.trigger('click'); // reference the button and click it
+            });
         }
     });
 
@@ -30,7 +41,4 @@ var addAppointMent = function (id) {
 
 }
 
-$("#appointment-form").submit(function (e) {
-   alert("cool");
-    e.preventDefault();
-});
+
