@@ -72,7 +72,7 @@
                         <li class="blockBtn">
                           <a href='#' class="blockTxt"> 
                             <i class="fa fa-user-times"></i> 
-                            @if($user->admin_block)
+                            @if($user->admin_blocked)
                             Unblock
                             @else
                             Block
