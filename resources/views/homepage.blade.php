@@ -111,7 +111,7 @@
                                             {{ $video->title }}
                                         </a>
                                         @endif  --}}
-                                        <a class="cd-btn" href="{{$video->link}}">
+                                        <a class="cd-btn" href="{{url().'/users/create'}}">
                                             {{ $video->title }}
                                         </a>
                                 </div>
@@ -332,7 +332,7 @@
                                                 <div>
                                                     <ul class="">
                                                         <li ng-repeat="online in data.online">
-                                                            <a ng-href="@{{ base_url+'/profile/' + online.username}}">
+                                                            <a ng-href="@{{ base_url+'/user/create'}}">
                                                                 <div class="img-container" ng-style="{'background-image': 'url('+online.photo+')'}">
                                                                 </div>
                                                                 <span class="user-name">@{{ online.firstName }} @{{ online.lastName }}</span>
