@@ -18,8 +18,9 @@ var addAppointMent = function (id) {
                 text: 'Submit',
                 btnClass: 'btn-blue',
                 action: function () {
-                    var name = this.$content.find('#appointment-form').serialize();
+                    var dataForm = this.$content.find('#appointment-form').serialize();
                    console.log("form-ser",name);
+                    saveAppointment(dataForm);
                 }
             },
             cancel: function () {
@@ -39,6 +40,22 @@ var addAppointMent = function (id) {
 
 
 
+}
+function saveAppointment(dataForm) {
+    var data_link = base_url + '/api/getuserlocation';
+    $.ajax({
+        url: data_link,
+        dataType: 'json',
+        data:dataForm,
+        method: 'POST',
+
+    }).done(function (response) {
+
+
+
+    }).fail(function () {
+        alert('Something went wrong.');
+    });
 }
 
 
