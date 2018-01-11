@@ -61,21 +61,21 @@ class UserManagementController extends Controller
 
         switch($cat){
             case "men":
-                $field = 'gender';
-                $val = 'Male';
-                break;
+            $field = 'gender';
+            $val = 'Male';
+            break;
             case "women":
-                $field = 'gender';
-                $val = 'Female';
-                break;
+            $field = 'gender';
+            $val = 'Female';
+            break;
             case "notverified":
-                $field = 'verified';
-                $val = 0;
-                break;
+            $field = 'verified';
+            $val = 0;
+            break;
             case "verified":
-                $field = 'verified';
-                $val = 1;
-                break;
+            $field = 'verified';
+            $val = 1;
+            break;
         }
         $users = User::where($field,$val)->get();
         foreach ($users as $user) {
@@ -95,25 +95,25 @@ class UserManagementController extends Controller
 
         switch($cat){
             case "men":
-                $sql = 'select * from users where gender = ?';
-                $field = 'gender';
-                $val = 'Male';
-                break;
+            $sql = 'select * from users where gender = ?';
+            $field = 'gender';
+            $val = 'Male';
+            break;
             case "women":
-                $sql = 'select * from users where gender = ?';
-                $field = 'gender';
-                $val = 'Female';
-                break;
+            $sql = 'select * from users where gender = ?';
+            $field = 'gender';
+            $val = 'Female';
+            break;
             case "notverified":
-                $sql = 'select * from users where verified = ?';
-                $field = 'verified';
-                $val = 0;
-                break;
+            $sql = 'select * from users where verified = ?';
+            $field = 'verified';
+            $val = 0;
+            break;
             case "verified":
-                $sql = 'select * from users where verified = ?';
-                $field = 'verified';
-                $val = 1;
-                break;
+            $sql = 'select * from users where verified = ?';
+            $field = 'verified';
+            $val = 1;
+            break;
         }
 
         // $users = User::where($field,$val)->get();
@@ -219,24 +219,23 @@ class UserManagementController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        //dd($user);
-     
-        DB::table('friends')
-        ->where('friend_one','=',$id)
-        ->orWhere('friend_two','=',$id)
-        ->delete();        
-        DB::table('role_user')->where('user_id','=',$id)->delete();
-        $username = DB::table('users')->where('id','=',$id)->pluck('username');
-        DB::table('about_your_date')->where('user_id','=',$username)->delete();
-        DB::table('compatability')->where('user_id','=',$id)->delete();
-        DB::table('user_online')->where('user_id','=',$id)->delete();
-        DB::table('subscription')->where('user_id','=',$id)->delete();
-        $user->delete();
-        // redirect
-        \Session::flash('message', 'Successfully deleted!!');
-        return \Redirect::to('admin/users');
+        // $user = User::find($id);
+        // //dd($user);
 
+        // DB::table('friends')
+        // ->where('friend_one','=',$id)
+        // ->orWhere('friend_two','=',$id)
+        // ->delete();        
+        // DB::table('role_user')->where('user_id','=',$id)->delete();
+        // $username = DB::table('users')->where('id','=',$id)->pluck('username');
+        // DB::table('about_your_date')->where('user_id','=',$username)->delete();
+        // DB::table('compatability')->where('user_id','=',$id)->delete();
+        // DB::table('user_online')->where('user_id','=',$id)->delete();
+        // DB::table('subscription')->where('user_id','=',$id)->delete();
+        // $user->delete();
+        // // redirect
+        // \Session::flash('message', 'Successfully deleted!!');
+        // return \Redirect::to('admin');
     }
 }
 

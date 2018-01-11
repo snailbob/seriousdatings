@@ -275,7 +275,6 @@
 <!-- AdminLTE dashboard demo -->
 <script src="{{ url() }}/public/dist/js/pages/admin-script.js"></script>
 
-
 <!-- angular script -->
 @include('admin.inc.angular')
 
