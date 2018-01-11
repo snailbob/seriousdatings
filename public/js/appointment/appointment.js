@@ -29,3 +29,8 @@ var addAppointMent = function (id) {
 
 
 }
+
+$("#appointment-form").submit(function (e) {
+   alert("cool");
+    e.preventDefault();
+});
