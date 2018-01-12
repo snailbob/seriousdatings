@@ -31,6 +31,7 @@ class Template extends Model implements AuthenticatableContract, CanResetPasswor
      */
     protected $fillable = ['template_name', 'template_subject', 'template_content'];
 
+    protected   $date = ['created_at', 'updated_at'];
     /**
      * The attributes excluded from the model's JSON form.
      *

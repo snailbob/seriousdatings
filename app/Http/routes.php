@@ -254,6 +254,7 @@ Route::group(array('before' => 'admin'), function() {
     
     Route::get('admin/templates/{id}/content', 'TemplateController@showContent');
     Route::get('admin/change_password', 'ChangePasswordController@showForm');
+    Route::get('admin/editable_email', 'EditableEmailController@showForm');
     Route::get('admin/calendar', 'AdminCalendarEveController@showCalendar'); //  BY AK
     Route::get('admin/calendar/{id}', 'AdminCalendarEveController@showCalendarByEvent'); //  BY AK
     Route::get('admin/sendmail', 'AdminCalendarEveController@showComposeMail'); //  BY AK
@@ -284,9 +285,9 @@ Route::group(array('before' => 'admin'), function() {
     Route::resource('admin/dating_plans', 'DatingPlanManagementController');
     Route::resource('admin/pages', 'ContentManagementController');
     Route::controller('admin', 'AdminDashboardController');
-    //Route::get('admin/calendar', 'CalendarController@showCalendar');
 
 
+    Route::post('saveTemplate', 'EditableEmailController@saveTemplate');
     /** Admin New Section* */
     //Route::resource('admin_new', 'AdminDashboardController@admin_new');
     // Route::resource('admin_new/slide/new', 'NSlideManagementController');

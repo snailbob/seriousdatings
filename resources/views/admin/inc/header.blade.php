@@ -293,6 +293,7 @@
 
 
         <li><a href="{{ url('admin/calendar') }}"><i class="fa fa-calendar"></i> <span>Events Calendar</span></a></li>
+        <li><a href="{{ url('admin/editable_email') }}"><i class="fa fa-envelope"></i> <span>Editable Email Templates</span></a></li>
         <li><a href="{{ url('admin/change_password') }}"><i class="fa fa-user"></i> <span>Change Password</span></a></li>
         <!-- <li><a href="#"><i class="fa fa-envelope-o"></i> <span>Manage Mail</span></a></li> -->
         <li><a href="{{ url('admin/logout') }}"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
