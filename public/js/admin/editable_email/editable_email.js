@@ -23,12 +23,12 @@ $(document).ready(function()
 			cache: false,
 			success: function(value)
 			{	
-				toastr.info(value.template_name + " was successfully created!");
+				toastr.info(value.template_name + " was successfully updated!");
 			},
 			error: function(value)
 			{
 				$.each( value.responseJSON, function( key, value ) {
-					toastr.error(key + ": " + value);
+					toastr.error(value);
 				});
 			}
 		});

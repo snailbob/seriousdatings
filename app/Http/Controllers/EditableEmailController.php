@@ -14,15 +14,26 @@ use App\Template;
 
 class EditableEmailController extends Controller
 {
-    public function showForm()
+    public function showAddForm()
     {
-        return \View::make('admin.email_template.editable_email_template')->withStatus("");
+        return \View::make('admin.email_template.add_email_template')->withStatus("");
+    }
+
+    public function showTemplateLists()
+    {
+        $templates = Template::all();
+        foreach ($templates as $key => $value) 
+        {
+            $templates[$key]['ellipse'] = self::setContentToEllipse($value->template_content);
+        }
+
+        return \View::make('admin.email_template.template_lists')->with('templates', $templates );
     }
 
     public function saveTemplate(Request $request)
     {
         $errors = $this->validate($request, [
-            'Name' => 'required|max:255',
+            'Name' => 'required|max:255|unique:templates,template_name,NULL,id,deleted_at,NULL',
             'Subject' => 'required|max:255',
             'Content' => 'required'
         ]);
@@ -34,4 +45,62 @@ class EditableEmailController extends Controller
         ]);       
         return response()->json($template);
     }
+
+    public function getTemplateById(Request $request)
+    {
+        $template = Template::find($request->id);
+        return response()->json($template);
+    }
+
+    public function updateTemplate(Request $request)
+    {
+        /* Validation Process Befor Updating */ 
+        $errors = $this->validate($request, [
+            'Name' => 'required|max:255',
+            'Subject' => 'required|max:255',
+            'Content' => 'required'
+        ]);
+
+        $template = Template::find($request->id);
+
+        if(strtolower($template->template_name) != trim(strtolower($request->Name)))
+        {
+            $this->validate($request, [
+                'Name' => 'unique:templates,template_name'
+            ]);
+        }
+        /* End of Validation Process Befor Updating */
+
+        Template::where('id', $request->id)
+        ->update([
+            'template_name' => trim($request->Name),
+            'template_subject' => trim($request->Subject),
+            'template_content' => $request->Content
+        ]);
+
+        /* returning the updated data */ 
+        $template = Template::find($request->id);
+        $template['ellipse'] = self::setContentToEllipse($template->template_content);
+
+
+        return response()->json($template);
+    }
+
+    public function deleteTemplate(Request $request)
+    {
+        $template = Template::find($request->id);
+
+        $template->delete();
+
+        return response()->json($template);
+    }
+
+    static function setContentToEllipse($text)
+    {
+        $partialEndTag = strpos($text, "</");
+        $offsetEndTag = strpos($text, ">", $partialEndTag);
+        $ellipseMessage = substr($text, 0, $offsetEndTag);
+        return $ellipseMessage;
+    }  
+
 }

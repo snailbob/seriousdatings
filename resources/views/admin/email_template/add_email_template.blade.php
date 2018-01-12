@@ -4,11 +4,11 @@
   <section class="content-header">
     <h1>
       Administrator
-      <small>Change Password</small>
+      <small>Add Email Template</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Editable Email Template</li>
+      <li class="active">Add Email Template</li>
     </ol>
   </section>
   <section class="content">

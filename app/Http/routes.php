@@ -121,6 +121,19 @@ Route::post('login_facebook', 'UsersController@login_facebook');
 
 Route::get('user_session', 'AboutYourDateController@userSession');
 
+// Route::get('test_email', function(){
+
+//         $data = []; //$request->input(); //response()->json($request->input());   
+//         $data['invited_by'] = Auth::user()->firstName;
+//         $data['link'] = url();
+//         $data['button_text'] = 'Join Now';
+
+//         $email_to_send = 'asd@sdf.com';// $data['email'];
+
+
+//         return View::make('email/invite_friend')->with($data);
+// });
+
 Route::group(['prefix' => 'api'], function () {
 
     Route::get('body_contents', 'UsersController@getBodyContents');
@@ -251,10 +264,19 @@ Route::group(array('before' => 'admin'), function() {
 
         return redirect(url() . '/admin/users/' . $id);
     });
+
+    /* Editable Email Section */
+    Route::post('saveTemplate', 'EditableEmailController@saveTemplate');
+    Route::post('getTemplateById', 'EditableEmailController@getTemplateById');
+    Route::post('updateTemplate', 'EditableEmailController@updateTemplate');
+    Route::post('deleteTemplate', 'EditableEmailController@deleteTemplate');
+
+    Route::get('admin/email_template_lists', 'EditableEmailController@showTemplateLists');
+    Route::get('admin/add_email_template', 'EditableEmailController@showAddForm');
+    
     
     Route::get('admin/templates/{id}/content', 'TemplateController@showContent');
     Route::get('admin/change_password', 'ChangePasswordController@showForm');
-    Route::get('admin/editable_email', 'EditableEmailController@showForm');
     Route::get('admin/calendar', 'AdminCalendarEveController@showCalendar'); //  BY AK
     Route::get('admin/calendar/{id}', 'AdminCalendarEveController@showCalendarByEvent'); //  BY AK
     Route::get('admin/sendmail', 'AdminCalendarEveController@showComposeMail'); //  BY AK
@@ -286,8 +308,6 @@ Route::group(array('before' => 'admin'), function() {
     Route::resource('admin/pages', 'ContentManagementController');
     Route::controller('admin', 'AdminDashboardController');
 
-
-    Route::post('saveTemplate', 'EditableEmailController@saveTemplate');
     /** Admin New Section* */
     //Route::resource('admin_new', 'AdminDashboardController@admin_new');
     // Route::resource('admin_new/slide/new', 'NSlideManagementController');
