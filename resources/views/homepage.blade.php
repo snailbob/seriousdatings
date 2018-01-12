@@ -7,10 +7,12 @@
 '; ?>
 
 @include('header_new')
-@include('header_bottom')
-@section('css-scripts')
 {!! HTML::style('public/css/homepage-style.css') !!}
-@endsection
+
+@include('header_bottom')
+
+{{--  @section('css-scripts')
+@endsection  --}}
 
     <script src="https://connect.facebook.net/en_US/all.js"></script>
 
@@ -332,7 +334,7 @@
                                                 <div>
                                                     <ul class="">
                                                         <li ng-repeat="online in data.online">
-                                                            <a ng-href="@{{ base_url+'/user/create'}}">
+                                                            <a ng-href="@{{ base_url+'/users/create'}}">
                                                                 <div class="img-container" ng-style="{'background-image': 'url('+online.photo+')'}">
                                                                 </div>
                                                                 <span class="user-name">@{{ online.firstName }} @{{ online.lastName }}</span>

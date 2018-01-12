@@ -501,9 +501,9 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label>Where your father and mother born?</label>
+                        <label>Father birth place</label>
 
-                        <select class="form-control" required name="wouldBirthFatherAndMotherAre" ng-model="user.wouldBirthFatherAndMotherAre">
+                        <select class="form-control" required name="fatherBorn" ng-model="user.fatherBorn">
                             <option value="">--Select--</option>
                             @foreach ($countries as $country)
                             <option value="{{$country->short_name}}">{{$country->short_name}}</option>
@@ -515,13 +515,15 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label>How ambitious are you?</label>
-                        <select class="form-control" required name="howAmbitiousAreYou" ng-model="user.howAmbitiousAreYou">
+                        <label>Mother birth place</label>
+
+                        <select class="form-control" required name="motherBorn" ng-model="user.motherBorn">
                             <option value="">--Select--</option>
-                            <option value="Very Important">Very Important</option>
-                            <option value="Important">Important</option>
-                            <option value="Somewhat Important">Somewhat Important</option>
+                            @foreach ($countries as $country)
+                            <option value="{{$country->short_name}}">{{$country->short_name}}</option>
+                            @endforeach
                             <option value="N/A">N/A</option>
+
                         </select>
                     </div>
                 </div>
@@ -545,7 +547,7 @@
 
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label>What are your religiouse you do beliefs? </label>
+                        <label>Religion</label>
                         <select class="form-control" required name="religiousBeliefs" ng-model="user.religiousBeliefs">
                             <option value="">--Select--</option>
                             <option value="Christians">Christians</option>
@@ -729,6 +731,9 @@
                             <option value="Excellent Posture">Excellent Posture</option>
                             <option value="Gains Muscle Easily">Gains Muscle Easily</option>
                             <option value="Fat">Fat</option>
+                            <option value="Curves">Curves</option>
+                            <option value="Petite">Petite</option>
+                            <option value="Skinny ">Skinny </option>
                             <option value="N/A">N/A</option>
                         </select>
                     </div>
@@ -910,6 +915,18 @@
             </div>
             <div class="row">
 
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>How ambitious are you?</label>
+                        <select class="form-control" required name="howAmbitiousAreYou" ng-model="user.howAmbitiousAreYou">
+                            <option value="">--Select--</option>
+                            <option value="Very Important">Very Important</option>
+                            <option value="Important">Important</option>
+                            <option value="Somewhat Important">Somewhat Important</option>
+                            <option value="N/A">N/A</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label>What is your ethnicity? </label>

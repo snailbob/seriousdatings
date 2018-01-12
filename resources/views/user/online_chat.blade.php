@@ -68,17 +68,17 @@
                             <div class="container-fluid padding-top">
                                 <div class="row no-gutter">
                                     <div class="col-sm-4">
-                                        <a class="btn btn-success btn-block" ng-click="startCall('voice', user, $index)" uib-tooltip="Start Voice Call">
+                                        <a class="btn btn-success btn-block" ng-click="startCall('voice', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Voice Call">
                                             <i class="fa fa-phone" aria-hidden="true"></i>
                                         </a>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a class="btn btn-success btn-block" ng-click="startCall('video', user, $index)" uib-tooltip="Start Video Call">
+                                        <a class="btn btn-success btn-block" ng-click="startCall('video', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Video Call">
                                             <i class="fa fa-video-camera" aria-hidden="true"></i>
                                         </a>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a class="btn btn-success btn-block" ng-click="startCall('text', user, $index)" uib-tooltip="Send Message">
+                                        <a class="btn btn-success btn-block" ng-click="startCall('text', user, $index)" tooltip-append-to-body="true" uib-tooltip="Send Message">
                                             <i class="fa fa-envelope" aria-hidden="true"></i>
                                         </a>
                                     </div>
@@ -120,22 +120,22 @@
                                     <div class="container-fluid">
                                         <div class="row no-gutter">
                                             <div class="col-sm-3">
-                                                <a class="btn btn-success btn-xs btn-block" ng-click="startCall('voice', user, $index)" uib-tooltip="Start Voice Call">
+                                                <a class="btn btn-success btn-xs btn-block" ng-click="startCall('voice', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Voice Call">
                                                     <i class="fa fa-phone" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                             <div class="col-sm-3">
-                                                <a class="btn btn-success btn-xs btn-block" ng-click="startCall('video', user, $index)" uib-tooltip="Start Video Call">
+                                                <a class="btn btn-success btn-xs btn-block" ng-click="startCall('video', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Video Call">
                                                     <i class="fa fa-video-camera" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                             <div class="col-sm-3">
-                                                <a class="btn btn-success btn-xs btn-block" ng-click="startCall('text', user, $index)" uib-tooltip="Send Message">
+                                                <a class="btn btn-success btn-xs btn-block" ng-click="startCall('text', user, $index)" tooltip-append-to-body="true" uib-tooltip="Send Message">
                                                     <i class="fa fa-envelope" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                             <div class="col-sm-3">
-                                                <a class="btn btn-danger btn-xs btn-block" ng-click="blockUser($index, user)" uib-tooltip="Block User">
+                                                <a class="btn btn-danger btn-xs btn-block" ng-click="blockUser($index, user)" tooltip-append-to-body="true" uib-tooltip="Block User">
                                                     <i class="fa fa-ban" aria-hidden="true"></i>
                                                 </a> 
                                             </div>
