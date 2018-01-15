@@ -28,7 +28,6 @@
 
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script> 
 
 
 
@@ -64,6 +63,9 @@
   <script src="{{ url() }}/public/plugins/angularjs/controllers/verifyCtrl.js"></script>
 
   <script src="{{ url() }}/public/plugins/angularjs/services/profileService.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script> 
+  <script src="{{ url() }}/public/plugins/angularjs/plugins/angular-moment/angular-moment.js"></script>
 
 
   <script src="{{ url() }}/public/js/user-script.js"></script>

@@ -136,7 +136,10 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('delete_account', 'UsersController@delete_account');
 
     Route::get('online_chat', 'UsersController@get_online_chat');
-
+    Route::get('get_private_chat_id', 'GroupChatController@get_private_chat_id');
+    Route::resource('group_chat', 'GroupChatController');
+    Route::resource('group_chat_participants', 'GroupChatParticipantsController');
+    Route::resource('group_chat_messages', 'GroupChatMessagesController');
     
     Route::get('usermates/{username}', 'UsersController@selectmates');
     Route::post('add_friend', 'UserFriendshipController@store');

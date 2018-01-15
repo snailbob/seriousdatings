@@ -1,4 +1,4 @@
-var ngApp = angular.module('seriousDatingApp', ['ngValidate', 'checklist-model', 'ngImgCrop', 'ngBootbox', 'ngToast', 'ui.bootstrap','cp.ngConfirm', 'ui.calendar']);
+var ngApp = angular.module('seriousDatingApp', ['ngValidate', 'checklist-model', 'ngImgCrop', 'ngBootbox', 'ngToast', 'ui.bootstrap','cp.ngConfirm', 'ui.calendar', 'angularMoment']);
 
 ngApp.config(['ngToastProvider', function(ngToastProvider) {
     ngToastProvider.configure({
@@ -359,7 +359,7 @@ ngApp.controller('bodyController', [
     $scope.getDataCount = function () {
         myHttpService.post('messagescount', {
             id: $scope.logged_id,
-            _token: window.csrf_token
+            // _token: window.csrf_token
         }).then(function (res) {
             $scope.count_new_sms = res.data[0].total_count;
         });
@@ -2823,12 +2823,20 @@ ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '
 
 }]);
 
-ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer) {
+ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', 'moment', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer, moment) {
 
     $scope.isLoading = false;
     $scope.data = {};
     $scope.base_url = window.base_url;
+    $scope.activeUser = {};
+    $scope.activeIndex = null;
     $scope.callStarted = false;
+    $scope.chatMessage = {
+        message: '',
+        sending: false
+    };
+    $scope.chatLoading = false;
+    $scope.params = window.uri_get_params;
     $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
 
 
@@ -2891,19 +2899,113 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.startCall = function(type, user, i){
         $scope.callStarted = true;
 
+        if(i != $scope.activeIndex){
+            $scope.activeIndex = i;
+            $scope.activeUser = user;
+        }
+        
         if(type != 'text'){
             $scope.startVideoCall(i, user);
         }
+        else{
+            $scope.getPrivateRoomId(i, user);
+        }
     }
 
+    $scope.flirtPopover = {
+        content: [],
+        templateUrl: 'myFlirtMessageTemplate.html',
+        title: 'Flirt Messages',
+        isOpen: false
+    };
+
+    $scope.emojiPopover = {
+        content: [],
+        templateUrl: 'myEmojiMessageTemplate.html',
+        title: 'Emoji Messages',
+        isOpen: false
+    };
+    
+
+    $scope.getPrivateRoomId = function(i, user){
+        var private_id = $scope.logged_user_info.id * user.id;
+        var data = {
+            private_id: private_id,
+            logged_id: $scope.logged_user_info.id,
+            user_id: user.id
+        };
+        console.log(private_id);
+
+        myHttpService.getWithParams('get_private_chat_id', data).then(function(res){
+            console.log(res.data , typeof(res.data.new));
+
+            if(typeof(res.data.new) === 'undefined'){
+                $scope.getConversations(res.data.id);
+            }
+
+        });
+    }
+
+    $scope.getConversations = function(room_id){
+        $scope.chatLoading = true;
+        myHttpService.get('group_chat/'+room_id).then(function(res){
+            $scope.chatLoading = false;
+
+            console.log(res.data , 'group_chat');
+            $scope.activeUser.private_id = res.data.private_id;
+            $scope.activeUser.room_id = res.data.id;
+            $scope.activeUser.chat = res.data.messages;
+            $scope.activeUser.participants = res.data.messages;
+            $scope.scrollBottom();
+
+        });
+    }
+
+    $scope.backView = function(){
+        $scope.callStarted = false;
+    }
+
+    $scope.sendChat = function(m){
+        var message = angular.copy(m);
+        $scope.chatMessage.sending = true;
+        var newChat = {
+            group_id: $scope.activeUser.room_id,
+            user_id: $scope.logged_user_info.id,
+            message: message,
+            type: 'text',
+        };
+
+        myHttpService.post('group_chat_messages', newChat).then(function(res){
+            $scope.chatMessage.message = '';
+            $scope.chatMessage.sending = false;
+
+            var d = res.data;
+            d.user_info = $scope.logged_user_info;
+
+            $scope.activeUser.chat.push(d);
+            console.log($scope.activeUser.chat, '$scope.activeUser.chat');
+            $scope.scrollBottom();
+        });
+
+
+    }
+
+    $scope.scrollBottom = function(){
+        $timeout(function(){
+            $(document).find(".direct-chat-messages").animate({ scrollTop: $('.direct-chat-messages').prop("scrollHeight")}, 500);
+        }, 500);
+    }
 
     $scope.blockUser = function(i, u){
         console.log(i, u);
         $scope.showToast('You have successfully blocked user.');
         $scope.data.users.splice(i, 1);
 
+        $scope.activeIndex = 0;
+        $scope.activeUser = $scope.data.users[0];
+
         myHttpService.post('block_user', u).then(function(res){
-            console.log()
+            console.log();
         });
     }
 
@@ -2945,6 +3047,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         myHttpService.getWithParams('online_chat', {}).then(function(res){
             $scope.isLoading = false;
             $scope.data = res.data;
+            $scope.flirtPopover.content = res.data.flirt_messages;
             console.log(res.data, 'online_chat');
         });
     }
