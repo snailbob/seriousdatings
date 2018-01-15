@@ -221,24 +221,6 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::post('validateuser', 'liveCHatController@validateUserMoreThanOneDay');
     Route::get('verified', 'VerifyController@send_verification_mail');
-    // Route::get('emailertest', function(){
-    //     $user = User::find(147);
-
-    //     $data = [
-    //         'email' => $user['email'],
-    //         'image' => $user['photo'],
-    //         'name' => $user['firstName'] . ' ' . $user['lastName'],
-    //         'username' => $user['username'],
-    //         'verification_link' => url().'/users/' . $user['id'] . '/verify/' . $user['verify_key'],
-    //         'image_link' => url().'/public/images/logo.jpg',
-    //         'contact_address' => ''
-    //     ];
-    
-    //     return response()->view('email.verification', $data);
-
-    // });
-    
-    
 
 });
 
@@ -273,6 +255,21 @@ Route::group(array('before' => 'admin'), function() {
 
     Route::get('admin/email_template_lists', 'EditableEmailController@showTemplateLists');
     Route::get('admin/add_email_template', 'EditableEmailController@showAddForm');
+     /* END Editable Email Section */
+
+    /* Definable Flirt Message */
+    Route::post('saveFlirtMessage', 'DefinableFlirtController@saveFlirtMessage'); 
+    Route::post('flirtMessage', 'DefinableFlirtController@getFlirtMessage'); 
+    Route::post('updateFlirtMessage', 'DefinableFlirtController@updateFlirtMessage');
+    Route::post('deleteFlirtMessage', 'DefinableFlirtController@deleteFlirtMessage');
+    Route::get('admin/definable_flirt_list', 'DefinableFlirtController@showFlirtMessageLists');
+    Route::get('admin/add_flirt_message', 'DefinableFlirtController@showFlirtMessageForm');
+    /* End Definable Flirt Message */ 
+
+    /* Blog Management */
+    Route::get('admin/blog_management/category', 'BlogManagementController@showCategoryLists');
+    Route::post('addBlogCategory', 'BlogManagementController@addBlogCategory');
+    /* END Blog Management */ 
     
     
     Route::get('admin/templates/{id}/content', 'TemplateController@showContent');
@@ -322,6 +319,7 @@ Route::post('blockUser', 'AdminUserListController@blockUser');
 Route::post('pauseUser', 'AdminUserListController@pauseUser');
 Route::post('deleteUser', 'AdminUserListController@deleteUser');
 /* End of Manage User Actions */
+
 
 
 Route::get('/test', 'AdminDashboardController@getTest');

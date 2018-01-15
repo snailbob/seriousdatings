@@ -11,13 +11,12 @@ $(document).ready(function()
 	{	
 		var data = {
 			name : $(this).closest('tr').children('td:eq(0)').text(),
-			subject : $(this).closest('tr').children('td:eq(1)').text(),
 			content : $(this).closest('tr').children('td.hidden').text()
 		};
 
 		bootbox.dialog({
 			message: data.content,
-			title: data.subject,
+			title: data.name,
 			size: 'large'
 		});
 	});
@@ -28,19 +27,18 @@ $(document).ready(function()
 	{
 		$('#ckeditorModal').modal('show');
 		var	data = { id: $(this).closest('tr').children('td:last-child').attr('id') };
-
+		console.log(data);
 		$.ajax({
 			type: "POST",
-			url: base_url + "/getTemplateById",
+			url: base_url + "/flirtMessage",
 			data: data,
 			cache: false,
 			success: function(value)
 			{
 				console.log(value);
 				$('#id').val(value.id);
-				$('#Name').val(value.template_name);
-				$('#Subject').val(value.template_subject);
-				CKEDITOR.instances['Content'].setData(value.template_content);
+				$('#Name').val(value.name);
+				CKEDITOR.instances['Content'].setData(value.content);
 			},
 			error: function(data,a,b)
 			{
@@ -51,25 +49,25 @@ $(document).ready(function()
 
 	$(document).on('click', '#saveBtn', function()
 	{
-		var template = {};
-		$('form#edit_email :input').each(function()
+		var message = {};
+		$('form#flirt_message :input').each(function()
 		{
-			template[$(this).attr('id')] = $(this).val();
+			message[$(this).attr('id')] = $(this).val();
 		});
-		template['Content'] = CKEDITOR.instances['Content'].getData();
-
+		message['Content'] = CKEDITOR.instances['Content'].getData();
+		console.log(message);
 		$.ajax({
 			type: "POST",
-			url: base_url + '/updateTemplate',
-			data: template,
+			url: base_url + '/updateFlirtMessage',
+			data: message,
 			cache: false,
 			success: function(value)
 			{	
-				$( 'td#' + value.id ).siblings('td:eq(0)').text(value.template_name);
-				$( 'td#' + value.id ).siblings('td:eq(1)').text(value.template_subject);
-				$( 'td#' + value.id ).siblings('td:eq(2)').html(value.ellipse);
-				$( 'td#' + value.id ).siblings('td:eq(3)').text(value.template_content);
-				toastr.info(value.template_name + " was successfully updated!");
+				console.log(value);
+				$( 'td#' + value.id ).siblings('td:eq(0)').text(value.name);
+				$( 'td#' + value.id ).siblings('td:eq(2)').text(value.content);
+				$( 'td#' + value.id ).siblings('td:eq(1)').html(value.ellipse);
+				toastr.info(value.name + " was successfully updated!");
 				$('#ckeditorModal').modal('hide');
 			},
 			error: function(value)
@@ -92,7 +90,7 @@ $(document).ready(function()
 		};
 
 		bootbox.confirm({
-			title: "DELETE TEMPLATE",
+			title: "DELETE MESSAGE",
 			message: "Are you sure to delete template " + data.name.toUpperCase() + "?",
 			buttons: {
 				confirm: {
@@ -108,13 +106,15 @@ $(document).ready(function()
 				if (result) {
 					$.ajax({
 						type: "POST",
-						url: base_url + '/deleteTemplate',
+						url: base_url + '/deleteFlirtMessage',
 						data: data,
 						cache: false,
 						success: function(value)
 						{	
 							console.log(value);
 							$('td#' + value.id).parent().remove();
+							// $('ul#' + value.id + ' a.' + value.anchorClass).remove();
+							// $('ul#' + value.id + ' li.' + value.listClass).append('<a href=\'#\' class="'+ value.anchorClass +'"><i class="fa '+ value.icon +'"></i> ' + value.text + '</a>');
 							toastr.info(value.name + " is successfully deleted");
 						},
 						error: function(data,a,b)

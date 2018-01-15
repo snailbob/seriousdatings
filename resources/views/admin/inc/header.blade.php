@@ -290,10 +290,9 @@
             <li><a href="{{ url('admin/seo/edit/copyright') }}"><i class="fa fa-circle-o"></i> Meta Copyright Attribute </a></li>
           </ul>
         </li>
-        <li><a href="{{ url('admin/calendar') }}"><i class="fa fa-calendar"></i> <span>Events Calendar</span></a></li>
         <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
           <a href="#">
-            <i class="fa fa-user"></i>
+            <i class="fa fa-envelope"></i>
             <span>Email Templates</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -304,6 +303,33 @@
             <li><a href="{{ url('admin/add_email_template') }}"><i class="fa fa-circle-o"></i> <span>Add Email Templates</span></a></li>
           </ul>
         </li>
+        <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+          <a href="#">
+            <i class="fa fa-commenting"></i>
+            <span>Definable Flirt Message</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('admin/definable_flirt_list') }}"><i class="fa fa-circle-o"></i> <span>Flirt Message Lists</span></a></li>
+            <li><a href="{{ url('admin/add_flirt_message') }}"><i class="fa fa-circle-o"></i> <span>Add Flirt Message</span></a></li>
+          </ul>
+        </li>
+        <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+          <a href="#">
+            <i class="fa fa-newspaper-o"></i>
+            <span>Blog Management</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('admin/blog_management/category') }}"><i class="fa fa-circle-o"></i> <span>Category List</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Add Flirt Message</span></a></li>
+          </ul>
+        </li>
+        <li><a href="{{ url('admin/calendar') }}"><i class="fa fa-calendar"></i> <span>Events Calendar</span></a></li>
         <li><a href="{{ url('admin/change_password') }}"><i class="fa fa-user"></i> <span>Change Password</span></a></li>
         <!-- <li><a href="#"><i class="fa fa-envelope-o"></i> <span>Manage Mail</span></a></li> -->
         <li><a href="{{ url('admin/logout') }}"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
