@@ -187,7 +187,7 @@
                             <button id="setup-meeting">Setup New Meeting</button>
                         </section>
 
-                        <table style="width: 100%; display: hidden" id="meetings-list"></table>
+                        <table style="width: 100%; display: none;" id="meetings-list"></table>
                         <table style="width: 100%;">
                             <tr>
                                 <td width="50%">
