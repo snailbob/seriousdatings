@@ -12,6 +12,7 @@ use \App\User;
 use \App\Notification;
 use Auth;
 use DB;
+use App\Http\Controllers\NotiFierLogsController;
 class ProfileController extends Controller
 {
 
@@ -91,7 +92,9 @@ class ProfileController extends Controller
             'type'=>'visit_profile'
         );
         Notification::create($arr);
-        
+
+        /*Added new NotificationLogs*/
+        NotiFierLogsController::createNotification($current_user[0]->id,'visit_profile','added you as friend. Click to visit their profile');
 
         return View::make('profile')->with(array('data'=>$data, 'data_new'=>$data_new,'username'=>$uname, 'currentUser'=>0));
 
@@ -107,7 +110,7 @@ class ProfileController extends Controller
         $top_friend = User::orderByRaw("RAND()")->where('gender', '!=', $current_user_data->gender)->get(); //orderByRaw("RAND()")->
 
         $random_friend = User::orderByRaw("RAND()")->where('gender', '!=', $current_user_data->gender)->limit(8)->get();
-        
+
         // $res_friend = DB::table('users')->where('gender', '!=', $current_user_data[0]->gender)->limit(8)->get();
         // dd($res_friend);
         $friends = array();

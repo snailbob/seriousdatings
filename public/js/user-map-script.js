@@ -91,6 +91,14 @@ function initMap() {
 
 }
 
+ $(document).ready(function () {
+     $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': window.parent.$('meta[name="csrf-token"]').attr('content')
+         }
+     });
+
+ });
 
 function CustomMarker(latlng, map, imageSrc,id,classNameD) {
     this.latlng_ = latlng;
@@ -132,8 +140,8 @@ function getMenus(){
 
 	if (ifClicked) {
 		ifClicked= false;
-		$("#floating-panel").width(52.05).height(40);
-		$("#listOFdata").width(52.05).height(40);
+		$("#floating-panel").width(52.05).height(15);
+		$("#listOFdata").width(52.05).height(15);
 		$("#listOFdata").html("");
 		$("#floating-panel").css("overflow-y","");
         $(".toggle-menus-data").html("Menu");

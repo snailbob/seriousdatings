@@ -90,16 +90,29 @@
 #floating-panel {
     cursor: pointer;
   position: absolute;
-  top: 13px;
+  top: 10px;
   left: 1%;
   z-index: 5;
   background-color: #fff;
-  padding: 5px;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 5px;
-    margin-left: 110px;
+  margin-left: 100px;
+}
+#floating-panel {
+    direction: ltr;
+    overflow: hidden;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    font-family: Roboto, Arial, sans-serif;
+    user-select: none;
+    font-size: 10px;
+    background-color: rgb(255, 255, 255);
+    padding: 8px;
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+    min-width: 20px;
+    font-weight: 500;
 }
 
 #floating-panel{
@@ -107,8 +120,12 @@
        -moz-box-shadow: 0 10px 6px -6px #777;
             box-shadow: 0 6px 6px -6px #777;
 }
+#floating-panel a{
+    text-decoration: none;
+    color: #0a0a0a;
+}
 
-   #floating-panel2 {
+#floating-panel2 {
         position: absolute;
         top: 10px;
         left: 25%;
@@ -120,7 +137,8 @@
         font-family: 'Roboto','sans-serif';
         line-height: 30px;
         padding-left: 10px;
-      }
+}
+
 
 
 
