@@ -3146,7 +3146,7 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
             _getHomepage(data);
         }
 
-        _getHomepage({});
+        // _getHomepage({});
 
         // myHttpService.get('homepage').then(function(res){
         //     $scope.data = res.data;
