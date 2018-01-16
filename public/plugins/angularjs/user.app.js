@@ -3088,6 +3088,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
 
 ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngBootbox', '$httpParamSerializer', function ($scope, $filter, myHttpService, $timeout, $ngBootbox, $httpParamSerializer) {
     $scope.data = {};
+    $scope.theCity = '';
     $scope.isLoading = true;
     $scope.formData = {
         age_from: '21',
@@ -3123,13 +3124,15 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
             myHttpService.post('homepage', d).then(function(res){
                 $scope.data = res.data;
                 $scope.isLoading = false;
-                console.log(res.data, 'res.data homepage');
+                console.log(res.data, d, 'res.data homepage');
             });
         }
 
         var _havePostCode = function(res){
             $scope.formData.zip = res.data.address.postcode;
             var city = (typeof(res.data.address.city) !== 'undefined') ? res.data.address.city : res.data.address.state;
+            $scope.theCity = city;
+
             var data = {
                 lat: res.data.lat,
                 lon: res.data.lon,
