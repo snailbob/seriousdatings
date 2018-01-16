@@ -133,7 +133,7 @@ class UsersController extends Controller {
         if(!empty($blogs)){
             foreach($blogs as $value){
                 $value->content_preview = (strlen($value->blogContent)>150) ? substr($value->blogContent,0,150).'....' : $value->blogContent;
-                $value->date_format = date("d/m/Y",strtotime($value->createdat));
+                $value->date_format = date("d/m/Y",strtotime($value->created_at));
                 $arr[] = $value;
             }
         }
