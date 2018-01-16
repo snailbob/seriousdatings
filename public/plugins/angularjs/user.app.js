@@ -3102,7 +3102,8 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
 
     $scope.htmlToPlaintext = function(text) {
         return text ? String(text).replace(/<[^>]+>/gm, '') : '';
-      }
+    }
+
     $scope.justRegScroll = function(){
         
         if(!$scope.justReg.start){
@@ -3118,23 +3119,92 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
     $scope.getData = function(){
         console.log('search yeah');
 
+        var _getHomepage = function(d){
+            myHttpService.post('homepage', d).then(function(res){
+                $scope.data = res.data;
+                $scope.isLoading = false;
+                console.log(res.data, 'res.data homepage');
+            });
+        }
+
+        var _havePostCode = function(res){
+            $scope.formData.zip = res.data.address.postcode;
+            var city = (typeof(res.data.address.city) !== 'undefined') ? res.data.address.city : res.data.address.state;
+            var data = {
+                lat: res.data.lat,
+                lon: res.data.lon,
+                zip: res.data.address.postcode,
+                country: res.data.address.country,
+                city: city
+            };
+
+            console.log(data, '_havePostCode');
+
+            _getHomepage(data);
+        }
+
+        _getHomepage({});
+
         // myHttpService.get('homepage').then(function(res){
         //     $scope.data = res.data;
         //     console.log(res.data, 'res.data homepage');
+        //     $scope.isLoading = false;
+
         // });
-        var whr = $(document).find('[name="zip"]').data();
 
-        $scope.formData.zip = whr.zip;
-        $scope.formData.age_from = '21';
-        $scope.formData.age_to = '30';
+        // var whr = $(document).find('[name="zip"]').data();
 
-        console.log(whr, 'whehehre');
+        // $scope.formData.zip = whr.zip;
+        // $scope.formData.age_from = '21';
+        // $scope.formData.age_to = '30';
+
+        // console.log(whr, 'whehehre');
         
-        myHttpService.post('homepage', whr).then(function(res){
-            $scope.data = res.data;
-            $scope.isLoading = false;
-            console.log(res.data, 'res.data homepage');
+        // myHttpService.post('homepage', whr).then(function(res){
+        //     $scope.data = res.data;
+        //     $scope.isLoading = false;
+        //     console.log(res.data, 'res.data homepage');
+        // });
+
+        myHttpService.getCustom('https://ipapi.co/json/').then(function(res){
+            console.log(res.data, 'ipapi');
+            var lat = res.data.latitude;
+            var lng = res.data.longitude;
+
+            $scope.formData.age_from = '21';
+            $scope.formData.age_to = '30';
+
+            myHttpService.getCustom('https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lng+'&addressdetails=1').then(function(res){
+                console.log(res.data, 'openstreetmap');
+
+
+                if(typeof(res.data.address.postcode) === 'undefined'){
+                    window.navigator.geolocation.getCurrentPosition(function(pos){
+                        console.log(pos);
+
+                        var coords = pos.coords;
+                        var lat = coords.latitude;
+                        var lng = coords.longitude;
+                        
+                        myHttpService.getCustom('https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lng+'&addressdetails=1').then(function(res){
+                            if(typeof(res.data.address.postcode) !== 'undefined'){
+                                _havePostCode(res);
+                            }
+                        });
+
+                    }); 
+                }
+                else{
+                    _havePostCode(res);
+
+                }
+
+    
+            });
+
+            console.log(res);
         });
+
 
         // myHttpService.getCustom('http://ip-api.com/json').then(function(res){
         //     console.log(res);

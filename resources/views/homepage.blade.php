@@ -262,13 +262,13 @@
                                 <div class="meet-singles font-indie-17">
                                     Meet Singles in
                                     <br>
-                                    <span class="font-opensans-26 red">{{$city}} area</span>
+                                    <span class="font-opensans-26 red">@{{data.city}} area</span>
                                 </div>
                                 <div class="women-percent font-indie-17">
-                                    <span class="font-opensans-26">{{$womenPercent}}%</span> women found in your area
+                                    <span class="font-opensans-26">@{{data.womenPercent}}%</span> women found in your area
                                 </div>
                                 <div class="men-percent font-indie-17">
-                                    <span class="font-opensans-26">{{$menPercent}}%</span> men found in your area
+                                    <span class="font-opensans-26">@{{data.menPercent}}%</span> men found in your area
                                 </div>
                             </div>
                         </div>
