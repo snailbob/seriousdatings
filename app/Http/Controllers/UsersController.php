@@ -133,7 +133,7 @@ class UsersController extends Controller {
         if(!empty($blogs)){
             foreach($blogs as $value){
                 $value->content_preview = (strlen($value->blogContent)>150) ? substr($value->blogContent,0,150).'....' : $value->blogContent;
-                $value->date_format = date("d/m/Y",strtotime($value->createdat));
+                $value->date_format = date("d/m/Y",strtotime($value->created_at));
                 $arr[] = $value;
             }
         }
@@ -212,9 +212,10 @@ class UsersController extends Controller {
         ->where('id', 'not like', $logged_id)
         ->count();
 
+        $flirt_messages = \DB::table('definable_flirt')->get();
 
         $online = User::where('gender', 'not like', $gender)->get();
-        // $me = User::where('gender', 'not like', $gender)->get();
+        $me = User::find($logged_id);
 
         $filter_blocked = $this->filter_blocked($online);
         
@@ -223,6 +224,8 @@ class UsersController extends Controller {
 
         $arr = array(
             'users'=>$format_users,
+            'me'=>$me,
+            'flirt_messages'=>$flirt_messages,
             'count'=>$count,
             // 'user_id'=>$logged_id
         );
@@ -239,6 +242,7 @@ class UsersController extends Controller {
             foreach($users as $r=>$value){
                 $is_blocked = DB::table('user_blocks')->where('user_id', $logged_id)->where('user_blocked_id', $value->id)->count();
                 if(empty($is_blocked)){
+                    $value['chat'] = array();
                     $filtered_users[] = $value;
                 }
             }

@@ -1,4 +1,4 @@
-var ngApp = angular.module('seriousDatingApp', ['ngValidate', 'checklist-model', 'ngImgCrop', 'ngBootbox', 'ngToast', 'ui.bootstrap','cp.ngConfirm', 'ui.calendar']);
+var ngApp = angular.module('seriousDatingApp', ['ngValidate', 'checklist-model', 'ngImgCrop', 'ngBootbox', 'ngToast', 'ui.bootstrap','cp.ngConfirm', 'ui.calendar', 'angularMoment']);
 
 ngApp.config(['ngToastProvider', function(ngToastProvider) {
     ngToastProvider.configure({
@@ -366,7 +366,7 @@ ngApp.controller('bodyController', [
     $scope.getDataCount = function () {
         myHttpService.post('messagescount', {
             id: $scope.logged_id,
-            _token: window.csrf_token
+            // _token: window.csrf_token
         }).then(function (res) {
             $scope.count_new_sms = res.data[0].total_count;
         });
@@ -2830,12 +2830,20 @@ ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '
 
 }]);
 
-ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer) {
+ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', 'moment', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer, moment) {
 
     $scope.isLoading = false;
     $scope.data = {};
     $scope.base_url = window.base_url;
+    $scope.activeUser = {};
+    $scope.activeIndex = null;
     $scope.callStarted = false;
+    $scope.chatMessage = {
+        message: '',
+        sending: false
+    };
+    $scope.chatLoading = false;
+    $scope.params = window.uri_get_params;
     $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
 
 
@@ -2865,6 +2873,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                     btnClass: 'btn-default',
                     action: function(scope, button){
                         $scope.myInterval = 3000;
+                        $(document).find('.experiment-rtc').addClass('hidden');
 
                         $scope.callAudio.pause();
                         $scope.callAudio.currentTime = 0;
@@ -2876,6 +2885,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
 
         $scope.callAudio.onended = function(){
             // alert("The audio has ended");
+            $(document).find('.experiment-rtc').addClass('hidden');
 
             jc.close();
             $ngConfirm({
@@ -2898,19 +2908,134 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.startCall = function(type, user, i){
         $scope.callStarted = true;
 
+        if(i != $scope.activeIndex){
+            $scope.activeIndex = i;
+            $scope.activeUser = user;
+        }
+        
         if(type != 'text'){
             $scope.startVideoCall(i, user);
+
+            if(type == 'video'){
+                var vidlength = $(document).find('video').length;
+                $(document).find('.experiment-rtc').removeClass('hidden');
+
+                if(vidlength == 0){
+                    $(document).find('#setup-meeting').click();
+                }
+
+            }
+        }
+        else{
+            $scope.getPrivateRoomId(i, user);
         }
     }
 
+    $scope.flirtPopover = {
+        content: [],
+        templateUrl: 'myFlirtMessageTemplate.html',
+        title: 'Flirt Messages',
+        isOpen: false
+    };
+
+    $scope.emojiPopover = {
+        content: [],
+        templateUrl: 'myEmojiMessageTemplate.html',
+        title: 'Emoji Messages',
+        isOpen: false
+    };
+
+    $scope.closeAllPopups = function(){
+        $scope.flirtPopover.isOpen = false;
+    }
+    
+    $scope.selectFlirt = function(flirt){
+        $scope.closeAllPopups();
+        console.log(flirt, 'flirt');
+        $scope.chatMessage.message = flirt.content;
+    }
+    
+
+
+    $scope.getPrivateRoomId = function(i, user){
+        var private_id = $scope.logged_user_info.id * user.id;
+        var data = {
+            private_id: private_id,
+            logged_id: $scope.logged_user_info.id,
+            user_id: user.id
+        };
+        console.log(private_id);
+
+        myHttpService.getWithParams('get_private_chat_id', data).then(function(res){
+            console.log(res.data , typeof(res.data.new));
+
+            if(typeof(res.data.new) === 'undefined'){
+                $scope.getConversations(res.data.id);
+            }
+
+        });
+    }
+
+    $scope.getConversations = function(room_id){
+        $scope.chatLoading = true;
+        myHttpService.get('group_chat/'+room_id).then(function(res){
+            $scope.chatLoading = false;
+
+            console.log(res.data , 'group_chat');
+            $scope.activeUser.private_id = res.data.private_id;
+            $scope.activeUser.room_id = res.data.id;
+            $scope.activeUser.chat = res.data.messages;
+            $scope.activeUser.participants = res.data.messages;
+            $scope.scrollBottom();
+
+        });
+    }
+
+    $scope.backView = function(){
+        $scope.callStarted = false;
+    }
+
+    $scope.sendChat = function(m){
+        var message = angular.copy(m);
+        $scope.chatMessage.sending = true;
+        var newChat = {
+            group_id: $scope.activeUser.room_id,
+            user_id: $scope.logged_user_info.id,
+            message: message,
+            type: 'text',
+        };
+
+        myHttpService.post('group_chat_messages', newChat).then(function(res){
+            $scope.chatMessage.message = '';
+            $scope.chatMessage.sending = false;
+
+            var d = res.data;
+            d.user_info = $scope.logged_user_info;
+
+            $scope.activeUser.chat.push(d);
+            console.log($scope.activeUser.chat, '$scope.activeUser.chat');
+            $scope.scrollBottom();
+        });
+
+
+    }
+
+    $scope.scrollBottom = function(){
+        $timeout(function(){
+            $(document).find(".direct-chat-messages").animate({ scrollTop: $('.direct-chat-messages').prop("scrollHeight")}, 500);
+        }, 500);
+    }
 
     $scope.blockUser = function(i, u){
         console.log(i, u);
         $scope.showToast('You have successfully blocked user.');
         $scope.data.users.splice(i, 1);
 
+        $scope.activeIndex = 0;
+        $scope.activeUser = $scope.data.users[0];
+
         myHttpService.post('block_user', u).then(function(res){
-            console.log()
+            console.log();
         });
     }
 
@@ -2952,6 +3077,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         myHttpService.getWithParams('online_chat', {}).then(function(res){
             $scope.isLoading = false;
             $scope.data = res.data;
+            $scope.flirtPopover.content = res.data.flirt_messages;
             console.log(res.data, 'online_chat');
         });
     }
@@ -2969,6 +3095,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
 
 ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngBootbox', '$httpParamSerializer', function ($scope, $filter, myHttpService, $timeout, $ngBootbox, $httpParamSerializer) {
     $scope.data = {};
+    $scope.theCity = '';
     $scope.isLoading = true;
     $scope.formData = {
         age_from: '21',
@@ -2983,7 +3110,8 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
 
     $scope.htmlToPlaintext = function(text) {
         return text ? String(text).replace(/<[^>]+>/gm, '') : '';
-      }
+    }
+
     $scope.justRegScroll = function(){
         
         if(!$scope.justReg.start){
@@ -2999,23 +3127,94 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
     $scope.getData = function(){
         console.log('search yeah');
 
+        var _getHomepage = function(d){
+            myHttpService.post('homepage', d).then(function(res){
+                $scope.data = res.data;
+                $scope.isLoading = false;
+                console.log(res.data, d, 'res.data homepage');
+            });
+        }
+
+        var _havePostCode = function(res){
+            $scope.formData.zip = res.data.address.postcode;
+            var city = (typeof(res.data.address.city) !== 'undefined') ? res.data.address.city : res.data.address.state;
+            $scope.theCity = city;
+
+            var data = {
+                lat: res.data.lat,
+                lon: res.data.lon,
+                zip: res.data.address.postcode,
+                country: res.data.address.country,
+                city: city
+            };
+
+            console.log(data, '_havePostCode');
+
+            _getHomepage(data);
+        }
+
+        // _getHomepage({});
+
         // myHttpService.get('homepage').then(function(res){
         //     $scope.data = res.data;
         //     console.log(res.data, 'res.data homepage');
+        //     $scope.isLoading = false;
+
         // });
-        var whr = $(document).find('[name="zip"]').data();
 
-        $scope.formData.zip = whr.zip;
-        $scope.formData.age_from = '21';
-        $scope.formData.age_to = '30';
+        // var whr = $(document).find('[name="zip"]').data();
 
-        console.log(whr, 'whehehre');
+        // $scope.formData.zip = whr.zip;
+        // $scope.formData.age_from = '21';
+        // $scope.formData.age_to = '30';
+
+        // console.log(whr, 'whehehre');
         
-        myHttpService.post('homepage', whr).then(function(res){
-            $scope.data = res.data;
-            $scope.isLoading = false;
-            console.log(res.data, 'res.data homepage');
+        // myHttpService.post('homepage', whr).then(function(res){
+        //     $scope.data = res.data;
+        //     $scope.isLoading = false;
+        //     console.log(res.data, 'res.data homepage');
+        // });
+
+        myHttpService.getCustom('https://ipapi.co/json/').then(function(res){
+            console.log(res.data, 'ipapi');
+            var lat = res.data.latitude;
+            var lng = res.data.longitude;
+
+            $scope.formData.age_from = '21';
+            $scope.formData.age_to = '30';
+
+            myHttpService.getCustom('https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lng+'&addressdetails=1').then(function(res){
+                console.log(res.data, 'openstreetmap');
+
+
+                if(typeof(res.data.address.postcode) === 'undefined'){
+                    window.navigator.geolocation.getCurrentPosition(function(pos){
+                        console.log(pos);
+
+                        var coords = pos.coords;
+                        var lat = coords.latitude;
+                        var lng = coords.longitude;
+                        
+                        myHttpService.getCustom('https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lng+'&addressdetails=1').then(function(res){
+                            if(typeof(res.data.address.postcode) !== 'undefined'){
+                                _havePostCode(res);
+                            }
+                        });
+
+                    }); 
+                }
+                else{
+                    _havePostCode(res);
+
+                }
+
+    
+            });
+
+            console.log(res);
         });
+
 
         // myHttpService.getCustom('http://ip-api.com/json').then(function(res){
         //     console.log(res);
