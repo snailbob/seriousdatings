@@ -32,7 +32,7 @@ use Mail;
 
 use App\Http\Controllers\DatingPlanController;
 use App\Http\Controllers\AdsSpaceController;
-
+use App\Http\Controllers\NotiFierLogsController;
 
 class UsersController extends Controller {
 
@@ -728,20 +728,18 @@ class UsersController extends Controller {
 
     public function getBodyContents(){
         $logged_id = (Auth::check()) ? Auth::user()->id : '';
-        $notifications = Notification::where('user_id', $logged_id)->orderBy('id', 'DESC')->limit(20)->get();
-        $unread_noti_count = Notification::where('user_id', $logged_id)->where('is_read', '0')->count();
-        $format_noti = $this->format_noti($notifications);
-
         $logged_user_info = (Auth::check()) ? Auth::user() : null;
-        
+
         //get validation of subscription
         $dating_ctrl = new DatingPlanController();
         $subscription_validity = $dating_ctrl->check_subscription_validity();
-        
+
         //get advertisements
         $ads_ctrl = new AdsSpaceController();
         $active_ads = $ads_ctrl->active_ads();
-        
+
+        $format_noti = NotiFierLogsController::formattedNotification();
+        $unread_noti_count = NotiFierLogsController::getCountNotification();
 
         $arr = array(
             'active_ads'=>$active_ads,

@@ -160,7 +160,9 @@ Route::group(['prefix' => 'api'], function () {
     
     Route::post('notifications', 'NotificationController@update');
     
-    
+    /*NEW notification logs*/
+    Route::post('notifications_new', 'NotiFierLogsController@updateRead');
+
     Route::get('movies', 'LikeMoviesController@index');
     Route::post('likemovies', 'LikeMoviesController@store');
     Route::post('dislikemovies', 'LikeMoviesController@destroy');
@@ -208,6 +210,10 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::post('validateuser', 'liveCHatController@validateUserMoreThanOneDay');
     Route::get('verified', 'VerifyController@send_verification_mail');
+
+    /*saving appointment*/
+    Route::post('saveappointment','AppointmentController@saveAppointment');
+
     // Route::get('emailertest', function(){
     //     $user = User::find(147);
 

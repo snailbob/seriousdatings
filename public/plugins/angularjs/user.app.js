@@ -146,6 +146,7 @@ ngApp.controller('bodyController', [
     
     $scope.getData = function(){
         myHttpService.get('body_contents').then(function(res){
+            console.log("res.data.notifications",res.data.notifications);
             $scope.notifications = res.data.notifications;
             $scope.subscription_validity = res.data.subscription_validity;
             $scope.active_ads = res.data.active_ads;
@@ -328,18 +329,24 @@ ngApp.controller('bodyController', [
     };
   
     $scope.viewNoti = function(noti){
-        
-        if(!noti.is_read){
+
+
+        if(!noti.notif_status){
             $scope.unread_noti_count -= 1;
-            myHttpService.post('notifications', {id: noti.id, is_read: 1}).then(function(res){
+            myHttpService.post('notifications_new', {id: noti.notif_id}).then(function(res){
                 console.log(res);
-                noti.is_read = 1;
+
+                noti.notif_status =true;
+                if(res.data ==="1"){
+                    if(noti.notif_type === 'visit_profile' || noti.notif_type === 'add_friend'){
+                        window.location.href = base_url + '/user/profile/'+noti.from_info.username;
+                    }
+                }
+
             });
         }
 
-        if(noti.type == 'visit_profile' || noti.type == 'add_friend'){
-            window.location.href = base_url + '/user/profile/'+noti.from_info.username;
-        }
+
     }
 
     $scope.markAllNotiRead = function(){

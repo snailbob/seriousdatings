@@ -8,7 +8,6 @@ var addAppointMent = function (id) {
         columnClass: 'medium',
         containerFluid: true,
         closeAnimation: 'scale',
-        backgroundDismiss: true,
         theme: 'material',
         type: 'red',
 
@@ -18,8 +17,27 @@ var addAppointMent = function (id) {
                 text: 'Submit',
                 btnClass: 'btn-blue',
                 action: function () {
-                    var dataForm = this.$content.find('#appointment-form').serialize();
-                   console.log("form-ser",name);
+                    var dataForm = this.$content.find('#appointment-form').serializeArray();
+                    var noEmptyField = true;
+                    $(dataForm).each(function(i, field){
+                        if(field.value === ""){
+                            noEmptyField = false;
+                            $("input[name='" +field.name+ "']").css({border: '0 solid #f37736'}).animate({
+                                borderWidth: 3
+                            }, 500);
+
+                            }else{
+                            console.log(field.name);
+                                $(  "input[name='" + field.name + "']").css({border: '0 solid #f37736'}).animate({
+                                    borderWidth: 1
+                                }, 500);
+
+                        }
+                    });
+                    if (noEmptyField === false){
+                            messageDialog('All Fields are required','fa fa-warning')
+                        return false;
+                    }
                     saveAppointment(dataForm);
                 }
             },
@@ -35,14 +53,21 @@ var addAppointMent = function (id) {
                 e.preventDefault();
                 jc.$$formSubmit.trigger('click'); // reference the button and click it
             });
+            this.$content.find('#app_to_id').val(id);
+            var checkTime  = this.$content.find('.time-check').attr('class');
+            $('.'+checkTime).on('change', function() {
+                $('.'+checkTime).not(this).prop('checked', false);
+            });
         }
     });
 
 
 
 }
+
+
 function saveAppointment(dataForm) {
-    var data_link = base_url + '/api/getuserlocation';
+    var data_link = base_url + '/api/saveappointment';
     $.ajax({
         url: data_link,
         dataType: 'json',
@@ -50,12 +75,37 @@ function saveAppointment(dataForm) {
         method: 'POST',
 
     }).done(function (response) {
-
-
+        if(response.trans){
+            messageDialog('Appointment has sent successfully ',
+                            'fa fa-smile-o');
+        }else{
+            messageDialog('Appointment has sent successfully ',
+                'fa fa-frown-o');
+        }
 
     }).fail(function () {
         alert('Something went wrong.');
     });
 }
+
+var messageDialog = function (message,icon) {
+    $.confirm({
+        content: message,
+        icon: icon,
+        theme: 'modern',
+        closeIcon: true,
+        animation: 'scale',
+        type: 'red',
+        buttons: {
+            moreButtons: {
+                text: 'Close',
+                action: function () {
+                }
+            },
+        }
+    });
+}
+
+
 
 
