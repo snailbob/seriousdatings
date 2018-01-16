@@ -2866,6 +2866,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                     btnClass: 'btn-default',
                     action: function(scope, button){
                         $scope.myInterval = 3000;
+                        $(document).find('.experiment-rtc').addClass('hidden');
 
                         $scope.callAudio.pause();
                         $scope.callAudio.currentTime = 0;
@@ -2877,6 +2878,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
 
         $scope.callAudio.onended = function(){
             // alert("The audio has ended");
+            $(document).find('.experiment-rtc').addClass('hidden');
 
             jc.close();
             $ngConfirm({
@@ -2906,6 +2908,16 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         
         if(type != 'text'){
             $scope.startVideoCall(i, user);
+
+            if(type == 'video'){
+                var vidlength = $(document).find('video').length;
+                $(document).find('.experiment-rtc').removeClass('hidden');
+
+                if(vidlength == 0){
+                    $(document).find('#setup-meeting').click();
+                }
+
+            }
         }
         else{
             $scope.getPrivateRoomId(i, user);
@@ -2925,7 +2937,18 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         title: 'Emoji Messages',
         isOpen: false
     };
+
+    $scope.closeAllPopups = function(){
+        $scope.flirtPopover.isOpen = false;
+    }
     
+    $scope.selectFlirt = function(flirt){
+        $scope.closeAllPopups();
+        console.log(flirt, 'flirt');
+        $scope.chatMessage.message = flirt.content;
+    }
+    
+
 
     $scope.getPrivateRoomId = function(i, user){
         var private_id = $scope.logged_user_info.id * user.id;

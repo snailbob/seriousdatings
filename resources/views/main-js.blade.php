@@ -67,6 +67,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script> 
   <script src="{{ url() }}/public/plugins/angularjs/plugins/angular-moment/angular-moment.js"></script>
 
+  @if(request()->segment(1) == 'online_chat')
+    <script src="https://cdn.webrtc-experiment.com/meeting.js"> </script>
+    <script src="{{ url() }}/public/plugins/angularjs/chatroom_rtc.js"> </script>
+  @endif
 
   <script src="{{ url() }}/public/js/user-script.js"></script>
   {{--  <script src="{{ url() }}/public/socketjs/new-chatbox.js"></script>

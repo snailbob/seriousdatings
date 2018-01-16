@@ -8,7 +8,7 @@
 </div>
 
 @include('footer_new')
-@extends('main-js')
+@include('main-js')
 </body>
 
 </html>

@@ -2,8 +2,13 @@
 
 
 @section('form_area')
-
-<div ng-controller="onlineChatController" ng-cloak>
+<script>
+    if(!location.hash.replace('#', '').length) {
+        location.href = location.href.split('#')[0] + '#' + (Math.random() * 100).toString().replace('.', '');
+        location.reload();
+    }
+</script>
+<div ng-controller="onlineChatController" ng-cloak ng-click="closeAllPopups()">
 
     <div class="inner-header calendar-event-banner">
         <div class="container">
@@ -98,7 +103,7 @@
             </div>
 
 
-            <div class="row" ng-if="callStarted">
+            <div class="row" ng-hide="!callStarted">
 
                 <div class="col-md-3">
                     <div class="group-chat-contacts">
@@ -121,35 +126,6 @@
                                             @{{user.myage}} years old
                                         </p>
 
-                                        {{--  <div class="container-fluid">
-                                            <div class="row no-gutter">
-                                                <div class="col-sm-3">
-                                                    <a class="btn btn-success btn-xs btn-block" ng-click="startCall('voice', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Voice Call">
-                                                        <i class="fa fa-phone" aria-hidden="true"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a class="btn btn-success btn-xs btn-block" ng-click="startCall('video', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Video Call">
-                                                        <i class="fa fa-video-camera" aria-hidden="true"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a class="btn btn-success btn-xs btn-block" ng-click="startCall('text', user, $index)" tooltip-append-to-body="true" uib-tooltip="Send Message">
-                                                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    <a class="btn btn-danger btn-xs btn-block" ng-click="blockUser($index, user)" tooltip-append-to-body="true" uib-tooltip="Block User">
-                                                        <i class="fa fa-ban" aria-hidden="true"></i>
-                                                    </a> 
-                                                </div>
-                                            </div>
-                                        </div>  --}}
-
-                                        
-                                        <!-- <p class="small">
-                                            <i>@{{user.city}}</i>
-                                        </p> -->
                                     </div>
                                 </div>
                             </div>
@@ -166,7 +142,7 @@
                         <div class="pull-right text-right">
                             
                             <span ng-if="activeUser.is_online">
-                                <a class="fa-stack fa-lg" tooltip-append-to-body="true" uib-tooltip="Start Video Call" ng-click="startCall('video', activeUser, activeIndex)">
+                                <a class="fa-stack fa-lg setup-meeting" tooltip-append-to-body="true" uib-tooltip="Start Video Call" ng-click="startCall('video', activeUser, activeIndex)">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-video-camera fa-stack-1x fa-inverse"></i>
                                 </a>
@@ -177,11 +153,11 @@
                             </span>
                             
                             <span ng-if="!activeUser.is_online">
-                                <a class="fa-stack fa-lg" tooltip-append-to-body="true">
+                                <a class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x text-muted"></i>
                                     <i class="fa fa-video-camera fa-stack-1x fa-inverse"></i>
                                 </a>
-                                <a class="fa-stack fa-lg" tooltip-append-to-body="true">
+                                <a class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x text-muted"></i>
                                     <i class="fa fa-phone fa-stack-1x fa-inverse"></i>
                                 </a>
@@ -201,6 +177,33 @@
                         <h3>@{{activeUser.name}}</h3>
 
                     </div>
+
+
+                    <!-- just copy this <section> and next script -->
+                    <section class="experiment experiment-rtc hidden">
+                        <section class="hidden">
+                            <h2 style="border: 0; padding-left: .5em;">Wanna try yourself?</h2>
+                            <input type="text" id="meeting-name">
+                            <button id="setup-meeting">Setup New Meeting</button>
+                        </section>
+
+                        <table style="width: 100%; display: hidden" id="meetings-list"></table>
+                        <table style="width: 100%;">
+                            <tr>
+                                <td width="50%">
+                                    {{--  <h2 style="display: block; font-size: 1em; text-align: center;">You!</h2>  --}}
+                                    <div id="local-streams-container"></div>
+                                </td>
+                                <td width="50%" style="background: white;">
+                                    {{--  <h2 style="display: block; font-size: 1em; text-align: center;">Remote Peers</h2>  --}}
+                                    <div id="remote-streams-container"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </section>
+                
+
+
 
                     <div class="direct-chat-messages">
                         <div class="padding-top" ng-if="!activeUser.chat.length && !chatLoading">
@@ -261,10 +264,10 @@
                         <div class="input-group">
                             <input type="text" name="message" placeholder="Type message ..." ng-model="chatMessage.message" class="form-control">
                             <div class="input-group-btn">
-                                <button type="button" class="btn btn-default" uib-popover="@{{emojiPopover.content}}">
+                                {{--  <button type="button" class="btn btn-default" uib-popover="@{{emojiPopover.content}}">
                                     <i class="fa fa-smile-o" aria-hidden="true"></i>
-                                </button>
-                                <button type="button" class="btn btn-default" uib-popover="@{{flirtPopover.content}}">
+                                </button>  --}}
+                                <button type="button" class="btn btn-default" uib-popover-template="flirtPopover.templateUrl" popover-is-open="flirtPopover.isOpen">
                                     <i class="fa fa-comment-o" aria-hidden="true"></i>
                                 </button>
                                 <button type="button" class="btn btn-success" ng-disabled="chatMessage.sending || !chatMessage.message" ng-click="sendChat(chatMessage.message)">
@@ -375,11 +378,15 @@
     </div>
 
     <script type="text/ng-template" id="myFlirtMessageTemplate.html">
-        <div>@{{flirtPopover.content}}</div>
-        <div class="form-group">
-          <label>Popup Title:</label>
-          <input type="text" ng-model="flirtPopover.title" class="form-control">
+        <div>
+            <p><strong>@{{flirtPopover.title}}</strong></p>
+            <div class="clearfix list-group">
+                <a class="list-group-item" ng-click="selectFlirt(flirt)" ng-repeat="flirt in flirtPopover.content">
+                    @{{flirt.content}}
+                </a>
+            </div>
         </div>
+
     </script>
 
     <script type="text/ng-template" id="myEmojiMessageTemplate.html">
