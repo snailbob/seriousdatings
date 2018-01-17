@@ -330,8 +330,8 @@
             <li><a href="{{ url('admin/blog_management/post_lists') }}"><i class="fa fa-circle-o"></i> <span>All Posts</span></a></li>
             <li><a href="{{ url('admin/blog_management/create_post') }}"><i class="fa fa-circle-o"></i> <span>Create Post</span></a></li>
             <li><a href="{{ url('admin/blog_management/category') }}"><i class="fa fa-circle-o"></i> <span>Category Lists</span></a></li>
-            <li><a href="{{ url('admin/blog_management/status') }}"><i class="fa fa-circle-o"></i> <span>Status Lists</span></a></li>
-            <li><a href="{{ url('admin/blog_management/type') }}"><i class="fa fa-circle-o"></i> <span>Type Lists</span></a></li>
+         <!--    <li><a href="{{ url('admin/blog_management/status') }}"><i class="fa fa-circle-o"></i> <span>Status Lists</span></a></li>
+            <li><a href="{{ url('admin/blog_management/type') }}"><i class="fa fa-circle-o"></i> <span>Type Lists</span></a></li> -->
           </ul>
         </li>
         <li><a href="{{ url('admin/calendar') }}"><i class="fa fa-calendar"></i> <span>Events Calendar</span></a></li>
