@@ -3040,7 +3040,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     }
 
     $scope.addUser = function(u){
-        if(!$scope.data.user_id){
+        if(!$scope.data.me.id){
             $.alert({
                 title: 'Opps!',
                 content: 'Please login to add user as friend.',
@@ -3138,6 +3138,8 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
         var _havePostCode = function(res){
             $scope.formData.zip = res.data.address.postcode;
             var city = (typeof(res.data.address.city) !== 'undefined') ? res.data.address.city : res.data.address.state;
+            var city = (typeof(city) === 'undefined') ? res.data.address.suburb : res.data.address.county;
+            
             $scope.theCity = city;
 
             var data = {

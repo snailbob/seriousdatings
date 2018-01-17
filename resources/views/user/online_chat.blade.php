@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>
-                        Online users    
+                        Online Chat    
                     </h1>
                 </div>
             </div>
@@ -109,18 +109,28 @@
                     <div class="group-chat-contacts">
 
                         <div class="list-group">
-                            <div class="list-group-item" ng-class="{'active': $index == activeIndex}" ng-repeat="user in data.users" ng-click="startCall('text', user, $index)">
+                            <div class="list-group-item" ng-class="{'active': $index == activeIndex}" ng-repeat="user in data.users">
 
-                                <div class="media" title="Start instant messaging">
-                                    <div class="media-left">
+                                <div class="media">
+                                    <div class="media-left" ng-click="startCall('text', user, $index)">
                                         <img class="media-object img-circle img-thumbnail" ng-src="@{{user.photo}}" width="45" alt="image">
                                     </div>
                                     <div class="media-body">   
+                                        <div class="pull-right">
+                                            <a class="btn btn-default btn-xs" ng-if="!user.is_friend" ng-click="addUser(user)" tooltip-append-to-body="true" uib-tooltip="Add Friend">
+                                                <i class="fa fa-user-plus fa-fw"></i>
+                                            </a>
+
+                                            <a class="btn btn-danger btn-xs" ng-if="user.is_friend" ng-click="addUser(user)" tooltip-append-to-body="true" uib-tooltip="Remove Friend">
+                                                <i class="fa fa-user-times fa-fw"></i>
+                                            </a>
+                                        </div>
 
 
-                                        <h4 class="media-heading">
 
-                                            <i class="fa fa-circle fa-fw" ng-class="{'text-muted' : !user.is_online, 'text-success' : user.is_online}" aria-hidden="true"></i> @{{user.firstName}} @{{user.lastName}}
+                                        <h4 class="media-heading" ng-click="startCall('text', user, $index)">
+
+                                            <i class="fa fa-circle fa-fw" ng-class="{'text-muted' : !user.is_online, 'text-success' : user.is_online}" aria-hidden="true"></i> @{{user.firstName}}
                                         </h4>
                                         <p class="small">
                                             @{{user.myage}} years old
@@ -190,13 +200,24 @@
                         <table style="width: 100%; display: none;" id="meetings-list"></table>
                         <table style="width: 100%;">
                             <tr>
-                                <td width="50%">
+                                <td width="50%" style="width: 50%;  background: white; vertical-align: top;">
                                     {{--  <h2 style="display: block; font-size: 1em; text-align: center;">You!</h2>  --}}
                                     <div id="local-streams-container"></div>
                                 </td>
-                                <td width="50%" style="background: white;">
+                                <td width="50%" style="width: 50%;  background: white; vertical-align: top;">
                                     {{--  <h2 style="display: block; font-size: 1em; text-align: center;">Remote Peers</h2>  --}}
                                     <div id="remote-streams-container"></div>
+
+                                    <div class="container-fluid">
+                                        <div class="row no-gutter">
+                                            <div class="col-sm-12">
+                                                <img ng-src="@{{ activeUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    
                                 </td>
                             </tr>
                         </table>
@@ -267,7 +288,7 @@
                                 {{--  <button type="button" class="btn btn-default" uib-popover="@{{emojiPopover.content}}">
                                     <i class="fa fa-smile-o" aria-hidden="true"></i>
                                 </button>  --}}
-                                <button type="button" class="btn btn-default" uib-popover-template="flirtPopover.templateUrl" popover-is-open="flirtPopover.isOpen">
+                                <button type="button" class="btn btn-default" uib-popover-template="flirtPopover.templateUrl" popover-is-open="flirtPopover.isOpen" title="Flirt Messages">
                                     <i class="fa fa-comment-o" aria-hidden="true"></i>
                                 </button>
                                 <button type="button" class="btn btn-success" ng-disabled="chatMessage.sending || !chatMessage.message" ng-click="sendChat(chatMessage.message)">
