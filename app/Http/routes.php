@@ -213,31 +213,10 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::post('validateuser', 'liveCHatController@validateUserMoreThanOneDay');
     Route::get('verified', 'VerifyController@send_verification_mail');
-<<<<<<< HEAD
-=======
+
 
     /*saving appointment*/
     Route::post('saveappointment','AppointmentController@saveAppointment');
-
-    // Route::get('emailertest', function(){
-    //     $user = User::find(147);
-
-    //     $data = [
-    //         'email' => $user['email'],
-    //         'image' => $user['photo'],
-    //         'name' => $user['firstName'] . ' ' . $user['lastName'],
-    //         'username' => $user['username'],
-    //         'verification_link' => url().'/users/' . $user['id'] . '/verify/' . $user['verify_key'],
-    //         'image_link' => url().'/public/images/logo.jpg',
-    //         'contact_address' => ''
-    //     ];
-    
-    //     return response()->view('email.verification', $data);
-
-    // });
-    
-    
->>>>>>> origin/master
 
 });
 
