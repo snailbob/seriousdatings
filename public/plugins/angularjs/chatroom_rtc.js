@@ -36,7 +36,7 @@ meeting.onaddstream = function (e) {
 // via: https://github.com/muaz-khan/WebRTC-Experiment/tree/master/websocket-over-nodejs
 meeting.openSignalingChannel = function (onmessage) {
     var channel = location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
-    var websocket = new WebSocket('wss://www.webrtcweb.com:9449');
+    var websocket = new WebSocket('wss://wsnodejs.nodejitsu.com:443'); //wss://www.webrtcweb.com:9449');
     websocket.onopen = function () {
         websocket.push(JSON.stringify({
             open: true,
