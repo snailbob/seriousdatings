@@ -77,11 +77,13 @@
                             <div id="notificationsBody" class="notifications">
                                 <div class="list-group">
                                     <a ng-click="viewNoti(noti)" class="list-group-item text-left" ng-repeat="noti in notifications">
-                                        <small class="pull-right opacity-6">
+                                        <small class="pull-right opacity-6" style="font-size: 12px;">
                                             @{{ noti.ago }}
+                                            <div class="noti-type">@{{ noti.notif_label }}</div>
                                         </small>
                                         <img ng-src="@{{noti.from_info.photo}}" alt="" class="pull-left img-thumbnail img-circle" width="40">
                                         <span ng-class="{'text-strong' : !noti.is_read}">@{{ noti.message }}</span>
+
                                     </a>
                                 </div>
 

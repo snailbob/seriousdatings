@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<!--<li ng-repeat="x in newNotifStore">@{{x}}</li>-->
+<div id="notebooks" >
+    <input type="text" id="query" ng-model="query" placeholder="Search an appointment description"/>
+    <select ng-model="orderList">
+        <option value="appDesc">Desc</option>
+        <option value="appCreated">Newest</option>
+        <option value="appStatus">Status</option>
+    </select>
+    <ul id="notebook_ul">
+
+        <li ng-repeat="notebook in AppointmentList | filter:query | orderBy: orderList">
+            <img ng-src="{{notebook.fromInfo.photo}}" alt="" class="pull-left img-thumbnail img-circle" style="width: 40px;height: 40px;"/>
+            From: {{notebook.fromInfo.firstName}}<br/>
+
+            <small class=" opacity-6" style="font-size: 12px;">
+                Description: {{notebook.appDesc}}<br/>
+                Days: {{notebook.aapDays}}
+            </small>
+            <br/>
+            <small class=" opacity-6" style="font-size: 8px;">
+                Tap view more datails...
+            </small>
+            <div class="right top">
+                <small class="pull-right opacity-6" style="font-size: 12px;">
+                {{notebook.appCreated}}
+                </small>
+
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+</body>
+</html>

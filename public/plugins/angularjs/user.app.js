@@ -337,14 +337,13 @@ ngApp.controller('bodyController', [
                 console.log(res);
 
                 noti.notif_status =true;
-                if(res.data ==="1"){
-                    if(noti.notif_type === 'visit_profile' || noti.notif_type === 'add_friend'){
-                        window.location.href = base_url + '/user/profile/'+noti.from_info.username;
-                    }
-                }
 
             });
         }
+
+        $timeout(function(){
+                $scope.notifActions(noti.notif_type,noti);
+        }, 200);
 
 
     }
@@ -358,6 +357,52 @@ ngApp.controller('bodyController', [
             });
         });
     }
+
+    /*START KRAM*/
+    $scope.notifActions = function(type,data){
+        switch (type) {
+            case 'visit_profile':
+                window.location.href = base_url + '/user/profile/'+data.from_info.username;
+                break;
+            case 'APPOINTMENT':
+                $scope.viewAppointment();
+                break;
+            default:
+
+        }
+
+    };
+
+    $scope.viewAppointment = function () {
+        myHttpService.get('getAppoinment').then(function(res){
+            $scope.asyncAppointment(res.data.appointment);
+
+        });
+    };
+
+
+    $scope.asyncAppointment = function (data) {
+
+        $ngConfirm({
+            title: 'My Appointments',
+            contentUrl: base_url+'/public/js/appointment/appointment-list-layout.html',
+            columnClass: 'medium', // to make the width wider.
+            animation: 'zoom',
+            backgroundDismiss: true,
+            theme: 'material',
+            type: 'red',
+            onScopeReady: function ($scope) {
+
+                // $scope.newNotifStore = data;
+                $scope.AppointmentList = data;
+                $scope.orderList = "appCreated";
+            }
+        })
+
+    };
+
+    /*END KRAM*/
+
 
     /* 
     MARK 2017-11-27

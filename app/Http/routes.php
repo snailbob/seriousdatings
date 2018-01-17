@@ -216,6 +216,7 @@ Route::group(['prefix' => 'api'], function () {
 
     /*saving appointment*/
     Route::post('saveappointment','AppointmentController@saveAppointment');
+    Route::get('getAppoinment','AppointmentController@getAppointment');
 
     // Route::get('emailertest', function(){
     //     $user = User::find(147);

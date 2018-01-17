@@ -54,22 +54,41 @@ class NotiFierLogsController extends Controller
         $new_value = array();
         $format = array();
         foreach (self::getMyNotification() as $key => $value){
-            $status = $value->notif_status == null ? false : true;
             $new_value['from_info'] = User::find($value->notif_from);
             $new_value['to'] = $value->notif_to;
-            $new_value['notif_type'] = $value->notif_type;
+            $new_value['notif_type'] =$value->notif_type;
             $new_value['message'] = $value->notif_desc;
             $new_value['ago'] = self::time_elapsed_string($value->notif_date);
             $new_value['notif_id'] = $value->notif_id;
-            $new_value['notif_status'] = $status;
+            $new_value['notif_status'] = self::statusType($value->notif_status);
+            $new_value['notif_label'] = self::notifTypeLabel($value->notif_type);
             $format[] = $new_value;
         }
         return $format;
     }
 
+
     public function updateRead(Request $request){
         $id = $request->input('id');
         return NotificationLogs::where('notif_id',$id)->update(['notif_status'=>'R']);
+    }
+
+
+    public static function statusType($type){
+        return $type == null ? false : true;
+    }
+
+
+    public static function notifTypeLabel ($type){
+            switch ($type){
+                case 'APPOINTMENT':
+                    return 'Appointment';
+                    break;
+                case 'visit_profile':
+                    return 'Visited Profile';
+                default:
+                    return "";
+            }
     }
 
 
