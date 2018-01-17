@@ -50,8 +50,6 @@
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     CKEDITOR.replace('editor1')
-    //bootstrap WYSIHTML5 - text editor
-    $('.textarea').wysihtml5()
   })
 </script>   
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

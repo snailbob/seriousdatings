@@ -41,9 +41,6 @@
                 <td id="{{ $category->id }}">
                   <div class="btn-group pull-right table-action custom"> <a class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-pencil"></i> Action <span class="caret"></span> </a>
                     <ul class="dropdown-menu">
-                      <li class="viewBtn">
-                        <a href='#'> <i class="fa fa-eye"></i> View</a>
-                      </li>
                       <li class="editBtn">
                         <a href='#'> <i class="fa fa-edit"></i> Edit</a>
                       </li>

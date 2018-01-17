@@ -325,8 +325,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('admin/blog_management/category') }}"><i class="fa fa-circle-o"></i> <span>Category List</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Add Flirt Message</span></a></li>
+            <li><a href="{{ url('admin/blog_management/post_lists') }}"><i class="fa fa-circle-o"></i> <span>All Posts</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Create Post</span></a></li>
+            <li><a href="{{ url('admin/blog_management/category') }}"><i class="fa fa-circle-o"></i> <span>Category Lists</span></a></li>
           </ul>
         </li>
         <li><a href="{{ url('admin/calendar') }}"><i class="fa fa-calendar"></i> <span>Events Calendar</span></a></li>

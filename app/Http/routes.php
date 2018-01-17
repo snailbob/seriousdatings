@@ -121,19 +121,6 @@ Route::post('login_facebook', 'UsersController@login_facebook');
 
 Route::get('user_session', 'AboutYourDateController@userSession');
 
-// Route::get('test_email', function(){
-
-//         $data = []; //$request->input(); //response()->json($request->input());   
-//         $data['invited_by'] = Auth::user()->firstName;
-//         $data['link'] = url();
-//         $data['button_text'] = 'Join Now';
-
-//         $email_to_send = 'asd@sdf.com';// $data['email'];
-
-
-//         return View::make('email/invite_friend')->with($data);
-// });
-
 Route::group(['prefix' => 'api'], function () {
 
     Route::get('body_contents', 'UsersController@getBodyContents');
@@ -255,7 +242,7 @@ Route::group(array('before' => 'admin'), function() {
 
     Route::get('admin/email_template_lists', 'EditableEmailController@showTemplateLists');
     Route::get('admin/add_email_template', 'EditableEmailController@showAddForm');
-     /* END Editable Email Section */
+    /* END Editable Email Section */
 
     /* Definable Flirt Message */
     Route::post('saveFlirtMessage', 'DefinableFlirtController@saveFlirtMessage'); 
@@ -267,8 +254,17 @@ Route::group(array('before' => 'admin'), function() {
     /* End Definable Flirt Message */ 
 
     /* Blog Management */
+    Route::get('admin/blog_management/post_lists', 'BlogManagementController@showPostLists');
+    Route::get('admin/blog_management/post/{id}', 'BlogManagementController@showPostById')->name('PostById');
+    Route::post('getPost', 'BlogManagementController@getPost');
+    Route::post('deletePost', 'BlogManagementController@deletePost');
+
+    //category list
     Route::get('admin/blog_management/category', 'BlogManagementController@showCategoryLists');
     Route::post('addBlogCategory', 'BlogManagementController@addBlogCategory');
+    Route::post('editBlogCategory', 'BlogManagementController@editBlogCategory');
+    Route::post('deleteCategory', 'BlogManagementController@deleteCategory');
+
     /* END Blog Management */ 
     
     
