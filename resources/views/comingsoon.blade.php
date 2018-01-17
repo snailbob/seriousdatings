@@ -16,6 +16,7 @@
 
     <!--     Fonts     -->
     <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
+    {!! HTML::style('public/css/font-awesome/font-awesome.min.css') !!}
     <link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 
 </head>

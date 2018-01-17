@@ -247,21 +247,6 @@
         @endif
 
     </div>
-
-    <!--<div class="container" style="margin-bottom: 4%; margin-top: 1%;">
-
-        <div class="row">
-
-            <div class="col-md-12">
-
-    <!-- Here was the menu--
-
-    </div>
-
-</div>
-
-</div>-->
-
 </div>
 
 
@@ -307,8 +292,6 @@
                     <div class="lovers-match notify-target-username" style="text-transform:uppercase">Loading</div>
 
                     <div class="breaf-name notify-mesage">Loading</div>
-
-                    <!--<div class="review-match">Review your <span>Match FREE</span></div>-->
 
                     <hr />
 

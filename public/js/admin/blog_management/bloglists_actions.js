@@ -12,8 +12,7 @@ $(document).ready(function()
 			id: $(this).closest('tr').children('td:last-child').attr('id')
 		};
 		$('#ckeditorModal').modal('show');
-		console.log(data);
-
+		
 		$.ajax({
 			type: "POST",
 			url: base_url + "/getPost",
@@ -21,7 +20,6 @@ $(document).ready(function()
 			cache: false,
 			success: function(data)
 			{
-				console.log(data);
 				$.each(data, function( index, value ) {
 					$('#' + index).val(value);
 				});
@@ -32,7 +30,6 @@ $(document).ready(function()
 			},
 			error: function(value)
 			{
-				console.log(value);
 			}
 		});
 
@@ -45,8 +42,7 @@ $(document).ready(function()
 			id: $(this).closest('tr').children('td:last-child').attr('id'),
 			name: $(this).closest('tr').children('td:first').text() 
 		};
-		console.log(data);
-
+		
 		bootbox.confirm({
 			title: "DELETE MESSAGE",
 			message: "Are you sure to delete category " + data.name.toUpperCase() + "?",
@@ -69,13 +65,11 @@ $(document).ready(function()
 						cache: false,
 						success: function(value)
 						{	
-							console.log(value);
 							$('td#' + value.id).parent().remove();
 							toastr.info(value.blogTitle + " is successfully deleted");
 						},
 						error: function(data,a,b)
 						{
-							console.log(data,a,b);
 						}
 					});
 				}

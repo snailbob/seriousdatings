@@ -11,7 +11,7 @@ $(document).ready(function()
 	{
 		bootbox.confirm({
 			message: "<form>\
-			Category name:<input type='text' class='form-control' id='category_name' />\
+			Type name:<input type='text' class='form-control' id='type_name' />\
 			</form>",
 			buttons: {
 				confirm: {
@@ -28,8 +28,8 @@ $(document).ready(function()
 				{
 					$.ajax({
 						type: 'POST',
-						url: base_url + '/addBlogCategory',
-						data: { name: $('#category_name').val() },
+						url: base_url + '/addBlogType',
+						data: { name: $('#type_name').val() },
 						cache: false,
 						success: function(value)
 						{
@@ -49,7 +49,7 @@ $(document).ready(function()
 							row += "</div>";
 							row += "</td>";
 							row += "</tr>"							;
-							$('#category_tbl > tbody:last').append(row); 
+							$('#type_tbl > tbody:last').append(row); 
 						},
 						error: function(value)
 						{
@@ -71,9 +71,9 @@ $(document).ready(function()
 		};
 		
 		bootbox.confirm({
-			title: "Edit category",
+			title: "Edit type",
 			message: "<form>\
-			Category name:<input type='text' class='form-control' id='category_name' value='"+ data.name +"' />\
+			type name:<input type='text' class='form-control' id='type_name' value='"+ data.name +"' />\
 			</form>",
 			buttons: {
 				confirm: {
@@ -90,8 +90,8 @@ $(document).ready(function()
 				{
 					$.ajax({
 						type: 'POST',
-						url: base_url + '/editBlogCategory',
-						data: { name: $('#category_name').val(), id: data.id },
+						url: base_url + '/editBlogType',
+						data: { name: $('#type_name').val(), id: data.id },
 						cache: false,
 						success: function(value)
 						{
@@ -122,7 +122,7 @@ $(document).ready(function()
 		
 		bootbox.confirm({
 			title: "DELETE MESSAGE",
-			message: "Are you sure to delete category " + data.name.toUpperCase() + "?",
+			message: "Are you sure to delete type " + data.name.toUpperCase() + "?",
 			buttons: {
 				confirm: {
 					label: 'Yes',
@@ -137,7 +137,7 @@ $(document).ready(function()
 				if (result) {
 					$.ajax({
 						type: "POST",
-						url: base_url + '/deleteCategory',
+						url: base_url + '/deleteType',
 						data: data,
 						cache: false,
 						success: function(value)

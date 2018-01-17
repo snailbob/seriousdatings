@@ -54,7 +54,8 @@
         
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,700,600' rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans:400,400i,700,700i" rel="stylesheet">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        
+        {!! HTML::script('public/css/font-awesome/font-awesome.min.css') !!}
         
 
 

@@ -274,6 +274,21 @@ Route::group(array('before' => 'admin'), function() {
     Route::post('editBlogCategory', 'BlogManagementController@editBlogCategory');
     Route::post('deleteCategory', 'BlogManagementController@deleteCategory');
 
+    // status list
+    Route::get('admin/blog_management/status', 'BlogManagementController@showStatusLists');
+    Route::post('addBlogStatus', 'BlogManagementController@addBlogStatus');
+    Route::post('editBlogStatus', 'BlogManagementController@editBlogStatus');
+    Route::post('deleteStatus', 'BlogManagementController@deleteStatus');
+
+    // type list
+    Route::get('admin/blog_management/type', 'BlogManagementController@showTypeLists');
+    Route::post('addBlogType', 'BlogManagementController@addBlogType');
+    Route::post('editBlogType', 'BlogManagementController@editBlogType');
+    Route::post('deleteType', 'BlogManagementController@deleteType');
+
+    // create post
+     Route::get('admin/blog_management/create_post', 'BlogManagementController@showCreatePost');
+     Route::post('savePost', 'BlogManagementController@savePost');
     /* END Blog Management */ 
     
     
