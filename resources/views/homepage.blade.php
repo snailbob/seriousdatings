@@ -7,10 +7,12 @@
 '; ?>
 
 @include('header_new')
-@include('header_bottom')
-@section('css-scripts')
 {!! HTML::style('public/css/homepage-style.css') !!}
-@endsection
+
+@include('header_bottom')
+
+{{--  @section('css-scripts')
+@endsection  --}}
 
     <script src="https://connect.facebook.net/en_US/all.js"></script>
 
@@ -111,7 +113,7 @@
                                             {{ $video->title }}
                                         </a>
                                         @endif  --}}
-                                        <a class="cd-btn" href="{{$video->link}}">
+                                        <a class="cd-btn" href="{{url().'/users/create'}}">
                                             {{ $video->title }}
                                         </a>
                                 </div>
@@ -260,13 +262,13 @@
                                 <div class="meet-singles font-indie-17">
                                     Meet Singles in
                                     <br>
-                                    <span class="font-opensans-26 red">{{$city}} area</span>
+                                    <span class="font-opensans-26 red">@{{data.city}} area</span>
                                 </div>
                                 <div class="women-percent font-indie-17">
-                                    <span class="font-opensans-26">{{$womenPercent}}%</span> women found in your area
+                                    <span class="font-opensans-26">@{{data.womenPercent}}%</span> women found in your area
                                 </div>
                                 <div class="men-percent font-indie-17">
-                                    <span class="font-opensans-26">{{$menPercent}}%</span> men found in your area
+                                    <span class="font-opensans-26">@{{data.menPercent}}%</span> men found in your area
                                 </div>
                             </div>
                         </div>
@@ -332,7 +334,7 @@
                                                 <div>
                                                     <ul class="">
                                                         <li ng-repeat="online in data.online">
-                                                            <a ng-href="@{{ base_url+'/profile/' + online.username}}">
+                                                            <a ng-href="@{{ base_url+'/users/create'}}">
                                                                 <div class="img-container" ng-style="{'background-image': 'url('+online.photo+')'}">
                                                                 </div>
                                                                 <span class="user-name">@{{ online.firstName }} @{{ online.lastName }}</span>

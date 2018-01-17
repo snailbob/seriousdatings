@@ -136,7 +136,10 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('delete_account', 'UsersController@delete_account');
 
     Route::get('online_chat', 'UsersController@get_online_chat');
-
+    Route::get('get_private_chat_id', 'GroupChatController@get_private_chat_id');
+    Route::resource('group_chat', 'GroupChatController');
+    Route::resource('group_chat_participants', 'GroupChatParticipantsController');
+    Route::resource('group_chat_messages', 'GroupChatMessagesController');
     
     Route::get('usermates/{username}', 'UsersController@selectmates');
     Route::post('add_friend', 'UserFriendshipController@store');
@@ -160,7 +163,9 @@ Route::group(['prefix' => 'api'], function () {
     
     Route::post('notifications', 'NotificationController@update');
     
-    
+    /*NEW notification logs*/
+    Route::post('notifications_new', 'NotiFierLogsController@updateRead');
+
     Route::get('movies', 'LikeMoviesController@index');
     Route::post('likemovies', 'LikeMoviesController@store');
     Route::post('dislikemovies', 'LikeMoviesController@destroy');
@@ -208,6 +213,31 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::post('validateuser', 'liveCHatController@validateUserMoreThanOneDay');
     Route::get('verified', 'VerifyController@send_verification_mail');
+<<<<<<< HEAD
+=======
+
+    /*saving appointment*/
+    Route::post('saveappointment','AppointmentController@saveAppointment');
+
+    // Route::get('emailertest', function(){
+    //     $user = User::find(147);
+
+    //     $data = [
+    //         'email' => $user['email'],
+    //         'image' => $user['photo'],
+    //         'name' => $user['firstName'] . ' ' . $user['lastName'],
+    //         'username' => $user['username'],
+    //         'verification_link' => url().'/users/' . $user['id'] . '/verify/' . $user['verify_key'],
+    //         'image_link' => url().'/public/images/logo.jpg',
+    //         'contact_address' => ''
+    //     ];
+    
+    //     return response()->view('email.verification', $data);
+
+    // });
+    
+    
+>>>>>>> origin/master
 
 });
 

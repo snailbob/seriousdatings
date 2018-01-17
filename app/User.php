@@ -60,6 +60,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'howAmbitiousAreYou',
         'whatIsTheLongestRelationshipYouHaveBeenIn',
         'yourBirthFatherAndMotherAre',
+        'fatherBirthPlace',
+        'motherBirthPlace',
         'partnerDependability',
         'sexualCompatibility',
         'friendshipBetweenPartners',

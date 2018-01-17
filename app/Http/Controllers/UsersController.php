@@ -32,7 +32,7 @@ use Mail;
 
 use App\Http\Controllers\DatingPlanController;
 use App\Http\Controllers\AdsSpaceController;
-
+use App\Http\Controllers\NotiFierLogsController;
 
 class UsersController extends Controller {
 
@@ -133,7 +133,7 @@ class UsersController extends Controller {
         if(!empty($blogs)){
             foreach($blogs as $value){
                 $value->content_preview = (strlen($value->blogContent)>150) ? substr($value->blogContent,0,150).'....' : $value->blogContent;
-                $value->date_format = date("d/m/Y",strtotime($value->createdat));
+                $value->date_format = date("d/m/Y",strtotime($value->created_at));
                 $arr[] = $value;
             }
         }
@@ -212,9 +212,10 @@ class UsersController extends Controller {
         ->where('id', 'not like', $logged_id)
         ->count();
 
+        $flirt_messages = \DB::table('definable_flirt')->get();
 
         $online = User::where('gender', 'not like', $gender)->get();
-        // $me = User::where('gender', 'not like', $gender)->get();
+        $me = User::find($logged_id);
 
         $filter_blocked = $this->filter_blocked($online);
         
@@ -223,6 +224,8 @@ class UsersController extends Controller {
 
         $arr = array(
             'users'=>$format_users,
+            'me'=>$me,
+            'flirt_messages'=>$flirt_messages,
             'count'=>$count,
             // 'user_id'=>$logged_id
         );
@@ -239,6 +242,7 @@ class UsersController extends Controller {
             foreach($users as $r=>$value){
                 $is_blocked = DB::table('user_blocks')->where('user_id', $logged_id)->where('user_blocked_id', $value->id)->count();
                 if(empty($is_blocked)){
+                    $value['chat'] = array();
                     $filtered_users[] = $value;
                 }
             }
@@ -728,20 +732,18 @@ class UsersController extends Controller {
 
     public function getBodyContents(){
         $logged_id = (Auth::check()) ? Auth::user()->id : '';
-        $notifications = Notification::where('user_id', $logged_id)->orderBy('id', 'DESC')->limit(20)->get();
-        $unread_noti_count = Notification::where('user_id', $logged_id)->where('is_read', '0')->count();
-        $format_noti = $this->format_noti($notifications);
-
         $logged_user_info = (Auth::check()) ? Auth::user() : null;
-        
+
         //get validation of subscription
         $dating_ctrl = new DatingPlanController();
         $subscription_validity = $dating_ctrl->check_subscription_validity();
-        
+
         //get advertisements
         $ads_ctrl = new AdsSpaceController();
         $active_ads = $ads_ctrl->active_ads();
-        
+
+        $format_noti = NotiFierLogsController::formattedNotification();
+        $unread_noti_count = NotiFierLogsController::getCountNotification();
 
         $arr = array(
             'active_ads'=>$active_ads,
