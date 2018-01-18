@@ -380,7 +380,7 @@ $scope.notifActions = function(type,data){
 |  Function viewAppointment, asyncAppointment,readDetaildAppointment,reusableNgConfirmAppointment
 |	  Author: MARK
 |  Purpose:  ViewList,ViewDetails,Reply Appointment
-|  Returns:objectArray inspired to FRONTEND API STRUCTURE  minimize load
+|  Returns:objectArray inspired to FRONTEND API STRUCTURE  minimize load pages
 *------------------------------------------------------*/
 
     $scope.viewAppointment = function () {
