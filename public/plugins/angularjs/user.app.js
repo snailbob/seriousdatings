@@ -2901,7 +2901,7 @@ ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '
 
 }]);
 
-ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', 'moment', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer, moment) {
+ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', 'moment', '$interval', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer, moment, $interval) {
 
     $scope.isLoading = false;
     $scope.data = {};
@@ -2909,6 +2909,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.activeUser = {};
     $scope.activeIndex = null;
     $scope.callStarted = false;
+    $scope.videoShown = false;
     $scope.chatMessage = {
         message: '',
         sending: false
@@ -2944,7 +2945,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                     btnClass: 'btn-default',
                     action: function(scope, button){
                         $scope.myInterval = 3000;
-                        $(document).find('.experiment-rtc').addClass('hidden');
+                        // $(document).find('.experiment-rtc').addClass('hidden');
+                        $scope.videoShown = false;
 
                         $scope.callAudio.pause();
                         $scope.callAudio.currentTime = 0;
@@ -2956,7 +2958,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
 
         $scope.callAudio.onended = function(){
             // alert("The audio has ended");
-            $(document).find('.experiment-rtc').addClass('hidden');
+            // $(document).find('.experiment-rtc').addClass('hidden');
+            $scope.videoShown = false;
 
             jc.close();
             $ngConfirm({
@@ -2989,7 +2992,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
 
             if(type == 'video'){
                 var vidlength = $(document).find('video').length;
-                $(document).find('.experiment-rtc').removeClass('hidden');
+                // $(document).find('.experiment-rtc').removeClass('hidden');
+                $scope.videoShown = true;
 
                 if(vidlength == 0){
                     $(document).find('#setup-meeting').click();
@@ -3023,7 +3027,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.selectFlirt = function(flirt){
         $scope.closeAllPopups();
         console.log(flirt, 'flirt');
-        $scope.chatMessage.message = flirt.content;
+        // $scope.chatMessage.message = flirt.content;
+        $scope.sendChat(flirt.content);
     }
     
 
@@ -3051,13 +3056,17 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         $scope.chatLoading = true;
         myHttpService.get('group_chat/'+room_id).then(function(res){
             $scope.chatLoading = false;
+            var oldLength = $scope.activeUser.chat.length;
 
             console.log(res.data , 'group_chat');
             $scope.activeUser.private_id = res.data.private_id;
             $scope.activeUser.room_id = res.data.id;
             $scope.activeUser.chat = res.data.messages;
             $scope.activeUser.participants = res.data.messages;
-            $scope.scrollBottom();
+
+            if($scope.activeUser.chat.length != oldLength){
+                $scope.scrollBottom();
+            }
 
         });
     }
@@ -3111,7 +3120,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     }
 
     $scope.addUser = function(u){
-        if(!$scope.data.user_id){
+        if(!$scope.data.me.id){
             $.alert({
                 title: 'Opps!',
                 content: 'Please login to add user as friend.',
@@ -3154,6 +3163,12 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     }
     var init = function(){
         $scope.getData();
+
+        $interval(function(){
+            if($scope.activeUser.id){
+                $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
+            }
+        }, 7000);
     }
     init();
 
@@ -3209,6 +3224,8 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
         var _havePostCode = function(res){
             $scope.formData.zip = res.data.address.postcode;
             var city = (typeof(res.data.address.city) !== 'undefined') ? res.data.address.city : res.data.address.state;
+            var city = (typeof(city) === 'undefined') ? res.data.address.suburb : res.data.address.county;
+            
             $scope.theCity = city;
 
             var data = {
