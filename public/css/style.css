@@ -8051,8 +8051,9 @@ button.list-group-item {
 	overflow: auto;
   }
 
-  .modal-body.group-chat-contacts{
-	  height: auto;
+  .gclist-modal.group-chat-contacts{
+	  height: 300px;
+	  overflow: auto;
   }
   .group-chat-contacts .list-group-item{
 	  cursor: pointer;
