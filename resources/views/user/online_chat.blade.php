@@ -239,6 +239,45 @@
                                 <td width="50%" style="width: 50%;  background: white; vertical-align: top;">
                                     {{--  <h2 style="display: block; font-size: 1em; text-align: center;">You!</h2>  --}}
                                     <div id="local-streams-container"></div>
+
+                                    <div class="container-fluid" ng-if="videoShown">
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <div class="row no-gutter">
+                                                    <div class="col-sm-3">
+
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-volume-down" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-volume-up" aria-hidden="true"></i>
+                                                        </button>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-microphone-slash" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <button type="button" class="btn btn-danger btn-block">
+                                                            Drop
+                                                        </button>
+                                                    </div>
+                                                    
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </td>
                                 <td width="50%" style="width: 50%;  background: white; vertical-align: top;">
                                     {{--  <h2 style="display: block; font-size: 1em; text-align: center;">Remote Peers</h2>  --}}
@@ -249,6 +288,11 @@
                                             <div class="col-sm-12">
                                                 <img ng-src="@{{ activeUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
                                             </div>
+
+                                            <div class="col-sm-12" ng-repeat="invitedUser in activeUser.invitedToChat">
+                                                <img ng-src="@{{ invitedUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
+                                            </div>
+
                                         </div>
                                     </div>
 
@@ -354,7 +398,7 @@
                                     <div class="col-sm-6">
                                         <img ng-src="@{{ activeUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
                                     </div>
-                                    <div class="col-sm-6" ng-repeat="i in [0, 1, 2]">
+                                    <div class="col-sm-6" ng-if="!activeUser.invitedToChat.length" ng-repeat="i in [0, 1, 2]">
 
                                         <div class="hvrbox">
                                             <img src="{{ url().'/public/images/img_placeholder_avatar.jpg' }}" alt="img" class="hvrbox-layer_bottom">
@@ -369,44 +413,11 @@
 
                                     </div>
 
-                                    
-                                </div>
-                            </div>
-
-                            <div class="container-fluid" ng-if="videoShown">
-                                <div class="row">
-
-                                    <div class="col-sm-12">
-                                        <div class="row no-gutter">
-                                            <div class="col-sm-3">
-
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-volume-down" aria-hidden="true"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-sm-3">
-
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-volume-up" aria-hidden="true"></i>
-                                                </button>
-
-                                            </div>
-
-                                            <div class="col-sm-3">
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-microphone-slash" aria-hidden="true"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <button type="button" class="btn btn-danger btn-block">
-                                                    Drop
-                                                </button>
-                                            </div>
-                                            
-                                        </div>
-
-
+                                    <div class="col-sm-6" ng-repeat="invitedUser in activeUser.invitedToChat">
+                                        <img ng-src="@{{ invitedUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="" ng-click="inviteToChat()" title="Change Users">
                                     </div>
+
+                                    
                                 </div>
                             </div>
 

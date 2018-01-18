@@ -2904,27 +2904,58 @@ ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '
 
 ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items', 'myHttpService', function ($scope, $uibModalInstance, items, myHttpService) {
     $scope.items = items;
-    $scope.questions = [];
+    $scope.users = items.users;
     $scope.isLoading = false;
-    $scope.currentIndex = 0;
-    $scope.currentQuestion = {};
-    $scope.showAnswer = false;
+    $scope.selectedCount = 0;
+    $scope.selectedUser = [];
+
+
+    console.log(items, 'items');
     
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
 
+    $scope.submit = function () {
+        var _invited = [];
+
+        $scope.users.forEach(function(val, i){
+            console.log(val, i);
+            if(val.selected){
+                _invited.push(val);
+            }
+        });
+
+        $uibModalInstance.close(_invited);
+    };
+   
+    $scope.selectUser = function(u, i){
+
+        if(u.selected){
+            u.selected = false;
+            $scope.selectedCount--;
+            return false;
+        }
+        else if(!u.selected && $scope.selectedCount > 2){
+            $scope.showToast('Group chat particapants full.', 'danger');
+            return false;
+        }
+        
+
+        if(!u.selected){
+            u.selected = true;
+            $scope.selectedCount++;
+            // $scope.selectedUser.push(u);     
+        }
+        
+        console.log($scope.selectedCount, u);
+
+    }
 
     $scope.getData = function(){
         $scope.isLoading = true;
-        console.log(window.base_url + '/public/plugins/angularjs/data/ready_questions.json');
-        myHttpService.get('get_readydate_question').then(function(res){
-            $scope.questions = res.data;        
-            $scope.isLoading = false;
-            
-            $scope.currentQuestion = res.data[$scope.currentIndex];
-            console.log(res, 'asdfsdf');
-        });
+
+        
     }
 
     var init = function(){
@@ -2933,7 +2964,7 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
     init();
 }]);
 
-ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', 'moment', '$interval', '$uibModal', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer, moment, $interval, $uibModal) {
+ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', 'moment', '$interval', '$uibModal', '$log', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer, moment, $interval, $uibModal, $log) {
 
     $scope.isLoading = false;
     $scope.data = {};
@@ -2946,12 +2977,19 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         message: '',
         sending: false
     };
+    $scope.invitedToChat = [];
     $scope.chatLoading = false;
     $scope.params = window.uri_get_params;
     $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
 
 
     $scope.inviteToChat = function (items) {
+        var _toItem = {
+            users: angular.copy($scope.data.users),
+            activeUser: $scope.activeUser,
+            activeIndex: $scope.activeIndex
+        };
+
         console.log(items, 'wow');
         // var parentElem = parentSelector ?
             // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
@@ -2967,14 +3005,19 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
             // appendTo: parentElem,
             resolve: {
                 items: function () {
-                    return items ? items : {};
+                    return _toItem; //items ? items : {};
                 }
             }
         });
 
-        modalInstance.result.then(function (userAction) {
+        modalInstance.result.then(function (res) {
+            $log.info(res);
+
+            $scope.activeUser.invitedToChat = res;
+
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
+
         });
     };
 
