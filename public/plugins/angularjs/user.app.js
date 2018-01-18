@@ -2901,7 +2901,39 @@ ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '
 
 }]);
 
-ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', 'moment', '$interval', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer, moment, $interval) {
+
+ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items', 'myHttpService', function ($scope, $uibModalInstance, items, myHttpService) {
+    $scope.items = items;
+    $scope.questions = [];
+    $scope.isLoading = false;
+    $scope.currentIndex = 0;
+    $scope.currentQuestion = {};
+    $scope.showAnswer = false;
+    
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+
+    $scope.getData = function(){
+        $scope.isLoading = true;
+        console.log(window.base_url + '/public/plugins/angularjs/data/ready_questions.json');
+        myHttpService.get('get_readydate_question').then(function(res){
+            $scope.questions = res.data;        
+            $scope.isLoading = false;
+            
+            $scope.currentQuestion = res.data[$scope.currentIndex];
+            console.log(res, 'asdfsdf');
+        });
+    }
+
+    var init = function(){
+        $scope.getData();
+    }
+    init();
+}]);
+
+ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', 'moment', '$interval', '$uibModal', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer, moment, $interval, $uibModal) {
 
     $scope.isLoading = false;
     $scope.data = {};
@@ -2918,6 +2950,33 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.params = window.uri_get_params;
     $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
 
+
+    $scope.inviteToChat = function (items) {
+        console.log(items, 'wow');
+        // var parentElem = parentSelector ?
+            // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+        var modalInstance = $uibModal.open({
+            animation: true,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'inviteToChatModal.html',
+            controller: 'ModalInviteToChatCtrl',
+            // controllerAs: '$scope',
+            size: 'sm',
+            windowClass: 'compatible-modal',
+            // appendTo: parentElem,
+            resolve: {
+                items: function () {
+                    return items ? items : {};
+                }
+            }
+        });
+
+        modalInstance.result.then(function (userAction) {
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
 
     $scope.startVideoCall = function(i, user){
         $scope.currentUser = user;
