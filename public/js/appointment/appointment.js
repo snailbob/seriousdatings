@@ -5,11 +5,10 @@ var addAppointMent = function (id) {
         contentClass:'unique-id-content',
         content: 'url:'+base_url+'/public/js/appointment/appointment-layout.html',
         animation: 'scale',
-        columnClass: 'medium',
+        columnClass: 'small',
         containerFluid: true,
         closeAnimation: 'scale',
         theme: 'material',
-        type: 'red',
 
         buttons: {
 

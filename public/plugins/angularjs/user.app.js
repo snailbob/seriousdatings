@@ -404,7 +404,7 @@ $scope.notifActions = function(type,data){
     };
 
     $scope.readDetaildAppointment  = function (AppointmentData) {
-        $scope.reusableNgConfirmAppointment('Appointment',
+        $scope.reusableNgConfirmAppointment('',
             'appointment-view-layout.html',
             AppointmentData,
             function($scope){
@@ -420,7 +420,6 @@ $scope.notifActions = function(type,data){
             animation: 'zoom',
             backgroundDismiss: true,
             theme: 'material',
-            type: 'red',
             onScopeReady: callBack,
         })
 

@@ -10,15 +10,28 @@
         </head>
 <body>
 
-
-<h2>Appointment Form</h2>
-<form  id="appointment-form" method="post">
+<div class="appointment-banner"><p class="inside-banner">Appointment Form</p></div>
+<div class="view-appForm">
+<form  id="appointment-form" method="post" >
     <input type="hidden" value="" name="app_to_id" id="app_to_id">
+
+    <div class="row">
+        <div class="col-xs-5">
+                <label>
+                    <img ng-src="{{AppointmentDetail.fromInfo.photo}}" alt="" class="pull-left img-thumbnail img-circle" style="width: 60px;height: 60px;"/>
+
+
+                </label>
+            <span class="help-block"><small>  From: {{AppointmentDetail.fromInfo.firstName}}   {{AppointmentDetail.fromInfo.lastName}}</small></span>
+        </div>
+
+    </div>
+
     <div class="form-group has-warning">
         <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
             Location of appointment
         </label>
-        <input type="text" class="form-control input-sm" name="streetAdd" id="inputWarning" placeholder="Enter ..." required="required">
+        <input type="text" class="form-control input-sm" name="streetAdd" value="{{AppointmentDetail.appStreet}}" id="inputWarning"  readonly="readonly"/>
         <span class="help-block"><small>Street Address</small></span>
     </div>
 
@@ -27,7 +40,7 @@
         <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
             Address
         </label>
-        <input type="text" class="form-control input-sm" name="streetAddLine" id="inputWarning" placeholder="Enter ...">
+        <input type="text" class="form-control input-sm" name="streetAddLine" value="{{AppointmentDetail.appStreetl2}}" id="inputWarning" readonly="readonly"/>
         <span class="help-block"><small>Street Address Line2</small></span>
     </div>
 
@@ -40,7 +53,7 @@
                 <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
                     Address
                 </label>
-                <input type="text" class="form-control input-sm" name="Appcity" id="inputWarning" placeholder="Enter ...">
+                <input type="text" class="form-control input-sm" name="Appcity" value="{{AppointmentDetail.appCity}}" id="inputWarning" readonly="readonly">
                 <span class="help-block"><small>City</small></span>
             </div>
 
@@ -51,7 +64,7 @@
                 <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
                     Address
                 </label>
-                <input type="text" class="form-control input-sm" name="stateProvince" id="inputWarning" placeholder="Enter ...">
+                <input type="text" class="form-control input-sm" name="stateProvince" value="{{AppointmentDetail.appState}}" id="inputWarning" readonly="readonly">
                 <span class="help-block"><small>State / Province</small></span>
             </div>
         </div>
@@ -66,7 +79,7 @@
                 <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
                     Address
                 </label>
-                <input type="text" class="form-control input-sm" name="postalZipCode" id="inputWarning" placeholder="Enter ...">
+                <input type="text" class="form-control input-sm" name="postalZipCode" value="{{AppointmentDetail.appZipcode}}" id="inputWarning" readonly="readonly">
                 <span class="help-block"><small>Postal /Zipcode</small></span>
             </div>
 
@@ -77,125 +90,67 @@
                 <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
                     Address
                 </label>
-                <input type="text" class="form-control input-sm" name="AppCountry" id="inputWarning" placeholder="Enter ...">
+                <input type="text" class="form-control input-sm" name="AppCountry" id="inputWarning" value="{{AppointmentDetail.appCountry}}" readonly="readonly">
                 <span class="help-block"><small>Country</small></span>
             </div>
         </div>
     </div>
     <hr>
 
-    <h2>What days work best for you? </h2>
+    <h2>Day </h2>
     <div class="row">
         <div class="col-xs-3">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="Monday" name="day[]"> Monday
+                    {{AppointmentDetail.appDays}}
                 </label>
             </div>
         </div>
-        <div class="col-xs-4">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="Tuesday" name="day[]"> Tuesday
-                </label>
-            </div>
-        </div>
-        <div class="col-xs-5">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="Wednesday" name="day[]"> Wednesday
-                </label>
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-xs-3">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="Thursday" name="day[]"> Thursday
-                </label>
-            </div>
-        </div>
-        <div class="col-xs-4">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="Friday" name="day[]"> Friday
-                </label>
-            </div>
-        </div>
-        <div class="col-xs-5">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox"  value="Saturday" name="day[]"> Saturday
-                </label>
-            </div>
-        </div>
     </div>
 
     <hr>
-    <h2>What time works best for you? </h2>
+    <h2>Time of the Day. </h2>
     <div class="row">
         <div class="col-xs-3">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" value="Morning" name="time[]" class="time-check" > Morning
+                   {{AppointmentDetail.appTime}}
                 </label>
             </div>
         </div>
-        <div class="col-xs-4">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="Afternoon" name="time[]" class="time-check" > Afternoon
-                </label>
-            </div>
-        </div>
-        <div class="col-xs-5">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="Evening" name="time[]" class="time-check" > Evening
-                </label>
-            </div>
-        </div>
+
     </div>
     <hr>
-    <h2>Any specific date/time?</h2>
+    <h2>Specific date/time</h2>
+
     <div class="row">
-
-        <div class="col-xs-4">
-
-            <div class="form-group has-warning">
-                <label class="control-label" for="inputWarning"><i class="fa fa-calendar"></i>
-                    date
+        <div class="col-xs-3">
+            <div class="checkbox">
+                <label>
+                    {{AppointmentDetail.appSpecdateTime}}
                 </label>
-                <input type="date" class="form-control input-sm" name="specificDate" id="inputWarning" placeholder="Enter ...">
-                <span class="help-block"><small>your date</small></span>
-            </div>
-
-
-        </div>
-        <div class="col-xs-5">
-            <div class="form-group has-warning">
-                <label class="control-label" for="inputWarning"><i class="fa fa-clock-o"></i>
-                    at
-                </label>
-                <input type="time" class="form-control input-sm" name="specificTime" id="inputWarning" placeholder="Enter ...">
-                <span class="help-block"><small>time</small></span>
             </div>
         </div>
+
     </div>
 
-    <div class="form-group has-warning">
-        <label class="control-label" for="inputWarning"><i class="fa fa-check-square-o"></i>
-            Remarks/Description/Purpose/
-        </label>
-        <textarea class="form-control" rows="3" name="rdpField" placeholder="Enter ..."></textarea>
-        <span class="help-block"><small>Details of appointment here</small></span>
+    <h2>Remarks/Description/Purpose/</h2>
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="checkbox">
+                <label>
+                    {{AppointmentDetail.appDesc}}
+                </label>
+            </div>
+        </div>
+
     </div>
+
 
 
 </form>
-
+</div>
 
 
 </body>

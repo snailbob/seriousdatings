@@ -69,7 +69,20 @@ class AppointmentController extends Controller
             $new_value['appDesc'] = $value->app_desc;
             $new_value['appCreated'] = NotiFierLogsController::time_elapsed_string($value->app_created);
             $new_value['appStatus'] = self::readUnread($value->app_status);
-            $new_value['aapDays'] = $value->app_days;
+            $new_value['appDays'] = $value->app_days;
+
+            /*Address and Time*/
+            $new_value['appStreet'] = $value->app_street;
+            $new_value['appStreetl2'] = $value->app_street_l2;
+            $new_value['appCity'] = $value->app_city;
+            $new_value['appState'] = $value->app_state;
+            $new_value['appZipcode'] = $value->app_zipcode;
+            $new_value['appCountry'] = $value->app_country;
+            $new_value['appDays'] = $value->app_days;
+            $new_value['appTime'] = $value->app_time;
+            $new_value['appSpecdateTime'] = date('l jS \of F Y h:i:s A',strtotime($value->app_specdateTime));
+
+
             $format[] = $new_value;
         }
         return $format;

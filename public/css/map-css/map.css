@@ -338,3 +338,62 @@ a.profile-link {
 .fmpapfilter-width-form{
     width: 150px;
 }
+
+
+.appointment-banner{
+    background: url(../../images/ribbon-appoinmebt.png) no-repeat;
+    height:50px;
+    width: 100%;
+    color: #fff;
+}
+
+.appointment-banner{
+
+    margin-left: -20px;
+}
+.appointment-banner{
+    position: absolute;
+
+}
+
+.appointment-banner:before,.appointment-banner:after {
+    content:'';
+    display: inline-block;
+    position:absolute;
+    top: 0;
+
+    height: 100%;
+    background:inherit;
+    background-position:100% 100%;
+}
+.appointment-banner:before {
+    left:-20px;
+    background-position: 0 100%;
+}
+.view-appForm{
+    background-color: rgba(0, 0, 0, 0.05);
+    background-image:
+            linear-gradient(
+                    90deg,
+                    #d71818 10px,
+                    #EEE 10px,
+                    #EEE 11px,
+                    transparent 11px);
+    padding: 10px 15px 10px 25px;
+    border: 1px solid #CCC;
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5);
+    margin-bottom: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    border-radius: 3px;
+
+}
+.inside-banner{
+    margin-left: 20%;
+    margin-top: 1%;
+
+}
+.view-appForm form{
+    margin-top:10%;
+}
