@@ -355,7 +355,18 @@
                                         <img ng-src="@{{ activeUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
                                     </div>
                                     <div class="col-sm-6" ng-repeat="i in [0, 1, 2]">
-                                        <img src="{{ url().'/public/images/img_placeholder_avatar.jpg' }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
+
+                                        <div class="hvrbox">
+                                            <img src="{{ url().'/public/images/img_placeholder_avatar.jpg' }}" alt="img" class="hvrbox-layer_bottom">
+                                            <div class="hvrbox-layer_top">
+                                                <div class="hvrbox-text">
+                                                    <button class="btn btn-default btn-block" ng-click="inviteToChat()">
+                                                        Invite
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                     
@@ -433,6 +444,8 @@
           <input type="text" ng-model="emojiPopover.title" class="form-control">
         </div>
     </script>
+
+    @include('user.shared.invite_to_onlinechat')
 
 </div>
 
