@@ -8,6 +8,8 @@
   
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+  <meta http-equiv="Content-Type" content="text/html" charset=UTF-8" />
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{ url() }}/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -41,26 +43,26 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ url() }}/public/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="{{ url() }}/public/dist/css/skins/_all-skins.min.css">
+   folder instead of downloading all of them to reduce the load. -->
+   <link rel="stylesheet" href="{{ url() }}/public/dist/css/skins/_all-skins.min.css">
 
-  <!-- Custom style -->
-  <link rel="stylesheet" href="{{ url() }}/public/css/app.css">
+   <!-- Custom style -->
+   <link rel="stylesheet" href="{{ url() }}/public/css/app.css">
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+<![endif]-->
 
-  <!-- Toastr -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-  <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<!-- Google Font -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-  <script>
+<script>
     // get uri segments and params for angular use
     var uri_1 = "{{ request()->segment(1) }}";
     var uri_2 = "{{ request()->segment(2) }}";
@@ -75,112 +77,112 @@
 
 </head>
 <body class="hold-transition skin-red-light sidebar-mini">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="{{ url().'/admin'}}" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>S</b>D</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Serious</b>Datings</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
+    <header class="main-header">
+      <!-- Logo -->
+      <a href="{{ url().'/admin'}}" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>S</b>D</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>Serious</b>Datings</span>
       </a>
+      <!-- Header Navbar: style can be found in header.less -->
+      <nav class="navbar navbar-static-top">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+          <span class="sr-only">Toggle navigation</span>
+        </a>
 
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ url() }}/public/images/new_logo.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{ Auth::user()->firstName}} {{ Auth::user()->lastName}}</span>
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img src="{{ url() }}/public/images/new_logo.png" class="user-image" alt="User Image">
+                <span class="hidden-xs">{{ Auth::user()->firstName}} {{ Auth::user()->lastName}}</span>
+              </a>
+              <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                  <img src="{{ url() }}/public/images/new_logo.png" class="img-circle" alt="User Image">
+
+                  <p>
+                    Administrator
+                    <small>Account</small>
+                  </p>
+                </li>
+                <!-- Menu Footer-->
+                <li class="user-footer">
+                  {{--  <div class="pull-left">
+                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  </div>  --}}
+                  <div class="pull-right">
+                    <a href="{{ url('admin/logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <!-- Control Sidebar Toggle Button -->
+            {{--  <li>
+              <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            </li>  --}}
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+      <!-- sidebar: style can be found in sidebar.less -->
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+          <div class="pull-left image">
+            <img src="{{ url() }}/public/images/new_logo.png" class="img-circle" alt="User Image">
+          </div>
+          <div class="pull-left info">
+            <p>{{ Auth::user()->firstName}} {{ Auth::user()->lastName}}</p>
+            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          </div>
+        </div>
+        <!-- search form -->
+        {{--  <form action="#" method="get" class="sidebar-form">
+          <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+          </div>
+        </form>  --}}
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+          <li class="header">MAIN NAVIGATION</li>
+          <li><a href="{{ url('admin') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+          <li><a target="_blank" href="{{ url() }}"><i class="fa fa-external-link"></i> <span>Super Access</span></a></li>
+
+          <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+            <a href="#">
+              <i class="fa fa-user"></i>
+              <span>User</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
             </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              <li class="user-header">
-                <img src="{{ url() }}/public/images/new_logo.png" class="img-circle" alt="User Image">
-
-                <p>
-                  Administrator
-                  <small>Account</small>
-                </p>
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                {{--  <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>  --}}
-                <div class="pull-right">
-                  <a href="{{ url('admin/logout') }}" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
+            <ul class="treeview-menu">
+              <li><a href="{{ url('admin/users') }}"><i class="fa fa-circle-o"></i> <span>All Users Management</span></a></li>
+              <li><a href="{{ url('admin/users/cat/verified') }}"><i class="fa fa-circle-o"></i> <span>Active Users Management</span></a></li>
+              <li><a href="{{ url('admin/users/cat/notverified') }}"> <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Inactive Users Management</span></a></li>
+              <li><a href="{{ url('admin/users/cat/men') }}"><i class="fa fa-circle-o"></i> <span>Non-User Management</span></a></li>
             </ul>
           </li>
-          <!-- Control Sidebar Toggle Button -->
-          {{--  <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>  --}}
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="{{ url() }}/public/images/new_logo.png" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>{{ Auth::user()->firstName}} {{ Auth::user()->lastName}}</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-      <!-- search form -->
-      {{--  <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>  --}}
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
-        <li><a href="{{ url('admin') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a target="_blank" href="{{ url() }}"><i class="fa fa-external-link"></i> <span>Super Access</span></a></li>
-       
-        <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
-          <a href="#">
-            <i class="fa fa-user"></i>
-            <span>User</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ url('admin/users') }}"><i class="fa fa-circle-o"></i> <span>All Users Management</span></a></li>
-            <li><a href="{{ url('admin/users/cat/verified') }}"><i class="fa fa-circle-o"></i> <span>Active Users Management</span></a></li>
-            <li><a href="{{ url('admin/users/cat/notverified') }}"> <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Inactive Users Management</span></a></li>
-            <li><a href="{{ url('admin/users/cat/men') }}"><i class="fa fa-circle-o"></i> <span>Non-User Management</span></a></li>
-          </ul>
-        </li>
-       
-       
 
-        <li><a href="{{ url('admin/demographic') }}"><i class="fa fa-map"></i> <span>Demographic Report</span></a></li>
-        <li><a href="{{ url('admin/monthlypayment') }}"><i class="fa fa-usd"></i> <span>Monthly Payments Reports</span></a></li>
-        
+
+
+          <li><a href="{{ url('admin/demographic') }}"><i class="fa fa-map"></i> <span>Demographic Report</span></a></li>
+          <li><a href="{{ url('admin/monthlypayment') }}"><i class="fa fa-usd"></i> <span>Monthly Payments Reports</span></a></li>
+
         <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-picture-o"></i>
@@ -290,8 +292,48 @@
             <li><a href="{{ url('admin/seo/edit/copyright') }}"><i class="fa fa-circle-o"></i> Meta Copyright Attribute </a></li>
           </ul>
         </li>
-
-
+        <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+          <a href="#">
+            <i class="fa fa-envelope"></i>
+            <span>Email Templates</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('admin/email_template_lists') }}"><i class="fa fa-circle-o"></i> <span>Email Template Lists</span></a></li>
+            <li><a href="{{ url('admin/add_email_template') }}"><i class="fa fa-circle-o"></i> <span>Add Email Templates</span></a></li>
+          </ul>
+        </li>
+        <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+          <a href="#">
+            <i class="fa fa-commenting"></i>
+            <span>Definable Flirt Message</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('admin/definable_flirt_list') }}"><i class="fa fa-circle-o"></i> <span>Flirt Message Lists</span></a></li>
+            <li><a href="{{ url('admin/add_flirt_message') }}"><i class="fa fa-circle-o"></i> <span>Add Flirt Message</span></a></li>
+          </ul>
+        </li>
+        <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+          <a href="#">
+            <i class="fa fa-newspaper-o"></i>
+            <span>Blog Management</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('admin/blog_management/post_lists') }}"><i class="fa fa-circle-o"></i> <span>All Posts</span></a></li>
+            <li><a href="{{ url('admin/blog_management/create_post') }}"><i class="fa fa-circle-o"></i> <span>Create Post</span></a></li>
+            <li><a href="{{ url('admin/blog_management/category') }}"><i class="fa fa-circle-o"></i> <span>Category Lists</span></a></li>
+         <!--    <li><a href="{{ url('admin/blog_management/status') }}"><i class="fa fa-circle-o"></i> <span>Status Lists</span></a></li>
+            <li><a href="{{ url('admin/blog_management/type') }}"><i class="fa fa-circle-o"></i> <span>Type Lists</span></a></li> -->
+          </ul>
+        </li>
         <li><a href="{{ url('admin/calendar') }}"><i class="fa fa-calendar"></i> <span>Events Calendar</span></a></li>
         <li><a href="{{ url('admin/change_password') }}"><i class="fa fa-user"></i> <span>Change Password</span></a></li>
         <!-- <li><a href="#"><i class="fa fa-envelope-o"></i> <span>Manage Mail</span></a></li> -->

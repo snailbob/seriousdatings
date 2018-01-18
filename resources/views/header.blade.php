@@ -22,9 +22,10 @@
 {!! HTML::script('public/js/jquery.min1.js') !!}
 {!! HTML::script('public/js/jquery.vortex.min.js') !!}
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+{!! HTML::script('public/js/googleapi/jquery.min.js') !!}
+{!! HTML::script('public/js/jsdelivr/jquery.validate.min.js') !!}
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> --> 
+<!-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script> -->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
 {!! HTML::script('public/js/bootstrap.min.js') !!}
 

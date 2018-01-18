@@ -256,8 +256,15 @@
 <!-- FastClick -->
 <script src="{{ url() }}/bower_components/fastclick/lib/fastclick.js"></script>
 
+<script src="{{ url() }}/bower_components/ckeditor/ckeditor.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="{{ url() }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.js"></script>
+
 
 
 

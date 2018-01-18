@@ -8,17 +8,7 @@
 <link rel="stylesheet" type="text/css" href="css/newstyleuserprofile.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-<!--<script type="text/javascript">
-function googleTranslateElementInit() {
-new google.translate.TranslateElement({pageLanguage: '',includedLanguages: 'en,de,es,fr,it,pt,ar,ja,ko,zh,nl,cs,hr,eo,et,ka,el,hu,id,ga,ja,ko,pt,ru,sv,th,uk,ur,uz,sr,iw,fy,da,kk,hy,tl,fi,hi,lv,lt,fa,pl,ro,tr,sk,sl,af,da',  layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-}
 
-window.setInterval(function(){
-     var lang = $(".goog-te-menu-value span:first").text();
-    
-},5000);
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
 <style>
 .goog-te-gadget-simple {display: block;
     width: 100%;
@@ -49,8 +39,6 @@ window.setInterval(function(){
     <div class="container">
     <div class="row">
     <div class="col-md-8">
-    <!--<div class="right">Translate to your language</div>
-     -->
       
       </div>
       <div class="col-md-4">

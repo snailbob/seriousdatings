@@ -1,3 +1,4 @@
+{{ !! dd('dsa') !!}}
 <div class="sidebar clearfix">
     <div class="sidebar-nav navbar-collapse">
         <div class="media user-media bg-dark dker" style="padding:0px;color:#fff">
@@ -82,6 +83,7 @@
                     <li><a href="{{ url('/') }}/admin/pages/create">Add Website Content</a></li>
                 </ul>
             </li>
+            <li><a href="#"><i class="fa fa-sign-out fa-fw"></i>Editable Email Templates</li>
             <li> <a href="{{ url('/') }}/admin/change_password"><i class="fa fa-sign-out fa-fw"></i>&nbsp;&nbsp;&nbsp;Change Password</a></li>
             <li> <a href="{{ url('/') }}/admin/logout"><i class="fa fa-sign-out fa-fw"></i>&nbsp;&nbsp;&nbsp;Logout</a></li>
             <li> <a href="{{ url('/') }}/admin/calendar"><i class="fa fa-calendar fa-fw"></i>&nbsp;&nbsp;&nbsp;Manage Calendar</a></li>

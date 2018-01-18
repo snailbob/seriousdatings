@@ -214,28 +214,10 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('validateuser', 'liveCHatController@validateUserMoreThanOneDay');
     Route::get('verified', 'VerifyController@send_verification_mail');
 
+
     /*saving appointment*/
     Route::post('saveappointment','AppointmentController@saveAppointment');
     Route::get('getAppoinment','AppointmentController@getAppointment');
-
-    // Route::get('emailertest', function(){
-    //     $user = User::find(147);
-
-    //     $data = [
-    //         'email' => $user['email'],
-    //         'image' => $user['photo'],
-    //         'name' => $user['firstName'] . ' ' . $user['lastName'],
-    //         'username' => $user['username'],
-    //         'verification_link' => url().'/users/' . $user['id'] . '/verify/' . $user['verify_key'],
-    //         'image_link' => url().'/public/images/logo.jpg',
-    //         'contact_address' => ''
-    //     ];
-    
-    //     return response()->view('email.verification', $data);
-
-    // });
-    
-    
 
 });
 
@@ -261,6 +243,55 @@ Route::group(array('before' => 'admin'), function() {
 
         return redirect(url() . '/admin/users/' . $id);
     });
+
+    /* Editable Email Section */
+    Route::post('saveTemplate', 'EditableEmailController@saveTemplate');
+    Route::post('getTemplateById', 'EditableEmailController@getTemplateById');
+    Route::post('updateTemplate', 'EditableEmailController@updateTemplate');
+    Route::post('deleteTemplate', 'EditableEmailController@deleteTemplate');
+
+    Route::get('admin/email_template_lists', 'EditableEmailController@showTemplateLists');
+    Route::get('admin/add_email_template', 'EditableEmailController@showAddForm');
+    /* END Editable Email Section */
+
+    /* Definable Flirt Message */
+    Route::post('saveFlirtMessage', 'DefinableFlirtController@saveFlirtMessage'); 
+    Route::post('flirtMessage', 'DefinableFlirtController@getFlirtMessage'); 
+    Route::post('updateFlirtMessage', 'DefinableFlirtController@updateFlirtMessage');
+    Route::post('deleteFlirtMessage', 'DefinableFlirtController@deleteFlirtMessage');
+    Route::get('admin/definable_flirt_list', 'DefinableFlirtController@showFlirtMessageLists');
+    Route::get('admin/add_flirt_message', 'DefinableFlirtController@showFlirtMessageForm');
+    /* End Definable Flirt Message */ 
+
+    /* Blog Management */
+    Route::get('admin/blog_management/post_lists', 'BlogManagementController@showPostLists');
+    Route::get('admin/blog_management/post/{id}', 'BlogManagementController@showPostById')->name('PostById');
+    Route::post('getPost', 'BlogManagementController@getPost');
+    Route::post('deletePost', 'BlogManagementController@deletePost');
+
+    //category list
+    Route::get('admin/blog_management/category', 'BlogManagementController@showCategoryLists');
+    Route::post('addBlogCategory', 'BlogManagementController@addBlogCategory');
+    Route::post('editBlogCategory', 'BlogManagementController@editBlogCategory');
+    Route::post('deleteCategory', 'BlogManagementController@deleteCategory');
+
+    // status list
+    Route::get('admin/blog_management/status', 'BlogManagementController@showStatusLists');
+    Route::post('addBlogStatus', 'BlogManagementController@addBlogStatus');
+    Route::post('editBlogStatus', 'BlogManagementController@editBlogStatus');
+    Route::post('deleteStatus', 'BlogManagementController@deleteStatus');
+
+    // type list
+    Route::get('admin/blog_management/type', 'BlogManagementController@showTypeLists');
+    Route::post('addBlogType', 'BlogManagementController@addBlogType');
+    Route::post('editBlogType', 'BlogManagementController@editBlogType');
+    Route::post('deleteType', 'BlogManagementController@deleteType');
+
+    // create post
+     Route::get('admin/blog_management/create_post', 'BlogManagementController@showCreatePost');
+     Route::post('savePost', 'BlogManagementController@savePost');
+    /* END Blog Management */ 
+    
     
     Route::get('admin/templates/{id}/content', 'TemplateController@showContent');
     Route::get('admin/change_password', 'ChangePasswordController@showForm');
@@ -294,8 +325,6 @@ Route::group(array('before' => 'admin'), function() {
     Route::resource('admin/dating_plans', 'DatingPlanManagementController');
     Route::resource('admin/pages', 'ContentManagementController');
     Route::controller('admin', 'AdminDashboardController');
-    //Route::get('admin/calendar', 'CalendarController@showCalendar');
-
 
     /** Admin New Section* */
     //Route::resource('admin_new', 'AdminDashboardController@admin_new');
@@ -311,6 +340,7 @@ Route::post('blockUser', 'AdminUserListController@blockUser');
 Route::post('pauseUser', 'AdminUserListController@pauseUser');
 Route::post('deleteUser', 'AdminUserListController@deleteUser');
 /* End of Manage User Actions */
+
 
 
 Route::get('/test', 'AdminDashboardController@getTest');

@@ -9,11 +9,9 @@
 
 {!! HTML::script('js/mg.js') !!}
 {!! HTML::script('js/jquery.min.js') !!}
-<!-- <script src="jquery-1.7.min.js" type="text/javascript"></script> -->
 {!! HTML::script('js/jquery.transform.min.js') !!}
 {!! HTML::script('js/jquery.bez.min.js') !!}
-<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
-{!! HTML::script('https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js') !!}
+{!! HTML::script('js/bootbox/bootbox.min.js') !!}
 <script type="text/javascript">
     // bezier animations
     var bez = $.bez([.19, 1, .22, 1]);

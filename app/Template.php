@@ -10,31 +10,30 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Template extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable;
     use CanResetPassword;
     use EntrustUserTrait;
+    use SoftDeletes;
 
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
+
     protected $table = 'templates';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = ['template_name', 'template_subject', 'template_content'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    //protected $hidden = ['password', 'remember_token'];
+    protected $date = ['created_at', 'updated_at', 'deleted_at'];
+
+    public function setTemplateNameAttribute($value)
+    {
+        $this->attributes['template_name'] = trim($value);
+    }
+
+    public function setTemplateSubjectAttribute($value)
+    {
+        $this->attributes['template_subject'] = trim($value);
+    }
+
 }
