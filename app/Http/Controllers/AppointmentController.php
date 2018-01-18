@@ -64,6 +64,7 @@ class AppointmentController extends Controller
         $data = AppointMent::where('app_to',NotiFierLogsController::getUserId())->get();
 
         foreach ($data as $key => $value){
+            $new_value['appID'] = $value->app_id;
             $new_value['fromInfo'] = User::find($value->app_from);
             $new_value['appDesc'] = $value->app_desc;
             $new_value['appCreated'] = NotiFierLogsController::time_elapsed_string($value->app_created);

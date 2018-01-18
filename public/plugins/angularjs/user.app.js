@@ -327,51 +327,61 @@ ngApp.controller('bodyController', [
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
-  
-    $scope.viewNoti = function(noti){
 
 
-        if(!noti.notif_status){
-            $scope.unread_noti_count -= 1;
-            myHttpService.post('notifications_new', {id: noti.notif_id}).then(function(res){
-                console.log(res);
-
-                noti.notif_status =true;
-
-            });
-        }
-
-        $timeout(function(){
-                $scope.notifActions(noti.notif_type,noti);
-        }, 200);
+$scope.viewNoti = function(noti){
 
 
-    }
-
-    $scope.markAllNotiRead = function(){
-        myHttpService.post('notifications', {is_read: 1}).then(function(res){
+    if(!noti.notif_status){
+        $scope.unread_noti_count -= 1;
+        myHttpService.post('notifications_new', {id: noti.notif_id}).then(function(res){
             console.log(res);
-            $scope.unread_noti_count = 0;
-            $scope.notifications.forEach(function(element){
-                element.is_read = 1;
-            });
+            noti.notif_status =true;
+
         });
     }
 
-    /*START KRAM*/
-    $scope.notifActions = function(type,data){
-        switch (type) {
-            case 'visit_profile':
-                window.location.href = base_url + '/user/profile/'+data.from_info.username;
-                break;
-            case 'APPOINTMENT':
-                $scope.viewAppointment();
-                break;
-            default:
+    $timeout(function(){
+            $scope.notifActions(noti.notif_type,noti);
+    }, 200);
 
-        }
 
-    };
+}
+
+$scope.markAllNotiRead = function(){
+    myHttpService.post('notifications', {is_read: 1}).then(function(res){
+        console.log(res);
+        $scope.unread_noti_count = 0;
+        $scope.notifications.forEach(function(element){
+            element.is_read = 1;
+        });
+    });
+}
+
+
+$scope.notifActions = function(type,data){
+    switch (type) {
+        case 'visit_profile':
+            window.location.href = base_url + '/user/profile/'+data.from_info.username;
+            break;
+        case 'APPOINTMENT':
+            $scope.viewAppointment();
+            break;
+        default:
+
+    }
+
+};
+
+
+
+
+/*------------ THIS BLOCK OF CODE'S IS FOR APPOINTMENT -----
+|  Function viewAppointment, asyncAppointment,readDetaildAppointment,reusableNgConfirmAppointment
+|	  Author: MARK
+|  Purpose:  ViewList,ViewDetails,Reply Appointment
+|  Returns:objectArray inspired to FRONTEND API STRUCTURE  minimize load
+*------------------------------------------------------*/
 
     $scope.viewAppointment = function () {
         myHttpService.get('getAppoinment').then(function(res){
@@ -380,33 +390,49 @@ ngApp.controller('bodyController', [
         });
     };
 
+    $scope.asyncAppointment = function (AppointmentData) {
+            $scope.reusableNgConfirmAppointment('My Appointment',
+                'appointment-list-layout.html',
+                AppointmentData,
+                function($scoped){
+                    $scoped.AppointmentList = AppointmentData;
+                    $scoped.orderList = "appCreated";
+                    $scoped.lunchDetailsAppointment = function (data) {
+                        $scope.readDetaildAppointment(data);
+                    };
+                });
+    };
 
-    $scope.asyncAppointment = function (data) {
+    $scope.readDetaildAppointment  = function (AppointmentData) {
+        $scope.reusableNgConfirmAppointment('Appointment',
+            'appointment-view-layout.html',
+            AppointmentData,
+            function($scope){
+                $scope.AppointmentDetail = AppointmentData;
+            });
+    };
 
+    $scope.reusableNgConfirmAppointment  = function (title,url,data,callBack) {
         $ngConfirm({
-            title: 'My Appointments',
-            contentUrl: base_url+'/public/js/appointment/appointment-list-layout.html',
+            title: title,
+            contentUrl: base_url+'/public/js/appointment/'+url,
             columnClass: 'medium', // to make the width wider.
             animation: 'zoom',
             backgroundDismiss: true,
             theme: 'material',
             type: 'red',
-            onScopeReady: function ($scope) {
-
-                // $scope.newNotifStore = data;
-                $scope.AppointmentList = data;
-                $scope.orderList = "appCreated";
-            }
+            onScopeReady: callBack,
         })
 
     };
+/*------------ END BLOCK OF CODE'S FOR APPOINTMENT -----
 
-    /*END KRAM*/
 
 
-    /* 
-    MARK 2017-11-27
-    Message   count service*/
+
+                /*
+                MARK 2017-11-27
+                Message   count service*/
     $scope.count_new_sms = 0;
     $scope.getDataCount = function () {
         myHttpService.post('messagescount', {

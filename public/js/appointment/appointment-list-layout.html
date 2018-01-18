@@ -5,7 +5,6 @@
 
 </head>
 <body>
-<!--<li ng-repeat="x in newNotifStore">@{{x}}</li>-->
 <div id="notebooks" >
     <input type="text" id="query" ng-model="query" placeholder="Search an appointment description"/>
     <select ng-model="orderList">
@@ -15,7 +14,8 @@
     </select>
     <ul id="notebook_ul">
 
-        <li ng-repeat="notebook in AppointmentList | filter:query | orderBy: orderList">
+        <li ng-click="lunchDetailsAppointment(notebook);"  ng-repeat="notebook in AppointmentList | filter:query | orderBy: orderList" >
+            <a >
             <img ng-src="{{notebook.fromInfo.photo}}" alt="" class="pull-left img-thumbnail img-circle" style="width: 40px;height: 40px;"/>
             From: {{notebook.fromInfo.firstName}}<br/>
 
@@ -33,6 +33,7 @@
                 </small>
 
             </div>
+            </a>
         </li>
     </ul>
 </div>
