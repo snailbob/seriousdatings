@@ -382,8 +382,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                 if (typeof roomsList === 'undefined') roomsList = document.body;
 
                 var tr = document.createElement('tr');
-                tr.innerHTML = '<td><strong>' + room.roomName + '</strong> shared a conferencing room with you!</td>' +
-                    '<td><button class="join">Join</button></td>';
+                tr.innerHTML = '<td><strong>' + room.roomName + '</strong> is inviting you to join video call..!</td>' +
+                    '<td><button class="join">Answer</button></td>';
                 roomsList.insertBefore(tr, roomsList.firstChild);
 
                 console.log(room.roomName, '.roomName');

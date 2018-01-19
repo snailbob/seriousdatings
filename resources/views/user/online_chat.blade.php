@@ -227,7 +227,7 @@
                     <div class="for-videocall">
                         <!-- just copy this <section> and next script -->
                         <section class="experiment">
-                            <section>
+                            <section class="hidden">
                                 <span>
                                     Private ??
                                     <a href="/video-conferencing/" target="_blank" title="Open this link in new tab. Then your conference room will be private!">
