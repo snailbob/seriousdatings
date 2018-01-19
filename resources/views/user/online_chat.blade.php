@@ -2,12 +2,12 @@
 
 
 @section('form_area')
-<script>
+{{--  <script>
     if(!location.hash.replace('#', '').length) {
         location.href = location.href.split('#')[0] + '#' + (Math.random() * 100).toString().replace('.', '');
         location.reload();
     }
-</script>
+</script>  --}}
 <div ng-controller="onlineChatController" ng-cloak ng-click="closeAllPopups()">
 
     <div class="inner-header calendar-event-banner">
