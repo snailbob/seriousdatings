@@ -345,6 +345,7 @@ a.profile-link {
     height:50px;
     width: 100%;
     color: #fff;
+    z-index: 1000;
 }
 
 .appointment-banner{

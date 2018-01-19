@@ -80,7 +80,7 @@ ngApp.service('myHttpService', ['$http', 'CSRF_TOKEN', function ($http, CSRF_TOK
     }
 
     this.getWithParams = function (link = 'header_tasks', data = {}) {
-        console.log(this.url);
+        // console.log(this.url);
         return $http.get(this.url + '/api/' + link, {
             params: data
         });
@@ -146,7 +146,6 @@ ngApp.controller('bodyController', [
     
     $scope.getData = function(){
         myHttpService.get('body_contents').then(function(res){
-            console.log("res.data.notifications",res.data.notifications);
             $scope.notifications = res.data.notifications;
             $scope.subscription_validity = res.data.subscription_validity;
             $scope.active_ads = res.data.active_ads;
@@ -382,18 +381,17 @@ $scope.notifActions = function(type,data){
 |  Purpose:  ViewList,ViewDetails,Reply Appointment
 |  Returns:objectArray inspired to FRONTEND API STRUCTURE  minimize load pages
 *------------------------------------------------------*/
-
+    $scope.storeAppointment = [];
     $scope.viewAppointment = function () {
         myHttpService.get('getAppoinment').then(function(res){
             $scope.asyncAppointment(res.data.appointment);
-
+            $scope.storeAppointment = res.data.appointment;
         });
     };
 
     $scope.asyncAppointment = function (AppointmentData) {
             $scope.reusableNgConfirmAppointment('My Appointment',
                 'appointment-list-layout.html',
-                AppointmentData,
                 function($scoped){
                     $scoped.AppointmentList = AppointmentData;
                     $scoped.orderList = "appCreated";
@@ -406,19 +404,79 @@ $scope.notifActions = function(type,data){
     $scope.readDetaildAppointment  = function (AppointmentData) {
         $scope.reusableNgConfirmAppointment('',
             'appointment-view-layout.html',
-            AppointmentData,
-            function($scope){
-                $scope.AppointmentDetail = AppointmentData;
+            function($scoped){
+                $scoped.AppointmentDetail = AppointmentData;
+                $scoped.declineAppointment = function(appID){
+                        $scope.actionDeclineAppointment(appID);
+                };
+                $scoped.acceptAppointment = function (appId) {
+                        $scope.actionAcceptAppointment(appId);
+                };
             });
     };
 
-    $scope.reusableNgConfirmAppointment  = function (title,url,data,callBack) {
-        $ngConfirm({
+    $scope.actionDeclineAppointment = function (id) {
+        $scope.reusableNgConfirmAppointment('Reasons',
+            'appointment-actions-layout.html',
+            function($scoped){
+                $scoped.reasonTitle = "Give a polite reasons why to decline.";
+                $scoped.reasonType = "error";
+                $scoped.fontAwesome = "fa-frown-o";
+                $scoped.appID = id;
+                $scoped.saveActions = function () {
+                        $scope.saveAppointmentAction(this.text, this.appID,'R');
+
+                };
+            });
+
+    };
+    $scope.actionAcceptAppointment = function(id){
+        $scope.reusableNgConfirmAppointment('Message',
+            'appointment-actions-layout.html',
+            function($scoped){
+                $scoped.reasonTitle = "Confirmation Message";
+                $scoped.reasonType = "success";
+                $scoped.fontAwesome = "fa-smile-o";
+                $scoped.appID = id;
+                $scoped.saveActions = function () {
+                    $scope.saveAppointmentAction(this.text, this.appID,'A');
+
+                };
+            });
+    };
+
+
+    $scope.saveAppointmentAction  = function(msg,AppID,type){
+            $scope.storeAppointment.forEach(function(item){
+                if(item.appID === AppID){
+                    $scope.updateAppointment(
+                        {'appID':AppID,
+                         'msg':msg,
+                         'toID':item.fromInfo.id,
+                         'actType':type
+                        });
+                }
+            });
+    };
+
+    $scope.updateAppointment = function(params){
+        myHttpService.post('saveAppResponse', params).then(function (res) {
+            console.log(res);
+            if(res.data.trans){
+                location.reload();
+            }
+        });
+
+    };
+
+    $scope.reusableNgConfirmAppointment  = function (title,url,callBack) {
+       return $ngConfirm({
             title: title,
             contentUrl: base_url+'/public/js/appointment/'+url,
             columnClass: 'medium', // to make the width wider.
             animation: 'zoom',
             backgroundDismiss: true,
+            backgroundDismissAnimation: 'glow',
             theme: 'material',
             onScopeReady: callBack,
         })
@@ -426,48 +484,33 @@ $scope.notifActions = function(type,data){
     };
 /*------------ END BLOCK OF CODE'S FOR APPOINTMENT -----
 
-
-
-
-                /*
-                MARK 2017-11-27
-                Message   count service*/
-    $scope.count_new_sms = 0;
-    $scope.getDataCount = function () {
-        myHttpService.post('messagescount', {
-            id: $scope.logged_id,
-            // _token: window.csrf_token
-        }).then(function (res) {
-            $scope.count_new_sms = res.data[0].total_count;
-        });
-    }
-    $scope.image_name = 'contact_email.png';
+ /*
+ MARK 2017-11-27
+ Message   count service*/
+    $scope.image_name = "";
     $scope.image_src = base_url + '/public/images/mail/';
-    $scope.StartTimer = function () {
-        $scope.Timer = $interval(function () {
-            /*get data messeages*/
-            $scope.getDataCount();
-            if ($scope.count_new_sms > 0) {
+    $scope.getMessageCount = function () {
+        $scope.count_new_sms = 0;
+        myHttpService.get('messagescount', {
+            id: $scope.logged_id
+        }).then(function (res) {
+            $timeout(function(){
+                if (res.data[0].total_count >= 1)
                 $scope.image_name = 'contact_email.gif';
-                console.log("Unread Message");
-            } else {
-                $scope.image_name = 'contact_email.png';
-            }
-            $('.v-msg').attr('src', $scope.image_src + $scope.image_name);
-
-        }, 10000);
+                else $scope.image_name = 'contact_email.png';
+                $('.v-msg').attr('src', $scope.image_src + $scope.image_name);
+            }, 1000);
+        });
     };
 
     /*END ================MARK   2017-11-27*/
 
 
-
     var init = function () {
         $scope.getData();
-        $scope.StartTimer();
+        $scope.getMessageCount();
 
-
-    }
+    };
 
 
 
@@ -480,6 +523,8 @@ $scope.notifActions = function(type,data){
         var count_even_odd = 0;
         var define_count_even_odd ="",define_image_pull_cool="";
         var define_image_pull ="";
+
+        $('.v-msg').attr('src', base_url + '/public/images/mail/contact_email.png');
         $.confirm({
             /*callback message reques*/
             columnClass: 'col-md-6 col-md-offset-3',

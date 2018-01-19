@@ -53,6 +53,22 @@ class AppointmentController extends Controller
         return  response()->json(['trans'=>$trans]);
     }
 
+    public function saveAppResponse(Request $request){
+
+            $notifyMessage = 'Appointment rejected';
+        if ($request->input('actType') ==='A'){
+            $notifyMessage = 'Appointment Accepted';
+        }
+
+        NotiFierLogsController::createNotification($request->input('toID'),'APPOINTMENT',$notifyMessage);
+
+        $data = \DB::table('user_appoinment_actions')->insert([
+            'act_app_id' => $request->input('appID'),
+            'act_reasons' => $request->input('msg'),
+            'act_status'=>$request->input('actType')]);
+        return  response()->json(['trans'=>$data]);
+    }
+
     public function getAppointment(){
 
         return  response()->json(['appointment'=>self::formatAppointMent()]);
@@ -69,7 +85,6 @@ class AppointmentController extends Controller
             $new_value['appDesc'] = $value->app_desc;
             $new_value['appCreated'] = NotiFierLogsController::time_elapsed_string($value->app_created);
             $new_value['appStatus'] = self::readUnread($value->app_status);
-            $new_value['appDays'] = $value->app_days;
 
             /*Address and Time*/
             $new_value['appStreet'] = $value->app_street;
@@ -87,6 +102,8 @@ class AppointmentController extends Controller
         }
         return $format;
     }
+
+
     public  static function readUnread($status){
         switch ($status){
             case NULL:

@@ -200,7 +200,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 
-    console.log(window.location.hash, 'window.location.hash');
+    // console.log(window.location.hash, 'window.location.hash');
     
     if(window.location.hash == '#!#login' || window.location.hash == '#login'){
         console.log(window.location.hash, 'window.location.hash');

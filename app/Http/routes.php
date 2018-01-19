@@ -199,7 +199,7 @@ Route::group(['prefix' => 'api'], function () {
     /*START messages services ROUTING*/
     Route::get('messages', 'userMessagesController@messages');
     Route::get('messagesview', 'userMessagesController@messagesview');
-    Route::post('messagescount', 'userMessagesController@messagescount');
+    Route::get('messagescount', 'userMessagesController@messagescount');
     Route::post('sendmessage', 'userMessagesController@sendmessage');
     /*END  messages services ROUTING*/
 
@@ -218,6 +218,7 @@ Route::group(['prefix' => 'api'], function () {
     /*saving appointment*/
     Route::post('saveappointment','AppointmentController@saveAppointment');
     Route::get('getAppoinment','AppointmentController@getAppointment');
+    Route::post('saveAppResponse','AppointmentController@saveAppResponse');
 
 });
 

@@ -77,7 +77,7 @@ ngApp.controller('profileCtrl', [
 					if (page == 1) {
 						$scope.nextButton = true;
 					}
-					console.log($scope.matchUsers, total_data);
+					// console.log($scope.matchUsers, total_data);
 				});
 			}
 		}, true);

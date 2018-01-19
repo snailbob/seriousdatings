@@ -8493,6 +8493,9 @@ outline: none;
 	border-radius: 3px;
 
 }
+.btn-app{
+	box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.5);
+}
 .inside-banner{
 	margin-left: 20%;
 	margin-top: 1%;
@@ -8500,4 +8503,10 @@ outline: none;
 }
 .view-appForm form{
 	margin-top:10%;
+}
+.app-divBtn{
+	text-align: center;
+}
+.inner-div{
+	display: inline-block;
 }

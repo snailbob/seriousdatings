@@ -7,13 +7,12 @@ function filterMapOption() {
         contentClass:'unique-id-content',
         content: 'url:'+base_url+'/public/js/map-filter/map-filter-layout.html',
         animation: 'scale',
-        columnClass: 'medium',
+        columnClass: 'small',
         containerFluid: true,
         closeAnimation: 'scale',
         backgroundDismiss: true,
 
         buttons: {
-
 
             somethingElse: {
                 text: 'OK',
