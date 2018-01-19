@@ -40,7 +40,7 @@ class GroupChatController extends Controller
     }
 
     public function format_messages($group_id){
-        $messages = GroupChat::find($group_id)->messages()->orderBy('id', 'ASC')->take(15)->get();
+        $messages = GroupChat::find($group_id)->messages()->orderBy('id', 'DESC')->take(15)->get();
 
         $format_data = [];
         if(!empty($messages)){

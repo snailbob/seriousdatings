@@ -11,8 +11,14 @@ ngApp.config(['ngToastProvider', function(ngToastProvider) {
     });
 }]);
 
+ngApp.filter('reverse', function() {
+    return function(items) {
+      return items.slice().reverse();
+    };
+  });
 
-ngApp .run([
+
+ngApp.run([
     '$ngConfirmDefaults',
     function ($ngConfirmDefaults) {
         // modify the defaults here.
@@ -2936,9 +2942,15 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
             $scope.selectedCount--;
             return false;
         }
-        else if(!u.selected && $scope.selectedCount > 2){
-            $scope.showToast('Group chat particapants full.', 'danger');
-            return false;
+        else if(!u.selected){
+            if($scope.selectedCount > 2){
+                $scope.showToast('Group chat particapants full.', 'danger');
+                return false;
+            }
+            else if(!u.is_online){
+                $scope.showToast('Cannot invite offline user.', 'danger');
+                return false;
+            }
         }
         
 
@@ -2976,6 +2988,10 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.chatMessage = {
         message: '',
         sending: false
+    };
+    $scope.isCalling = {
+        voice: false,
+        video: false
     };
     $scope.invitedToChat = [];
     $scope.chatLoading = false;
@@ -3081,31 +3097,21 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         }
     }
 
-    $scope.startCall = function(type, user, i){
+    $scope.boxStartCall = function(type, user, i){
         $scope.callStarted = true;
+        $scope.startCall(type, user, i);
+    };
+
+    $scope.startCall = function(type, user, i){
 
         if(i != $scope.activeIndex){
             $scope.activeIndex = i;
             $scope.activeUser = user;
         }
         
-        if(type != 'text'){
-            $scope.startVideoCall(i, user);
 
-            if(type == 'video'){
-                var vidlength = $(document).find('video').length;
-                // $(document).find('.experiment-rtc').removeClass('hidden');
-                $scope.videoShown = true;
+        $scope.getPrivateRoomId(i, user, type);
 
-                if(vidlength == 0){
-                    $(document).find('#setup-meeting').click();
-                }
-
-            }
-        }
-        else{
-            $scope.getPrivateRoomId(i, user);
-        }
     }
 
     $scope.flirtPopover = {
@@ -3135,7 +3141,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     
 
 
-    $scope.getPrivateRoomId = function(i, user){
+    $scope.getPrivateRoomId = function(i, user, type){
         var private_id = $scope.logged_user_info.id * user.id;
         var data = {
             private_id: private_id,
@@ -3146,6 +3152,32 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
 
         myHttpService.getWithParams('get_private_chat_id', data).then(function(res){
             console.log(res.data , typeof(res.data.new));
+            $scope.activeUser.room_id = res.data.id;
+
+            if(type != 'text'){
+                $scope.startVideoCall(i, user);
+    
+                if(type == 'video'){
+                    var vidlength = angular.element(document).find('video').length;
+                    // angular.element(document).find('.experiment-rtc').removeClass('hidden');
+                    $scope.videoShown = true;
+    
+                    if(vidlength == 0){
+                        angular.element(document).find('#setup-new-room').click();
+                    }
+    
+                }
+                else if(type == 'voice'){
+                    var audioLength = angular.element(document).find('audio').length;
+                    // $(document).find('.experiment-rtc').removeClass('hidden');
+                    $scope.videoShown = true;
+    
+                    if(audioLength == 0){
+                        angular.element(document).find('#start-conferencing').click();
+                    }
+                    
+                }
+            }
 
             if(typeof(res.data.new) === 'undefined'){
                 $scope.getConversations(res.data.id);
@@ -3194,7 +3226,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
             var d = res.data;
             d.user_info = $scope.logged_user_info;
 
-            $scope.activeUser.chat.push(d);
+            $scope.activeUser.chat.unshift(d);
             console.log($scope.activeUser.chat, '$scope.activeUser.chat');
             $scope.scrollBottom();
         });
@@ -3267,7 +3299,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         $scope.getData();
 
         $interval(function(){
-            if($scope.activeUser.id){
+            if($scope.activeUser.id && $scope.startCall){
                 $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
             }
         }, 7000);

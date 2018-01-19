@@ -67,12 +67,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script> 
   <script src="{{ url() }}/public/plugins/angularjs/plugins/angular-moment/angular-moment.js"></script>
 
-  @if(request()->segment(1) == 'online_chat')
-    <script src="https://cdn.webrtc-experiment.com/meeting.js"> </script>
-    <script src="{{ url() }}/public/plugins/angularjs/chatroom_rtc.js"> </script>
-  @endif
 
   <script src="{{ url() }}/public/js/user-script.js"></script>
+
+  
+  @if(request()->segment(1) == 'online_chat')
+
+    <script src="https://cdn.webrtc-experiment.com/socket.io.js"> </script>
+    <script src="https://cdn.webrtc-experiment.com/RTCPeerConnection-v1.5.js"> </script>
+    {{--  <script src="{{ url() }}/public/plugins/angularjs/rtc/audio-broadcast/broadcast.js"> </script>
+    <script src="{{ url() }}/public/plugins/angularjs/rtc/audio-broadcast/broadcast-ui.js"> </script>  --}}
+    <script src="{{ url() }}/public/plugins/angularjs/rtc/video-conferencing/conference.js"> </script>
+    <script src="{{ url() }}/public/plugins/angularjs/rtc/video-conferencing/conference-ui.js"> </script>
+    {{--  <script src="{{ url() }}/public/plugins/angularjs/rtc/onlineChatController.js"> </script>  --}}
+
+    <script src="https://cdn.webrtc-experiment.com/getMediaElement.min.js"> </script>
+
+    {{--  <script src="https://cdn.webrtc-experiment.com/meeting.js"> </script>
+    <script src="{{ url() }}/public/plugins/angularjs/chatroom_rtc.js"> </script>  --}}
+  @endif
   {{--  <script src="{{ url() }}/public/socketjs/new-chatbox.js"></script>
   <script src="{{ url() }}/public/socketjs/config-server.js"></script>
   <script src="{{ url() }}/public/socketjs/server.js"></script>  --}}
