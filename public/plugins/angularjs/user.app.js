@@ -11,8 +11,14 @@ ngApp.config(['ngToastProvider', function(ngToastProvider) {
     });
 }]);
 
+ngApp.filter('reverse', function() {
+    return function(items) {
+      return items.slice().reverse();
+    };
+  });
 
-ngApp .run([
+
+ngApp.run([
     '$ngConfirmDefaults',
     function ($ngConfirmDefaults) {
         // modify the defaults here.
@@ -2948,27 +2954,64 @@ ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '
 
 ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items', 'myHttpService', function ($scope, $uibModalInstance, items, myHttpService) {
     $scope.items = items;
-    $scope.questions = [];
+    $scope.users = items.users;
     $scope.isLoading = false;
-    $scope.currentIndex = 0;
-    $scope.currentQuestion = {};
-    $scope.showAnswer = false;
+    $scope.selectedCount = 0;
+    $scope.selectedUser = [];
+
+
+    console.log(items, 'items');
     
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
 
+    $scope.submit = function () {
+        var _invited = [];
+
+        $scope.users.forEach(function(val, i){
+            console.log(val, i);
+            if(val.selected){
+                _invited.push(val);
+            }
+        });
+
+        $uibModalInstance.close(_invited);
+    };
+   
+    $scope.selectUser = function(u, i){
+
+        if(u.selected){
+            u.selected = false;
+            $scope.selectedCount--;
+            return false;
+        }
+        else if(!u.selected){
+            if($scope.selectedCount > 2){
+                $scope.showToast('Group chat particapants full.', 'danger');
+                return false;
+            }
+            else if(!u.is_online){
+                $scope.showToast('Cannot invite offline user.', 'danger');
+                return false;
+            }
+        }
+        
+
+        if(!u.selected){
+            u.selected = true;
+            $scope.selectedCount++;
+            // $scope.selectedUser.push(u);     
+        }
+        
+        console.log($scope.selectedCount, u);
+
+    }
 
     $scope.getData = function(){
         $scope.isLoading = true;
-        console.log(window.base_url + '/public/plugins/angularjs/data/ready_questions.json');
-        myHttpService.get('get_readydate_question').then(function(res){
-            $scope.questions = res.data;        
-            $scope.isLoading = false;
-            
-            $scope.currentQuestion = res.data[$scope.currentIndex];
-            console.log(res, 'asdfsdf');
-        });
+
+        
     }
 
     var init = function(){
@@ -2977,7 +3020,7 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
     init();
 }]);
 
-ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', 'moment', '$interval', '$uibModal', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer, moment, $interval, $uibModal) {
+ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', 'moment', '$interval', '$uibModal', '$log', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer, moment, $interval, $uibModal, $log) {
 
     $scope.isLoading = false;
     $scope.data = {};
@@ -2990,12 +3033,23 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         message: '',
         sending: false
     };
+    $scope.isCalling = {
+        voice: false,
+        video: false
+    };
+    $scope.invitedToChat = [];
     $scope.chatLoading = false;
     $scope.params = window.uri_get_params;
     $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
 
 
     $scope.inviteToChat = function (items) {
+        var _toItem = {
+            users: angular.copy($scope.data.users),
+            activeUser: $scope.activeUser,
+            activeIndex: $scope.activeIndex
+        };
+
         console.log(items, 'wow');
         // var parentElem = parentSelector ?
             // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
@@ -3011,14 +3065,19 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
             // appendTo: parentElem,
             resolve: {
                 items: function () {
-                    return items ? items : {};
+                    return _toItem; //items ? items : {};
                 }
             }
         });
 
-        modalInstance.result.then(function (userAction) {
+        modalInstance.result.then(function (res) {
+            $log.info(res);
+
+            $scope.activeUser.invitedToChat = res;
+
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
+
         });
     };
 
@@ -3082,31 +3141,21 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         }
     }
 
-    $scope.startCall = function(type, user, i){
+    $scope.boxStartCall = function(type, user, i){
         $scope.callStarted = true;
+        $scope.startCall(type, user, i);
+    };
+
+    $scope.startCall = function(type, user, i){
 
         if(i != $scope.activeIndex){
             $scope.activeIndex = i;
             $scope.activeUser = user;
         }
         
-        if(type != 'text'){
-            $scope.startVideoCall(i, user);
 
-            if(type == 'video'){
-                var vidlength = $(document).find('video').length;
-                // $(document).find('.experiment-rtc').removeClass('hidden');
-                $scope.videoShown = true;
+        $scope.getPrivateRoomId(i, user, type);
 
-                if(vidlength == 0){
-                    $(document).find('#setup-meeting').click();
-                }
-
-            }
-        }
-        else{
-            $scope.getPrivateRoomId(i, user);
-        }
     }
 
     $scope.flirtPopover = {
@@ -3136,7 +3185,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     
 
 
-    $scope.getPrivateRoomId = function(i, user){
+    $scope.getPrivateRoomId = function(i, user, type){
         var private_id = $scope.logged_user_info.id * user.id;
         var data = {
             private_id: private_id,
@@ -3147,6 +3196,32 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
 
         myHttpService.getWithParams('get_private_chat_id', data).then(function(res){
             console.log(res.data , typeof(res.data.new));
+            $scope.activeUser.room_id = res.data.id;
+
+            if(type != 'text'){
+                $scope.startVideoCall(i, user);
+    
+                if(type == 'video'){
+                    var vidlength = angular.element(document).find('video').length;
+                    // angular.element(document).find('.experiment-rtc').removeClass('hidden');
+                    $scope.videoShown = true;
+    
+                    if(vidlength == 0){
+                        angular.element(document).find('#setup-new-room').click();
+                    }
+    
+                }
+                else if(type == 'voice'){
+                    var audioLength = angular.element(document).find('audio').length;
+                    // $(document).find('.experiment-rtc').removeClass('hidden');
+                    $scope.videoShown = true;
+    
+                    if(audioLength == 0){
+                        angular.element(document).find('#start-conferencing').click();
+                    }
+                    
+                }
+            }
 
             if(typeof(res.data.new) === 'undefined'){
                 $scope.getConversations(res.data.id);
@@ -3195,7 +3270,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
             var d = res.data;
             d.user_info = $scope.logged_user_info;
 
-            $scope.activeUser.chat.push(d);
+            $scope.activeUser.chat.unshift(d);
             console.log($scope.activeUser.chat, '$scope.activeUser.chat');
             $scope.scrollBottom();
         });
@@ -3268,7 +3343,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         $scope.getData();
 
         $interval(function(){
-            if($scope.activeUser.id){
+            if($scope.activeUser.id && $scope.startCall){
                 $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
             }
         }, 7000);

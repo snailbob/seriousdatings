@@ -26,7 +26,7 @@
     <div class="inner-contendbg">
 
         <div class="container">
-
+            <div class="row"></div>
 
             <div class="row" ng-if="!callStarted">
 
@@ -72,19 +72,19 @@
 
                             <div class="container-fluid padding-top">
                                 <div class="row no-gutter">
-                                    {{--  <div class="col-sm-4">
-                                        <a class="btn btn-success btn-block" ng-click="startCall('voice', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Voice Call">
+                                    <div class="col-sm-4">
+                                        <a class="btn btn-success btn-block" ng-click="boxStartCall('voice', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Voice Call">
                                             <i class="fa fa-phone" aria-hidden="true"></i>
                                         </a>
                                     </div>
                                     <div class="col-sm-4">
-                                        <a class="btn btn-success btn-block" ng-click="startCall('video', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Video Call">
+                                        <a class="btn btn-success btn-block" ng-click="boxStartCall('video', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Video Call">
                                             <i class="fa fa-video-camera" aria-hidden="true"></i>
                                         </a>
-                                    </div>  --}}
-                                    <div class="col-sm-12">
-                                        <a class="btn btn-success btn-block" ng-click="startCall('text', user, $index)">
-                                            <i class="fa fa-envelope" aria-hidden="true"></i> Send Message
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <a class="btn btn-success btn-block" ng-click="boxStartCall('text', user, $index)" tooltip-append-to-body="true" uib-tooltip="Message">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -224,9 +224,66 @@
 
                     </div>
 
+                    <div class="for-videocall">
+                        <!-- just copy this <section> and next script -->
+                        <section class="experiment">
+                            <section class="hidden">
+                                <span>
+                                    Private ??
+                                    <a href="/video-conferencing/" target="_blank" title="Open this link in new tab. Then your conference room will be private!">
+                                        <code>
+                                            <strong id="unique-token">#123456789</strong>
+                                        </code>
+                                    </a>
+                                </span>
 
-                    <!-- just copy this <section> and next script -->
-                    <section class="experiment experiment-rtc" ng-show="videoShown">
+                                <input type="text" ng-model="activeUser.room_id" id="conference-name">
+                                <button id="setup-new-room" class="setup">Setup New Conference</button>
+                            </section>
+
+                            <!-- list of all available conferencing rooms -->
+                            {{--  <table style="width: 100%;" id="rooms-list"></table>  --}}
+
+                            <!-- local/remote videos container -->
+                            <div id="videos-container"></div>
+                        </section>
+                    </div>
+
+                    {{--  <div class="for-voicecall">
+                        <table class="visible">
+                                <tr>
+                                    <td style="text-align: right;">
+                                        <input type="text" id="conference-name" ng-model="activeUser.room_id" placeholder="Broadcast Name">
+                                    </td>
+                                    <td>
+                                        <button id="start-conferencing">New Broadcast</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table id="rooms-list" class="visible"></table>
+        
+                            <table class="visible">
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <h2>
+                                            <strong>Private Broadcast</strong> ??
+                                            <a href="" target="_blank" title="Open this link in new tab. Then your broadcasting room will be private!">
+                                                <code>
+                                                    <strong id="unique-token">#123456789</strong>
+                                                </code>
+                                            </a>
+                                        </h2>
+                                    </td>
+                                </tr>
+                            </table>
+        
+                            <div id="participants"></div>
+                    </div>  --}}
+
+
+
+                    <!-- just copy this <section> and next script /// for video -->
+                    {{--  <section class="experiment experiment-rtc" ng-show="videoShown">
                         <section class="hidden">
                             <h2 style="border: 0; padding-left: .5em;">Wanna try yourself?</h2>
                             <input type="text" id="meeting-name">
@@ -237,11 +294,48 @@
                         <table style="width: 100%;">
                             <tr>
                                 <td width="50%" style="width: 50%;  background: white; vertical-align: top;">
-                                    {{--  <h2 style="display: block; font-size: 1em; text-align: center;">You!</h2>  --}}
                                     <div id="local-streams-container"></div>
+
+                                    <div class="container-fluid" ng-if="videoShown">
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <div class="row no-gutter">
+                                                    <div class="col-sm-3">
+
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-volume-down" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-volume-up" aria-hidden="true"></i>
+                                                        </button>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-microphone-slash" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <button type="button" class="btn btn-danger btn-block">
+                                                            Drop
+                                                        </button>
+                                                    </div>
+                                                    
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </td>
                                 <td width="50%" style="width: 50%;  background: white; vertical-align: top;">
-                                    {{--  <h2 style="display: block; font-size: 1em; text-align: center;">Remote Peers</h2>  --}}
                                     <div id="remote-streams-container"></div>
 
                                     <div class="container-fluid">
@@ -249,6 +343,11 @@
                                             <div class="col-sm-12">
                                                 <img ng-src="@{{ activeUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
                                             </div>
+
+                                            <div class="col-sm-12" ng-repeat="invitedUser in activeUser.invitedToChat">
+                                                <img ng-src="@{{ invitedUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
+                                            </div>
+
                                         </div>
                                     </div>
 
@@ -257,7 +356,7 @@
                                 </td>
                             </tr>
                         </table>
-                    </section>
+                    </section>  --}}
                 
 
 
@@ -281,7 +380,7 @@
 
                                 </div>
                                 <div class="the_chat" ng-if="activeUser.chat.length">
-                                    <div class="the_message" ng-repeat="chat in activeUser.chat">
+                                    <div class="the_message" ng-repeat="chat in activeUser.chat | reverse">
                                         <!-- Message. Default to the left -->
                                         <div class="direct-chat-msg" ng-if="logged_user_info.id != chat.user_id">
                                             <div class="direct-chat-info clearfix">
@@ -354,7 +453,7 @@
                                     <div class="col-sm-6">
                                         <img ng-src="@{{ activeUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
                                     </div>
-                                    <div class="col-sm-6" ng-repeat="i in [0, 1, 2]">
+                                    <div class="col-sm-6" ng-if="!activeUser.invitedToChat.length" ng-repeat="i in [0, 1, 2]">
 
                                         <div class="hvrbox">
                                             <img src="{{ url().'/public/images/img_placeholder_avatar.jpg' }}" alt="img" class="hvrbox-layer_bottom">
@@ -369,44 +468,11 @@
 
                                     </div>
 
-                                    
-                                </div>
-                            </div>
-
-                            <div class="container-fluid" ng-if="videoShown">
-                                <div class="row">
-
-                                    <div class="col-sm-12">
-                                        <div class="row no-gutter">
-                                            <div class="col-sm-3">
-
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-volume-down" aria-hidden="true"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-sm-3">
-
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-volume-up" aria-hidden="true"></i>
-                                                </button>
-
-                                            </div>
-
-                                            <div class="col-sm-3">
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-microphone-slash" aria-hidden="true"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <button type="button" class="btn btn-danger btn-block">
-                                                    Drop
-                                                </button>
-                                            </div>
-                                            
-                                        </div>
-
-
+                                    <div class="col-sm-6" ng-repeat="invitedUser in activeUser.invitedToChat">
+                                        <img ng-src="@{{ invitedUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="" ng-click="inviteToChat()" title="Change Users">
                                     </div>
+
+                                    
                                 </div>
                             </div>
 

@@ -8050,6 +8050,11 @@ button.list-group-item {
 	height: 508px;
 	overflow: auto;
   }
+
+  .gclist-modal.group-chat-contacts{
+	  height: 300px;
+	  overflow: auto;
+  }
   .group-chat-contacts .list-group-item{
 	  cursor: pointer;
   }
@@ -8083,6 +8088,7 @@ button.list-group-item {
 }
 .hvrbox .hvrbox-layer_bottom {
 	display: block;
+	width: 100%;
 }
 .hvrbox .hvrbox-layer_top {
 	opacity: 0;
