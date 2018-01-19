@@ -227,7 +227,7 @@
                     <div class="for-videocall">
                         <!-- just copy this <section> and next script -->
                         <section class="experiment">
-                            <section class="hidden">
+                            <section>
                                 <span>
                                     Private ??
                                     <a href="/video-conferencing/" target="_blank" title="Open this link in new tab. Then your conference room will be private!">
@@ -242,7 +242,7 @@
                             </section>
 
                             <!-- list of all available conferencing rooms -->
-                            {{--  <table style="width: 100%;" id="rooms-list"></table>  --}}
+                            <table style="width: 100%;" id="rooms-list"></table>
 
                             <!-- local/remote videos container -->
                             <div id="videos-container"></div>

@@ -78,14 +78,15 @@
     {{--  <script src="{{ url() }}/public/plugins/angularjs/rtc/audio-broadcast/broadcast.js"> </script>
     <script src="{{ url() }}/public/plugins/angularjs/rtc/audio-broadcast/broadcast-ui.js"> </script>  --}}
     <script src="{{ url() }}/public/plugins/angularjs/rtc/video-conferencing/conference.js"> </script>
-    <script src="{{ url() }}/public/plugins/angularjs/rtc/video-conferencing/conference-ui.js"> </script>
-    {{--  <script src="{{ url() }}/public/plugins/angularjs/rtc/onlineChatController.js"> </script>  --}}
+    {{--  <script src="{{ url() }}/public/plugins/angularjs/rtc/video-conferencing/conference-ui.js"> </script>  --}}
+    <script src="{{ url() }}/public/plugins/angularjs/rtc/onlineChatController.js"> </script>
 
     <script src="https://cdn.webrtc-experiment.com/getMediaElement.min.js"> </script>
 
     {{--  <script src="https://cdn.webrtc-experiment.com/meeting.js"> </script>
     <script src="{{ url() }}/public/plugins/angularjs/chatroom_rtc.js"> </script>  --}}
   @endif
+
   {{--  <script src="{{ url() }}/public/socketjs/new-chatbox.js"></script>
   <script src="{{ url() }}/public/socketjs/config-server.js"></script>
   <script src="{{ url() }}/public/socketjs/server.js"></script>  --}}

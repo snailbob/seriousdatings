@@ -386,6 +386,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                     '<td><button class="join">Join</button></td>';
                 roomsList.insertBefore(tr, roomsList.firstChild);
 
+                console.log(room.roomName, '.roomName');
+
                 var joinRoomButton = tr.querySelector('.join');
                 joinRoomButton.setAttribute('data-broadcaster', room.broadcaster);
                 joinRoomButton.setAttribute('data-roomToken', room.roomToken);
