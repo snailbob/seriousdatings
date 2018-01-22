@@ -20,7 +20,11 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.chatLoading = false;
     $scope.params = window.uri_get_params;
     $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
-
+    $scope.nowCalling = {
+        calling: false,
+        message: '',
+        drop: false
+    };
 
     $scope.inviteToChat = function (items) {
         var _toItem = {
@@ -60,63 +64,79 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         });
     };
 
-    $scope.startVideoCall = function(i, user){
-        $scope.currentUser = user;
+    $scope.dropCall = function(){
+        $scope.myInterval = 3000;
+        $scope.videoShown = false;
+        $scope.callAudio.pause();
+        $scope.callAudio.currentTime = 0;
+        $scope.nowCalling.calling = false;
+        $scope.nowCalling.drop = true;
 
+    }
+
+    $scope.playRinging = function(){
         //play ringing
         $scope.callAudio.play();
-
         $scope.myInterval = 0;
+    }
+
+    $scope.startVideoCall = function(i, user){
+        $scope.currentUser = user;
+        $scope.playRinging();
+
+        $scope.nowCalling.calling = true;
+        $scope.nowCalling.message = '<i class="fa fa-video-camera"></i> Waiting for '+$scope.currentUser.firstName;
+        $scope.nowCalling.drop = false;
+
         
-        var jc = $ngConfirm({
-            title: 'Calling',
-            content: '<i class="fa fa-video-camera"></i> Waiting for {{currentUser.firstName}}',
-            scope: $scope,
-            buttons: {
-                Calling: {
-                    text: 'Calling..',
-                    btnClass: 'btn-danger',
-                    action: function(scope, button){
-                        // scope.name = 'Booo!!';
-                        return false; // prevent close;
-                    }
-                },
-                dropCall: {
-                    text: 'Drop',
-                    btnClass: 'btn-default',
-                    action: function(scope, button){
-                        $scope.myInterval = 3000;
-                        // $(document).find('.experiment-rtc').addClass('hidden');
-                        $scope.videoShown = false;
+        // var jc = $ngConfirm({
+        //     title: 'Calling',
+        //     content: '<i class="fa fa-video-camera"></i> Waiting for {{currentUser.firstName}}',
+        //     scope: $scope,
+        //     buttons: {
+        //         Calling: {
+        //             text: 'Calling..',
+        //             btnClass: 'btn-danger',
+        //             action: function(scope, button){
+        //                 // scope.name = 'Booo!!';
+        //                 return false; // prevent close;
+        //             }
+        //         },
+        //         dropCall: {
+        //             text: 'Drop',
+        //             btnClass: 'btn-default',
+        //             action: function(scope, button){
+        //                 $scope.myInterval = 3000;
+        //                 // $(document).find('.experiment-rtc').addClass('hidden');
+        //                 $scope.videoShown = false;
 
-                        $scope.callAudio.pause();
-                        $scope.callAudio.currentTime = 0;
-                    }
-                }
-            }
+        //                 $scope.callAudio.pause();
+        //                 $scope.callAudio.currentTime = 0;
+        //             }
+        //         }
+        //     }
 
-        });
+        // });
 
         $scope.callAudio.onended = function(){
-            // alert("The audio has ended");
-            // $(document).find('.experiment-rtc').addClass('hidden');
-            $scope.videoShown = false;
+            // jc.close();
 
-            jc.close();
-            $ngConfirm({
-                title: 'No Answer',
-                content: '<i class="fa fa-video-camera"></i> No answer from {{currentUser.firstName}}',
-                scope: $scope,
-                buttons: {
-                    dropCall: {
-                        text: 'OK',
-                        btnClass: 'btn-default',
-                        action: function(scope, button){
+            // $scope.dropCall();
+    
+            // $ngConfirm({
+            //     title: 'No Answer',
+            //     content: '<i class="fa fa-video-camera"></i> No answer from {{currentUser.firstName}}',
+            //     scope: $scope,
+            //     buttons: {
+            //         dropCall: {
+            //             text: 'OK',
+            //             btnClass: 'btn-default',
+            //             action: function(scope, button){
 
-                        }
-                    }
-                }
-            });
+            //             }
+            //         }
+            //     }
+            // });
         }
     }
 
@@ -380,19 +400,43 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                 if (alreadyExist) return;
 
                 if (typeof roomsList === 'undefined') roomsList = document.body;
+                
+                $scope.playRinging();
+
+                var callingNameId = room.roomName.split("__");
+                var callingName = callingNameId[1];
+                var callingID = callingNameId[0];
 
                 var tr = document.createElement('tr');
-                tr.innerHTML = '<td><strong>Admin ' + room.roomName + '</strong> is inviting you to join video call..!</td>' +
-                    '<td><button class="join">Answer</button></td>';
+                tr.innerHTML = '<td>'+
+                    '<div class="alert alert-info">' +
+                    '<div class="pull-right text-right">'+
+                        '<button class="btn btn-success join" style="margin-right: 5px;">Answer</button>' + 
+                        '<button class="btn btn-danger reject">Reject</button>' +
+                    '</div>'+
+                    '<strong>' + callingName + '</strong> is inviting you to join video call..' +
+                    '</div>'
+                +'</td>';
                 roomsList.insertBefore(tr, roomsList.firstChild);
 
                 console.log(room.roomName, '.roomName');
+
+                var rejectBtn = tr.querySelector('.reject');
+                rejectBtn.onclick = function() {
+                    $(rejectBtn).closest('tr').hide();
+                    $scope.dropCall();
+                };
+
+
 
                 var joinRoomButton = tr.querySelector('.join');
                 joinRoomButton.setAttribute('data-broadcaster', room.broadcaster);
                 joinRoomButton.setAttribute('data-roomToken', room.roomToken);
                 joinRoomButton.onclick = function() {
                     this.disabled = true;
+
+                    console.log(joinRoomButton);
+                    $(joinRoomButton).closest('tr').hide();
 
                     var broadcaster = this.getAttribute('data-broadcaster');
                     var roomToken = this.getAttribute('data-roomToken');

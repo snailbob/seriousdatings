@@ -26,7 +26,23 @@
     <div class="inner-contendbg">
 
         <div class="container">
-            <div class="row"></div>
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="alert alert-info" ng-if="nowCalling.calling">
+                        <div class="pull-right">
+                            <button class="btn btn-danger" ng-click="dropCall()">
+                                Drop
+                            </button>
+                        </div>
+                        <span ng-bind-html="nowCalling.message"></span>
+                    </div>
+
+                    <!-- list of all available conferencing rooms -->
+                    <table style="width: 100%;" id="rooms-list"></table>
+
+                </div>
+            </div>
 
             <div class="row" ng-if="!callStarted">
 
@@ -224,10 +240,10 @@
 
                     </div>
 
-                    <div class="for-videocall">
+                    <div class="for-videocall"  ng-hide="!videoShown">
                         <!-- just copy this <section> and next script -->
                         <section class="experiment">
-                            <section class="hidden">
+                            <section class="hiddenx">
                                 <span>
                                     Private ??
                                     <a href="/video-conferencing/" target="_blank" title="Open this link in new tab. Then your conference room will be private!">
@@ -237,12 +253,9 @@
                                     </a>
                                 </span>
 
-                                <input type="text" ng-model="activeUser.room_id" id="conference-name">
+                                <input type="text" value="@{{activeUser.room_id}}__@{{data.me.firstName}}" id="conference-name">
                                 <button id="setup-new-room" class="setup">Setup New Conference</button>
                             </section>
-
-                            <!-- list of all available conferencing rooms -->
-                            <table style="width: 100%;" id="rooms-list"></table>
 
                             <!-- local/remote videos container -->
                             <div id="videos-container"></div>
