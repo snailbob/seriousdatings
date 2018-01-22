@@ -66,7 +66,12 @@ class AppointmentController extends Controller
             'act_app_id' => $request->input('appID'),
             'act_reasons' => $request->input('msg'),
             'act_status'=>$request->input('actType')]);
-        return  response()->json(['trans'=>$data]);
+
+        if ($data){
+            $dataUpdate =AppointMent::where('app_id',$request->input('appID'))->update(['app_status'=>$request->input('actType')]);
+        }
+
+        return  response()->json(['trans'=>$dataUpdate]);
     }
 
     public function getAppointment(){

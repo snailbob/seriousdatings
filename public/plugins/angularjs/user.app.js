@@ -412,16 +412,37 @@ $scope.notifActions = function(type,data){
             'appointment-view-layout.html',
             function($scoped){
                 $scoped.AppointmentDetail = AppointmentData;
-                $scoped.declineAppointment = function(appID){
-                        $scope.actionDeclineAppointment(appID);
-                };
-                $scoped.acceptAppointment = function (appId) {
-                        $scope.actionAcceptAppointment(appId);
-                };
+                // $scoped.declineAppointment = function(appID){
+                //         $scope.actionDeclineAppointment(appID);
+                //
+                // };
+                // $scoped.acceptAppointment = function (appId) {
+                //         $scope.actionAcceptAppointment(appId);
+                //
+                // };
+            },
+            {
+
+                saveBtn: {
+                    text: 'Decline',
+                    btnClass: 'btn-red icons-btns',
+                    action: function(scoped){
+                        console.log(scoped.AppointmentDetail);
+                        $scope.actionDeclineAppointment(scoped.AppointmentDetail.appID,scoped.AppointmentDetail);
+                    }
+                },
+
+                closeBtn: {
+                    text: 'Accept',
+                    btnClass: 'btn-green icons-btns',
+                    action: function(scoped){
+                        $scope.actionAcceptAppointment(scoped.AppointmentDetail.appID,scoped.AppointmentDetail);
+                    }
+                }
             });
     };
 
-    $scope.actionDeclineAppointment = function (id) {
+    $scope.actionDeclineAppointment = function (id,AppointmentData) {
         $scope.reusableNgConfirmAppointment('Reasons',
             'appointment-actions-layout.html',
             function($scoped){
@@ -429,26 +450,54 @@ $scope.notifActions = function(type,data){
                 $scoped.reasonType = "error";
                 $scoped.fontAwesome = "fa-frown-o";
                 $scoped.appID = id;
-                $scoped.saveActions = function () {
-                        $scope.saveAppointmentAction(this.text, this.appID,'R');
 
-                };
+            },
+            {
+
+                saveBtn: {
+                    text: 'Submit',
+                    btnClass: 'btn-red icons-btns',
+                    action: function(scoped){
+                        $scope.saveAppointmentAction(scoped.text, id,'R');
+                    }
+                },
+
+                closeBtn: {
+                    text: 'cancel',
+                    action: function(scoped){
+                        $scope.readDetaildAppointment(AppointmentData);
+                    }
+                }
             });
 
     };
-    $scope.actionAcceptAppointment = function(id){
-        $scope.reusableNgConfirmAppointment('Message',
+    $scope.actionAcceptAppointment = function(id,AppointmentData){
+         $scope.reusableNgConfirmAppointment('Message',
             'appointment-actions-layout.html',
             function($scoped){
                 $scoped.reasonTitle = "Confirmation Message";
                 $scoped.reasonType = "success";
                 $scoped.fontAwesome = "fa-smile-o";
                 $scoped.appID = id;
-                $scoped.saveActions = function () {
-                    $scope.saveAppointmentAction(this.text, this.appID,'A');
 
-                };
-            });
+            },{
+                saveBtn: {
+                    text: 'Submit',
+                    btnClass: 'btn-green icons-btns',
+                    action: function(scoped){
+                        $scope.saveAppointmentAction(scoped.text, id,'A');
+                    }
+                },
+
+                 closeBtn: {
+                     text: 'cancel',
+                     action: function(scoped){
+                         $scope.readDetaildAppointment(AppointmentData);
+                     }
+                 }
+            }
+
+            );
     };
 
 
@@ -475,7 +524,7 @@ $scope.notifActions = function(type,data){
 
     };
 
-    $scope.reusableNgConfirmAppointment  = function (title,url,callBack) {
+    $scope.reusableNgConfirmAppointment  = function (title,url,callBack,callBackbuttons={}) {
        return $ngConfirm({
             title: title,
             contentUrl: base_url+'/public/js/appointment/'+url,
@@ -485,6 +534,8 @@ $scope.notifActions = function(type,data){
             backgroundDismissAnimation: 'glow',
             theme: 'material',
             onScopeReady: callBack,
+            buttons:callBackbuttons,
+
         })
 
     };
