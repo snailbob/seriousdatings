@@ -115,7 +115,10 @@ class AppointmentController extends Controller
                     return 'Unread';
                 break;
             case 'R':
-                return 'Read';
+                    return 'Decline';
+                break;
+            case 'A':
+                    return 'Accepted';
                 break;
             default:
                 return "";
