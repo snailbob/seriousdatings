@@ -109,71 +109,71 @@
     <div class="left-section">
 
         <div class="serious-method">
-            {{--  @if(isset($currentUser))   --}}
+            <h2 class="quiz-head">Are You Ready To Date Again?</h2>
+            <div class="row" style="margin-bottom: 10px;" ng-if="isReadyToDate.answer == null || isReadyToDate.answer == true">
+                <div class="col-xs-6 text-center">
+                    <button class="btn btn-danger" ng-click="areYouReadyToDate(true)">Yes</button>
+                </div>
+                <div class="col-xs-6 text-center">
+                    <button class="btn btn-danger" ng-click="areYouReadyToDate(false)">No</button>
+                </div>
+            </div>
+            <div class="row" ng-if="isReadyToDate.answer == false">
+                <div class="col-sm-12">
+                    <p class="text-muted text-center">
+                        You are not ready to date. <br><a class="btn btn-link" ng-click="areYouReadyToDate(null)">Update</a>
+                    </p>
+                </div>
+            </div>
 
-                @if(!isset($currentUser) || $currentUser==0)
-                <div class="connect-with-left">
-                    <a href="#">
-                        <div class="serious-icons">
-                            {!! HTML::Image("public/images/phone-chat-icon.png" ,"") !!}
-                        </div>
-                        <h2>Phone Chat</h2>
-                    </a> 
-                </div>
-                <div class="connect-with-left float-right"> 
-                    <a href="#">
-                        <div class="serious-icons">
-                            {!! HTML::Image("public/images/video-chat-icon.png" ,"") !!}
-                            </div>
-                        <h2>Video Chat</h2>
-                    </a> 
-                </div>
-                <div class="connect-with-left"> 
-                    <a href="#">
-                        <div class="serious-icons">{!! HTML::Image("public/images/serious-dating-icon.png" ,"") !!}</div>
-                        <h2>Serious Dating</h2>
-                    </a> 
-                </div>
-                <div class="connect-with-left float-right"> 
-                    <a href="#">
-                        <div class="serious-icons">{!! HTML::Image("public/images/vi-iconrtual-gift.png" ,"") !!}</div>
-                        <h2>Virtual Gift</h2>
-                    </a> 
-                </div>
-                <div class="connect-with-left"> 
-                    <a href="#">
-                        <div class="serious-icons">{!! HTML::Image("public/images/serious-vecation-icon.png" ,"") !!}</div>
-                        <h2>Serious Vacation</h2>
-                    </a> 
-                </div>
-                <div class="connect-with-left float-right"> 
-                    <a href="#">
-                        <div class="serious-icons">{!! HTML::Image("public/images/background-check-icon.png" ,"") !!}</div>
-                        <h2>background Check</h2>
-                    </a> 
-                </div>
-                @else
-                <h2 class="quiz-head">Are You Ready To Date Again?</h2>
-                <div class="row" style="margin-bottom: 10px;" ng-if="isReadyToDate.answer == null || isReadyToDate.answer == true">
-                    <div class="col-xs-6 text-center">
-                        <button class="btn btn-danger" ng-click="areYouReadyToDate(true)">Yes</button>
-                    </div>
-                    <div class="col-xs-6 text-center">
-                        <button class="btn btn-danger" ng-click="areYouReadyToDate(false)">No</button>
-                    </div>
-                </div>
-                <div class="row" ng-if="isReadyToDate.answer == false">
-                    <div class="col-sm-12">
-                        <p class="text-muted text-center">
-                            You are not ready to date. <br><a class="btn btn-link" ng-click="areYouReadyToDate(null)">Update</a>
-                        </p>
-                    </div>
-                </div>
-
-
-                @endif
-            {{--  @endif  --}}
         </div>
+
+
+        @if(!isset($currentUser) || $currentUser==0)
+        <div class="travel-option profile-managment">
+
+            <div class="connect-with-left">
+                <a href="#">
+                    <div class="serious-icons">
+                        {!! HTML::Image("public/images/phone-chat-icon.png" ,"") !!}
+                    </div>
+                    <h2>Phone Chat</h2>
+                </a> 
+            </div>
+            <div class="connect-with-left float-right"> 
+                <a href="#">
+                    <div class="serious-icons">
+                        {!! HTML::Image("public/images/video-chat-icon.png" ,"") !!}
+                        </div>
+                    <h2>Video Chat</h2>
+                </a> 
+            </div>
+            <div class="connect-with-left"> 
+                <a href="#">
+                    <div class="serious-icons">{!! HTML::Image("public/images/serious-dating-icon.png" ,"") !!}</div>
+                    <h2>Serious Dating</h2>
+                </a> 
+            </div>
+            <div class="connect-with-left float-right"> 
+                <a href="#">
+                    <div class="serious-icons">{!! HTML::Image("public/images/vi-iconrtual-gift.png" ,"") !!}</div>
+                    <h2>Virtual Gift</h2>
+                </a> 
+            </div>
+            <div class="connect-with-left"> 
+                <a href="#">
+                    <div class="serious-icons">{!! HTML::Image("public/images/serious-vecation-icon.png" ,"") !!}</div>
+                    <h2>Serious Vacation</h2>
+                </a> 
+            </div>
+            <div class="connect-with-left float-right"> 
+                <a href="#">
+                    <div class="serious-icons">{!! HTML::Image("public/images/background-check-icon.png" ,"") !!}</div>
+                    <h2>background Check</h2>
+                </a> 
+            </div>
+        </div>
+        @endif
 
         <div class="travel-option profile-managment">
             <h2>Profile management</h2>

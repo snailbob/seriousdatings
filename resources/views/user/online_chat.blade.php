@@ -2,12 +2,12 @@
 
 
 @section('form_area')
-<script>
+{{--  <script>
     if(!location.hash.replace('#', '').length) {
         location.href = location.href.split('#')[0] + '#' + (Math.random() * 100).toString().replace('.', '');
         location.reload();
     }
-</script>
+</script>  --}}
 <div ng-controller="onlineChatController" ng-cloak ng-click="closeAllPopups()">
 
     <div class="inner-header calendar-event-banner">
@@ -26,7 +26,23 @@
     <div class="inner-contendbg">
 
         <div class="container">
-            <div class="row"></div>
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="alert alert-info" ng-if="nowCalling.calling">
+                        <div class="pull-right">
+                            <button class="btn btn-danger" ng-click="dropCall()">
+                                Drop
+                            </button>
+                        </div>
+                        <span ng-bind-html="nowCalling.message"></span>
+                    </div>
+
+                    <!-- list of all available conferencing rooms -->
+                    <table style="width: 100%;" id="rooms-list"></table>
+
+                </div>
+            </div>
 
             <div class="row" ng-if="!callStarted">
 
@@ -224,7 +240,7 @@
 
                     </div>
 
-                    <div class="for-videocall">
+                    <div class="for-videocall"  ng-hide="!videoShown">
                         <!-- just copy this <section> and next script -->
                         <section class="experiment">
                             <section class="hidden">
@@ -237,12 +253,17 @@
                                     </a>
                                 </span>
 
-                                <input type="text" ng-model="activeUser.room_id" id="conference-name">
+                                <input type="text" value="@{{activeUser.room_id}}__@{{data.me.firstName}}" id="conference-name">
                                 <button id="setup-new-room" class="setup">Setup New Conference</button>
                             </section>
 
-                            <!-- list of all available conferencing rooms -->
-                            {{--  <table style="width: 100%;" id="rooms-list"></table>  --}}
+                            <div class="alert alert-info">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+
+                                <i class="fa fa-info-circle" aria-hidden="true"></i> You can mute friend's audio and can pause video to hold. Slide up/down slider to adjust volume. You can also view video on fullscreen. Hover over video and buttons will show to perform action.
+                            </div>
 
                             <!-- local/remote videos container -->
                             <div id="videos-container"></div>
@@ -371,11 +392,10 @@
                             
 
                             <div class="direct-chat-messages">
-                                <div class="padding-top" ng-if="!activeUser.chat.length && !chatLoading && activeUser.private_id">
+                                <div class="padding-top" ng-if="!activeUser.chat.length && activeUser.private_id">
                                     <p class="lead text-center text-muted">
                                         <i class="fa fa-envelope-o fa-3x" aria-hidden="true"></i> <br>
                                         No message yet.   
-
                                     </p>
 
                                 </div>
