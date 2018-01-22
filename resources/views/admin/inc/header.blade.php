@@ -331,15 +331,29 @@
             <li><a href="{{ url('admin/blog_management/create_post') }}"><i class="fa fa-circle-o"></i> <span>Create Post</span></a></li>
             <li><a href="{{ url('admin/blog_management/category') }}"><i class="fa fa-circle-o"></i> <span>Category Lists</span></a></li>
          <!--    <li><a href="{{ url('admin/blog_management/status') }}"><i class="fa fa-circle-o"></i> <span>Status Lists</span></a></li>
-            <li><a href="{{ url('admin/blog_management/type') }}"><i class="fa fa-circle-o"></i> <span>Type Lists</span></a></li> -->
-          </ul>
-        </li>
-        <li><a href="{{ url('admin/calendar') }}"><i class="fa fa-calendar"></i> <span>Events Calendar</span></a></li>
-        <li><a href="{{ url('admin/change_password') }}"><i class="fa fa-user"></i> <span>Change Password</span></a></li>
-        <!-- <li><a href="#"><i class="fa fa-envelope-o"></i> <span>Manage Mail</span></a></li> -->
-        <li><a href="{{ url('admin/logout') }}"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
-        <!-- <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li> -->
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+          <li><a href="{{ url('admin/blog_management/type') }}"><i class="fa fa-circle-o"></i> <span>Type Lists</span></a></li> -->
+        </ul>
+      </li>
+      <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+        <a href="#">
+          <i class="fa fa-group"></i>
+          <span>Group Management</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{ url('admin/group_management/group_lists') }}"><i class="fa fa-circle-o"></i> <span>Group list</span></a></li>
+          <!-- <li><a href="{{ url('admin/blog_management/create_post') }}"><i class="fa fa-circle-o"></i> <span>Create Post</span></a></li>
+          <li><a href="{{ url('admin/blog_management/category') }}"><i class="fa fa-circle-o"></i> <span>Category Lists</span></a></li> -->
+        </ul>
+      </li>
+      <li><a href="{{ url('admin/calendar') }}"><i class="fa fa-calendar"></i> <span>Events Calendar</span></a></li>
+      <li><a href="{{ url('admin/change_password') }}"><i class="fa fa-user"></i> <span>Change Password</span></a></li>
+      <!-- <li><a href="#"><i class="fa fa-envelope-o"></i> <span>Manage Mail</span></a></li> -->
+      <li><a href="{{ url('admin/logout') }}"><i class="fa fa-sign-out"></i> <span>Logout</span></a></li>
+      <!-- <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li> -->
+    </ul>
+  </section>
+  <!-- /.sidebar -->
+</aside>

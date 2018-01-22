@@ -58,10 +58,13 @@ $(document).ready(function()
 						cache: false,
 						success: function(value)
 						{	
-							console.log(value.text, value.message);
 							$('ul#' + value.id + ' a.' + value.anchorClass).remove();
 							$('ul#' + value.id + ' li.' + value.listClass).append('<a href=\'#\' class="'+ value.anchorClass +'"><i class="fa '+ value.icon +'"></i> ' + value.text + '</a>');
+							
 							toastr.info(value.message);
+							if(value.deleted_at != null){
+								$('ul#' + value.id).parent().parent().parent().remove();
+							}
 						},
 						error: function(data,a,b)
 						{

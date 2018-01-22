@@ -15,12 +15,10 @@
       <li class="active">Users</li>
     </ol>
   </section>
-
   <!-- Main content -->
   <section class="content">
     <div class="row">
       <div class="col-xs-12">
-
         <div class="box">
           <div class="box-body">
             <table id="user_list_tbl" class="table table-bordered table-striped">
@@ -34,9 +32,7 @@
                 </tr>
               </thead>
               <tbody>
-
                 @foreach($users as $user)
-
                 <tr>
                   <td>
                     <img src="{{$user->photo}}" class="img-circle " width="45" alt="">
