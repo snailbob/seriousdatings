@@ -67,10 +67,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.dropCall = function(){
         $scope.myInterval = 3000;
         $scope.videoShown = false;
-        $scope.callAudio.pause();
-        $scope.callAudio.currentTime = 0;
-        $scope.nowCalling.calling = false;
         $scope.nowCalling.drop = true;
+        $scope.stopRinging();
 
     }
 
@@ -78,6 +76,12 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         //play ringing
         $scope.callAudio.play();
         $scope.myInterval = 0;
+    }
+
+    $scope.stopRinging = function(){
+        $scope.nowCalling.calling = false;
+        $scope.callAudio.pause();
+        $scope.callAudio.currentTime = 0;
     }
 
     $scope.startVideoCall = function(i, user){
@@ -236,10 +240,14 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
             var oldLength = $scope.activeUser.chat.length;
 
             console.log(res.data , 'group_chat');
-            $scope.activeUser.private_id = res.data.private_id;
-            $scope.activeUser.room_id = res.data.id;
-            $scope.activeUser.chat = res.data.messages;
-            $scope.activeUser.participants = res.data.messages;
+
+            //check first if room id is same before displaying
+            if($scope.activeUser.room_id == res.data.id){
+                $scope.activeUser.private_id = res.data.private_id;
+                $scope.activeUser.room_id = res.data.id;
+                $scope.activeUser.chat = res.data.messages;
+                $scope.activeUser.participants = res.data.messages;
+            }
 
             if($scope.activeUser.chat.length != oldLength){
                 $scope.scrollBottom();
@@ -389,6 +397,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                 });
                 mediaElement.id = media.streamid;
                 videosContainer.insertBefore(mediaElement, videosContainer.firstChild);
+                $scope.stopRinging();
+
             },
             onRemoteStreamEnded: function(stream, video) {
                 if (video.parentNode && video.parentNode.parentNode && video.parentNode.parentNode.parentNode) {
@@ -425,8 +435,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                 rejectBtn.onclick = function() {
                     $(rejectBtn).closest('tr').hide();
                     $scope.dropCall();
+                    // $scope.stopRinging();
                 };
-
 
 
                 var joinRoomButton = tr.querySelector('.join');
@@ -434,6 +444,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                 joinRoomButton.setAttribute('data-roomToken', room.roomToken);
                 joinRoomButton.onclick = function() {
                     this.disabled = true;
+                    $scope.videoShown = true;
 
                     console.log(joinRoomButton);
                     $(joinRoomButton).closest('tr').hide();
