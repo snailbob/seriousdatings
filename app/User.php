@@ -172,5 +172,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->friendsOfMine->merge($this->friendOf);
     }
 
+    public function group()
+    {
+        return $this->belongsToMany('App\Group', 'groups_users', 'group_id', 'user_id')->withPivot('id');
+    }
 
 }

@@ -287,10 +287,23 @@ Route::group(array('before' => 'admin'), function() {
     Route::post('deleteType', 'BlogManagementController@deleteType');
 
     // create post
-     Route::get('admin/blog_management/create_post', 'BlogManagementController@showCreatePost');
-     Route::post('savePost', 'BlogManagementController@savePost');
+    Route::get('admin/blog_management/create_post', 'BlogManagementController@showCreatePost');
+    Route::post('savePost', 'BlogManagementController@savePost');
     /* END Blog Management */ 
     
+    /* Group Management */
+    Route::get('admin/group_management/group_lists', 'GroupManagementController@showGroupList');
+    Route::get('admin/group_management/group/{id}', 'GroupManagementController@showGroupMembers')->name('group_page');
+    Route::get('admin/group_management/group/{id}/add_members', 'GroupManagementController@nonMemberLists');
+    Route::post('addGroupNames', 'GroupManagementController@addGroupName');
+    Route::post('editGroupName', 'GroupManagementController@editGroupName');
+    Route::post('deleteGroupName', 'GroupManagementController@deleteGroupName');
+    Route::post('blockGroupName', 'GroupManagementController@blockGroupName');
+    Route::post('blockMemberInGroup', 'GroupManagementController@blockMemberInGroup');
+    Route::post('addMembersInGroup', 'GroupManagementController@addMembersInGroup');
+    
+    /* End Group Management */ 
+
     
     Route::get('admin/templates/{id}/content', 'TemplateController@showContent');
     Route::get('admin/change_password', 'ChangePasswordController@showForm');

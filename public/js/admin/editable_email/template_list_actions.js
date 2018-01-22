@@ -115,7 +115,7 @@ $(document).ready(function()
 						{	
 							console.log(value);
 							$('td#' + value.id).parent().remove();
-							toastr.info(value.name + " is successfully deleted");
+							toastr.info(value.template_name + " is successfully deleted");
 						},
 						error: function(data,a,b)
 						{
