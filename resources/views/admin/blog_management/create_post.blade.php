@@ -3,11 +3,12 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      Administrator
-      <small>Create Post</small>
+      Create Post
+      <small>administration</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="{{url()}}/admin/blog_management/post_lists">Blog Management</a></li>
       <li class="active">Create Post</li>
     </ol>
   </section>

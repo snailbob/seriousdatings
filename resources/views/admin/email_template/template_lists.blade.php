@@ -7,12 +7,11 @@
   <section class="content-header">
     <h1>
       Email Template
-      <small>list of templates</small>
+      <small>lists</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="#">Email Templates</a></li>
-      <li class="active">Template Lists</li>
+      <li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Email Template Lists</li>
     </ol>
   </section>
 

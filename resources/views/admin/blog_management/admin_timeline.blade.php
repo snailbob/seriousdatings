@@ -6,11 +6,11 @@
  	<section class="content-header">
  		<h1>
  			Timeline
- 			<small>name of the user</small>
+ 			<small>by {{$post->blogby}}</small>
  		</h1>
  		<ol class="breadcrumb">
- 			<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
- 			<li><a href="#">UI</a></li>
+ 			<li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+ 			<li><a href="{{url()}}/admin/blog_management/post_lists">Blog Management</a></li>
  			<li class="active">Timeline</li>
  		</ol>
  	</section>
