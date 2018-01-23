@@ -13,6 +13,7 @@ use App\AppointMent;
 use App\User;
 use App\Http\Controllers\NotiFierLogsController;
 use Illuminate\Support\Facades\View;
+use App\AvailabilityApp;
 class AppointmentController extends Controller
 {
     /**
@@ -123,6 +124,41 @@ class AppointmentController extends Controller
             default:
                 return "";
         }
+
+    }
+
+
+
+    public function getTimeAvailability(){
+        $data = AvailabilityApp::where('av_user_id',NotiFierLogsController::getUserId())->where('av_status','=',null)->get();
+         return  response()->json(['avail'=>self::AvailabilityAppFormat($data)]);
+    }
+
+
+    public static function AvailabilityAppFormat ($data){
+
+         $new_value = array();
+         $format = array();
+        foreach ($data as $key => $value) {
+
+             $new_value['avDate'] = date('d-M-Y',strtotime($value->av_user_date));
+             $new_value['avDay'] = date('l',strtotime($value->av_user_date));
+             $new_value['avTimes'] = self::sliceUserTime($value->av_user_times);
+             $format[] = $new_value;
+
+        }
+
+        return $format;
+    }
+    public static function sliceUserTime ($times){
+            $time = explode(",", $times);
+            $timed = array();
+            $timer = array();
+            foreach ($time as  $value) {
+                    $timer['Usertime'] = $value;
+                    $timed[]  = $timer;               
+            }
+            return $timed;
 
     }
 
