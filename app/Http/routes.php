@@ -11,10 +11,11 @@
   |
  */
 
-  use Illuminate\Support\Facades\App;
-  use App\Http\Controllers\SubscriptionCheckController;
-  use App\User;
-  use App\AboutYourDate;
+use Illuminate\Support\Facades\App;
+use App\Http\Controllers\SubscriptionCheckController;
+use App\User;
+use App\AboutYourDate;
+
 /* Route::get('test', function () {
 
 
@@ -52,7 +53,7 @@ Route::get('username/check', function () {
     }
 });
 
-Route::get('/start', function() {
+Route::get('/start', function () {
     $verified = new Role();
     $verified->name = 'Verified';
     $verified->save();
@@ -111,7 +112,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('profile_settings', 'UsersController@profileSettings');
     Route::get('privacy_settings', 'UsersController@privacySettings');
-    
+
 });
 
 Route::get('search', 'SearchController@index');
@@ -140,7 +141,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::resource('group_chat', 'GroupChatController');
     Route::resource('group_chat_participants', 'GroupChatParticipantsController');
     Route::resource('group_chat_messages', 'GroupChatMessagesController');
-    
+
     Route::get('usermates/{username}', 'UsersController@selectmates');
     Route::post('add_friend', 'UserFriendshipController@store');
     Route::post('delete_friend', 'UserFriendshipController@destroy');
@@ -157,12 +158,12 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('search_byname', 'SearchController@getSearchByName');
     Route::get('random_compatible', 'SearchController@getRandomCompatible');
     Route::get('get_browse_members', 'SearchController@getBrowseMembers');
-    
+
     Route::get('get_readydate_question', 'ReadyDateQuestion@index');
     Route::post('readydate_answer', 'ReadDateAnswer@store');
-    
+
     Route::post('notifications', 'NotificationController@update');
-    
+
     /*NEW notification logs*/
     Route::post('notifications_new', 'NotiFierLogsController@updateRead');
 
@@ -173,9 +174,9 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('place', 'UserDestinationController@index');
     Route::post('add_place', 'UserDestinationController@store');
     Route::post('remove_place', 'UserDestinationController@destroy');
-    
+
     Route::get('testfriends', 'UsersController@testfriends');
-    
+
     Route::get('current_user', 'UsersController@getCurrentUser');
 
     Route::get('events', 'EventManagementController@apiGetEvent');
@@ -187,9 +188,8 @@ Route::group(['prefix' => 'api'], function () {
     //for admin
     Route::post('send_event_invite', 'EventsController@send_event_invite');
     Route::post('change_primary_video', 'VideoManagementController@change_primary_video');
-    
-    
-    
+
+
     Route::get('profile/{username}', 'ProfileController@userProfile');
     Route::get('notify_check/{id}', 'ProfileController@checkNotify');
     Route::get('match/{username}', 'ProfileController@getUserMatch');
@@ -216,14 +216,14 @@ Route::group(['prefix' => 'api'], function () {
 
 
     /*saving appointment*/
-    Route::post('saveappointment','AppointmentController@saveAppointment');
-    Route::get('getAppoinment','AppointmentController@getAppointment');
-    Route::post('saveAppResponse','AppointmentController@saveAppResponse');
+    Route::post('saveappointment', 'AppointmentController@saveAppointment');
+    Route::get('getAppoinment', 'AppointmentController@getAppointment');
+    Route::post('saveAppResponse', 'AppointmentController@saveAppResponse');
 
 });
 
-Route::group(array('before' => 'admin'), function() {
-    Route::get('admin/logout', function() {
+Route::group(array('before' => 'admin'), function () {
+    Route::get('admin/logout', function () {
         $user_id = Auth::user()->id;
         Auth::logout();
         DB::table('user_online')->where('user_id', '=', $user_id)->delete();
@@ -234,8 +234,8 @@ Route::group(array('before' => 'admin'), function() {
     Route::get('admin/users/{id}/removePicture', function ($id) {
 
         DB::table('users')
-        ->where('id', $id)
-        ->update(['photo' => 'placeholder.png']);
+            ->where('id', $id)
+            ->update(['photo' => 'placeholder.png']);
         $username = DB::table('users')->where('id', $id)->pluck("username");
         $file = public_path() . '\images\placeholder.png';
         $dest = public_path() . '\images\users\\' . $username . '\placeholder.png';
@@ -244,6 +244,21 @@ Route::group(array('before' => 'admin'), function() {
 
         return redirect(url() . '/admin/users/' . $id);
     });
+
+    /* Ads Mangement */
+    Route::get('admin/ads_management/pricing_lists', 'AdsPricingController@getPricelist');
+    Route::post('addAdsPricing', 'AdsPricingController@addAdsPricing');
+    Route::post('editAdsPricing', 'AdsPricingController@editAdsPricing');
+    Route::post('deleteAdsPricing', 'AdsPricingController@deleteAdsPricing');
+    /* End Ads Mangement */
+
+
+    /* Gift E-Cards */
+    Route::get('admin/gift_cards/category', 'GiftCardController@getCategoryList');
+    Route::post('addGiftCardCategory', 'GiftCardController@addGiftCardCategory');
+    Route::post('editGiftCardCategory', 'GiftCardController@editGiftCardCategory');
+    Route::post('deleteGiftCardCategory', 'GiftCardController@deleteGiftCardCategory');
+    /* End Gift E-Cards */
 
     /* Editable Email Section */
     Route::post('saveTemplate', 'EditableEmailController@saveTemplate');
@@ -256,13 +271,13 @@ Route::group(array('before' => 'admin'), function() {
     /* END Editable Email Section */
 
     /* Definable Flirt Message */
-    Route::post('saveFlirtMessage', 'DefinableFlirtController@saveFlirtMessage'); 
-    Route::post('flirtMessage', 'DefinableFlirtController@getFlirtMessage'); 
+    Route::post('saveFlirtMessage', 'DefinableFlirtController@saveFlirtMessage');
+    Route::post('flirtMessage', 'DefinableFlirtController@getFlirtMessage');
     Route::post('updateFlirtMessage', 'DefinableFlirtController@updateFlirtMessage');
     Route::post('deleteFlirtMessage', 'DefinableFlirtController@deleteFlirtMessage');
     Route::get('admin/definable_flirt_list', 'DefinableFlirtController@showFlirtMessageLists');
     Route::get('admin/add_flirt_message', 'DefinableFlirtController@showFlirtMessageForm');
-    /* End Definable Flirt Message */ 
+    /* End Definable Flirt Message */
 
     /* Blog Management */
     Route::get('admin/blog_management/post_lists', 'BlogManagementController@showPostLists');
@@ -291,8 +306,8 @@ Route::group(array('before' => 'admin'), function() {
     // create post
     Route::get('admin/blog_management/create_post', 'BlogManagementController@showCreatePost');
     Route::post('savePost', 'BlogManagementController@savePost');
-    /* END Blog Management */ 
-    
+    /* END Blog Management */
+
     /* Group Management */
     Route::get('admin/group_management/group_lists', 'GroupManagementController@showGroupList');
     Route::get('admin/group_management/group/{id}', 'GroupManagementController@showGroupMembers')->name('group_page');
@@ -303,10 +318,10 @@ Route::group(array('before' => 'admin'), function() {
     Route::post('blockGroupName', 'GroupManagementController@blockGroupName');
     Route::post('blockMemberInGroup', 'GroupManagementController@blockMemberInGroup');
     Route::post('addMembersInGroup', 'GroupManagementController@addMembersInGroup');
-    
-    /* End Group Management */ 
 
-    
+    /* End Group Management */
+
+
     Route::get('admin/templates/{id}/content', 'TemplateController@showContent');
     Route::get('admin/change_password', 'ChangePasswordController@showForm');
     Route::get('admin/calendar', 'AdminCalendarEveController@showCalendar'); //  BY AK
@@ -320,7 +335,7 @@ Route::group(array('before' => 'admin'), function() {
 
     Route::get('admin/seo/edit/{type}', 'SeoContentController@edit');
     Route::post('admin/seo/update', 'SeoContentController@update');
-    
+
     Route::post('admin/change_password', 'ChangePasswordController@updatePassword');
     Route::post('admin/send', 'AdminDashboardController@sendEmail');
 
@@ -356,7 +371,6 @@ Route::post('deleteUser', 'AdminUserListController@deleteUser');
 /* End of Manage User Actions */
 
 
-
 Route::get('/test', 'AdminDashboardController@getTest');
 
 Route::get('ajax', 'AjaxRequestController@getSearchType');
@@ -374,11 +388,9 @@ Route::get('contact', 'ContactController@showForm');
 Route::post('profileupload', 'MatchController@Profileupload');
 
 
-
-
-Route::get('test_coords', function(){
+Route::get('test_coords', function () {
     $u = AboutYourDate::where('id', '120')->first(); //->update(['relationshipGoal'=>'yeah']);
-    return  json_encode($u);
+    return json_encode($u);
     // $details = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=23423"));
     // $lat = $details->results[0]->geometry->location->lat;
     // $lng = $details->results[0]->geometry->location->lng;
@@ -387,12 +399,10 @@ Route::get('test_coords', function(){
 });
 
 
-
-
 Route::get('adminlogin', 'AdminLoginController@getIndex');
 //Route::get('calendar', 'CalendarController');
 Route::post('admindashboard', 'AdminLoginController@postLogin');
-Route::get('comingsoon', function() {
+Route::get('comingsoon', function () {
     return View::make('comingsoon');
 });
 
@@ -415,7 +425,7 @@ Route::post('forgotPassword', 'ForgotPasswordController@forgetFormPost');
 
 Route::get('pages/{title}', 'PageController@showContent');
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function () {
 
     Route::get('groups', 'MyGroupController@showGroups');
     Route::get('profiles/groups', 'MyGroupController@index');
@@ -423,12 +433,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('profiles/groups/create', 'MyGroupController@create');
     Route::get('groups/{groupID}/addMember', 'MyGroupController@addMemberForm');
     Route::get('groups/{groupID}/removeMember', 'MyGroupController@removeMemberForm');
-    
+
     Route::get('datingPlan/{planId}', 'DatingPlanController@subscribe');
     Route::get('datingPlan/{planId}/success', 'DatingPlanController@success');
     Route::get('profile/datingPlan/succes', 'DatingPlanController@success');
     Route::get('datingPlan/{planId}/cancel', 'DatingPlanController@cancel');
-    
+
     Route::get('events/{id}/upload', 'EventsController@uploadForm');
     Route::get('match', 'MatchController@getIndex');
 
@@ -437,7 +447,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('groups/{groupID}/addMember', 'MyGroupController@addMemberPost');
     Route::post('groups/{groupID}/removeMember', 'MyGroupController@removeMemberPost');
     Route::post('events/create', 'EventsController@create');
-    
+
     Route::resource('events', 'EventsController');
     Route::get('events/details/{id}', 'EventsController@getEventsDetails');
 
@@ -461,7 +471,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::controller('profile', 'ProfileController');
     // Route::get('profile', 'ProfileController@userProfile');
 
-    Route::get('profile/logout', function() {
+    Route::get('profile/logout', function () {
         $user_id = Auth::user()->id;
         Auth::logout();
         DB::table('user_online')->where('user_id', '=', $user_id)->delete();
@@ -478,7 +488,7 @@ Route::controller('/', 'HomeController');
 // Route::get('/logout', 'HomeController@getLogout');
 
 
-Route::filter('profile', function() {
+Route::filter('profile', function () {
     if (Auth::user()) {
         $checkSubscription = new SubscriptionCheckController();
         $checkSubscription->checkSubscription();
@@ -489,7 +499,7 @@ Route::filter('profile', function() {
 });
 
 
-Route::filter('admin', function() {
+Route::filter('admin', function () {
     if (Auth::user()) {
         $user = Auth::user();
         if (!$user->hasRole('Admin')) {

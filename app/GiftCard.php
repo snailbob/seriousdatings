@@ -17,24 +17,12 @@ class GiftCard extends Model implements AuthenticatableContract, CanResetPasswor
     use CanResetPassword;
     use EntrustUserTrait;
 
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'gift_cards';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['name', 'image', 'price'];
+    protected $fillable = [ 'gift_category_id', 'name', 'image', 'price'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    //protected $hidden = ['password', 'remember_token'];
+    public function giftCategory(){
+        return $this->belongsTo('App\GiftCategory');
+    }
+
 }

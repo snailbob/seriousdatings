@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\GiftCard;
 use Input;
 use Redirect;
+use App\GiftCategory;
 
 
 class GiftCardController extends Controller
@@ -20,12 +21,9 @@ class GiftCardController extends Controller
      */
     public function index()
     {
-        $giftCards = GiftCard::all();
-        if ($giftCards === null) {
-            $giftCards = null;
-		}
-		//return $giftCards;
-         return \View::make('admin.gift_card.manage_giftCard')->withCards($giftCards);
+        $giftCards = GiftCard::where('gift_category_id', '>' ,1)->get();
+        $giftCards->load('giftCategory');
+        return \View::make('admin.gift_card.manage_giftCard')->with('giftCards', $giftCards);
     }
 
     /**
@@ -35,106 +33,112 @@ class GiftCardController extends Controller
      */
     public function create()
     {
-        return \View::make('admin.gift_card..add_giftCard');
+        $categories = GiftCategory::where('id', '>', 1)->get();
+        return \View::make('admin.gift_card.add_giftCard')->with('categories', $categories);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         //return 'form posted';
-		$rules = array(
-                'name' 				=> 'required',
-                'uploadpicture'    	=> 'required',
-                'price' 			=> 'required'
-                );
-        
-                $validator = \Validator::make(\Input::all(),$rules);
-                if($validator->fails())
-                 	return \Redirect::to('admin/gift_cards/create')
-                    ->withInput()
-                    ->witherrors($validator->messages());
-                $filname = \Input::file('uploadpicture')->getClientOriginalName();
-                $imageName = \Input::file('uploadpicture')->getClientOriginalExtension();
-                \Input::file('uploadpicture')->move(base_path() . '/public/images/gift_cards/', $filname);
-                 $giftCard= GiftCard::create(array(
-                    'name'          => \Input::get('name'),
-                    'image'         => $filname,
-					'price'         => \Input::get('price')
-                    
-                ));
-                return \Redirect::to('admin/gift_cards');
+        $rules = array(
+            'name' => 'required',
+            'uploadpicture' => 'required',
+            'price' => 'required'
+        );
+
+//        dd(\Input::get('category'));
+        $validator = \Validator::make(\Input::all(), $rules);
+        if ($validator->fails())
+            return \Redirect::to('admin/gift_cards/create')
+                ->withInput()
+                ->witherrors($validator->messages());
+
+
+        $filname = \Input::file('uploadpicture')->getClientOriginalName();
+        $imageName = \Input::file('uploadpicture')->getClientOriginalExtension();
+
+        \Input::file('uploadpicture')->move(base_path() . '/public/images/gift_cards/', $filname);
+        $giftCard = GiftCard::create(array(
+            'gift_category_id' => \Input::get('category'),
+            'name' => \Input::get('name'),
+            'image' => $filname,
+            'price' => \Input::get('price')
+
+        ));
+
+        return \Redirect::to('admin/gift_cards');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         return \Redirect::to('admin/gift_cards');
-         $giftCard = GiftCard::find($id);
+        $giftCard = GiftCard::find($id);
         return \View::make('admin.gift_card.view_giftCard')->withCard($giftCard);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-         $giftCard = GiftCard::find($id);
+        $giftCard = GiftCard::find($id);
         return \View::make('admin.gift_card.edit_giftCard')->withCard($giftCard);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-         $rules = array(
-                'name' 				=> 'required',
-                'price' 			=> 'required'
-                );
-        
-                $validator = \Validator::make(\Input::all(),$rules);
-                if($validator->fails())
-                    return Redirect::to('admin/gift_cards/'.$id.'/edit')
-                    ->withInput()
-                    ->witherrors($validator->messages());
+        $rules = array(
+            'name' => 'required',
+            'price' => 'required'
+        );
 
-                $giftCard = GiftCard::find($id);
-                $giftCard->name = \Input::get('name');
-                $giftCard->price = \Input::get('price');
-                
-                if(Input::file('uploadpicture') != null)
-                {
-                    $filname = \Input::file('uploadpicture')->getClientOriginalName();
-                    $imageName = \Input::file('uploadpicture')->getClientOriginalExtension();
-                    \Input::file('uploadpicture')->move(base_path() . '/public/images/gift_cards/', $filname);
-                    $giftCard->image = $filname;
-                }
-            	$giftCard->save();
-                \Session::flash('message', 'Successfully updated!');
-                return \Redirect::to('admin/gift_cards');
+        $validator = \Validator::make(\Input::all(), $rules);
+        if ($validator->fails())
+            return Redirect::to('admin/gift_cards/' . $id . '/edit')
+                ->withInput()
+                ->witherrors($validator->messages());
+
+        $giftCard = GiftCard::find($id);
+        $giftCard->name = \Input::get('name');
+        $giftCard->price = \Input::get('price');
+
+        if (Input::file('uploadpicture') != null) {
+            $filname = \Input::file('uploadpicture')->getClientOriginalName();
+            $imageName = \Input::file('uploadpicture')->getClientOriginalExtension();
+            \Input::file('uploadpicture')->move(base_path() . '/public/images/gift_cards/', $filname);
+            $giftCard->image = $filname;
+        }
+        $giftCard->save();
+        \Session::flash('message', 'Successfully updated!');
+        return \Redirect::to('admin/gift_cards');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -144,5 +148,53 @@ class GiftCardController extends Controller
         // redirect
         \Session::flash('message', 'Successfully deleted!!');
         return \Redirect::to('admin/gift_cards');
+    }
+
+    public function getCategoryList()
+    {
+        $categories = GiftCategory::all();
+
+        return \View::make('admin.gift_card.manage_category_gift')->with('categories', $categories);
+    }
+
+    public function addGiftCardCategory(Request $request)
+    {
+        $errors = $this->validate($request, [
+            'name' => 'required|max:255|unique:gift_category,name',
+        ]);
+
+        $category = GiftCategory::create(['name' => $request->name]);
+
+        return response()->json($category);
+    }
+
+    public function editGiftCardCategory(Request $request)
+    {
+        $errors = $this->validate($request, [
+            'name' => 'required|max:255|unique:gift_category,name',
+        ]);
+
+        GiftCategory::where('id', $request->id)
+            ->update(['name' => ucfirst(strtolower($request->name))]);
+
+        $category = GiftCategory::find($request->id);
+
+        return response()->json($category);
+    }
+
+    public function deleteGiftCardCategory(Request $request)
+    {
+        $errors = $this->validate($request, [
+            'name' => 'required|max:255|exists:gift_category,name',
+        ]);
+
+        $category = GiftCategory::find($request->id);
+
+        if ($category->deletable) {
+            $data['message'] = 'This categeroy name is used.';
+            return response()->json($data);
+        } else {
+            return response()->json($category);
+        }
     }
 }
