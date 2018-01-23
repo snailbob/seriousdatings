@@ -38,6 +38,15 @@
                         <span ng-bind-html="nowCalling.message"></span>
                     </div>
 
+                    <div class="alert alert-danger" ng-if="!nowCalling.calling && nowCalling.user_unavailable">
+                        <button type="button" class="close" ng-click="nowCalling.user_unavailable = false" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+
+                        <span ng-bind-html="nowCalling.message"></span>
+                    </div>
+
                     <!-- list of all available conferencing rooms -->
                     <table style="width: 100%;" id="rooms-list"></table>
 
@@ -88,17 +97,17 @@
 
                             <div class="container-fluid padding-top">
                                 <div class="row no-gutter">
-                                    <div class="col-sm-4">
+                                    <div class="col-xs-4">
                                         <a class="btn btn-success btn-block" ng-click="boxStartCall('voice', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Voice Call">
                                             <i class="fa fa-phone" aria-hidden="true"></i>
                                         </a>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-xs-4">
                                         <a class="btn btn-success btn-block" ng-click="boxStartCall('video', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Video Call">
                                             <i class="fa fa-video-camera" aria-hidden="true"></i>
                                         </a>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-xs-4">
                                         <a class="btn btn-success btn-block" ng-click="boxStartCall('text', user, $index)" tooltip-append-to-body="true" uib-tooltip="Message">
                                             <i class="fa fa-envelope" aria-hidden="true"></i>
                                         </a>
@@ -142,35 +151,35 @@
                                         <div class="container-fluid">
                                             <div class="row no-gutter">
 
-                                                <div class="col-sm-3" ng-if="!user.is_online">
+                                                <div class="col-xs-3" ng-if="!user.is_online">
                                                     <a class="btn btn-success btn-block btn-xs disabled">
                                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                                     </a>
                                                 </div>
-                                                <div class="col-sm-3" ng-if="!user.is_online">
+                                                <div class="col-xs-3" ng-if="!user.is_online">
                                                     <a class="btn btn-success btn-block btn-xs disabled">
                                                         <i class="fa fa-video-camera" aria-hidden="true"></i>
                                                     </a>
                                                 </div>
 
-                                                <div class="col-sm-3" ng-if="user.is_online">
+                                                <div class="col-xs-3" ng-if="user.is_online">
                                                     <a class="btn btn-success btn-block btn-xs" ng-click="startCall('voice', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Voice Call">
                                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                                     </a>
                                                 </div>
-                                                <div class="col-sm-3" ng-if="user.is_online">
+                                                <div class="col-xs-3" ng-if="user.is_online">
                                                     <a class="btn btn-success btn-block btn-xs setup-meeting" ng-click="startCall('video', user, $index)" tooltip-append-to-body="true" uib-tooltip="Start Video Call">
                                                         <i class="fa fa-video-camera" aria-hidden="true"></i>
                                                     </a>
                                                 </div>
 
-                                                <div class="col-sm-3">
+                                                <div class="col-xs-3">
                                                     <a class="btn btn-success btn-block btn-xs" ng-click="startCall('text', user, $index)">
                                                         <i class="fa fa-envelope" aria-hidden="true"></i>
                                                     </a>
                                                 </div>
                                                 
-                                                <div class="col-sm-3">
+                                                <div class="col-xs-3">
                                                     <a class="btn btn-danger btn-block btn-xs" ng-click="blockUser($index, user)" tooltip-append-to-body="true" uib-tooltip="Block">
                                                         <i class="fa fa-ban" aria-hidden="true"></i>
                                                     </a>
@@ -247,13 +256,13 @@
                                 <span>
                                     Private ??
                                     <a href="/video-conferencing/" target="_blank" title="Open this link in new tab. Then your conference room will be private!">
-                                        <code>
+                                        {{--  <code>
                                             <strong id="unique-token">#123456789</strong>
-                                        </code>
+                                        </code>  --}}
                                     </a>
                                 </span>
 
-                                <input type="text" value="@{{activeUser.room_id}}__@{{data.me.firstName}}" id="conference-name">
+                                <input type="text" value="@{{activeUser.room_id}}__@{{data.me.firstName}}__@{{activeUser.private_id}}__@{{activeUser.id}}__@{{callType}}" id="conference-name">
                                 <button id="setup-new-room" class="setup">Setup New Conference</button>
                             </section>
 
@@ -261,12 +270,24 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
+                                <span ng-if="callType == 'video'">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i> You can mute friend's audio and can pause video to hold. Slide left/right to adjust volume. You can also view video on fullscreen. You can also dismiss user's video by clicking (x) icon. Hover over video and buttons will show to perform action.
+                                </span>
+                                <span ng-if="callType != 'video'">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i> You can mute friend's audio and slide left/right to adjust volume. You can also dismiss user's voice by clicking (x) icon. Hover over voice media and buttons will show to perform action.
+                                </span>
 
-                                <i class="fa fa-info-circle" aria-hidden="true"></i> You can mute friend's audio and can pause video to hold. Slide up/down slider to adjust volume. You can also view video on fullscreen. Hover over video and buttons will show to perform action.
                             </div>
 
                             <!-- local/remote videos container -->
-                            <div id="videos-container"></div>
+                            <div id="videos-container" class="row">
+                                <div class="col-sm-6" id="myMedia">
+                                    
+                                </div>
+                                <div class="col-sm-6" id="othersMedia">
+                                    
+                                </div>
+                            </div>
                         </section>
                     </div>
 
@@ -281,7 +302,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <table id="rooms-list" class="visible"></table>
+                            <table id="rooms-list-voice" class="visible"></table>
         
                             <table class="visible">
                                 <tr>
@@ -316,44 +337,6 @@
                             <tr>
                                 <td width="50%" style="width: 50%;  background: white; vertical-align: top;">
                                     <div id="local-streams-container"></div>
-
-                                    <div class="container-fluid" ng-if="videoShown">
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="row no-gutter">
-                                                    <div class="col-sm-3">
-
-                                                        <button type="button" class="btn btn-default btn-block">
-                                                            <i class="fa fa-volume-down" aria-hidden="true"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-sm-3">
-
-                                                        <button type="button" class="btn btn-default btn-block">
-                                                            <i class="fa fa-volume-up" aria-hidden="true"></i>
-                                                        </button>
-
-                                                    </div>
-
-                                                    <div class="col-sm-3">
-                                                        <button type="button" class="btn btn-default btn-block">
-                                                            <i class="fa fa-microphone-slash" aria-hidden="true"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <button type="button" class="btn btn-danger btn-block">
-                                                            Drop
-                                                        </button>
-                                                    </div>
-                                                    
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
 
                                 </td>
                                 <td width="50%" style="width: 50%;  background: white; vertical-align: top;">
@@ -496,6 +479,42 @@
                                 </div>
                             </div>
 
+                            <div class="container-fluid" ng-show="videoShown">
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+                                        <div class="row no-gutter">
+                                            <div class="col-sm-3">
+
+                                                <button type="button" class="btn btn-default btn-block">
+                                                    <i class="fa fa-volume-down" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-3">
+
+                                                <button type="button" class="btn btn-default btn-block">
+                                                    <i class="fa fa-volume-up" aria-hidden="true"></i>
+                                                </button>
+
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <button type="button" class="btn btn-default btn-block">
+                                                    <i class="fa fa-microphone-slash" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <button type="button" class="btn btn-danger btn-block">
+                                                    Drop
+                                                </button>
+                                            </div>
+                                            
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
 
