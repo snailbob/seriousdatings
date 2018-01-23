@@ -7,12 +7,11 @@
   <section class="content-header">
     <h1>
       Blog
-      <small>lists of blog</small>
+      <small>lists</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="#">Blog Management</a></li>
-      <li class="active">Blog Lists</li>
+      <li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Blog Management</li>
     </ol>
   </section>
 

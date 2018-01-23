@@ -7,7 +7,8 @@
       <small>Add Email Template</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href=""></a>Email Template Lists</li>
       <li class="active">Add Email Template</li>
     </ol>
   </section>

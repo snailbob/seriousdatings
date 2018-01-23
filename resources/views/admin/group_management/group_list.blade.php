@@ -6,12 +6,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Groups
+        Group Management
         <small>lists of group</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Group Management</a></li>
+        <li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Group Management</a>
       </ol>
     </section>
 
