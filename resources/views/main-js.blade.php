@@ -61,6 +61,7 @@
   <script src="{{ url() }}/public/plugins/angularjs/controllers/testCtrl.js"></script>
   <script src="{{ url() }}/public/plugins/angularjs/controllers/profileCtrl.js"></script>
   <script src="{{ url() }}/public/plugins/angularjs/controllers/verifyCtrl.js"></script>
+  <script src="{{ url() }}/public/plugins/angularjs/controllers/videoChatController.js"> </script>
 
   <script src="{{ url() }}/public/plugins/angularjs/services/profileService.js"></script>
 
@@ -86,6 +87,8 @@
     {{--  <script src="https://cdn.webrtc-experiment.com/meeting.js"> </script>
     <script src="{{ url() }}/public/plugins/angularjs/chatroom_rtc.js"> </script>  --}}
   @endif
+
+
 
   {{--  <script src="{{ url() }}/public/socketjs/new-chatbox.js"></script>
   <script src="{{ url() }}/public/socketjs/config-server.js"></script>

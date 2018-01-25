@@ -15,7 +15,8 @@
         "predis/predis": "^1.1",
         "unisharp/laravel-filemanager": "^1.6",
         "laravel/socialite": "^2.0",
-        "netshell/paypal": "dev-master"
+        "netshell/paypal": "dev-master",
+        "square/connect": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
