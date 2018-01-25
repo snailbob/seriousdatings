@@ -216,6 +216,9 @@ Route::group(['prefix' => 'api'], function () {
 
 
     /*saving appointment*/
+    Route::post('saveAppointmentNew','AppointmentController@saveAppointmentNew');
+
+    
     Route::post('saveappointment','AppointmentController@saveAppointment');
     Route::get('getAppoinment','AppointmentController@getAppointment');
     Route::post('saveAppResponse','AppointmentController@saveAppResponse');

@@ -364,8 +364,9 @@ function viewAllDetails(id){
 
 
 function getAppointmentFromAngular(dataID){
+    SearhValueOFdata     
       var scope = angular.element(document.getElementById('map')).scope();
-            scope.addAppointMentNew(dataID);
+            scope.addAppointMentNew(SearhValueOFdata(dataID));
 }
 
 
