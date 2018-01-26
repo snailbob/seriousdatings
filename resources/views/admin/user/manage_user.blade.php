@@ -52,8 +52,6 @@
                         <li>
                           <a href='{{ url() }}/admin/users/{!! $user->id !!}'> <i class="fa fa-eye"></i> View</a>
                         </li>
-
-
                         @if($user->username != "admin")
                         <li class="pauseBtn">
                           <a href='#' class="pauseTxt"> 

@@ -95,7 +95,7 @@ class EditableEmailController extends Controller
         return response()->json($template);
     }
 
-    static function setContentToEllipse($text)
+    public static function setContentToEllipse($text)
     {
         $partialEndTag = strpos($text, "</");
         $offsetEndTag = strpos($text, ">", $partialEndTag);

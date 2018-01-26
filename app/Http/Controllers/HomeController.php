@@ -310,10 +310,6 @@ class HomeController extends Controller {
         return Response::json(['status' => 'success', 'user' => $allUsers->toJson()]);
     }
 	
-	public function ListBlog() {
-        $data['blogdata'] = DB::table('user_blogs')->orderBy('id', 'DESC')->get();	
-        return response()->json($data);
-		#return view('bloglist',$data)	;	
-	}
+
 
 }
