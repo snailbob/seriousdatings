@@ -484,27 +484,14 @@
 
                                     <div class="col-sm-12">
                                         <div class="row no-gutter">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-6">
 
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-volume-down" aria-hidden="true"></i>
+                                                <button type="button" ng-click="exitPage()" class="btn btn-default btn-block">
+                                                    <i class="fa fa-close" aria-hidden="true"></i> Exit Page
                                                 </button>
                                             </div>
-                                            <div class="col-sm-3">
-
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-volume-up" aria-hidden="true"></i>
-                                                </button>
-
-                                            </div>
-
-                                            <div class="col-sm-3">
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-microphone-slash" aria-hidden="true"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <button type="button" class="btn btn-danger btn-block">
+                                            <div class="col-sm-6">
+                                                <button type="button" ng-click="dropCall()" class="btn btn-danger btn-block">
                                                     Drop
                                                 </button>
                                             </div>

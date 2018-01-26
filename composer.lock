@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d6d828262cbf59564286022907813da1",
+    "content-hash": "86d7f771cf0f5288e10b58b1f17fc372",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1907,6 +1907,57 @@
             ],
             "description": "A lightweight implementation of CommonJS Promises/A for PHP",
             "time": "2016-05-03T17:50:52+00:00"
+        },
+        {
+            "name": "square/connect",
+            "version": "2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/square/connect-php-sdk.git",
+                "reference": "f4b1934bff596673919950e21493181479d9ed46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/square/connect-php-sdk/zipball/f4b1934bff596673919950e21493181479d9ed46",
+                "reference": "f4b1934bff596673919950e21493181479d9ed46",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "~0.6.1",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SquareConnect\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache v2"
+            ],
+            "authors": [
+                {
+                    "name": "Square, Inc.",
+                    "homepage": "https://squareup.com/developers"
+                }
+            ],
+            "description": "PHP client library for the Square Connect v2 API",
+            "homepage": "https://github.com/square/connect-php-sdk",
+            "keywords": [
+                "api",
+                "php",
+                "sdk",
+                "swagger"
+            ],
+            "time": "2017-11-13T22:27:57+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
