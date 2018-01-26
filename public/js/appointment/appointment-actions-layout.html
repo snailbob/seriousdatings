@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form  id="appointment-form-actions" method="post" ng-submit="saveActions()">
+<form  id="appointment-form-actions" method="post">
     <div class="form-group has-{{reasonType}}">
         <label class="control-label" ><i class="fa {{fontAwesome}}"></i>
            {{reasonTitle}}
@@ -14,13 +14,7 @@
         <textarea class="form-control" rows="3" name="rdpField" placeholder="Enter here ..." ng-model="text"></textarea>
         <span class="help-block"><small>Your message</small></span>
     </div>
-    <div class="row" style="text-align: center;">
-        <div class="inner-div">
-        <button class="btn btn-{{reasonType =='error' ? 'danger' : reasonType}}" type="submit" style="display: inline-block;">
-            <span class="fa {{fontAwesome}}" aria-hidden="true"></span> Submit
-        </button>
-        </div>
-    </div>
+
 </form>
 
 

@@ -1,21 +1,21 @@
-var ngApp = angular.module('seriousDatingApp', ['ngValidate', 'checklist-model', 'ngImgCrop', 'ngBootbox', 'ngToast', 'ui.bootstrap','cp.ngConfirm', 'ui.calendar', 'angularMoment']);
+var ngApp = angular.module('seriousDatingApp', ['ngValidate', 'checklist-model', 'ngImgCrop', 'ngBootbox', 'ngToast', 'ui.bootstrap', 'cp.ngConfirm', 'ui.calendar', 'angularMoment']);
 
-ngApp.config(['ngToastProvider', function(ngToastProvider) {
+ngApp.config(['ngToastProvider', function (ngToastProvider) {
     ngToastProvider.configure({
-      animation: 'slide', // or 'fade' 'slide'
-      dismissButton: true,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      maxNumber: 1,
-      timeout: 3000
+        animation: 'slide', // or 'fade' 'slide'
+        dismissButton: true,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        maxNumber: 1,
+        timeout: 3000
     });
 }]);
 
-ngApp.filter('reverse', function() {
-    return function(items) {
-      return items.slice().reverse();
+ngApp.filter('reverse', function () {
+    return function (items) {
+        return items.slice().reverse();
     };
-  });
+});
 
 
 ngApp.run([
@@ -27,30 +27,30 @@ ngApp.run([
 ]);
 
 
-ngApp.filter('slice', function() {
-    return function(arr, start, end) {
-      return arr.slice(start, end);
+ngApp.filter('slice', function () {
+    return function (arr, start, end) {
+        return arr.slice(start, end);
     };
-  });
+});
 
-ngApp.run(['$rootScope', 'ngToast', function($rootScope, ngToast) {
+ngApp.run(['$rootScope', 'ngToast', function ($rootScope, ngToast) {
 
-    $rootScope.showToast = function(content = 'Cool', classname = 'success'){
+    $rootScope.showToast = function (content = 'Cool', classname = 'success') {
         console.log(content);
         ngToast.create({
             className: classname,
             content: content
-          });
+        });
 
     };
 
-    $rootScope.heightOptions = function(){
+    $rootScope.heightOptions = function () {
         var arr = [];
-        for(var i = 2; i < 9; i ++){
-            for(var i2 = 0; i2 < 12; i2++){
+        for (var i = 2; i < 9; i++) {
+            for (var i2 = 0; i2 < 12; i2++) {
                 var height = i + 'ft';
-                if(i2){
-                    height+= ' '+i2 + 'in';
+                if (i2) {
+                    height += ' ' + i2 + 'in';
                 }
                 arr.push(height);
             }
@@ -68,13 +68,13 @@ Object.toparams = function ObjecttoParams(obj) {
     return p.join('&');
 };
 
-ngApp.filter('slice', function() {
-  return function(arr, start, end) {
-    if(arr)
-        return arr.slice(start, end);
-    else
-        return null;
-  };
+ngApp.filter('slice', function () {
+    return function (arr, start, end) {
+        if (arr)
+            return arr.slice(start, end);
+        else
+            return null;
+    };
 });
 
 ngApp.service('myHttpService', ['$http', 'CSRF_TOKEN', function ($http, CSRF_TOKEN) {
@@ -95,18 +95,18 @@ ngApp.service('myHttpService', ['$http', 'CSRF_TOKEN', function ($http, CSRF_TOK
     this.post = function (link, data) {
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
         // $http.defaults.headers.post["X-CSRF-TOKEN"] = CSRF_TOKEN;
-        
+
         var d = Object.toparams(data);
         console.log(this.url + '/api/' + link);
         return $http.post(this.url + '/api/' + link, d); //Object.toparams(data));
     }
 
-    this.getCustom = function(link){
+    this.getCustom = function (link) {
         console.log(this.url);
         return $http.get(link);
     }
 
-    this.postCustom = function(link){
+    this.postCustom = function (link) {
         console.log(this.url);
         return $http.post(link);
     }
@@ -116,311 +116,347 @@ ngApp.service('myHttpService', ['$http', 'CSRF_TOKEN', function ($http, CSRF_TOK
 }]);
 
 ngApp.controller('bodyController', [
-            '$scope',
-            '$filter',
-            'myHttpService',
-            '$timeout',
-            '$ngBootbox',
-            '$uibModal',
-            '$log',
-            '$document',
-            '$ngConfirm',
-            '$interval',
-            '$location',
-            function ($scope, $filter, myHttpService, $timeout, $ngBootbox, $uibModal, $log, $document, $ngConfirm, $interval, $location) {
+    '$scope',
+    '$filter',
+    'myHttpService',
+    '$timeout',
+    '$ngBootbox',
+    '$uibModal',
+    '$log',
+    '$document',
+    '$ngConfirm',
+    '$interval',
+    '$location',
+    function ($scope, $filter, myHttpService, $timeout, $ngBootbox, $uibModal, $log, $document, $ngConfirm, $interval, $location) {
 
-    $scope.notifications = [];
-    $scope.subscription_validity = {};
-    $scope.active_ads = [];
-    $scope.logged_user_info = null;
-    $scope.logged_id = 0;
-    $scope.isReadyToDate = {
-        readyDetails: {},
-        responded: false,
-        answer: null
-    };
-    $scope.globalURL ="";
+        $scope.notifications = [];
+        $scope.subscription_validity = {};
+        $scope.active_ads = [];
+        $scope.logged_user_info = null;
+        $scope.logged_id = 0;
+        $scope.isReadyToDate = {
+            readyDetails: {},
+            responded: false,
+            answer: null
+        };
+        $scope.globalURL = "";
 
-    $scope.searchSettings = {
-        type: 'quick'
-    };
-    $scope.searchByName = {
-        firstName: '',
-        lastName: ''
-    };
-    $scope.unread_noti_count = 0;
-    
-    $scope.getData = function(){
-        myHttpService.get('body_contents').then(function(res){
-            $scope.notifications = res.data.notifications;
-            $scope.subscription_validity = res.data.subscription_validity;
-            $scope.active_ads = res.data.active_ads;
-            $scope.logged_id = res.data.logged_id;
-            myHttpService.shareData = res.data;
-            $scope.unread_noti_count = res.data.unread_noti_count;
-            $scope.logged_user_info = res.data.logged_user_info;
-            
-            console.log(res.data, 'body_contents');
-            //check if subscription valid or expired
-            if($scope.subscription_validity){
-                if($scope.subscription_validity.is_expired && uri_1 != 'datingPlan'){
-                    $scope.SubscriptionInfo('');
-                }
-            }
-
-            // $scope.data = res.data;
-        });
-    }
-
-    $scope.$watch(function () {
-        return myHttpService.shareData;
-    }, function (newVal) {
-        $scope.notifications = newVal.notifications;
-        $scope.unread_noti_count = newVal.unread_noti_count;
-    });
-
-
-    $scope.readyToDateModal = function (items) {
-        console.log(items, 'wow');
-        // var parentElem = parentSelector ?
-            // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
-        var modalInstance = $uibModal.open({
-            animation: true,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'readyToDateModal.html',
-            controller: 'ModalReadyToDateCtrl',
-            // controllerAs: '$scope',
-            size: 'lg',
-            windowClass: 'compatible-modal',
-            // appendTo: parentElem,
-            resolve: {
-                items: function () {
-                    return items ? items : {};
-                }
-            }
-        });
-
-        modalInstance.result.then(function (userAction) {
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-    };
-
-    $scope.areYouReadyToDate = function(answer){
-        if(answer){
-            $scope.isReadyToDate.answer = true;
-            $scope.readyToDateModal();
-        }
-        else{
-            $scope.isReadyToDate.answer = answer;
-        }
-    }
-
-
-
-    $scope.searchByNameModal = function (size, parentSelector) {
-        var parentElem = parentSelector ?
-            angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
-        var modalInstance = $uibModal.open({
-            animation: true,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'searchByNameModal.html',
-            controller: 'ModalSearchByNameCtrl',
-            // controllerAs: '$scope',
-            size: 'lg',
-            windowClass: 'compatible-modal',
-            appendTo: parentElem,
-            resolve: {
-                items: function () {
-                    return $scope.searchByName;
-                }
-            }
-        });
-
-        modalInstance.result.then(function (userAction) {
-            console.log(userAction, 'userAction');
-            if(userAction == 'add'){
-                $scope.addUser($scope.data);
-            }
-            else if(userAction == 'flirt'){
-
-            }
-            else if(userAction == 'message'){
-
-            }
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-    };
-
-    $scope.inviteFriendsModal = function (size, parentSelector) {
-        var parentElem = parentSelector ?
-            angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
-        var modalInstance = $uibModal.open({
-            animation: true,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'inviteFriendsModal.html',
-            controller: 'ModalInviteFriendsCtrl',
-            // controllerAs: '$scope',
-            size: 'lg',
-            windowClass: 'compatible-modal',
-            appendTo: parentElem,
-            resolve: {
-                items: function () {
-                    return {};
-                }
-            }
-        });
-
-        modalInstance.result.then(function (userAction) {
-            console.log(userAction, 'userAction');
-            if(userAction == 'add'){
-                $scope.addUser($scope.data);
-            }
-            else if(userAction == 'flirt'){
-
-            }
-            else if(userAction == 'message'){
-
-            }
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-    };
-
-    
-    $scope.randomCompatibleModal = function (size, parentSelector) {
-        var parentElem = parentSelector ?
-            angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
-        var modalInstance = $uibModal.open({
-            animation: true,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'randomCompatibleModal.html',
-            controller: 'ModalRandomCompatibleCtrl',
-            // controllerAs: '$scope',
-            size: 'lg',
-            windowClass: 'compatible-modal',
-            appendTo: parentElem,
-            resolve: {
-                items: function () {
-                    return {};
-                }
-            }
-        });
-
-        modalInstance.result.then(function (userAction) {
-
-            console.log(userAction, 'Are we compitable?');
-            if(userAction.id){
-                $scope.createSMS(userAction.id,userAction.firstName);
-            }
-            else if(userAction == 'add'){
-                $scope.addUserAsFriend(res.user);
-            }
-            else if(userAction == 'flirt'){
-
-            }
-            else if(userAction == 'message'){
-
-
-            }
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-    };
-
-
-$scope.viewNoti = function(noti){
-
-
-    if(!noti.notif_status){
-        $scope.unread_noti_count -= 1;
-        myHttpService.post('notifications_new', {id: noti.notif_id}).then(function(res){
-            console.log(res);
-            noti.notif_status =true;
-
-        });
-    }
-
-    $timeout(function(){
-            $scope.notifActions(noti.notif_type,noti);
-    }, 200);
-
-
-}
-
-$scope.markAllNotiRead = function(){
-    myHttpService.post('notifications', {is_read: 1}).then(function(res){
-        console.log(res);
+        $scope.searchSettings = {
+            type: 'quick'
+        };
+        $scope.searchByName = {
+            firstName: '',
+            lastName: ''
+        };
         $scope.unread_noti_count = 0;
-        $scope.notifications.forEach(function(element){
-            element.is_read = 1;
+
+        $scope.getData = function () {
+            myHttpService.get('body_contents').then(function (res) {
+                $scope.notifications = res.data.notifications;
+                $scope.subscription_validity = res.data.subscription_validity;
+                $scope.active_ads = res.data.active_ads;
+                $scope.logged_id = res.data.logged_id;
+                myHttpService.shareData = res.data;
+                $scope.unread_noti_count = res.data.unread_noti_count;
+                $scope.logged_user_info = res.data.logged_user_info;
+
+                console.log(res.data, 'body_contents');
+                //check if subscription valid or expired
+                if ($scope.subscription_validity) {
+                    if ($scope.subscription_validity.is_expired && uri_1 != 'datingPlan') {
+                        $scope.SubscriptionInfo('');
+                    }
+                }
+
+                // $scope.data = res.data;
+            });
+        }
+
+        $scope.$watch(function () {
+            return myHttpService.shareData;
+        }, function (newVal) {
+            $scope.notifications = newVal.notifications;
+            $scope.unread_noti_count = newVal.unread_noti_count;
         });
-    });
-}
 
 
-$scope.notifActions = function(type,data){
-    switch (type) {
-        case 'visit_profile':
-            window.location.href = base_url + '/user/profile/'+data.from_info.username;
-            break;
-        case 'APPOINTMENT':
-            $scope.viewAppointment();
-            break;
-        default:
+        $scope.readyToDateModal = function (items) {
+            console.log(items, 'wow');
+            // var parentElem = parentSelector ?
+            // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'readyToDateModal.html',
+                controller: 'ModalReadyToDateCtrl',
+                // controllerAs: '$scope',
+                size: 'lg',
+                windowClass: 'compatible-modal',
+                // appendTo: parentElem,
+                resolve: {
+                    items: function () {
+                        return items ? items : {};
+                    }
+                }
+            });
 
-    }
-
-};
-
-
-
-
-/*------------ THIS BLOCK OF CODE'S IS FOR APPOINTMENT -----
-|  Function viewAppointment, asyncAppointment,readDetaildAppointment,reusableNgConfirmAppointment
-|	  Author: MARK
-|  Purpose:  ViewList,ViewDetails,Reply Appointment
-|  Returns:objectArray inspired to FRONTEND API STRUCTURE  minimize load pages
-*------------------------------------------------------*/
-    $scope.storeAppointment = [];
-    $scope.viewAppointment = function () {
-        myHttpService.get('getAppoinment').then(function(res){
-            $scope.asyncAppointment(res.data.appointment);
-            $scope.storeAppointment = res.data.appointment;
+            modalInstance.result.then(function (userAction) {}, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+        modalInstance.result.then(function (userAction) {
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
         });
     };
 
-    $scope.asyncAppointment = function (AppointmentData) {
+        $scope.areYouReadyToDate = function (answer) {
+            if (answer) {
+                $scope.isReadyToDate.answer = true;
+                $scope.readyToDateModal();
+            }
+            else {
+                $scope.isReadyToDate.answer = answer;
+            }
+        }
+
+
+
+        $scope.searchByNameModal = function (size, parentSelector) {
+            var parentElem = parentSelector ?
+                angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'searchByNameModal.html',
+                controller: 'ModalSearchByNameCtrl',
+                // controllerAs: '$scope',
+                size: 'lg',
+                windowClass: 'compatible-modal',
+                appendTo: parentElem,
+                resolve: {
+                    items: function () {
+                        return $scope.searchByName;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (userAction) {
+                console.log(userAction, 'userAction');
+                if (userAction == 'add') {
+                    $scope.addUser($scope.data);
+                }
+                else if (userAction == 'flirt') {
+
+                }
+                else if (userAction == 'message') {
+
+                }
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+        $scope.inviteFriendsModal = function (size, parentSelector) {
+            var parentElem = parentSelector ?
+                angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'inviteFriendsModal.html',
+                controller: 'ModalInviteFriendsCtrl',
+                // controllerAs: '$scope',
+                size: 'lg',
+                windowClass: 'compatible-modal',
+                appendTo: parentElem,
+                resolve: {
+                    items: function () {
+                        return {};
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (userAction) {
+                console.log(userAction, 'userAction');
+                if (userAction == 'add') {
+                    $scope.addUser($scope.data);
+                }
+                else if (userAction == 'flirt') {
+
+                }
+                else if (userAction == 'message') {
+
+                }
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+
+        $scope.randomCompatibleModal = function (size, parentSelector) {
+            var parentElem = parentSelector ?
+                angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'randomCompatibleModal.html',
+                controller: 'ModalRandomCompatibleCtrl',
+                // controllerAs: '$scope',
+                size: 'lg',
+                windowClass: 'compatible-modal',
+                appendTo: parentElem,
+                resolve: {
+                    items: function () {
+                        return {};
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (userAction) {
+
+                console.log(userAction, 'Are we compitable?');
+                if (userAction.id) {
+                    $scope.createSMS(userAction.id, userAction.firstName);
+                }
+                else if (userAction == 'add') {
+                    $scope.addUserAsFriend(res.user);
+                }
+                else if (userAction == 'flirt') {
+
+                }
+                else if (userAction == 'message') {
+
+
+                }
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+
+        $scope.viewNoti = function (noti) {
+
+
+            if (!noti.notif_status) {
+                $scope.unread_noti_count -= 1;
+                myHttpService.post('notifications_new', {
+                    id: noti.notif_id
+                }).then(function (res) {
+                    console.log(res);
+                    noti.notif_status = true;
+
+                });
+            }
+
+            $timeout(function () {
+                $scope.notifActions(noti.notif_type, noti);
+            }, 200);
+
+
+        }
+
+        $scope.markAllNotiRead = function () {
+            myHttpService.post('notifications', {
+                is_read: 1
+            }).then(function (res) {
+                console.log(res);
+                $scope.unread_noti_count = 0;
+                $scope.notifications.forEach(function (element) {
+                    element.is_read = 1;
+                });
+            });
+        }
+
+
+        $scope.notifActions = function (type, data) {
+            switch (type) {
+            case 'visit_profile':
+                window.location.href = base_url + '/user/profile/' + data.from_info.username;
+                break;
+            case 'APPOINTMENT':
+                $scope.viewAppointment();
+                break;
+            default:
+
+            }
+
+        };
+
+
+
+
+        /*------------ THIS BLOCK OF CODE'S IS FOR APPOINTMENT -----
+        |  Function viewAppointment, asyncAppointment,readDetaildAppointment,reusableNgConfirmAppointment
+        |     Author: MARK
+        |  Purpose:  ViewList,ViewDetails,Reply Appointment
+        |  Returns:objectArray inspired to FRONTEND API STRUCTURE  minimize load pages
+        *------------------------------------------------------*/
+        $scope.storeAppointment = [];
+        $scope.viewAppointment = function () {
+            myHttpService.get('getAppoinment').then(function (res) {
+                $scope.asyncAppointment(res.data.appointment);
+                $scope.storeAppointment = res.data.appointment;
+            });
+        };
+
+        $scope.asyncAppointment = function (AppointmentData) {
             $scope.reusableNgConfirmAppointment('My Appointment',
                 'appointment-list-layout.html',
-                function($scoped){
+                function ($scoped) {
                     $scoped.AppointmentList = AppointmentData;
                     $scoped.orderList = "appCreated";
                     $scoped.lunchDetailsAppointment = function (data) {
                         $scope.readDetaildAppointment(data);
                     };
                 });
-    };
+        };
 
-    $scope.readDetaildAppointment  = function (AppointmentData) {
-        $scope.reusableNgConfirmAppointment('',
-            'appointment-view-layout.html',
-            function($scoped){
-                $scoped.AppointmentDetail = AppointmentData;
-                $scoped.declineAppointment = function(appID){
-                        $scope.actionDeclineAppointment(appID);
-                };
-                $scoped.acceptAppointment = function (appId) {
-                        $scope.actionAcceptAppointment(appId);
-                };
-            });
-    };
+        $scope.readDetaildAppointment = function (AppointmentData) {
+            $scope.reusableNgConfirmAppointment('',
+                'appointment-view-layout.html',
+                function ($scoped) {
+                    $scoped.AppointmentDetail = AppointmentData;
+                    // $scoped.declineAppointment = function(appID){
+                    //         $scope.actionDeclineAppointment(appID);
+                    //
+                    // };
+                    // $scoped.acceptAppointment = function (appId) {
+                    //         $scope.actionAcceptAppointment(appId);
+                    //
+                    // };
+                }, {
 
+                    saveBtn: {
+                        text: 'Decline',
+                        btnClass: 'btn-red icons-btns',
+                        action: function (scoped) {
+                            console.log(scoped.AppointmentDetail);
+                            $scope.actionDeclineAppointment(scoped.AppointmentDetail.appID, scoped.AppointmentDetail);
+                        }
+                    },
+
+                    closeBtn: {
+                        text: 'Accept',
+                        btnClass: 'btn-green icons-btns',
+                        action: function (scoped) {
+                            $scope.actionAcceptAppointment(scoped.AppointmentDetail.appID, scoped.AppointmentDetail);
+                        }
+                    }
+                });
+        };
+
+        $scope.actionDeclineAppointment = function (id, AppointmentData) {
+            $scope.reusableNgConfirmAppointment('Reasons',
+                'appointment-actions-layout.html',
+                function ($scoped) {
+                    $scoped.reasonTitle = "Give a polite reasons why to decline.";
+                    $scoped.reasonType = "error";
+                    $scoped.fontAwesome = "fa-frown-o";
+                    $scoped.appID = id;
     $scope.actionDeclineAppointment = function (id) {
         $scope.reusableNgConfirmAppointment('Reasons',
             'appointment-actions-layout.html',
@@ -432,9 +468,33 @@ $scope.notifActions = function(type,data){
                 $scoped.saveActions = function () {
                         $scope.saveAppointmentAction(this.text, this.appID,'R');
 
-                };
-            });
+                }, {
 
+                    saveBtn: {
+                        text: 'Submit',
+                        btnClass: 'btn-red icons-btns',
+                        action: function (scoped) {
+                            $scope.saveAppointmentAction(scoped.text, id, 'R');
+                        }
+                    },
+
+                    closeBtn: {
+                        text: 'cancel',
+                        action: function (scoped) {
+                            $scope.readDetaildAppointment(AppointmentData);
+                        }
+                    }
+                });
+
+        };
+        $scope.actionAcceptAppointment = function (id, AppointmentData) {
+            $scope.reusableNgConfirmAppointment('Message',
+                'appointment-actions-layout.html',
+                function ($scoped) {
+                    $scoped.reasonTitle = "Confirmation Message";
+                    $scoped.reasonType = "success";
+                    $scoped.fontAwesome = "fa-smile-o";
+                    $scoped.appID = id;
     };
     $scope.actionAcceptAppointment = function(id){
         $scope.reusableNgConfirmAppointment('Message',
@@ -447,260 +507,284 @@ $scope.notifActions = function(type,data){
                 $scoped.saveActions = function () {
                     $scope.saveAppointmentAction(this.text, this.appID,'A');
 
-                };
-            });
-    };
+                }, {
+                    saveBtn: {
+                        text: 'Submit',
+                        btnClass: 'btn-green icons-btns',
+                        action: function (scoped) {
+                            $scope.saveAppointmentAction(scoped.text, id, 'A');
+                        }
+                    },
+
+                    closeBtn: {
+                        text: 'cancel',
+                        action: function (scoped) {
+                            $scope.readDetaildAppointment(AppointmentData);
+                        }
+                    }
+                }
+
+            );
+        };
 
 
-    $scope.saveAppointmentAction  = function(msg,AppID,type){
-            $scope.storeAppointment.forEach(function(item){
-                if(item.appID === AppID){
-                    $scope.updateAppointment(
-                        {'appID':AppID,
-                         'msg':msg,
-                         'toID':item.fromInfo.id,
-                         'actType':type
-                        });
+        $scope.saveAppointmentAction = function (msg, AppID, type) {
+            $scope.storeAppointment.forEach(function (item) {
+                if (item.appID === AppID) {
+                    $scope.updateAppointment({
+                        'appID': AppID,
+                        'msg': msg,
+                        'toID': item.fromInfo.id,
+                        'actType': type
+                    });
                 }
             });
-    };
+        };
 
-    $scope.updateAppointment = function(params){
-        myHttpService.post('saveAppResponse', params).then(function (res) {
-            console.log(res);
-            if(res.data.trans){
-                location.reload();
-            }
-        });
+        $scope.updateAppointment = function (params) {
+            myHttpService.post('saveAppResponse', params).then(function (res) {
+                console.log(res);
+                if (res.data.trans) {
+                    location.reload();
+                }
+            });
 
-    };
+        };
 
-    $scope.reusableNgConfirmAppointment  = function (title,url,callBack) {
-       return $ngConfirm({
-            title: title,
-            contentUrl: base_url+'/public/js/appointment/'+url,
-            columnClass: 'medium', // to make the width wider.
-            animation: 'zoom',
-            backgroundDismiss: true,
-            backgroundDismissAnimation: 'glow',
-            theme: 'material',
-            onScopeReady: callBack,
-        })
+        $scope.reusableNgConfirmAppointment = function (title, url, callBack, callBackbuttons = {}) {
+            return $ngConfirm({
+                title: title,
+                contentUrl: base_url + '/public/js/appointment/' + url,
+                columnClass: 'medium', // to make the width wider.
+                animation: 'zoom',
+                backgroundDismiss: true,
+                backgroundDismissAnimation: 'glow',
+                theme: 'material',
+                onScopeReady: callBack,
+                buttons: callBackbuttons,
 
-    };
-/*------------ END BLOCK OF CODE'S FOR APPOINTMENT -----
+            })
 
- /*
- MARK 2017-11-27
- Message   count service*/
-    $scope.image_name = "";
-    $scope.image_src = base_url + '/public/images/mail/';
-    $scope.getMessageCount = function () {
-        $scope.count_new_sms = 0;
-        myHttpService.get('messagescount', {
-            id: $scope.logged_id
-        }).then(function (res) {
-            $timeout(function(){
-                if (res.data[0].total_count >= 1)
-                $scope.image_name = 'contact_email.gif';
-                else $scope.image_name = 'contact_email.png';
-                $('.v-msg').attr('src', $scope.image_src + $scope.image_name);
-            }, 1000);
-        });
-    };
+        };
+        /*------------ END BLOCK OF CODE'S FOR APPOINTMENT -----
 
-    /*END ================MARK   2017-11-27*/
+         /*
+         MARK 2017-11-27
+         Message   count service*/
+        $scope.image_name = "";
+        $scope.image_src = base_url + '/public/images/mail/';
+        $scope.getMessageCount = function () {
+            $scope.count_new_sms = 0;
+            myHttpService.get('messagescount', {
+                id: $scope.logged_id
+            }).then(function (res) {
+                $timeout(function () {
+                    if (res.data[0].total_count >= 1)
+                        $scope.image_name = 'contact_email.gif';
+                    else $scope.image_name = 'contact_email.png';
+                    $('.v-msg').attr('src', $scope.image_src + $scope.image_name);
+                }, 1000);
+            });
+        };
 
-
-    var init = function () {
-        $scope.getData();
-        $scope.getMessageCount();
-
-    };
+        /*END ================MARK   2017-11-27*/
 
 
+        var init = function () {
+            $scope.getData();
+            $scope.getMessageCount();
 
-    /*====================START MESSAGE============================================*/
-    /*Start added by MARK 2017*/
-    $scope.emailContact = function (user_id) {
+        };
 
-        var image_link = base_url + '/public/images/2.jpg';
-        var data_link = base_url + '/api/messages';
-        var count_even_odd = 0;
-        var define_count_even_odd ="",define_image_pull_cool="";
-        var define_image_pull ="";
 
-        $('.v-msg').attr('src', base_url + '/public/images/mail/contact_email.png');
-        $.confirm({
-            /*callback message reques*/
-            columnClass: 'col-md-6 col-md-offset-3',
-            content: function () {
-                var self = this;
-                return $.ajax({
-                    url: data_link,
-                    dataType: 'json',
-                    data: {
-                        'id': user_id
-                    },
-                    method: 'get'
-                }).done(function (response) {
-                    angular.forEach(response, function (value, key) {
-                        count_even_odd++;
-                        
+
+        /*====================START MESSAGE============================================*/
+        /*Start added by MARK 2017*/
+        $scope.emailContact = function (user_id) {
+
+            var image_link = base_url + '/public/images/2.jpg';
+            var data_link = base_url + '/api/messages';
+            var count_even_odd = 0;
+            var define_count_even_odd = "",
+                define_image_pull_cool = "";
+            var define_image_pull = "";
+
+            $('.v-msg').attr('src', base_url + '/public/images/mail/contact_email.png');
+            $.confirm({
+                /*callback message reques*/
+                columnClass: 'col-md-6 col-md-offset-3',
+                content: function () {
+                    var self = this;
+                    return $.ajax({
+                        url: data_link,
+                        dataType: 'json',
+                        data: {
+                            'id': user_id
+                        },
+                        method: 'get'
+                    }).done(function (response) {
+                        angular.forEach(response, function (value, key) {
+                            count_even_odd++;
+
                             if (count_even_odd % 2 === 0) {
                                 define_count_even_odd = "right";
                                 define_image_pull = "darker";
                                 define_image_pull_cool = 'class="right"';
 
-                            } else {
-                                 define_count_even_odd  = "left";
-                                 define_image_pull_cool ="";
-                                 define_image_pull =""
+                            }
+                            else {
+                                define_count_even_odd = "left";
+                                define_image_pull_cool = "";
+                                define_image_pull = ""
                             }
 
-                        var statuses = value.m_status == 0 ? 'animate-container' : '';
-                        
-                            self.setContentAppend('<div class="sms-container  '+define_image_pull+' '+statuses+' remove-'+value.m_id+'" onclick="viewFullMessages(\'' + value.id + '\',\'' + value.m_id + '\')">'+
-                                                              '<img src="' + value.photo + '" alt="Avatar" '+define_image_pull_cool+' style="width:100%;">'+
-                                                              '<p>Subject: ' + value.m_subject + '<br>Message: ' + value.m_message.substr(0, 5) + '...</p>'+
-                                                              '<span class="time-'+define_count_even_odd+'">' + value.message_time + '</span>'+
-                                                            '</div>');
+                            var statuses = value.m_status == 0 ? 'animate-container' : '';
+
+                            self.setContentAppend('<div class="sms-container  ' + define_image_pull + ' ' + statuses + ' remove-' + value.m_id + '" onclick="viewFullMessages(\'' + value.id + '\',\'' + value.m_id + '\')">' +
+                                '<img src="' + value.photo + '" alt="Avatar" ' + define_image_pull_cool + ' style="width:100%;">' +
+                                '<p>Subject: ' + value.m_subject + '<br>Message: ' + value.m_message.substr(0, 5) + '...</p>' +
+                                '<span class="time-' + define_count_even_odd + '">' + value.message_time + '</span>' +
+                                '</div>');
 
 
 
-                    });
-                }).fail(function () {
-                    self.setContent('Something went wrong.');
-                });
-            },
-            bootstrapClasses: {
-                container: 'container',
-                containerFluid: 'container-fluid',
-                row: 'row',
-            },
-
-            title: 'Messages',
-            closeIcon: true,
-            draggable: true,
-            icon: 'fa fa-envelope',
-            theme: 'material',
-            animation: 'scalex',
-            type: 'red',
-            closeAnimation: 'scale',
-            buttons: {
-            
-                close: function () {
-
-                }
-            },
-        })
-    }
-
-
-    var data_link = base_url + '/profile';
-    $scope.createSMS = function (recipient_id, name) {
-
-        $.confirm({
-            title: 'Send Messages to: <b>' + name + '</b>',
-            content: '' +
-                '<form action="" class="SMS_INFO">' +
-                '<div class="form-group">' +
-                '<label>Enter your subject here</label>' +
-                '<input type="text" placeholder="Subject" class="subject form-control" required />' +
-                '</div>' +
-                '<div class="form-group">' +
-                '<label>Enter your message here</label>' +
-                '<textarea  placeholder="Message" class="messagecontent form-control" required></textarea>' +
-                '</div>' +
-                '</form>',
-            closeIcon: true,
-            draggable: true,
-            icon: 'fa fa-envelope',
-            theme: 'material',
-            animation: 'scalex',
-            type: 'red',
-            closeAnimation: 'scale',
-            buttons: {
-                formSubmit: {
-                    text: 'Submit',
-                    btnClass: 'btn-blue submit-load',
-                    action: function () {
-                        var subject = this.$content.find('.subject').val();
-                        var message = this.$content.find('.messagecontent').val();
-                        if (!subject) {
-                            $.alert('provide a valid subject ');
-                            return false;
-                        }
-                        if (!message) {
-                            $.alert('provide a valid message ');
-                            return false;
-                        }
-
-                        var form_data = {
-                            subject: subject,
-                            message: message,
-                            recipient_id: recipient_id
-                        };
-                        $.confirm({
-                            content: function () {
-                                var self = this;
-                                return myHttpService.post('sendmessage', form_data).then(function (res) {
-                                    if (res.data.message_r) {
-                                        self.setContentAppend('Sent successfully!');
-                                        self.setTitle('Message');
-                                    }
-                                });
-                            },
-                            icon: 'fa fa-check',
-                            theme: 'material',
-                            animation: 'scalex',
-                            buttons: {
-                                close: function () {},
-                            }
                         });
+                    }).fail(function () {
+                        self.setContent('Something went wrong.');
+                    });
+                },
+                bootstrapClasses: {
+                    container: 'container',
+                    containerFluid: 'container-fluid',
+                    row: 'row',
+                },
+
+                title: 'Messages',
+                closeIcon: true,
+                draggable: true,
+                icon: 'fa fa-envelope',
+                theme: 'material',
+                animation: 'scalex',
+                type: 'red',
+                closeAnimation: 'scale',
+                buttons: {
+
+                    close: function () {
 
                     }
                 },
-                cancel: function () {
-                    //close
+            })
+        }
+
+
+        var data_link = base_url + '/profile';
+        $scope.createSMS = function (recipient_id, name) {
+
+            $.confirm({
+                title: 'Send Messages to: <b>' + name + '</b>',
+                content: '' +
+                    '<form action="" class="SMS_INFO">' +
+                    '<div class="form-group">' +
+                    '<label>Enter your subject here</label>' +
+                    '<input type="text" placeholder="Subject" class="subject form-control" required />' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                    '<label>Enter your message here</label>' +
+                    '<textarea  placeholder="Message" class="messagecontent form-control" required></textarea>' +
+                    '</div>' +
+                    '</form>',
+                closeIcon: true,
+                draggable: true,
+                icon: 'fa fa-envelope',
+                theme: 'material',
+                animation: 'scalex',
+                type: 'red',
+                closeAnimation: 'scale',
+                buttons: {
+                    formSubmit: {
+                        text: 'Submit',
+                        btnClass: 'btn-blue submit-load',
+                        action: function () {
+                            var subject = this.$content.find('.subject').val();
+                            var message = this.$content.find('.messagecontent').val();
+                            if (!subject) {
+                                $.alert('provide a valid subject ');
+                                return false;
+                            }
+                            if (!message) {
+                                $.alert('provide a valid message ');
+                                return false;
+                            }
+
+                            var form_data = {
+                                subject: subject,
+                                message: message,
+                                recipient_id: recipient_id
+                            };
+                            $.confirm({
+                                content: function () {
+                                    var self = this;
+                                    return myHttpService.post('sendmessage', form_data).then(function (res) {
+                                        if (res.data.message_r) {
+                                            self.setContentAppend('Sent successfully!');
+                                            self.setTitle('Message');
+                                        }
+                                    });
+                                },
+                                icon: 'fa fa-check',
+                                theme: 'material',
+                                animation: 'scalex',
+                                buttons: {
+                                    close: function () {},
+                                }
+                            });
+
+                        }
+                    },
+                    cancel: function () {
+                        //close
+                    },
                 },
-            },
-            onContentReady: function () {
-                // bind to events
-                var jc = this;
-                this.$content.find('form').on('submit', function (e) {
-                    // if the user submits the form by pressing enter in the field.
-                    e.preventDefault();
-                    jc.$$formSubmit.trigger('click'); // reference the button and click it
-                });
-            }
-        });
-
-      
-    }
-
-
-    $scope.gotoliveChat = function(id){
-            window.location.href = base_url+'/speeddating/'+id;
-    }
-
-    $scope.moreInfoModal =function(){
-        
-         var modalInstance = $uibModal.open({
-            animation: true,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'moreInfoModal.html',
-            controller:'ModalMoreInfoCtrl',
-            size: 'lg',
-            windowClass: 'info-modal',
-            resolve: {
-                items: function () {
-                    return null;
+                onContentReady: function () {
+                    // bind to events
+                    var jc = this;
+                    this.$content.find('form').on('submit', function (e) {
+                        // if the user submits the form by pressing enter in the field.
+                        e.preventDefault();
+                        jc.$$formSubmit.trigger('click'); // reference the button and click it
+                    });
                 }
-            }
-        });
+            });
 
+
+        }
+
+
+        $scope.gotoliveChat = function (id) {
+            window.location.href = base_url + '/speeddating/' + id;
+        }
+
+        $scope.moreInfoModal = function () {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'moreInfoModal.html',
+                controller: 'ModalMoreInfoCtrl',
+                size: 'lg',
+                windowClass: 'info-modal',
+                resolve: {
+                    items: function () {
+                        return null;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (userAction) {}, function () {
+                $log.info('xlo clos info modal');
+            });
+        };
         modalInstance.result.then(function (userAction) {
         }, function () {
             $log.info('xlo clos info modal');
@@ -708,56 +792,57 @@ $scope.notifActions = function(type,data){
     };
 
 
-     $scope.SubscriptionInfo = function (name) {
-         
-        var modalInstance = $uibModal.open({
-            animation: true,
-            ariaLabelledBy: 'modal-title',
-            ariaDescribedBy: 'modal-body',
-            templateUrl: 'SubscriptionDetails.html',
-            controller: 'ModalMoreInfoCtrl',
-            size: 'lg',
-            windowClass: 'compatible-modal',
-            backdrop  : 'static',
-            keyboard  : false,
-            resolve: {
-                items: function () {
-                    return name ? name : {};
+        $scope.SubscriptionInfo = function (name) {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'SubscriptionDetails.html',
+                controller: 'ModalMoreInfoCtrl',
+                size: 'lg',
+                windowClass: 'compatible-modal',
+                backdrop: 'static',
+                keyboard: false,
+                resolve: {
+                    items: function () {
+                        return name ? name : {};
+                    }
                 }
-            }
-        });
+            });
 
-        modalInstance.result.then(function (userAction) {
-       
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-    };
+            modalInstance.result.then(function (userAction) {
 
-
-    /*================================================================*/
-    /*END  added by MARK 2017*/
-
-    init();
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
 
-}]);
+        /*================================================================*/
+        /*END  added by MARK 2017*/
+
+        init();
 
 
- 
-ngApp.controller('ModalMoreInfoCtrl', ['$scope','items','$uibModalInstance', function ($scope,items,$uibModalInstance) {
-        $scope.nameFirst = items;
-             $scope.closeModal = function(){
-               $uibModalInstance.close();
-            }
-              $scope.cancel = function(){
-            
-                // $scope.SubscriptionInfo(items);
-            }
-            $scope.redirectToPlan =function (){
-                 window.location.href = base_url+'/datingPlan';
+    }
+]);
 
-            }
+
+
+ngApp.controller('ModalMoreInfoCtrl', ['$scope', 'items', '$uibModalInstance', function ($scope, items, $uibModalInstance) {
+    $scope.nameFirst = items;
+    $scope.closeModal = function () {
+        $uibModalInstance.close();
+    }
+    $scope.cancel = function () {
+
+        // $scope.SubscriptionInfo(items);
+    }
+    $scope.redirectToPlan = function () {
+        window.location.href = base_url + '/datingPlan';
+
+    }
 
 }]);
 
@@ -779,19 +864,19 @@ ngApp.controller('ModalRandomCompatibleCtrl', ['$scope', '$uibModalInstance', 'i
     $scope.items = {};
     $scope.isLoading = false;
     console.log(items);
-       
+
     $scope.userAction = function (userAction = 'close') {
-        if(userAction == 'add'){
+        if (userAction == 'add') {
             $scope.addUserAsFriend($scope.items.user);
         }
-        else if(userAction == 'flirt'){
+        else if (userAction == 'flirt') {
             $uibModalInstance.close($scope.items.user);
         }
-        else if(userAction == 'message'){
+        else if (userAction == 'message') {
             $uibModalInstance.close($scope.items.user);
         }
-        else if(userAction == 'close'){
-            window.location.href = base_url+'/user/profile/'+$scope.items.user.username;
+        else if (userAction == 'close') {
+            window.location.href = base_url + '/user/profile/' + $scope.items.user.username;
         }
         // $uibModalInstance.close(m);
     };
@@ -800,7 +885,7 @@ ngApp.controller('ModalRandomCompatibleCtrl', ['$scope', '$uibModalInstance', 'i
     $scope.compatibleDetailsModal = function (items) {
         console.log(items, 'wow');
         // var parentElem = parentSelector ?
-            // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+        // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
         var modalInstance = $uibModal.open({
             animation: true,
             ariaLabelledBy: 'modal-title',
@@ -819,7 +904,7 @@ ngApp.controller('ModalRandomCompatibleCtrl', ['$scope', '$uibModalInstance', 'i
         });
 
         modalInstance.result.then(function (data) {
-                $uibModalInstance.close(data);
+            $uibModalInstance.close(data);
 
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
@@ -827,37 +912,41 @@ ngApp.controller('ModalRandomCompatibleCtrl', ['$scope', '$uibModalInstance', 'i
     };
 
 
-    $scope.addUserAsFriend = function(u){
+    $scope.addUserAsFriend = function (u) {
         $scope.activeData = u;
         u.is_friend = !u.is_friend;
 
-        if(!u.is_friend){
-            var action = myHttpService.post('delete_friend', {id: u.id}).then(function(res){
+        if (!u.is_friend) {
+            var action = myHttpService.post('delete_friend', {
+                id: u.id
+            }).then(function (res) {
                 console.log(res);
                 var mess = 'User successfully removed.';
                 $scope.showToast(mess);
             });
         }
-        else{
-            myHttpService.post('add_friend', {id: u.id}).then(function(res){
+        else {
+            myHttpService.post('add_friend', {
+                id: u.id
+            }).then(function (res) {
                 console.log(res);
                 var mess = 'User successfully picked up.';
                 $scope.showToast(mess);
             });
         }
-        
+
     }
 
-    $scope.getData = function(){
+    $scope.getData = function () {
         $scope.isLoading = true;
-        myHttpService.get('random_compatible').then(function(res){
+        myHttpService.get('random_compatible').then(function (res) {
             console.log(res.data);
             $scope.isLoading = false;
             $scope.items = res.data;
         });
     };
 
-    var init = function(){
+    var init = function () {
         $scope.getData();
     }
     init();
@@ -877,80 +966,80 @@ ngApp.controller('ModalReadyToDateCtrl', ['$scope', '$uibModalInstance', 'items'
     $scope.currentIndex = 0;
     $scope.currentQuestion = {};
     $scope.showAnswer = false;
-    
+
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
 
     $scope.choiceLength = 7;
-    $scope.getNumber = function(num) {
-        return new Array(num);   
+    $scope.getNumber = function (num) {
+        return new Array(num);
     }
 
-    $scope.selectAsnwer = function(i){
+    $scope.selectAsnwer = function (i) {
         $scope.currentQuestion.answer = i;
     }
 
-    $scope.prevQuestion = function(){
+    $scope.prevQuestion = function () {
         $scope.currentIndex -= 1;
         $scope.currentQuestion = $scope.questions[$scope.currentIndex];
     }
 
-    $scope.getAnswerAverage = function(i){
+    $scope.getAnswerAverage = function (i) {
         var total = 0;
         var count = $scope.currentQuestion.average[i].count;
-        $scope.currentQuestion.average.forEach(function(item){
+        $scope.currentQuestion.average.forEach(function (item) {
             total += item.count;
         });
-        
-        return Math.round((count/total)*100);
+
+        return Math.round((count / total) * 100);
     }
 
-    $scope.nextQuestion = function(){
+    $scope.nextQuestion = function () {
         var ans = $scope.currentQuestion.answer;
-        if(typeof(ans) !== 'undefined'){
-            if($scope.currentIndex < 9){
+        if (typeof (ans) !== 'undefined') {
+            if ($scope.currentIndex < 9) {
                 $scope.currentIndex += 1;
                 $scope.currentQuestion = $scope.questions[$scope.currentIndex];
                 $scope.currentQuestion.submitted = true;
             }
-            else{
+            else {
                 $scope.showAnswer = true;
             }
         }
-        else{
+        else {
             $scope.showToast('Select answer first.', 'danger');
         }
 
     }
 
-    $scope.myScore = function(){
-        var total = 7*10;
+    $scope.myScore = function () {
+        var total = 7 * 10;
         var myscore = 10;
-        $scope.questions.forEach(function(item){
+        $scope.questions.forEach(function (item) {
             myscore += item.answer;
             console.log(total, myscore);
-            
-        });
-        
 
-        return Math.round((myscore/total)*100);
-        
+        });
+
+
+        return Math.round((myscore / total) * 100);
+
     }
 
-    $scope.getData = function(){
+    $scope.getData = function () {
         $scope.isLoading = true;
         console.log(window.base_url + '/public/plugins/angularjs/data/ready_questions.json');
-        myHttpService.get('get_readydate_question').then(function(res){
-            $scope.questions = res.data;        
+        myHttpService.get('get_readydate_question').then(function (res) {
+            $scope.questions = res.data;
             $scope.isLoading = false;
-            
+
             $scope.currentQuestion = res.data[$scope.currentIndex];
             console.log(res, 'asdfsdf');
         });
     }
 
-    var init = function(){
+    var init = function () {
         $scope.getData();
     }
     init();
@@ -962,9 +1051,9 @@ ngApp.controller('ModalSearchByNameCtrl', ['$scope', '$uibModalInstance', 'items
     $scope.search = items;
     $scope.haveSearched = false;
     $scope.isLoading = false;
-    
+
     console.log(items);
-       
+
     $scope.userAction = function (m = 'close') {
         $uibModalInstance.close(m);
     };
@@ -973,28 +1062,28 @@ ngApp.controller('ModalSearchByNameCtrl', ['$scope', '$uibModalInstance', 'items
         $uibModalInstance.dismiss('cancel');
     };
 
-    $scope.viewProfile = function(u){
-        var link = base_url+'/search/profile/'+u.id;
+    $scope.viewProfile = function (u) {
+        var link = base_url + '/search/profile/' + u.id;
         console.log(link);
         return link;
     }
 
 
-    $scope.findUser = function(){
+    $scope.findUser = function () {
         $scope.isLoading = true;
-        
+
         console.log($scope.search, 'search_name');
 
-        myHttpService.getWithParams('search_byname', $scope.search).then(function(res){
+        myHttpService.getWithParams('search_byname', $scope.search).then(function (res) {
             $scope.foundUsers = res.data;
             $scope.haveSearched = true;
             $scope.isLoading = false;
-            
+
             console.log(res.data, 'res.data aboudate');
         });
     }
 
-    if($scope.search.firstName != ''){
+    if ($scope.search.firstName != '') {
         $scope.findUser();
     }
 
@@ -1012,9 +1101,11 @@ ngApp.controller('ModalInviteFriendsCtrl', ['$scope', '$uibModalInstance', 'item
     $scope.fbContacts = [];
     $scope.fbData = {};
     $scope.selectedToInvite = 0;
+    $scope.socialTypes = [{
     $scope.socialTypes = [
         {
             name: 'Facebook',
+        }, {
         },
         {
             name: 'Google+',
@@ -1036,14 +1127,14 @@ ngApp.controller('ModalInviteFriendsCtrl', ['$scope', '$uibModalInstance', 'item
         // }
     ];
     $scope.activeSocial = $scope.socialTypes[1];
-    
+
 
     console.log(items);
 
-    $scope.selectSocial = function(i){
+    $scope.selectSocial = function (i) {
         $scope.activeSocial = $scope.socialTypes[i];
     }
-       
+
     $scope.userAction = function (m = 'close') {
         $uibModalInstance.close(m);
     };
@@ -1052,27 +1143,27 @@ ngApp.controller('ModalInviteFriendsCtrl', ['$scope', '$uibModalInstance', 'item
         $uibModalInstance.dismiss('cancel');
     };
 
-    $scope.viewProfile = function(u){
-        var link = base_url+'/search/profile/'+u.id;
+    $scope.viewProfile = function (u) {
+        var link = base_url + '/search/profile/' + u.id;
         console.log(link);
         return link;
     }
 
-    $scope.selectAll = function(data){
-        data.forEach(function(el){
+    $scope.selectAll = function (data) {
+        data.forEach(function (el) {
             $scope.selectUser(el);
         });
     }
 
-    $scope.sendInvite = function(data){
+    $scope.sendInvite = function (data) {
         var loading = $.confirm({
             icon: 'fa fa-spinner fa-spin',
             title: 'Sending Invite..',
             content: 'Sit back, we are processing your request.',
-            buttons:{
+            buttons: {
                 close: {
                     text: 'Sending..',
-                    action: function(){
+                    action: function () {
                         return false;
                     }
                 }
@@ -1093,9 +1184,9 @@ ngApp.controller('ModalInviteFriendsCtrl', ['$scope', '$uibModalInstance', 'item
         $q.all(promises).then(function (results) {
             console.log(results, 'results');
             results.forEach(function (data, index, headers, config) {
-                console.log(index, promises.length,index + 1); //data, index, headers, config);
-                
-                if(promises.length == (index + 1)){
+                console.log(index, promises.length, index + 1); //data, index, headers, config);
+
+                if (promises.length == (index + 1)) {
                     loading.close();
                     $.alert('Invite successfully sent.');
                 }
@@ -1104,27 +1195,27 @@ ngApp.controller('ModalInviteFriendsCtrl', ['$scope', '$uibModalInstance', 'item
         });
 
     }
-    
-    $scope.connectFacebook = function(){
+
+    $scope.connectFacebook = function () {
         var fb_data = JSON.parse(window.localStorage.getItem('fb_data'));
         $scope.fbData = fb_data;
 
         console.log(fb_data, 'fb_data');
-        if(!fb_data){
+        if (!fb_data) {
             checkLoginState();
 
-            $timeout(function(){
+            $timeout(function () {
                 checkLoginState();
             }, 5000);
         }
-        else{
+        else {
             $scope.fbIsLogged = true;
-            $scope.fbContacts = (typeof(fb_data.friends.data) !== 'undefined') ? fb_data.friends.data : [];
+            $scope.fbContacts = (typeof (fb_data.friends.data) !== 'undefined') ? fb_data.friends.data : [];
             console.log($scope.fbContacts, 'fbContacts');
         }
     }
 
-    $scope.startGoogle = function() {
+    $scope.startGoogle = function () {
         // Client ID and API key from the Developer Console
         var CLIENT_ID = '653416927817-0ocqcmiprl9ni48v07i9nhmbluo388k1.apps.googleusercontent.com';
         var API_KEY = 'AIzaSyClo2KBtLJTc1kfEtm82iRq9cKE2R8dEXY';
@@ -1139,7 +1230,7 @@ ngApp.controller('ModalInviteFriendsCtrl', ['$scope', '$uibModalInstance', 'item
         var authorizeButton = document.getElementById('authorize-button');
         var signoutButton = document.getElementById('signout-button');
         var GoogleAuth; // Google Auth object.
-        
+
         /**
          *  On load, called to load the auth2 library and API client library.
          */
@@ -1160,7 +1251,7 @@ ngApp.controller('ModalInviteFriendsCtrl', ['$scope', '$uibModalInstance', 'item
             }).then(function () {
                 // Listen for sign-in state changes.
                 GoogleAuth = gapi.auth2.getAuthInstance();
-                
+
                 GoogleAuth.isSignedIn.listen(updateSigninStatus);
 
                 // Handle the initial sign-in state.
@@ -1178,7 +1269,7 @@ ngApp.controller('ModalInviteFriendsCtrl', ['$scope', '$uibModalInstance', 'item
             authorizeButton.style.display = 'block';
             signoutButton.style.display = 'none';
             $scope.googleIsLogged = false;
-            
+
             if (isSignedIn) {
                 authorizeButton.style.display = 'none';
                 signoutButton.style.display = 'block';
@@ -1242,14 +1333,16 @@ ngApp.controller('ModalInviteFriendsCtrl', ['$scope', '$uibModalInstance', 'item
                             googleContacts.push(d);
 
                             // appendPre(person.emailAddresses[0].value);
-                        } else {
+                        }
+                        else {
                             // appendPre("User has no email.");
                         }
                     }
                     $scope.googleContacts = googleContacts;
                     console.log($scope.googleContacts, 'googleContacts');
 
-                } else {
+                }
+                else {
                     appendPre('No upcoming events found.');
                 }
             });
@@ -1262,52 +1355,52 @@ ngApp.controller('ModalInviteFriendsCtrl', ['$scope', '$uibModalInstance', 'item
         //     handleSignoutClick: handleSignoutClick(),
         //     handleAuthClick: handleAuthClick()
         // };
-        
+
     };
 
-    $scope.connectGoogle = function(){
+    $scope.connectGoogle = function () {
         $('body').find('#authorize-button').click();
     }
 
-    $scope.disconnectGoogle = function(){
+    $scope.disconnectGoogle = function () {
         $('body').find('#signout-button').click();
     }
 
-    $scope.selectUser = function(d){
+    $scope.selectUser = function (d) {
         d.selected = !d.selected;
-        if(d.selected){
+        if (d.selected) {
             $scope.selectedToInvite += 1;
         }
-        else{
+        else {
             $scope.selectedToInvite -= 1;
         }
         // console.log($scope.selectedToInvite);
     }
-    $scope.getData = function(){
+    $scope.getData = function () {
         // $scope.isLoading = true;
         $scope.startGoogle();
     }
 
     $scope.getData();
-    
+
 }]);
 
-ngApp.controller('videoRoomController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$compile', 'uiCalendarConfig', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $compile,uiCalendarConfig) {
-    
-    $scope.blockUser = function(e){
+ngApp.controller('videoRoomController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$compile', 'uiCalendarConfig', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $compile, uiCalendarConfig) {
+
+    $scope.blockUser = function (e) {
         console.log(e);
         $(e.currentTarget).closest('.list-group-item').hide();
     }
 
 }]);
 
-ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$compile', 'uiCalendarConfig', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $compile,uiCalendarConfig) {
+ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$compile', 'uiCalendarConfig', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $compile, uiCalendarConfig) {
     $scope.myInterval = 3000;
     $scope.noWrapSlides = false;
     $scope.active = 0;
     $scope.currentUser = {};
-    $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
-    
+    $scope.callAudio = new Audio(base_url + '/public/assets/audio/phone_ringing.mp3');
+
 
     var slides = $scope.slides = [];
     var currIndex = 0;
@@ -1325,19 +1418,19 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
     //     $scope.addSlide();
     // }
 
-    $scope.playAudio = function() {
-        var audio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
+    $scope.playAudio = function () {
+        var audio = new Audio(base_url + '/public/assets/audio/phone_ringing.mp3');
         audio.play();
     };
-    
-    $scope.startVideoCall = function(i, user){
+
+    $scope.startVideoCall = function (i, user) {
         $scope.currentUser = user;
 
         //play ringing
         $scope.callAudio.play();
 
         $scope.myInterval = 0;
-        
+
         var jc = $ngConfirm({
             title: 'Calling',
             content: '<i class="fa fa-video-camera"></i> Waiting for {{currentUser.firstName}}',
@@ -1346,7 +1439,7 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
                 Calling: {
                     text: 'Calling..',
                     btnClass: 'btn-danger',
-                    action: function(scope, button){
+                    action: function (scope, button) {
                         // scope.name = 'Booo!!';
                         return false; // prevent close;
                     }
@@ -1354,7 +1447,7 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
                 dropCall: {
                     text: 'Drop',
                     btnClass: 'btn-default',
-                    action: function(scope, button){
+                    action: function (scope, button) {
                         $scope.myInterval = 3000;
 
                         $scope.callAudio.pause();
@@ -1365,7 +1458,7 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
 
         });
 
-        $scope.callAudio.onended = function(){
+        $scope.callAudio.onended = function () {
             // alert("The audio has ended");
 
             jc.close();
@@ -1377,7 +1470,7 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
                     dropCall: {
                         text: 'OK',
                         btnClass: 'btn-default',
-                        action: function(scope, button){
+                        action: function (scope, button) {
 
                         }
                     }
@@ -1385,22 +1478,22 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
             });
         }
     }
-    
-    $scope.getData = function(){
-        myHttpService.get('get_video_shuffle').then(function(res){
+
+    $scope.getData = function () {
+        myHttpService.get('get_video_shuffle').then(function (res) {
             // slides = res.data.online;
 
-            res.data.online.forEach(function(d){
-                d.slideIndex = currIndex++; 
+            res.data.online.forEach(function (d) {
+                d.slideIndex = currIndex++;
                 slides.push(d);
                 console.log(d);
             });
             console.log(slides, res.data, 'get_video_shuffle');
-            
+
         });
     }
 
-    var init = function(){
+    var init = function () {
         $scope.getData();
     }
 
@@ -1410,61 +1503,81 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
 }]);
 
 
-ngApp.controller('eventsController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$compile', 'uiCalendarConfig', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $compile,uiCalendarConfig) {
+ngApp.controller('eventsController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$compile', 'uiCalendarConfig', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $compile, uiCalendarConfig) {
     $scope.base_url = window.base_url;
 
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
-    
+
     $scope.changeTo = 'Hungarian';
     /* event source that pulls from google.com */
     $scope.eventSource = {
-            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-            className: 'gcal-event',           // an option!
-            currentTimezone: 'America/Chicago' // an option!
+        url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
+        className: 'gcal-event', // an option!
+        currentTimezone: 'America/Chicago' // an option!
     };
     /* event source that contains custom events on the scope */
     $scope.events = [
-    //   {title: 'Beer Party',start: new Date(y, m, 1, 6, 0),end: new Date(y, m, 1, 22, 30),allDay: false},
-    //   {title: 'Singles Meetup',start: new Date(y, m, d - 5, 10, 0),end: new Date(y, m, d - 5, 22, 30),allDay: false},
-    //   {id: 999,title: 'Pizza Party',start: new Date(y, m, d - 3, 13, 0),end: new Date(y, m, d - 3, 22, 30),allDay: false},
-    //   {id: 999,title: 'Random Event',start: new Date(y, m, d + 4, 15, 0),end: new Date(y, m, d + 4, 22, 30),allDay: false},
-    //   {title: 'Admin Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-    //   {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
+        //   {title: 'Beer Party',start: new Date(y, m, 1, 6, 0),end: new Date(y, m, 1, 22, 30),allDay: false},
+        //   {title: 'Singles Meetup',start: new Date(y, m, d - 5, 10, 0),end: new Date(y, m, d - 5, 22, 30),allDay: false},
+        //   {id: 999,title: 'Pizza Party',start: new Date(y, m, d - 3, 13, 0),end: new Date(y, m, d - 3, 22, 30),allDay: false},
+        //   {id: 999,title: 'Random Event',start: new Date(y, m, d + 4, 15, 0),end: new Date(y, m, d + 4, 22, 30),allDay: false},
+        //   {title: 'Admin Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
+        //   {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
     ];
 
-    console.log($scope.events, 'evns'); 
+    console.log($scope.events, 'evns');
 
 
     /* event source that calls a function on every view switch */
     $scope.eventsF = function (start, end, timezone, callback) {
-      var s = new Date(start).getTime() / 1000;
-      var e = new Date(end).getTime() / 1000;
-      var m = new Date(start).getMonth();
-      var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
+        var s = new Date(start).getTime() / 1000;
+        var e = new Date(end).getTime() / 1000;
+        var m = new Date(start).getMonth();
+        var events = [{
+            title: 'Feed Me ' + m,
+            start: s + (50000),
+            end: s + (100000),
+            allDay: false,
+            className: ['customFeed']
+        }];
 
-      if(typeof(callback) === 'function'){
-        callback(events);
-      }
+        if (typeof (callback) === 'function') {
+            callback(events);
+        }
     };
 
     $scope.calEventsExt = {
-       color: '#f00',
-       textColor: 'yellow',
-       events: [ 
-          {type:'party',title: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-          {type:'party',title: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-          {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-        ]
+        color: '#f00',
+        textColor: 'yellow',
+        events: [{
+            type: 'party',
+            title: 'Lunch',
+            start: new Date(y, m, d, 12, 0),
+            end: new Date(y, m, d, 14, 0),
+            allDay: false
+        }, {
+            type: 'party',
+            title: 'Lunch 2',
+            start: new Date(y, m, d, 12, 0),
+            end: new Date(y, m, d, 14, 0),
+            allDay: false
+        }, {
+            type: 'party',
+            title: 'Click for Google',
+            start: new Date(y, m, 28),
+            end: new Date(y, m, 29),
+            url: 'http://google.com/'
+        }]
     };
     /* alert on eventClick */
-    $scope.alertOnEventClick = function( date, jsEvent, view){
+    $scope.alertOnEventClick = function (date, jsEvent, view) {
         console.log('clickckck', date);
         $scope.alertMessage = date;
 
-        window.location.href = $scope.base_url+'/events/details/'+date.id;
+        window.location.href = $scope.base_url + '/events/details/' + date.id;
 
         // $ngConfirm({
         //     title: 'Event Summary',
@@ -1482,107 +1595,110 @@ ngApp.controller('eventsController', ['$scope', '$filter', 'myHttpService', '$ti
 
     };
     /* alert on Drop */
-     $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
-       $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
+    $scope.alertOnDrop = function (event, delta, revertFunc, jsEvent, ui, view) {
+        $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
     };
     /* alert on Resize */
-    $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
-       $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
+    $scope.alertOnResize = function (event, delta, revertFunc, jsEvent, ui, view) {
+        $scope.alertMessage = ('Event Resized to make dayDelta ' + delta);
     };
     /* add and removes an event source of choice */
-    $scope.addRemoveEventSource = function(sources,source) {
-      var canAdd = 0;
-      angular.forEach(sources,function(value, key){
-        if(sources[key] === source){
-          sources.splice(key,1);
-          canAdd = 1;
+    $scope.addRemoveEventSource = function (sources, source) {
+        var canAdd = 0;
+        angular.forEach(sources, function (value, key) {
+            if (sources[key] === source) {
+                sources.splice(key, 1);
+                canAdd = 1;
+            }
+        });
+        if (canAdd === 0) {
+            sources.push(source);
         }
-      });
-      if(canAdd === 0){
-        sources.push(source);
-      }
     };
     /* add custom event*/
-    $scope.addEvent = function(d) {
-      $scope.events.push(d);
+    $scope.addEvent = function (d) {
+        $scope.events.push(d);
     };
     /* remove event */
-    $scope.remove = function(index) {
-      $scope.events.splice(index,1);
+    $scope.remove = function (index) {
+        $scope.events.splice(index, 1);
     };
     /* Change View */
-    $scope.changeView = function(view,calendar) {
-      uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
+    $scope.changeView = function (view, calendar) {
+        uiCalendarConfig.calendars[calendar].fullCalendar('changeView', view);
     };
     /* Change View */
-    $scope.renderCalender = function(calendar) {
-      if(uiCalendarConfig.calendars[calendar]){
-        uiCalendarConfig.calendars[calendar].fullCalendar('render');
-      }
-    };
-
-    $scope.rerenderEvents = function(calendar) {
-        if(uiCalendarConfig.calendars[calendar]){
-          uiCalendarConfig.calendars[calendar].fullCalendar('rerenderEvents');
+    $scope.renderCalender = function (calendar) {
+        if (uiCalendarConfig.calendars[calendar]) {
+            uiCalendarConfig.calendars[calendar].fullCalendar('render');
         }
     };
 
-    $scope.refreshEvents = function(calendar) {
-        if(uiCalendarConfig.calendars[calendar]){
+    $scope.rerenderEvents = function (calendar) {
+        if (uiCalendarConfig.calendars[calendar]) {
+            uiCalendarConfig.calendars[calendar].fullCalendar('rerenderEvents');
+        }
+    };
+
+    $scope.refreshEvents = function (calendar) {
+        if (uiCalendarConfig.calendars[calendar]) {
             uiCalendarConfig.calendars[calendar].fullCalendar('refresh');
         }
     };
-    
-     /* Render Tooltip */
-    $scope.eventRender = function( event, element, view ) { 
-        element.attr({'tooltip': event.title,
-                     'tooltip-append-to-body': true});
+
+    /* Render Tooltip */
+    $scope.eventRender = function (event, element, view) {
+        element.attr({
+            'tooltip': event.title,
+            'tooltip-append-to-body': true
+        });
         $compile(element)($scope);
     };
 
 
     /* config object */
     $scope.uiConfig = {
-      calendar:{
-        height: 500,
-        editable: false,
-        header:{
-          left: 'today',
-          center: 'title',
-          right: 'prev,next'
-        },
-        eventClick: $scope.alertOnEventClick,
-        eventDrop: $scope.alertOnDrop,
-        eventResize: $scope.alertOnResize,
-        eventRender: $scope.eventRender
-      }
+        calendar: {
+            height: 500,
+            editable: false,
+            header: {
+                left: 'today',
+                center: 'title',
+                right: 'prev,next'
+            },
+            eventClick: $scope.alertOnEventClick,
+            eventDrop: $scope.alertOnDrop,
+            eventResize: $scope.alertOnResize,
+            eventRender: $scope.eventRender
+        }
     };
 
-    $scope.changeLang = function() {
-      if($scope.changeTo === 'Hungarian'){
-        $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
-        $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
-        $scope.changeTo= 'English';
-      } else {
-        $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        $scope.changeTo = 'Hungarian';
-      }
+    $scope.changeLang = function () {
+        if ($scope.changeTo === 'Hungarian') {
+            $scope.uiConfig.calendar.dayNames = ["Vasárnap", "Hétfő", "Kedd", "Szerda", "Csütörtök", "Péntek", "Szombat"];
+            $scope.uiConfig.calendar.dayNamesShort = ["Vas", "Hét", "Kedd", "Sze", "Csüt", "Pén", "Szo"];
+            $scope.changeTo = 'English';
+        }
+        else {
+            $scope.uiConfig.calendar.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            $scope.uiConfig.calendar.dayNamesShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            $scope.changeTo = 'Hungarian';
+        }
     };
     /* event sources array*/
     $scope.eventSources = [$scope.events]; //, $scope.eventSource, $scope.eventsF];
     $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
 
-    $scope.getEvents = function(){
+    $scope.getEvents = function () {
         var type = (window.uri_3) ? window.uri_3 : 0;
 
-        myHttpService.get('events/'+type).then(function(res){
+        myHttpService.get('events/' + type).then(function (res) {
             // $scope.events = [];
-            
+
             console.log(res.data, 'events');
             // $scope.events = res.data;
 
-            angular.forEach(res.data,function(event,key){
+            angular.forEach(res.data, function (event, key) {
                 console.log(event, key, 'kk');
                 event.start = moment(event.start).toDate();
                 event.end = moment(event.end).toDate();
@@ -1590,16 +1706,16 @@ ngApp.controller('eventsController', ['$scope', '$filter', 'myHttpService', '$ti
                 // $scope.events.push(event);
             });
             console.log($scope.events, 'dd');
-            
-            $timeout(function(){
+
+            $timeout(function () {
                 $scope.renderCalender('myCalendar1');
                 $scope.refreshEvents('myCalendar1');
-                
-            }, 1000);            
+
+            }, 1000);
         });
     }
 
-    var init = function(){
+    var init = function () {
         $scope.getEvents();
     }
 
@@ -1615,34 +1731,34 @@ ngApp.controller('eventsController', ['$scope', '$filter', 'myHttpService', '$ti
 ngApp.controller('eventDetailsController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', function ($scope, $filter, myHttpService, $timeout, $ngConfirm) {
     $scope.user = {};
     $scope.event = {};
-    $scope.getEventDetails = function(){
+    $scope.getEventDetails = function () {
         var type = (window.uri_3) ? window.uri_3 : 0;
 
-        myHttpService.get('events/details/'+type).then(function(res){
+        myHttpService.get('events/details/' + type).then(function (res) {
             $scope.event = res.data.event;
             $scope.user = res.data.user;
 
             $scope.initMap($scope.event.lat, $scope.event.lng);
             console.log(res.data, 'events/details');
-      
+
         });
     }
 
-    $scope.joinEvent = function(max){
+    $scope.joinEvent = function (max) {
 
-        if($scope.event.members.length == max){
+        if ($scope.event.members.length == max) {
             $ngConfirm({
                 title: 'Sorry!',
                 content: 'Event already full.',
                 // theme: 'dark', //'supervan' // 'material', 'bootstrap'
             });
-    
+
 
 
             // $ngConfirm.alert('Event already full.');
             return false;
         }
-        if(!$scope.event.joined){
+        if (!$scope.event.joined) {
             $ngConfirm({
                 title: 'Join',
                 content: 'Confirm payment of $<strong>{{event.eventPrice}}</strong> for this event to join.',
@@ -1651,22 +1767,25 @@ ngApp.controller('eventDetailsController', ['$scope', '$filter', 'myHttpService'
                     yes: {
                         text: 'Confirm',
                         btnClass: 'btn-success',
-                        action: function(scope, button){
-                            myHttpService.post('join_event', {event_id: $scope.event.id, user_id: $scope.user.id}).then(function(res){
+                        action: function (scope, button) {
+                            myHttpService.post('join_event', {
+                                event_id: $scope.event.id,
+                                user_id: $scope.user.id
+                            }).then(function (res) {
                                 console.log(res.data);
                                 $scope.event.joined = true;
                                 $scope.event.members.push($scope.user);
                             });
                         }
                     },
-                    close: function(scope, button){
+                    close: function (scope, button) {
                         // closes the modal
                     },
                 }
             });
-    
+
         }
-        else{
+        else {
             $ngConfirm({
                 title: 'Leave',
                 content: 'No refund if you leave event.',
@@ -1675,18 +1794,22 @@ ngApp.controller('eventDetailsController', ['$scope', '$filter', 'myHttpService'
                     yes: {
                         text: 'OK',
                         btnClass: 'btn-success',
-                        action: function(scope, button){
-                            myHttpService.post('leave_event', {event_id: $scope.event.id, user_id: $scope.user.id, '_method': 'DELETE'}).then(function(res){
+                        action: function (scope, button) {
+                            myHttpService.post('leave_event', {
+                                event_id: $scope.event.id,
+                                user_id: $scope.user.id,
+                                '_method': 'DELETE'
+                            }).then(function (res) {
                                 console.log(res.data);
                                 $scope.event.joined = false;
-                
+
                                 $scope.event.members = res.data;
                                 // $scope.event.members.splice(-1, 1);
                             });
-                            
+
                         }
                     },
-                    close: function(scope, button){
+                    close: function (scope, button) {
                         // closes the modal
                     },
                 }
@@ -1695,9 +1818,9 @@ ngApp.controller('eventDetailsController', ['$scope', '$filter', 'myHttpService'
 
         }
 
-        
+
     }
-    $scope.initMap = function(lat, lng) {
+    $scope.initMap = function (lat, lng) {
         if ($('#map').length) {
             setTimeout(function () {
                 var myLatLng = {
@@ -1719,7 +1842,7 @@ ngApp.controller('eventDetailsController', ['$scope', '$filter', 'myHttpService'
         }
     }
 
-    var init = function(){
+    var init = function () {
         $scope.getEventDetails();
     }
 
@@ -1737,11 +1860,11 @@ ngApp.controller('browseMemberController', ['$scope', '$filter', 'myHttpService'
     $scope.perPage = 6;
     $scope.formData = {};
 
-    $scope.next = function(){
+    $scope.next = function () {
         $scope.offset += $scope.perPage;
         $scope.getData($scope.offset);
     }
-    $scope.previous = function(){
+    $scope.previous = function () {
         $scope.offset -= $scope.perPage;
         $scope.isEnd = false;
         $scope.getData($scope.offset);
@@ -1750,6 +1873,8 @@ ngApp.controller('browseMemberController', ['$scope', '$filter', 'myHttpService'
 
     $scope.validationOptions = {
         ignore: [],
+        rules: {},
+        messages: {},
         rules: {
         },
         messages: {
@@ -1770,7 +1895,7 @@ ngApp.controller('browseMemberController', ['$scope', '$filter', 'myHttpService'
 
     $scope.submitForm = function (form) {
         console.log(form.validate(), $scope.formData);
-        if(form.validate()){
+        if (form.validate()) {
             $scope.getData(0);
             $scope.isEnd = false;
         }
@@ -1786,35 +1911,35 @@ ngApp.controller('browseMemberController', ['$scope', '$filter', 'myHttpService'
     //     });
     // }
 
-    $scope.blockUser = function(i, u){
+    $scope.blockUser = function (i, u) {
         console.log(i, u);
         $scope.showToast('You have successfully blocked user.');
         $scope.data.users.splice(i, 1);
 
-        myHttpService.post('block_user', u).then(function(res){
+        myHttpService.post('block_user', u).then(function (res) {
             console.log()
         });
     }
 
 
-    $scope.getData = function(offset){
+    $scope.getData = function (offset) {
         $scope.isLoading = true;
         $scope.formData.offset = offset ? offset : 0;
-        myHttpService.getWithParams('search_user', $scope.formData).then(function(res){
+        myHttpService.getWithParams('search_user', $scope.formData).then(function (res) {
             $scope.isLoading = false;
 
-            if(!res.data.users.length){
+            if (!res.data.users.length) {
                 $scope.isEnd = true;
                 $scope.offset -= $scope.perPage;
-                $scope.showToast('Nothing more to show.','warning');
+                $scope.showToast('Nothing more to show.', 'warning');
             }
-            else{
+            else {
                 $scope.data = res.data;
             }
             console.log(res.data, 'search_user');
         });
     }
-    var init = function(){
+    var init = function () {
         $scope.getData();
     }
     init();
@@ -1831,6 +1956,8 @@ ngApp.controller('aboutDateController', ['$scope', '$filter', 'myHttpService', '
 
     $scope.validationOptions = {
         ignore: [],
+        rules: {},
+        messages: {},
         rules: {
         },
         messages: {
@@ -1848,13 +1975,13 @@ ngApp.controller('aboutDateController', ['$scope', '$filter', 'myHttpService', '
         }
     };
 
-    $scope.getData = function(){
-        myHttpService.get('aboutdate').then(function(res){
+    $scope.getData = function () {
+        myHttpService.get('aboutdate').then(function (res) {
             $scope.formData = res.data;
             console.log(res.data, 'res.data aboudate');
         });
     }
-    var init = function(){
+    var init = function () {
         $scope.getData();
     }
     init();
@@ -1863,32 +1990,32 @@ ngApp.controller('aboutDateController', ['$scope', '$filter', 'myHttpService', '
         $scope.formData.fatherBorn = $scope.formData.motherBorn;
         console.log(form, $scope.formData);
         if (form.validate()) {
-            
-            if($scope.formData.age_from > $scope.formData.age_to){
+
+            if ($scope.formData.age_from > $scope.formData.age_to) {
                 $ngBootbox.alert('Opps! Between age field must be smaller than to field.');
                 return false;
             }
             $ngBootbox.customDialog(loadingModalOpt);
-            
-            myHttpService.post('aboutdate', $scope.formData).then(function(res){
+
+            myHttpService.post('aboutdate', $scope.formData).then(function (res) {
                 console.log('aboutdate', res);
                 $ngBootbox.hideAll();
-                $timeout(function(){
+                $timeout(function () {
                     $scope.showToast('Details about your date successfully saved.');
                 }, 300);
-                $timeout(function(){
+                $timeout(function () {
 
-                    if($scope.logged_user_info.verified){
+                    if ($scope.logged_user_info.verified) {
                         window.location.href = base_url + '/profile_settings';
-                        
+
                     }
-                    else{
-                        window.location.href = base_url + '/users/'+res.data.user_id+'/select_mates';
-                        
+                    else {
+                        window.location.href = base_url + '/users/' + res.data.user_id + '/select_mates';
+
                     }
 
                 }, 2500);
-            }, function(err){
+            }, function (err) {
                 $ngBootbox.hideAll();
             });
         }
@@ -1900,9 +2027,9 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
     $scope.emailInUse = 0;
     $scope.usernameInUse = 0;
     $scope.profileType = null;
-    
-    $scope.myImage='';
-    $scope.myCroppedImage='';
+
+    $scope.myImage = '';
+    $scope.myCroppedImage = '';
     $scope.imgEdit = true;
     $scope.imgDone = {
         done: false
@@ -1922,7 +2049,7 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
     };
     angular.element(document.querySelector('#fileInput')).on('change', handleFileSelect);
 
-    $scope.deleteAccount = function(){
+    $scope.deleteAccount = function () {
 
         $ngConfirm({
             title: 'Delete Account',
@@ -1932,9 +2059,9 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
                 sayBoo: {
                     text: 'Confirm',
                     btnClass: 'btn-danger',
-                    action: function(scope, button){
+                    action: function (scope, button) {
                         console.log('yeah');
-                        myHttpService.post('delete_account', {}).then(function(res){
+                        myHttpService.post('delete_account', {}).then(function (res) {
                             console.log(res.data);
                             $.alert({
                                 title: (res.data.status == 'ok') ? 'Account Deleted' : 'Account Admin',
@@ -1951,7 +2078,7 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
                 cancel: {
                     text: 'Cancel',
                     btnClass: 'btn-default',
-                    action: function(scope, button){
+                    action: function (scope, button) {
                         console.log('yeah');
                     }
                 },
@@ -2016,9 +2143,9 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
 
     $scope.submitForm = function (registerform) {
         console.log($scope.logged_user_info, '$scope.imgEdit');
-        
+
         $scope.logged_user_info.birthdate = $filter('date')($scope.logged_user_info.birthdateObj, "yyyy-MM-dd");
-        if($scope.profileType)
+        if ($scope.profileType)
             $scope.logged_user_info.photoType = $scope.profileType;
         else
             $scope.logged_user_info.photoType = 3;
@@ -2026,7 +2153,7 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
         // console.log(registerform, $scope.logged_user_info);
         if (registerform.validate() && !$scope.emailInUse && !$scope.logged_user_infonameInUse) {
             // $scope.logged_user_info.photo = $scope.myCroppedImage;
-            if($scope.imgEdit){
+            if ($scope.imgEdit) {
                 $scope.showToast('Please upload an image.', 'danger');
                 return false;
             }
@@ -2055,7 +2182,7 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
             //     $ngBootbox.hideAll();
             // });
         }
-        else{
+        else {
             $scope.showToast('Opps! Please check your input.', 'danger');
         }
     }
@@ -2073,47 +2200,51 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
     $scope.usernameChange = function (n) {
         console.log(n);
         $scope.usernameInUse = 0;
-        
-        if(n){
-            myHttpService.post('validate_username', {username: n})
-            .then(function(res){
-                console.log(res);
-                $scope.usernameInUse = res.data.count;
-            }, function(err){
-                console.log(err);
-            });
+
+        if (n) {
+            myHttpService.post('validate_username', {
+                    username: n
+                })
+                .then(function (res) {
+                    console.log(res);
+                    $scope.usernameInUse = res.data.count;
+                }, function (err) {
+                    console.log(err);
+                });
         }
 
     }
-    
+
     $scope.emailChange = function (n) {
         console.log(n);
         $scope.emailInUse = 0;
-        
-        if(n){
-            myHttpService.post('validate_email', {email: n})
-            .then(function(res){
-                console.log(res);
-                $scope.emailInUse = res.data.count;
-            }, function(err){
-                console.log(err);
-            });
+
+        if (n) {
+            myHttpService.post('validate_email', {
+                    email: n
+                })
+                .then(function (res) {
+                    console.log(res);
+                    $scope.emailInUse = res.data.count;
+                }, function (err) {
+                    console.log(err);
+                });
         }
     }
 
-    $scope.getInitImage = function(){
-        myHttpService.getCustom(base_url+'/public/plugins/angularjs/data/signup_img.json').then(function(res){
+    $scope.getInitImage = function () {
+        myHttpService.getCustom(base_url + '/public/plugins/angularjs/data/signup_img.json').then(function (res) {
             console.log(res.data, 'ress image');
-            $scope.myCroppedImage=res.data.image;
-            
+            $scope.myCroppedImage = res.data.image;
+
         });
     }
 
-    var init = function(){
+    var init = function () {
         $scope.getInitImage();
     }
     init();
-    
+
 
 
 }]);
@@ -2123,9 +2254,9 @@ ngApp.controller('signupController', ['$scope', '$filter', 'myHttpService', '$ti
     $scope.usernameInUse = 0;
     $scope.profileType = null;
     $scope.base_url = window.base_url;
-    
-    $scope.myImage='';
-    $scope.myCroppedImage='';
+
+    $scope.myImage = '';
+    $scope.myCroppedImage = '';
     $scope.imgEdit = true;
     $scope.imgDone = {
         done: false
@@ -2155,8 +2286,8 @@ ngApp.controller('signupController', ['$scope', '$filter', 'myHttpService', '$ti
 
     $scope.user = {};
 
-    $scope.getLocationByIp = function(){
-        myHttpService.get('get_signup_location').then(function(res){
+    $scope.getLocationByIp = function () {
+        myHttpService.get('get_signup_location').then(function (res) {
             $scope.user.location = res.data.location;
             $scope.user.latitude = res.data.latitude;
             $scope.user.longitude = res.data.longitude;
@@ -2179,20 +2310,20 @@ ngApp.controller('signupController', ['$scope', '$filter', 'myHttpService', '$ti
         // });
     }
 
-    $scope.getInitImage = function(){
-        myHttpService.getCustom(base_url+'/public/plugins/angularjs/data/signup_img.json').then(function(res){
+    $scope.getInitImage = function () {
+        myHttpService.getCustom(base_url + '/public/plugins/angularjs/data/signup_img.json').then(function (res) {
             console.log(res.data, 'ress image');
-            $scope.myCroppedImage=res.data.image;
-            
+            $scope.myCroppedImage = res.data.image;
+
         });
     }
 
-    var init = function(){
+    var init = function () {
         $scope.getLocationByIp();
         $scope.getInitImage();
     }
     init();
-    
+
     $scope.checklist = [
         'I\'m new to the area',
         'I don\'t feel comfortable asking peopleout',
@@ -2247,9 +2378,9 @@ ngApp.controller('signupController', ['$scope', '$filter', 'myHttpService', '$ti
 
     $scope.submitForm = function (registerform) {
         console.log($scope.user, '$scope.imgEdit');
-        
+
         $scope.user.birthdate = $filter('date')($scope.user.birthdateObj, "yyyy-MM-dd");
-        if($scope.profileType)
+        if ($scope.profileType)
             $scope.user.photoType = $scope.profileType;
         else
             $scope.user.photoType = 3;
@@ -2257,36 +2388,36 @@ ngApp.controller('signupController', ['$scope', '$filter', 'myHttpService', '$ti
         // console.log(registerform, $scope.user);
         if (registerform.validate() && !$scope.emailInUse && !$scope.usernameInUse) {
             $scope.user.photo = $scope.myCroppedImage;
-            if($scope.imgEdit){
+            if ($scope.imgEdit) {
                 $scope.showToast('Please upload an image.', 'danger');
                 return false;
             }
             $ngBootbox.customDialog(loadingModalOpt);
 
             myHttpService.post('signup', $scope.user)
-            .then(function(res){
-                console.log(res);
-                $ngBootbox.hideAll();
-                if(res.data.result == 'ok'){
+                .then(function (res) {
+                    console.log(res);
                     $ngBootbox.hideAll();
-                    $timeout(function(){
-                        $scope.showToast(res.data.message);
-                    }, 300);
-                    $timeout(function(){
-                        window.location.href = window.base_url+'/users/'+res.data.username+'/about_your_date';
-                    }, 2500);
+                    if (res.data.result == 'ok') {
+                        $ngBootbox.hideAll();
+                        $timeout(function () {
+                            $scope.showToast(res.data.message);
+                        }, 300);
+                        $timeout(function () {
+                            window.location.href = window.base_url + '/users/' + res.data.username + '/about_your_date';
+                        }, 2500);
 
-                }
-                else{
-                    $ngBootbox.alert(res.data.message);
-                }
-            }, function(err){
-                console.log(err);
-                var box = $ngBootbox.alert('Something went wrong.');
-                $ngBootbox.hideAll();
-            });
+                    }
+                    else {
+                        $ngBootbox.alert(res.data.message);
+                    }
+                }, function (err) {
+                    console.log(err);
+                    var box = $ngBootbox.alert('Something went wrong.');
+                    $ngBootbox.hideAll();
+                });
         }
-        else{
+        else {
             $scope.showToast('Opps! Please check your input.', 'danger');
         }
     }
@@ -2304,31 +2435,35 @@ ngApp.controller('signupController', ['$scope', '$filter', 'myHttpService', '$ti
     $scope.usernameChange = function (n) {
         console.log(n);
         $scope.usernameInUse = 0;
-        
-        if(n){
-            myHttpService.post('validate_username', {username: n})
-            .then(function(res){
-                console.log(res);
-                $scope.usernameInUse = res.data.count;
-            }, function(err){
-                console.log(err);
-            });
+
+        if (n) {
+            myHttpService.post('validate_username', {
+                    username: n
+                })
+                .then(function (res) {
+                    console.log(res);
+                    $scope.usernameInUse = res.data.count;
+                }, function (err) {
+                    console.log(err);
+                });
         }
 
     }
-    
+
     $scope.emailChange = function (n) {
         console.log(n);
         $scope.emailInUse = 0;
-        
-        if(n){
-            myHttpService.post('validate_email', {email: n})
-            .then(function(res){
-                console.log(res);
-                $scope.emailInUse = res.data.count;
-            }, function(err){
-                console.log(err);
-            });
+
+        if (n) {
+            myHttpService.post('validate_email', {
+                    email: n
+                })
+                .then(function (res) {
+                    console.log(res);
+                    $scope.emailInUse = res.data.count;
+                }, function (err) {
+                    console.log(err);
+                });
         }
     }
 
@@ -2340,7 +2475,7 @@ ngApp.controller('selectMateController', ['$scope', '$filter', 'myHttpService', 
     $scope.userData = null;
     $scope.isLoading = false;
 
-    $scope.getData = function(){
+    $scope.getData = function () {
         // myHttpService.get('selectmates').then(function(res){
         //     $scope.data = res.data;
         //     var midd = Number((res.data.users.length/2).toFixed(0)) - 1;
@@ -2360,22 +2495,22 @@ ngApp.controller('selectMateController', ['$scope', '$filter', 'myHttpService', 
         // });
     }
 
-    $scope.$watch('userData', function(newValue) {
+    $scope.$watch('userData', function (newValue) {
         $scope.isLoading = true;
-        
-        if(newValue){
-            
-            profileService.getUserMates(newValue).then(function(res) {
+
+        if (newValue) {
+
+            profileService.getUserMates(newValue).then(function (res) {
                 // $scope.usersMate = res;
                 // console.log($scope.usersMate);
                 $scope.data = res;
                 $scope.isLoading = false;
 
-                var midd = Number((res.users.length/2).toFixed(0)) - 1;
+                var midd = Number((res.users.length / 2).toFixed(0)) - 1;
 
                 $scope.activeData = $scope.data.users[midd];
 
-                $timeout(function(){
+                $timeout(function () {
 
                     // console.log(res, 'res.data selectmates');
                     $(document).find("#mate-carousel").flipster({
@@ -2385,52 +2520,56 @@ ngApp.controller('selectMateController', ['$scope', '$filter', 'myHttpService', 
                         buttons: false,
                         scrollwheel: false,
                         touch: false,
-                        onItemSwitch: function(curr, prev){
+                        onItemSwitch: function (curr, prev) {
                             var i = $(curr).index();
                             var d = $scope.data.users[i];
 
                             $scope.viewDetails(d);
-                            
+
                             console.log($(curr).index(), $scope.data.users[i], curr, prev);
-                            
-                        }                        
+
+                        }
                     });
                 }, 0);
             });
         }
     }, true);
 
-    var init = function(){
+    var init = function () {
         $scope.getData();
     }
     init();
 
-    $scope.viewDetails = function(u){
+    $scope.viewDetails = function (u) {
         $scope.activeData = u;
     }
-    $scope.addUser = function(u){
+    $scope.addUser = function (u) {
         $scope.activeData = u;
         u.is_friend = !u.is_friend;
 
-        if(!u.is_friend){
-            var action = myHttpService.post('delete_friend', {id: u.id}).then(function(res){
+        if (!u.is_friend) {
+            var action = myHttpService.post('delete_friend', {
+                id: u.id
+            }).then(function (res) {
                 console.log(res);
                 var mess = 'User successfully removed.';
                 $scope.showToast(mess);
             });
         }
-        else{
-            myHttpService.post('add_friend', {id: u.id}).then(function(res){
+        else {
+            myHttpService.post('add_friend', {
+                id: u.id
+            }).then(function (res) {
                 console.log(res);
                 var mess = 'User successfully picked up.';
                 $scope.showToast(mess);
             });
         }
-        
+
     }
 
-    $scope.goNext = function(){
-        window.location.href = base_url + '/users/'+$scope.data.user.username+'/like_movies';
+    $scope.goNext = function () {
+        window.location.href = base_url + '/users/' + $scope.data.user.username + '/like_movies';
     }
 
 }]);
@@ -2439,18 +2578,23 @@ ngApp.controller('likeMoviesController', ['$scope', '$filter', 'myHttpService', 
     $scope.data = {};
     $scope.activeData = {};
 
-    $scope.likeMovies = function(data){
+    $scope.likeMovies = function (data) {
         // console.log(data);
-        if(data.selected){
+        if (data.selected) {
             data.selected = !data.selected;
-            myHttpService.post('dislikemovies', {movie: data.name}).then(function(res){
+            myHttpService.post('dislikemovies', {
+                movie: data.name
+            }).then(function (res) {
                 // console.log(res);
                 // var mess = 'User successfully removed.';
                 // $scope.showToast(mess);
             });
-        }else{
+        }
+        else {
             data.selected = !data.selected;
-            myHttpService.post('likemovies', {movie: data.name}).then(function(res){
+            myHttpService.post('likemovies', {
+                movie: data.name
+            }).then(function (res) {
                 // console.log(res);
                 // var mess = 'User successfully picked up.';
                 // $scope.showToast(mess);
@@ -2458,18 +2602,23 @@ ngApp.controller('likeMoviesController', ['$scope', '$filter', 'myHttpService', 
         }
     }
 
-    $scope.wantPlace = function(data){
+    $scope.wantPlace = function (data) {
         console.log(data);
-        if(data.selected){
+        if (data.selected) {
             data.selected = !data.selected;
-            myHttpService.post('remove_place', {place: data.name}).then(function(res){
+            myHttpService.post('remove_place', {
+                place: data.name
+            }).then(function (res) {
                 // console.log(res);
                 // var mess = 'User successfully removed.';
                 // $scope.showToast(mess);
             });
-        }else{
+        }
+        else {
             data.selected = !data.selected;
-            myHttpService.post('add_place', {place: data.name}).then(function(res){
+            myHttpService.post('add_place', {
+                place: data.name
+            }).then(function (res) {
                 // console.log(res);
                 // var mess = 'User successfully removed.';
                 // $scope.showToast(mess);
@@ -2544,44 +2693,46 @@ ngApp.controller('likeMoviesController', ['$scope', '$filter', 'myHttpService', 
         }
     ];
 
-    $scope.getMovie = function(){
-        myHttpService.get('movies').then(function(res){
-            if(res.data.length){
-                for(var i=0;i<res.data.length;i++){
-                    for(var j=0;j<$scope.movies.length;j++){
-                        if(res.data[i].movies==$scope.movies[j].name){
+    $scope.getMovie = function () {
+        myHttpService.get('movies').then(function (res) {
+            if (res.data.length) {
+                for (var i = 0; i < res.data.length; i++) {
+                    for (var j = 0; j < $scope.movies.length; j++) {
+                        if (res.data[i].movies == $scope.movies[j].name) {
                             $scope.movies[j].selected = true;
                         }
                     }
                 }
-            }else{}
+            }
+            else {}
         });
     }
-    $scope.getPlace = function(){
-        myHttpService.get('place').then(function(res){
-            if(res.data.length){
-                for(var i=0;i<res.data.length;i++){
-                    for(var j=0;j<$scope.places.length;j++){
-                        if(res.data[i].destination==$scope.places[j].name){
+    $scope.getPlace = function () {
+        myHttpService.get('place').then(function (res) {
+            if (res.data.length) {
+                for (var i = 0; i < res.data.length; i++) {
+                    for (var j = 0; j < $scope.places.length; j++) {
+                        if (res.data[i].destination == $scope.places[j].name) {
                             $scope.places[j].selected = true;
                         }
                     }
                 }
-            }else{}
+            }
+            else {}
         });
     }
-    var init = function(){
+    var init = function () {
         $scope.getMovie();
         $scope.getPlace();
     }
     init();
 
-    
-    $scope.goNext = function(){
-        if($scope.logged_user_info.verified){
+
+    $scope.goNext = function () {
+        if ($scope.logged_user_info.verified) {
             window.location.href = base_url + '/profile_settings';
         }
-        else{
+        else {
             window.location.href = base_url + '/verifyPlease';
         }
     }
@@ -2590,9 +2741,9 @@ ngApp.controller('likeMoviesController', ['$scope', '$filter', 'myHttpService', 
 ngApp.controller('ModalCompatibleCtrl', ['$scope', '$uibModalInstance', 'items', 'myHttpService', '$uibModal', '$log', '$document', function ($scope, $uibModalInstance, items, myHttpService, $uibModal, $log, $document) {
     $scope.items = items;
     console.log(items);
-       
+
     $scope.userAction = function (m) {
-        console.log("action_modeHeader",m);
+        console.log("action_modeHeader", m);
 
 
         $uibModalInstance.close(m);
@@ -2618,7 +2769,7 @@ ngApp.controller('ModalCompatibleCtrl', ['$scope', '$uibModalInstance', 'items',
         });
 
         modalInstance.result.then(function (data) {
-            console.log("mark",data);
+            console.log("mark", data);
             $uibModalInstance.close(data);
             // $scope.createSMS(data.id,data.firstName);
 
@@ -2626,7 +2777,7 @@ ngApp.controller('ModalCompatibleCtrl', ['$scope', '$uibModalInstance', 'items',
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
-    
+
 
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
@@ -2662,75 +2813,81 @@ ngApp.controller('searchProfileController', ['$scope', '$filter', 'myHttpService
 
         modalInstance.result.then(function (userAction) {
             console.log(userAction, 'userAction');
-            if(userAction.id){
-                $scope.createSMS(userAction.id,userAction.firstName);
+            if (userAction.id) {
+                $scope.createSMS(userAction.id, userAction.firstName);
             }
-            else if(userAction == 'add'){
+            else if (userAction == 'add') {
                 $scope.addUser($scope.data);
             }
-            else if(userAction == 'flirt'){
+            else if (userAction == 'flirt') {
 
             }
-            else if(userAction == 'message'){
-                
-                $scope.createSMS($scope.data.id,$scope.data.firstName);
+            else if (userAction == 'message') {
+
+                $scope.createSMS($scope.data.id, $scope.data.firstName);
 
             }
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });
     };
-  
-    $scope.closeWindow = function(){
+
+    $scope.closeWindow = function () {
         window.close();
     }
-    
+
     console.log($scope.user_id);
-    $scope.getData = function(){
+    $scope.getData = function () {
         $scope.isLoading = true;
-        myHttpService.getWithParams('search_profile', {id: $scope.user_id}).then(function(res){
+        myHttpService.getWithParams('search_profile', {
+            id: $scope.user_id
+        }).then(function (res) {
             console.log(res);
             $scope.isLoading = false;
             $scope.data = res.data.user;
             $scope.allData = res.data;
             $scope.logged_id = res.data.logged_id;
 
-            if(!res.data.user.is_friend){
+            if (!res.data.user.is_friend) {
                 $scope.openCompatibilityModal();
             }
         });
     }
 
-    var init = function(){
+    var init = function () {
         $scope.getData();
     }
     init();
 
 
-    $scope.addUser = function(u){
-        if(!$scope.logged_id){
-            $ngBootbox.alert('Please login to add pick up user.').then(function(){
+    $scope.addUser = function (u) {
+        if (!$scope.logged_id) {
+            $ngBootbox.alert('Please login to add pick up user.').then(function () {
                 window.location.href = base_url + '/users/create';
             });
             return false;
         }
         u.is_friend = !u.is_friend;
 
-        if(!u.is_friend){
-            var action = myHttpService.post('delete_friend', {id: u.id}).then(function(res){
+        if (!u.is_friend) {
+            var action = myHttpService.post('delete_friend', {
+                id: u.id
+            }).then(function (res) {
                 console.log(res);
                 var mess = 'User successfully removed.';
                 $scope.showToast(mess);
             });
         }
-        else{
-            myHttpService.post('add_friend', {id: u.id}).then(function(res){
+        else {
+            myHttpService.post('add_friend', {
+                id: u.id
+            }).then(function (res) {
                 console.log(res);
                 var mess = 'User successfully picked up.';
                 $scope.showToast(mess);
             });
         }
-        
+
     }
 
 }]);
@@ -2738,7 +2895,7 @@ ngApp.controller('searchProfileController', ['$scope', '$filter', 'myHttpService
 
 ngApp.controller('searchController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngBootbox', '$httpParamSerializer', function ($scope, $filter, myHttpService, $timeout, $ngBootbox, $httpParamSerializer) {
     $scope.data = {};
-    $scope.haveQuery = (typeof(window.uri_get_params.zip) !== 'undefined') ? true : false;
+    $scope.haveQuery = (typeof (window.uri_get_params.zip) !== 'undefined') ? true : false;
     $scope.formData = ($scope.haveQuery) ? window.uri_get_params : {};
     console.log($scope.formData);
     $scope.base_url = base_url;
@@ -2750,7 +2907,7 @@ ngApp.controller('searchController', ['$scope', '$filter', 'myHttpService', '$ti
     $scope.searchSettings = {
         type: ($scope.formData.search_type) ? 'advance' : 'quick'
     };
-    
+
     $scope.search = {
         isQuick: (!$scope.formData.search_type) ? true : false,
         advance: ($scope.formData.search_type) ? true : false,
@@ -2762,6 +2919,8 @@ ngApp.controller('searchController', ['$scope', '$filter', 'myHttpService', '$ti
 
     $scope.validationOptions = {
         ignore: [],
+        rules: {},
+        messages: {},
         rules: {
         },
         messages: {
@@ -2779,11 +2938,11 @@ ngApp.controller('searchController', ['$scope', '$filter', 'myHttpService', '$ti
         }
     };
 
-    $scope.next = function(){
+    $scope.next = function () {
         $scope.offset += $scope.perPage;
         $scope.getData($scope.offset);
     }
-    $scope.previous = function(){
+    $scope.previous = function () {
         $scope.offset -= $scope.perPage;
         $scope.isEnd = false;
         $scope.getData($scope.offset);
@@ -2792,7 +2951,7 @@ ngApp.controller('searchController', ['$scope', '$filter', 'myHttpService', '$ti
 
     $scope.submitForm = function (form) {
         console.log(form.validate(), $scope.formData);
-        if(form.validate()){
+        if (form.validate()) {
             $scope.getData(0);
             $scope.isEnd = false;
         }
@@ -2807,69 +2966,73 @@ ngApp.controller('searchController', ['$scope', '$filter', 'myHttpService', '$ti
     //         $scope.data = res.data;
     //     });
     // }
-    
-    $scope.getData = function(offset){
+
+    $scope.getData = function (offset) {
         $scope.isLoading = true;
         $scope.formData.offset = offset ? offset : 0;
         $scope.formData.search_type = ($scope.search.advance) ? 'advance' : '';
-        myHttpService.getWithParams('search_user', $scope.formData).then(function(res){
+        myHttpService.getWithParams('search_user', $scope.formData).then(function (res) {
             $scope.isLoading = false;
 
-            if(!res.data.users.length){
+            if (!res.data.users.length) {
                 $scope.isEnd = true;
                 $scope.offset -= $scope.perPage;
 
-                if($scope.data.users.length){
-                    $scope.showToast('Nothing more to show.','warning');
+                if ($scope.data.users.length) {
+                    $scope.showToast('Nothing more to show.', 'warning');
                 }
             }
-            else{
+            else {
                 $scope.data = res.data;
             }
             console.log(res.data, 'search_user');
         });
     }
 
-    var init = function(){
+    var init = function () {
         $scope.getData();
     }
 
-    if($scope.haveQuery){
+    if ($scope.haveQuery) {
         init();
     }
 
-    $scope.addUser = function(u){
-        if(!$scope.data.user_id){
-            $ngBootbox.alert('Please login to add pick up user.').then(function(){
+    $scope.addUser = function (u) {
+        if (!$scope.data.user_id) {
+            $ngBootbox.alert('Please login to add pick up user.').then(function () {
                 window.location.href = base_url + '/users/create';
             });
             return false;
         }
         u.is_friend = !u.is_friend;
 
-        if(!u.is_friend){
-            var action = myHttpService.post('delete_friend', {id: u.id}).then(function(res){
+        if (!u.is_friend) {
+            var action = myHttpService.post('delete_friend', {
+                id: u.id
+            }).then(function (res) {
                 console.log(res);
                 var mess = 'User successfully removed.';
                 $scope.showToast(mess);
             });
         }
-        else{
-            myHttpService.post('add_friend', {id: u.id}).then(function(res){
+        else {
+            myHttpService.post('add_friend', {
+                id: u.id
+            }).then(function (res) {
                 console.log(res);
                 var mess = 'User successfully picked up.';
                 $scope.showToast(mess);
             });
         }
-        
+
     }
 
-    $scope.promptToLogin = function(){
-        $ngBootbox.alert('Please create an account to see more users.').then(function(){
+    $scope.promptToLogin = function () {
+        $ngBootbox.alert('Please create an account to see more users.').then(function () {
             window.location.href = base_url + '/users/create';
         });
     }
-    
+
 
 }]);
 
@@ -2877,8 +3040,8 @@ ngApp.controller('searchController', ['$scope', '$filter', 'myHttpService', '$ti
 ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer) {
     $scope.user = {};
 
-    $scope.myImage='';
-    $scope.myCroppedImage='';
+    $scope.myImage = '';
+    $scope.myCroppedImage = '';
     $scope.imgEdit = true;
     $scope.imgDone = {
         done: false
@@ -2898,6 +3061,7 @@ ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '
 
     $scope.validationOptions = {
         ignore: [],
+        rules: {},
         rules: {
         },
         messages: {
@@ -2917,33 +3081,33 @@ ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '
     };
 
     $scope.submitForm = function (registerform) {
-        
+
         if (registerform.validate()) {
             $scope.user.image = $scope.myCroppedImage;
             console.log($scope.user, 'sdfsdfdsf');
-            if($scope.imgEdit){
+            if ($scope.imgEdit) {
                 $scope.showToast('Please upload an image banner.', 'danger');
                 return false;
             }
 
             $scope.user.submitting = true;
 
-            
+
             myHttpService.post('save_advertisement', $scope.user)
-            .then(function(res){
-                console.log(res);
-                $scope.user.submitting = false;
-                $scope.showToast('Your advertisement successfully submitted.');
-                $timeout(function(){
-                    window.location.href = base_url + '/profile';
-                },1500);
-            }, function(err){
-                console.log(err);
-                $scope.showToast('Something went wrong. Please try again.', 'danger');
-                $scope.user.submitting = false;
-            });
+                .then(function (res) {
+                    console.log(res);
+                    $scope.user.submitting = false;
+                    $scope.showToast('Your advertisement successfully submitted.');
+                    $timeout(function () {
+                        window.location.href = base_url + '/profile';
+                    }, 1500);
+                }, function (err) {
+                    console.log(err);
+                    $scope.showToast('Something went wrong. Please try again.', 'danger');
+                    $scope.user.submitting = false;
+                });
         }
-        else{
+        else {
             $scope.showToast('Opps! Please check your input.', 'danger');
         }
     }
@@ -2961,7 +3125,7 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
 
 
     console.log(items, 'items');
-    
+
     $scope.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
@@ -2969,52 +3133,52 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
     $scope.submit = function () {
         var _invited = [];
 
-        $scope.users.forEach(function(val, i){
+        $scope.users.forEach(function (val, i) {
             console.log(val, i);
-            if(val.selected){
+            if (val.selected) {
                 _invited.push(val);
             }
         });
 
         $uibModalInstance.close(_invited);
     };
-   
-    $scope.selectUser = function(u, i){
 
-        if(u.selected){
+    $scope.selectUser = function (u, i) {
+
+        if (u.selected) {
             u.selected = false;
             $scope.selectedCount--;
             return false;
         }
-        else if(!u.selected){
-            if($scope.selectedCount > 2){
+        else if (!u.selected) {
+            if ($scope.selectedCount > 2) {
                 $scope.showToast('Group chat particapants full.', 'danger');
                 return false;
             }
-            else if(!u.is_online){
+            else if (!u.is_online) {
                 $scope.showToast('Cannot invite offline user.', 'danger');
                 return false;
             }
         }
-        
 
-        if(!u.selected){
+
+        if (!u.selected) {
             u.selected = true;
             $scope.selectedCount++;
             // $scope.selectedUser.push(u);     
         }
-        
+
         console.log($scope.selectedCount, u);
 
     }
 
-    $scope.getData = function(){
+    $scope.getData = function () {
         $scope.isLoading = true;
 
-        
+
     }
 
-    var init = function(){
+    var init = function () {
         $scope.getData();
     }
     init();
@@ -3088,7 +3252,7 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
 //         $scope.callAudio.play();
 
 //         $scope.myInterval = 0;
-        
+
 //         var jc = $ngConfirm({
 //             title: 'Calling',
 //             content: '<i class="fa fa-video-camera"></i> Waiting for {{currentUser.firstName}}',
@@ -3152,7 +3316,7 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
 //             $scope.activeIndex = i;
 //             $scope.activeUser = user;
 //         }
-        
+
 
 //         $scope.getPrivateRoomId(i, user, type);
 
@@ -3175,14 +3339,14 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
 //     $scope.closeAllPopups = function(){
 //         $scope.flirtPopover.isOpen = false;
 //     }
-    
+
 //     $scope.selectFlirt = function(flirt){
 //         $scope.closeAllPopups();
 //         console.log(flirt, 'flirt');
 //         // $scope.chatMessage.message = flirt.content;
 //         $scope.sendChat(flirt.content);
 //     }
-    
+
 
 
 //     $scope.getPrivateRoomId = function(i, user, type){
@@ -3200,26 +3364,26 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
 
 //             if(type != 'text'){
 //                 $scope.startVideoCall(i, user);
-    
+
 //                 if(type == 'video'){
 //                     var vidlength = angular.element(document).find('video').length;
 //                     // angular.element(document).find('.experiment-rtc').removeClass('hidden');
 //                     $scope.videoShown = true;
-    
+
 //                     if(vidlength == 0){
 //                         angular.element(document).find('#setup-new-room').click();
 //                     }
-    
+
 //                 }
 //                 else if(type == 'voice'){
 //                     var audioLength = angular.element(document).find('audio').length;
 //                     // $(document).find('.experiment-rtc').removeClass('hidden');
 //                     $scope.videoShown = true;
-    
+
 //                     if(audioLength == 0){
 //                         angular.element(document).find('#start-conferencing').click();
 //                     }
-                    
+
 //                 }
 //             }
 
@@ -3283,6 +3447,13 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
 //             $(document).find(".direct-chat-messages").animate({ scrollTop: $('.direct-chat-messages').prop("scrollHeight")}, 500);
 //         }, 500);
 //     }
+        }, 500);
+    }
+
+    $scope.blockUser = function (i, u) {
+        console.log(i, u);
+        $scope.showToast('You have successfully blocked user.');
+        $scope.data.users.splice(i, 1);
 
 //     $scope.blockUser = function(i, u){
 //         console.log(i, u);
@@ -3291,11 +3462,25 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
 
 //         $scope.activeIndex = 0;
 //         $scope.activeUser = $scope.data.users[0];
+            console.log();
+        });
+    }
 
 //         myHttpService.post('block_user', u).then(function(res){
 //             console.log();
 //         });
 //     }
+            $.alert({
+                title: 'Opps!',
+                content: 'Please login to add user as friend.',
+                onDestroy: function () {
+                    // when the modal is removed from DOM
+                    window.location.href = base_url + '/users/create';
+                },
+            });
+            return false;
+        }
+        u.is_friend = !u.is_friend;
 
 //     $scope.addUser = function(u){
 //         if(!$scope.data.me.id){
@@ -3310,6 +3495,11 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
 //             return false;
 //         }
 //         u.is_friend = !u.is_friend;
+                console.log(res);
+                var mess = 'User successfully picked up.';
+                $scope.showToast(mess);
+            });
+        }
 
 //         if(!u.is_friend){
 //             var action = myHttpService.post('delete_friend', {id: u.id}).then(function(res){
@@ -3328,10 +3518,15 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
         
 //     }
 
+    $scope.getData = function (offset) {
+        $scope.isLoading = true;
 
 //     $scope.getData = function(offset){
 //         $scope.isLoading = true;
+    var init = function () {
         
+        $scope.getData();
+
 //         myHttpService.getWithParams('online_chat', {}).then(function(res){
 //             $scope.isLoading = false;
 //             $scope.data = res.data;
@@ -3370,40 +3565,40 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
         start: 0,
         end: 10
     };
-    
 
-    $scope.htmlToPlaintext = function(text) {
+
+    $scope.htmlToPlaintext = function (text) {
         return text ? String(text).replace(/<[^>]+>/gm, '') : '';
     }
 
-    $scope.justRegScroll = function(){
-        
-        if(!$scope.justReg.start){
+    $scope.justRegScroll = function () {
+
+        if (!$scope.justReg.start) {
             $scope.justReg.start = 10;
             $scope.justReg.end = 20;
         }
-        else{
+        else {
             $scope.justReg.start = 0;
             $scope.justReg.end = 10;
         }
     }
-    
-    $scope.getData = function(){
+
+    $scope.getData = function () {
         console.log('search yeah');
 
-        var _getHomepage = function(d){
-            myHttpService.post('homepage', d).then(function(res){
+        var _getHomepage = function (d) {
+            myHttpService.post('homepage', d).then(function (res) {
                 $scope.data = res.data;
                 $scope.isLoading = false;
                 console.log(res.data, d, 'res.data homepage');
             });
         }
 
-        var _havePostCode = function(res){
+        var _havePostCode = function (res) {
             $scope.formData.zip = res.data.address.postcode;
-            var city = (typeof(res.data.address.city) !== 'undefined') ? res.data.address.city : res.data.address.state;
-            var city = (typeof(city) === 'undefined') ? res.data.address.suburb : res.data.address.county;
-            
+            var city = (typeof (res.data.address.city) !== 'undefined') ? res.data.address.city : res.data.address.state;
+            var city = (typeof (city) === 'undefined') ? res.data.address.suburb : res.data.address.county;
+
             $scope.theCity = city;
 
             var data = {
@@ -3435,14 +3630,14 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
         // $scope.formData.age_to = '30';
 
         // console.log(whr, 'whehehre');
-        
+
         // myHttpService.post('homepage', whr).then(function(res){
         //     $scope.data = res.data;
         //     $scope.isLoading = false;
         //     console.log(res.data, 'res.data homepage');
         // });
 
-        myHttpService.getCustom('https://ipapi.co/json/').then(function(res){
+        myHttpService.getCustom('https://ipapi.co/json/').then(function (res) {
             console.log(res.data, 'ipapi');
             var lat = res.data.latitude;
             var lng = res.data.longitude;
@@ -3450,32 +3645,32 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
             $scope.formData.age_from = '21';
             $scope.formData.age_to = '30';
 
-            myHttpService.getCustom('https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lng+'&addressdetails=1').then(function(res){
+            myHttpService.getCustom('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lng + '&addressdetails=1').then(function (res) {
                 console.log(res.data, 'openstreetmap');
 
 
-                if(typeof(res.data.address.postcode) === 'undefined'){
-                    window.navigator.geolocation.getCurrentPosition(function(pos){
+                if (typeof (res.data.address.postcode) === 'undefined') {
+                    window.navigator.geolocation.getCurrentPosition(function (pos) {
                         console.log(pos);
 
                         var coords = pos.coords;
                         var lat = coords.latitude;
                         var lng = coords.longitude;
-                        
-                        myHttpService.getCustom('https://nominatim.openstreetmap.org/reverse?format=json&lat='+lat+'&lon='+lng+'&addressdetails=1').then(function(res){
-                            if(typeof(res.data.address.postcode) !== 'undefined'){
+
+                        myHttpService.getCustom('https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lng + '&addressdetails=1').then(function (res) {
+                            if (typeof (res.data.address.postcode) !== 'undefined') {
                                 _havePostCode(res);
                             }
                         });
 
-                    }); 
+                    });
                 }
-                else{
+                else {
                     _havePostCode(res);
 
                 }
 
-    
+
             });
 
             console.log(res);
@@ -3501,13 +3696,15 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
 
         // });
     }
-    var init = function(){
+    var init = function () {
         $scope.getData();
     }
     init();
 
     $scope.validationOptions = {
         ignore: [],
+        rules: {},
+        messages: {},
         rules: {
         },
         messages: {
@@ -3529,19 +3726,19 @@ ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$
     $scope.submitForm = function (form) {
         console.log(form.validate(), $scope.formData);
         if (form.validate()) {
-            if($scope.formData.age_from > $scope.formData.age_to){
+            if ($scope.formData.age_from > $scope.formData.age_to) {
                 $scope.showToast('Age from should be lesser tha age to field.', 'danger');
             }
-            else{
+            else {
                 var qs = $httpParamSerializer($scope.formData);
                 console.log(qs);
-                window.location.href = base_url+'/search?'+qs;
+                window.location.href = base_url + '/search?' + qs;
                 // myHttpService.post('homepage_search_people', $scope.formData).then(function(res){
                 //     console.log(res,'homepage_search_people');
                 // });
             }
         }
-        else{
+        else {
             // $scope.showToast('Please fill all the fields.', 'danger');
         }
     }

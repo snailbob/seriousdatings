@@ -3,14 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style type="text/css">
+            
+            .clean-gray{
+
+                background-color: #eeeeee;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+                background-image: -webkit-linear-gradient(top, #eeeeee, #cccccc);
+                background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
+                background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
+                background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
+                background-image: linear-gradient(top, #eeeeee, #cccccc);
+                border: 1px solid #ccc;
+                border-bottom: 1px solid #bbb;
+                border-radius: 3px;
+                color: #333;
+                font: bold 11px/1 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+                padding: 8px 0;
+                text-align: center;
+                text-shadow: 0 1px 0 #eee;
+                width: 150px;
+                 display: inline-block;
+
+            }
+            .mid-btn{
+                width: 200px;
+                height: 35px;
+            }
+            .side-btn{
+                width: 60px;
+                 height: 35px;
+            }
+            .side-btn > span {
+                font-weight: bold;
+                color:orange;
+            }
+            .list-times{
+             
+                border-radius: 1px;
+                background-color: #c6c6c6;
+                border: none;
+                color: #000000;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+
+            }
+            .list-times:hover{
+                background-color: #f2f2f2;
+
+            }
+
+    </style>
 </head>
 <body>
 
-<div class="appointment-banner"><p class="inside-banner">Appointment Form</p></div>
+<div class="appointment-banner"><p class="inside-banner">Add Appointment</p></div>
 <div class="view-appForm">
 
-    <form  id="appointment-form" method="post">
-        <input type="hidden" value="" name="app_to_id" id="app_to_id">
+
+
+
+
+    <form  id="appointment-form" method="post" name="form1">
+
+                  
+                  
+            <div class="row" style="text-align: center;">
+                <label>{{ userInfo.lastName }}, {{userInfo.firstName}} available Date and Time</label>
+            </div>
+            <div class="row" style="margin-left:66px">
+
+                <button type="button" ng-click="previous();" class="clean-gray side-btn"><span> < </span></button>
+                <button type="button" class="clean-gray mid-btn"> {{allAvailTime.avail[incrementingData].avDate}} </button>
+                <button type="button" ng-click="next();"- class="clean-gray side-btn"><span> > </span></button> 
+            </div>  
+
+            <div class="row" style="margin-left:130px;margin-top: 5px;">
+                <button class="clean-gray mid-btn">{{allAvailTime.avail[incrementingData].avDay}}</button>
+            </div>  
+            <label>Select time :</label>
+            <br/>
+            <div class="row">
+                    <!-- <div > -->
+                           <button type="button" ng-repeat="times in allAvailTime.avail[incrementingData].avTimes track by $index" class="list-times act-{{$index}}" ng-click="getTimes(times,$index)">{{times.Usertime}}</button>       
+                    <!-- </div> -->
+            </div>
+        <hr/>
+
+
+
+
+        <input type="text" value="{{ userInfo.id }}" name="appToid"/ >
+        <input type="hidden" value="{{fetchTime}}" name="availTime" id="availTimed">
+        <input type="hidden" value="{{allAvailTime.avail[incrementingData].avDate}}" name="availDate" id="appAvailDay">
+
         <div class="form-group has-warning">
             <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
                 Location of appointment
@@ -81,7 +172,7 @@
         </div>
     <hr>
 
-        <h2>What days work best for you? </h2>
+      <!--   <h2>What days work best for you? </h2>
         <div class="row">
             <div class="col-xs-3">
                 <div class="checkbox">
@@ -180,7 +271,7 @@
                     <span class="help-block"><small>time</small></span>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="form-group has-warning">
             <label class="control-label" for="inputWarning"><i class="fa fa-check-square-o"></i>
@@ -190,6 +281,9 @@
             <span class="help-block"><small>Details of appointment here</small></span>
         </div>
 
+        <div class="form-group" style="text-align: center;">
+                <button type="button" ng-click="saveData();" class="clean-gray"><span> Save Appointment </span></button>
+        </div>
 
     </form>
 </div>

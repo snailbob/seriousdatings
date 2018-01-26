@@ -147,8 +147,12 @@
 
     </div>
     <hr/>
+<<<<<<< HEAD
+    <div class="row app-divBtn" ng-hide="true" >
+=======
     <input type="hidden" value="{{AppointmentDetail.appID}}" ng-model="hiddenAppID">
     <div class="row app-divBtn"   ng-hide="true">
+>>>>>>> new-fixes-app
         <div class="inner-div">
         <div class="col-xs-5">
             <a class="btn btn-danger btn-app" ng-click="declineAppointment(AppointmentDetail.appID)">
