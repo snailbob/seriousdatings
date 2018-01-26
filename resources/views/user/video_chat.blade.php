@@ -8,7 +8,7 @@
     <nav class="video-menu" ng-class="{ 'hidden' : !callStatus.onCall }">
         <a href="#">&#9776;</a>
         <ul>
-            <a href="#"><li>Exit page </li></a>
+            <a href="#" ng-click="window.location.href = window.base_url"><li>Exit page </li></a>
             <a href="#"><li>Hang up</li></a>
             <a href="#"><li>Answer</li></a>
             <a href="#"><li>Shuffle</li></a>
@@ -46,18 +46,26 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9">
+            <div ng-class="{'col-sm-9' : callStatus.leftSizeLarge, 'col-sm-3' : !callStatus.leftSizeLarge}">
                 <div class="padding-top">
                     <img ng-src="@{{logged_user_info.photo}}" class="img-thumbnail" style="width: 100%; margin:auto;">
 
                 </div>
+                
+                <button class="btn btn-default btn-block" ng-if="!callStatus.leftSizeLarge" ng-click="switchSize()">
+                    Switch Size
+                </button>
             </div>
 
-            <div class="col-sm-3">
+            <div ng-class="{'col-sm-9' : !callStatus.leftSizeLarge, 'col-sm-3' : callStatus.leftSizeLarge}">
 
                 <div class="padding-top">
                     <img ng-src="@{{currentUser.photo}}" class="img-thumbnail" style="width: 100%; margin:auto;">
                 </div>
+
+                <button class="btn btn-default btn-block" ng-if="callStatus.leftSizeLarge" ng-click="switchSize()">
+                    Switch Size
+                </button>
             </div>
         </div>
 

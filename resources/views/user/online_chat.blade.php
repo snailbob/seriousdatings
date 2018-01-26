@@ -522,12 +522,19 @@
 
                                     <div class="col-sm-12">
                                         <div class="row no-gutter">
+                                            <div class="col-sm-6">
+
+                                                <button type="button" ng-click="exitPage()" class="btn btn-default btn-block">
+                                                    <i class="fa fa-close" aria-hidden="true"></i> Exit Page
+                                                </button>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button type="button" ng-click="dropCall()" class="btn btn-danger btn-block">
                                                     Drop
                                                 </button>
                                             </div>
                                             
                                         </div>
-
 
                                     </div>
                                 </div>

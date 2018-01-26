@@ -6,7 +6,8 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
     $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
     $scope.callStatus = {
         onCall: false,
-        isRinging: false
+        isRinging: false,
+        leftSizeLarge: true 
     };
 
     var slides = $scope.slides = [];
@@ -24,6 +25,10 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
     // for (var i = 0; i < 4; i++) {
     //     $scope.addSlide();
     // }
+
+    $scope.switchSize = function(){
+        $scope.callStatus.leftSizeLarge = !$scope.callStatus.leftSizeLarge; 
+    }
 
     $scope.playAudio = function() {
         var audio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
