@@ -177,4 +177,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany('App\Group', 'groups_users', 'group_id', 'user_id')->withPivot('id');
     }
 
+    public function adsSpace()
+    {
+        return $this->hasMany('App\AdsSpace', 'user_id');
+    }
+
+    public function userMusic()
+    {
+        return $this->hasMany('App\UserMusic', 'user_id');
+    }
+
+    public function userPhoto()
+    {
+        return $this->hasMany('App\UserPhoto', 'user_id');
+    }
+
+    public function userVideo()
+    {
+        return $this->hasMany('App\UserVideo', 'user_id');
+    }
+
 }

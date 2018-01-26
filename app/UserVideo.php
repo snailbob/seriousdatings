@@ -17,24 +17,15 @@ class UserVideo extends Model implements AuthenticatableContract, CanResetPasswo
     use CanResetPassword;
     use EntrustUserTrait;
 
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'user_videos';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['user_id', 'type','link','video'];
+    protected $fillable = ['user_id', 'type','link','video', 'status', 'privacy'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    //protected $hidden = ['password', 'remember_token'];
+    protected $date = ['created_at', 'updated_at'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 }

@@ -5,15 +5,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Category
-            <small>lists of blog category</small>
+            Advestisements
+            <small>lists of Ads price</small>
         </h1>
         <ol class="breadcrumb">
-    </h1>
-    <ol class="breadcrumb">
-      <li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="{{url()}}/admin/blog_management/post_lists">Blog Management</a></li>
-            <li class="active">Category Lists</li>
+            <li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Ads Price Lists</li>
         </ol>
     </section>
 
@@ -21,27 +18,28 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-
                 <div class="box">
                     <div class="box box-header">
                         <button id="addBtn" class="btn btn-success pull-left"><i class="fa fa-plus-square"></i> Add
-                            Category
+                            Ads Pricing
                         </button>
                     </div>
                     <div class="box-body">
-                        <table id="category_tbl" class="table table-bordered table-striped">
+                        <table id="ads_pricing_tbl" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Days</th>
+                                <th>Price</th>
                                 <th width="80px" class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            @foreach($categories as $category)
+                            @foreach($prices as $price)
                                 <tr>
-                                    <td class="">{{ $category->name }}</td>
-                                    <td id="{{ $category->id }}">
+                                    <td class="">{{ $price->days }}</td>
+                                    <td class="">{{ $price->price }}</td>
+                                    <td id="{{ $price->id }}">
                                         <div class="btn-group pull-right table-action custom"><a
                                                     class="btn btn-danger btn-sm dropdown-toggle"
                                                     data-toggle="dropdown"> <i class="fa fa-pencil"></i> Action <span
@@ -69,11 +67,10 @@
         </div>
     </section>
 </div>
-@include('admin.definable_flirt.ckeditor_edit_modal')
 @include('admin.inc.footer')
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-{!! HTML::script('public/js/admin/blog_management/categorylist.js') !!}
+{!! HTML::script('public/js/admin/ads_management/ads_lists.js') !!}
 </body>
 </html>

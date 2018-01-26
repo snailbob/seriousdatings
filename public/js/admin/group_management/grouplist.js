@@ -43,7 +43,7 @@ $(document).ready(function()
 							row += "<div class='btn-group pull-right table-action custom'> <a class='btn btn-danger btn-sm dropdown-toggle' data-toggle='dropdown'> <i class='fa fa-pencil'></i> Action <span class='caret'></span> </a>";
 							row += "<ul class='dropdown-menu'>";
 							row += "<li class='viewBtn'>"
-							row += "<a href='#'> <i class='fa fa-eye'></i> View</a>"
+							row += "<a href='"+ base_url +"/admin/group_management/group/"+ value.id +"'> <i class='fa fa-eye'></i> View</a>"
 							row += "</li>"
 							row += "<li class='editBtn'>";
 							row += "<a href='#'> <i class='fa fa-edit'></i> Edit</a>";

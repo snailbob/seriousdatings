@@ -13,6 +13,7 @@ class AdsSpace extends Model
      * @var string
      */
     protected $table = 'ads_spaces';
+
     
     /**
      * The attributes that are mass assignable.
@@ -21,11 +22,9 @@ class AdsSpace extends Model
      */
     protected $fillable = ['user_id', 'days', 'paid', 'link', 'fb_link', 'skype_link', 'twitter_link', 'business_name', 'image'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    //protected $hidden = ['password', 'remember_token'];
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
 }
