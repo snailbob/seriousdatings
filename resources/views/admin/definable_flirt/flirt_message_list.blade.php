@@ -7,11 +7,10 @@
   <section class="content-header">
     <h1>
       Flirt Message
-      <small>lists of flirt message</small>
+      <small>lists</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="#">Definable Flirt Message</a></li>
+      <li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
       <li class="active">Flirt Message Lists</li>
     </ol>
   </section>

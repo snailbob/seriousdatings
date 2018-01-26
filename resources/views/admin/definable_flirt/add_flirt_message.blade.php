@@ -3,12 +3,13 @@
 <div class="content-wrapper">
   <section class="content-header">
     <h1>
-      Administrator
-      <small>Add Email Template</small>
+      Create Email Template
+      <small>administration</small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Add Email Template</li>
+      <li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li><a href="{{url()}}/admin/definable_flirt_list"><i></i> Definable Flirt Message</a></li>
+      <li class="active">Create Email Template</li>
     </ol>
   </section>
   <section class="content">
