@@ -212,11 +212,11 @@
                     </li>
                     {{--  <li>
                         <a href="{!! url() !!}/datingPlan">Dating Plans</a>
-                    </li>
-                    <li>
-                        <a href="{!! url() !!}/video_chat">Video Chat</a>
                     </li>  --}}
-                    <li class="dropdown">
+                    <li ng-show="!subscription_validity.is_expired">
+                        <a href="{!! url() !!}/video_chat">Video Chat</a>
+                    </li>
+                    <li class="dropdown" ng-show="subscription_validity.is_expired">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Services</a>
                         <ul class="dropdown-menu" role="menu">
                             <li class="tlign">

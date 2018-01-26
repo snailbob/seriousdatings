@@ -75,8 +75,8 @@
 
     <script src="https://cdn.webrtc-experiment.com/socket.io.js"> </script>
     <script src="https://cdn.webrtc-experiment.com/RTCPeerConnection-v1.5.js"> </script>
-    {{--  <script src="{{ url() }}/public/plugins/angularjs/rtc/audio-broadcast/broadcast.js"> </script>
-    <script src="{{ url() }}/public/plugins/angularjs/rtc/audio-broadcast/broadcast-ui.js"> </script>  --}}
+    <script src="{{ url() }}/public/plugins/angularjs/rtc/audio-broadcast/broadcast.js"> </script>
+    {{--  <script src="{{ url() }}/public/plugins/angularjs/rtc/audio-broadcast/broadcast-ui.js"> </script>  --}}
     <script src="{{ url() }}/public/plugins/angularjs/rtc/video-conferencing/conference.js"> </script>
     {{--  <script src="{{ url() }}/public/plugins/angularjs/rtc/video-conferencing/conference-ui.js"> </script>  --}}
     <script src="{{ url() }}/public/plugins/angularjs/rtc/onlineChatController.js"> </script>

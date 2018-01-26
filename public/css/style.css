@@ -4443,56 +4443,6 @@ body {
 	z-index: 1;
 }
 
-.vodeo-content-section {
-	float: left;
-	width: 100%;
-	clear: both;
-}
-
-.vodeo-content-section .two-cols {
-	width: 50%;
-	min-height: 400px;
-	float: left;
-	margin-top: 40px;
-}
-
-.vodeo-content-section .two-cols .imgcontainer {
-	float: left;
-	width: 100%;
-	position: relative;
-}
-
-.vodeo-content-section .two-cols .images-title {
-	width: 100%;
-	background: #dedede;
-	height: auto;
-	text-align: center;
-	text-transform: uppercase;
-	font-size: 23px;
-	float: left;
-	line-height: 46px;
-}
-
-.vodeo-content-section .two-cols:first-child {
-	padding-right: 28px;
-}
-
-.vodeo-content-section .two-cols:last-child {
-	padding-left: 28px;
-}
-
-.vodeo-content-section .two-cols .imgcontainer .img-bg {
-	float: left;
-	width: 100%;
-	height: auto;
-	margin-bottom: 5px;
-}
-
-.vodeo-content-section .two-cols .imgcontainer .img-bg img {
-	max-width: 100%;
-	width: 100%;
-}
-
 .list-container {
 	background: #FFF;
 	float: left;
