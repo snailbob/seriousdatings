@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ContentStatus;
 use App\UserMusic;
 use App\UserVideo;
 use Illuminate\Http\Request;
@@ -18,15 +19,11 @@ use Auth;
 
 class UserMusicController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         if (Auth::check()) {
-            if(Auth::user()->verified == 0){
+            if (Auth::user()->verified == 0) {
                 // return redirect('/verifyPlease');
                 return \Redirect::to('/verifyPlease');
             }
@@ -36,35 +33,24 @@ class UserMusicController extends Controller
         //dd($current_user_id);
         $music = UserMusic::where('user_id', $current_user_id)->get();
         $data = array(
-            'current_user' 	=> $current_user,
-            'music'		=> $music
+            'current_user' => $current_user,
+            'music' => $music
         );
         //dd($data);
         return View::make('user_music')->withData($data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $current_user = \Auth::user();
         $current_user_id = $current_user->id;
         $data = array(
-            'current_user' 	=> $current_user
+            'current_user' => $current_user
         );
         //dd($current_user);
         return View::make('user_music_create')->withData($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $current_user = \Auth::user();
@@ -75,72 +61,75 @@ class UserMusicController extends Controller
         $file_count = count($files);
         // start count how many uploaded
         $uploadcount = 0;
-        foreach($files as $file) {
+        foreach ($files as $file) {
             $rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
-            $validator = Validator::make(array('file'=> $file), $rules);
-            if($validator->passes()){
-                $destinationPath = base_path() . '/public/images/users/'.$username.'/music';
+            $validator = Validator::make(array('file' => $file), $rules);
+            if ($validator->passes()) {
+                $destinationPath = base_path() . '/public/images/users/' . $username . '/music';
                 $filename = $file->getClientOriginalName();
                 $upload_success = $file->move($destinationPath, $filename);
-                $music= UserMusic::create(array(
-                    'user_id'          =>   $current_user_id,
-                    'music'            =>   $filename,
-                    'title'             =>   Input::get('title')
+                $music = UserMusic::create(array(
+                    'user_id' => $current_user_id,
+                    'music' => $filename,
+                    'title' => Input::get('title')
                 ));
-                $uploadcount ++;
+                $uploadcount++;
             }
         }
-        if($uploadcount == $file_count){
+        if ($uploadcount == $file_count) {
             Session::flash('success', 'Upload successfully');
             return Redirect::to('profile/music');
-        }
-        else {
+        } else {
             return Redirect::to('profile/music')->withInput()->withErrors($validator);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function getMusicList()
     {
-        //
+        $audios = UserMusic::all();
+        $audios->load('user');
+        return \View::make('admin.user_content_management.audio_list')->with('audios', $audios);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function rejectUserMusic(Request $request)
     {
-        //
+        $errors = $this->validate($request, [
+            'id' => 'required|exists:user_music,id',
+            'status' => 'required'
+        ]);
+
+        UserMusic::where('id', $request->id)
+            ->update(['status' => $request->status]);
+
+        $audio = UserMusic::find($request->id);
+
+        return response()->json($audio);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function approveUserMusic(Request $request)
     {
-        //
+        $errors = $this->validate($request, [
+            'id' => 'required|exists:user_music,id',
+            'status' => 'required'
+        ]);
+
+        UserMusic::where('id', $request->id)
+            ->update(['status' => $request->status]);
+
+        $audio = UserMusic::find($request->id);
+
+        return response()->json($audio);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function deleteUserMusic(Request $request)
     {
-        //
+        $errors = $this->validate($request, [
+            'id' => 'required|exists:user_music,id'
+        ]);
+
+        $request_music = UserMusic::find($request->id);
+        $request_music->delete();
+        return response()->json($request_music);
     }
+
 }

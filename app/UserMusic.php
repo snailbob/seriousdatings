@@ -17,24 +17,15 @@ class UserMusic extends Model implements AuthenticatableContract, CanResetPasswo
     use CanResetPassword;
     use EntrustUserTrait;
 
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'user_music';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['user_id', 'music','title'];
+    protected $fillable = ['user_id', 'music', 'title', 'status', 'privacy'];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    //protected $hidden = ['password', 'remember_token'];
+    protected $date = ['created_at', 'updated_at'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 }

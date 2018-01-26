@@ -247,10 +247,37 @@ Route::group(array('before' => 'admin'), function () {
 
     /* Ads Mangement */
     Route::get('admin/ads_management/pricing_lists', 'AdsPricingController@getPricelist');
+    Route::get('admin/ads_management/pricing_spaces', 'AdsPricingController@getPriceSpace');
+    Route::post('deleteAdsSpace', 'AdsPricingController@deleteAdsSpace');
     Route::post('addAdsPricing', 'AdsPricingController@addAdsPricing');
     Route::post('editAdsPricing', 'AdsPricingController@editAdsPricing');
     Route::post('deleteAdsPricing', 'AdsPricingController@deleteAdsPricing');
     /* End Ads Mangement */
+
+    /* User Content Manager */
+    //    music
+    Route::get('admin/user_contents/music', 'UserMusicController@getMusicList');
+    Route::post('rejectUserMusic', 'UserMusicController@rejectUserMusic');
+    Route::post('approveUserMusic', 'UserMusicController@approveUserMusic');
+    Route::post('deleteUserMusic', 'UserMusicController@deleteUserMusic');
+
+    //    photo
+    Route::get('admin/user_contents/photo', 'UserPhotoController@getPhotoList');
+    Route::post('rejectUserPhoto', 'UserPhotoController@rejectUserPhoto');
+    Route::post('approveUserPhoto', 'UserPhotoController@approveUserPhoto');
+    Route::post('deleteUserPhoto', 'UserPhotoController@deleteUserPhoto');
+
+    //    video
+    Route::get('admin/user_contents/video', 'UserVideoController@getVideoList');
+    Route::post('rejectUserVideo', 'UserVideoController@rejectUserVideo');
+    Route::post('approveUserVideo', 'UserVideoController@approveUserVideo');
+    Route::post('deleteUserVideo', 'UserVideoController@deleteUserVideo');
+    /* End User Content Manager */
+
+    /* date time format*/
+    Route::get('admin/date_time_format', 'DateTimeController@showFormatting');
+    Route::post('updateDateFormat', 'DateTimeController@updateDateFormat');
+    /* date time format*/
 
 
     /* Gift E-Cards */

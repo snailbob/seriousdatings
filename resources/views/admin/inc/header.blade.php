@@ -119,19 +119,12 @@
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                {{--  <div class="pull-left">
-                                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>  --}}
                                 <div class="pull-right">
                                     <a href="{{ url('admin/logout') }}" class="btn btn-default btn-flat">Sign out</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
-                    <!-- Control Sidebar Toggle Button -->
-                    {{--  <li>
-                      <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>  --}}
                 </ul>
             </div>
         </nav>
@@ -150,18 +143,6 @@
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
-            <!-- search form -->
-        {{--  <form action="#" method="get" class="sidebar-form">
-          <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Search...">
-            <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-          </div>
-        </form>  --}}
-        <!-- /.search form -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
                 <li><a href="{{ url('admin') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
@@ -191,6 +172,26 @@
                     </ul>
                 </li>
 
+                <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+                    <a href="#">
+                        <i class="fa fa-address-book"></i>
+                        <small><span>User Contents Management</span></small>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{url('admin/user_contents/music') }}"><i class="fa fa-circle-o"></i>
+                                <span>Music</span></a></li>
+                        <li><a href="{{url('admin/user_contents/photo')}}">
+                                <i class="fa fa-circle-o"></i> <span>Photos</span></a>
+                        </li>
+                        <li><a href="{{ url('admin/user_contents/video') }}">
+                                <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Video </span></a>
+                        </li>
+                    </ul>
+                </li>
+
 
                 <li><a href="{{ url('admin/demographic') }}"><i class="fa fa-map"></i>
                         <span>Demographic Report</span></a></li>
@@ -207,7 +208,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ url('admin/ads_management/pricing_lists') }}"><i class="fa fa-circle-o"></i> Pricings </a></li>
-                        <li><a href="#{{-- url('') --}}"><i class="fa fa-circle-o"></i> Spaces </a>
+                        <li><a href="{{ url('admin/ads_management/pricing_spaces') }}"><i class="fa fa-circle-o"></i> Spaces </a>
                         </li>
                     </ul>
                 </li>
@@ -261,19 +262,6 @@
                                 E-Card Category</a></li>
                     </ul>
                 </li>
-                {{--  <li class="treeview {{(request()->segment(2) == 'gift_cards') ? 'active menu-open' : ''}}">
-                  <a href="#">
-                    <i class="fa fa-gift"></i>
-                    <span>Gift Card Management</span>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="{{ url('admin/gift_cards') }}"><i class="fa fa-circle-o"></i> Manage Gift Card </a></li>
-                    <li><a href="{{ url('admin/gift_cards/create') }}"><i class="fa fa-circle-o"></i> Add New Gift Card </a></li>
-                  </ul>
-                </li>  --}}
                 <li class="treeview {{(request()->segment(2) == 'dating_plans') ? 'active menu-open' : ''}}">
                     <a href="#">
                         <i class="fa fa-calendar"></i>
@@ -390,6 +378,8 @@
                 </li>
                 <li><a href="{{ url('admin/calendar') }}"><i class="fa fa-calendar"></i>
                         <span>Events Calendar</span></a></li>
+                <li><a href="{{ url('admin/date_time_format')}}"><i class="fa fa-clock-o"></i>
+                        <span>Date / Time Formatting</span></a></li>
                 <li><a href="{{ url('admin/change_password') }}"><i class="fa fa-user"></i> <span>Change Password</span></a>
                 </li>
                 <!-- <li><a href="#"><i class="fa fa-envelope-o"></i> <span>Manage Mail</span></a></li> -->

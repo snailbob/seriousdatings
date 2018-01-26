@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\AdsSpace;
 use App\AdsPricing;
 
 class AdsPricingController extends Controller
@@ -68,7 +69,24 @@ class AdsPricingController extends Controller
         $ads = AdsPricing::find($request->id);
         $ads->delete();
 
-//        return "adwd";
         return response()->json($ads);
+    }
+
+    public function getPriceSpace()
+    {
+        $spaces = AdsSpace::all();
+        $spaces->load('user');
+        return \View::make('admin.ads_management.ads_spacing_management')->with('spaces', $spaces);
+    }
+
+    public function deleteAdsSpace(Request $request)
+    {
+        $errors = $this->validate($request, [
+            'id' => 'required|exists:ads_spaces,id'
+        ]);
+
+        $space = AdsSpace::find($request->id);
+        $space->delete();
+        return response()->json($space);
     }
 }

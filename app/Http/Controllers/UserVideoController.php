@@ -15,11 +15,6 @@ use Illuminate\Support\Facades\Redirect;
 use Auth;
 class UserVideoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         if (Auth::check()) {
@@ -40,11 +35,6 @@ class UserVideoController extends Controller
         return View::make('user_video')->withData($data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
 
@@ -57,12 +47,6 @@ class UserVideoController extends Controller
         return View::make('user_video_create')->withData($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $current_user = \Auth::user();
@@ -117,48 +101,52 @@ class UserVideoController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function getVideoList()
     {
-        //
+        $videos = UserVideo::all();
+        $videos->load('user');
+        return \View::make('admin.user_content_management.video_list')->with('videos', $videos);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function rejectUserVideo(Request $request)
     {
-        //
+        $errors = $this->validate($request, [
+            'id' => 'required|exists:user_videos,id',
+            'status' => 'required'
+        ]);
+
+        UserVideo::where('id', $request->id)
+            ->update(['status' => $request->status]);
+
+        $video = UserVideo::find($request->id);
+
+        return response()->json($video);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function approveUserVideo(Request $request)
     {
-        //
+        $errors = $this->validate($request, [
+            'id' => 'required|exists:user_videos,id',
+            'status' => 'required'
+        ]);
+
+        UserVideo::where('id', $request->id)
+            ->update(['status' => $request->status]);
+
+        $video = UserVideo::find($request->id);
+
+        return response()->json($video);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function deleteUserVideo(Request $request)
     {
-        //
+        $errors = $this->validate($request, [
+            'id' => 'required|exists:user_videos,id'
+        ]);
+
+        $request_video = UserVideo::find($request->id);
+        $request_video->delete();
+        return response()->json($request_video);
     }
+
 }
