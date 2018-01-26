@@ -26,7 +26,6 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         user_unavailable: false,
         drop: false
     };
-    $scope.callType = 'text'; //voice, video
 
     $scope.inviteToChat = function (items) {
         var _toItem = {
@@ -82,7 +81,6 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         $scope.nowCalling.drop = true;
         $scope.nowCalling.user_unavailable = false;
         $scope.stopRinging();
-        // window.location.reload(true);
 
     }
 
@@ -165,8 +163,14 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     };
 
     $scope.startCall = function(type, user, i){
+<<<<<<<<< Temporary merge branch 1
         $scope.callType = type;
+        if(type != 'text'){
             $scope.callType = type;
+        }
+=========
+        $scope.callType = type;
+>>>>>>>>> Temporary merge branch 2
         }
 
         if(i != $scope.activeIndex){

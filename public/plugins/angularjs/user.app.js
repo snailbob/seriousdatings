@@ -1358,6 +1358,8 @@ ngApp.controller('videoRoomController', ['$scope', '$filter', 'myHttpService', '
 
 }]);
 
+<<<<<<<<< Temporary merge branch 1
+=========
 ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$compile', 'uiCalendarConfig', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $compile, uiCalendarConfig) {
     $scope.myInterval = 3000;
     $scope.noWrapSlides = false;
@@ -1466,6 +1468,7 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
 
 }]);
 
+>>>>>>>>> Temporary merge branch 2
 
 ngApp.controller('eventsController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$compile', 'uiCalendarConfig', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $compile, uiCalendarConfig) {
     $scope.base_url = window.base_url;
