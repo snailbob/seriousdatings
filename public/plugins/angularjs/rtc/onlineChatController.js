@@ -72,6 +72,10 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         $scope.nowCalling.user_unavailable = true;
     }
 
+    $scope.exitPage = function(){
+        window.location.href = window.base_url + '/profile';
+    }
+
     $scope.dropCall = function(){
         $scope.myInterval = 3000;
         $scope.videoShown = false;
@@ -162,6 +166,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
 
     $scope.startCall = function(type, user, i){
         $scope.callType = type;
+            $scope.callType = type;
+        }
 
         if(i != $scope.activeIndex){
             $scope.activeIndex = i;
@@ -443,6 +449,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
 
                 if (typeof roomsList === 'undefined') roomsList = document.body;
                 
+                $scope.playRinging();
+
                 var callingNameId = room.roomName.split("__");
                 var _callingRoomID = callingNameId[0];
                 var _callingName = callingNameId[1];

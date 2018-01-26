@@ -277,6 +277,7 @@
                                     <i class="fa fa-info-circle" aria-hidden="true"></i> You can mute friend's audio and slide left/right to adjust volume. You can also dismiss user's voice by clicking (x) icon. Hover over voice media and buttons will show to perform action.
                                 </span>
 
+                                <i class="fa fa-info-circle" aria-hidden="true"></i> You can mute friend's audio and can pause video to hold. Slide up/down slider to adjust volume. You can also view video on fullscreen. Hover over video and buttons will show to perform action.
                             </div>
 
                             <!-- local/remote videos container -->
@@ -337,6 +338,44 @@
                             <tr>
                                 <td width="50%" style="width: 50%;  background: white; vertical-align: top;">
                                     <div id="local-streams-container"></div>
+
+                                    <div class="container-fluid" ng-if="videoShown">
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <div class="row no-gutter">
+                                                    <div class="col-sm-3">
+
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-volume-down" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-volume-up" aria-hidden="true"></i>
+                                                        </button>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-microphone-slash" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <button type="button" class="btn btn-danger btn-block">
+                                                            Drop
+                                                        </button>
+                                                    </div>
+                                                    
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                 </td>
                                 <td width="50%" style="width: 50%;  background: white; vertical-align: top;">

@@ -49,6 +49,12 @@
                                 <a href="{{url().'/profile_settings'}}">
                                     <i class="fa fa-user fa-fw" aria-hidden="true"></i> Profile Settings</a>
                             </li>
+
+                            <li>
+                                <a href="{{url().'/payment_gateway'}}">
+                                    <i class="fa fa-credit-card fa-fw" aria-hidden="true"></i> Payment Gateway</a>
+                            </li>
+
                             <li>
                                 <a href="{{url().'/privacy_settings'}}">
                                     <i class="fa fa-cog fa-fw" aria-hidden="true"></i> Privacy Setting</a>

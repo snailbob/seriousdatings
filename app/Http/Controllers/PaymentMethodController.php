@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 
 use Netshell\Paypal\Facades\Paypal;
 use Redirect;
@@ -136,7 +137,13 @@ class PaymentMethodController extends Controller
         // Curse and humiliate the user for cancelling this most sacred payment (yours)
         return view('user.checkout_cancel');
     }
-    
+
+    public function paymentGateway(){
+        $user = Auth::user();
+        return View::make('user.payment_gateway')->withUser($user);
+        
+    }
+
 
     /**
      * Display a listing of the resource.

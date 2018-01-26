@@ -3148,6 +3148,341 @@ ngApp.controller('ModalInviteToChatCtrl', ['$scope', '$uibModalInstance', 'items
     init();
 }]);
 
+// ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', 'moment', '$interval', '$uibModal', '$log', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer, moment, $interval, $uibModal, $log) {
+
+//     $scope.isLoading = false;
+//     $scope.data = {};
+//     $scope.base_url = window.base_url;
+//     $scope.activeUser = {};
+//     $scope.activeIndex = null;
+//     $scope.callStarted = false;
+//     $scope.videoShown = false;
+//     $scope.chatMessage = {
+//         message: '',
+//         sending: false
+//     };
+//     $scope.isCalling = {
+//         voice: false,
+//         video: false
+//     };
+//     $scope.invitedToChat = [];
+//     $scope.chatLoading = false;
+//     $scope.params = window.uri_get_params;
+//     $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
+
+
+//     $scope.inviteToChat = function (items) {
+//         var _toItem = {
+//             users: angular.copy($scope.data.users),
+//             activeUser: $scope.activeUser,
+//             activeIndex: $scope.activeIndex
+//         };
+
+//         console.log(items, 'wow');
+//         // var parentElem = parentSelector ?
+//             // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+//         var modalInstance = $uibModal.open({
+//             animation: true,
+//             ariaLabelledBy: 'modal-title',
+//             ariaDescribedBy: 'modal-body',
+//             templateUrl: 'inviteToChatModal.html',
+//             controller: 'ModalInviteToChatCtrl',
+//             // controllerAs: '$scope',
+//             size: 'sm',
+//             windowClass: 'compatible-modal',
+//             // appendTo: parentElem,
+//             resolve: {
+//                 items: function () {
+//                     return _toItem; //items ? items : {};
+//                 }
+//             }
+//         });
+
+//         modalInstance.result.then(function (res) {
+//             $log.info(res);
+
+//             $scope.activeUser.invitedToChat = res;
+
+//         }, function () {
+//             $log.info('Modal dismissed at: ' + new Date());
+
+//         });
+//     };
+
+//     $scope.startVideoCall = function(i, user){
+//         $scope.currentUser = user;
+
+//         //play ringing
+//         $scope.callAudio.play();
+
+//         $scope.myInterval = 0;
+        
+//         var jc = $ngConfirm({
+//             title: 'Calling',
+//             content: '<i class="fa fa-video-camera"></i> Waiting for {{currentUser.firstName}}',
+//             scope: $scope,
+//             buttons: {
+//                 Calling: {
+//                     text: 'Calling..',
+//                     btnClass: 'btn-danger',
+//                     action: function(scope, button){
+//                         // scope.name = 'Booo!!';
+//                         return false; // prevent close;
+//                     }
+//                 },
+//                 dropCall: {
+//                     text: 'Drop',
+//                     btnClass: 'btn-default',
+//                     action: function(scope, button){
+//                         $scope.myInterval = 3000;
+//                         // $(document).find('.experiment-rtc').addClass('hidden');
+//                         $scope.videoShown = false;
+
+//                         $scope.callAudio.pause();
+//                         $scope.callAudio.currentTime = 0;
+//                     }
+//                 }
+//             }
+
+//         });
+
+//         $scope.callAudio.onended = function(){
+//             // alert("The audio has ended");
+//             // $(document).find('.experiment-rtc').addClass('hidden');
+//             $scope.videoShown = false;
+
+//             jc.close();
+//             $ngConfirm({
+//                 title: 'No Answer',
+//                 content: '<i class="fa fa-video-camera"></i> No answer from {{currentUser.firstName}}',
+//                 scope: $scope,
+//                 buttons: {
+//                     dropCall: {
+//                         text: 'OK',
+//                         btnClass: 'btn-default',
+//                         action: function(scope, button){
+
+//                         }
+//                     }
+//                 }
+//             });
+//         }
+//     }
+
+//     $scope.boxStartCall = function(type, user, i){
+//         $scope.callStarted = true;
+//         $scope.startCall(type, user, i);
+//     };
+
+//     $scope.startCall = function(type, user, i){
+
+//         if(i != $scope.activeIndex){
+//             $scope.activeIndex = i;
+//             $scope.activeUser = user;
+//         }
+        
+
+//         $scope.getPrivateRoomId(i, user, type);
+
+//     }
+
+//     $scope.flirtPopover = {
+//         content: [],
+//         templateUrl: 'myFlirtMessageTemplate.html',
+//         title: 'Flirt Messages',
+//         isOpen: false
+//     };
+
+//     $scope.emojiPopover = {
+//         content: [],
+//         templateUrl: 'myEmojiMessageTemplate.html',
+//         title: 'Emoji Messages',
+//         isOpen: false
+//     };
+
+//     $scope.closeAllPopups = function(){
+//         $scope.flirtPopover.isOpen = false;
+//     }
+    
+//     $scope.selectFlirt = function(flirt){
+//         $scope.closeAllPopups();
+//         console.log(flirt, 'flirt');
+//         // $scope.chatMessage.message = flirt.content;
+//         $scope.sendChat(flirt.content);
+//     }
+    
+
+
+//     $scope.getPrivateRoomId = function(i, user, type){
+//         var private_id = $scope.logged_user_info.id * user.id;
+//         var data = {
+//             private_id: private_id,
+//             logged_id: $scope.logged_user_info.id,
+//             user_id: user.id
+//         };
+//         console.log(private_id);
+
+//         myHttpService.getWithParams('get_private_chat_id', data).then(function(res){
+//             console.log(res.data , typeof(res.data.new));
+//             $scope.activeUser.room_id = res.data.id;
+
+//             if(type != 'text'){
+//                 $scope.startVideoCall(i, user);
+    
+//                 if(type == 'video'){
+//                     var vidlength = angular.element(document).find('video').length;
+//                     // angular.element(document).find('.experiment-rtc').removeClass('hidden');
+//                     $scope.videoShown = true;
+    
+//                     if(vidlength == 0){
+//                         angular.element(document).find('#setup-new-room').click();
+//                     }
+    
+//                 }
+//                 else if(type == 'voice'){
+//                     var audioLength = angular.element(document).find('audio').length;
+//                     // $(document).find('.experiment-rtc').removeClass('hidden');
+//                     $scope.videoShown = true;
+    
+//                     if(audioLength == 0){
+//                         angular.element(document).find('#start-conferencing').click();
+//                     }
+                    
+//                 }
+//             }
+
+//             if(typeof(res.data.new) === 'undefined'){
+//                 $scope.getConversations(res.data.id);
+//             }
+
+//         });
+//     }
+
+//     $scope.getConversations = function(room_id){
+//         $scope.chatLoading = true;
+//         myHttpService.get('group_chat/'+room_id).then(function(res){
+//             $scope.chatLoading = false;
+//             var oldLength = $scope.activeUser.chat.length;
+
+//             console.log(res.data , 'group_chat');
+//             $scope.activeUser.private_id = res.data.private_id;
+//             $scope.activeUser.room_id = res.data.id;
+//             $scope.activeUser.chat = res.data.messages;
+//             $scope.activeUser.participants = res.data.messages;
+
+//             if($scope.activeUser.chat.length != oldLength){
+//                 $scope.scrollBottom();
+//             }
+
+//         });
+//     }
+
+//     $scope.backView = function(){
+//         $scope.callStarted = false;
+//     }
+
+//     $scope.sendChat = function(m){
+//         var message = angular.copy(m);
+//         $scope.chatMessage.sending = true;
+//         var newChat = {
+//             group_id: $scope.activeUser.room_id,
+//             user_id: $scope.logged_user_info.id,
+//             message: message,
+//             type: 'text',
+//         };
+
+//         myHttpService.post('group_chat_messages', newChat).then(function(res){
+//             $scope.chatMessage.message = '';
+//             $scope.chatMessage.sending = false;
+
+//             var d = res.data;
+//             d.user_info = $scope.logged_user_info;
+
+//             $scope.activeUser.chat.unshift(d);
+//             console.log($scope.activeUser.chat, '$scope.activeUser.chat');
+//             $scope.scrollBottom();
+//         });
+
+
+//     }
+
+//     $scope.scrollBottom = function(){
+//         $timeout(function(){
+//             $(document).find(".direct-chat-messages").animate({ scrollTop: $('.direct-chat-messages').prop("scrollHeight")}, 500);
+//         }, 500);
+//     }
+
+//     $scope.blockUser = function(i, u){
+//         console.log(i, u);
+//         $scope.showToast('You have successfully blocked user.');
+//         $scope.data.users.splice(i, 1);
+
+//         $scope.activeIndex = 0;
+//         $scope.activeUser = $scope.data.users[0];
+
+//         myHttpService.post('block_user', u).then(function(res){
+//             console.log();
+//         });
+//     }
+
+//     $scope.addUser = function(u){
+//         if(!$scope.data.me.id){
+//             $.alert({
+//                 title: 'Opps!',
+//                 content: 'Please login to add user as friend.',
+//                 onDestroy: function () {
+//                     // when the modal is removed from DOM
+//                     window.location.href = base_url + '/users/create';
+//                 },
+//             });
+//             return false;
+//         }
+//         u.is_friend = !u.is_friend;
+
+//         if(!u.is_friend){
+//             var action = myHttpService.post('delete_friend', {id: u.id}).then(function(res){
+//                 console.log(res);
+//                 var mess = 'User successfully removed.';
+//                 $scope.showToast(mess);
+//             });
+//         }
+//         else{
+//             myHttpService.post('add_friend', {id: u.id}).then(function(res){
+//                 console.log(res);
+//                 var mess = 'User successfully picked up.';
+//                 $scope.showToast(mess);
+//             });
+//         }
+        
+//     }
+
+
+//     $scope.getData = function(offset){
+//         $scope.isLoading = true;
+        
+//         myHttpService.getWithParams('online_chat', {}).then(function(res){
+//             $scope.isLoading = false;
+//             $scope.data = res.data;
+//             $scope.flirtPopover.content = res.data.flirt_messages;
+//             console.log(res.data, 'online_chat');
+//         });
+//     }
+//     var init = function(){
+//         $scope.getData();
+
+//         $interval(function(){
+//             if($scope.activeUser.id && $scope.startCall){
+//                 $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
+//             }
+//         }, 7000);
+//     }
+//     init();
+
+//     // $scope.blockUser = function(e, i){
+//     //     console.log(e, i);
+//     //     $(e.currentTarget).closest('.list-group-item').hide();
+//     // }
+// }]);
 
 
 ngApp.controller('homePageController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngBootbox', '$httpParamSerializer', function ($scope, $filter, myHttpService, $timeout, $ngBootbox, $httpParamSerializer) {
