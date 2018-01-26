@@ -19,7 +19,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.invitedToChat = [];
     $scope.chatLoading = false;
     $scope.params = window.uri_get_params;
-    $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
+    $scope.callAudio = new Audio($scope.base_url+'/public/assets/audio/phone_ringing.mp3');
     $scope.nowCalling = {
         calling: false,
         message: '',
@@ -73,7 +73,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     }
 
     $scope.exitPage = function(){
-        window.location.href = window.base_url + '/profile';
+        window.location.href = $scope.base_url + '/profile';
     }
 
     $scope.dropCall = function(){
@@ -82,7 +82,14 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         $scope.nowCalling.drop = true;
         $scope.nowCalling.user_unavailable = false;
         $scope.stopRinging();
-        window.location.reload(true);
+
+        if(typeof($scope.params.user_id) !== 'undefined'){
+            $scope.params.action_type = 'text';
+            window.location.href = $scope.base_url+'/online_chat?'+$.param($scope.params);
+        }else{
+            $scope.params.user_index = $scope.activeIndex;
+            window.location.href = $scope.base_url+'/online_chat?'+$.param($scope.params);
+        }
 
     }
 
@@ -173,7 +180,6 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
             $scope.activeIndex = i;
             $scope.activeUser = user;
         }
-        
 
         $scope.getPrivateRoomId(i, user, type);
 
@@ -203,14 +209,12 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         // $scope.chatMessage.message = flirt.content;
         $scope.sendChat(flirt.content);
     }
-    
-
 
     $scope.getPrivateRoomId = function(i, user, type){
-        var private_id = $scope.logged_user_info.id * user.id;
+        var private_id = $scope.data.me.id * user.id;
         var data = {
             private_id: private_id,
-            logged_id: $scope.logged_user_info.id,
+            logged_id: $scope.data.me.id,
             user_id: user.id
         };
         console.log(private_id);
@@ -333,7 +337,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                 content: 'Please login to add user as friend.',
                 onDestroy: function () {
                     // when the modal is removed from DOM
-                    window.location.href = base_url + '/users/create';
+                    window.location.href = $scope.base_url + '/users/create';
                 },
             });
             return false;
@@ -361,11 +365,34 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.getData = function(offset){
         $scope.isLoading = true;
         
-        myHttpService.getWithParams('online_chat', {}).then(function(res){
+        myHttpService.getWithParams('online_chat', $scope.params).then(function(res){
             $scope.isLoading = false;
             $scope.data = res.data;
             $scope.flirtPopover.content = res.data.flirt_messages;
             console.log(res.data, 'online_chat');
+
+            if(typeof($scope.params.user_index) !== 'undefined'){
+                $scope.activeIndex = $scope.params.user_index;
+                $scope.activeUser = res.data.users[$scope.activeIndex];
+                var _action = (typeof($scope.params.action_type) !== 'undefined') ? $scope.params.action_type : 'text';
+                $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
+            }
+            else if(typeof($scope.params.user_id) !== 'undefined'){
+                $scope.activeUser = res.data.users[0];
+                $scope.activeIndex = 0;
+                var _action = (typeof($scope.params.action_type) !== 'undefined') ? $scope.params.action_type : 'text';
+
+                if(!$scope.activeUser.is_online && _action != 'text'){
+                    $.alert('Opps! Cannot start a call to an offline user.');
+                    _action = 'text';
+                }
+
+                $timeout(function(){
+                    $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
+
+                }, 250);
+
+            }
         });
     }
 

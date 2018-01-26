@@ -16,7 +16,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>
-                        Online Chat    
+                        <span ng-if="!params.user_id">Online Chat</span> 
+                         <span ng-if="params.user_id">Chat with @{{activeUser.firstName}}</span> 
                     </h1>
                 </div>
             </div>
@@ -58,7 +59,7 @@
                 <p class="padding-top lead text-center text-muted loading-browse" ng-if="isLoading">
                     <i class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i> <br> Loading...
                 </p>
-                <div class="col-sm-3 browse-profile-bg" ng-repeat="user in data.users" ng-if="!isLoading">
+                <div class="col-md-3 col-sm-4 browse-profile-bg" ng-repeat="user in data.users" ng-if="!isLoading">
                     <div class="profile-images-bg">
                         <a ng-href="@{{ base_url + '/search/profile/' + user.id}}" target="_blank">
                             <img ng-src="@{{ user.photo }}" class="img-thumbnail" alt="">
@@ -195,7 +196,7 @@
                         </div>
                     </div>
                     
-                    <button class="btn btn-default btn-block" ng-click="backView()">
+                    <button class="btn btn-default btn-block" ng-click="backView()" ng-if="!params.user_id">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i> Back
                     </button>
 
@@ -403,9 +404,9 @@
 
 
                     <div class="row no-gutter">
-                        <div class="col-sm-4">
+                        <div ng-class="{'col-sm-4' : !params.user_id, 'col-sm-12' : params.user_id }">
 
-                            <div class="row" ng-if="!videoShown">
+                            <div class="row" ng-if="!videoShown && !params.user_id">
                                 <div class="col-sm-12">
                                     <img src="{{ Auth::user()->photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
                                 </div>
@@ -489,7 +490,7 @@
 
                         </div>
                         <div class="col-sm-8">
-                            <div class="container-fluid" ng-if="!videoShown">
+                            <div class="container-fluid" ng-if="!videoShown && !params.user_id">
                                 <div class="row no-gutter">
                                     <div class="col-sm-6">
                                         <img ng-src="@{{ activeUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">

@@ -9,6 +9,7 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
         isRinging: false,
         leftSizeLarge: true 
     };
+    $scope.isLoading = false;
 
     var slides = $scope.slides = [];
     var currIndex = 0;
@@ -76,26 +77,43 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
             $scope.callStatus.isRinging = false;
 
             // jc.close();
-            $ngConfirm({
-                title: 'No Answer',
-                content: '<i class="fa fa-video-camera"></i> No answer from {{currentUser.firstName}}',
-                scope: $scope,
-                buttons: {
-                    dropCall: {
-                        text: 'OK',
-                        btnClass: 'btn-default',
-                        action: function(scope, button){
+            // $ngConfirm({
+            //     title: 'No Answer',
+            //     content: '<i class="fa fa-video-camera"></i> No answer from {{currentUser.firstName}}',
+            //     scope: $scope,
+            //     buttons: {
+            //         dropCall: {
+            //             text: 'OK',
+            //             btnClass: 'btn-default',
+            //             action: function(scope, button){
 
-                        }
-                    }
-                }
-            });
+            //             }
+            //         }
+            //     }
+            // });
         }
+    }
+
+
+    $scope.stopRinging = function(){
+        $scope.callAudio.pause();
+        $scope.callAudio.currentTime = 0;
+    }
+
+    $scope.dropCall = function(){
+        $scope.callStatus.onCall = false;
+        $scope.callStatus.isRinging = false;
+
+        $scope.stopRinging();
+
     }
     
     $scope.getData = function(){
+        $scope.isLoading = true;
+
         myHttpService.get('get_video_shuffle').then(function(res){
             // slides = res.data.online;
+            $scope.isLoading = false;
 
             res.data.online.forEach(function(d){
                 d.slideIndex = currIndex++; 

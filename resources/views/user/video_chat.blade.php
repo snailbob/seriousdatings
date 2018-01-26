@@ -36,7 +36,7 @@
                     <div class="col-sm-12">
                         <div class="padding-top">
                             <div class="alert alert-info">
-                                <button class="btn btn-danger btn-sm pull-right" ng-click="callStatus.onCall = false; callStatus.isRinging = false">
+                                <button class="btn btn-danger btn-sm pull-right" ng-click="dropCall()">
                                     Drop
                                 </button>
                                 <p class="lead">Waiting for @{{currentUser.firstName}} ..</p>
@@ -104,7 +104,15 @@
                             <div class="imgcontainer">
                                 <div class="row">
                                     <div class="col-sm-8 col-sm-offset-2">
-                                        <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                                        <div class="" ng-if="isLoading" style="padding: 143px 0">
+
+                                            <p class="lead text-center text-muted">
+                                                <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                                            </p>
+
+                                        </div>
+
+                                        <div uib-carousel ng-if="!isLoading" active="active" interval="myInterval" no-wrap="noWrapSlides">
                                             <div uib-slide ng-repeat="slide in slides track by slide.slideIndex" index="slide.slideIndex">
                                                 <img ng-src="@{{slide.photo}}" style="width: 100%; margin:auto;">
                                                 <div class="carousel-caption">

@@ -203,7 +203,10 @@ class UsersController extends Controller {
         
     }
 
-    public function get_online_chat(){
+    public function get_online_chat(Request $request){
+        $user_id = $request->input('user_id');
+        $action_type = $request->input('action_type');
+
         $logged_id  = Auth::user()->id;
         $gender  = Auth::user()->gender;
 
@@ -214,7 +217,15 @@ class UsersController extends Controller {
 
         $flirt_messages = \DB::table('definable_flirt')->get();
 
-        $online = User::where('gender', 'not like', $gender)->get();
+        $soloUserCount = User::where('id', $user_id)->count();
+
+        if(!empty($user_id) && $soloUserCount){
+            $online = User::where('id', $user_id)->get();
+        }
+        else{
+            $online = User::where('gender', 'not like', $gender)->limit(20)->get();
+        }
+
         $me = User::find($logged_id);
 
         $filter_blocked = $this->filter_blocked($online);
@@ -223,6 +234,7 @@ class UsersController extends Controller {
         $format_users = $this->format_friends($filter_blocked);
 
         $arr = array(
+            'user_id'=>$user_id,
             'users'=>$format_users,
             'me'=>$me,
             'flirt_messages'=>$flirt_messages,

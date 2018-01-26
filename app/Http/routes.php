@@ -113,6 +113,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profile_settings', 'UsersController@profileSettings');
     Route::get('privacy_settings', 'UsersController@privacySettings');
     Route::get('payment_gateway', 'PaymentMethodController@paymentGateway');
+    Route::get('test_payment', 'PaymentMethodController@testPayment');
+
+    
     
 });
 
