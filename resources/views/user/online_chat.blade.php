@@ -277,7 +277,6 @@
                                     <i class="fa fa-info-circle" aria-hidden="true"></i> You can mute friend's audio and slide left/right to adjust volume. You can also dismiss user's voice by clicking (x) icon. Hover over voice media and buttons will show to perform action.
                                 </span>
 
-                                <i class="fa fa-info-circle" aria-hidden="true"></i> You can mute friend's audio and can pause video to hold. Slide up/down slider to adjust volume. You can also view video on fullscreen. Hover over video and buttons will show to perform action.
                             </div>
 
                             <!-- local/remote videos container -->
