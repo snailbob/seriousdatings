@@ -54,9 +54,9 @@
         
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,700,600' rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans:400,400i,700,700i" rel="stylesheet">
-        
+
         {!! HTML::script('public/css/font-awesome/font-awesome.min.css') !!}
-        
+
 
 
         {!! HTML::script('public/js/jquery.min1.12.0.js') !!}
@@ -69,6 +69,8 @@
         {!! HTML::script('public/js/jquery.bxslider.js') !!}
         {!! HTML::script('public/js/jquery.reveal.js') !!}
         {!! HTML::script('public/js/video-slider.js') !!}
+        {!! HTML::script('public/js/toastr/toastr.min.js') !!}
+        {!! HTML::style('public/js/toastr/toastr.min.css') !!}
         <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 
         <!-- Include all compiled plugins (below), or include individual files as needed -->

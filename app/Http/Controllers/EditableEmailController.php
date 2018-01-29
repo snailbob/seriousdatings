@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Template;
+use App\UserBlog;
 
 class EditableEmailController extends Controller
 {
@@ -95,12 +96,11 @@ class EditableEmailController extends Controller
         return response()->json($template);
     }
 
-    static function setContentToEllipse($text)
+    public static function setContentToEllipse($text)
     {
-        $partialEndTag = strpos($text, "</");
-        $offsetEndTag = strpos($text, ">", $partialEndTag);
-        $ellipseMessage = substr($text, 0, $offsetEndTag);
-        return $ellipseMessage;
+        $text = str_replace("\r\n",'', UserBlog::convertApostrophe(strip_tags($text)));
+        $intro_str = substr($text, 0, 150) . "...";
+        return $intro_str;
     }  
 
     public function send(Request $request)

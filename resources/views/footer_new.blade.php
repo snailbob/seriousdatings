@@ -38,7 +38,7 @@
                                     <!-- <a href="#">Gallery </a> -->
                                 </li>
                                 <li>
-                                    <a href="{!! url() !!}/blog">Blog </a>
+                                    <a href="{!! url() !!}/bloglist">Blog </a>
                                 </li>
                                 <li>
                                     <a href="{!! url() !!}/contact">Contact Us</a>

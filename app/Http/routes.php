@@ -36,8 +36,6 @@ Route::post('submitAboutDate', 'UsersController@submitAboutDate');
 
 Route::get('user/paginate', 'HomeController@paginateUser');
 
-Route::get('bloglist', 'HomeController@ListBlog');
-
 
 Route::get('users/{username}/verify/{key}', 'VerifyController@getVerify');
 
@@ -94,6 +92,12 @@ Route::get('/start', function () {
 
     return 'Woohoo!';
 });
+
+/* blog page */
+Route::get('bloglist', 'UserBlogPageController@ListBlog');
+Route::get('user/blog_page/{id}', 'UserBlogPageController@blogPageView');
+Route::post('commentInBlog', 'UserBlogPageController@commentInBlog');
+/* end blog page */
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -230,6 +234,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('getAppoinment', 'AppointmentController@getAppointment');
     Route::post('saveAppResponse', 'AppointmentController@saveAppResponse');
     Route::get('getTimeAvailability','AppointmentController@getTimeAvailability');
+
 
 });
 

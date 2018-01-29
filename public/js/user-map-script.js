@@ -180,17 +180,8 @@ function getMenus(){
                     },300)
 
                 });
-
-
-
-
-
-
 		ifClicked =true;
 	}
-
-
-
 }
 
 /*Click Filter Map Menue
