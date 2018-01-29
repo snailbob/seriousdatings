@@ -100,6 +100,18 @@ Route::post('commentInBlog', 'UserBlogPageController@commentInBlog');
 /* end blog page */
 
 
+/* news page */
+Route::get('pages/news', 'UserNewsPageController@ListNews');
+Route::get('/user/news_page/{id}', 'UserNewsPageController@newsPageView');
+Route::post('commentInNews', 'UserNewsPageController@commentInNews');
+/* end news page */
+
+/* subscribe */
+Route::post('subscribeEmail', 'UserNewsPageController@subscribeEmail');
+/* end subscribe */
+
+
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('users/{username}/about_your_date', 'AboutYourDateController@index');
     Route::get('users/{username}/select_mates', 'AboutYourDateController@selectMates');

@@ -5,30 +5,30 @@
 @endsection
 
 @section('javascript')
+    {!! HTML::script('public/js/blog_page/news_page.js') !!}
     {!! HTML::script('public/js/blog_page/subscribe.js') !!}
-    {!! HTML::script('public/js/blog_page/blog_page.js') !!}
 @endsection
 
 @section('form_area')
-    {{--{{dd($blog)}}--}}
+    {{--{{dd($news)}}--}}
     <div class="container">
         <div class="row">
             <div class="col-md-8 blog-main">
                 <article class="blog-post">
                     <header>
-                        <h1>{{$blog['blogTitle']}}</h1>
+                        <h1>{{$news['blogTitle']}}</h1>
                         <div class="lead-image">
-                            <img src="{{ URL::to('/public/assets/' . $blog['blogImage']) }}" alt="Hands"
+                            <img src="{{ URL::to('/public/assets/' . $news['blogImage']) }}" alt="Hands"
                                  class="img-responsive">
                             <div class="meta clearfix">
 
                                 <div class="author">
                                     <i class="fa fa-user"></i>
-                                    <span class="data">{{$blog['blogby']}}</span>
+                                    <span class="data">{{$news['blogby']}}</span>
                                 </div>
                                 <div class="date">
                                     <i class="fa fa-calendar"></i>
-                                    <span class="data">{{$blog['created_at']}}</span>
+                                    <span class="data">{{$news['created_at']}}</span>
                                 </div>
                                 <div class="comments">
                                     <i class="fa fa-comments"></i>
@@ -38,7 +38,7 @@
                         </div>
                     </header>
                     <div class="body">
-                        {!! $blog['blogContent'] !!}
+                        {!! $news['blogContent'] !!}
                     </div>
                 </article>
 
@@ -81,7 +81,7 @@
                                                          placeholder="Your thoughts..."
                                                          class="form-control input-lg"></textarea>
 
-                                <div id="{{$blog['id']}}" class="buttons clearfix">
+                                <div id="{{$news['id']}}" class="buttons clearfix">
                                     <button id="clearBtn" type="button" class="btn btn-secondary">Cancel</button>
                                     <button id="submitBtn" type="button" class="btn btn-danger">Submit</button>
                                 </div>

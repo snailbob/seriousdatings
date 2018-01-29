@@ -18,14 +18,9 @@ use  App\Http\Controllers\EditableEmailController as editEmail;
 
 class UserBlogPageController extends Controller
 {
-    public function blogPageList()
-    {
-        return \View::make('user.blog_page.blog_list_user_page');
-    }
-
     public function ListBlog()
     {
-        $data = UserBlog::all();
+        $data = UserBlog::where('blog_type_id', 1)->get();
         $data->load('blogStatus', 'blogCategory', 'blogType');
         foreach ($data->toArray() as $key => $value) {
             $blogs[$key] = $value;
@@ -54,7 +49,6 @@ class UserBlogPageController extends Controller
                 $comments[$key]['created_at'] = UserBlog::time_elapsed_string($value['created_at']);
             }
         }
-
         return \View::make('user.blog_page.blog_page')->with(['blog' => $blog, 'comments' => $comments]);
     }
 
