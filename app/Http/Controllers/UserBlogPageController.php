@@ -44,13 +44,15 @@ class UserBlogPageController extends Controller
         $blog['blogTitle'] = UserBlog::convertApostrophe($data['blogTitle']);
         $blog['blogContent'] = UserBlog::convertApostrophe($data['blogContent']);
         $blog['intro'] = editEmail::setContentToEllipse($data['blogContent']);
-
         $data = BlogComment::where('blog_id', $id)->get();
         $data->load('user');
-//        $comments = array();
-        foreach ($data->toArray() as $key => $value) {
-            $comments[$key] = $value;
-            $comments[$key]['created_at'] = UserBlog::time_elapsed_string($value['created_at']);
+        $comments = array();
+        if($data)
+        {
+            foreach ($data->toArray() as $key => $value) {
+                $comments[$key] = $value;
+                $comments[$key]['created_at'] = UserBlog::time_elapsed_string($value['created_at']);
+            }
         }
 
         return \View::make('user.blog_page.blog_page')->with(['blog' => $blog, 'comments' => $comments]);
@@ -68,7 +70,7 @@ class UserBlogPageController extends Controller
             'user_id' => Auth::id(),
             'comment' => $request->comment,
         ]);
-
+        $comment->load('user');
         return response()->json($comment);
     }
 }

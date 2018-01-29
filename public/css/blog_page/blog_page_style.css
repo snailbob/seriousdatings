@@ -489,7 +489,7 @@ hr {
 }
 .blog-main:before,
 .blog-aside:before {
-    border-left: 1px solid #ced5db;
+    /*border-left: 1px solid #ced5db;*/
     height: 100%;
     content: "";
     position: absolute;
@@ -1195,4 +1195,13 @@ fieldset[disabled] .btn-tales-two.active {
     font-size: 20px;
     line-height: normal;
     border-radius: 5px;
+}
+
+article.blog-teaser {
+    height: 100%;
+}
+
+.col-md-6.col-sm-6.list {
+    height: 337px !important;
+    margin-bottom: 20px;
 }

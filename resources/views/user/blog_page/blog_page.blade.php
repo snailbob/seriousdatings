@@ -5,12 +5,11 @@
 @endsection
 
 @section('javascript')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     {!! HTML::script('public/js/blog_page/blog_page.js') !!}
 @endsection
 
 @section('form_area')
-    {{--{{dd($comments)}}--}}
+    {{--{{dd($blog)}}--}}
     <div class="container">
         <div class="row">
             <div class="col-md-8 blog-main">
@@ -32,39 +31,20 @@
                                 </div>
                                 <div class="comments">
                                     <i class="fa fa-comments"></i>
-                                    <span class="data"><a href="#comments">26 Comments</a></span>
+                                    <span class="data"><a href="#comments"> <span class="comment_number">{{count($comments)}}</span> Comment/s</a></span>
                                 </div>
                             </div>
                         </div>
                     </header>
                     <div class="body">
-
                         {!! $blog['blogContent'] !!}
-
                     </div>
                 </article>
-
-                <aside class="social-icons clearfix">
-                    <a href="#" class="social-icon color-one">
-                        <div class="inner-circle"></div>
-                        <i class="fa fa-twitter"></i>
-                    </a>
-
-                    <a href="#" class="social-icon color-two">
-                        <div class="inner-circle"></div>
-                        <i class="fa fa-google-plus"></i>
-                    </a>
-
-                    <a href="#" class="social-icon color-three">
-                        <div class="inner-circle"></div>
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                </aside>
 
                 <aside class="comments" id="comments">
                     <hr>
 
-                    <h2><i class="fa fa-comments"></i> {{count($comments)}} Comment/s</h2>
+                    <h2><i class="fa fa-comments"></i> <span class="comment_number">{{count($comments)}}</span> Comment/s</h2>
                     @foreach($comments as $comment)
                         <article class="comment">
                             <header class="clearfix">
@@ -101,8 +81,8 @@
                                                          class="form-control input-lg"></textarea>
 
                                 <div id="{{$blog['id']}}" class="buttons clearfix">
-                                    <button class="btn btn-xlarge btn-tales-two">Cancel</button>
-                                    <button id="submitBtn" class="btn btn-xlarge btn-tales-one">Submit</button>
+                                    <button id="clearBtn" type="button" class="btn btn-secondary">Cancel</button>
+                                    <button id="submitBtn" type="button" class="btn btn-danger">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -110,54 +90,17 @@
                 @endif
             </div>
             <aside class="col-md-4 blog-aside">
-
-                <div class="aside-widget">
-                    <header>
-                        <h3>Read next...</h3>
-                    </header>
-                    <div class="body">
-                        <ul class="tales-list">
-                            <li><a href="index.html">Email Encryption Explained</a></li>
-                            <li><a href="#">Selling is a Function of Design.</a></li>
-                            <li><a href="#">It’s Hard To Come Up With Dummy Titles</a></li>
-                            <li><a href="#">Why the Internet is Full of Cats</a></li>
-                            <li><a href="#">Last Made-Up Headline, I Swear!</a></li>
-                        </ul>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Email">
+                            <span class="input-group-btn">
+                                <button class="btn btn-warning">
+                                   Subscribe
+                                </button>
+                            </span>
                     </div>
                 </div>
-
-                <div class="aside-widget">
-                    <header>
-                        <h3>Authors Favorites</h3>
-                    </header>
-                    <div class="body">
-                        <ul class="tales-list">
-                            <li><a href="index.html">Email Encryption Explained</a></li>
-                            <li><a href="#">Selling is a Function of Design.</a></li>
-                            <li><a href="#">It’s Hard To Come Up With Dummy Titles</a></li>
-                            <li><a href="#">Why the Internet is Full of Cats</a></li>
-                            <li><a href="#">Last Made-Up Headline, I Swear!</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="aside-widget">
-                    <header>
-                        <h3>Tags</h3>
-                    </header>
-                    <div class="body clearfix">
-                        <ul class="tags">
-                            <li><a href="#">OpenPGP</a></li>
-                            <li><a href="#">Django</a></li>
-                            <li><a href="#">Bitcoin</a></li>
-                            <li><a href="#">Security</a></li>
-                            <li><a href="#">GNU/Linux</a></li>
-                            <li><a href="#">Git</a></li>
-                            <li><a href="#">Homebrew</a></li>
-                            <li><a href="#">Debian</a></li>
-                        </ul>
-                    </div>
-                </div>
+                @include('right_sidebar')
             </aside>
         </div>
     </div>

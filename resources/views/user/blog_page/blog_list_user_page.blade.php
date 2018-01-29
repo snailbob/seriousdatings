@@ -30,7 +30,7 @@
                         <div class="col-md-6 col-sm-6 list">
                             <article class=" blog-teaser">
                                 <header>
-                                    <img src="public/assets/{{$blog['blogImage']}}" alt="A Cat">
+                                    <img src="public/assets/{{$blog['blogImage']}}" alt="no picture">
                                     <h3><a href="#">{{ $blog['blogTitle'] }}</a></h3>
                                     <span class="meta">{{ $blog['created_at'] }}, {{ $blog['blogby'] }}</span>
                                     <hr>
@@ -39,7 +39,7 @@
                                     {!! $blog['intro'] !!}
                                 </div>
                                 <div class="clearfix">
-                                    <a href="{{url()}}/user/blog_page/{{$blog['id']}}" class="btn btn-info btn-sm pull-right">Read more</a>
+                                    <a href="{{url()}}/user/blog_page/{{$blog['id']}}" class="btn btn-danger btn-sm pull-right">Read more</a>
                                 </div>
                             </article>
                         </div>
