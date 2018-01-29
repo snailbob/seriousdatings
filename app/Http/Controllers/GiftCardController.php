@@ -197,4 +197,18 @@ class GiftCardController extends Controller
             return response()->json($category);
         }
     }
+
+    public function getGiftCards(){
+        $categories = GiftCategory::all();
+        $data = [];
+
+        if(!empty($categories)){
+            foreach($categories as $r=>$value){
+                $value['cards'] = GiftCategory::find($value->id)->giftCard()->get();
+                $data[] = $value;
+            }
+        }
+
+        return response()->json($data);
+    }
 }

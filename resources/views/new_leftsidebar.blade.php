@@ -133,7 +133,7 @@
         <div class="travel-option profile-managment">
 
             <div class="connect-with-left">
-                <a href="#">
+                <a ng-href="@{{ base_url+'/online_chat?user_id='+userProfileData.id+'&action_type=text' }}">
                     <div class="serious-icons">
                         {!! HTML::Image("public/images/phone-chat-icon.png" ,"") !!}
                     </div>
@@ -141,7 +141,7 @@
                 </a> 
             </div>
             <div class="connect-with-left float-right"> 
-                <a href="#">
+                <a ng-href="@{{ base_url+'/online_chat?user_id='+userProfileData.id+'&action_type=video' }}">
                     <div class="serious-icons">
                         {!! HTML::Image("public/images/video-chat-icon.png" ,"") !!}
                         </div>
@@ -154,7 +154,7 @@
                     <h2>Serious Dating</h2>
                 </a> 
             </div>
-            <div class="connect-with-left float-right"> 
+            <div class="connect-with-left float-right" ng-click="virtualGiftModal()"> 
                 <a href="#">
                     <div class="serious-icons">{!! HTML::Image("public/images/vi-iconrtual-gift.png" ,"") !!}</div>
                     <h2>Virtual Gift</h2>

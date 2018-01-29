@@ -174,4 +174,6 @@
     
     @include('user.shared.subscription_modal')
 
+    @include('user.shared.virtual_gift_modal')
+
 

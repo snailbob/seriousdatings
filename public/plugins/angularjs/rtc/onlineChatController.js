@@ -378,19 +378,46 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                 $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
             }
             else if(typeof($scope.params.user_id) !== 'undefined'){
+                $scope.callStarted = true;
                 $scope.activeUser = res.data.users[0];
                 $scope.activeIndex = 0;
                 var _action = (typeof($scope.params.action_type) !== 'undefined') ? $scope.params.action_type : 'text';
 
                 if(!$scope.activeUser.is_online && _action != 'text'){
-                    $.alert('Opps! Cannot start a call to an offline user.');
+                    $.alert('Opps! Cannot start a call to an offline user. Send a message instead.');
                     _action = 'text';
+                    $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
                 }
 
-                $timeout(function(){
-                    $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
-
-                }, 250);
+                else{
+                    $timeout(function(){
+                        var jc = $ngConfirm({
+                            title: 'Start Call',
+                            content: 'Do you want to start the call now?',
+                            scope: $scope,
+                            buttons: {
+                                Calling: {
+                                    text: 'Call Now',
+                                    btnClass: 'btn-danger',
+                                    action: function(scope, button){
+                                        $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
+                                    }
+                                },
+                                dropCall: {
+                                    text: 'Later',
+                                    btnClass: 'btn-default',
+                                    action: function(scope, button){
+                                        $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
+    
+                                    }
+                                }
+                            }
+    
+                        });
+    
+    
+                    }, 250);
+                }
 
             }
         });

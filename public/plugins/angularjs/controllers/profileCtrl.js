@@ -6,7 +6,8 @@ ngApp.controller('profileCtrl', [
 	'$interval',
 	'profileService',
 	'myHttpService',
-	function ($scope, $uibModal, $interval, profileService, myHttpService) {
+	'$log',
+	function ($scope, $uibModal, $interval, profileService, myHttpService, $log) {
 
 		var ind = 0;
 		var count = 3;
@@ -18,6 +19,7 @@ ngApp.controller('profileCtrl', [
 		$scope.currentPage = 1;
 		$scope.matchUsersData = null;
 		$scope.notifyCount = 0;
+		$scope.base_url = window.base_url;
 
 		$scope.getMatchData = function (data) {
 			$scope.matchUsersData = data;
@@ -41,6 +43,44 @@ ngApp.controller('profileCtrl', [
 		// 		})
 		// 	}
 		// }, 3000);
+
+        $scope.virtualGiftModal = function (items) {
+            var _toItem = {
+				username: window.uri_3,
+				user: $scope.userProfileData
+            };
+
+            console.log(items, 'wow');
+            // var parentElem = parentSelector ?
+                // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'virtualGiftModal.html',
+                controller: 'virtualGiftModalCtrl',
+                // controllerAs: '$scope',
+                // size: '',
+                windowClass: 'compatible-modal',
+                // appendTo: parentElem,
+                resolve: {
+                    items: function () {
+                        return _toItem; //items ? items : {};
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (res) {
+                $log.info(res);
+                // $scope.activeUser.invitedToChat = res;
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+
+            });
+        };
+
+
 
 		$scope.$watch('username', function (newValue, oldValue) {
 			if (newValue) {
@@ -203,4 +243,78 @@ ngApp.controller('profileCtrl', [
 		}
 
 	}
-])
+]);
+
+ngApp.controller('virtualGiftModalCtrl', ['$scope', '$uibModalInstance', 'items', 'myHttpService', function ($scope, $uibModalInstance, items, myHttpService) {
+    $scope.items = items;
+    $scope.user = items.user;
+    $scope.giftCat = [];
+    $scope.isLoading = false;
+    $scope.selectedCount = 0;
+    $scope.selectedUser = [];
+    $scope.base_url = window.base_url;
+
+
+    console.log(items, 'items');
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+    $scope.submit = function () {
+        var _invited = [];
+
+        $scope.users.forEach(function (val, i) {
+            console.log(val, i);
+            if (val.selected) {
+                _invited.push(val);
+            }
+        });
+
+        $uibModalInstance.close(_invited);
+    };
+
+    $scope.selectUser = function (u, i) {
+
+        if (u.selected) {
+            u.selected = false;
+            $scope.selectedCount--;
+            return false;
+        }
+        else if (!u.selected) {
+            if ($scope.selectedCount > 2) {
+                $scope.showToast('Group chat particapants full.', 'danger');
+                return false;
+            }
+            else if (!u.is_online) {
+                $scope.showToast('Cannot invite offline user.', 'danger');
+                return false;
+            }
+        }
+
+
+        if (!u.selected) {
+            u.selected = true;
+            $scope.selectedCount++;
+            // $scope.selectedUser.push(u);     
+        }
+
+        console.log($scope.selectedCount, u);
+
+    }
+
+    $scope.getData = function () {
+		$scope.isLoading = true;
+		
+		myHttpService.get('get_gift_cards').then(function(res){
+			console.log(res.data);
+			$scope.isLoading = false;
+			$scope.giftCat = res.data;
+		});
+    }
+
+    var init = function () {
+        $scope.getData();
+    }
+    init();
+}]);
