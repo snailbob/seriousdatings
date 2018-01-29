@@ -18,7 +18,7 @@ class GroupChatMessages extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'group_id', 'group_id', 'type', 'message'];
+    protected $fillable = ['user_id', 'group_id', 'group_id', 'type', 'message', 'price'];
 
     /**
      * The attributes excluded from the model's JSON form.

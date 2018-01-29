@@ -10,6 +10,7 @@ use App\User;
 use App\GroupChat;
 use App\GroupChatParticipants;
 use App\GroupChatMessages;
+use App\GiftCard;
 
 class GroupChatController extends Controller
 {
@@ -46,7 +47,25 @@ class GroupChatController extends Controller
         if(!empty($messages)){
             foreach($messages as $r=>$value){
                 $value->user_info = User::select('firstName','lastName', 'photo', 'username')->find($value->user_id);
+
+                //format_message for virtual_gift
+                if($value->type == 'virtual_gift'){
+                    $gifts = explode(',', $value->message);
+                    $value->gifts = $this->format_gift_cards($gifts);
+                }
+
                 $format_data[] = $value;
+            }
+        }
+        return $format_data;
+    }
+
+    public function format_gift_cards($cards){
+        $format_data = [];
+
+        if(!empty($cards)){
+            foreach($cards as $r=>$value){
+                $format_data[] = GiftCard::find($value);
             }
         }
         return $format_data;

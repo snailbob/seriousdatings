@@ -15,27 +15,40 @@
             </p>
         </div>
         
-        <div class="panel panel-default" ng-repeat="cat in giftCat" ng-if="cat.cards.length">
-            <div class="panel-heading">
-                <h4>@{{cat.name}}</h4>
-            </div>
-            <div class="panel-body">
-                <div class="row">
+        <uib-accordion close-others="true">
+            <div uib-accordion-group class="panel-default" ng-repeat="cat in giftCat" ng-if="cat.cards.length" is-open="cat.isCustomHeaderOpen">
+                <uib-accordion-heading>
+                    <div class="padding">
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': cat.isCustomHeaderOpen, 'glyphicon-chevron-right': !cat.isCustomHeaderOpen}"></i>
+                        @{{cat.name}}
+                    </div>
+                </uib-accordion-heading>
 
-                    <div class="col-xs-6 col-sm-3 text-center" ng-repeat="card in cat.cards" ng-click="selectCard()">
-                        <a>
-                            <img ng-src="@{{base_url + '/public/images/gift_cards/' + card.image}}" class="img-thumbnail" alt="gift card" style="height: 80px" />
-                        </a>
-                        @{{card.price | currency}}
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3 text-center" ng-repeat="card in cat.cards" ng-click="selectCard(card)">
+                        <div class="form-group">
+                            <img ng-src="@{{base_url + '/public/images/gift_cards/' + card.image}}" title="@{{card.name}}" class="img-thumbnail" alt="gift card" style="height: 90px" />
+                            <br>
+                            <i class="fa fa-fw" ng-class="{'fa-check-circle-o text-success' : card.selected, 'fa-circle-o text-muted' : !card.selected}" aria-hidden="true"></i>
+                            @{{card.price | currency}}
+
+                        </div>
                     </div>
                 </div>                
 
+
             </div>
-        </div>
+
+            
+        </uib-accordion>
+            
 
         <div class="form-group text-right padding-top-15">
-            <button class="btn btn-danger" ng-click="submit()">
-                Submit
+            <p class="pull-left text-muted" ng-if="totalPrice">
+                A total of @{{ totalPrice | currency }} to pay.
+            </p>
+            <button class="btn btn-danger" ng-disabled="!totalPrice" ng-click="submit()">
+                Send to @{{user.firstName}}
             </button>
         </div>
 

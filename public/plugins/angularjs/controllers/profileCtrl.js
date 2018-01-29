@@ -47,6 +47,7 @@ ngApp.controller('profileCtrl', [
         $scope.virtualGiftModal = function (items) {
             var _toItem = {
 				username: window.uri_3,
+				logged_user: $scope.currentUserData[0],
 				user: $scope.userProfileData
             };
 
@@ -71,7 +72,8 @@ ngApp.controller('profileCtrl', [
             });
 
             modalInstance.result.then(function (res) {
-                $log.info(res);
+				$log.info(res);
+				$.alert('Gift successfully sent to '+$scope.userProfileData.firstName);
                 // $scope.activeUser.invitedToChat = res;
 
             }, function () {
@@ -247,11 +249,14 @@ ngApp.controller('profileCtrl', [
 
 ngApp.controller('virtualGiftModalCtrl', ['$scope', '$uibModalInstance', 'items', 'myHttpService', function ($scope, $uibModalInstance, items, myHttpService) {
     $scope.items = items;
-    $scope.user = items.user;
+	$scope.user = items.user;
+	$scope.logged_user = items.logged_user;
+	
     $scope.giftCat = [];
     $scope.isLoading = false;
     $scope.selectedCount = 0;
-    $scope.selectedUser = [];
+    $scope.selectedCard = [];
+    $scope.totalPrice = 0;
     $scope.base_url = window.base_url;
 
 
@@ -262,44 +267,48 @@ ngApp.controller('virtualGiftModalCtrl', ['$scope', '$uibModalInstance', 'items'
     };
 
     $scope.submit = function () {
-        var _invited = [];
+		var _data = {
+			cards: $scope.selectedCard,
+			to_id: $scope.user.id,
+			from_id: $scope.logged_user.id,
+			price: $scope.totalPrice
+		}
+        myHttpService.post('send_gift', _data).then(function(res){
+			console.log(res.data, '');
+			$uibModalInstance.close($scope.selectedCard);
 
-        $scope.users.forEach(function (val, i) {
-            console.log(val, i);
-            if (val.selected) {
-                _invited.push(val);
-            }
-        });
+		});
 
-        $uibModalInstance.close(_invited);
     };
 
-    $scope.selectUser = function (u, i) {
+    $scope.selectCard = function (u) {
 
         if (u.selected) {
             u.selected = false;
-            $scope.selectedCount--;
+			$scope.selectedCount--;
+
+			$scope.totalPrice = $scope.totalPrice - u.price;
+
+			$scope.selectedCard = $scope.selectedCard.filter(function(a){
+				return a !== u.id;
+			});
+
             return false;
         }
         else if (!u.selected) {
-            if ($scope.selectedCount > 2) {
-                $scope.showToast('Group chat particapants full.', 'danger');
-                return false;
-            }
-            else if (!u.is_online) {
-                $scope.showToast('Cannot invite offline user.', 'danger');
-                return false;
-            }
-        }
 
+        }
 
         if (!u.selected) {
-            u.selected = true;
-            $scope.selectedCount++;
-            // $scope.selectedUser.push(u);     
+			u.selected = true;
+			$scope.selectedCount++;
+			if(!$scope.selectedCard.includes(u.id)) {
+				$scope.totalPrice = $scope.totalPrice + u.price;
+				$scope.selectedCard.push(u.id);     
+            }
         }
 
-        console.log($scope.selectedCount, u);
+        console.log($scope.totalPrice, $scope.selectedCard);
 
     }
 
