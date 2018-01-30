@@ -68,7 +68,15 @@
                     <i class="fa fa-angle-double-left" aria-hidden="true"></i> Back
                   </button>
                 </div>
-                Welcome to {{ $data['current_user']->firstName }} {{ $data['current_user']->lastName }} @else Welcome to your profile @endif
+                Welcome to {{ $data['current_user']->firstName }} {{ $data['current_user']->lastName }}
+                @else
+                <div class="pull-right">
+                  <button class="btn btn-default btn-sm" onclick="window.location.href='{{url().'/profile_settings'}}'">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> Edit Profile
+                  </button>
+                </div>
+                Welcome to your profile
+                @endif
               </a>
             </h3>
           </div>

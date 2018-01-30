@@ -181,7 +181,7 @@
                 <li> <a href="{!! url() !!}/profile/photo">My Photo</a> </li>
                 <li> <a href="{!! url() !!}/profile/music">My Music</a> </li>
                 <li> <a href="{!! url() !!}/profile/video">My Video </a> </li>
-                <li><a href="{!! url() !!}/profiles/groups/create">Create Groups</a></li>
+                <li><a href="{!! url() !!}/profiles/groups">Groups</a></li>
             </ul>
         </div>
 

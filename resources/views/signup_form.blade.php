@@ -18,6 +18,21 @@
 
     <div class="container">
         <div class="row">
+            <div class="col-sm-6 col-sm-offset-3 padding-top">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <p class="text-center padding padding-top">
+                            <button class="btn btn-lg btn-info btn-fb" onclick="checkLoginState()">
+                                <i class="fa fa-facebook" aria-hidden="true"></i> Signup with Facebook
+                            </button>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+
             <div class="col-sm-3 crop-col" ng-show="!imgDone.done">
                 <div class="row">
                     <div class="col-sm-12">

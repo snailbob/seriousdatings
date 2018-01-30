@@ -176,7 +176,8 @@ Route::group(['prefix' => 'api'], function () {
 
     
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
-
+    Route::post('send_gift', 'GiftCardController@sendGiftCards');
+    
     Route::post('save_advertisement', 'AdsSpaceController@store');
 
     Route::get('get_video_shuffle', 'UsersController@getVideoShuffle');

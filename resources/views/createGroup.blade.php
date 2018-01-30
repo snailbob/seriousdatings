@@ -34,7 +34,7 @@
 
 								<div class="upload-profile" style="margin-top:30px; margin-left:0px;">
 									<div class="image-border">
-										{!! HTML::image('images/profile-img.jpg', 'Profile Picture', array('id' => 'blah')) !!}
+										{{--  {!! HTML::image('images/profile-img.jpg', 'Profile Picture', array('id' => 'blah')) !!}  --}}
 									</div>
 									<div class="fileUpload uplod_button">
 										<span>Upload</span>

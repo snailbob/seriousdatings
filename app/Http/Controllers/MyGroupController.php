@@ -101,14 +101,14 @@ class MyGroupController extends Controller
                  $logged_in = Auth::user() -> id;
             }
             $groups = DB::table('user_groups')
-                     ->leftJoin('group_member', function($join)
+                     ->leftJoin('groups_users', function($join)
                          {
-                             $join->on('user_groups.id', '=', 'group_member.group_id');
+                             $join->on('user_groups.id', '=', 'groups_users.group_id');
                          })
                      ->where('user_groups.id', '=', $id)
                      ->get();
           $matchThese = ['group_id' => $id, 'user_id' => $logged_in]; 
-          $checkJoined = DB::table('group_member')
+          $checkJoined = DB::table('groups_users')
                      ->where($matchThese)
                      ->get();
             $joined = 0;
@@ -223,7 +223,7 @@ class MyGroupController extends Controller
 
         foreach ($friends as $friend) {
             $matchThese = ['group_id' => $id, 'user_id' => $friend -> friend_id]; 
-            $checkJoined = DB::table('group_member')
+            $checkJoined = DB::table('groups_users')
                     ->where($matchThese)
                     ->get();
                     
@@ -240,9 +240,9 @@ class MyGroupController extends Controller
         }
 
         $groups = DB::table('user_groups')
-                    ->leftJoin('group_member', function($join)
+                    ->leftJoin('groups_users', function($join)
                         {
-                            $join->on('user_groups.id', '=', 'group_member.group_id');
+                            $join->on('user_groups.id', '=', 'groups_users.group_id');
                         })
                     ->where('user_groups.id', '=', $id)
                     ->get();
@@ -278,7 +278,7 @@ class MyGroupController extends Controller
 
         foreach (Input::get('members') as $member_id) {
            
-           $id = DB::table('group_member')->insertGetId(
+           $id = DB::table('groups_users')->insertGetId(
             ['group_id' => Input::get('groupID'), 'user_id' => $member_id]   
             );
 
@@ -300,12 +300,12 @@ public function removeMemberForm($id){
 
 
 
-            $members  = DB::table('group_member')
+            $members  = DB::table('groups_users')
                      ->leftJoin('users', function($join)
                          {
-                             $join->on('group_member.user_id', '=', 'users.id');
+                             $join->on('groups_users.user_id', '=', 'users.id');
                          })
-                     ->where('group_member.group_id', '=', $id)
+                     ->where('groups_users.group_id', '=', $id)
                      ->get();
 
             
@@ -336,7 +336,7 @@ public function removeMemberForm($id){
         foreach (Input::get('members') as $member_id) {
            
             $matchThese = ['group_id' => Input::get('groupID'), 'user_id' => $member_id]; 
-            DB::table('group_member')->where($matchThese)->delete();
+            DB::table('groups_users')->where($matchThese)->delete();
             }
         
         return redirect('groups/'. Input::get('groupID'));
