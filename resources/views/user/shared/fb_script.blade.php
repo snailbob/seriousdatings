@@ -97,24 +97,31 @@
                         }
                         else if(uri_1 == 'users'){
                             if (typeof (res.id) !== 'undefined') {
-                                window.location.reload(true);
+                                
+                                setTimeout(function(){
+                                    window.location.reload(true);
+                                }, 1500);
+                                
+                                $.alert('You are already registered. Logging you in...');
+
                             } else {
                                 //set input fields for user signup
-                                var _name = response.name;
+                                var _first_name = response.first_name;
+                                var _last_name = response.last_name;
+                                var _email = response.email;
                                 var _id = response.id; 
                                 var _gender = response.gender; 
-                                var res = _name.split(" ");
-                                var _first = res[0];
-                                var _last = res[1];
 
                                 $('[name="fb_id"]').val(_id);
-                                $('[name="firstName"]').val(_first);
-                                $('[name="lastName"]').val(_last);
+                                $('[name="email"]').val(_email);
+                                $('[name="firstName"]').val(_first_name);
+                                $('[name="lastName"]').val(_last_name);
 
                                 if(_gender != 'male'){
                                     $('[name="gender"]').val('Female');
                                 }
                                 
+                                $.alert('Success! We connected your facebook account to SeriousDatings. Please complete form below to continue.');
                                 
                             }
 
