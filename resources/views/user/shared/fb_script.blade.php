@@ -65,7 +65,7 @@
   function testAPI() {
       console.log('Welcome! testAPI Fetching your information.... ');
       FB.api('/me', {
-          fields: 'birthday,link,gender,age_range,name,email,picture,firstname,lastname,friends{name,email}'
+          fields: 'birthday,link,gender,age_range,name,email,picture,first_name,last_name,friends{name,email}'
       }, function (response) {
           console.log(response, 'Successful login for: ' + response.name);
 
