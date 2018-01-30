@@ -92,53 +92,54 @@
             else {
                 $ip = $_SERVER['REMOTE_ADDR'];
             }
-            ?>
+        ?>
 
             var for_zip = "{{ $ip }}";
 
-            <?php
+        <?php
             $php_array = request()->input();
             $js_array = json_encode($php_array);
             echo "var uri_get_params = ". $js_array . ";\n";
-            ?>
+        ?>
 
-            var uri_path = "{{ request()->path() }}";
-            var base_url = "{{ url() }}";
-            jQuery(document).ready(function()
-            {
-              jQuery( ".three-cols" ).addClass( "customcolwidth" );
-          });
+        var uri_path = "{{ request()->path() }}";
+        var base_url = "{{ url() }}";
+        jQuery(document).ready(function () {
+            jQuery(".three-cols").addClass("customcolwidth");
+        });
       </script>
-      <!-- Attach our CSS -->
-      <script type="text/javascript">
-       function frgtpass_msg() {
-        alert('New Password Set Successfully');
-    }
-</script>
+
+    <!-- Attach our CSS -->
+    <script type="text/javascript">
+        function frgtpass_msg() {
+            alert('New Password Set Successfully');
+        }
+    </script>
+    
 <script type="text/javascript">
   $(function () {
-      if(jQuery("#language").length)  
-       $("#language, #gender, #lookingfor, #age, #ageto,#zipcode, #weight, #relation, #relation-ship ").selectbox();
-});
+      if (jQuery("#language").length)
+          $("#language, #gender, #lookingfor, #age, #ageto,#zipcode, #weight, #relation, #relation-ship ").selectbox();
+  });
 </script> 
 <script type="text/javascript">
-        /*document.getElementById("uploadBtn").onchange = function () {
-            document.getElementById("uploadFile").value = this.value;
-        };*/
-            // this script only for show images
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();  
-                    reader.onload = function (e) {
-                     $('#blah').attr('src', e.target.result);
-                 }          
-                 reader.readAsDataURL(input.files[0]);
-             }
-         }
-         $(".imgInp").change(function(){
-            readURL(this);
-        });
-    </script>
+    /*document.getElementById("uploadBtn").onchange = function () {
+                document.getElementById("uploadFile").value = this.value;
+            };*/
+    // this script only for show images
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $(".imgInp").change(function () {
+        readURL(this);
+    });
+</script>
 
     <?php echo (isset($prescript))? $prescript:"" ?>
     

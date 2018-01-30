@@ -8,10 +8,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Event;
 use App\EventMembers;
+use App\User;
+
 use View;
 use DB;
 use Redirect;
 use Input;
+use Mail;
 use DateTime;
 use App\Http\Controllers\EventsController;
 
@@ -172,9 +175,9 @@ class EventManagementController extends Controller
         $toDate = $toDate.' '.$toTime;
         
         // return response()->json(array('d'=>$toDate));
-        
-        DB::table('events')->insert( [
-            'eventtype'=>$eventCategory,
+
+        $data = [
+            'eventType'=>$eventCategory,
             'title'=>$title,
             'start'=>$fromDate,
             'endDate'=>$toDate,
@@ -187,11 +190,53 @@ class EventManagementController extends Controller
             'youtube_video'=>$youtube_video,
             'eventPrice'=>$price,
             'image'=>$filname
-        ]);
-
+        ];
+        
+        $new_id = DB::table('events')->insertGetId( $data ); //Event::create($data); //
+        // $data['id'] = $new_id;
+        // $data['sents'] = $this->sendInviteEmailToUsers($data);
+        // return response()->json($data);
         return redirect(url().'/admin/events');
     
     }
+
+    public function get_location_country($loc){
+        $arr = explode(', ', $loc);
+        // $lastKey = array_pop(array_keys($arr));
+        return end($arr);
+    }
+
+    public function sendInviteEmailToUsers($details){
+        // $data = $request->input(); //response()->json($request->input());   
+        $data['invited_by'] = 'SeriousDatings';
+        $data['link'] = url().'/events/details/'.$details['id'];
+        $data['button_text'] = 'View Event';
+
+        $country = $this->get_location_country($details['eventLocation']);
+
+        $users = User::where('country', $country)->get();
+
+        $sents = [];
+        if(!empty($users)){
+            foreach($users as $r=>$value){
+                $email_to_send = $value->email;
+
+                // return View::make('email.invite_friend')->with($data);
+                
+                Mail::send('email.new_event_noti', $data, function($message) use ($email_to_send) {
+                    $message->to($email_to_send, 'ID')->subject('Serious Datings - New Event');
+                });
+
+                $sents[] = $email_to_send;
+
+        
+            }
+        }
+
+
+        return $sents;
+    }
+
 
     /**
      * Display the specified resource.

@@ -92,10 +92,10 @@
                                 <div class="row" style="margin-bottom: 2%;">
                                     <div class="col-md-4">
                                         <a href="#">
-                                            <div class="grup_member">
+                                            <div class="grup_memberx">
                                                 <div>
                                                     @if($groups != null)
-                                                    <img src="{!! url() !!}/public/images/groups/{!! $groups['0'] -> groupID !!}/{!! $groups['0'] -> image !!}" class="img-responsive"
+                                                    <img src="{{ url().'/public/images/groups/'.$groups['0'] -> groupID.'/'.$groups['0'] -> image }}" class="img-responsive img-thumbnail"
                                                         alt="group memberadmin image" /> @endif
                                                 </div>
                                             </div>
@@ -103,8 +103,8 @@
                                     </div>
                                     <div class="col-md-8">
                                         @if($groups != null)
-                                        <h4 style="font-weight: 600; line-height: 25px;">Created By:</h4>
-                                        <p>{!! $groups['0'] -> groupAdmin !!}</p>
+                                        {{--  <h4 style="font-weight: 600; line-height: 25px;">Created By:</h4>
+                                        <p>{!! $groups['0'] -> groupAdmin !!}</p>  --}}
                                     </div>
                                 </div>
                                 <div class="clear"></div>
@@ -163,10 +163,10 @@
                         <div class="row">
                             @if($groups != null) @if($groups['0'] -> id != null) @if($groups['0'] -> groupType == 'Public') @foreach($groups as $group)
                             <div class="col-md-3">
-                                <a href="{!! url() !!}/users/{!! $group -> user_info -> username !!}">
+                                <a href="{{url().'user/profile/'.$group -> user_info -> username}}">
                                     <div class="grup_member">
                                         <div>
-                                            <img src="{!! url() !!}/public/images/users/{!! $group -> user_info -> username !!}/{!! $group -> user_info -> photo !!}"
+                                            <img src="{{$group -> user_info -> photo}}"
                                                 class="img-responsive" alt="group member image" />
                                         </div>
                                         <div class="member_name">
@@ -177,10 +177,10 @@
                             </div>
                             @endforeach @else @if($groups['0'] -> joined == 1 || $groups['0'] -> admin == 1) @foreach($groups as $group)
                             <div class="col-md-3">
-                                <a href="{!! url() !!}/users/{!! $group -> user_info -> username !!}">
+                                <a href="{{url().'user/profile/'.$group -> user_info -> username}}">
                                     <div class="grup_member">
                                         <div>
-                                            <img src="{!! url() !!}/public/images/users/{!! $group -> user_info -> username !!}/{!! $group -> user_info -> photo !!}"
+                                                <img src="{{$group -> user_info -> photo}}"
                                                 class="img-responsive" alt="group member image" />
                                         </div>
                                         <div class="member_name">

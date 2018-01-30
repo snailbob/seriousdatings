@@ -7,7 +7,8 @@ ngApp.controller('profileCtrl', [
 	'profileService',
 	'myHttpService',
 	'$log',
-	function ($scope, $uibModal, $interval, profileService, myHttpService, $log) {
+	'$ngConfirm',
+	function ($scope, $uibModal, $interval, profileService, myHttpService, $log, $ngConfirm) {
 
 		var ind = 0;
 		var count = 3;
@@ -247,7 +248,7 @@ ngApp.controller('profileCtrl', [
 	}
 ]);
 
-ngApp.controller('virtualGiftModalCtrl', ['$scope', '$uibModalInstance', 'items', 'myHttpService', function ($scope, $uibModalInstance, items, myHttpService) {
+ngApp.controller('virtualGiftModalCtrl', ['$scope', '$uibModalInstance', 'items', 'myHttpService', '$ngConfirm', function ($scope, $uibModalInstance, items, myHttpService, $ngConfirm) {
     $scope.items = items;
 	$scope.user = items.user;
 	$scope.logged_user = items.logged_user;
@@ -273,11 +274,36 @@ ngApp.controller('virtualGiftModalCtrl', ['$scope', '$uibModalInstance', 'items'
 			from_id: $scope.logged_user.id,
 			price: $scope.totalPrice
 		}
-        myHttpService.post('send_gift', _data).then(function(res){
-			console.log(res.data, '');
-			$uibModalInstance.close($scope.selectedCard);
 
-		});
+        var jc = $ngConfirm({
+            title: 'Confirm Send',
+            content: 'You will be charged {{totalPrice | currency}}.',
+            scope: $scope,
+            buttons: {
+                Confirm: {
+                    text: 'Confirm',
+                    btnClass: 'btn-success',
+                    action: function(scope, button){
+
+						myHttpService.post('send_gift', _data).then(function(res){
+							console.log(res.data, '');
+							$uibModalInstance.close($scope.selectedCard);
+				
+						});
+						
+                    }
+                },
+                Cancel: {
+                    text: 'Cancel',
+                    btnClass: 'btn-default',
+                    action: function(scope, button){
+
+                    }
+                }
+            }
+
+        });
+
 
     };
 

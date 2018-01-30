@@ -424,23 +424,30 @@
                                 <div class="the_chat" ng-if="activeUser.chat.length">
                                     <div class="the_message" ng-repeat="chat in activeUser.chat | reverse">
                                         <!-- Message. Default to the left -->
-                                        <div class="direct-chat-msg" ng-if="logged_user_info.id != chat.user_id">
+                                        <div class="direct-chat-msg" ng-class="{'right' : logged_user_info.id == chat.user_id}">
                                             <div class="direct-chat-info clearfix">
-                                                <span class="direct-chat-name pull-left">@{{chat.user_info.firstName}}</span>
-                                                <span class="direct-chat-timestamp pull-right" am-time-ago="chat.created_at | amParse:'YYYY-MM-DD HH:mm:ss'"></span>
+                                                <span class="direct-chat-name" ng-class="{'pull-left' : logged_user_info.id != chat.user_id, 'pull-right' : logged_user_info.id == chat.user_id}">@{{chat.user_info.firstName}}</span>
+                                                <span class="direct-chat-timestamp" ng-class="{'pull-right' : logged_user_info.id != chat.user_id, 'pull-left' : logged_user_info.id == chat.user_id}" am-time-ago="chat.created_at | amParse:'YYYY-MM-DD HH:mm:ss'"></span>
                                             </div>
                                             <!-- /.direct-chat-info -->
                                             <img class="direct-chat-img" ng-src="@{{chat.user_info.photo}}" alt="Message User Image">
                                             <!-- /.direct-chat-img -->
-                                            <div class="direct-chat-text" ng-bind-html="chat.message">
-                                                
+                                            <div class="direct-chat-text">
+                                                <div ng-bind-html="chat.message" ng-if="chat.type == 'text'"></div>
+                                                <div ng-if="chat.type == 'virtual_gift'">
+                                                    <ul class="list-inline">
+                                                        <li ng-repeat="gift in chat.gifts">
+                                                            <img ng-src="@{{base_url + '/public/images/gift_cards/' + gift.image}}" title="@{{gift.name}}" class="img-thumbnail" alt="gift card" style="height: 90px; margin-bottom: 5px;">
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                             <!-- /.direct-chat-text -->
                                         </div>
                                         <!-- /.direct-chat-msg -->
 
 
-                                        <!-- Message to the right -->
+                                        {{--  <!-- Message to the right -->
                                         <div class="direct-chat-msg right" ng-if="logged_user_info.id == chat.user_id">
                                             <div class="direct-chat-info clearfix">
                                                 <span class="direct-chat-name pull-right">@{{logged_user_info.firstName}}</span>
@@ -453,7 +460,7 @@
                                             </div>
                                             <!-- /.direct-chat-text -->
                                         </div>
-                                        <!-- /.direct-chat-msg -->
+                                        <!-- /.direct-chat-msg -->  --}}
 
                                     </div>
 
