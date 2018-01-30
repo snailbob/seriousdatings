@@ -5,7 +5,6 @@ $(document).ready(function () {
         }
     });
 
-
     $(document).on('click', '#submitBtn', function () {
         var data = {
             id: $(this).parent().attr('id'),
@@ -15,14 +14,15 @@ $(document).ready(function () {
 
         $.ajax({
             type: 'POST',
-            url: base_url + '/commentInBlog',
+            url: base_url + '/commentInNews',
             data: data,
             cache: false,
             success: function (value) {
                 toastr.info('Your comment was posted.');
                 var count = parseInt($('.comment_number').first().text());
+                console.log(count+1);
 
-                $('.comment_number').text(count + 1);
+                $('.comment_number').text(count+1);
                 var comment_txt = "<article class='comment'>" +
                     "<header class='clearfix'>" +
                     "<img src='" + value['user']['photo'] + "' class='img-circle ' width='45' alt=''" +
@@ -33,14 +33,14 @@ $(document).ready(function () {
                     " </h3>" +
                     "<span class='date'>" + value['created_at'] +
                     "</span>" +
-                    "<span class='separator'>" +
+                    "<span class='separator'>"+
                     "</span>" +
                     "</div>" +
                     "</header>" +
                     "<div class='body'>" + value['comment'] +
                     "</div>" +
                     "</article>";
-                $("#comments").append(comment_txt);
+                $( "#comments" ).append(comment_txt);
             },
             error: function (data) {
                 $.each(data.responseJSON, function (key, value) {
@@ -51,7 +51,8 @@ $(document).ready(function () {
         })
     });
 
-    $(document).on('click', '#clearBtn', function () {
+    $(document).on('click', '#clearBtn', function()
+    {
         $('#comment-body').val("");
     });
 

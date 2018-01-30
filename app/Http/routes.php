@@ -99,6 +99,25 @@ Route::get('user/blog_page/{id}', 'UserBlogPageController@blogPageView');
 Route::post('commentInBlog', 'UserBlogPageController@commentInBlog');
 /* end blog page */
 
+/* delete comment */
+Route::post('deleteComment', 'UserBlogPageController@deleteComment');
+/* end delete comment */
+
+/* news page */
+Route::get('pages/news', 'UserNewsPageController@ListNews');
+Route::get('/user/news_page/{id}', 'UserNewsPageController@newsPageView');
+Route::post('commentInNews', 'UserNewsPageController@commentInNews');
+/* end news page */
+
+/* subscribe */
+Route::post('subscribeEmail', 'UserNewsPageController@subscribeEmail');
+/* end subscribe */
+
+/* travel page */
+//Route::get('travel', 'TravelController');
+/* end travel page */
+
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('users/{username}/about_your_date', 'AboutYourDateController@index');
@@ -336,6 +355,7 @@ Route::group(array('before' => 'admin'), function () {
 
     // status list
     Route::get('admin/blog_management/status', 'BlogManagementController@showStatusLists');
+    Route::get('admin/blog_management/spam_control', 'BlogManagementController@showSpamControl');
     Route::post('addBlogStatus', 'BlogManagementController@addBlogStatus');
     Route::post('editBlogStatus', 'BlogManagementController@editBlogStatus');
     Route::post('deleteStatus', 'BlogManagementController@deleteStatus');

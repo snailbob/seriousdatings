@@ -19,7 +19,7 @@ class BlogComment extends Model
 
     public function userBlog()
     {
-        return $this->belongsTo('App\UserBlog');
+        return $this->belongsTo('App\UserBlog', 'blog_id', 'id');
     }
 
     public function user()

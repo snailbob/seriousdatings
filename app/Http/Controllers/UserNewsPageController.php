@@ -1,9 +1,9 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -14,45 +14,45 @@ use Input;
 use View;
 use App\UserBlog;
 use App\BlogComment;
+use App\BlogSubscription;
 use  App\Http\Controllers\EditableEmailController as editEmail;
 
-class UserBlogPageController extends Controller
+class UserNewsPageController extends Controller
 {
-    public function ListBlog()
+    public function ListNews()
     {
-        $data = UserBlog::where('blog_type_id', 1)->get();
+        $data = UserBlog::where('blog_type_id', 2)->get();
         $data->load('blogStatus', 'blogCategory', 'blogType');
         foreach ($data->toArray() as $key => $value) {
-            $blogs[$key] = $value;
-            $blogs[$key]['blogTitle'] = UserBlog::convertApostrophe($value['blogTitle']);
-            $blogs[$key]['blogContent'] = UserBlog::convertApostrophe($value['blogContent']);
-            $blogs[$key]['intro'] = editEmail::setContentToEllipse($value['blogContent']);
+            $news[$key] = $value;
+            $news[$key]['blogTitle'] = UserBlog::convertApostrophe($value['blogTitle']);
+            $news[$key]['blogContent'] = UserBlog::convertApostrophe($value['blogContent']);
+            $news[$key]['intro'] = editEmail::setContentToEllipse($value['blogContent']);
         }
 
-        return \View::make('user.blog_page.blog_list_user_page')->with('blogs', $blogs);
+        return \View::make('user.news_page.news_list_user_page')->with('news', $news);
     }
 
-    public function blogPageView($id)
+    public function newsPageView($id)
     {
         $data = UserBlog::find($id);
-        $blog = $data->toArray();
-        $blog['blogTitle'] = UserBlog::convertApostrophe($data['blogTitle']);
-        $blog['blogContent'] = UserBlog::convertApostrophe($data['blogContent']);
-        $blog['intro'] = editEmail::setContentToEllipse($data['blogContent']);
+        $news = $data->toArray();
+        $news['blogTitle'] = UserBlog::convertApostrophe($data['blogTitle']);
+        $news['blogContent'] = UserBlog::convertApostrophe($data['blogContent']);
+        $news['intro'] = editEmail::setContentToEllipse($data['blogContent']);
         $data = BlogComment::where('blog_id', $id)->get();
         $data->load('user');
         $comments = array();
-        if($data)
-        {
+        if ($data) {
             foreach ($data->toArray() as $key => $value) {
                 $comments[$key] = $value;
                 $comments[$key]['created_at'] = UserBlog::time_elapsed_string($value['created_at']);
             }
         }
-        return \View::make('user.blog_page.blog_page')->with(['blog' => $blog, 'comments' => $comments]);
+        return \View::make('user.news_page.news_page')->with(['news' => $news, 'comments' => $comments]);
     }
 
-    public function commentInBlog(Request $request)
+    public function commentInNews(Request $request)
     {
         $errors = $this->validate($request, [
             'comment' => 'required|max:1000',
@@ -68,16 +68,16 @@ class UserBlogPageController extends Controller
         return response()->json($comment);
     }
 
-    public function deleteComment(Request $request)
+    public function subscribeEmail(Request $request)
     {
         $errors = $this->validate($request, [
-           'comment_id' => 'required|exists:blog_comments,id'
+            'email' => 'required|max:1000|email|unique:blog_subscription,email',
+        ]);
+        $subscribe = BlogSubscription::create([
+           'email' => $request->email
         ]);
 
-        $comment = BlogComment::find($request->comment_id);
-        $comment->load('user');
-        $comment->delete();
-
-        return response()->json($comment);
+        return response()->json($subscribe);
     }
+
 }
