@@ -45,14 +45,14 @@ ngApp.controller('profileCtrl', [
 		// 	}
 		// }, 3000);
 
-        $scope.virtualGiftModal = function (items) {
+        $scope.virtualGiftModal = function (currUser, loggedUser) {
             var _toItem = {
 				username: window.uri_3,
-				logged_user: $scope.currentUserData[0],
-				user: $scope.userProfileData
+				logged_user: (typeof(currUser) !== 'undefined' && currUser != '') ? currUser : $scope.currentUserData[0],
+				user: (typeof(loggedUser) !== 'undefined') ? loggedUser : $scope.userProfileData
             };
 
-            console.log(items, 'wow');
+            // console.log(items, 'wow');
             // var parentElem = parentSelector ?
                 // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
             var modalInstance = $uibModal.open({
@@ -67,7 +67,7 @@ ngApp.controller('profileCtrl', [
                 // appendTo: parentElem,
                 resolve: {
                     items: function () {
-                        return _toItem; //items ? items : {};
+                        return _toItem; //items ? items : {}; // 
                     }
                 }
             });

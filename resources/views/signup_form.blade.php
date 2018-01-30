@@ -86,7 +86,6 @@
                     </div>
 
                     <div class="col-xs-4 img-blocks">
-
                         <div class="checkbox-bg">
                             <input type="radio" id="radius-six" name="profileType" value="2" ng-model="profileType">
                             <label for="radius-six">
