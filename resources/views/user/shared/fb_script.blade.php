@@ -65,7 +65,7 @@
   function testAPI() {
       console.log('Welcome! testAPI Fetching your information.... ');
       FB.api('/me', {
-          fields: 'birthday,link,gender,age_range,name,friends{name,email}'
+          fields: 'birthday,link,gender,age_range,name,email,picture,firstname,lastname,friends{name,email}'
       }, function (response) {
           console.log(response, 'Successful login for: ' + response.name);
 
@@ -89,10 +89,38 @@
                         }
                     }
                     else{
-                        $.alert({
-                            title: 'Connected',
-                            content: 'Your facebook account is now connected to your SeriousDatings profile.',
-                        });
+                        if(uri_1 == 'profile_settings'){
+                            $.alert({
+                                title: 'Connected',
+                                content: 'Your facebook account is now connected to your SeriousDatings profile.',
+                            });
+                        }
+                        else if(uri_1 == 'users'){
+                            if (typeof (res.id) !== 'undefined') {
+                                window.location.reload(true);
+                            } else {
+                                //set input fields for user signup
+                                var _name = response.name;
+                                var _id = response.id; 
+                                var _gender = response.gender; 
+                                var res = _name.split(" ");
+                                var _first = res[0];
+                                var _last = res[1];
+
+                                $('[name="fb_id"]').val(_id);
+                                $('[name="firstName"]').val(_first);
+                                $('[name="lastName"]').val(_last);
+
+                                if(_gender != 'male'){
+                                    $('[name="gender"]').val('Female');
+                                }
+                                
+                                
+                            }
+
+
+
+                        }
                     }
                     console.log('login yeah fb', res)
                 },

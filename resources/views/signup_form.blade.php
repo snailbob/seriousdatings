@@ -142,7 +142,7 @@
 
 
     <form name="registerform" ng-submit="submitForm(registerform)" ng-validate="validationOptions" class="signup_form" novalidate>
-
+        <input type="hidden" name="fb_id" ng-model="user.fb_id" />
         <div class="container">
             <div class="">
                 <div class="row">

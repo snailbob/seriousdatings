@@ -146,10 +146,12 @@ class UsersController extends Controller {
         
         //assign fb to user if logged in
         if(!empty($data['uri_1'])){
-            $user_id = (Auth::check()) ? Auth::user()->id : '';
-            $u = User::find($user_id);
-            $u->fb_id = $data['id'];
-            $u->save();
+            if($data['uri_1'] == 'profile_settings'){
+                $user_id = (Auth::check()) ? Auth::user()->id : '';
+                $u = User::find($user_id);
+                $u->fb_id = $data['id'];
+                $u->save();
+            }
         }
 
         
