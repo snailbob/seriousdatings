@@ -74,7 +74,7 @@ ngApp.controller('profileCtrl', [
 
             modalInstance.result.then(function (res) {
 				$log.info(res);
-				$.alert('Gift successfully sent to '+$scope.userProfileData.firstName);
+				$.alert('Gift successfully sent to '+_toItem.user.firstName);
                 // $scope.activeUser.invitedToChat = res;
 
             }, function () {
