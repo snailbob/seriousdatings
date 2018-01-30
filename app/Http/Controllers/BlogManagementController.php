@@ -14,6 +14,7 @@ use App\BlogCategory;
 use App\BlogStatus;
 use App\BlogType;
 use Log;
+use App\BlogComment;
 
 class BlogManagementController extends Controller
 {
@@ -42,6 +43,17 @@ class BlogManagementController extends Controller
     {
         $statuses = BlogStatus::all();
         return \View::make('admin.blog_management.status_list')->with('statuses', $statuses);
+    }
+
+    public function showSpamControl()
+    {
+        $comments = BlogComment::all();
+        $comments->load('user', 'userBlog');
+        foreach ($comments as $comment)
+        {
+            $comment->userBlog->blogTitle = UserBlog::convertApostrophe($comment->userBlog->blogTitle);
+        }
+        return \View::make('admin.blog_management.spam_control')->with('comments', $comments);
     }
 
     public function showTypeLists()

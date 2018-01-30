@@ -10,7 +10,7 @@
 @endsection
 
 @section('form_area')
-    {{--{{dd($blog)}}--}}
+{{--    {{dd( Auth::user()->role )}}--}}
     <div class="container">
         <div class="row">
             <div class="col-md-8 blog-main">
@@ -32,7 +32,8 @@
                                 </div>
                                 <div class="comments">
                                     <i class="fa fa-comments"></i>
-                                    <span class="data"><a href="#comments"> <span class="comment_number">{{count($comments)}}</span> Comment/s</a></span>
+                                    <span class="data"><a href="#comments"> <span
+                                                    class="comment_number">{{count($comments)}}</span> Comment/s</a></span>
                                 </div>
                             </div>
                         </div>
@@ -45,15 +46,27 @@
                 <aside class="comments" id="comments">
                     <hr>
 
-                    <h2><i class="fa fa-comments"></i> <span class="comment_number">{{count($comments)}}</span> Comment/s</h2>
+                    <h2><i class="fa fa-comments"></i> <span class="comment_number">{{count($comments)}}</span>
+                        Comment/s</h2>
                     @foreach($comments as $comment)
-                        <article class="comment">
+                        <article id="{{$comment['id']}}" class="comment">
                             <header class="clearfix">
                                 <img src="{{$comment['user']['photo']}}" class="img-circle " width="45" alt=""
                                      class="avatar">
                                 <div class="meta">
                                     <h3>
-                                        <a href="#">{{$comment['user']['firstName']}} {{$comment['user']['lastName']}}</a>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <a href="#">{{$comment['user']['firstName']}} {{$comment['user']['lastName']}}</a>
+                                            </div>
+                                            @if( Auth::user()->role == "admin" )
+                                                <div class="col-md-2">
+                                                    <button  type="button"
+                                                            class="btn btn-default btn-xs deleteCommentBtn">&times;
+                                                    </button>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </h3>
                                     <span class="date">
                                         {{$comment['created_at']}}
@@ -72,7 +85,6 @@
                 @if(Auth::check())
                     <aside class="create-comment" id="create-comment">
                         <hr>
-
                         <h2><i class="fa fa-heart"></i> Add Comment</h2>
 
                         <form accept-charset="utf-8">

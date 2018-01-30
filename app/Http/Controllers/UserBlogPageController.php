@@ -67,4 +67,17 @@ class UserBlogPageController extends Controller
         $comment->load('user');
         return response()->json($comment);
     }
+
+    public function deleteComment(Request $request)
+    {
+        $errors = $this->validate($request, [
+           'comment_id' => 'required|exists:blog_comments,id'
+        ]);
+
+        $comment = BlogComment::find($request->comment_id);
+        $comment->load('user');
+        $comment->delete();
+
+        return response()->json($comment);
+    }
 }

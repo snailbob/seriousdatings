@@ -359,6 +359,7 @@
                         </li>
                     <!--    <li><a href="{{ url('admin/blog_management/status') }}"><i class="fa fa-circle-o"></i> <span>Status Lists</span></a></li>
           <li><a href="{{ url('admin/blog_management/type') }}"><i class="fa fa-circle-o"></i> <span>Type Lists</span></a></li> -->
+                        <li><a href="{{ url('admin/blog_management/spam_control') }}"><i class="fa fa-circle-o"></i> <span>Spam Control</span></a></li>
                     </ul>
                 </li>
                 <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">

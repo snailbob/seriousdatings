@@ -29,6 +29,48 @@ $(document).ready(function () {
         })
     });
 
+    $(document).on('click', '.deleteCommentBtn', function()
+    {
+        var data = {
+            comment_id: $(this).closest('article').attr('id'),
+        };
+
+        bootbox.confirm({
+            title: "DELETE MESSAGE",
+            message: "Are you sure to delete this comment ?",
+            buttons: {
+                confirm: {
+                    label: 'Yes',
+                    className: 'btn-primary'
+                },
+                cancel: {
+                    label: 'No',
+                    className: 'btn-danger'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        type: 'POST',
+                        url: base_url + '/deleteComment',
+                        data: data,
+                        cache: false,
+                        success: function (value) {
+                            console.log(value);
+                            toastr.error( value['user']['firstName'] +'\'s comment was deleted.');
+                            var count = parseInt($('.comment_number').first().text());
+                            $('.comment_number').text(count - 1);
+                            $('article#'+value.id).remove();
+                        },
+                        error: function (value) {
+                            console.log(value);
+                        }
+                    })
+                }
+            }
+        });
+    });
+
     toastr.options = {
         "closeButton": false,
         "debug": false,
