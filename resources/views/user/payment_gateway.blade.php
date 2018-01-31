@@ -139,7 +139,7 @@
 
                     <div class="panel panel-default">
                         <div class="panel-heading" >
-                            <h3 class="panel-h">Cheque Details</h3>
+                            <h3 class="panel-h">E-Cheque Details</h3>
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
