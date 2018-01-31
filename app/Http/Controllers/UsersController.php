@@ -492,6 +492,15 @@ class UsersController extends Controller {
         
     }
 
+    public function format_location($loc){
+         
+        $loc = explode(', ',$loc);
+        $locCityIndex = count($loc) - 2;
+        $city = (isset($loc[$locCityIndex])) ? $loc[$locCityIndex].', ' : '';
+        $newLoc = $city.end($loc);
+        return $newLoc;
+    }
+
     public function format_friends($users){
         $user_id = (Auth::check()) ? Auth::user()->id : '';
         $arr = array();
@@ -512,6 +521,7 @@ class UsersController extends Controller {
                     $value->is_friend = ($relation + $relation2) ? true : false;
                     $value->is_online = \DB::table('user_online')->where('user_id', $value->id)->count();
                     $value->myage = $this->calc_age($value->birthdate);
+                    $value->location = $this->format_location($value->location);
 
                     //get percentage
                     $current_user_data = DB::table('users')->where('id', '=', $user_id)->get();
@@ -567,7 +577,8 @@ class UsersController extends Controller {
         $user['name'] = $user->firstName.' '.$user->lastName;
         $user['my_movies'] = $this->my_movies($user->id);
         $user['my_places'] = $this->my_places($user->id);
-        
+        $user['location'] = $this->format_location($user->location);
+
         return $user;
     }
 
