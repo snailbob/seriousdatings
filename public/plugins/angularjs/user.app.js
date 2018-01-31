@@ -400,54 +400,47 @@ ngApp.controller('bodyController', [
 
         $scope.asyncAppointment = function (AppointmentData) {
             $scope.reusableNgConfirmAppointment('My Appointment',
-                'appointment-list-layout.html',
+                'appointment-list-layout',
                 function ($scoped) {
+                    var self = this;
                     $scoped.AppointmentList = AppointmentData;
                     $scoped.orderList = "appCreated";
+                    $scoped.appointMentStatus;
                     $scoped.lunchDetailsAppointment = function (data) {
-                        $scope.readDetaildAppointment(data);
+                        $scope.readDetaildAppointment(data,self);
                     };
                 });
         };
 
-        $scope.readDetaildAppointment = function (AppointmentData) {
+        $scope.readDetaildAppointment = function (AppointmentData,grandParent) {
             $scope.reusableNgConfirmAppointment('',
-                'appointment-view-layout.html',
+                'appointment-view-layout',
                 function ($scoped) {
+                    var self = this;
+                  
+                    
                     $scoped.AppointmentDetail = AppointmentData;
-                    // $scoped.declineAppointment = function(appID){
-                    //         $scope.actionDeclineAppointment(appID);
-                    //
-                    // };
-                    // $scoped.acceptAppointment = function (appId) {
-                    //         $scope.actionAcceptAppointment(appId);
-                    //
-                    // };
+                    console.log(AppointmentData.appStatus);
+                    $scoped.declineAppointment = function(appID){
+                            $scope.actionDeclineAppointment(appID,AppointmentData,self,grandParent);
+                    
+                    };
+                    $scoped.acceptAppointment = function (appId) {
+                        
+                            $scope.actionAcceptAppointment(appId,AppointmentData,self,grandParent);
+                    
+                    };
                 }, {
 
-                    saveBtn: {
-                        text: 'Decline',
-                        btnClass: 'btn-red icons-btns',
-                        action: function (scoped) {
-                            console.log(scoped.AppointmentDetail);
-                            $scope.actionDeclineAppointment(scoped.AppointmentDetail.appID, scoped.AppointmentDetail);
-                        }
-                    },
-
-                    closeBtn: {
-                        text: 'Accept',
-                        btnClass: 'btn-green icons-btns',
-                        action: function (scoped) {
-                            $scope.actionAcceptAppointment(scoped.AppointmentDetail.appID, scoped.AppointmentDetail);
-                        }
-                    }
+             
                 });
         };
 
-        $scope.actionDeclineAppointment = function (id, AppointmentData) {
+        $scope.actionDeclineAppointment = function (id, AppointmentData,spcModal,grandParent) {
             $scope.reusableNgConfirmAppointment('Reasons',
-                'appointment-actions-layout.html',
+                'appointment-actions-layout',
                 function ($scoped) {
+                    var self = this;
                     $scoped.reasonTitle = "Give a polite reasons why to decline.";
                     $scoped.reasonType = "error";
                     $scoped.fontAwesome = "fa-frown-o";
@@ -459,23 +452,23 @@ ngApp.controller('bodyController', [
                         text: 'Submit',
                         btnClass: 'btn-red icons-btns',
                         action: function (scoped) {
-                            $scope.saveAppointmentAction(scoped.text, id, 'R');
+                            $scope.saveAppointmentAction(scoped.text, id, 'R',spcModal,self,grandParent);
                         }
                     },
 
                     closeBtn: {
                         text: 'cancel',
                         action: function (scoped) {
-                            $scope.readDetaildAppointment(AppointmentData);
                         }
                     }
                 });
 
         };
-        $scope.actionAcceptAppointment = function (id, AppointmentData) {
+        $scope.actionAcceptAppointment = function (id, AppointmentData,spcModal,grandParent) {
             $scope.reusableNgConfirmAppointment('Message',
-                'appointment-actions-layout.html',
+                'appointment-actions-layout',
                 function ($scoped) {
+                    var self = this;
                     $scoped.reasonTitle = "Confirmation Message";
                     $scoped.reasonType = "success";
                     $scoped.fontAwesome = "fa-smile-o";
@@ -486,14 +479,13 @@ ngApp.controller('bodyController', [
                         text: 'Submit',
                         btnClass: 'btn-green icons-btns',
                         action: function (scoped) {
-                            $scope.saveAppointmentAction(scoped.text, id, 'A');
+                            $scope.saveAppointmentAction(scoped.text, id, 'A',spcModal,self,grandParent);
                         }
                     },
 
                     closeBtn: {
                         text: 'cancel',
                         action: function (scoped) {
-                            $scope.readDetaildAppointment(AppointmentData);
                         }
                     }
                 }
@@ -502,7 +494,7 @@ ngApp.controller('bodyController', [
         };
 
 
-        $scope.saveAppointmentAction = function (msg, AppID, type) {
+        $scope.saveAppointmentAction = function (msg, AppID, type,parent,child,grandParent) {
             $scope.storeAppointment.forEach(function (item) {
                 if (item.appID === AppID) {
                     $scope.updateAppointment({
@@ -510,17 +502,47 @@ ngApp.controller('bodyController', [
                         'msg': msg,
                         'toID': item.fromInfo.id,
                         'actType': type
-                    });
+                    },parent,child,grandParent,type);
                 }
             });
         };
 
-        $scope.updateAppointment = function (params) {
+        $scope.updateAppointment = function (params,parent,child,grandParent,messageType) {
             myHttpService.post('saveAppResponse', params).then(function (res) {
                 console.log(res);
                 if (res.data.trans) {
-                    location.reload();
-                }
+                    
+                    var colorType = 'red';
+                    var iconType = 'fa fa-frown-o';
+                    var contentType = 'Appointment Rejected successfully.';
+                    var recipientGrandParent = 'Declined';
+
+                        if (messageType == 'A') {
+                            colorType ='green';
+                            iconType = 'fa fa-smile-o';
+                            contentType = 'Appointment Accepted successfully.';
+                            recipientGrandParent = 'Accepted'
+                        }
+
+                         $ngConfirm({
+                            title: 'Alert',
+                            icon: iconType,
+                            theme: 'modern',
+                            type: colorType,
+                            content: contentType,
+                            animation: 'scale',
+                            closeAnimation: 'scale',
+                            buttons: {
+                               
+                                close: function () {
+                                    parent.close();
+                                    child.close();
+                                    var mainAppID = grandParent.$content.find('#IdappID').val();
+                                    grandParent.$content.find('#'+mainAppID+'-appointMentStatus').html(recipientGrandParent);
+                                }
+                            },
+                        })
+}
             });
 
         };
@@ -528,12 +550,13 @@ ngApp.controller('bodyController', [
         $scope.reusableNgConfirmAppointment = function (title, url, callBack, callBackbuttons = {}) {
             return $ngConfirm({
                 title: title,
-                contentUrl: base_url + '/public/js/appointment/' + url,
+                contentUrl: base_url + '/public/js/appointment/' + url+'.html',
                 columnClass: 'medium', // to make the width wider.
                 animation: 'zoom',
                 backgroundDismiss: true,
                 backgroundDismissAnimation: 'glow',
                 theme: 'material',
+                lazyOpen:true,
                 onScopeReady: callBack,
                 buttons: callBackbuttons,
 
@@ -2112,8 +2135,9 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
                         backgroundDismiss: true,
                         backgroundDismissAnimation: 'glow',
                         theme: 'material',
+                        lazyOpen: true,
                         onScopeReady: function($scoped){
-
+                            var self = this;
 
                             /*datePickerBootstrap Start Here*/
                             $scoped.today = function() {
@@ -2248,6 +2272,42 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
                                               }
                                               return color;
                                         }
+                                      $scoped.saveTimeAvailabityBtn = function (){
+                                               
+                                       var dateAv=  angular.element('#dateFull').val();
+                                       var timeAll=   $scoped.arrUnique;
+                                        
+                                         myHttpService.post('saveTimeAvailabity', {
+                                                    dateAvp: dateAv,
+                                                    timeAllp: timeAll
+                                                })
+                                                .then(function (res) {
+                                                    console.log(res);
+                                                    if (res.data.trans) {
+
+                                                        $ngConfirm({
+                                                            title: 'Alert',
+                                                            icon: 'fa fa-smile-o',
+                                                            theme: 'modern',
+                                                            type: 'blue',
+                                                            content: 'Appointment availability successfully save.',
+                                                            animation: 'scale',
+                                                            closeAnimation: 'scale',
+                                                            buttons: {
+                                                               
+                                                                close: function () {
+                                                                    self.close();
+                                                                }
+                                                            },
+                                                        })
+
+
+                                                    }
+                                                   
+                                                }, function (err) {
+                                                    console.log(err);
+                                                });
+                                      }
 
 
 
@@ -2255,6 +2315,8 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
                         },
                     })
     }
+
+
 
     init();
 
