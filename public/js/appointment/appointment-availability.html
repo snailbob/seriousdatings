@@ -1,0 +1,62 @@
+<div style="text-align: center;">
+
+<pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+<br/>
+<div style="display:inline-block; min-height:290px;">
+  <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
+</div>
+
+<button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
+<button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
+<button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" uib-tooltip="After today restriction">Min date</button>
+
+<hr />
+<div style="min-height: 150px;">
+<pre>Time also</pre>
+	
+	&nbsp;From:&nbsp; <select id="timeFrom">
+			<option value="1:00">1:00</option>
+			<option value="2:00">2:00</option>
+			<option value="3:00">3:00</option>
+			<option value="4:00">4:00</option>
+			<option value="5:00">5:00</option>
+			<option value="6:00">6:00</option>
+			<option value="7:00">7:00</option>
+			<option value="8:00">8:00</option>
+			<option value="9:00">9:00</option>
+			<option value="10:00">10:00</option>
+			<option value="11:00">11:00</option>
+			<option value="12:00">12:00</option>
+		  </select>
+		  <select id="fromAMPM">
+			<option>AM</option>
+			<option>PM</option>
+		  </select>
+	&nbsp;To&nbsp; :<select id="timeTo">
+			<option value="1:00">1:00</option>
+			<option value="2:00">2:00</option>
+			<option value="3:00">3:00</option>
+			<option value="4:00">4:00</option>
+			<option value="5:00">5:00</option>
+			<option value="6:00">6:00</option>
+			<option value="7:00">7:00</option>
+			<option value="8:00">8:00</option>
+			<option value="9:00">9:00</option>
+			<option value="10:00">10:00</option>
+			<option value="11:00">11:00</option>
+			<option value="12:00">12:00</option>
+		  </select>
+		  <select id="toAMPM">
+			<option>AM</option>
+			<option>PM</option>
+		  </select>
+	<button type="button" class="btn btn-xs btn-danger" ng-click="addTime()">Add</button>
+	<br/>
+	<div style="display:inline-block"  ng-repeat="timeBtns in arrUnique track by $index">
+		<button type="button" ng-dblclick="removeTimed(timeBtns)" class="btn btn-xs tmID-{{$index}}" style="margin: 3px; background-color:{{colorSBg[$index]}}">
+		{{timeBtns}}
+	    </button>
+	</div>
+	<pre ng-hide="afterAdd"><small >Double click to remove</small></pre>		
+</div>
+</div>

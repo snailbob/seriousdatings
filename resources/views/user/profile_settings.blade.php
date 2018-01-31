@@ -899,6 +899,9 @@
                                 <i class="fa fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook Connected
                             </a>
                             @endif
+                            <a href="#" ng-click="timeAvailability();" class="list-group-item">
+                                <i class="fa fa-fw fa-book" aria-hidden="true"></i> Appointment Availability
+                            </a>
 
                             <a class="list-group-item" ng-click="deleteAccount()">
                                 <i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete Account

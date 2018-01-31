@@ -2099,6 +2099,163 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
     var init = function () {
         $scope.getInitImage();
     }
+
+
+
+
+    $scope.timeAvailability = function(){
+                 $ngConfirm({
+                        title: ' Appointment Availability',
+                        contentUrl: base_url+'/public/js/appointment/appointment-availability.html',
+                        columnClass: 'medium', // to make the width wider.
+                        animation: 'zoom',
+                        backgroundDismiss: true,
+                        backgroundDismissAnimation: 'glow',
+                        theme: 'material',
+                        onScopeReady: function($scoped){
+
+
+                            /*datePickerBootstrap Start Here*/
+                            $scoped.today = function() {
+                                        $scoped.dt = new Date();
+                                      };
+                                      $scoped.today();
+
+                                      $scoped.clear = function() {
+                                        $scoped.dt = null;
+                                      };
+
+                                      $scoped.options = {
+                                        customClass: getDayClass,
+                                        minDate: new Date(),
+                                        showWeeks: true
+                                      };
+
+                                      // Disable weekend selection
+                                      function disabled(data) {
+                                        var date = data.date,
+                                          mode = data.mode;
+                                        return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+                                      }
+
+                                      $scoped.toggleMin = function() {
+                                        $scoped.options.minDate = $scoped.options.minDate ? null : new Date();
+                                      };
+
+                                      $scoped.toggleMin();
+
+                                      $scoped.setDate = function(year, month, day) {
+                                        $scoped.dt = new Date(year, month, day);
+                                      };
+
+                                      var tomorrow = new Date();
+                                      tomorrow.setDate(tomorrow.getDate() + 1);
+                                      var afterTomorrow = new Date(tomorrow);
+                                      afterTomorrow.setDate(tomorrow.getDate() + 1);
+                                      $scoped.events = [
+                                        {
+                                          date: tomorrow,
+                                          status: 'full'
+                                        },
+                                        {
+                                          date: afterTomorrow,
+                                          status: 'partially'
+                                        }
+                                      ];
+
+                                      function getDayClass(data) {
+                                        var date = data.date,
+                                          mode = data.mode;
+                                        if (mode === 'day') {
+                                          var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+                                          for (var i = 0; i < $scoped.events.length; i++) {
+                                            var currentDay = new Date($scoped.events[i].date).setHours(0,0,0,0);
+
+                                            if (dayToCheck === currentDay) {
+                                              return $scoped.events[i].status;
+                                            }
+                                          }
+                                        }
+
+                                        return '';
+                                      }
+                                    /*datePickerBootstrap End Here*/
+                                    $scoped.timeButton = [];
+                                    $scoped.arrUnique;
+                                    $scoped.afterAdd = true;
+                                    $scoped.colorSBg = [];
+
+                                    $scoped.addTime = function(){
+                                             
+                                        var timeFrom = angular.element('#timeFrom').val();
+                                        var fromAMPM = angular.element('#fromAMPM').val();
+                                        var timeTo = angular.element('#timeTo').val();
+                                        var toAMPM = angular.element('#toAMPM').val();
+                                        var Formatted = timeFrom+''+fromAMPM+'-'+timeTo+''+toAMPM; 
+                                        angular.forEach($scoped.timeButton, function(item) {
+                                                console.log("sss",item);
+                                              if(item== Formatted) {
+                                                   $ngConfirm('Time Already Added.');
+                                                    return false;
+                                              }
+                                          });
+                                        
+                                          $scoped.timeButton.push(Formatted);
+                                          $scoped.arrUnique = $scoped.unique($scoped.timeButton);
+                                            
+                                         $scoped.afterAdd = false;
+                                         $scoped.colorSBg.push($scoped.randomCOlors());
+                                       
+                                          
+                                    }
+                                    $scoped.unique  = function(origArr) {
+                                                var newArr = [],
+                                                    origLen = origArr.length,
+                                                    found, x, y;
+
+                                                for (x = 0; x < origLen; x++) {
+                                                    found = undefined;
+                                                    for (y = 0; y < newArr.length; y++) {
+                                                        if (origArr[x] === newArr[y]) {
+                                                            found = true;
+
+                                                            break;
+                                                        }
+                                                    }
+                                                    if (!found) {
+                                                        newArr.push(origArr[x]);
+                                                    }   
+                                                }
+                                                return newArr;
+                                     }
+                                     $scoped.removeTimed = function(data){
+                                        var index1 = $scoped.arrUnique.indexOf(data);
+                                        var index2 = $scoped.timeButton.indexOf(data);
+                                       
+                                            $scoped.arrUnique.splice(index1, 1);
+                                            $scoped.timeButton =$scoped.arrUnique;
+                                            
+                                        console.log("timeButton",$scoped.timeButton);
+                                        console.log("arrUnique",$scoped.arrUnique);
+                                     }
+
+                                     $scoped.randomCOlors = function () {
+                                              var letters = '0123456789ABCDEF';
+                                              var color = '#';
+                                              for (var i = 0; i < 6; i++) {
+                                                color += letters[Math.floor(Math.random() * 16)];
+                                              }
+                                              return color;
+                                        }
+
+
+
+
+                        },
+                    })
+    }
+
     init();
 
 
