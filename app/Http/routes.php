@@ -116,7 +116,7 @@ Route::post('subscribeEmail', 'UserNewsPageController@subscribeEmail');
 /* end subscribe */
 
 /* travel page */
-//Route::get('travel', 'TravelController');
+Route::get('travels', 'TravelController@viewTravelPage');
 /* end travel page */
 
 

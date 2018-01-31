@@ -5814,6 +5814,7 @@ input.margin_5 {
 }
 .cracking-offer img,
 .serious-banner img {
+    width: 100%;
     border: 1px #dddddd solid;
     float: left;
 }
