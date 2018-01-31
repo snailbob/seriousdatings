@@ -14,9 +14,9 @@ class TravelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function viewTravelPage()
     {
-//        return
+        return \View::make('user.travel_page.travel_page');
     }
 
     /**
