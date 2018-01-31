@@ -65,7 +65,7 @@
   function testAPI() {
       console.log('Welcome! testAPI Fetching your information.... ');
       FB.api('/me', {
-          fields: 'birthday,link,gender,age_range,name,friends{name,email}'
+          fields: 'birthday,link,gender,age_range,name,email,picture,first_name,last_name,friends{name,email}'
       }, function (response) {
           console.log(response, 'Successful login for: ' + response.name);
 
@@ -89,10 +89,45 @@
                         }
                     }
                     else{
-                        $.alert({
-                            title: 'Connected',
-                            content: 'Your facebook account is now connected to your SeriousDatings profile.',
-                        });
+                        if(uri_1 == 'profile_settings'){
+                            $.alert({
+                                title: 'Connected',
+                                content: 'Your facebook account is now connected to your SeriousDatings profile.',
+                            });
+                        }
+                        else if(uri_1 == 'users'){
+                            if (typeof (res.id) !== 'undefined') {
+                                
+                                setTimeout(function(){
+                                    window.location.reload(true);
+                                }, 1500);
+                                
+                                $.alert('You are already registered. Logging you in...');
+
+                            } else {
+                                //set input fields for user signup
+                                var _first_name = response.first_name;
+                                var _last_name = response.last_name;
+                                var _email = response.email;
+                                var _id = response.id; 
+                                var _gender = response.gender; 
+
+                                $('[name="fb_id"]').val(_id);
+                                $('[name="email"]').val(_email);
+                                $('[name="firstName"]').val(_first_name);
+                                $('[name="lastName"]').val(_last_name);
+
+                                if(_gender != 'male'){
+                                    $('[name="gender"]').val('Female');
+                                }
+                                
+                                $.alert('Success! We connected your facebook account to SeriousDatings. Please complete form below to continue.');
+                                
+                            }
+
+
+
+                        }
                     }
                     console.log('login yeah fb', res)
                 },

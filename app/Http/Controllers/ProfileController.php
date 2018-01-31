@@ -28,6 +28,8 @@ class ProfileController extends Controller
             return \Redirect::to(url());
         }
         $current_user = Auth::user();
+        $current_user->location = $this->format_location($current_user->location);
+        
 		//$all_users = User::all();
         // $all_users = DB::table('users')->get();
         $all_users = DB::table('users')->where('gender', '!=', $current_user->gender)->limit(14)->get();
@@ -64,6 +66,8 @@ class ProfileController extends Controller
         }
         // $current_user = Auth::user();
         $current_user = DB::table('users')->where('username', '=', $username)->get();
+        $current_user[0]->location = $this->format_location($current_user[0]->location);
+
         $main_user = DB::table('users')->where('username', '=', Auth::user()->username)->get();
         
         // return response()->json($current_user);
@@ -102,6 +106,15 @@ class ProfileController extends Controller
 
     //End here
 
+    public function format_location($loc){
+         
+        $loc = explode(', ',$loc);
+        $locCityIndex = count($loc) - 2;
+        $city = (isset($loc[$locCityIndex])) ? $loc[$locCityIndex].', ' : '';
+        $newLoc = $city.end($loc);
+        return $newLoc;
+    }
+
     public function getUserFriend(){
 
         $logged_in = Auth::user()->id;
@@ -123,6 +136,9 @@ class ProfileController extends Controller
             if($percent >= 70){
                 if(count($friends) < 9){
                     $friends[$inc] = $res_data[0];
+
+                    $friends[$inc]->location = $this->format_location($friends[$inc]->location);
+
                     $friends[$inc]->percent = $this->getPercentage(array($current_user_data), $res_data);
                     $friends[$inc]->favorite = $this->getMatchFavorite(array($current_user_data), $res_data);
                 }
@@ -140,6 +156,9 @@ class ProfileController extends Controller
                 $res_data = DB::table('users')->where('id', '=', $data->id)->get();
 
                 $friends[$inc] = $res_data[0];
+                
+                $friends[$inc]->location = $this->format_location($friends[$inc]->location);
+
                 $friends[$inc]->percent = $this->getPercentage(array($current_user_data), $res_data);
                 $friends[$inc]->favorite = $this->getMatchFavorite(array($current_user_data), $res_data);
 
@@ -246,6 +265,9 @@ class ProfileController extends Controller
 
                 $user_data_age = $this->getUserAge($user_data[0]->birthdate);
                 $new_user[$i] = $user_data[0]; 
+
+                $new_user[$i]->location = $this->format_location($new_user[$i]->location);
+
                 $new_user[$i]->percent = $this->getPercentage($current_user, $user_data);
                 $new_user[$i]->favorite = $this->getMatchFavorite($current_user, $user_data);
 

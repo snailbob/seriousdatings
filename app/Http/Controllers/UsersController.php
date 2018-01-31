@@ -146,10 +146,12 @@ class UsersController extends Controller {
         
         //assign fb to user if logged in
         if(!empty($data['uri_1'])){
-            $user_id = (Auth::check()) ? Auth::user()->id : '';
-            $u = User::find($user_id);
-            $u->fb_id = $data['id'];
-            $u->save();
+            if($data['uri_1'] == 'profile_settings'){
+                $user_id = (Auth::check()) ? Auth::user()->id : '';
+                $u = User::find($user_id);
+                $u->fb_id = $data['id'];
+                $u->save();
+            }
         }
 
         
@@ -203,7 +205,10 @@ class UsersController extends Controller {
         
     }
 
-    public function get_online_chat(){
+    public function get_online_chat(Request $request){
+        $user_id = $request->input('user_id');
+        $action_type = $request->input('action_type');
+
         $logged_id  = Auth::user()->id;
         $gender  = Auth::user()->gender;
 
@@ -214,7 +219,15 @@ class UsersController extends Controller {
 
         $flirt_messages = \DB::table('definable_flirt')->get();
 
-        $online = User::where('gender', 'not like', $gender)->get();
+        $soloUserCount = User::where('id', $user_id)->count();
+
+        if(!empty($user_id) && $soloUserCount){
+            $online = User::where('id', $user_id)->get();
+        }
+        else{
+            $online = User::where('gender', 'not like', $gender)->limit(20)->get();
+        }
+
         $me = User::find($logged_id);
 
         $filter_blocked = $this->filter_blocked($online);
@@ -223,6 +236,7 @@ class UsersController extends Controller {
         $format_users = $this->format_friends($filter_blocked);
 
         $arr = array(
+            'user_id'=>$user_id,
             'users'=>$format_users,
             'me'=>$me,
             'flirt_messages'=>$flirt_messages,
@@ -478,6 +492,15 @@ class UsersController extends Controller {
         
     }
 
+    public function format_location($loc){
+         
+        $loc = explode(', ',$loc);
+        $locCityIndex = count($loc) - 2;
+        $city = (isset($loc[$locCityIndex])) ? $loc[$locCityIndex].', ' : '';
+        $newLoc = $city.end($loc);
+        return $newLoc;
+    }
+
     public function format_friends($users){
         $user_id = (Auth::check()) ? Auth::user()->id : '';
         $arr = array();
@@ -498,6 +521,7 @@ class UsersController extends Controller {
                     $value->is_friend = ($relation + $relation2) ? true : false;
                     $value->is_online = \DB::table('user_online')->where('user_id', $value->id)->count();
                     $value->myage = $this->calc_age($value->birthdate);
+                    $value->location = $this->format_location($value->location);
 
                     //get percentage
                     $current_user_data = DB::table('users')->where('id', '=', $user_id)->get();
@@ -553,7 +577,8 @@ class UsersController extends Controller {
         $user['name'] = $user->firstName.' '.$user->lastName;
         $user['my_movies'] = $this->my_movies($user->id);
         $user['my_places'] = $this->my_places($user->id);
-        
+        $user['location'] = $this->format_location($user->location);
+
         return $user;
     }
 

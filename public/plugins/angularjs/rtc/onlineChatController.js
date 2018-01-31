@@ -19,14 +19,14 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.invitedToChat = [];
     $scope.chatLoading = false;
     $scope.params = window.uri_get_params;
-    $scope.callAudio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
+    $scope.callAudio = new Audio($scope.base_url+'/public/assets/audio/phone_ringing.mp3');
     $scope.nowCalling = {
         calling: false,
         message: '',
         user_unavailable: false,
         drop: false
     };
-    $scope.callType = 'text'; //voice, video
+    $scope.callType = 'voice'; //voice, video
 
     $scope.inviteToChat = function (items) {
         var _toItem = {
@@ -72,13 +72,24 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         $scope.nowCalling.user_unavailable = true;
     }
 
+    $scope.exitPage = function(){
+        window.location.href = $scope.base_url + '/profile';
+    }
+
     $scope.dropCall = function(){
         $scope.myInterval = 3000;
         $scope.videoShown = false;
         $scope.nowCalling.drop = true;
         $scope.nowCalling.user_unavailable = false;
         $scope.stopRinging();
-        // window.location.reload(true);
+
+        if(typeof($scope.params.user_id) !== 'undefined'){
+            $scope.params.action_type = 'text';
+            window.location.href = $scope.base_url+'/online_chat?'+$.param($scope.params);
+        }else{
+            $scope.params.user_index = $scope.activeIndex;
+            window.location.href = $scope.base_url+'/online_chat?'+$.param($scope.params);
+        }
 
     }
 
@@ -161,13 +172,14 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     };
 
     $scope.startCall = function(type, user, i){
-        $scope.callType = type;
+        if(type != 'text'){
+            $scope.callType = type;
+        }
 
         if(i != $scope.activeIndex){
             $scope.activeIndex = i;
             $scope.activeUser = user;
         }
-        
 
         $scope.getPrivateRoomId(i, user, type);
 
@@ -197,14 +209,12 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         // $scope.chatMessage.message = flirt.content;
         $scope.sendChat(flirt.content);
     }
-    
-
 
     $scope.getPrivateRoomId = function(i, user, type){
-        var private_id = $scope.logged_user_info.id * user.id;
+        var private_id = $scope.data.me.id * user.id;
         var data = {
             private_id: private_id,
-            logged_id: $scope.logged_user_info.id,
+            logged_id: $scope.data.me.id,
             user_id: user.id
         };
         console.log(private_id);
@@ -327,7 +337,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                 content: 'Please login to add user as friend.',
                 onDestroy: function () {
                     // when the modal is removed from DOM
-                    window.location.href = base_url + '/users/create';
+                    window.location.href = $scope.base_url + '/users/create';
                 },
             });
             return false;
@@ -355,11 +365,73 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.getData = function(offset){
         $scope.isLoading = true;
         
-        myHttpService.getWithParams('online_chat', {}).then(function(res){
+        myHttpService.getWithParams('online_chat', $scope.params).then(function(res){
             $scope.isLoading = false;
             $scope.data = res.data;
             $scope.flirtPopover.content = res.data.flirt_messages;
             console.log(res.data, 'online_chat');
+
+            if(typeof($scope.params.user_index) !== 'undefined'){
+                $scope.activeIndex = $scope.params.user_index;
+                $scope.activeUser = res.data.users[$scope.activeIndex];
+                var _action = (typeof($scope.params.action_type) !== 'undefined') ? $scope.params.action_type : 'text';
+                $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
+            }
+            else if(typeof($scope.params.user_id) !== 'undefined'){
+                $scope.callStarted = true;
+                $scope.activeUser = res.data.users[0];
+                $scope.activeIndex = 0;
+                var _action = (typeof($scope.params.action_type) !== 'undefined') ? $scope.params.action_type : 'text';
+
+                if(!$scope.activeUser.is_online && _action != 'text'){
+                    $.alert('Opps! Cannot start a call to an offline user. Send a message instead.');
+                    _action = 'text';
+                    $timeout(function(){
+                        $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
+                    }, 250);
+
+                }
+
+                else{
+                    if(_action != 'text'){
+                        var jc = $ngConfirm({
+                            title: 'Start Call',
+                            content: 'Do you want to start the call now?',
+                            scope: $scope,
+                            buttons: {
+                                Calling: {
+                                    text: 'Call Now',
+                                    btnClass: 'btn-danger',
+                                    action: function(scope, button){
+                                        $timeout(function(){
+                                            $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
+                                        }, 250);
+                                    }
+                                },
+                                dropCall: {
+                                    text: 'Later',
+                                    btnClass: 'btn-default',
+                                    action: function(scope, button){
+                                        $timeout(function(){
+                                            $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
+                                        }, 250);
+
+                                    }
+                                }
+                            }
+    
+                        });
+        
+                    }
+                    else{
+                        $timeout(function(){
+                            $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
+                        }, 250);
+                    }
+
+                }
+
+            }
         });
     }
 

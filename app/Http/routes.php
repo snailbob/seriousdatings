@@ -137,7 +137,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('profile_settings', 'UsersController@profileSettings');
     Route::get('privacy_settings', 'UsersController@privacySettings');
+    Route::get('payment_gateway', 'PaymentMethodController@paymentGateway');
+    Route::get('test_payment', 'PaymentMethodController@testPayment');
 
+    
+    
 });
 
 Route::get('search', 'SearchController@index');
@@ -172,6 +176,10 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('delete_friend', 'UserFriendshipController@destroy');
     Route::post('block_user', 'UserBlockController@store');
 
+    
+    Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
+    Route::post('send_gift', 'GiftCardController@sendGiftCards');
+    
     Route::post('save_advertisement', 'AdsSpaceController@store');
 
     Route::get('get_video_shuffle', 'UsersController@getVideoShuffle');

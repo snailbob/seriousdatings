@@ -18,7 +18,16 @@ ngApp.service('httServices', ['$http', 'CSRF_TOKEN', function ($http, CSRF_TOKEN
 
 	    this.get = function (link) {
 	        return $http.get(this.url + '/api/' + link);
-	    }
+		}
+		
+		this.getWithParams = function (link, data = {}) {
+			// console.log(this.url);
+			return $http.get(this.url + '/api/' + link, {
+				params: data
+			});
+		}
+	
+
 	    this.post = function (link, data) {
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
         // $http.defaults.headers.post["X-CSRF-TOKEN"] = CSRF_TOKEN;
@@ -50,7 +59,8 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 	$scope.availableTime = [];
 
 	$scope.addAppointMentNew = function(userInfos) {
-				httServices.get('getTimeAvailability').then(function (res) {
+	
+				httServices.getWithParams('getTimeAvailability',{'ids':userInfos.id}).then(function (res) {
 				
 						$scope.viewLayoutAppoinment(res.data,userInfos);	
 				});

@@ -156,8 +156,8 @@ class AppointmentController extends Controller
 
 
 
-    public function getTimeAvailability(){
-        $data = AvailabilityApp::where('av_user_id',NotiFierLogsController::getUserId())->where('av_status','=',null)->get();
+    public function getTimeAvailability(Request $request){
+        $data = AvailabilityApp::where('av_user_id',$request->input('ids'))->where('av_status','=',null)->get();
          return  response()->json(['avail'=>self::AvailabilityAppFormat($data)]);
     }
 

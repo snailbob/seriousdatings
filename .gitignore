@@ -5,3 +5,5 @@ Homestead.json
 .env
 /.env
 /.idea/*
+/public/images/events/*
+/public/images/groups/*

@@ -315,9 +315,30 @@ class EventsController extends Controller
     }
 
     public function apiPostJoinEvent(Request $request){
+        $arr = $request->input();
         EventMembers::create($request->input());
 
-        return response()->json($request->input());
+        $arr['invite'] = $this->sendInvoiceNotice();
+
+        return response()->json($arr);
+    }
+    
+    public function sendInvoiceNotice(){
+        // $data = $request->input(); //response()->json($request->input());   
+        $data['invited_by'] = 'SeriousDatings';
+        $data['link'] = url();
+        $data['button_text'] = 'Visit SeriousDatings Site';
+
+
+        $email_to_send = Auth::user()->email;
+
+        // return View::make('email.invite_friend')->with($data);
+        
+        Mail::send('email.join_event_invoice', $data, function($message) use ($email_to_send) {
+            $message->to($email_to_send, 'ID')->subject('Serious Datings - New Event');
+        });
+
+        return $email_to_send;
     }
 
     public function apiLeaveEvent(Request $request){

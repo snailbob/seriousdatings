@@ -6,7 +6,9 @@ ngApp.controller('profileCtrl', [
 	'$interval',
 	'profileService',
 	'myHttpService',
-	function ($scope, $uibModal, $interval, profileService, myHttpService) {
+	'$log',
+	'$ngConfirm',
+	function ($scope, $uibModal, $interval, profileService, myHttpService, $log, $ngConfirm) {
 
 		var ind = 0;
 		var count = 3;
@@ -18,6 +20,7 @@ ngApp.controller('profileCtrl', [
 		$scope.currentPage = 1;
 		$scope.matchUsersData = null;
 		$scope.notifyCount = 0;
+		$scope.base_url = window.base_url;
 
 		$scope.getMatchData = function (data) {
 			$scope.matchUsersData = data;
@@ -41,6 +44,46 @@ ngApp.controller('profileCtrl', [
 		// 		})
 		// 	}
 		// }, 3000);
+
+        $scope.virtualGiftModal = function (currUser, loggedUser) {
+            var _toItem = {
+				username: window.uri_3,
+				logged_user: (typeof(currUser) !== 'undefined' && currUser != '') ? currUser : $scope.currentUserData[0],
+				user: (typeof(loggedUser) !== 'undefined') ? loggedUser : $scope.userProfileData
+            };
+
+            // console.log(items, 'wow');
+            // var parentElem = parentSelector ?
+                // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'virtualGiftModal.html',
+                controller: 'virtualGiftModalCtrl',
+                // controllerAs: '$scope',
+                // size: '',
+                windowClass: 'compatible-modal',
+                // appendTo: parentElem,
+                resolve: {
+                    items: function () {
+                        return _toItem; //items ? items : {}; // 
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (res) {
+				$log.info(res);
+				$.alert('Gift successfully sent to '+_toItem.user.firstName);
+                // $scope.activeUser.invitedToChat = res;
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+
+            });
+        };
+
+
 
 		$scope.$watch('username', function (newValue, oldValue) {
 			if (newValue) {
@@ -203,4 +246,110 @@ ngApp.controller('profileCtrl', [
 		}
 
 	}
-])
+]);
+
+ngApp.controller('virtualGiftModalCtrl', ['$scope', '$uibModalInstance', 'items', 'myHttpService', '$ngConfirm', function ($scope, $uibModalInstance, items, myHttpService, $ngConfirm) {
+    $scope.items = items;
+	$scope.user = items.user;
+	$scope.logged_user = items.logged_user;
+	
+    $scope.giftCat = [];
+    $scope.isLoading = false;
+    $scope.selectedCount = 0;
+    $scope.selectedCard = [];
+    $scope.totalPrice = 0;
+    $scope.base_url = window.base_url;
+
+
+    console.log(items, 'items');
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+    $scope.submit = function () {
+		var _data = {
+			cards: $scope.selectedCard,
+			to_id: $scope.user.id,
+			from_id: $scope.logged_user.id,
+			price: $scope.totalPrice
+		}
+
+        var jc = $ngConfirm({
+            title: 'Confirm Send',
+            content: 'You will be charged {{totalPrice | currency}}.',
+            scope: $scope,
+            buttons: {
+                Confirm: {
+                    text: 'Confirm',
+                    btnClass: 'btn-success',
+                    action: function(scope, button){
+
+						myHttpService.post('send_gift', _data).then(function(res){
+							console.log(res.data, '');
+							$uibModalInstance.close($scope.selectedCard);
+				
+						});
+						
+                    }
+                },
+                Cancel: {
+                    text: 'Cancel',
+                    btnClass: 'btn-default',
+                    action: function(scope, button){
+
+                    }
+                }
+            }
+
+        });
+
+
+    };
+
+    $scope.selectCard = function (u) {
+
+        if (u.selected) {
+            u.selected = false;
+			$scope.selectedCount--;
+
+			$scope.totalPrice = $scope.totalPrice - u.price;
+
+			$scope.selectedCard = $scope.selectedCard.filter(function(a){
+				return a !== u.id;
+			});
+
+            return false;
+        }
+        else if (!u.selected) {
+
+        }
+
+        if (!u.selected) {
+			u.selected = true;
+			$scope.selectedCount++;
+			if(!$scope.selectedCard.includes(u.id)) {
+				$scope.totalPrice = $scope.totalPrice + u.price;
+				$scope.selectedCard.push(u.id);     
+            }
+        }
+
+        console.log($scope.totalPrice, $scope.selectedCard);
+
+    }
+
+    $scope.getData = function () {
+		$scope.isLoading = true;
+		
+		myHttpService.get('get_gift_cards').then(function(res){
+			console.log(res.data);
+			$scope.isLoading = false;
+			$scope.giftCat = res.data;
+		});
+    }
+
+    var init = function () {
+        $scope.getData();
+    }
+    init();
+}]);

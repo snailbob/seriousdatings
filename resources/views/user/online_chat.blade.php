@@ -16,7 +16,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>
-                        Online Chat    
+                        <span ng-if="!params.user_id">Online Chat</span> 
+                         <span ng-if="params.user_id">Chat with @{{activeUser.firstName}}</span> 
                     </h1>
                 </div>
             </div>
@@ -58,7 +59,7 @@
                 <p class="padding-top lead text-center text-muted loading-browse" ng-if="isLoading">
                     <i class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i> <br> Loading...
                 </p>
-                <div class="col-sm-3 browse-profile-bg" ng-repeat="user in data.users" ng-if="!isLoading">
+                <div class="col-md-3 col-sm-4 browse-profile-bg" ng-repeat="user in data.users" ng-if="!isLoading">
                     <div class="profile-images-bg">
                         <a ng-href="@{{ base_url + '/search/profile/' + user.id}}" target="_blank">
                             <img ng-src="@{{ user.photo }}" class="img-thumbnail" alt="">
@@ -195,7 +196,7 @@
                         </div>
                     </div>
                     
-                    <button class="btn btn-default btn-block" ng-click="backView()">
+                    <button class="btn btn-default btn-block" ng-click="backView()" ng-if="!params.user_id">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i> Back
                     </button>
 
@@ -338,6 +339,44 @@
                                 <td width="50%" style="width: 50%;  background: white; vertical-align: top;">
                                     <div id="local-streams-container"></div>
 
+                                    <div class="container-fluid" ng-if="videoShown">
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <div class="row no-gutter">
+                                                    <div class="col-sm-3">
+
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-volume-down" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-volume-up" aria-hidden="true"></i>
+                                                        </button>
+
+                                                    </div>
+
+                                                    <div class="col-sm-3">
+                                                        <button type="button" class="btn btn-default btn-block">
+                                                            <i class="fa fa-microphone-slash" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <button type="button" class="btn btn-danger btn-block">
+                                                            Drop
+                                                        </button>
+                                                    </div>
+                                                    
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </td>
                                 <td width="50%" style="width: 50%;  background: white; vertical-align: top;">
                                     <div id="remote-streams-container"></div>
@@ -365,9 +404,9 @@
 
 
                     <div class="row no-gutter">
-                        <div class="col-sm-4">
+                        <div ng-class="{'col-sm-4' : !params.user_id, 'col-sm-12' : params.user_id }">
 
-                            <div class="row" ng-if="!videoShown">
+                            <div class="row" ng-if="!videoShown && !params.user_id">
                                 <div class="col-sm-12">
                                     <img src="{{ Auth::user()->photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
                                 </div>
@@ -385,23 +424,30 @@
                                 <div class="the_chat" ng-if="activeUser.chat.length">
                                     <div class="the_message" ng-repeat="chat in activeUser.chat | reverse">
                                         <!-- Message. Default to the left -->
-                                        <div class="direct-chat-msg" ng-if="logged_user_info.id != chat.user_id">
+                                        <div class="direct-chat-msg" ng-class="{'right' : logged_user_info.id == chat.user_id}">
                                             <div class="direct-chat-info clearfix">
-                                                <span class="direct-chat-name pull-left">@{{chat.user_info.firstName}}</span>
-                                                <span class="direct-chat-timestamp pull-right" am-time-ago="chat.created_at | amParse:'YYYY-MM-DD HH:mm:ss'"></span>
+                                                <span class="direct-chat-name" ng-class="{'pull-left' : logged_user_info.id != chat.user_id, 'pull-right' : logged_user_info.id == chat.user_id}">@{{chat.user_info.firstName}}</span>
+                                                <span class="direct-chat-timestamp" ng-class="{'pull-right' : logged_user_info.id != chat.user_id, 'pull-left' : logged_user_info.id == chat.user_id}" am-time-ago="chat.created_at | amParse:'YYYY-MM-DD HH:mm:ss'"></span>
                                             </div>
                                             <!-- /.direct-chat-info -->
                                             <img class="direct-chat-img" ng-src="@{{chat.user_info.photo}}" alt="Message User Image">
                                             <!-- /.direct-chat-img -->
-                                            <div class="direct-chat-text" ng-bind-html="chat.message">
-                                                
+                                            <div class="direct-chat-text">
+                                                <div ng-bind-html="chat.message" ng-if="chat.type == 'text'"></div>
+                                                <div ng-if="chat.type == 'virtual_gift'">
+                                                    <ul class="list-inline">
+                                                        <li ng-repeat="gift in chat.gifts">
+                                                            <img ng-src="@{{base_url + '/public/images/gift_cards/' + gift.image}}" title="@{{gift.name}}" class="img-thumbnail" alt="gift card" style="height: 90px; margin-bottom: 5px;">
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                             <!-- /.direct-chat-text -->
                                         </div>
                                         <!-- /.direct-chat-msg -->
 
 
-                                        <!-- Message to the right -->
+                                        {{--  <!-- Message to the right -->
                                         <div class="direct-chat-msg right" ng-if="logged_user_info.id == chat.user_id">
                                             <div class="direct-chat-info clearfix">
                                                 <span class="direct-chat-name pull-right">@{{logged_user_info.firstName}}</span>
@@ -414,7 +460,7 @@
                                             </div>
                                             <!-- /.direct-chat-text -->
                                         </div>
-                                        <!-- /.direct-chat-msg -->
+                                        <!-- /.direct-chat-msg -->  --}}
 
                                     </div>
 
@@ -451,7 +497,7 @@
 
                         </div>
                         <div class="col-sm-8">
-                            <div class="container-fluid" ng-if="!videoShown">
+                            <div class="container-fluid" ng-if="!videoShown && !params.user_id">
                                 <div class="row no-gutter">
                                     <div class="col-sm-6">
                                         <img ng-src="@{{ activeUser.photo }}" class="img-responsive img-thumbnail" style="width: 100%" alt="">
@@ -484,33 +530,19 @@
 
                                     <div class="col-sm-12">
                                         <div class="row no-gutter">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-6">
 
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-volume-down" aria-hidden="true"></i>
+                                                <button type="button" ng-click="exitPage()" class="btn btn-default btn-block">
+                                                    <i class="fa fa-close" aria-hidden="true"></i> Exit Page
                                                 </button>
                                             </div>
-                                            <div class="col-sm-3">
-
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-volume-up" aria-hidden="true"></i>
-                                                </button>
-
-                                            </div>
-
-                                            <div class="col-sm-3">
-                                                <button type="button" class="btn btn-default btn-block">
-                                                    <i class="fa fa-microphone-slash" aria-hidden="true"></i>
-                                                </button>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <button type="button" class="btn btn-danger btn-block">
+                                            <div class="col-sm-6">
+                                                <button type="button" ng-click="dropCall()" class="btn btn-danger btn-block">
                                                     Drop
                                                 </button>
                                             </div>
                                             
                                         </div>
-
 
                                     </div>
                                 </div>
