@@ -17,14 +17,14 @@
     </section>
 
     <!-- Main content -->
-    {{dd($comments)}}
+    {{--{{dd($comments)}}--}}
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
 
                 <div class="box">
                     <div class="box-body">
-                        <table id="status_tbl" class="table table-bordered table-striped">
+                        <table id="spam_tbl" class="table table-bordered table-striped">
                             <thead>
                             <tr>
                                 <th>Comment</th>
@@ -39,12 +39,10 @@
                                 <tr>
                                     <td>{{ $comment->comment }}</td>
                                     <td>{{ $comment->user->firstName }} {{ $comment->user->lastName }}</td>
+                                    <td>{{ $comment->userBlog->blogTitle}}</td>
                                     <td id="{{ $comment->id }}">
                                         <div class="btn-group pull-right table-action custom"> <a class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-pencil"></i> Action <span class="caret"></span> </a>
                                             <ul class="dropdown-menu">
-                                                <li class="editBtn">
-                                                    <a href='#'> <i class="fa fa-edit"></i> Edit</a>
-                                                </li>
                                                 <li class="deleteBtn">
                                                     <a href='#'><i class="fa fa-trash-o"></i> Delete</a>
                                                 </li>
@@ -69,6 +67,11 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-{!! HTML::script('public/js/admin/blog_management/statuslist.js') !!}
+{!! HTML::script('public/js/admin/blog_management/spamlist.js') !!}
+<script>
+    $(function () {
+        var table = $('#spam_tbl').DataTable();
+    })
+</script>
 </body>
 </html>

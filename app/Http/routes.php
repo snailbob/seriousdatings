@@ -96,7 +96,9 @@ Route::get('/start', function () {
 /* blog page */
 Route::get('bloglist', 'UserBlogPageController@ListBlog');
 Route::get('user/blog_page/{id}', 'UserBlogPageController@blogPageView');
+Route::get('blogs/create', 'UserBlogPageController@createBlog');
 Route::post('commentInBlog', 'UserBlogPageController@commentInBlog');
+Route::post('saveBlog', 'UserBlogPageController@saveBlog');
 /* end blog page */
 
 /* delete comment */

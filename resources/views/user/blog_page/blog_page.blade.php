@@ -10,13 +10,16 @@
 @endsection
 
 @section('form_area')
-{{--    {{dd( Auth::user()->role )}}--}}
+    {{--{{dd( $blog )}}--}}
     <div class="container">
         <div class="row">
             <div class="col-md-8 blog-main">
                 <article class="blog-post">
                     <header>
                         <h1>{{$blog['blogTitle']}}</h1>
+                        @if($blog['blog_status']['name'] == 'Pending Review')
+                        <small class="text-warning">Status - {{$blog['blog_status']['name']}}</small>
+                        @endif
                         <div class="lead-image">
                             <img src="{{ URL::to('/public/assets/' . $blog['blogImage']) }}" alt="Hands"
                                  class="img-responsive">
@@ -112,6 +115,9 @@
                                 </button>
                             </span>
                     </div>
+                </div>
+                <div class="form-group">
+                    <a href="{{url()}}/blogs/create"><button class="btn btn-danger btn-block btn-lg">Create a blog</button></a>
                 </div>
                 @include('right_sidebar')
             </aside>
