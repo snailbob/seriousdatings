@@ -23,5 +23,4 @@ class GiftCategory extends Model
     public function giftCard(){
         return $this->hasMany('App\GiftCard', 'gift_category_id');
     }
-
 }
