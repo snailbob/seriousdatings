@@ -49,7 +49,7 @@
                             <div class="pull-right" >                            
                                 <img class="img-responsive" src="{{ url() }}/public/images/icon/accepted_c22e0.png">
                             </div>
-                            <h3 style="font-size: 24px; padding-top: 7px" >Card Payment</h3>
+                            <h3 class="panel-h">Card Payment</h3>
               
                         </div>
                         <div class="panel-body">
@@ -133,7 +133,45 @@
                     <!-- CREDIT CARD FORM ENDS HERE -->
                     
                     
+                    <hr>
+                        <div class="text-center">or</div>
+                    <hr>
 
+                    <div class="panel panel-default">
+                        <div class="panel-heading" >
+                            <h3 class="panel-h">E-Cheque Details</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <textarea name="cheque_details" class="form-control" id="" rows="10" placeholder="cheque detail for manual payment process"></textarea>
+                            </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-danger">
+                                    Submit to Admin
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                        <div class="text-center">or</div>
+                    <hr>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" >
+                            <h3 class="panel-h">Bank Draft</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <textarea name="cheque_details" class="form-control" id="" rows="10" placeholder="Draft detail - admin will process and confirm later for membership"></textarea>
+                            </div>
+                            <div class="form-group text-right">
+                                <button class="btn btn-danger">
+                                    Submit to Admin
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
