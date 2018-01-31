@@ -4956,6 +4956,10 @@ footer {
 	box-sizing: border-box;
 }
 
+.panel-heading .panel-h{
+	font-size: 24px; padding-top: 7px;
+}
+
 .left-section .panel-group{
 	margin-bottom: 0px;
 }
