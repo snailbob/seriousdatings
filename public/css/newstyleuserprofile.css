@@ -4476,7 +4476,7 @@ body {
 }
 
 .vodeo-content-section .two-cols {
-    width: 50%;
+    /* width: 50%; */
     min-height: 400px;
     float: left;
     margin-top: 40px;
@@ -4500,11 +4500,11 @@ body {
 }
 
 .vodeo-content-section .two-cols:first-child {
-    padding-right: 28px;
+    /* padding-right: 28px; */
 }
 
 .vodeo-content-section .two-cols:last-child {
-    padding-left: 28px;
+    /* padding-left: 28px; */
 }
 
 .vodeo-content-section .two-cols .imgcontainer .img-bg {
@@ -6609,7 +6609,7 @@ input.margin_5 {
     background: #fff;
     padding: 5px;
     margin-left: 5px;
-    min-height: 87px;
+    min-height: 50px;
 }
 .advertise-user-detail h4 {
     color: #e21d24;

@@ -20,18 +20,18 @@
         <div class="container-fluid">
           <div class="row no-gutter">
             <div class="col-xs-6" ng-repeat="ads in active_ads">
-              <a href="@{{ads.link}}">
+              <a href="@{{ads.link}}" target="_blank">
                 <div class="advivertise-inner">
                   <div class="advertise-left">
                     <div class="advertise-img"><img ng-src="@{{ads.image}}" alt=""></div>
                     <div class="advertise-user-detail">
-                      <h4>@{{ads.business_name}}</h4>
-                      <span>Age: 21</span>
-                      <p>Lorem Lipsum</p>
+                      <h4>@{{(ads.business_name) ? ads.business_name : 'Alia Bhutt'}}</h4>
+                      {{--  <span>Age: 21</span>
+                      <p>Lorem Lipsum</p>  --}}
                       <ul>
-                        <li><a href="#"><img src="{!! url() !!}/public/images/facebook-icon.png"  alt=""></a></li>
-                        <li><a href="#"><img src="{!! url() !!}/public/images/skype-icon.png"  alt=""></a></li>
-                        <li><a href="#"><img src="{!! url() !!}/public/images/twitter-icon.png" alt=""></a></li>
+                        <li><a href="@{{ads.fb_link}}" target="_blank"><img src="{!! url() !!}/public/images/facebook-icon.png"  alt=""></a></li>
+                        <li><a href="@{{ads.skype_link}}" target="_blank"><img src="{!! url() !!}/public/images/skype-icon.png"  alt=""></a></li>
+                        <li><a href="@{{ads.twitter_link}}" target="_blank"><img src="{!! url() !!}/public/images/twitter-icon.png" alt=""></a></li>
                       </ul>
                     </div>
                   </div>
@@ -46,8 +46,8 @@
                   <div class="advertise-img"><img src="{!! url() !!}/public/images/browse-profile.png" alt=""></div>
                   <div class="advertise-user-detail">
                     <h4>Alia Bhutt</h4>
-                    <span>Age: 21</span>
-                    <p>Lorem Lipsum</p>
+                    {{--  <span>Age: 21</span>
+                    <p>Lorem Lipsum</p>  --}}
                     <ul>
                       <li><a href="#"><img src="{!! url() !!}/public/images/facebook-icon.png"  alt=""></a></li>
                       <li><a href="#"><img src="{!! url() !!}/public/images/skype-icon.png"  alt=""></a></li>
@@ -75,8 +75,8 @@
                     <div class="advertise-img"><img src="{!! url() !!}/public/images/browse-profile.png" alt=""></div>
                     <div class="advertise-user-detail">
                       <h4>Alia Bhutt</h4>
-                      <span>Age: 21</span>
-                      <p>Lorem Lipsum</p>
+                      {{--  <span>Age: 21</span>
+                      <p>Lorem Lipsum</p>  --}}
                       <ul>
                         <li><a href="#"><img src="{!! url() !!}/public/images/facebook-icon.png"  alt=""></a></li>
                         <li><a href="#"><img src="{!! url() !!}/public/images/skype-icon.png"  alt=""></a></li>
@@ -92,8 +92,8 @@
                     <div class="advertise-img"><img src="{!! url() !!}/public/images/browse-profile.png" alt=""></div>
                     <div class="advertise-user-detail">
                       <h4>Alia Bhutt</h4>
-                      <span>Age: 21</span>
-                      <p>Lorem Lipsum</p>
+                      {{--  <span>Age: 21</span>
+                      <p>Lorem Lipsum</p>  --}}
                       <ul>
                         <li><a href="#"><img src="{!! url() !!}/public/images/facebook-icon.png"  alt=""></a></li>
                         <li><a href="#"><img src="{!! url() !!}/public/images/skype-icon.png"  alt=""></a></li>

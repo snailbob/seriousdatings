@@ -241,9 +241,13 @@ Route::group(['prefix' => 'api'], function () {
 
 
     /*saving appointment*/
+    Route::post('saveAppointmentNew','AppointmentController@saveAppointmentNew');
+
+    
     Route::post('saveappointment', 'AppointmentController@saveAppointment');
     Route::get('getAppoinment', 'AppointmentController@getAppointment');
     Route::post('saveAppResponse', 'AppointmentController@saveAppResponse');
+    Route::get('getTimeAvailability','AppointmentController@getTimeAvailability');
 
 
 });
@@ -425,6 +429,7 @@ Route::post('deleteUser', 'AdminUserListController@deleteUser');
 /* End of Manage User Actions */
 
 
+
 Route::get('/test', 'AdminDashboardController@getTest');
 
 Route::get('ajax', 'AjaxRequestController@getSearchType');
@@ -442,7 +447,9 @@ Route::get('contact', 'ContactController@showForm');
 Route::post('profileupload', 'MatchController@Profileupload');
 
 
-Route::get('test_coords', function () {
+
+
+Route::get('test_coords', function(){
     $u = AboutYourDate::where('id', '120')->first(); //->update(['relationshipGoal'=>'yeah']);
     return json_encode($u);
     // $details = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=23423"));
@@ -451,6 +458,8 @@ Route::get('test_coords', function () {
     // $location = $details->results[0]->formatted_address;
     // return json_encode(count($details->results));
 });
+
+
 
 
 Route::get('adminlogin', 'AdminLoginController@getIndex');

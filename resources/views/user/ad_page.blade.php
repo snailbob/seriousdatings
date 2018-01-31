@@ -66,6 +66,18 @@
                             <input type="url" class="form-control" name="link" ng-model="user.link" required/>
                         </div>
                         <div class="form-group">
+                            <label for="">Facebook Link</label>
+                            <input type="url" class="form-control" name="fb_link" ng-model="user.fb_link"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Skype</label>
+                            <input type="text" class="form-control" name="skype_link" ng-model="user.skype_link"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Twitter Link</label>
+                            <input type="url" class="form-control" name="twitter_link" ng-model="user.twitter_link"/>
+                        </div>
+                        <div class="form-group">
                             <label for="">Business Name</label>
                             <input type="text" class="form-control" name="business_name" ng-model="user.business_name" required/>
                         </div>

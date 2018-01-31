@@ -14,7 +14,13 @@ class AdsSpace extends Model
      */
     protected $table = 'ads_spaces';
 
-    protected $fillable = ['user_id', 'days', 'paid', 'link', 'business_name', 'image'];
+    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['user_id', 'days', 'paid', 'link', 'fb_link', 'skype_link', 'twitter_link', 'business_name', 'image'];
 
     public function user()
     {

@@ -7,24 +7,27 @@
 {!! Form::hidden('invisible', $userInfo->photo, array('id' => 'photo')) !!}
 {!! Form::hidden('invisible', $isSpeed, array('id' => 'current_page')) !!}
 {!! Form::hidden('invisible', url(), array('id' => 'base_url')) !!}
+<div ng-app="mapDatings">
+    <div ng-controller="mapCtrl">
+        <div id="map" class="map-class"></div>
 
-<div id="map" class="map-class"></div>
+        <div id="floating-panel"><a href="javascript:getMenus();" class="toggle-menus-data">MENU</a>
+            <div class="filter-option-map pull-right" style="display: none">
 
-<div id="floating-panel"><a href="javascript:getMenus();" class="toggle-menus-data">MENU</a>
-    <div class="filter-option-map pull-right" style="display: none">
+                <a id="filtering-btn-map"><i class="fa fa-cog" aria-hidden="true"></i> Filter Map </a>
+            </div>
+        	<div id="listOFdata"></div>
+        </div>
 
-        <a id="filtering-btn-map"><i class="fa fa-cog" aria-hidden="true"></i> Filter Map </a>
-    </div>
-	<div id="listOFdata"></div>
-</div>
-
-<div id="floating-panel2" style="display: none;">
-    <b>Mode of Travel: </b>
-    <select id="mode">
-      <option value="DRIVING">Driving</option>
-      <option value="WALKING">Walking</option>
-      <option value="BICYCLING">Bicycling</option>
-      <option value="TRANSIT">Transit</option>
-    </select>
+        <div id="floating-panel2" style="display: none;">
+            <b>Mode of Travel: </b>
+            <select id="mode">
+              <option value="DRIVING">Driving</option>
+              <option value="WALKING">Walking</option>
+              <option value="BICYCLING">Bicycling</option>
+              <option value="TRANSIT">Transit</option>
+            </select>
+        </div>
+  </div>
 </div>
 @extends('map.script-js')

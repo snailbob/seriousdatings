@@ -354,6 +354,13 @@ function viewAllDetails(id){
 }
 
 
+function getAppointmentFromAngular(dataID){
+    SearhValueOFdata     
+      var scope = angular.element(document.getElementById('map')).scope();
+            scope.addAppointMentNew(SearhValueOFdata(dataID));
+}
+
+
 function  NextPreviousValue(id,element) {
     var resultObjectInfo ="";
     resultObjectInfo = SearhValueOFdata(id);
@@ -381,7 +388,7 @@ function  NextPreviousValue(id,element) {
         '<li class="fa fa-comments" title="Send Message"></li>'+
         '<li class="fa fa-eye" title="wink"></li>'+
         '<li class="fa fa-user-plus" title="Add User"></li>'+
-        '<li class="fa fa-calendar-check-o" title="Appointment" onclick="addAppointMent(\''+resultObjectInfo.id+'\')"></li>'+
+        '<li class="fa fa-calendar-check-o" title="Appointment" onclick="getAppointmentFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
         '</ul>'+
         '</div>';
 

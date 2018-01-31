@@ -23,8 +23,10 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     $scope.nowCalling = {
         calling: false,
         message: '',
+        user_unavailable: false,
         drop: false
     };
+    $scope.callType = 'text'; //voice, video
 
     $scope.inviteToChat = function (items) {
         var _toItem = {
@@ -64,11 +66,19 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         });
     };
 
+    $scope.userUnavailable = function(){
+        $scope.dropCall();
+        $scope.nowCalling.message = '<i class="fa fa-user"></i> '+$scope.currentUser.firstName + ' is currently unavailable.';
+        $scope.nowCalling.user_unavailable = true;
+    }
+
     $scope.dropCall = function(){
         $scope.myInterval = 3000;
         $scope.videoShown = false;
         $scope.nowCalling.drop = true;
+        $scope.nowCalling.user_unavailable = false;
         $scope.stopRinging();
+        // window.location.reload(true);
 
     }
 
@@ -89,7 +99,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         $scope.playRinging();
 
         $scope.nowCalling.calling = true;
-        $scope.nowCalling.message = '<i class="fa fa-video-camera"></i> Waiting for '+$scope.currentUser.firstName;
+        $scope.nowCalling.message = ($scope.callType == 'video') ? '<i class="fa fa-video-camera"></i> Waiting for '+$scope.currentUser.firstName :  '<i class="fa fa-user"></i> Waiting for '+$scope.currentUser.firstName;
         $scope.nowCalling.drop = false;
 
         
@@ -123,6 +133,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         // });
 
         $scope.callAudio.onended = function(){
+            $scope.userUnavailable();
             // jc.close();
 
             // $scope.dropCall();
@@ -150,6 +161,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     };
 
     $scope.startCall = function(type, user, i){
+        $scope.callType = type;
 
         if(i != $scope.activeIndex){
             $scope.activeIndex = i;
@@ -204,26 +216,30 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
             if(type != 'text'){
                 $scope.startVideoCall(i, user);
     
-                if(type == 'video'){
-                    var vidlength = angular.element(document).find('video').length;
-                    // angular.element(document).find('.experiment-rtc').removeClass('hidden');
-                    $scope.videoShown = true;
-    
-                    if(vidlength == 0){
+                var vidlength = angular.element(document).find('video').length;
+                // angular.element(document).find('.experiment-rtc').removeClass('hidden');
+                $scope.videoShown = true;
+
+                if(vidlength == 0){
+                    $timeout(function(){
                         angular.element(document).find('#setup-new-room').click();
-                    }
-    
+                    });
                 }
-                else if(type == 'voice'){
-                    var audioLength = angular.element(document).find('audio').length;
-                    // $(document).find('.experiment-rtc').removeClass('hidden');
-                    $scope.videoShown = true;
+
+                // if(type == 'video'){
+                // }
+                // else if(type == 'voice'){
+                //     var audioLength = angular.element(document).find('audio').length;
+                //     // $(document).find('.experiment-rtc').removeClass('hidden');
+                //     $scope.videoShown = true;
     
-                    if(audioLength == 0){
-                        angular.element(document).find('#start-conferencing').click();
-                    }
+                //     if(audioLength == 0){
+                //         $timeout(function(){
+                //             angular.element(document).find('#start-conferencing').click();
+                //         });
+                //     }
                     
-                }
+                // }
             }
 
             if(typeof(res.data.new) === 'undefined'){
@@ -365,7 +381,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         var config = {
             // via: https://github.com/muaz-khan/WebRTC-Experiment/tree/master/socketio-over-nodejs
             openSocket: function(config) {
-                var SIGNALING_SERVER = 'https://webrtcweb.com:9559/';
+                var SIGNALING_SERVER = 'https://socketio-over-nodejs2.herokuapp.com:443/'; //https://webrtcweb.com:9559/';
 
                 config.channel = config.channel || location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
                 var sender = Math.round(Math.random() * 999999999) + 999999999;
@@ -391,12 +407,28 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                 socket.on('message', config.onmessage);
             },
             onRemoteStream: function(media) {
-                var mediaElement = getMediaElement(media.video, {
-                    width: (videosContainer.clientWidth / 2) - 50,
-                    buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider']
-                });
-                mediaElement.id = media.streamid;
-                videosContainer.insertBefore(mediaElement, videosContainer.firstChild);
+                var $othersMedia = $('#othersMedia');
+                console.log($scope.callType, 'scope.callType');
+                if($scope.callType == 'voice'){
+                    var mediaElement = getMediaElement(media.video, {
+                        width: ($othersMedia.width()) - 15, //(videosContainer.clientWidth / 2) - 15,
+                        height: 50,
+                        buttons: ['mute-audio', 'volume-slider', 'stop' ] //'mute-video', 'full-screen', 
+                    });
+                    mediaElement.id = media.streamid;
+                }
+                else{
+                    var mediaElement = getMediaElement(media.video, {
+                        width: ($othersMedia.width() / 2) - 15, //(videosContainer.clientWidth / 2) - 15,
+                        buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider', 'stop']
+                    });
+                    mediaElement.id = media.streamid;
+                }
+
+                $othersMedia.append(mediaElement);
+                // videosContainer.parentNode.insertBefore(mediaElement, videosContainer.nextSibling);
+
+                // videosContainer.insertBefore(mediaElement, videosContainer.firstChild);
                 $scope.stopRinging();
 
             },
@@ -411,55 +443,63 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
 
                 if (typeof roomsList === 'undefined') roomsList = document.body;
                 
-                $scope.playRinging();
-
                 var callingNameId = room.roomName.split("__");
-                var callingName = callingNameId[1];
-                var callingID = callingNameId[0];
+                var _callingRoomID = callingNameId[0];
+                var _callingName = callingNameId[1];
+                var _callingPrivateID = callingNameId[2];
+                var _callingUserID = callingNameId[3];
+                $scope.callType = callingNameId[4];
+                console.log($scope.callType,'ctype');
 
-                var tr = document.createElement('tr');
-                tr.innerHTML = '<td>'+
-                    '<div class="alert alert-info">' +
-                    '<div class="pull-right text-right">'+
-                        '<button class="btn btn-success join" style="margin-right: 5px;">Answer</button>' + 
-                        '<button class="btn btn-danger reject">Reject</button>' +
-                    '</div>'+
-                    '<strong>' + callingName + '</strong> is inviting you to join video call..' +
-                    '</div>'
-                +'</td>';
-                roomsList.insertBefore(tr, roomsList.firstChild);
+                if(_callingUserID == $scope.data.me.id){
+                    $scope.playRinging();
 
-                console.log(room.roomName, '.roomName');
-
-                var rejectBtn = tr.querySelector('.reject');
-                rejectBtn.onclick = function() {
-                    $(rejectBtn).closest('tr').hide();
-                    $scope.dropCall();
-                    // $scope.stopRinging();
-                };
-
-
-                var joinRoomButton = tr.querySelector('.join');
-                joinRoomButton.setAttribute('data-broadcaster', room.broadcaster);
-                joinRoomButton.setAttribute('data-roomToken', room.roomToken);
-                joinRoomButton.onclick = function() {
-                    this.disabled = true;
-                    $scope.videoShown = true;
-
-                    console.log(joinRoomButton);
-                    $(joinRoomButton).closest('tr').hide();
-
-                    var broadcaster = this.getAttribute('data-broadcaster');
-                    var roomToken = this.getAttribute('data-roomToken');
-                    captureUserMedia(function() {
-                        conferenceUI.joinRoom({
-                            roomToken: roomToken,
-                            joinUser: broadcaster
+                    var tr = document.createElement('tr');
+                    tr.innerHTML = '<td>'+
+                        '<div class="alert alert-info">' +
+                        '<div class="pull-right text-right">'+
+                            '<button class="btn btn-success join" style="margin-right: 5px;">Answer</button>' + 
+                            '<button class="btn btn-danger reject">Reject</button>' +
+                        '</div>'+
+                        '<strong>' + _callingName + '</strong> is inviting you to join '+$scope.callType+' call..' +
+                        '</div>'
+                    +'</td>';
+                    roomsList.insertBefore(tr, roomsList.firstChild);
+    
+                    console.log(room.roomName, '.roomName');
+    
+                    var rejectBtn = tr.querySelector('.reject');
+                    rejectBtn.onclick = function() {
+                        $(rejectBtn).closest('tr').hide();
+                        $scope.dropCall();
+                        // $scope.stopRinging();
+                    };
+    
+    
+                    var joinRoomButton = tr.querySelector('.join');
+                    joinRoomButton.setAttribute('data-broadcaster', room.broadcaster);
+                    joinRoomButton.setAttribute('data-roomToken', room.roomToken);
+                    joinRoomButton.onclick = function() {
+                        this.disabled = true;
+                        $scope.videoShown = true;
+                        $scope.callStarted = true;
+    
+                        console.log(joinRoomButton);
+                        $(joinRoomButton).closest('tr').hide();
+    
+                        var broadcaster = this.getAttribute('data-broadcaster');
+                        var roomToken = this.getAttribute('data-roomToken');
+                        captureUserMedia(function() {
+                            conferenceUI.joinRoom({
+                                roomToken: roomToken,
+                                joinUser: broadcaster
+                            });
+                        }, function() {
+                            joinRoomButton.disabled = false;
                         });
-                    }, function() {
-                        joinRoomButton.disabled = false;
-                    });
-                };
+                    };
+                }
+
             },
             onRoomClosed: function(room) {
                 var joinButton = document.querySelector('button[data-roomToken="' + room.roomToken + '"]');
@@ -486,28 +526,67 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         }
 
         function captureUserMedia(callback, failure_callback) {
-            var video = document.createElement('video');
+            var $myMedia = $('#myMedia');
+            if($scope.callType == 'voice'){
+                var audio = document.createElement('video');
+                audio.setAttribute('autoplay', true);
+                audio.setAttribute('controls', true);
+                // participants.insertBefore(audio, participants.firstChild);
+    
+                getUserMedia({
+                    video: audio,
+                    constraints: { audio: true, video: false },
+                    onsuccess: function(stream) {
+                        config.attachStream = stream;
+                        callback && callback();
+    
+                        audio.setAttribute('muted', true);
+    
+                        var mediaElement = getMediaElement(audio, {
+                            width: $myMedia.width() - 15, //(videosContainer.clientWidth / 2) - 15,
+                            height: 50,
+                            buttons: ['mute-audio', 'volume-slider', 'stop'] //'mute-video', 'full-screen', 
+                        });
+                        mediaElement.toggle('mute-audio');
+                        // videosContainer.insertBefore(mediaElement, videosContainer.firstChild);
 
-            getUserMedia({
-                video: video,
-                onsuccess: function(stream) {
-                    config.attachStream = stream;
-                    callback && callback();
+                        $myMedia.append(mediaElement);
 
-                    video.setAttribute('muted', true);
+                    },
+                    onerror: function() {
+                        $.alert('Unable to get access to your mic.');
+                        // callback && callback();
+                    }
+                });
+            }
+            else{
+                var video = document.createElement('video');
 
-                    var mediaElement = getMediaElement(video, {
-                        width: (videosContainer.clientWidth / 2) - 50,
-                        buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider']
-                    });
-                    mediaElement.toggle('mute-audio');
-                    videosContainer.insertBefore(mediaElement, videosContainer.firstChild);
-                },
-                onerror: function() {
-                    alert('unable to get access to your webcam');
-                    callback && callback();
-                }
-            });
+                getUserMedia({
+                    video: video,
+                    onsuccess: function(stream) {
+                        config.attachStream = stream;
+                        callback && callback();
+    
+                        video.setAttribute('muted', true);
+    
+                        var mediaElement = getMediaElement(video, {
+                            width: $myMedia.width() - 15, //(videosContainer.clientWidth / 2) - 15,
+                            buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider', 'stop']
+                        });
+                        mediaElement.toggle('mute-audio');
+                        $myMedia.append(mediaElement);
+
+                        // videosContainer.insertBefore(mediaElement, videosContainer.firstChild);
+                    },
+                    onerror: function() {
+                        $.alert('Unable to get access to your webcam');
+                        // callback && callback();
+                    }
+                });
+            }
+
+
         }
 
         var conferenceUI = conference(config);

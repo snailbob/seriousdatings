@@ -13,6 +13,7 @@ use App\AppointMent;
 use App\User;
 use App\Http\Controllers\NotiFierLogsController;
 use Illuminate\Support\Facades\View;
+use App\AvailabilityApp;
 class AppointmentController extends Controller
 {
     /**
@@ -52,6 +53,33 @@ class AppointmentController extends Controller
         }
         return  response()->json(['trans'=>$trans]);
     }
+    public function saveAppointmentNew(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $to_notify = $request->input('appToid');
+        NotiFierLogsController::createNotification($to_notify,'APPOINTMENT','Request an Appointment');
+
+        $data = \DB::table('user_appointment')->insert([
+            'app_from' => $user_id,
+            'app_to' => $request->input('appToid'),
+            'app_street' => $request->input('streetAdd'),
+            'app_street_l2' => $request->input('streetAddLine'),
+            'app_city' => $request->input('Appcity'),
+            'app_state' => $request->input('stateProvince'),
+            'app_zipcode' => $request->input('streetAddLine'),
+            'app_country' => $request->input('AppCountry'),
+            'app_days' => $request->input('availDate'),
+            'app_time' => $request->input('availTime'),
+            'app_desc' => $request->input('rdpField'),
+
+        ]);
+        $trans = false;
+        if ($data) {
+            $trans = true;
+        }
+        return  response()->json(['trans'=>$trans]);
+
+    }
 
     public function saveAppResponse(Request $request){
 
@@ -66,7 +94,12 @@ class AppointmentController extends Controller
             'act_app_id' => $request->input('appID'),
             'act_reasons' => $request->input('msg'),
             'act_status'=>$request->input('actType')]);
-        return  response()->json(['trans'=>$data]);
+
+        if ($data){
+            $dataUpdate =AppointMent::where('app_id',$request->input('appID'))->update(['app_status'=>$request->input('actType')]);
+        }
+
+        return  response()->json(['trans'=>$dataUpdate]);
     }
 
     public function getAppointment(){
@@ -110,11 +143,49 @@ class AppointmentController extends Controller
                     return 'Unread';
                 break;
             case 'R':
-                return 'Read';
+                    return 'Decline';
+                break;
+            case 'A':
+                    return 'Accepted';
                 break;
             default:
                 return "";
         }
+
+    }
+
+
+
+    public function getTimeAvailability(){
+        $data = AvailabilityApp::where('av_user_id',NotiFierLogsController::getUserId())->where('av_status','=',null)->get();
+         return  response()->json(['avail'=>self::AvailabilityAppFormat($data)]);
+    }
+
+
+    public static function AvailabilityAppFormat ($data){
+
+         $new_value = array();
+         $format = array();
+        foreach ($data as $key => $value) {
+
+             $new_value['avDate'] = date('d-M-Y',strtotime($value->av_user_date));
+             $new_value['avDay'] = date('l',strtotime($value->av_user_date));
+             $new_value['avTimes'] = self::sliceUserTime($value->av_user_times);
+             $format[] = $new_value;
+
+        }
+
+        return $format;
+    }
+    public static function sliceUserTime ($times){
+            $time = explode(",", $times);
+            $timed = array();
+            $timer = array();
+            foreach ($time as  $value) {
+                    $timer['Usertime'] = $value;
+                    $timed[]  = $timer;               
+            }
+            return $timed;
 
     }
 
