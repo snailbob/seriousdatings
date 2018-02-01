@@ -59,7 +59,7 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 	$scope.availableTime = [];
 
 	$scope.addAppointMentNew = function(userInfos) {
-	
+				// console.log(userInfos);
 				httServices.getWithParams('getTimeAvailability',{'ids':userInfos.id}).then(function (res) {
 				
 						$scope.viewLayoutAppoinment(res.data,userInfos);	
@@ -72,15 +72,19 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 			$ngConfirm({
 				title:'',
 				contentUrl:base_url+'/public/js/appointment/appointment-layout.html',
-                columnClass: 'medium', 
+                boxWidth: '450px',
+    			useBootstrap: false,
                 animation: 'zoom',
                 backgroundDismiss: true,
                 backgroundDismissAnimation: 'glow',
                 theme: 'material',
                 type:'purple',
+                lazyOpen: true,
                  onScopeReady: function ($scoped) {
+                 	var self = this;
                  	var counter = 0;
                  	   $scoped.incrementingData =counter;
+                       $scoped.allAvailTimelength = dataAvialable.avail.length;
                        $scoped.allAvailTime = dataAvialable;
                        $scoped.userInfo = userData;
                        $scoped.previous = function () {
@@ -122,7 +126,22 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 							
 								}).done(function (response) {
 								
-									console.log(response);
+									$ngConfirm({
+                                                title: 'Alert',
+                                                icon: 'fa fa-smile-o',
+                                                theme: 'modern',
+                                                type: 'blue',
+                                                content: 'Appointment successfully send to.'+userData.firstName,
+                                                animation: 'scale',
+                                                closeAnimation: 'scale',
+                                                buttons: {
+                                                   
+                                                    close: function () {
+                                                        self.close();
+                                                    }
+                                                },
+                                            })
+
 								}).fail(function () {
 									alert('Something went wrong.');
 								});

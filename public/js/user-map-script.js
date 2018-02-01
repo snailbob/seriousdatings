@@ -79,7 +79,10 @@ function initMap() {
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 			});
 	if (current_page == 1 /*means current route is on speeddatingnew*/) {
-		getAllUserLocation(map);
+        setTimeout(function(){
+
+            getAllUserLocation(map);
+        },500)
 	}
 
 	
@@ -354,8 +357,7 @@ function viewAllDetails(id){
 }
 
 
-function getAppointmentFromAngular(dataID){
-    SearhValueOFdata     
+function getAppointmentFromAngular(dataID){  
       var scope = angular.element(document.getElementById('map')).scope();
             scope.addAppointMentNew(SearhValueOFdata(dataID));
 }

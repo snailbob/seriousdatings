@@ -8553,3 +8553,9 @@ nav.video-menu:hover>ul a li {
 	position: relative;
 	left: -75px;
 }
+
+.uib-time > input{
+	width: 100px;
+}
+
+/*form-control text-center ng-pristine ng-untouched ng-valid ng-valid-hours ng-not-empty ng-valid-maxlength*/

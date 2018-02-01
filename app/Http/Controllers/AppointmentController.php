@@ -62,15 +62,25 @@ class AppointmentController extends Controller
         $data = \DB::table('user_appointment')->insert([
             'app_from' => $user_id,
             'app_to' => $request->input('appToid'),
-            'app_street' => $request->input('streetAdd'),
-            'app_street_l2' => $request->input('streetAddLine'),
-            'app_city' => $request->input('Appcity'),
-            'app_state' => $request->input('stateProvince'),
-            'app_zipcode' => $request->input('streetAddLine'),
-            'app_country' => $request->input('AppCountry'),
             'app_days' => $request->input('availDate'),
             'app_time' => $request->input('availTime'),
-            'app_desc' => $request->input('rdpField'),
+            'app_availID' => $request->input('availDid'),
+        ]);
+        $trans = false;
+        if ($data) {
+            $trans = true;
+        }
+        return  response()->json(['trans'=>$trans]);
+
+    }
+
+    public function saveTimeAvailabity(Request $request){
+
+        $user_id = Auth::user()->id;
+        $data = \DB::table('user_appointment_availability')->insert([
+            'av_user_id' => $user_id,
+            'av_user_date' => $request->input('dateAvp'),
+            'av_user_times' =>  $request->input('timeAllp'),
 
         ]);
         $trans = false;
@@ -78,6 +88,7 @@ class AppointmentController extends Controller
             $trans = true;
         }
         return  response()->json(['trans'=>$trans]);
+
 
     }
 
@@ -140,7 +151,7 @@ class AppointmentController extends Controller
     public  static function readUnread($status){
         switch ($status){
             case NULL:
-                    return 'Unread';
+                    return 'Pending';
                 break;
             case 'R':
                     return 'Decline';
@@ -168,6 +179,7 @@ class AppointmentController extends Controller
          $format = array();
         foreach ($data as $key => $value) {
 
+             $new_value['avDid'] = $value->av_id;
              $new_value['avDate'] = date('d-M-Y',strtotime($value->av_user_date));
              $new_value['avDay'] = date('l',strtotime($value->av_user_date));
              $new_value['avTimes'] = self::sliceUserTime($value->av_user_times);

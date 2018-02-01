@@ -28,138 +28,46 @@
 
     </div>
 
-    <div class="form-group has-warning">
-        <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
-            Location of appointment
-        </label>
-        <input type="text" class="form-control input-sm" name="streetAdd" value="{{AppointmentDetail.appStreet}}" id="inputWarning"  readonly="readonly"/>
-        <span class="help-block"><small>Street Address</small></span>
-    </div>
-
-
-    <div class="form-group has-warning">
-        <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
-            Address
-        </label>
-        <input type="text" class="form-control input-sm" name="streetAddLine" value="{{AppointmentDetail.appStreetl2}}" id="inputWarning" readonly="readonly"/>
-        <span class="help-block"><small>Street Address Line2</small></span>
-    </div>
-
-
     <div class="row">
 
-        <div class="col-xs-4">
-
-            <div class="form-group has-warning">
-                <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
-                    Address
-                </label>
-                <input type="text" class="form-control input-sm" name="Appcity" value="{{AppointmentDetail.appCity}}" id="inputWarning" readonly="readonly">
-                <span class="help-block"><small>City</small></span>
-            </div>
-
-
-        </div>
-        <div class="col-xs-5">
-            <div class="form-group has-warning">
-                <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
-                    Address
-                </label>
-                <input type="text" class="form-control input-sm" name="stateProvince" value="{{AppointmentDetail.appState}}" id="inputWarning" readonly="readonly">
-                <span class="help-block"><small>State / Province</small></span>
-            </div>
-        </div>
+       <div class="col-xs-6">
+         <span class="help-block"><small>  Requested date: {{AppointmentDetail.appDays}} </small></span>
+         <hr/>
+         <span class="help-block"><small>  Time: {{AppointmentDetail.appTime}} </small></span>
+         <hr/>
+         <span class="help-block"><small>  Created: {{AppointmentDetail.appCreated}} </small></span>
+           <hr/>
+         <span class="help-block"><small>  Status: {{AppointmentDetail.appStatus}} </small></span>
+      </div>
     </div>
 
-
-    <div class="row">
-
-        <div class="col-xs-4">
-
-            <div class="form-group has-warning">
-                <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
-                    Address
-                </label>
-                <input type="text" class="form-control input-sm" name="postalZipCode" value="{{AppointmentDetail.appZipcode}}" id="inputWarning" readonly="readonly">
-                <span class="help-block"><small>Postal /Zipcode</small></span>
-            </div>
-
-
-        </div>
-        <div class="col-xs-5">
-            <div class="form-group has-warning">
-                <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
-                    Address
-                </label>
-                <input type="text" class="form-control input-sm" name="AppCountry" id="inputWarning" value="{{AppointmentDetail.appCountry}}" readonly="readonly">
-                <span class="help-block"><small>Country</small></span>
-            </div>
-        </div>
-    </div>
-    <hr>
-
-    <h2>Day </h2>
-    <div class="row">
-        <div class="col-xs-3">
-            <div class="checkbox">
-                <label>
-                    {{AppointmentDetail.appDays}}
-                </label>
-            </div>
-        </div>
-
-    </div>
-
-    <hr>
-    <h2>Time of the Day. </h2>
-    <div class="row">
-        <div class="col-xs-3">
-            <div class="checkbox">
-                <label>
-                   {{AppointmentDetail.appTime}}
-                </label>
-            </div>
-        </div>
-
-    </div>
-    <hr>
-    <h2>Specific date/time</h2>
-
-    <div class="row">
-        <div class="col-md-4">
-
-                    {{AppointmentDetail.appSpecdateTime}}
-
-        </div>
-
-    </div>
-    <hr/>
-
-    <h2>Remarks/Description/Purpose/</h2>
-    <div class="row">
-        <div class="col-xs-3">
-            <div class="checkbox">
-                <label>
-                    {{AppointmentDetail.appDesc}}
-                </label>
-            </div>
-        </div>
-
-    </div>
-    <hr/>
     <input type="hidden" value="{{AppointmentDetail.appID}}" ng-model="hiddenAppID">
-    <div class="row app-divBtn"   ng-hide="true">
+    <div class="row app-divBtn"   ng-hide="false">
         <div class="inner-div">
-        <div class="col-xs-5">
+        <div class="col-xs-5" ng-if="AppointmentDetail.appStatus =='Accepted'">
             <a class="btn btn-danger btn-app" ng-click="declineAppointment(AppointmentDetail.appID)">
                 <span class="fa fa-times fa-fw" aria-hidden="true"></span> Decline
             </a>
         </div>
-        <div class="col-xs-5">
+        <div class="col-xs-5" ng-if="AppointmentDetail.appStatus =='Decline'">
             <a class="btn btn-success  btn-app" ng-click="acceptAppointment(AppointmentDetail.appID)">
                 <span class="fa fa-check fa-fw" aria-hidden="true"></span> Accept
             </a>
         </div>
+
+            <div ng-if="AppointmentDetail.appStatus == 'Pending'">
+                <div class="col-xs-5" >
+                    <a class="btn btn-danger btn-app" ng-click="declineAppointment(AppointmentDetail.appID)">
+                         <span class="fa fa-times fa-fw" aria-hidden="true"></span> Decline
+                    </a>
+                </div>
+                <div class="col-xs-5" >
+                    <a class="btn btn-success  btn-app" ng-click="acceptAppointment(AppointmentDetail.appID)">
+                        <span class="fa fa-check fa-fw" aria-hidden="true"></span> Accept
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 

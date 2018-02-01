@@ -1,0 +1,92 @@
+<style type="text/css">
+	    
+            .clean-gray{
+
+                background-color: #eeeeee;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+                background-image: -webkit-linear-gradient(top, #eeeeee, #cccccc);
+                background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
+                background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
+                background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
+                background-image: linear-gradient(top, #eeeeee, #cccccc);
+                border: 1px solid #ccc;
+                border-bottom: 1px solid #bbb;
+                border-radius: 3px;
+                color: #333;
+                font: bold 11px/1 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+                padding: 8px 0;
+                text-align: center;
+                text-shadow: 0 1px 0 #eee;
+                width: 150px;
+                 display: inline-block;
+
+            }
+
+
+</style>
+
+<div style="text-align: center;">
+
+<pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+	<input type="hidden" value="{{dt | date:'yyyy-MM-dd'}}" id="dateFull">
+<br/>
+<div style="display:inline-block; min-height:200px;">
+  <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
+</div>
+
+<button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
+<button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
+<button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" uib-tooltip="After today restriction">Min date</button>
+
+<hr />
+<div style="min-height: 150px;">
+<pre>Time also</pre>
+	
+	&nbsp;From:&nbsp; <select id="timeFrom">
+			<option value="1:00">1:00</option>
+			<option value="2:00">2:00</option>
+			<option value="3:00">3:00</option>
+			<option value="4:00">4:00</option>
+			<option value="5:00">5:00</option>
+			<option value="6:00">6:00</option>
+			<option value="7:00">7:00</option>
+			<option value="8:00">8:00</option>
+			<option value="9:00">9:00</option>
+			<option value="10:00">10:00</option>
+			<option value="11:00">11:00</option>
+			<option value="12:00">12:00</option>
+		  </select>
+		  <select id="fromAMPM">
+			<option>AM</option>
+			<option>PM</option>
+		  </select>
+	&nbsp;To&nbsp; :<select id="timeTo">
+			<option value="1:00">1:00</option>
+			<option value="2:00">2:00</option>
+			<option value="3:00">3:00</option>
+			<option value="4:00">4:00</option>
+			<option value="5:00">5:00</option>
+			<option value="6:00">6:00</option>
+			<option value="7:00">7:00</option>
+			<option value="8:00">8:00</option>
+			<option value="9:00">9:00</option>
+			<option value="10:00">10:00</option>
+			<option value="11:00">11:00</option>
+			<option value="12:00">12:00</option>
+		  </select>
+		  <select id="toAMPM">
+			<option>AM</option>
+			<option>PM</option>
+		  </select>
+	<button type="button" class="btn btn-xs btn-danger" ng-click="addTime()">Add</button>
+	<br/>
+	<div style="display:inline-block"  ng-repeat="timeBtns in arrUnique track by $index">
+		<button type="button" ng-dblclick="removeTimed(timeBtns)" class="btn btn-xs tmID-{{$index}}" style="color:#fff;margin: 3px; background-color:{{colorSBg[$index]}}">
+		{{timeBtns}}
+	    </button>
+	</div>
+	<pre ng-hide="afterAdd"><small >Double click to remove</small></pre>		
+</div>
+	<button type="button" ng-hide="afterAdd" class="btn btn-info clean-gray" ng-click="saveTimeAvailabityBtn()">Save</button>
+   <!-- <button type="button" ng-click="saveTimeAvailabityBtn();" class="clean-gray side-btn">Save</button> -->
+</div>
