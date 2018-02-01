@@ -175,6 +175,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('add_friend', 'UserFriendshipController@store');
     Route::post('delete_friend', 'UserFriendshipController@destroy');
     Route::post('block_user', 'UserBlockController@store');
+    Route::post('speedBlock', 'UserBlockController@speedBlock');
 
     
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');

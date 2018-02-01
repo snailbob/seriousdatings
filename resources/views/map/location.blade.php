@@ -16,7 +16,10 @@
 
                 <a id="filtering-btn-map"><i class="fa fa-cog" aria-hidden="true"></i> Filter Map </a>
             </div>
-        	<div id="listOFdata"></div>
+        	<div id="listOFdata">
+            <p style="text-align: center; margin-top: 35px; display: none;" id="pwait">Please wait..</p>
+
+          </div>
         </div>
 
         <div id="floating-panel2" style="display: none;">

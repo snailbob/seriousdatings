@@ -127,7 +127,7 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 								}).done(function (response) {
 								
 									$ngConfirm({
-                                                title: 'Alert',
+                                                title: 'Hi',
                                                 icon: 'fa fa-smile-o',
                                                 theme: 'modern',
                                                 type: 'blue',
@@ -147,7 +147,46 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 								});
 							
 					   }
-					
+
+				// http://localhost/seriousdatings/online_chat?user_id=163&action_type=voice
+
+						$scoped.callMeNow = function(user_id,action_type){
+									var UrLs = '/online_chat'
+										UrLs +='?user_id='+user_id;
+										UrLs +='&action_type='+action_type
+									var win = window.open(httServices.url+UrLs, '_blank');
+									win.focus();
+						}
+						$scoped.blockUser = function(u){
+							console.log(u);
+							var fullName = u.firstName+' '+u.lastName;
+					        httServices.post('speedBlock', u).then(function(res){
+					            console.log(res);
+					            if(res.data.trans){
+
+					            	$ngConfirm({
+                                                title: fullName,
+                                                icon: 'fa fa-check-circle',
+                                                theme: 'modern',
+                                                type: 'red',
+                                                content: res.data.message,
+                                                animation: 'scale',
+                                                closeAnimation: 'scale',
+                                                buttons: {
+                                                   
+                                                    close: function () {
+                                                        self.close();
+                                                         $(".removable-"+u.id).slideUp(1000);
+                                                          
+                                                          parentCOnfirm.close();
+                                                    }
+                                                },
+                                     	   });
+
+					              
+					            }
+					        });
+					    }
 
 
 

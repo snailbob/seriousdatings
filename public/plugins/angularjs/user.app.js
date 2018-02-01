@@ -2298,7 +2298,7 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
                                                                     self.close();
                                                                 }
                                                             },
-                                                        })
+                                                        });
 
 
                                                     }
