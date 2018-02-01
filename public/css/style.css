@@ -8576,6 +8576,10 @@ nav.video-menu:hover>ul a li {
 	opacity: .7;
 }
 
+.back-btn span{
+	font-size: 10px;
+}
+
 
 
 /* Small devices (tablets, 768px and up) */

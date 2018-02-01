@@ -152,8 +152,9 @@
 </head>
 <body class="hidden" ng-controller="bodyController" id="plain-code" ng-cloak>
 
-    <div class="back-btn hidden" uib-tooltip="Back" tooltip-position="left">
+    <div class="back-btn hidden text-center">
         <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <br><span class="small">BACK</span>
     </div>
 
     <toast></toast>

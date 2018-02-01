@@ -62,6 +62,7 @@
   <script src="{{ url() }}/public/plugins/angularjs/controllers/profileCtrl.js"></script>
   <script src="{{ url() }}/public/plugins/angularjs/controllers/verifyCtrl.js"></script>
   <script src="{{ url() }}/public/plugins/angularjs/controllers/videoChatController.js"> </script>
+  <script src="{{ url() }}/public/plugins/angularjs/controllers/paymentController.js"> </script>
 
   <script src="{{ url() }}/public/plugins/angularjs/services/profileService.js"></script>
 
@@ -72,6 +73,11 @@
   <script src="{{ url() }}/public/js/user-script.js"></script>
 
   
+  @if(request()->segment(1) == 'payment_gateway')
+    <!-- link to the SqPaymentForm library -->
+    <script type="text/javascript" src="https://js.squareup.com/v2/paymentform"></script>
+  @endif
+
   @if(request()->segment(1) == 'online_chat')
 
     <script src="https://cdn.webrtc-experiment.com/socket.io.js"> </script>

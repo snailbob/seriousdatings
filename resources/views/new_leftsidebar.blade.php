@@ -161,7 +161,7 @@
                 </a> 
             </div>
             <div class="connect-with-left"> 
-                <a href="{{ url().'/travels' }}">
+                <a href="{{ url().'/travels' }}" target="_blank">
                     <div class="serious-icons">{!! HTML::Image("public/images/serious-vecation-icon.png" ,"") !!}</div>
                     <h2>Serious Vacation</h2>
                 </a> 
