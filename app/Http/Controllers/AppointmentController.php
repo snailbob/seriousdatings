@@ -63,7 +63,8 @@ class AppointmentController extends Controller
             'app_from' => $user_id,
             'app_to' => $request->input('appToid'),
             'app_days' => $request->input('availDate'),
-            'app_time' => $request->input('availTime')
+            'app_time' => $request->input('availTime'),
+            'app_availID' => $request->input('availDid'),
         ]);
         $trans = false;
         if ($data) {
@@ -178,6 +179,7 @@ class AppointmentController extends Controller
          $format = array();
         foreach ($data as $key => $value) {
 
+             $new_value['avDid'] = $value->av_id;
              $new_value['avDate'] = date('d-M-Y',strtotime($value->av_user_date));
              $new_value['avDay'] = date('l',strtotime($value->av_user_date));
              $new_value['avTimes'] = self::sliceUserTime($value->av_user_times);

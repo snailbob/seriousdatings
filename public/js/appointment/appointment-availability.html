@@ -22,6 +22,7 @@
 
             }
 
+
 </style>
 
 <div style="text-align: center;">
@@ -29,7 +30,7 @@
 <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
 	<input type="hidden" value="{{dt | date:'yyyy-MM-dd'}}" id="dateFull">
 <br/>
-<div style="display:inline-block; min-height:290px;">
+<div style="display:inline-block; min-height:200px;">
   <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></div>
 </div>
 
@@ -80,7 +81,7 @@
 	<button type="button" class="btn btn-xs btn-danger" ng-click="addTime()">Add</button>
 	<br/>
 	<div style="display:inline-block"  ng-repeat="timeBtns in arrUnique track by $index">
-		<button type="button" ng-dblclick="removeTimed(timeBtns)" class="btn btn-xs tmID-{{$index}}" style="margin: 3px; background-color:{{colorSBg[$index]}}">
+		<button type="button" ng-dblclick="removeTimed(timeBtns)" class="btn btn-xs tmID-{{$index}}" style="color:#fff;margin: 3px; background-color:{{colorSBg[$index]}}">
 		{{timeBtns}}
 	    </button>
 	</div>
