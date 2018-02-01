@@ -131,11 +131,11 @@
 
 /*-------- custom checkbox ----------*/
 
-input[type="checkbox"] {
+.checkbox-container input[type="checkbox"] {
   display: none;
 }
 
-input[type="checkbox"]+label {
+.checkbox-container input[type="checkbox"]+label {
   font-size: 13px;
   line-height: 23px;
   margin: 5px 0;
@@ -144,7 +144,7 @@ input[type="checkbox"]+label {
   margin: 0;
 }
 
-input[type="checkbox"]+label span {
+.checkbox-container input[type="checkbox"]+label span {
   display: inline-block;
   width: 22px;
   height: 22px;
@@ -154,18 +154,18 @@ input[type="checkbox"]+label span {
   background: #0C6;
 }
 
-input[type="checkbox"]+label span {
+.checkbox-container input[type="checkbox"]+label span {
   background: #fff url(../images/check-box.png) no-repeat;
   height: 11px;
   width: 11px;
 }
 
-input[type="checkbox"]:checked+label span {
+.checkbox-container input[type="checkbox"]:checked+label span {
   background-position: 0 -12px;
 }
 
-input[type="checkbox"]+label span,
-input[type="checkbox"]:checked+label span {
+.checkbox-container input[type="checkbox"]+label span,
+.checkbox-container input[type="checkbox"]:checked+label span {
   -webkit-transition: background-color 0.4s linear;
   -o-transition: background-color 0.4s linear;
   -moz-transition: background-color 0.4s linear;

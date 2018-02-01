@@ -142,9 +142,68 @@
                             <h3 class="panel-h">E-Cheque Details</h3>
                         </div>
                         <div class="panel-body">
-                            <div class="form-group">
-                                <textarea name="cheque_details" class="form-control" id="" rows="10" placeholder="cheque detail for manual payment process"></textarea>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="">Amount</label>
+                                        <input type="text" name="amount" id="" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="">Account Type</label>
+                                        <input type="text" name="amount" id="" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="">Routing No.</label>
+                                        <input type="text" name="amount" id="" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="">Account No.</label>
+                                        <input type="text" name="amount" id="" class="form-control">
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="">First Name</label>
+                                        <input type="text" name="amount" id="" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="">Last Name</label>
+                                        <input type="text" name="amount" id="" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="">Phone</label>
+                                        <input type="number" name="amount" id="" class="form-control">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Do you have signed authorization?</label>
+                                <div class="checkbox">
+                                    <label>
+                                    <input type="checkbox"> I have signed authorization
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="well well-sm"><strong class="text-danger">IMPORTANT: </strong> To process this transaction, you must have <strong>already received signed authorization</strong></div>
+                            </div>
+
+
                             <div class="form-group text-right">
                                 <button class="btn btn-danger">
                                     Submit to Admin

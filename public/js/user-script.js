@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    
+    if(history.length > 2){
+        $('.back-btn').removeClass('hidden');
+        $('.back-btn').on('click', function(){
+            history.back();
+        });
+    }
+
     // $("#mate-carousel").flipster({
     //     style: 'carousel',
     //     spacing: 1,
@@ -390,7 +398,7 @@ function viewFullMessages(id, m_id) {
 }
 
 function parentCreatSMS(user_id,user_FirstName){
-      var scope = angular.element(document.getElementById('plain-code')).scope();
-            scope.createSMS(user_id,user_FirstName);
+    var scope = angular.element(document.getElementById('plain-code')).scope();
+    scope.createSMS(user_id,user_FirstName);
 }
 

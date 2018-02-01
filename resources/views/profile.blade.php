@@ -83,7 +83,7 @@
         </div>
 
         @if($currentUser != '0')
-        <div ng-class="{ 'hide-me' : userSelected==null || '{!! $currentUser !!}'=='0' }">
+        <div ng-class="{ 'hide-me' : userSelected==null || '{!! $currentUser !!}'=='0' }" class="hidden-xs">
           <div class="next-carousel">
             <ul class="carousel carousel-profile">
 
@@ -96,7 +96,7 @@
             </ul>
           </div>
         </div>
-        <div class="controls">
+        <div class="controls hidden-xs">
           <a href="#" class="previous btn btn-danger" ng-click="left()">
             <span class="fa fa-chevron-left"></span>
           </a>
@@ -362,7 +362,7 @@
       </div>
 
 
-      <div class="col-md-3" style="z-index: 100;">
+      <div class="col-md-3">
         @include('right_sidebar')
       </div>
     </div>

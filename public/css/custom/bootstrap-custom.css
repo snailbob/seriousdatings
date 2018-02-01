@@ -55,7 +55,7 @@
 	.custom.navbar-default{
 	    background-color: transparent !important;
 		border-color: transparent !important;
-	    z-index: 1000;
+	    z-index: 50;
 	    position: absolute;
 	    top: 120px;
 	    right: 0px;

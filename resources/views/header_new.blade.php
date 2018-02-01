@@ -152,6 +152,10 @@
 </head>
 <body class="hidden" ng-controller="bodyController" id="plain-code" ng-cloak>
 
+    <div class="back-btn hidden" uib-tooltip="Back" tooltip-position="left">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </div>
+
     <toast></toast>
     @include('user.shared.fb_script')
 

@@ -1,4 +1,4 @@
-<div class="col-md-3" style="z-index: 100;">
+<div class="col-md-3">
     <div class="left-section">
         <uib-accordion>
             <div uib-accordion-group class="panel-danger">
