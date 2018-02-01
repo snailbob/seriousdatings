@@ -463,20 +463,20 @@ ngApp.controller('bodyController', [
                     }
                 });
 
-        };
-        $scope.actionAcceptAppointment = function (id, AppointmentData,spcModal,grandParent) {
-            $scope.reusableNgConfirmAppointment('Message',
-                'appointment-actions-layout',
-                function ($scoped) {
-                    var self = this;
-                    $scoped.reasonTitle = "Confirmation Message";
-                    $scoped.reasonType = "success";
-                    $scoped.fontAwesome = "fa-smile-o";
-                    $scoped.appID = id;
+            };
+            $scope.actionAcceptAppointment = function (id, AppointmentData,spcModal,grandParent) {
+                $scope.reusableNgConfirmAppointment('Message',
+                    'appointment-actions-layout',
+                    function ($scoped) {
+                        var self = this;
+                        $scoped.reasonTitle = "Confirmation Message";
+                        $scoped.reasonType = "success";
+                        $scoped.fontAwesome = "fa-smile-o";
+                        $scoped.appID = id;
 
-                }, {
-                    saveBtn: {
-                        text: 'Submit',
+                    }, {
+                        saveBtn: {
+                            text: 'Submit',
                         btnClass: 'btn-green icons-btns',
                         action: function (scoped) {
                             $scope.saveAppointmentAction(scoped.text, id, 'A',spcModal,self,grandParent);
@@ -672,7 +672,6 @@ ngApp.controller('bodyController', [
                 },
             })
         }
-
 
         var data_link = base_url + '/profile';
         $scope.createSMS = function (recipient_id, name) {
