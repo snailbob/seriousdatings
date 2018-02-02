@@ -7,6 +7,26 @@ $(document).ready(function () {
         });
     }
 
+    //dating plan subscribe
+    $('.continue-plan').on('click', function(){
+        var data = $(this).data();
+
+        $.confirm({
+            content: 'By clicking the button, you agree with our <a href="'+base_url+'/pages/Terms%20and%20condiitions" target="_blank">terms and conditions</a>.',
+            title: 'CONFIRM',
+            buttons: {
+                AGREE:{
+                    text: 'AGREE &amp; PROCEED TO PAYMENT',
+                    btnClass: 'btn-default',
+                    action: function(scope, button){
+                        location.href = window.base_url+'/payment_gateway?'+$.param(data);
+                    }
+                }
+            }
+        });
+        return false;
+    });
+
     // $("#mate-carousel").flipster({
     //     style: 'carousel',
     //     spacing: 1,

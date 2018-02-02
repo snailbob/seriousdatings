@@ -8563,7 +8563,7 @@ nav.video-menu:hover>ul a li {
 	background: #efefef;
     padding: 10px 15px;
     position: fixed;
-    top: 70px;
+    top: 60px;
     z-index: 20;
     cursor: pointer;
     right: 15px;
@@ -8591,4 +8591,22 @@ nav.video-menu:hover>ul a li {
 	.header-scroll{
 		min-width: 380px;
 	} */
+}
+
+
+/* payment gateway page */
+
+/* Define how SqPaymentForm iframes should look when they have focus */
+.form-control--focus {
+	outline: 5px auto rgb(59, 153, 252);
+}
+
+/* Define how SqPaymentForm iframes should look when they contain invalid values */
+
+.form-control--error {
+	outline: 5px auto rgb(255, 97, 97);
+}
+
+.table.table-borderless > tbody > tr > td{
+	border-top: 0;
 }

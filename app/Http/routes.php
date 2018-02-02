@@ -132,13 +132,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('browse', 'SearchController@browseUsers');
     Route::get('payment_method', 'PaymentMethodController@index');
     Route::get('payment_checkout/{plan_id}', 'PaymentMethodController@getCheckout');
-    Route::get('getdone/{plan_id}', 'PaymentMethodController@getDone');
+    Route::get('getdone/{plan_id}', 'PaymentMe\thodController@getDone');
     Route::get('getcancel', 'PaymentMethodController@getCancel');
 
     Route::get('profile_settings', 'UsersController@profileSettings');
     Route::get('privacy_settings', 'UsersController@privacySettings');
     Route::get('payment_gateway', 'PaymentMethodController@paymentGateway');
-    Route::get('test_payment', 'PaymentMethodController@testPayment');
+    Route::post('square_payment', 'PaymentMethodController@squarePayment');
 
     
     

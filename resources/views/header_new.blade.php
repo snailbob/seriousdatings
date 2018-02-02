@@ -124,6 +124,15 @@
           $("#language, #gender, #lookingfor, #age, #ageto,#zipcode, #weight, #relation, #relation-ship ").selectbox();
   });
 </script> 
+
+
+@if(request()->segment(1) == 'payment_gateway')
+    <!-- link to the SqPaymentForm library -->
+    <script type="text/javascript" src="https://js.squareup.com/v2/paymentform"></script>
+    <script type="text/javascript" src="{{ url().'/public/js/sqpaymentform.js'}}"></script>
+@endif
+
+
 <script type="text/javascript">
     /*document.getElementById("uploadBtn").onchange = function () {
                 document.getElementById("uploadFile").value = this.value;

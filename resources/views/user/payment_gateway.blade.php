@@ -27,7 +27,7 @@
                 <div class="col-md-8 col-md-offset-2">
 
                     <p class="lead text-center">
-                        <a href="https://paypal.com" target="_blank" class="thumbnail no-decoration">
+                        <a ng-click="processPaypal()" class="thumbnail no-decoration">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-square-o fa-stack-2x"></i>
                                 <i class="fa fa-paypal fa-stack-1x" aria-hidden="true"></i>
@@ -54,77 +54,61 @@
                         </div>
                         <div class="panel-body">
 
+                            <div id="sq-ccbox">
 
-                            <form class="form-horizontal" role="form">
-                                <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="card-number">Card Number</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Card Number">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="expiry-month">Expiration Date</label>
-                                        <div class="col-sm-9">
-                                            <div class="row">
-                                                <div class="col-xs-6 col-sm-4">
-                                                    <select class="form-control col-sm-2" name="expiry-month" id="expiry-month">
-                                                        <option>Month</option>
-                                                        <option value="01">Jan (01)</option>
-                                                        <option value="02">Feb (02)</option>
-                                                        <option value="03">Mar (03)</option>
-                                                        <option value="04">Apr (04)</option>
-                                                        <option value="05">May (05)</option>
-                                                        <option value="06">June (06)</option>
-                                                        <option value="07">July (07)</option>
-                                                        <option value="08">Aug (08)</option>
-                                                        <option value="09">Sep (09)</option>
-                                                        <option value="10">Oct (10)</option>
-                                                        <option value="11">Nov (11)</option>
-                                                        <option value="12">Dec (12)</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-xs-6 col-sm-4">
-                                                    <select class="form-control" name="expiry-year">
-                                                        <option value="18">2018</option>
-                                                        <option value="19">2019</option>
-                                                        <option value="20">2020</option>
-                                                        <option value="21">2021</option>
-                                                        <option value="22">2022</option>
-                                                        <option value="23">2023</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" name="cvv" id="cvv" placeholder="Security Code">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-3 col-sm-3">
-                                            <button type="button" class="btn btn-block btn-success">Add</button>
-                                        </div>
-                                    </div>
+                                <form class="form-horizontal" id="nonce-form" role="form">
+                                    <table class="table table-borderless">
+                                        <thead>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td width="25%">Card Number:</td>
+                                                <td width="75%">
+                                                    <div id="sq-card-number"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>CVV:</td>
+                                                <td>
+                                                    <div id="sq-cvv"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Expiration Date: </td>
+                                                <td>
+                                                    <div id="sq-expiration-date"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Postal Code:</td>
+                                                <td>
+                                                    <div id="sq-postal-code"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
 
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-3 col-sm-9">
-                                            <p class="text-muted"><img src="{{ url() }}/public/images/icon/lock-icon.png" alt="" class="pull-left" style="margin-right: 5px"/>For your security, SeriousDatings does not store your banking details. Square is our secure payment provider. <a href="https://square.com/" target="_blank">Find out more</a></p>
-                                        </div>
-                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-9 padding-top-15">
+                                                            <p class="text-muted"><img src="{{ url() }}/public/images/icon/lock-icon.png" alt="" class="pull-left" style="margin-right: 5px"/>For your security, SeriousDatings does not store your banking details. Square is our secure payment provider. <a href="https://square.com/" target="_blank">Find out more</a></p>
+                                                        </div>
+                                                        <div class="col-sm-3 padding-top-15">
+                                                            <button type="submit" id="sq-creditcard" class="btn btn-danger btn-block button-credit-card" onclick="requestCardNonce(event)">
+                                                                Pay with card
+                                                            </button>
+                                                        </div>
+                                                    </div>
 
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
+                                    <input type="hidden" id="card-nonce" name="nonce">
 
-                                </fieldset>
-                            </form>
+                                </form>
+
+                            </div>  
 
 
 

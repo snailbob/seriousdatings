@@ -124,7 +124,10 @@
                   <i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>
                 </div>
                 <h2>
-                  <a class="profile-link" href="{!! url('user/profile') !!}/@{{ userSelected.username }}">@{{ userSelected.firstName }} @{{ userSelected.lastName }}</a>
+                  <a class="profile-link" href="{!! url('user/profile') !!}/@{{ userSelected.username }}">
+                    <i class="fa fa-circle new-state" ng-class="{'text-success' : userSelected.is_online, 'text-danger' : !userSelected.is_online}" aria-hidden="true"></i>
+                    @{{ userSelected.firstName }} @{{ userSelected.lastName }}
+                  </a>
                   <span class="percent">@{{ userSelected.percent }}%</span>
                 </h2>
                 <p>@{{ userSelected.location }}</p>
@@ -329,7 +332,7 @@
                   <i class="fa fa-comments" ng-click="createSMS(match.id,match.firstName)" uib-tooltip="Message"></i>
                 </div>
                 <h2>
-                  <i class="fa fa-circle  new-state" aria-hidden="true" id="@{{ match.id }}-stateicon-new"></i>
+                  <i class="fa fa-circle  new-state"  ng-class="{'text-success' : match.is_online, 'text-danger' : !match.is_online}" aria-hidden="true" id="@{{ match.id }}-stateicon-new"></i>
                   <a class="profile-link" href="{!! url('user/profile') !!}/@{{ match.username }}">
 
                     @{{ match.firstName }} @{{ match.lastName }}</a>

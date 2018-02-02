@@ -7,6 +7,9 @@ ngApp.controller('paymentController', ['$scope', '$filter', 'myHttpService', '$t
     $scope.imgDone = {
         done: false
     };
+    $scope.params = window.uri_get_params;
+    $scope.base_url = window.base_url;
+
     var handleFileSelect = function (evt) {
         var file = evt.currentTarget.files[0];
         var reader = new FileReader();
@@ -73,5 +76,10 @@ ngApp.controller('paymentController', ['$scope', '$filter', 'myHttpService', '$t
         }
     }
 
-
+    $scope.processPaypal = function(){
+        if($scope.params.type == 'plan'){
+            window.location.href = $scope.base_url+'/payment_checkout/'+$scope.params.id;
+        }
+    }
+    
 }]);
