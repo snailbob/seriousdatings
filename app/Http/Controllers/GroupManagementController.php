@@ -21,12 +21,22 @@ class GroupManagementController extends Controller
     {
         $groups = Group::all();
         $data = array();
+        $created_by = array();
         foreach ($groups as $key) {
             $data[$key->id]['population'] = DB::table('groups_users')
-            ->where('group_id', $key->id)  
-            ->count(); 
-        } 
-        return \View::make('admin.group_management.group_list')->with(['groups' => $groups, 'data' => $data]);
+            ->where('group_id', $key->id)
+            ->count();
+            $created_by[] = User::find($key->created_by_id);
+        }
+        $creator = array();
+
+        foreach ($groups->toArray() as $key => $value)
+        {
+            $creator[] = $value ;
+            $creator[$key]['created_by_id'] =  $created_by[$key]->firstName . " " . $created_by[$key]->lastName;
+        }
+
+        return \View::make('admin.group_management.group_list')->with(['groups' => $groups, 'data' => $data, 'created' => $creator]);
     }
 
     public function showGroupMembers($id)

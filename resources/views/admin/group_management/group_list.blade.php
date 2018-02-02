@@ -1,7 +1,5 @@
   @include('admin.inc.header')
-
-
-
+  {{--{{dd($test)}}--}}
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -34,16 +32,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($groups as $group)
+                  @foreach($created as $group)
                   <tr>
-                    <td class="">{{ $group->name }}</td>
-                    <td class="">{{ $data[$group->id]['population']}}</td>
-                    <td class="">{{ $group->role->name }}</td>
-                    <td id="{{ $group->id }}">
+                    <td class="">{{ $group['name'] }}</td>
+                    <td class="">{{ $data[$group['id']]['population']}}</td>
+                    <td>{{$group['created_by_id']}}</td>
+                    <td id="{{ $group['id'] }}">
                       <div class="btn-group pull-right table-action custom"> <a class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-pencil"></i> Action <span class="caret"></span> </a>
                         <ul class="dropdown-menu">
                          <li class="viewBtn">
-                          <a href='{{ route("group_page", $group->id) }}'> <i class="fa fa-eye"></i> View</a>
+                          <a href='{{ route("group_page", $group['id']) }}'> <i class="fa fa-eye"></i> View</a>
                         </li>
                         <li class="editBtn">
                           <a href='#'> <i class="fa fa-edit"></i> Edit</a>
@@ -51,7 +49,7 @@
                         <li class="blockBtn">
                           <a href='#' class="blockTxt"> 
                             <i class="fa fa-user-times"></i> 
-                            @if($group->block)
+                            @if($group['block'])
                             Unblock
                             @else
                             Block

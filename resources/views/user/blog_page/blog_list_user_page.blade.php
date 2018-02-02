@@ -5,7 +5,7 @@
 @endsection
 
 @section('form_area')
-    {{--    {{dd($blogs)}}--}}
+        {{--{{dd($blogs)}}--}}
     <div class="inner-header upcoming-banner">
         <div class="container">
             <h1>
@@ -27,6 +27,7 @@
                 <div class="col-md-12 blog-main">
                     <div class="row">
                         @foreach($blogs as $blog)
+                            @if($blog['blog_status']['name'] == "Published")
                             <div class="col-md-6 col-sm-6 list">
                                 <article class=" blog-teaser">
                                     <header>
@@ -44,6 +45,7 @@
                                     </div>
                                 </article>
                             </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>
