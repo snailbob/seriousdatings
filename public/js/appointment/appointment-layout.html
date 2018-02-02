@@ -111,7 +111,10 @@
 
                 <img ng-src="{{ userInfo.photo }}" id="new-img-user" alt="delete" title="Remove" />
                 <br>
-                <button type="button" ng-click="callMeNow(userInfo.id,'voice')" class="clean-gray call-me-btnNew">Call Me Now</button>
+                <button type="button" ng-click="callMeNow(userInfo.id,'voice')" class="clean-gray call-me-btnNew">
+                <i class="fa fa-phone"></i>
+                Call
+                </button>
                  {{ userInfo.lastName }}, {{userInfo.firstName}}<br/>
                  {{ userInfo.location }}
                  
