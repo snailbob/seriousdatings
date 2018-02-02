@@ -36,21 +36,28 @@ class UserNewsPageController extends Controller
     public function newsPageView($id)
     {
         $data = UserBlog::find($id);
+        $data->load('blogStatus');
         $news = $data->toArray();
-        $news['blogTitle'] = UserBlog::convertApostrophe($data['blogTitle']);
-        $news['blogContent'] = UserBlog::convertApostrophe($data['blogContent']);
-        $news['intro'] = editEmail::setContentToEllipse($data['blogContent']);
-        $data = BlogComment::where('blog_id', $id)->get();
-        $data->load('user');
-        $comments = array();
-        if ($data) {
-            foreach ($data->toArray() as $key => $value) {
-                $comments[$key] = $value;
-                $comments[$key]['created_at'] = UserBlog::time_elapsed_string($value['created_at']);
+        if (Auth::check()) {
+            if ($news['blog_status']['name'] == "Published" || (Auth::user()->role == "admin" || Auth::id() == $news->user_id)) {
+                $news = UserBlog::getBlogData($id);
+                $comments = BlogComment::getBlogComment($id);
+                return \View::make('user.blog_page.blog_page')->with(['blog' => $news, 'comments' => $comments]);
+            } else {
+                return \Redirect::to('bloglist');
+            }
+        } else {
+            if ($news['blog_status']['name'] == "Published") {
+                $news = UserBlog::getBlogData($id);
+                $comments = BlogComment::getBlogComment($id);
+                return \View::make('user.blog_page.blog_page')->with(['blog' => $news, 'comments' => $comments]);
+            } else {
+                return \Redirect::to('bloglist');
             }
         }
-        return \View::make('user.news_page.news_page')->with(['news' => $news, 'comments' => $comments]);
     }
+
+
 
     public function commentInNews(Request $request)
     {
@@ -74,7 +81,7 @@ class UserNewsPageController extends Controller
             'email' => 'required|max:1000|email|unique:blog_subscription,email',
         ]);
         $subscribe = BlogSubscription::create([
-           'email' => $request->email
+            'email' => $request->email
         ]);
 
         return response()->json($subscribe);

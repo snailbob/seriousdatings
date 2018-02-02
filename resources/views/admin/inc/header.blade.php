@@ -197,6 +197,8 @@
                         <span>Demographic Report</span></a></li>
                 <li><a href="{{ url('admin/monthlypayment') }}"><i class="fa fa-usd"></i>
                         <span>Monthly Payments Reports</span></a></li>
+                <li><a href="{{ url('admin/premium') }}"><i class="fa fa-trophy"></i>
+                        <span>Premium Features</span></a></li>
 
                 <li class="treeview {{(request()->segment(2) == 'videos') ? 'active menu-open' : ''}}">
                     <a href="#">

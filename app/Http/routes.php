@@ -93,6 +93,7 @@ Route::get('/start', function () {
     return 'Woohoo!';
 });
 
+
 /* blog page */
 Route::get('bloglist', 'UserBlogPageController@ListBlog');
 Route::get('user/blog_page/{id}', 'UserBlogPageController@blogPageView');
@@ -120,6 +121,32 @@ Route::get('travels', 'TravelController@viewTravelPage');
 /* end travel page */
 
 
+/* blog page */
+Route::get('bloglist', 'UserBlogPageController@ListBlog');
+Route::get('user/blog_page/{id}', 'UserBlogPageController@blogPageView');
+Route::get('blogs/create', 'UserBlogPageController@createBlog');
+Route::post('commentInBlog', 'UserBlogPageController@commentInBlog');
+Route::post('saveBlog', 'UserBlogPageController@saveBlog');
+/* end blog page */
+
+/* delete comment */
+Route::post('deleteComment', 'UserBlogPageController@deleteComment');
+/* end delete comment */
+
+/* news page */
+Route::get('pages/news', 'UserNewsPageController@ListNews');
+Route::get('/user/news_page/{id}', 'UserNewsPageController@newsPageView');
+Route::post('commentInNews', 'UserNewsPageController@commentInNews');
+/* end news page */
+
+/* subscribe */
+Route::post('subscribeEmail', 'UserNewsPageController@subscribeEmail');
+/* end subscribe */
+
+/* travel page */
+Route::get('travels', 'TravelController@viewTravelPage');
+/* end travel page */
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('users/{username}/about_your_date', 'AboutYourDateController@index');
@@ -139,9 +166,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('privacy_settings', 'UsersController@privacySettings');
     Route::get('payment_gateway', 'PaymentMethodController@paymentGateway');
     Route::post('square_payment', 'PaymentMethodController@squarePayment');
-    
-    
-    
+
+
 });
 
 Route::get('search', 'SearchController@index');
@@ -177,11 +203,9 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('block_user', 'UserBlockController@store');
     Route::post('speedBlock', 'UserBlockController@speedBlock');
 
-    Route::post('save_echeck', 'PaymentMethodController@postSaveEcheck');
-    
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
     Route::post('send_gift', 'GiftCardController@sendGiftCards');
-    
+
     Route::post('save_advertisement', 'AdsSpaceController@store');
 
     Route::get('get_video_shuffle', 'UsersController@getVideoShuffle');
@@ -251,13 +275,13 @@ Route::group(['prefix' => 'api'], function () {
 
 
     /*saving appointment*/
-    Route::post('saveAppointmentNew','AppointmentController@saveAppointmentNew');
+    Route::post('saveAppointmentNew', 'AppointmentController@saveAppointmentNew');
 
-    
+
     Route::post('saveappointment', 'AppointmentController@saveAppointment');
     Route::get('getAppoinment', 'AppointmentController@getAppointment');
     Route::post('saveAppResponse', 'AppointmentController@saveAppResponse');
-    Route::get('getTimeAvailability','AppointmentController@getTimeAvailability');
+    Route::get('getTimeAvailability', 'AppointmentController@getTimeAvailability');
     Route::post('saveTimeAvailabity','AppointmentController@saveTimeAvailabity');
 
 
@@ -352,6 +376,8 @@ Route::group(array('before' => 'admin'), function () {
     Route::get('admin/blog_management/post/{id}', 'BlogManagementController@showPostById')->name('PostById');
     Route::post('getPost', 'BlogManagementController@getPost');
     Route::post('deletePost', 'BlogManagementController@deletePost');
+    Route::post('pendingPost', 'BlogManagementController@pendingPost');
+    ROute::post('publishedPost', 'BlogManagementController@publishedPost');
 
     //category list
     Route::get('admin/blog_management/category', 'BlogManagementController@showCategoryLists');
@@ -387,8 +413,13 @@ Route::group(array('before' => 'admin'), function () {
     Route::post('blockGroupName', 'GroupManagementController@blockGroupName');
     Route::post('blockMemberInGroup', 'GroupManagementController@blockMemberInGroup');
     Route::post('addMembersInGroup', 'GroupManagementController@addMembersInGroup');
-
     /* End Group Management */
+
+    /* Premium Features */
+    Route::get('admin/premium', 'PremiumFeaturesController@getPremiumFeatures');
+    Route::post('editPremiumFeature', 'PremiumFeaturesController@editPremiumFeature');
+    Route::post('deletePremiumFeature', 'PremiumFeaturesController@deletePremiumFeature');
+    /* End Premium Features */
 
 
     Route::get('admin/templates/{id}/content', 'TemplateController@showContent');
@@ -440,7 +471,6 @@ Route::post('deleteUser', 'AdminUserListController@deleteUser');
 /* End of Manage User Actions */
 
 
-
 Route::get('/test', 'AdminDashboardController@getTest');
 
 Route::get('ajax', 'AjaxRequestController@getSearchType');
@@ -458,9 +488,7 @@ Route::get('contact', 'ContactController@showForm');
 Route::post('profileupload', 'MatchController@Profileupload');
 
 
-
-
-Route::get('test_coords', function(){
+Route::get('test_coords', function () {
     $u = AboutYourDate::where('id', '120')->first(); //->update(['relationshipGoal'=>'yeah']);
     return json_encode($u);
     // $details = json_decode(file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?address=23423"));
@@ -469,8 +497,6 @@ Route::get('test_coords', function(){
     // $location = $details->results[0]->formatted_address;
     // return json_encode(count($details->results));
 });
-
-
 
 
 Route::get('adminlogin', 'AdminLoginController@getIndex');
@@ -507,6 +533,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profiles/groups/create', 'MyGroupController@create');
     Route::get('groups/{groupID}/addMember', 'MyGroupController@addMemberForm');
     Route::get('groups/{groupID}/removeMember', 'MyGroupController@removeMemberForm');
+    Route::post('createGroup', 'MyGroupController@createGroup');
+    Route::post('deleteMembersInGroup', 'MyGroupController@deleteMembersInGroup');
+
 
     Route::get('datingPlan/{planId}', 'DatingPlanController@subscribe');
     Route::get('datingPlan/{planId}/success', 'DatingPlanController@success');

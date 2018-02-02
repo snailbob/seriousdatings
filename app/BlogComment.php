@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\UserBlog;
+use  App\Http\Controllers\EditableEmailController as editEmail;
 
 class BlogComment extends Model
 {
@@ -57,4 +58,20 @@ class BlogComment extends Model
         if (!$full) $string = array_slice($string, 0, 1);
         return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
+
+
+    public static function getBlogComment($id)
+    {
+        $data = self::where('blog_id', $id)->get();
+        $data->load('user');
+        $comments = array();
+        if ($data) {
+            foreach ($data->toArray() as $key => $value) {
+                $comments[$key] = $value;
+                $comments[$key]['created_at'] = UserBlog::time_elapsed_string($value['created_at']);
+            }
+        }
+        return $comments;
+    }
+
 }

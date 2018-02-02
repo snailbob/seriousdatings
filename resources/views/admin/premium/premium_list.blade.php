@@ -5,12 +5,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Blog
+            Premium Features
             <small>lists</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Blog Management</li>
+            <li class="active">Premium Features</li>
         </ol>
     </section>
 
@@ -24,43 +24,26 @@
                         <table id="category_tbl" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Category</th>
-                                <th>Type</th>
-                                <th>Status</th>
-                                <th>Blog by</th>
-                                <th>Created at</th>
+                                <th>Feature</th>
                                 <th width="80px" class="text-center">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($posts as $post)
+                            @foreach($features as $feature)
                                 <tr>
-                                    <td class="">{{ $post->blogTitle }}</td>
-                                    <td class="">{{ $post->blogCategory->name }}</td>
-                                    <td class="">{{ $post->blogType->name }}</td>
-                                    <td class="">{{ $post->blogStatus->name }}</td>
-                                    <td class="">{{ $post->blogby }}</td>
-                                    <td class="">{{ $post->created_at }}</td>
-                                    <td id="{{ $post->id }}">
+                                    <td class="">{{ $feature->feature }}</td>
+                                    <td id="{{ $feature->id }}">
                                         <div class="btn-group pull-right table-action custom"><a
                                                     class="btn btn-danger btn-sm dropdown-toggle"
                                                     data-toggle="dropdown"> <i class="fa fa-pencil"></i> Action <span
                                                         class="caret"></span> </a>
                                             <ul class="dropdown-menu">
-                                                <li class="viewBtn">
-                                                    <a href='{{ route("PostById", $post->id) }}'> <i
-                                                                class="fa fa-circle-o"></i> View</a>
+                                                <li class="editBtn">
+                                                    <a href='#'> <i class="fa fa-pencil"></i> Edit</a>
                                                 </li>
-                                                @foreach($status as $stat)
-                                                    @if($stat->name != $post->blogStatus->name)
-                                                        <li class="{{strtolower($stat->name)}}Btn">
-                                                            <a href='#'> <i
-                                                                        class="fa fa-circle-o"></i> {{ucwords($stat->name)}}
-                                                            </a>
-                                                        </li>
-                                                    @endif
-                                                @endforeach
+                                                <li class="deleteBtn">
+                                                    <a href='#'> <i class="fa fa-trash"></i> Delete</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>
@@ -80,7 +63,7 @@
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-{!! HTML::script('public/js/admin/blog_management/bloglists_actions.js') !!}
+{!! HTML::script('public/js/admin/premium/premium_list.js') !!}
 <script type="text/javascript">
     $(function () {
         // Replace the <textarea id="editor1"> with a CKEditor

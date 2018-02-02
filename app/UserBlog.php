@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
+use  App\Http\Controllers\EditableEmailController as editEmail;
 
 class UserBlog extends Model
 {
@@ -93,5 +94,14 @@ class UserBlog extends Model
         return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 
-
+    public static function getBlogData($id)
+    {
+        $data = self::find($id);
+        $data->load('blogStatus');
+        $blog = $data->toArray();
+        $blog['blogTitle'] = UserBlog::convertApostrophe($data['blogTitle']);
+        $blog['blogContent'] = UserBlog::convertApostrophe($data['blogContent']);
+        $blog['intro'] = editEmail::setContentToEllipse($data['blogContent']);
+        return $blog;
+    }
 }

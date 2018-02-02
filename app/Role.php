@@ -7,10 +7,10 @@ class Role extends EntrustRole
 {
 	protected $fillable = ['name'];
 
-	protected $date = ['created_at', 'updated_at', 'deleted_at'];
+	protected $dates = ['created_at', 'updated_at'];
 
 	public function role()
 	{
-		return $this->hasMany('App\Group');
+		return $this->belongsTo('App\GroupUser');
 	}
 }

@@ -40,9 +40,39 @@ class UserBlogPageController extends Controller
         $data = UserBlog::find($id);
         $data->load('blogStatus');
         $blog = $data->toArray();
+        if (Auth::check()) {
+            if ($blog['blog_status']['name'] == "Published" || (Auth::user()->role == "admin" || Auth::id() == $blog->user_id)) {
+                $blog = UserBlog::getBlogData($id);
+                $comments = BlogComment::getBlogComment($id);
+                return \View::make('user.blog_page.blog_page')->with(['blog' => $blog, 'comments' => $comments]);
+            } else {
+                return \Redirect::to('bloglist');
+            }
+        } else {
+            if ($blog['blog_status']['name'] == "Published") {
+                $blog = UserBlog::getBlogData($id);
+                $comments = BlogComment::getBlogComment($id);
+                return \View::make('user.blog_page.blog_page')->with(['blog' => $blog, 'comments' => $comments]);
+            } else {
+                return \Redirect::to('bloglist');
+            }
+        }
+
+    }
+
+    static function getBlogData($id)
+    {
+        $data = UserBlog::find($id);
+        $data->load('blogStatus');
+        $blog = $data->toArray();
         $blog['blogTitle'] = UserBlog::convertApostrophe($data['blogTitle']);
         $blog['blogContent'] = UserBlog::convertApostrophe($data['blogContent']);
         $blog['intro'] = editEmail::setContentToEllipse($data['blogContent']);
+        return $blog;
+    }
+
+    static function getBlogComment($id)
+    {
         $data = BlogComment::where('blog_id', $id)->get();
         $data->load('user');
         $comments = array();
@@ -52,7 +82,7 @@ class UserBlogPageController extends Controller
                 $comments[$key]['created_at'] = UserBlog::time_elapsed_string($value['created_at']);
             }
         }
-        return \View::make('user.blog_page.blog_page')->with(['blog' => $blog, 'comments' => $comments]);
+        return $comments;
     }
 
     public function commentInBlog(Request $request)
@@ -130,9 +160,9 @@ class UserBlogPageController extends Controller
             }
         }
 
-        $type_link = strtolower($blog['blog_type']['name']) . "_page/" ;
+        $type_link = strtolower($blog['blog_type']['name']) . "_page/";
 
-        return redirect('user/'. $type_link . $blog['id'])->with(['blog' => $blog, 'comments' => $comments]);
+        return redirect('user/' . $type_link . $blog['id'])->with(['blog' => $blog, 'comments' => $comments]);
     }
 
 
