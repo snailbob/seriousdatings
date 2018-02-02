@@ -139,7 +139,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('privacy_settings', 'UsersController@privacySettings');
     Route::get('payment_gateway', 'PaymentMethodController@paymentGateway');
     Route::post('square_payment', 'PaymentMethodController@squarePayment');
-
+    
     
     
 });
@@ -177,6 +177,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('block_user', 'UserBlockController@store');
     Route::post('speedBlock', 'UserBlockController@speedBlock');
 
+    Route::post('save_echeck', 'PaymentMethodController@postSaveEcheck');
     
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
     Route::post('send_gift', 'GiftCardController@sendGiftCards');
