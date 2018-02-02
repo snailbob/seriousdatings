@@ -30,8 +30,7 @@ class AdsSpaceController extends Controller
 
         if(!empty($ads)){
             foreach($ads as $r=>$value){
-                $price = AdsPricing::find($value->days);
-                
+                $price = AdsPricing::find($value->id);
                 //calculate remaining days
                 $now = time(); // or your date as well
                 $start_date = strtotime($value->created_at);
@@ -40,8 +39,8 @@ class AdsSpaceController extends Controller
                 $passed_days = floor($datediff / (60 * 60 * 24));
                 $value->passed_days = $passed_days;
                 $value->ad_details = $price;
-                $value->remaining = $price->days - $passed_days;
-                
+                $value->remaining = $price->days;
+
                 //filter expired ads
                 if($price->days >= $passed_days){
                     $arr[] = $value;
