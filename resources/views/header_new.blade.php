@@ -124,6 +124,15 @@
           $("#language, #gender, #lookingfor, #age, #ageto,#zipcode, #weight, #relation, #relation-ship ").selectbox();
   });
 </script> 
+
+
+@if(request()->segment(1) == 'payment_gateway')
+    <!-- link to the SqPaymentForm library -->
+    <script type="text/javascript" src="https://js.squareup.com/v2/paymentform"></script>
+    <script type="text/javascript" src="{{ url().'/public/js/sqpaymentform.js'}}"></script>
+@endif
+
+
 <script type="text/javascript">
     /*document.getElementById("uploadBtn").onchange = function () {
                 document.getElementById("uploadFile").value = this.value;
@@ -151,6 +160,11 @@
  
 </head>
 <body class="hidden" ng-controller="bodyController" id="plain-code" ng-cloak>
+
+    <div class="back-btn hidden text-center">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        <br><span class="small">BACK</span>
+    </div>
 
     <toast></toast>
     @include('user.shared.fb_script')

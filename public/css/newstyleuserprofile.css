@@ -724,14 +724,12 @@ input[type=checkbox]:checked ~ #menu{
     margin: 0 0 14px 10px;
 }
 
-.checkbox label
-/*{margin-left:25px;font-size: 12px; color: #404040;}*/
-
+/* .checkbox label
 {
     margin-left: 0px;
     font-size: 12px;
     color: #404040;
-}
+} */
 
 .card {
     width: 31%;

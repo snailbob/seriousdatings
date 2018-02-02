@@ -1,4 +1,32 @@
 $(document).ready(function () {
+    
+    if(history.length > 2){
+        $('.back-btn').removeClass('hidden');
+        $('.back-btn').on('click', function(){
+            history.back();
+        });
+    }
+
+    //dating plan subscribe
+    $('.continue-plan').on('click', function(){
+        var data = $(this).data();
+
+        $.confirm({
+            content: 'By clicking the button, you agree with our <a href="'+base_url+'/pages/Terms%20and%20condiitions" target="_blank">terms and conditions</a>.',
+            title: 'CONFIRM',
+            buttons: {
+                AGREE:{
+                    text: 'AGREE &amp; PROCEED TO PAYMENT',
+                    btnClass: 'btn-default',
+                    action: function(scope, button){
+                        location.href = window.base_url+'/payment_gateway?'+$.param(data);
+                    }
+                }
+            }
+        });
+        return false;
+    });
+
     // $("#mate-carousel").flipster({
     //     style: 'carousel',
     //     spacing: 1,
@@ -390,7 +418,7 @@ function viewFullMessages(id, m_id) {
 }
 
 function parentCreatSMS(user_id,user_FirstName){
-      var scope = angular.element(document.getElementById('plain-code')).scope();
-            scope.createSMS(user_id,user_FirstName);
+    var scope = angular.element(document.getElementById('plain-code')).scope();
+    scope.createSMS(user_id,user_FirstName);
 }
 

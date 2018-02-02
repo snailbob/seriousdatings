@@ -8580,6 +8580,13 @@ nav.video-menu:hover>ul a li {
 	left: -75px;
 }
 
+<<<<<<< HEAD
+.uib-time > input{
+	width: 100px;
+}
+
+/*form-control text-center ng-pristine ng-untouched ng-valid ng-valid-hours ng-not-empty ng-valid-maxlength*/
+=======
 .back-btn{
 	background: #efefef;
     padding: 10px 15px;
@@ -8631,9 +8638,4 @@ nav.video-menu:hover>ul a li {
 .table.table-borderless > tbody > tr > td{
 	border-top: 0;
 }
-
-.uib-time > input{
-	width: 100px;
-}
-
-/*form-control text-center ng-pristine ng-untouched ng-valid ng-valid-hours ng-not-empty ng-valid-maxlength*/
+>>>>>>> origin/bankdraft

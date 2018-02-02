@@ -26,133 +26,149 @@
 <div class="top-nav">
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
-                <div class="left">
-                    <div class="language">
-                        <span id="google_translate_element" style="height:38px;font-size: 13px;color: #666;border-color: #ccc;"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-10">
+            <div class="col-md-12">
 
-                @if(Auth::check())
-                <div class="text_center_sm flt_right_md custom">
+                <div class="header-slider">
 
-                    <div class="btn-group">
-                        <a href="{!! url() !!}/profile" class="btn btn-default">{!! Auth::user() -> firstName !!}</a>
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="{{url().'/profile_settings'}}">
-                                    <i class="fa fa-user fa-fw" aria-hidden="true"></i> Profile Settings</a>
-                            </li>
-
-                            <li>
-                                <a href="{{url().'/payment_gateway'}}">
-                                    <i class="fa fa-credit-card fa-fw" aria-hidden="true"></i> Payment Gateway</a>
-                            </li>
-
-                            <li>
-                                <a href="{{url().'/privacy_settings'}}">
-                                    <i class="fa fa-cog fa-fw" aria-hidden="true"></i> Privacy Setting</a>
-                            </li>
-                            <li>
-                                <a href="{!! url() !!}/logout">
-                                    <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout</a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                    <li id="notification_li" class="notifica_li">
-                        <a href="#" id="notificationLink">
-                            <button type="button" class="btn btn-danger">Notifications
-                                <span class="badge">@{{ unread_noti_count }}</span>
-                            </button>
-                        </a>
-
-                        <div id="notificationContainer">
-
-                            <div id="notificationTitle">
-                                <a class="pull-left" ng-click="markAllNotiRead()">Mark all as read</a>
-                                Notifications
+                    <div class="header-scroll">
+                        <div class="pull-left">
+                            <div class="language">
+                                <span id="google_translate_element" style="height:38px;font-size: 13px;color: #666;border-color: #ccc;"></span>
                             </div>
-                            <div id="notificationsBody" class="notifications">
-                                <div class="list-group">
-                                    <a ng-click="viewNoti(noti)" class="list-group-item text-left" ng-repeat="noti in notifications">
-                                        <small class="pull-right opacity-6" style="font-size: 12px;">
-                                            @{{ noti.ago }}
-                                            <div class="noti-type">@{{ noti.notif_label }}</div>
-                                        </small>
-                                        <img ng-src="@{{noti.from_info.photo}}" alt="" class="pull-left img-thumbnail img-circle" width="40">
-                                        <span ng-class="{'text-strong' : !noti.is_read}">@{{ noti.message }}</span>
-
-                                    </a>
-                                </div>
-
-                            </div>
-                            {{--
-                            <div id="notificationFooter">
-                                <a href="#">See All</a>
-                            </div> --}}
                         </div>
-                    </li>
-                </div>
 
-                @else
+                        <div class="pull-right">
+                        
+                            @if(Auth::check())
+                            <div class="text_center_sm flt_right_md custom">
 
-                <ul class=" navbar-right login-right-nav">
-                    <li class="dropdown">
-                        <a class="btn btn-danger dropdown-toggle btn-login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <b>Login</b>
-                            <span class="caret"></span>
-                        </a>
-                        <ul id="login-dp" class="dropdown-menu">
-                            <li>
-                                <div class="row">
-                                    <div id="errorMessageLog"></div>
-                                    <div class="col-md-12">
-                                        {!! Form::open(array('url' => 'login', 'class' => 'form', 'id' => 'login-nav')) !!}
-                                        <div class="form-group">
-                                            <label class="sr-only" for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="sr-only" for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                                            <!-- <div class="help-block text-right"><a href="{!! url() !!}/forgotPassword">Forget the password ?</a></div> -->
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" id="remember" name="check" checked> keep me logged-in
+                                <div class="btn-group hidden-xs" uib-dropdown dropdown-append-to-body="true">
+                                    <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
+                                        {{ Auth::user() -> firstName }}
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                        <li>
+                                            <a href="{{url().'/profile_settings'}}">
+                                                <i class="fa fa-user fa-fw" aria-hidden="true"></i> Profile Settings</a>
+                                        </li>
 
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                            <div class="help-block text-right">
-                                                <a href="{!! url() !!}/forgotPassword">Forget the password ?</a>
-                                            </div>
-                                        </div>
-                                        {!! Form::close() !!}
-                                    </div>
+                                        <li>
+                                            <a href="{{url().'/payment_gateway'}}">
+                                                <i class="fa fa-credit-card fa-fw" aria-hidden="true"></i> Payment Gateway</a>
+                                        </li>
+
+                                        <li>
+                                            <a href="{{url().'/privacy_settings'}}">
+                                                <i class="fa fa-cog fa-fw" aria-hidden="true"></i> Privacy Setting</a>
+                                        </li>
+                                        <li>
+                                            <a href="{!! url() !!}/logout">
+                                                <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout</a>
+                                        </li>
+
+                                    </ul>
                                 </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="btn btn-success" href="{{ url() }}/users/create">Join Now</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-info btn-fb" aria-label="Left Align" onclick="checkLoginState()">
-                            <span class="fa fa-facebook-f"></span> Login with Facebook</a>
-                    </li>
-                </ul>
 
-                {{-- @include('login_form') --}} @endif
+
+
+
+                                <li id="notification_li" class="notifica_li">
+                                    <a href="#" id="notificationLink">
+                                        <button type="button" class="btn btn-danger">
+                                            <span class="hidden-xs">Notifications</span>
+                                            <span class="hidden-sm hidden-lg hidden-md">
+                                                <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="badge">@{{ unread_noti_count }}</span>
+                                        </button>
+                                    </a>
+
+                                    <div id="notificationContainer">
+
+                                        <div id="notificationTitle">
+                                            <a class="pull-left" ng-click="markAllNotiRead()">Mark all as read</a>
+                                            Notifications
+                                        </div>
+                                        <div id="notificationsBody" class="notifications">
+                                            <div class="list-group">
+                                                <a ng-click="viewNoti(noti)" class="list-group-item text-left" ng-repeat="noti in notifications">
+                                                    <small class="pull-right opacity-6" style="font-size: 12px;">
+                                                        @{{ noti.ago }}
+                                                        <div class="noti-type">@{{ noti.notif_label }}</div>
+                                                    </small>
+                                                    <img ng-src="@{{noti.from_info.photo}}" alt="" class="pull-left img-thumbnail img-circle" width="40">
+                                                    <span ng-class="{'text-strong' : !noti.is_read}">@{{ noti.message }}</span>
+
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                        {{--
+                                        <div id="notificationFooter">
+                                            <a href="#">See All</a>
+                                        </div> --}}
+                                    </div>
+                                </li>
+                            </div>
+
+                            @else
+
+                            <ul class=" navbar-right login-right-nav">
+                                <li class="dropdown">
+                                    <a class="btn btn-danger dropdown-toggle btn-login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <b>Login</b>
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul id="login-dp" class="dropdown-menu">
+                                        <li>
+                                            <div class="row">
+                                                <div id="errorMessageLog"></div>
+                                                <div class="col-md-12">
+                                                    {!! Form::open(array('url' => 'login', 'class' => 'form', 'id' => 'login-nav')) !!}
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="username">Username</label>
+                                                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="password">Password</label>
+                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                                        <!-- <div class="help-block text-right"><a href="{!! url() !!}/forgotPassword">Forget the password ?</a></div> -->
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" id="remember" name="check" checked> keep me logged-in
+
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                                        <div class="help-block text-right">
+                                                            <a href="{!! url() !!}/forgotPassword">Forget the password ?</a>
+                                                        </div>
+                                                    </div>
+                                                    {!! Form::close() !!}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="btn btn-success" href="{{ url() }}/users/create">Join Now</a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-info btn-fb" aria-label="Left Align" onclick="checkLoginState()">
+                                        <span class="fa fa-facebook-f"></span> Login with Facebook</a>
+                                </li>
+                            </ul>
+
+                            {{-- @include('login_form') --}} @endif
+                        
+                        </div>
+                    </div>
+
+                
+                </div>
 
             </div>
         </div>
@@ -245,6 +261,25 @@
                     </li>
                     <li>
                         <a href="{!! url() !!}/online_chat">Online Chat</a>
+                    </li>
+
+                    <li class="visible-xs">
+                        <a href="{{url().'/profile_settings'}}">
+                            Profile Settings</a>
+                    </li>
+
+                    <li class="visible-xs">
+                        <a href="{{url().'/payment_gateway'}}">
+                            Payment Gateway</a>
+                    </li>
+
+                    <li class="visible-xs">
+                        <a href="{{url().'/privacy_settings'}}">
+                            Privacy Setting</a>
+                    </li>
+                    <li class="visible-xs">
+                        <a href="{!! url() !!}/logout">
+                            Logout</a>
                     </li>
 
                     @if(Auth::User())
