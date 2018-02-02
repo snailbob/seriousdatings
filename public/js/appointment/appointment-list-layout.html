@@ -14,23 +14,26 @@
     </select>
     <ul id="notebook_ul">
 
-        <li ng-click="lunchDetailsAppointment(notebook);"  ng-repeat="notebook in AppointmentList | filter:query | orderBy: orderList" >
+        <li ng-click="lunchDetailsAppointment(notebook);"  ng-repeat="notebook in AppointmentList | filter:query | orderBy: appCreated" >
+               <input type="hidden" id="IdappID" value="{{notebook.appID}}" name="">
             <a >
             <img ng-src="{{notebook.fromInfo.photo}}" alt="" class="pull-left img-thumbnail img-circle" style="width: 40px;height: 40px;"/>
             From: {{notebook.fromInfo.firstName}}<br/>
 
             <small class=" opacity-6" style="font-size: 12px;">
-                Description: {{notebook.appDesc}}<br/>
-                Days: {{notebook.appDays}}
+                Requested Date: {{notebook.appDays}}
             </small>
             <br/>
             <small class=" opacity-6" style="font-size: 8px;">
-                Tap view more datails...
+                Tap to Accept or decline
             </small>
             <div class="right top">
                 <small class="pull-right opacity-6" style="font-size: 12px;">
                 {{notebook.appCreated}}<br/>
-                    <i class="fa fa-calendar" aria-hidden="true"></i>{{notebook.appStatus}}
+                    <div ng-model="appointMentStatus" ng-init="appointMentStatus = notebook.appStatus">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <label ng-bind-html="appointMentStatus" id="{{notebook.appID}}-appointMentStatus"></label>
+                    </div>
                 </small>
 
             </div>

@@ -43,7 +43,7 @@
 
       <div class="col-md-12">
         <div class="padding-top-15 padding-bottom plan-banner">
-          <div class="text-banner">
+          <div class="text-banner hidden-xs">
             <h1>WANT FULL ACCESS TO SERIOUSDATINGS?</h1>
             <p class="lead">Upgrade now and lock in your rate</p>
 
@@ -106,7 +106,8 @@
                           @endif
                         </div>
                         <div class="countinue-btn-outer">
-                          <a href="{!! url() !!}/payment_checkout/{!! $plan -> id !!}">Continue Plan</a>
+                            {{--  data-"{!! url() !!}/payment_checkout/{!! $plan -> id !!}"  --}}
+                          <a class="continue-plan" data-type="plan" data-price="{{ $plan -> price }}" data-id="{{ $plan -> id }}">Continue Plan</a>
                         </div>
                       </div>
                     </div>

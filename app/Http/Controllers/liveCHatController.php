@@ -23,6 +23,7 @@ use Redirect;
 use Input;
 use App\User;
 use App\Http\Controllers\UsersController;
+use App\UserBlocks;
 
 class liveCHatController extends Controller
 {
@@ -51,14 +52,26 @@ class liveCHatController extends Controller
 		return $user;
 	}
 
+
+
+	public static function removeBlockedUser($UserId){
+     return  UserBlocks::where('user_id',$UserId)->get();
+    }
+
+
 	public function getAllUserLocation(){
 		$user_id = Auth::user()->id;
 		
 		$user_ctrl = new UsersController();
 		// $user = User::find($id);
-
-		$users  = User::where('id','!=' ,$user_id)->get();
-
+		$notIn  = array($user_id);
+		$blockedUser = self::removeBlockedUser($user_id);
+		foreach ($blockedUser as $key => $value) {
+			$notIn[] = $value->user_blocked_id;
+		}
+			
+		$users = User::whereNotIn('id', $notIn)->get();
+		
         $format_user = array();
 
         if(!empty($users)){

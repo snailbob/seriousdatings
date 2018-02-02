@@ -1,4 +1,4 @@
-<div class="col-md-3" style="z-index: 100;">
+<div class="col-md-3">
     <div class="left-section">
         <uib-accordion>
             <div uib-accordion-group class="panel-danger">
@@ -149,7 +149,7 @@
                 </a> 
             </div>
             <div class="connect-with-left"> 
-                <a href="#">
+                <a ng-click="areYouReadyToDate(true)">
                     <div class="serious-icons">{!! HTML::Image("public/images/serious-dating-icon.png" ,"") !!}</div>
                     <h2>Serious Dating</h2>
                 </a> 
@@ -161,7 +161,7 @@
                 </a> 
             </div>
             <div class="connect-with-left"> 
-                <a href="#">
+                <a href="{{ url().'/travels' }}" target="_blank">
                     <div class="serious-icons">{!! HTML::Image("public/images/serious-vecation-icon.png" ,"") !!}</div>
                     <h2>Serious Vacation</h2>
                 </a> 

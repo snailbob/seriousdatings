@@ -79,7 +79,10 @@ function initMap() {
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 			});
 	if (current_page == 1 /*means current route is on speeddatingnew*/) {
-		getAllUserLocation(map);
+        setTimeout(function(){
+
+            getAllUserLocation(map);
+        },500)
 	}
 
 	
@@ -123,7 +126,7 @@ function getAllUserLocation(map){
             		new CustomMarker(
 					new google.maps.LatLng(key.latitude,key.longitude), 
 					map, 
-					key.photo,key.id,key.gender)
+					key.photo,key.id,key.gender+' markerID-'+key.id)
             	
 
             	});
@@ -136,6 +139,7 @@ function getAllUserLocation(map){
 var menuDialog;
 var ifClicked = false;
 var eahIndexForLoop = [];
+var parentCOnfirm;
 function getMenus(){
 
 	if (ifClicked) {
@@ -146,7 +150,7 @@ function getMenus(){
 		$("#floating-panel").css("overflow-y","");
         $(".toggle-menus-data").html("Menu");
         $(".filter-option-map").css("display","none");
-
+        $("#pwait").css('display','');
 	}else{
 		$("#floating-panel").css("overflow-y","scroll");
 		$("#floating-panel").width(500).height(600);
@@ -154,33 +158,43 @@ function getMenus(){
 		$("#floating-panel2").css("display","none");
 		$(".toggle-menus-data").html("Minimize");
 		$(".filter-option-map").css("display","");
-		
+        $("#pwait").css('display','');
 			$.each(all_data,function(index,key){
 				setTimeout(function(){
 
             eahIndexForLoop.push({"NewIndex": index, "NewID": all_data[index].id});
 
-            $("#listOFdata").append('<div class="upcoming-event-people">'+
-                      '<div class="upcoming-people-row">'+
-                        '<div class="left-upcoming-user"><a href="#" ><img src="'+all_data[index].photo+'"  alt=""></a></div>'+
-                        '<div class="upcoming-user-list">'+
-                          '<div class="upcoming-user-icon">'+
-                            /*'<i class="fa fa-user-plus" ng-click="addFriendByUserID('+all_data[index].id+')" uib-tooltip="Add as Friend"></i>'+
-                            '<i class="fa fa-gift" uib-tooltip="Send Gift"></i>'+
-                            '<i class="fa fa-fast-forward" ng-click="gotoliveChat('+all_data[index].id+')" uib-tooltip="Speed Dating"></i>'+
-                            '<i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>'+*/
-                          '</div>'+
-                          '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+all_data[index].percent+'%</span></h2>'+
-                          '  <p><a href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">view more options and details..</a></p>'+
-                        '</div>'+
-                      '</div>'+
-                    '</div>');
 
+             $("#listOFdata").slideUp(1000, function(){ 
+                  
+                $("#listOFdata").append('<div class="upcoming-event-people removable-'+all_data[index].id+'">'+
+                          '<div class="upcoming-people-row">'+
+                            '<div class="left-upcoming-user"><a href="#" ><img src="'+all_data[index].photo+'"  alt=""></a></div>'+
+                            '<div class="upcoming-user-list">'+
+                              '<div class="upcoming-user-icon">'+
+                                /*'<i class="fa fa-user-plus" ng-click="addFriendByUserID('+all_data[index].id+')" uib-tooltip="Add as Friend"></i>'+
+                                '<i class="fa fa-gift" uib-tooltip="Send Gift"></i>'+
+                                '<i class="fa fa-fast-forward" ng-click="gotoliveChat('+all_data[index].id+')" uib-tooltip="Speed Dating"></i>'+
+                                '<i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>'+*/
+                              '</div>'+
+                              '<h2><a class="profile-link" href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">'+all_data[index].firstName+ ' '+all_data[index].lastName+'</a> <span class="percent">'+all_data[index].percent+'%</span></h2>'+
+                              '  <p><a href="javascript:functionMoreInfoUser(\''+all_data[index].id+'\',\''+index+'\');">view more options and details..</a></p>'+
+                            '</div>'+
+                          '</div>'+
+                        '</div>').hide();
+                $('.upcoming-event-people').slideDown('slow');
+                 $("#listOFdata").slideDown('slow'); 
+             });
 
                     },300)
 
                 });
+            setTimeout(function(){
+                $("#pwait").css('display','none');
+            },300)
 		ifClicked =true;
+
+                 
 	}
 }
 
@@ -354,10 +368,16 @@ function viewAllDetails(id){
 }
 
 
-function getAppointmentFromAngular(dataID){
-    SearhValueOFdata     
+function getAppointmentFromAngular(dataID){  
       var scope = angular.element(document.getElementById('map')).scope();
             scope.addAppointMentNew(SearhValueOFdata(dataID));
+}
+function actionViVo(user_id,action){
+    var UrLs = '/online_chat'
+        UrLs +='?user_id='+user_id;
+        UrLs +='&action_type='+action;
+    var win = window.open(base_url+UrLs, '_blank');
+    win.focus();
 }
 
 
@@ -368,7 +388,6 @@ function  NextPreviousValue(id,element) {
         $("."+element).css("display","none");
 
     }
-
     var info_item = '<div>'+
         '<img src="'+resultObjectInfo.photo+'" class="del" alt="delete"  title="Remove" />'+
         '<span>'+
@@ -382,10 +401,9 @@ function  NextPreviousValue(id,element) {
         '<div class="plug-menu-option">'+
         '<ul class="option-menus">'+
 
-        '<li class="fa fa-microphone" title="Voice call"></li>'+
-        '<li class="fa fa-fast-forward" title="Speed dating video chat"></li>'+
+        '<li class="fa fa-microphone" title="Voice call" onclick="actionViVo(\''+resultObjectInfo.id+'\',\''+'voice'+'\')"></li>'+
+        '<li class="fa fa-fast-forward" title="Speed dating video chat" onclick="actionViVo(\''+resultObjectInfo.id+'\',\''+'video'+'\')"></li>'+
         '<li class="fa fa-gift" title="Virtual Gift"></li>'+
-        '<li class="fa fa-comments" title="Send Message"></li>'+
         '<li class="fa fa-eye" title="wink"></li>'+
         '<li class="fa fa-user-plus" title="Add User"></li>'+
         '<li class="fa fa-calendar-check-o" title="Appointment" onclick="getAppointmentFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
@@ -442,13 +460,14 @@ var setTitleLastFirstName = function (id) {
  function functionMoreInfoUser(id,index){
     var counter = index;
 
-	$.confirm({
+	 parentCOnfirm = $.confirm({
 		    title: '<div id="title-item-dialog">'+setTitleLastFirstName(id)+'</div>',
 		    columnClass: 'col-md-6 col-md-offset-3',
 		    content: '<div id="list-item-dialog">'+NextPreviousValue(id,'')+'</div>',
 		    theme: 'material',
 		    type: 'red',
 		    icon: 'fa fa-user',
+            lazyOpen: true,
 		    buttons: {
 
 		    viewINfo: {
@@ -482,6 +501,7 @@ var setTitleLastFirstName = function (id) {
                 },
 		    }
 		});
+    parentCOnfirm.open();
 
 
 }

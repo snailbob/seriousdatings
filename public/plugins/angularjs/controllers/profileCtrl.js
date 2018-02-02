@@ -8,7 +8,8 @@ ngApp.controller('profileCtrl', [
 	'myHttpService',
 	'$log',
 	'$ngConfirm',
-	function ($scope, $uibModal, $interval, profileService, myHttpService, $log, $ngConfirm) {
+	'$timeout',
+	function ($scope, $uibModal, $interval, profileService, myHttpService, $log, $ngConfirm, $timeout) {
 
 		var ind = 0;
 		var count = 3;
@@ -104,22 +105,26 @@ ngApp.controller('profileCtrl', [
 					var page = 1;
 					var nextP = false;
 					$scope.matchUsers = data;
-					for (var i = 1; i <= data.length; i++) {
-						if ((i) % count == 0) {
-							$scope.matchUsers[i - 1].page = page;
-							nextP = true;
-						} else {
-							if (nextP) {
-								page++;
-								nextP = false;
+
+					$timeout(function(){
+						for (var i = 1; i <= data.length; i++) {
+							if ((i) % count == 0) {
+								$scope.matchUsers[i - 1].page = page;
+								nextP = true;
+							} else {
+								if (nextP) {
+									page++;
+									nextP = false;
+								}
+								$scope.matchUsers[i - 1].page = page;
 							}
-							$scope.matchUsers[i - 1].page = page;
 						}
-					}
-					total_data = page;
-					if (page == 1) {
-						$scope.nextButton = true;
-					}
+						total_data = page;
+						if (page == 1) {
+							$scope.nextButton = true;
+						}
+					}, 500);
+
 					// console.log($scope.matchUsers, total_data);
 				});
 			}

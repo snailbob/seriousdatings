@@ -59,7 +59,7 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 	$scope.availableTime = [];
 
 	$scope.addAppointMentNew = function(userInfos) {
-	
+				// console.log(userInfos);
 				httServices.getWithParams('getTimeAvailability',{'ids':userInfos.id}).then(function (res) {
 				
 						$scope.viewLayoutAppoinment(res.data,userInfos);	
@@ -72,15 +72,19 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 			$ngConfirm({
 				title:'',
 				contentUrl:base_url+'/public/js/appointment/appointment-layout.html',
-                columnClass: 'medium', 
+                boxWidth: '450px',
+    			useBootstrap: false,
                 animation: 'zoom',
                 backgroundDismiss: true,
                 backgroundDismissAnimation: 'glow',
                 theme: 'material',
                 type:'purple',
+                lazyOpen: true,
                  onScopeReady: function ($scoped) {
+                 	var self = this;
                  	var counter = 0;
                  	   $scoped.incrementingData =counter;
+                       $scoped.allAvailTimelength = dataAvialable.avail.length;
                        $scoped.allAvailTime = dataAvialable;
                        $scoped.userInfo = userData;
                        $scoped.previous = function () {
@@ -122,13 +126,67 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 							
 								}).done(function (response) {
 								
-									console.log(response);
+									$ngConfirm({
+                                                title: 'Hi',
+                                                icon: 'fa fa-smile-o',
+                                                theme: 'modern',
+                                                type: 'blue',
+                                                content: 'Appointment successfully send to.'+userData.firstName,
+                                                animation: 'scale',
+                                                closeAnimation: 'scale',
+                                                buttons: {
+                                                   
+                                                    close: function () {
+                                                        self.close();
+                                                    }
+                                                },
+                                            })
+
 								}).fail(function () {
 									alert('Something went wrong.');
 								});
 							
 					   }
-					
+
+				// http://localhost/seriousdatings/online_chat?user_id=163&action_type=voice
+
+						$scoped.callMeNow = function(user_id,action_type){
+									var UrLs = '/online_chat'
+										UrLs +='?user_id='+user_id;
+										UrLs +='&action_type='+action_type
+									var win = window.open(httServices.url+UrLs, '_blank');
+									win.focus();
+						}
+						$scoped.blockUser = function(u){
+							console.log(u);
+							var fullName = u.firstName+' '+u.lastName;
+					        httServices.post('speedBlock', u).then(function(res){
+					            console.log(res);
+					            if(res.data.trans){
+
+					            	$ngConfirm({
+                                                title: fullName,
+                                                icon: 'fa fa-check-circle',
+                                                theme: 'modern',
+                                                type: 'red',
+                                                content: res.data.message,
+                                                animation: 'scale',
+                                                closeAnimation: 'scale',
+                                                buttons: {
+                                                   
+                                                    close: function () {
+                                                        self.close();
+                                                         $(".removable-"+u.id).slideUp(3000);
+                                                         $(".markerID-"+u.id).css("display","none");
+                                                          parentCOnfirm.close();
+                                                    }
+                                                },
+                                     	   });
+
+					              
+					            }
+					        });
+					    }
 
 
 

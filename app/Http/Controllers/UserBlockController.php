@@ -50,6 +50,26 @@ class UserBlockController extends Controller
         return response()->json($request->input());
     }
 
+    /*Block User from speedDating Return Bool*/
+    public function speedBlock(Request $request)
+    {
+        $logged_user = Auth::user()->id;
+        $user_blocked_id = $request->input('id');
+
+          $data = UserBlocks::create([
+                'user_id'=>$logged_user,
+                'user_blocked_id'=>$user_blocked_id
+            ]);
+          
+          $message = ['trans' => false,
+                      'message'=>'Fail to block user'];
+          if ($data) {
+             $message = ['trans' => true,
+                      'message'=>'Succesfully Block'];
+          }
+      return response()->json($message);
+    }
+
     /**
      * Display the specified resource.
      *

@@ -29,7 +29,8 @@ class ProfileController extends Controller
         }
         $current_user = Auth::user();
         $current_user->location = $this->format_location($current_user->location);
-        
+        $current_user->is_online = \DB::table('user_online')->where('user_id', $current_user->id)->count();
+
 		//$all_users = User::all();
         // $all_users = DB::table('users')->get();
         $all_users = DB::table('users')->where('gender', '!=', $current_user->gender)->limit(14)->get();
@@ -158,6 +159,7 @@ class ProfileController extends Controller
                 $friends[$inc] = $res_data[0];
                 
                 $friends[$inc]->location = $this->format_location($friends[$inc]->location);
+                $friends[$inc]->is_online = \DB::table('user_online')->where('user_id', $data->id)->count();
 
                 $friends[$inc]->percent = $this->getPercentage(array($current_user_data), $res_data);
                 $friends[$inc]->favorite = $this->getMatchFavorite(array($current_user_data), $res_data);
@@ -233,6 +235,7 @@ class ProfileController extends Controller
         $res = array();
         $res[0]['detail']=$friend[0];
         $res[0]['percent']=$percent;
+        $res[0]['is_online'] = \DB::table('user_online')->where('user_id', $friend[0]->id)->count();
 
         return response()->json($res);
         // dd($res);
@@ -267,6 +270,7 @@ class ProfileController extends Controller
                 $new_user[$i] = $user_data[0]; 
 
                 $new_user[$i]->location = $this->format_location($new_user[$i]->location);
+                $new_user[$i]->is_online = \DB::table('user_online')->where('user_id', $user_data[0]->id)->count();
 
                 $new_user[$i]->percent = $this->getPercentage($current_user, $user_data);
                 $new_user[$i]->favorite = $this->getMatchFavorite($current_user, $user_data);

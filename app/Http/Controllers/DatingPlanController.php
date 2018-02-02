@@ -109,28 +109,33 @@ class DatingPlanController extends Controller
                 $my_subscription->details = (@unserialize($my_subscription->details)) ? unserialize($my_subscription->details) : array();
                 $my_subscription->payment_details = (@unserialize($my_subscription->payment_details)) ? unserialize($my_subscription->payment_details) : array();
 
+                //for square/and not paypal
+                $create_time = $my_subscription->created_at;
+
                 if($my_subscription->gateway == 'paypal'){
                     $create_time = $my_subscription->payment_details['create_time'];
-                    $my_subscription->mode = 'subscribed';
-        
-                    //calculate remaining days
-                    $now = time(); // or your date as well
-                    $subscription_date = strtotime($create_time);
-                    $datediff = $now - $subscription_date;
-
-                    $passed_days = floor($datediff / (60 * 60 * 24));
-
-                    $plan_no_of_days = $this->plan_no_of_days($my_subscription->plan_id);
-                    $my_subscription->plan_details = DB::table('dating_plan')->where('id', $my_subscription->plan_id)->first();
-                    $my_subscription->plan_no_of_days = $plan_no_of_days;
-                    
-                    $my_subscription->subscription_date = date('Y-m-d',$subscription_date);
-                    $my_subscription->passed_days = $passed_days;
-                    $my_subscription->remaining_days = max($plan_no_of_days - $passed_days, 0);
-                    $my_subscription->is_expired = (empty($my_subscription->remaining_days)) ? true : false;
-                    $my_subscription->status_text = ($my_subscription->is_expired) ? 'Expired' : 'Active';
-                    
                 }
+
+
+                $my_subscription->mode = 'subscribed';
+        
+                //calculate remaining days
+                $now = time(); // or your date as well
+                $subscription_date = strtotime($create_time);
+                $datediff = $now - $subscription_date;
+
+                $passed_days = floor($datediff / (60 * 60 * 24));
+
+                $plan_no_of_days = $this->plan_no_of_days($my_subscription->plan_id);
+                $my_subscription->plan_details = DB::table('dating_plan')->where('id', $my_subscription->plan_id)->first();
+                $my_subscription->plan_no_of_days = $plan_no_of_days;
+                
+                $my_subscription->subscription_date = date('Y-m-d',$subscription_date);
+                $my_subscription->passed_days = $passed_days;
+                $my_subscription->remaining_days = max($plan_no_of_days - $passed_days, 0);
+                $my_subscription->is_expired = (empty($my_subscription->remaining_days)) ? true : false;
+                $my_subscription->status_text = ($my_subscription->is_expired) ? 'Expired' : 'Active';
+
             }
             else{
                 $timeActivated = Auth::user()->timeActivated;
