@@ -373,7 +373,12 @@ ngApp.controller('bodyController', [
                 window.location.href = base_url + '/user/profile/' + data.from_info.username;
                 break;
             case 'APPOINTMENT':
-                $scope.viewAppointment();
+                    if (data.notifAppOnly !== "") {
+                        $scope.viewAppointmentActions(data);
+                    }else{
+                        $scope.viewAppointment();
+                        
+                    }
                 break;
             default:
 
@@ -404,7 +409,7 @@ ngApp.controller('bodyController', [
                 function ($scoped) {
                     var self = this;
                     $scoped.AppointmentList = AppointmentData;
-                    $scoped.orderList = "appCreated";
+                    $scoped.orderList = "appDesc";
                     $scoped.appointMentStatus;
                     $scoped.lunchDetailsAppointment = function (data) {
                         $scope.readDetaildAppointment(data,self);
@@ -563,6 +568,21 @@ ngApp.controller('bodyController', [
             })
 
         };
+
+        $scope.viewAppointmentActions = function(data){
+            $scope.reusableNgConfirmAppointment('',
+                'appointment-reply-layout',
+                function ($scoped) {
+                    var self = this;
+                
+                    $scoped.AppointmentDetail = data;
+                    console.log("here",data);
+                
+                }, {
+
+             
+                });
+        }
         /*------------ END BLOCK OF CODE'S FOR APPOINTMENT -----
 
          /*

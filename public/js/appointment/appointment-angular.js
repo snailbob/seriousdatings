@@ -176,8 +176,8 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
                                                    
                                                     close: function () {
                                                         self.close();
-                                                         $(".removable-"+u.id).slideUp(1000);
-                                                          
+                                                         $(".removable-"+u.id).slideUp(3000);
+                                                         $(".markerID-"+u.id).css("display","none");
                                                           parentCOnfirm.close();
                                                     }
                                                 },

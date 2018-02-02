@@ -87,7 +87,7 @@
                 width: 150px;
                 position: absolute;
                 float: right;
-                margin-left: 100;
+                margin-left: 150;
                 margin-top: -100;
                 height: 45;
                 background: #00921a;
@@ -111,9 +111,10 @@
 
                 <img ng-src="{{ userInfo.photo }}" id="new-img-user" alt="delete" title="Remove" />
                 <br>
+                <button type="button" ng-click="callMeNow(userInfo.id,'voice')" class="clean-gray call-me-btnNew">Call Me Now</button>
                  {{ userInfo.lastName }}, {{userInfo.firstName}}<br/>
                  {{ userInfo.location }}
-                 <button type="button" ng-click="callMeNow(userInfo.id,'voice')" class="clean-gray call-me-btnNew">Call Me Now</button>
+                 
             </div>
            
            <div class="insideFormApp">

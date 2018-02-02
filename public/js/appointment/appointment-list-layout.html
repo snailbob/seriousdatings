@@ -14,7 +14,7 @@
     </select>
     <ul id="notebook_ul">
 
-        <li ng-click="lunchDetailsAppointment(notebook);"  ng-repeat="notebook in AppointmentList | filter:query | orderBy: orderList" >
+        <li ng-click="lunchDetailsAppointment(notebook);"  ng-repeat="notebook in AppointmentList | filter:query | orderBy: appCreated" >
                <input type="hidden" id="IdappID" value="{{notebook.appID}}" name="">
             <a >
             <img ng-src="{{notebook.fromInfo.photo}}" alt="" class="pull-left img-thumbnail img-circle" style="width: 40px;height: 40px;"/>

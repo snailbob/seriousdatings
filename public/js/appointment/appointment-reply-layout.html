@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Title</title>
+          
+        </head>
+<body>
+<div class="{{AppointmentDetail.notifAppOnly}}-banner"></div>
+<div class="appointment-banner"><p class="inside-banner">Your Appointment From</p></div>
+<div class="view-appForm">
+<form  id="appointment-form" method="post">
+    <input type="hidden" value="" name="app_to_id" id="app_to_id">
+
+    <div class="row">
+        <div class="col-xs-5">
+                <label>
+                    <img ng-src="{{AppointmentDetail.from_info.photo}}" alt="" class="pull-left img-thumbnail img-circle" style="width: 60px;height: 60px;"/>
+
+
+                </label>
+            <span class="help-block"><small>  To: {{AppointmentDetail.from_info.firstName}}   {{AppointmentDetail.from_info.lastName}}</small></span>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+       <div class="col-xs-7">
+         <span class="help-block"><small>  Requested date: {{AppointmentDetail.notifAppOnlyReply[0].app_days}} </small></span>
+         <hr/>
+         <span class="help-block"><small>  Time: {{AppointmentDetail.notifAppOnlyReply[0].app_time}} </small></span>
+         <hr/>
+         <span class="help-block"><small>  Created: {{AppointmentDetail.notifAppOnlyReply[0].app_created}} </small></span>
+           <hr/>
+         <span class="help-block"><small>  Message: {{AppointmentDetail.notifAppOnlyReply[0].act_reasons}} </small></span>
+      </div>
+    </div>
+
+
+
+</form>
+</div>
+
+
+</body>
+</html>

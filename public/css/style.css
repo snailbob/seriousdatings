@@ -8409,6 +8409,27 @@ box-shadow: 0 0 10px rgba(255, 255, 0, 0.1);
 outline: none;
 }
 
+.REJECTED-banner{
+	background: url(../images/appointment/rejected.png) no-repeat;
+	background-size:contain;
+	height:100%;
+    width: 100%; 
+    margin-top: 80px;
+    position: absolute;
+    z-index: 5000;
+}
+.ACCEPTED-banner{
+
+	background: url(../images/appointment/accept.png) no-repeat;
+	background-size:contain;
+	height:100%;
+    width: 100%; 
+    margin-top: 80px;
+    position: absolute;
+    z-index: 5000;
+}
+
+
 .appointment-banner{
 	background: url(../images/ribbon-appoinmebt.png) no-repeat;
 	height:50px;

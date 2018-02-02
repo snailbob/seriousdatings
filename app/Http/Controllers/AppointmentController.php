@@ -94,11 +94,8 @@ class AppointmentController extends Controller
 
     public function saveAppResponse(Request $request){
 
-            $notifyMessage = 'Appointment rejected';
-        if ($request->input('actType') ==='A'){
-            $notifyMessage = 'Appointment Accepted';
-        }
-
+        $notifyMessage = $request->input('actType');
+       
         NotiFierLogsController::createNotification($request->input('toID'),'APPOINTMENT',$notifyMessage);
 
         $data = \DB::table('user_appoinment_actions')->insert([
@@ -121,7 +118,7 @@ class AppointmentController extends Controller
     public static  function formatAppointMent(){
         $new_value = array();
         $format = array();
-        $data = AppointMent::where('app_to',NotiFierLogsController::getUserId())->get();
+        $data = AppointMent::where('app_to',NotiFierLogsController::getUserId())->orderBy('app_id','desc')->get();
 
         foreach ($data as $key => $value){
             $new_value['appID'] = $value->app_id;
@@ -199,6 +196,21 @@ class AppointmentController extends Controller
             }
             return $timed;
 
+    }
+
+
+    public static function getUserResponseAppointment($appTo){
+        $user_id = Auth::user()->id;
+        $sql_view = "SELECT 
+                      * 
+                    FROM
+                      user_appointment AS upa 
+                      LEFT JOIN user_appoinment_actions AS upac 
+                        ON upac.act_app_id = upa.app_id 
+                    WHERE upa.app_from = '$user_id' 
+                      AND upa.app_to = '$appTo'";
+        $data = DB::select($sql_view);
+        return $data;
     }
 
 

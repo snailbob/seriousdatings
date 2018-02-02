@@ -126,7 +126,7 @@ function getAllUserLocation(map){
             		new CustomMarker(
 					new google.maps.LatLng(key.latitude,key.longitude), 
 					map, 
-					key.photo,key.id,key.gender)
+					key.photo,key.id,key.gender+' markerID-'+key.id)
             	
 
             	});

@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
 use App\NotificationLogs;
+use App\Http\Controllers\AppointmentController;
 use DB;
 
 class NotiFierLogsController extends Controller
@@ -53,15 +54,18 @@ class NotiFierLogsController extends Controller
     public static  function formattedNotification(){
         $new_value = array();
         $format = array();
+
         foreach (self::getMyNotification() as $key => $value){
             $new_value['from_info'] = User::find($value->notif_from);
             $new_value['to'] = $value->notif_to;
-            $new_value['notif_type'] =$value->notif_type;
-            $new_value['message'] = $value->notif_desc;
+            $new_value['message'] = self::notifTypeMessageFormat($value->notif_desc)['message'];
             $new_value['ago'] = self::time_elapsed_string($value->notif_date);
             $new_value['notif_id'] = $value->notif_id;
+            $new_value['notif_type'] =$value->notif_type; 
             $new_value['notif_status'] = self::statusType($value->notif_status);
             $new_value['notif_label'] = self::notifTypeLabel($value->notif_type);
+            $new_value['notifAppOnly'] = self::notifTypeMessageFormat($value->notif_desc)['AppoinTmentOnly'];
+            $new_value['notifAppOnlyReply'] = AppointmentController::getUserResponseAppointment($value->notif_from);
             $format[] = $new_value;
         }
         return $format;
@@ -72,6 +76,32 @@ class NotiFierLogsController extends Controller
         $id = $request->input('id');
         return NotificationLogs::where('notif_id',$id)->update(['notif_status'=>'R']);
     }
+
+    public static function notifTypeMessageFormat($value){
+        $format =array();
+        switch ($value) {
+            case 'R':
+                $format['message'] = "Appointment Rejected";
+                $format['AppoinTmentOnly'] =self::notifAppointmentOnly('R');
+                break;
+            case 'A':
+                 $format['message'] = "Appointment Accepted";
+                 $format['AppoinTmentOnly'] = self::notifAppointmentOnly('A');
+                break;
+            default:
+                 $format['message'] = $value;
+                 $format['AppoinTmentOnly'] = "";
+                break;
+        }
+        return $format;
+    }
+
+    /*R and A means Rejected and Accepted Appointment*/
+    public static function notifAppointmentOnly($key='A'){
+        $data = array('R'=>'REJECTED','A'=>'ACCEPTED');
+        return $data[$key];
+    }
+
 
 
     public static function statusType($type){
