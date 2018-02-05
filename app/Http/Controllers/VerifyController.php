@@ -280,7 +280,7 @@ class VerifyController extends Controller
         $email_to_send = $user['email'];
         // return View::make('email.verification')->with($data);
 
-        Mail::send('mailtemplate', $data, function($message) use ($email_to_send) {
+        Mail::send('email.verification', $data, function($message) use ($email_to_send) {
             $message->to($email_to_send, 'ID')->subject('Verify your seriousdatings account');
         });
 

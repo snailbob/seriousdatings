@@ -41,7 +41,7 @@ class UserBlogPageController extends Controller
         $data->load('blogStatus');
         $blog = $data->toArray();
         if (Auth::check()) {
-            if ($blog['blog_status']['name'] == "Published" || (Auth::user()->role == "admin" || Auth::id() == $blog->user_id)) {
+            if ($blog['blog_status']['name'] == "Published" || (Auth::user()->role == "admin" || Auth::id() == $blog['user_id'])) {
                 $blog = UserBlog::getBlogData($id);
                 $comments = BlogComment::getBlogComment($id);
                 return \View::make('user.blog_page.blog_page')->with(['blog' => $blog, 'comments' => $comments]);
