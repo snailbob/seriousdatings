@@ -201,7 +201,8 @@ ngApp.controller('bodyController', [
                 }
             });
 
-            modalInstance.result.then(function (userAction) {}, function () {
+            modalInstance.result.then(function (userAction) {
+            }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
@@ -215,7 +216,6 @@ ngApp.controller('bodyController', [
                 $scope.isReadyToDate.answer = answer;
             }
         }
-
 
 
         $scope.searchByNameModal = function (size, parentSelector) {
@@ -369,24 +369,22 @@ ngApp.controller('bodyController', [
 
         $scope.notifActions = function (type, data) {
             switch (type) {
-            case 'visit_profile':
-                window.location.href = base_url + '/user/profile/' + data.from_info.username;
-                break;
-            case 'APPOINTMENT':
+                case 'visit_profile':
+                    window.location.href = base_url + '/user/profile/' + data.from_info.username;
+                    break;
+                case 'APPOINTMENT':
                     if (data.notifAppOnly !== "") {
                         $scope.viewAppointmentActions(data);
-                    }else{
+                    } else {
                         $scope.viewAppointment();
-                        
+
                     }
-                break;
-            default:
+                    break;
+                default:
 
             }
 
         };
-
-
 
 
         /*------------ THIS BLOCK OF CODE'S IS FOR APPOINTMENT -----
@@ -412,36 +410,33 @@ ngApp.controller('bodyController', [
                     $scoped.orderList = "appDesc";
                     $scoped.appointMentStatus;
                     $scoped.lunchDetailsAppointment = function (data) {
-                        $scope.readDetaildAppointment(data,self);
+                        $scope.readDetaildAppointment(data, self);
                     };
                 });
         };
 
-        $scope.readDetaildAppointment = function (AppointmentData,grandParent) {
+        $scope.readDetaildAppointment = function (AppointmentData, grandParent) {
             $scope.reusableNgConfirmAppointment('',
                 'appointment-view-layout',
                 function ($scoped) {
                     var self = this;
-                  
-                    
+
+
                     $scoped.AppointmentDetail = AppointmentData;
                     console.log(AppointmentData.appStatus);
-                    $scoped.declineAppointment = function(appID){
-                            $scope.actionDeclineAppointment(appID,AppointmentData,self,grandParent);
-                    
+                    $scoped.declineAppointment = function (appID) {
+                        // $scope.actionDeclineAppointment(appID, AppointmentData, self, grandParent);
+                        $scope.saveAppointmentAction('Sorry mate maybe next time.', appID, 'R', self, grandParent);
                     };
                     $scoped.acceptAppointment = function (appId) {
-                        
-                            $scope.actionAcceptAppointment(appId,AppointmentData,self,grandParent);
-                    
-                    };
-                }, {
 
-             
-                });
+                        $scope.actionAcceptAppointment(appId, AppointmentData, self, grandParent);
+
+                    };
+                }, {});
         };
 
-        $scope.actionDeclineAppointment = function (id, AppointmentData,spcModal,grandParent) {
+        $scope.actionDeclineAppointment = function (id, AppointmentData, spcModal, grandParent) {
             $scope.reusableNgConfirmAppointment('Reasons',
                 'appointment-actions-layout',
                 function ($scoped) {
@@ -457,7 +452,7 @@ ngApp.controller('bodyController', [
                         text: 'Submit',
                         btnClass: 'btn-red icons-btns',
                         action: function (scoped) {
-                            $scope.saveAppointmentAction(scoped.text, id, 'R',spcModal,self,grandParent);
+                            $scope.saveAppointmentAction(scoped.text, id, 'R', spcModal, self, grandParent);
                         }
                     },
 
@@ -468,23 +463,24 @@ ngApp.controller('bodyController', [
                     }
                 });
 
-            };
-            $scope.actionAcceptAppointment = function (id, AppointmentData,spcModal,grandParent) {
-                $scope.reusableNgConfirmAppointment('Message',
-                    'appointment-actions-layout',
-                    function ($scoped) {
-                        var self = this;
-                        $scoped.reasonTitle = "Confirmation Message";
-                        $scoped.reasonType = "success";
-                        $scoped.fontAwesome = "fa-smile-o";
-                        $scoped.appID = id;
+        };
 
-                    }, {
-                        saveBtn: {
-                            text: 'Submit',
+        $scope.actionAcceptAppointment = function (id, AppointmentData, spcModal, grandParent) {
+            $scope.reusableNgConfirmAppointment('Message',
+                'appointment-actions-layout',
+                function ($scoped) {
+                    var self = this;
+                    $scoped.reasonTitle = "Confirmation Message";
+                    $scoped.reasonType = "success";
+                    $scoped.fontAwesome = "fa-smile-o";
+                    $scoped.appID = id;
+
+                }, {
+                    saveBtn: {
+                        text: 'Submit',
                         btnClass: 'btn-green icons-btns',
                         action: function (scoped) {
-                            $scope.saveAppointmentAction(scoped.text, id, 'A',spcModal,self,grandParent);
+                            $scope.saveAppointmentAction(scoped.text, id, 'A', spcModal, self, grandParent);
                         }
                     },
 
@@ -494,12 +490,10 @@ ngApp.controller('bodyController', [
                         }
                     }
                 }
-
             );
         };
 
-
-        $scope.saveAppointmentAction = function (msg, AppID, type,parent,child,grandParent) {
+        $scope.saveAppointmentAction = function (msg, AppID, type, parent, grandParent) {
             $scope.storeAppointment.forEach(function (item) {
                 if (item.appID === AppID) {
                     $scope.updateAppointment({
@@ -507,61 +501,111 @@ ngApp.controller('bodyController', [
                         'msg': msg,
                         'toID': item.fromInfo.id,
                         'actType': type
-                    },parent,child,grandParent,type);
+                    }, parent, grandParent, type);
                 }
             });
         };
 
-        $scope.updateAppointment = function (params,parent,child,grandParent,messageType) {
+        $scope.updateAppointment = function (params, parent, grandParent, messageType) {
             myHttpService.post('saveAppResponse', params).then(function (res) {
                 console.log(res);
                 if (res.data.trans) {
-                    
+
                     var colorType = 'red';
                     var iconType = 'fa fa-frown-o';
                     var contentType = 'Appointment Rejected successfully.';
                     var recipientGrandParent = 'Declined';
 
-                        if (messageType == 'A') {
-                            colorType ='green';
-                            iconType = 'fa fa-smile-o';
-                            contentType = 'Appointment Accepted successfully.';
-                            recipientGrandParent = 'Accepted'
-                        }
+                    if (messageType == 'A') {
+                        colorType = 'green';
+                        iconType = 'fa fa-smile-o';
+                        contentType = 'Appointment Accepted successfully.';
+                        recipientGrandParent = 'Accepted'
+                    }
 
-                         $ngConfirm({
-                            title: 'Alert',
-                            icon: iconType,
-                            theme: 'modern',
-                            type: colorType,
-                            content: contentType,
-                            animation: 'scale',
-                            closeAnimation: 'scale',
-                            buttons: {
-                               
-                                close: function () {
-                                    parent.close();
-                                    child.close();
-                                    var mainAppID = grandParent.$content.find('#IdappID').val();
-                                    grandParent.$content.find('#'+mainAppID+'-appointMentStatus').html(recipientGrandParent);
-                                }
-                            },
-                        })
-}
+                    $ngConfirm({
+                        title: 'Alert',
+                        icon: iconType,
+                        theme: 'modern',
+                        type: colorType,
+                        content: contentType,
+                        animation: 'scale',
+                        closeAnimation: 'scale',
+                        buttons: {
+
+                            close: function () {
+                                parent.close();
+                                var mainAppID = grandParent.$content.find('#IdappID').val();
+                                grandParent.$content.find('#' + mainAppID + '-appointMentStatus').html(recipientGrandParent);
+                            }
+                        },
+                    })
+                }
             });
+
+        // $scope.saveAppointmentAction = function (msg, AppID, type, parent, child, grandParent) {
+        //     $scope.storeAppointment.forEach(function (item) {
+        //         if (item.appID === AppID) {
+        //             $scope.updateAppointment({
+        //                 'appID': AppID,
+        //                 'msg': msg,
+        //                 'toID': item.fromInfo.id,
+        //                 'actType': type
+        //             }, parent, child, grandParent, type);
+        //         }
+        //     });
+        // };
+        //
+        // $scope.updateAppointment = function (params, parent, child, grandParent, messageType) {
+        //     myHttpService.post('saveAppResponse', params).then(function (res) {
+        //         console.log(res);
+        //         if (res.data.trans) {
+        //
+        //             var colorType = 'red';
+        //             var iconType = 'fa fa-frown-o';
+        //             var contentType = 'Appointment Rejected successfully.';
+        //             var recipientGrandParent = 'Declined';
+        //
+        //             if (messageType == 'A') {
+        //                 colorType = 'green';
+        //                 iconType = 'fa fa-smile-o';
+        //                 contentType = 'Appointment Accepted successfully.';
+        //                 recipientGrandParent = 'Accepted'
+        //             }
+        //
+        //             $ngConfirm({
+        //                 title: 'Alert',
+        //                 icon: iconType,
+        //                 theme: 'modern',
+        //                 type: colorType,
+        //                 content: contentType,
+        //                 animation: 'scale',
+        //                 closeAnimation: 'scale',
+        //                 buttons: {
+        //
+        //                     close: function () {
+        //                         parent.close();
+        //                         child.close();
+        //                         var mainAppID = grandParent.$content.find('#IdappID').val();
+        //                         grandParent.$content.find('#' + mainAppID + '-appointMentStatus').html(recipientGrandParent);
+        //                     }
+        //                 },
+        //             })
+        //         }
+        //     });
 
         };
 
         $scope.reusableNgConfirmAppointment = function (title, url, callBack, callBackbuttons = {}) {
             return $ngConfirm({
                 title: title,
-                contentUrl: base_url + '/public/js/appointment/' + url+'.html',
+                contentUrl: base_url + '/public/js/appointment/' + url + '.html',
                 columnClass: 'medium', // to make the width wider.
                 animation: 'zoom',
                 backgroundDismiss: true,
                 backgroundDismissAnimation: 'glow',
                 theme: 'material',
-                lazyOpen:true,
+                lazyOpen: true,
                 onScopeReady: callBack,
                 buttons: callBackbuttons,
 
@@ -569,19 +613,16 @@ ngApp.controller('bodyController', [
 
         };
 
-        $scope.viewAppointmentActions = function(data){
+        $scope.viewAppointmentActions = function (data) {
             $scope.reusableNgConfirmAppointment('',
                 'appointment-reply-layout',
                 function ($scoped) {
                     var self = this;
-                
-                    $scoped.AppointmentDetail = data;
-                    console.log("here",data);
-                
-                }, {
 
-             
-                });
+                    $scoped.AppointmentDetail = data;
+                    console.log("here", data);
+
+                }, {});
         }
         /*------------ END BLOCK OF CODE'S FOR APPOINTMENT -----
 
@@ -614,7 +655,6 @@ ngApp.controller('bodyController', [
         };
 
 
-
         /*====================START MESSAGE============================================*/
         /*Start added by MARK 2017*/
         $scope.emailContact = function (user_id) {
@@ -627,8 +667,12 @@ ngApp.controller('bodyController', [
             var define_image_pull = "";
 
             $('.v-msg').attr('src', base_url + '/public/images/mail/contact_email.png');
+
             $.confirm({
                 /*callback message reques*/
+                type: 'purple',
+                theme: 'material',
+
                 columnClass: 'col-md-6 col-md-offset-3',
                 content: function () {
                     var self = this;
@@ -640,29 +684,35 @@ ngApp.controller('bodyController', [
                         },
                         method: 'get'
                     }).done(function (response) {
+                        console.log(response);
                         angular.forEach(response, function (value, key) {
                             count_even_odd++;
 
-                            if (count_even_odd % 2 === 0) {
-                                define_count_even_odd = "right";
-                                define_image_pull = "darker";
-                                define_image_pull_cool = 'class="right"';
-
-                            }
-                            else {
+                            // if (count_even_odd % 2 === 0) {
+                            //     define_count_even_odd = "right";
+                            //     define_image_pull = "darker";
+                            //     define_image_pull_cool = 'class="right"';
+                            //
+                            // }
+                            // else {
                                 define_count_even_odd = "left";
                                 define_image_pull_cool = "";
-                                define_image_pull = ""
-                            }
+                                define_image_pull = "";
+                            // }
 
                             var statuses = value.m_status == 0 ? 'animate-container' : '';
 
+                            /*      self.setContentAppend('<div class="sms-container  ' + define_image_pull + ' ' + statuses + ' remove-' + value.m_id + '" onclick="viewFullMessages(\'' + value.id + '\',\'' + value.m_id + '\')">' +
+                                      '<img src="' + value.photo + '" alt="Avatar" ' + define_image_pull_cool + ' style="width:100%;">' +
+                                      '<p>Subject: ' + value.m_subject + '<br>Message: ' + value.m_message.substr(0, 5) + '...</p>' +
+                                      '<span class="time-' + define_count_even_odd + '">' + value.message_time + '</span>' +
+                                      '</div>'*/
                             self.setContentAppend('<div class="sms-container  ' + define_image_pull + ' ' + statuses + ' remove-' + value.m_id + '" onclick="viewFullMessages(\'' + value.id + '\',\'' + value.m_id + '\')">' +
                                 '<img src="' + value.photo + '" alt="Avatar" ' + define_image_pull_cool + ' style="width:100%;">' +
-                                '<p>Subject: ' + value.m_subject + '<br>Message: ' + value.m_message.substr(0, 5) + '...</p>' +
+                                '<p><br>' + value.firstName + ': ' + value.m_message + '</p>' +
                                 '<span class="time-' + define_count_even_odd + '">' + value.message_time + '</span>' +
-                                '</div>');
-
+                                '</div>'
+                            );
 
 
                         });
@@ -699,16 +749,16 @@ ngApp.controller('bodyController', [
             $.confirm({
                 title: 'Send Messages to: <b>' + name + '</b>',
                 content: '' +
-                    '<form action="" class="SMS_INFO">' +
-                    '<div class="form-group">' +
-                    '<label>Enter your subject here</label>' +
-                    '<input type="text" placeholder="Subject" class="subject form-control" required />' +
-                    '</div>' +
-                    '<div class="form-group">' +
-                    '<label>Enter your message here</label>' +
-                    '<textarea  placeholder="Message" class="messagecontent form-control" required></textarea>' +
-                    '</div>' +
-                    '</form>',
+                '<form action="" class="SMS_INFO">' +
+                '<div class="form-group">' +
+                '<label>Enter your subject here</label>' +
+                '<input type="text" placeholder="Subject" class="subject form-control" required />' +
+                '</div>' +
+                '<div class="form-group">' +
+                '<label>Enter your message here</label>' +
+                '<textarea  placeholder="Message" class="messagecontent form-control" required></textarea>' +
+                '</div>' +
+                '</form>',
                 closeIcon: true,
                 draggable: true,
                 icon: 'fa fa-envelope',
@@ -751,7 +801,8 @@ ngApp.controller('bodyController', [
                                 theme: 'material',
                                 animation: 'scalex',
                                 buttons: {
-                                    close: function () {},
+                                    close: function () {
+                                    },
                                 }
                             });
 
@@ -797,7 +848,8 @@ ngApp.controller('bodyController', [
                 }
             });
 
-            modalInstance.result.then(function (userAction) {}, function () {
+            modalInstance.result.then(function (userAction) {
+            }, function () {
                 $log.info('xlo clos info modal');
             });
         };
@@ -968,7 +1020,6 @@ ngApp.controller('ModalRandomCompatibleCtrl', ['$scope', '$uibModalInstance', 'i
 }]);
 
 
-
 ngApp.controller('ModalReadyToDateCtrl', ['$scope', '$uibModalInstance', 'items', 'myHttpService', function ($scope, $uibModalInstance, items, myHttpService) {
     $scope.items = items;
     $scope.questions = [];
@@ -1112,10 +1163,10 @@ ngApp.controller('ModalInviteFriendsCtrl', ['$scope', '$uibModalInstance', 'item
     $scope.fbData = {};
     $scope.selectedToInvite = 0;
     $scope.socialTypes = [{
-            name: 'Facebook',
-        }, {
-            name: 'Google+',
-        },
+        name: 'Facebook',
+    }, {
+        name: 'Google+',
+    },
         // {
         //     name: 'Youtube',
         // },
@@ -1489,8 +1540,6 @@ ngApp.controller('eventsController', ['$scope', '$filter', 'myHttpService', '$ti
         // });
 
 
-
-
     };
     /* alert on Drop */
     $scope.alertOnDrop = function (event, delta, revertFunc, jsEvent, ui, view) {
@@ -1620,10 +1669,7 @@ ngApp.controller('eventsController', ['$scope', '$filter', 'myHttpService', '$ti
     init();
 
 
-
 }]);
-
-
 
 
 ngApp.controller('eventDetailsController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', function ($scope, $filter, myHttpService, $timeout, $ngConfirm) {
@@ -1650,7 +1696,6 @@ ngApp.controller('eventDetailsController', ['$scope', '$filter', 'myHttpService'
                 content: 'Event already full.',
                 // theme: 'dark', //'supervan' // 'material', 'bootstrap'
             });
-
 
 
             // $ngConfirm.alert('Event already full.');
@@ -1773,10 +1818,8 @@ ngApp.controller('browseMemberController', ['$scope', '$filter', 'myHttpService'
         ignore: [],
         rules: {},
         messages: {},
-        rules: {
-        },
-        messages: {
-        },
+        rules: {},
+        messages: {},
         highlight: function (element) {
             $(element).closest('.form-group').addClass('has-error');
         },
@@ -1856,10 +1899,8 @@ ngApp.controller('aboutDateController', ['$scope', '$filter', 'myHttpService', '
         ignore: [],
         rules: {},
         messages: {},
-        rules: {
-        },
-        messages: {
-        },
+        rules: {},
+        messages: {},
         highlight: function (element) {
             $(element).closest('.form-group').addClass('has-error');
         },
@@ -2101,8 +2142,8 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
 
         if (n) {
             myHttpService.post('validate_username', {
-                    username: n
-                })
+                username: n
+            })
                 .then(function (res) {
                     console.log(res);
                     $scope.usernameInUse = res.data.count;
@@ -2119,8 +2160,8 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
 
         if (n) {
             myHttpService.post('validate_email', {
-                    email: n
-                })
+                email: n
+            })
                 .then(function (res) {
                     console.log(res);
                     $scope.emailInUse = res.data.count;
@@ -2143,202 +2184,197 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
     }
 
 
+    $scope.timeAvailability = function () {
+        $ngConfirm({
+            title: ' Appointment Availability',
+            contentUrl: base_url + '/public/js/appointment/appointment-availability.html',
+            columnClass: 'medium', // to make the width wider.
+            animation: 'zoom',
+            backgroundDismiss: true,
+            backgroundDismissAnimation: 'glow',
+            theme: 'material',
+            lazyOpen: true,
+            onScopeReady: function ($scoped) {
+                var self = this;
+
+                /*datePickerBootstrap Start Here*/
+                $scoped.today = function () {
+                    $scoped.dt = new Date();
+                };
+                $scoped.today();
+
+                $scoped.clear = function () {
+                    $scoped.dt = null;
+                };
+
+                $scoped.options = {
+                    customClass: getDayClass,
+                    minDate: new Date(),
+                    showWeeks: true
+                };
+
+                // Disable weekend selection
+                function disabled(data) {
+                    var date = data.date,
+                        mode = data.mode;
+                    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+                }
+
+                $scoped.toggleMin = function () {
+                    $scoped.options.minDate = $scoped.options.minDate ? null : new Date();
+                };
+
+                $scoped.toggleMin();
+
+                $scoped.setDate = function (year, month, day) {
+                    $scoped.dt = new Date(year, month, day);
+                };
+
+                var tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                var afterTomorrow = new Date(tomorrow);
+                afterTomorrow.setDate(tomorrow.getDate() + 1);
+                $scoped.events = [
+                    {
+                        date: tomorrow,
+                        status: 'full'
+                    },
+                    {
+                        date: afterTomorrow,
+                        status: 'partially'
+                    }
+                ];
+
+                function getDayClass(data) {
+                    var date = data.date,
+                        mode = data.mode;
+                    if (mode === 'day') {
+                        var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+
+                        for (var i = 0; i < $scoped.events.length; i++) {
+                            var currentDay = new Date($scoped.events[i].date).setHours(0, 0, 0, 0);
+
+                            if (dayToCheck === currentDay) {
+                                return $scoped.events[i].status;
+                            }
+                        }
+                    }
+
+                    return '';
+                }
+
+                /*datePickerBootstrap End Here*/
+                $scoped.timeButton = [];
+                $scoped.arrUnique;
+                $scoped.afterAdd = true;
+                $scoped.colorSBg = [];
+
+                $scoped.addTime = function () {
+
+                    var timeFrom = angular.element('#timeFrom').val();
+                    var fromAMPM = angular.element('#fromAMPM').val();
+                    var timeTo = angular.element('#timeTo').val();
+                    var toAMPM = angular.element('#toAMPM').val();
+                    var Formatted = timeFrom + '' + fromAMPM + '-' + timeTo + '' + toAMPM;
+                    angular.forEach($scoped.timeButton, function (item) {
+                        console.log("sss", item);
+                        if (item == Formatted) {
+                            $ngConfirm('Time Already Added.');
+                            return false;
+                        }
+                    });
+
+                    $scoped.timeButton.push(Formatted);
+                    $scoped.arrUnique = $scoped.unique($scoped.timeButton);
+
+                    $scoped.afterAdd = false;
+                    $scoped.colorSBg.push($scoped.randomCOlors());
 
 
-    $scope.timeAvailability = function(){
-                 $ngConfirm({
-                        title: ' Appointment Availability',
-                        contentUrl: base_url+'/public/js/appointment/appointment-availability.html',
-                        columnClass: 'medium', // to make the width wider.
-                        animation: 'zoom',
-                        backgroundDismiss: true,
-                        backgroundDismissAnimation: 'glow',
-                        theme: 'material',
-                        lazyOpen: true,
-                        onScopeReady: function($scoped){
-                            var self = this;
+                }
+                $scoped.unique = function (origArr) {
+                    var newArr = [],
+                        origLen = origArr.length,
+                        found, x, y;
 
-                            /*datePickerBootstrap Start Here*/
-                            $scoped.today = function() {
-                                        $scoped.dt = new Date();
-                                      };
-                                      $scoped.today();
+                    for (x = 0; x < origLen; x++) {
+                        found = undefined;
+                        for (y = 0; y < newArr.length; y++) {
+                            if (origArr[x] === newArr[y]) {
+                                found = true;
 
-                                      $scoped.clear = function() {
-                                        $scoped.dt = null;
-                                      };
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            newArr.push(origArr[x]);
+                        }
+                    }
+                    return newArr;
+                }
+                $scoped.removeTimed = function (data) {
+                    var index1 = $scoped.arrUnique.indexOf(data);
+                    var index2 = $scoped.timeButton.indexOf(data);
 
-                                      $scoped.options = {
-                                        customClass: getDayClass,
-                                        minDate: new Date(),
-                                        showWeeks: true
-                                      };
+                    $scoped.arrUnique.splice(index1, 1);
+                    $scoped.timeButton = $scoped.arrUnique;
 
-                                      // Disable weekend selection
-                                      function disabled(data) {
-                                        var date = data.date,
-                                          mode = data.mode;
-                                        return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-                                      }
+                    console.log("timeButton", $scoped.timeButton);
+                    console.log("arrUnique", $scoped.arrUnique);
+                }
 
-                                      $scoped.toggleMin = function() {
-                                        $scoped.options.minDate = $scoped.options.minDate ? null : new Date();
-                                      };
+                $scoped.randomCOlors = function () {
+                    var letters = '0123456789ABCDEF';
+                    var color = '#';
+                    for (var i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                    }
+                    return color;
+                }
+                $scoped.saveTimeAvailabityBtn = function () {
 
-                                      $scoped.toggleMin();
+                    var dateAv = angular.element('#dateFull').val();
+                    var timeAll = $scoped.arrUnique;
 
-                                      $scoped.setDate = function(year, month, day) {
-                                        $scoped.dt = new Date(year, month, day);
-                                      };
-
-                                      var tomorrow = new Date();
-                                      tomorrow.setDate(tomorrow.getDate() + 1);
-                                      var afterTomorrow = new Date(tomorrow);
-                                      afterTomorrow.setDate(tomorrow.getDate() + 1);
-                                      $scoped.events = [
-                                        {
-                                          date: tomorrow,
-                                          status: 'full'
-                                        },
-                                        {
-                                          date: afterTomorrow,
-                                          status: 'partially'
-                                        }
-                                      ];
-
-                                      function getDayClass(data) {
-                                        var date = data.date,
-                                          mode = data.mode;
-                                        if (mode === 'day') {
-                                          var dayToCheck = new Date(date).setHours(0,0,0,0);
-
-                                          for (var i = 0; i < $scoped.events.length; i++) {
-                                            var currentDay = new Date($scoped.events[i].date).setHours(0,0,0,0);
-
-                                            if (dayToCheck === currentDay) {
-                                              return $scoped.events[i].status;
-                                            }
-                                          }
-                                        }
-
-                                        return '';
-                                      }
-                                    /*datePickerBootstrap End Here*/
-                                    $scoped.timeButton = [];
-                                    $scoped.arrUnique;
-                                    $scoped.afterAdd = true;
-                                    $scoped.colorSBg = [];
-
-                                    $scoped.addTime = function(){
-                                             
-                                        var timeFrom = angular.element('#timeFrom').val();
-                                        var fromAMPM = angular.element('#fromAMPM').val();
-                                        var timeTo = angular.element('#timeTo').val();
-                                        var toAMPM = angular.element('#toAMPM').val();
-                                        var Formatted = timeFrom+''+fromAMPM+'-'+timeTo+''+toAMPM; 
-                                        angular.forEach($scoped.timeButton, function(item) {
-                                                console.log("sss",item);
-                                              if(item== Formatted) {
-                                                   $ngConfirm('Time Already Added.');
-                                                    return false;
-                                              }
-                                          });
-                                        
-                                          $scoped.timeButton.push(Formatted);
-                                          $scoped.arrUnique = $scoped.unique($scoped.timeButton);
-                                            
-                                         $scoped.afterAdd = false;
-                                         $scoped.colorSBg.push($scoped.randomCOlors());
-                                       
-                                          
-                                    }
-                                    $scoped.unique  = function(origArr) {
-                                                var newArr = [],
-                                                    origLen = origArr.length,
-                                                    found, x, y;
-
-                                                for (x = 0; x < origLen; x++) {
-                                                    found = undefined;
-                                                    for (y = 0; y < newArr.length; y++) {
-                                                        if (origArr[x] === newArr[y]) {
-                                                            found = true;
-
-                                                            break;
-                                                        }
-                                                    }
-                                                    if (!found) {
-                                                        newArr.push(origArr[x]);
-                                                    }   
-                                                }
-                                                return newArr;
-                                     }
-                                     $scoped.removeTimed = function(data){
-                                        var index1 = $scoped.arrUnique.indexOf(data);
-                                        var index2 = $scoped.timeButton.indexOf(data);
-                                       
-                                            $scoped.arrUnique.splice(index1, 1);
-                                            $scoped.timeButton =$scoped.arrUnique;
-                                            
-                                        console.log("timeButton",$scoped.timeButton);
-                                        console.log("arrUnique",$scoped.arrUnique);
-                                     }
-
-                                     $scoped.randomCOlors = function () {
-                                              var letters = '0123456789ABCDEF';
-                                              var color = '#';
-                                              for (var i = 0; i < 6; i++) {
-                                                color += letters[Math.floor(Math.random() * 16)];
-                                              }
-                                              return color;
-                                        }
-                                      $scoped.saveTimeAvailabityBtn = function (){
-                                               
-                                       var dateAv=  angular.element('#dateFull').val();
-                                       var timeAll=   $scoped.arrUnique;
-                                        
-                                         myHttpService.post('saveTimeAvailabity', {
-                                                    dateAvp: dateAv,
-                                                    timeAllp: timeAll
-                                                })
-                                                .then(function (res) {
-                                                    console.log(res);
-                                                    if (res.data.trans) {
-
-                                                        $ngConfirm({
-                                                            title: 'Alert',
-                                                            icon: 'fa fa-smile-o',
-                                                            theme: 'modern',
-                                                            type: 'blue',
-                                                            content: 'Appointment availability successfully save.',
-                                                            animation: 'scale',
-                                                            closeAnimation: 'scale',
-                                                            buttons: {
-                                                               
-                                                                close: function () {
-                                                                    self.close();
-                                                                }
-                                                            },
-                                                        });
-
-
-                                                    }
-                                                   
-                                                }, function (err) {
-                                                    console.log(err);
-                                                });
-                                      }
-
-
-
-
-                        },
+                    myHttpService.post('saveTimeAvailabity', {
+                        dateAvp: dateAv,
+                        timeAllp: timeAll
                     })
+                        .then(function (res) {
+                            console.log(res);
+                            if (res.data.trans) {
+
+                                $ngConfirm({
+                                    title: 'Alert',
+                                    icon: 'fa fa-smile-o',
+                                    theme: 'modern',
+                                    type: 'blue',
+                                    content: 'Appointment availability successfully save.',
+                                    animation: 'scale',
+                                    closeAnimation: 'scale',
+                                    buttons: {
+
+                                        close: function () {
+                                            self.close();
+                                        }
+                                    },
+                                });
+
+
+                            }
+
+                        }, function (err) {
+                            console.log(err);
+                        });
+                }
+
+
+            },
+        })
     }
 
 
-
     init();
-
 
 
 }]);
@@ -2578,7 +2614,8 @@ ngApp.controller('likeMoviesController', ['$scope', '$filter', 'myHttpService', 
                     }
                 }
             }
-            else {}
+            else {
+            }
         });
     }
     $scope.getPlace = function () {
@@ -2592,7 +2629,8 @@ ngApp.controller('likeMoviesController', ['$scope', '$filter', 'myHttpService', 
                     }
                 }
             }
-            else {}
+            else {
+            }
         });
     }
     var init = function () {
@@ -2795,10 +2833,8 @@ ngApp.controller('searchController', ['$scope', '$filter', 'myHttpService', '$ti
         ignore: [],
         rules: {},
         messages: {},
-        rules: {
-        },
-        messages: {
-        },
+        rules: {},
+        messages: {},
         highlight: function (element) {
             $(element).closest('.form-group').addClass('has-error');
         },
@@ -2936,11 +2972,8 @@ ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '
     $scope.validationOptions = {
         ignore: [],
         rules: {},
-        rules: {
-        },
-        messages: {
-
-        },
+        rules: {},
+        messages: {},
         highlight: function (element) {
             $(element).closest('.form-group').addClass('has-error');
         },
