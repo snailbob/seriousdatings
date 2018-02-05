@@ -23,7 +23,7 @@ class BlogManagementController extends Controller
         $categories = BlogCategory::all();
         $statuses = BlogStatus::all();
         $types = BlogType::all();
-        return \View::make('admin.blog_management.create_post')->with(['categories'=> $categories, 'statuses' => $statuses, 'types' => $types]);
+        return \View::make('admin.blog_management.create_post')->with(['categories' => $categories, 'statuses' => $statuses, 'types' => $types]);
     }
 
     public function showCategoryLists()
@@ -34,9 +34,10 @@ class BlogManagementController extends Controller
 
     public function showPostLists()
     {
-        $posts = UserBlog::all();
+        $posts = UserBlog::withTrashed()->get();
         $posts->load('blogStatus', 'blogCategory', 'blogType');
-        return \View::make('admin.blog_management.blog_list')->with('posts', $posts);
+        $status = BlogStatus::all();
+        return \View::make('admin.blog_management.blog_list')->with(['posts' => $posts, 'status' => $status]);
     }
 
     public function showStatusLists()
@@ -49,8 +50,7 @@ class BlogManagementController extends Controller
     {
         $comments = BlogComment::all();
         $comments->load('user', 'userBlog');
-        foreach ($comments as $comment)
-        {
+        foreach ($comments as $comment) {
             $comment->userBlog->blogTitle = UserBlog::convertApostrophe($comment->userBlog->blogTitle);
         }
         return \View::make('admin.blog_management.spam_control')->with('comments', $comments);
@@ -63,8 +63,8 @@ class BlogManagementController extends Controller
     }
 
     public function showPostById($id)
-    {   
-        $post = UserBlog::find($id);        
+    {
+        $post = UserBlog::find($id);
         $post->load('blogStatus', 'blogCategory', 'blogType');
         return \View::make('admin.blog_management.admin_timeline')->with('post', $post);
     }
@@ -104,10 +104,34 @@ class BlogManagementController extends Controller
 
     public function deletePost(Request $request)
     {
+        $status = BlogStatus::where('name', 'Trashed')->first();
+        UserBlog::where('id', $request->id)
+            ->update(['blog_status_id' => $status->id]);
+
         $post = UserBlog::find($request->id);
+        $post->load('blogStatus');
+        return response()->json($post);
+    }
 
-        $post->delete();
+    public function pendingPost(Request $request)
+    {
+        $status = BlogStatus::where('name', 'Pending')->first();
+        UserBlog::where('id', $request->id)
+            ->update(['blog_status_id' => $status->id]);
 
+        $post = UserBlog::find($request->id);
+        $post->load('blogStatus');
+        return response()->json($post);
+    }
+
+    public function publishedPost(Request $request)
+    {
+        $status = BlogStatus::where('name', 'Published')->first();
+        UserBlog::where('id', $request->id)
+            ->update(['blog_status_id' => $status->id]);
+
+        $post = UserBlog::find($request->id);
+        $post->load('blogStatus');
         return response()->json($post);
     }
 
@@ -130,10 +154,10 @@ class BlogManagementController extends Controller
         ]);
 
         BlogCategory::where('id', $request->id)
-        ->update(['name' => $request->name]);
+            ->update(['name' => $request->name]);
 
         $category = BlogCategory::find($request->id);
-        return response()->json($category);   
+        return response()->json($category);
     }
 
     public function deleteCategory(Request $request)
@@ -142,7 +166,7 @@ class BlogManagementController extends Controller
 
         $category->delete();
 
-        return response()->json($category);        
+        return response()->json($category);
     }
 
     public function addBlogStatus(Request $request)
@@ -164,10 +188,10 @@ class BlogManagementController extends Controller
         ]);
 
         BlogStatus::where('id', $request->id)
-        ->update(['name' => $request->name]);
+            ->update(['name' => $request->name]);
 
         $status = BlogStatus::find($request->id);
-        return response()->json($status);   
+        return response()->json($status);
     }
 
     public function deleteStatus(Request $request)
@@ -176,7 +200,7 @@ class BlogManagementController extends Controller
 
         $status->delete();
 
-        return response()->json($status);  
+        return response()->json($status);
     }
 
     public function addBlogType(Request $request)
@@ -198,18 +222,18 @@ class BlogManagementController extends Controller
         ]);
 
         BlogType::where('id', $request->id)
-        ->update(['name' => $request->name]);
+            ->update(['name' => $request->name]);
 
         $type = BlogType::find($request->id);
-        return response()->json($type);   
+        return response()->json($type);
     }
 
     public function deleteType(Request $request)
     {
-       $type = BlogType::find($request->id);
+        $type = BlogType::find($request->id);
 
-       $type->delete();
+        $type->delete();
 
-       return response()->json($type);  
-   }
+        return response()->json($type);
+    }
 }

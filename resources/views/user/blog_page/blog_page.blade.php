@@ -17,8 +17,8 @@
                 <article class="blog-post">
                     <header>
                         <h1>{{$blog['blogTitle']}}</h1>
-                        @if($blog['blog_status']['name'] == 'Pending Review')
-                        <small class="text-warning">Status - {{$blog['blog_status']['name']}}</small>
+                        @if($blog['blog_status']['name'] == 'Pending')
+                            <small class="text-warning">Status - {{$blog['blog_status']['name']}}</small>
                         @endif
                         <div class="lead-image">
                             <img src="{{ URL::to('/public/assets/' . $blog['blogImage']) }}" alt="Hands"
@@ -62,12 +62,14 @@
                                             <div class="col-md-8">
                                                 <a href="#">{{$comment['user']['firstName']}} {{$comment['user']['lastName']}}</a>
                                             </div>
-                                            @if( Auth::user()->role == "admin" )
-                                                <div class="col-md-2">
-                                                    <button  type="button"
-                                                            class="btn btn-default btn-xs deleteCommentBtn">&times;
-                                                    </button>
-                                                </div>
+                                            @if(Auth::check())
+                                                @if( Auth::user()->role == "admin" )
+                                                    <div class="col-md-2">
+                                                        <button type="button"
+                                                                class="btn btn-default btn-xs deleteCommentBtn">&times;
+                                                        </button>
+                                                    </div>
+                                                @endif
                                             @endif
                                         </div>
                                     </h3>
@@ -117,7 +119,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <a href="{{url()}}/blogs/create"><button class="btn btn-danger btn-block btn-lg">Create a blog</button></a>
+                    <a href="{{url()}}/blogs/create">
+                        <button class="btn btn-danger btn-block btn-lg">Create a blog</button>
+                    </a>
                 </div>
                 @include('right_sidebar')
             </aside>

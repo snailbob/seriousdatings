@@ -255,8 +255,12 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('saveappointment', 'AppointmentController@saveAppointment');
     Route::get('getAppoinment', 'AppointmentController@getAppointment');
     Route::post('saveAppResponse', 'AppointmentController@saveAppResponse');
-    Route::get('getTimeAvailability', 'AppointmentController@getTimeAvailability');
+<<<<<<< HEAD
+    Route::get('getTimeAvailability','AppointmentController@getTimeAvailability');
     Route::post('saveTimeAvailabity','AppointmentController@saveTimeAvailabity');
+=======
+    Route::get('getTimeAvailability', 'AppointmentController@getTimeAvailability');
+>>>>>>> origin/group-page-020218
 
 
 });

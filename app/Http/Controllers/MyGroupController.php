@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
+use Auth;
 use DB;
 use Redirect;
-use Auth;
-use View;
 use Input;
+use View;
+use App\Group;
+use App\GroupUser;
+use App\User;
 
 class MyGroupController extends Controller
 {
@@ -22,177 +28,79 @@ class MyGroupController extends Controller
     public function index()
     {
 
-            $logged_in = 0;
-             if (Auth::check())
-            {
-                 $logged_in = Auth::user() -> id;
-            }
-          $groups = DB::table('user_groups')
-                    ->where('user_id', '=', $logged_in)
-                    ->get();
-           foreach ($groups as $group) {
-            
-                $group->logged_in = $logged_in;
+        $logged_in = 0;
+        if (Auth::check()) {
+            $logged_in = Auth::user()->id;
+        }
+        $groups = DB::table('user_groups')
+            ->where('user_id', '=', $logged_in)
+            ->get();
+        foreach ($groups as $group) {
 
-            }
+            $group->logged_in = $logged_in;
+
+        }
         return View::make('groups')->withGroups($groups);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-            $user_id = 0;
-             if (Auth::check())
-            {
-                 $user_id = Auth::user() -> id;
-                 return View::make('createGroup')->withData($user_id);
-            }
-            else{
+        if (Auth::check()) {
+            $user_id = Auth::user()->id;
+            return View::make('createGroup')->withData($user_id);
+        } else {
+            return \View::make('login');
+        }
 
-                return \View::make('login');
-            }
-        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        
-        if(Input::file('photo') != null){
-        
-        $filname = Input::file('photo')->getClientOriginalName();
-        
-        $imageName = Input::file('photo')->getClientOriginalExtension();
-
-        $id = DB::table('user_groups')->insertGetId(
-            ['user_id' => Input::get('userId'), 'group_name' => Input::get('groupName'), 'description' => Input::get('description'),'groupType' =>Input::get('groupType'), 'groupAdmin' => Input::get('userId'),'image' => $filname]   
-        );
-        Input::file('photo')->move(base_path() . '/public/images/groups/'.$id.'/', $filname);
-
-        return redirect('groups/'.$id);
-    }
-    else{
-
-        return redirect('profile/groups/create');
-    }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        
-         $logged_in = 0;
-             if (Auth::check())
-            {
-                 $logged_in = Auth::user() -> id;
-            }
-            $groups = DB::table('user_groups')
-                     ->leftJoin('groups_users', function($join)
-                         {
-                             $join->on('user_groups.id', '=', 'groups_users.group_id');
-                         })
-                     ->where('user_groups.id', '=', $id)
-                     ->get();
-          $matchThese = ['group_id' => $id, 'user_id' => $logged_in]; 
-          $checkJoined = DB::table('groups_users')
-                     ->where($matchThese)
-                     ->get();
-            $joined = 0;
-            if($checkJoined != null){
-                $joined = 1;
-            }
-            else{
-
-                $joined = 0;
-            }
-
-        foreach ($groups as $group) {
-            
-            $member_id = $group -> user_id;
-            $user_info = DB::table('users')
-                     ->where('id', '=', $member_id)
-                     ->first();
-            $group->user_info = $user_info;
-            $group->logged_in = $logged_in;
-            $group->joined = $joined;
-            $group->groupID = $id;
-            if($group -> groupAdmin == $logged_in){
-                $group->admin= 1;
-            }
-            else{
-              $group->admin= 0;
-            }
-            
+        $group = GroupUser::where('group_id', $id)->get();
+        $group->load('user', 'group');
+        $group_details = Group::find($id);
+        $members_id = array();
+        $created_by = User::find($group_details->created_by_id);
+        foreach ($group as $group_mem) {
+            $members_id[] = $group_mem->user_id;
         }
-        //dd($groups);
-        return View::make('groupMembers')->withGroups($groups);
+        return View::make('groupMembers')->with(['group' => $group, 'created' => $created_by, 'group_details' => $group_details, 'members' => $members_id]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function createGroup(Request $request)
     {
-        //
+//        dd($request->all());
+        $validate = Validator::make($request->all(), [
+            'groupType' => 'required',
+            'groupName' => 'required|max:200',
+            'description' => 'max:1000',
+            'userId' => 'required'
+        ]);
+
+        if (!$validate->fails()) {
+            $filname = Input::file('photo')->getClientOriginalName();
+            $group = Group::create([
+                'name' => Input::get('groupName'),
+                'created_by_id' => Input::get('userId'),
+                'description' => Input::get('description'),
+                'image' => $filname,
+                'block' => 0,
+                'isPrivate' => Input::get('groupType')
+            ]);
+            Input::file('photo')->move(base_path() . '/public/images/groups/' . $group->id . '/', $filname);
+
+            return redirect('groups/' . $group->id);
+        } else {
+            return redirect('profile/groups/create');
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    public function addFriend()
-    {
-        //
-    }
-
-    public function removeFriend()
-    {
-        //
-    }
-
-    
     public function showGroups()
     {
-        
-         $logged_in = 0;
-        if (Auth::check()){
-            $logged_in = Auth::user() -> id;
+
+        $logged_in = 0;
+        if (Auth::check()) {
+            $logged_in = Auth::user()->id;
         }
 
         $groups = DB::table('user_groups')->get();
@@ -201,155 +109,89 @@ class MyGroupController extends Controller
             $group->logged_in = $logged_in;
 
         }
-        
+
         return View::make('groups')->withGroups($groups);
     }
 
 
-    public function addMemberForm($id){
+    public function addMemberForm($id)
+    {
+        $group = Group::find($id);
+        $created_by = User::find($group->created_by_id);
+        $users = User::all();
+        $members = DB::table('groups_users')
+            ->join('users', 'groups_users.user_id', '=', 'users.id')
+            ->join('groups', 'groups_users.group_id', '=', 'groups.id')
+            ->select('groups_users.block', 'groups.name', 'groups.id as groupId', 'users.id', 'users.firstName', 'users.lastName', 'users.email', 'users.verified', 'users.username', 'users.photo')
+            ->where('users.deleted_at', NULL)
+            ->where('groups_users.group_id', $id)
+            ->get();
 
+        $non_members = DB::table('groups_users')
+            ->rightJoin('users', 'groups_users.user_id', '=', 'users.id')
+            ->select('groups_users.group_id as groupId', 'users.id', 'users.firstName', 'users.lastName', 'users.email', 'users.verified', 'users.username', 'users.photo')
+            ->where('users.deleted_at', NULL)
+            ->where('groups_users.group_id', '!=', $id)
+            ->orWhere('groups_users.group_id', NULL)
+            ->get();
 
-        $logged_in = (Auth::check()) ? Auth::user()->id : 0;
+        $members_id = array();
+        foreach ($members as $member) {
+            $members_id[] = $member->id;
+        }
 
-        $friends  = DB::table('user_friendships')
-                    ->leftJoin('users', function($join)
-                        {
-                            $join->on('user_friendships.friend_id', '=', 'users.id');
-                        })
-                    ->where('user_friendships.user_id', '=', $logged_in)
-                    ->get();
+        foreach ($non_members as $non_member) {
+            $non_unique_members[] = $non_member->id;
+        }
 
-        $membersToAddCount = 0;
+        $non_members = array_unique($non_unique_members);
 
-        foreach ($friends as $friend) {
-            $matchThese = ['group_id' => $id, 'user_id' => $friend -> friend_id]; 
-            $checkJoined = DB::table('groups_users')
-                    ->where($matchThese)
-                    ->get();
-                    
-            $joined = 0;
-            if($checkJoined != null){
-                $joined = 1;
+        foreach ($non_members as $key => $value) {
+            if (!in_array($value, $members_id)) {
+                $non_members_id[] = $value;
             }
-            else{
-                $joined = 0;
-                $membersToAddCount = $membersToAddCount+1;
-            }
-            $friend->alreadyMember = $joined;
-
         }
 
-        $groups = DB::table('user_groups')
-                    ->leftJoin('groups_users', function($join)
-                        {
-                            $join->on('user_groups.id', '=', 'groups_users.group_id');
-                        })
-                    ->where('user_groups.id', '=', $id)
-                    ->get();
-        
-          
-        foreach ($groups as $group) {
-            
-            $member_id = $group -> user_id;
-            $user_info = DB::table('users')
-                     ->where('id', '=', $member_id)
-                     ->first();
-            $group->user_info = $user_info;
-            $group->logged_in = $logged_in;
-            $group->groupID = $id;
-            $group->membersToAdd = $friends;
-            $group->membersToAddCount = $membersToAddCount;
-            
-            
-        }
-        
-        if($groups != null){
-            return View::make('addMember')->withGroups($groups);
-        }
-        else{
-
-            return redirect(url().'/groups');
-        }
-
-
+        return View::make('addMember')->with(['members' => $members, 'non_members' => $non_members_id, 'users' => $users, 'created' => $created_by, 'group' => $group]);
     }
-    public function addMemberPost(Request $request){
 
-
+    public function addMemberPost(Request $request)
+    {
         foreach (Input::get('members') as $member_id) {
-           
-           $id = DB::table('groups_users')->insertGetId(
-            ['group_id' => Input::get('groupID'), 'user_id' => $member_id]   
+            $id = DB::table('groups_users')->insertGetId(
+                ['group_id' => Input::get('groupID'), 'user_id' => $member_id]
             );
-
         }
-        
-        return redirect('groups/'. Input::get('groupID'));
-
+        return redirect('groups/' . Input::get('groupID'));
     }
-    
-
-public function removeMemberForm($id){
 
 
-            $logged_in = 0;
-             if (Auth::check())
-            {
-                 $logged_in = Auth::user() -> id;
-            }
-
-
-
-            $members  = DB::table('groups_users')
-                     ->leftJoin('users', function($join)
-                         {
-                             $join->on('groups_users.user_id', '=', 'users.id');
-                         })
-                     ->where('groups_users.group_id', '=', $id)
-                     ->get();
-
-            
-            $group = DB::table('user_groups')
-                     ->where('user_groups.id', '=', $id)
-                     ->first();
-          
-          
-            if($group != null){
-                $group->membersToRemove = $members;
-                $group->logged_in = $logged_in;
-            }
-        
-        
-         //dd($group);
-            if($group != null){
-                return View::make('removeMember')->withGroup($group);
-            }
-            else{
-
-                return redirect(url().'/groups');
-            }
-
+    public function removeMemberForm($id)
+    {
+        $group = GroupUser::where('group_id', $id)->get();
+        $group->load('user', 'group');
+        $group_details = Group::find($id);
+        $members_id = array();
+        $created_by = User::find($group_details->created_by_id);
+        foreach ($group as $group_mem) {
+            $members_id[] = $group_mem->user_id;
+        }
+        return View::make('removeMember')->with(['groups' => $group, 'created' => $created_by, 'group_details' => $group_details, 'members' => $members_id]);
     }
-    public function removeMemberPost(Request $request){
 
-        //dd("Posted");
+    public function removeMemberPost(Request $request)
+    {
         foreach (Input::get('members') as $member_id) {
-           
-            $matchThese = ['group_id' => Input::get('groupID'), 'user_id' => $member_id]; 
+            $matchThese = ['group_id' => Input::get('groupID'), 'user_id' => $member_id];
             DB::table('groups_users')->where($matchThese)->delete();
-            }
-        
-        return redirect('groups/'. Input::get('groupID'));
-
+        }
+        return redirect('groups/' . Input::get('groupID'));
     }
 
-
-
-
-
-
-
-
-
-
+    public function deleteMembersInGroup(Request $request)
+    {
+        $group_member = GroupUser::find($request->id);
+        $group_member->delete();
+        return response()->json($group_member);
+    }
 }

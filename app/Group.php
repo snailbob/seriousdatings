@@ -7,20 +7,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Group extends Model
 {
-	use SoftDeletes;
+    use SoftDeletes;
 
-	protected $fillable = ['name', 'created_by_id', 'role_id'];
+    protected $fillable = ['name', 'created_by_id', 'description', 'image', 'block', 'isPrivate'];
 
-	protected $date = ['created_at', 'updated_at', 'deleted_at'];
+    protected $date = ['created_at', 'updated_at', 'deleted_at'];
 
-	public function role()
-	{
-		return $this->belongsTo('App\Role');
-	}
-
-	public function users()
-	{
-		return $this->belongsToMany('App\User', 'groups_users', 'group_id', 'user_id' );
-	}
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'groups_users', 'group_id', 'user_id');
+    }
 
 }

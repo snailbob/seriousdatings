@@ -5,12 +5,12 @@
 @endsection
 
 @section('form_area')
-        {{--{{dd($news)}}--}}
+{{--    {{dd($news)}}--}}
     <div class="inner-header upcoming-banner">
         <div class="container">
             <h1>
                 <i class="calendar-event-icon">
-                    <img src="{{url()}}/public/images/upcoming-event-icon.png"  alt="">
+                    <img src="{{url()}}/public/images/upcoming-event-icon.png" alt="">
                 </i>
                 News
             </h1>
@@ -26,22 +26,26 @@
                 <div class="col-md-12 blog-main">
                     <div class="row">
                         @foreach($news as $value)
-                            <div class="col-md-6 col-sm-6 list">
-                                <article class=" blog-teaser">
-                                    <header>
-                                        <img src="{{ URL::asset('public/assets/' . $value['blogImage']) }}" alt="no picture">
-                                        <h3><a href="#">{{ $value['blogTitle'] }}</a></h3>
-                                        <span class="meta">{{ $value['created_at'] }}, {{ $value['blogby'] }}</span>
-                                        <hr>
-                                    </header>
-                                    <div class="body">
-                                        {!! $value['intro'] !!}
-                                    </div>
-                                    <div class="clearfix">
-                                        <a href="{{url()}}/user/news_page/{{$value['id']}}" class="btn btn-danger btn-sm pull-right">Read more</a>
-                                    </div>
-                                </article>
-                            </div>
+                            @if($value['blog_status']['name'] == "Published")
+                                <div class="col-md-6 col-sm-6 list">
+                                    <article class=" blog-teaser">
+                                        <header>
+                                            <img src="{{ URL::asset('public/assets/' . $value['blogImage']) }}"
+                                                 alt="no picture">
+                                            <h3><a href="#">{{ $value['blogTitle'] }}</a></h3>
+                                            <span class="meta">{{ $value['created_at'] }}, {{ $value['blogby'] }}</span>
+                                            <hr>
+                                        </header>
+                                        <div class="body">
+                                            {!! $value['intro'] !!}
+                                        </div>
+                                        <div class="clearfix">
+                                            <a href="{{url()}}/user/news_page/{{$value['id']}}"
+                                               class="btn btn-danger btn-sm pull-right">Read more</a>
+                                        </div>
+                                    </article>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>
