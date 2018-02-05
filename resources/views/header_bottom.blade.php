@@ -62,7 +62,7 @@
                                             <a href="{{url().'/privacy_settings'}}">
                                                 <i class="fa fa-cog fa-fw" aria-hidden="true"></i> Privacy Setting</a>
                                         </li>
-                                        <li>
+                                          <li>
                                             <a href="{!! url() !!}/logout">
                                                 <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Logout</a>
                                         </li>
