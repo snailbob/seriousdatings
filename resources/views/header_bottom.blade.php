@@ -65,9 +65,6 @@
                                     </ul>
                                 </div>
 
-
-
-
                                 <li id="notification_li" class="notifica_li">
                                     <a href="#" id="notificationLink">
                                         <button type="button" class="btn btn-danger">

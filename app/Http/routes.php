@@ -535,6 +535,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('groups/{groupID}/removeMember', 'MyGroupController@removeMemberForm');
     Route::post('createGroup', 'MyGroupController@createGroup');
     Route::post('deleteMembersInGroup', 'MyGroupController@deleteMembersInGroup');
+    Route::post('userAddMembersInGroup', 'GroupManagementController@addMembersInGroup');
 
 
     Route::get('datingPlan/{planId}', 'DatingPlanController@subscribe');
