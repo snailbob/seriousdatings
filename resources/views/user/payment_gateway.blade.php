@@ -117,7 +117,7 @@
                     <!-- CREDIT CARD FORM ENDS HERE -->
                     
                     
-                    <hr>
+                    {{--  <hr>
                         <div class="text-center">or</div>
                     <hr>
 
@@ -190,7 +190,6 @@
                                                 <option value="Checking">Checking</option>
                                                 <option value="Savings">Savings</option>
                                             </select>
-                                            {{--  <input required type="text" name="amount" ng-model="echeckData.amount" id="" class="form-control">  --}}
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -279,7 +278,7 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div>  --}}
 
                 </div>
             </div>
