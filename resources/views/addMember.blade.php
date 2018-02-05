@@ -1,10 +1,10 @@
 @extends('master')
 @section('javascript')
-    {!! HTML::script('public/js/admin/group_management/add_members.js') !!}
+    {!! HTML::script('public/js/groups/user_add_members.js') !!}
     <script>
-        $(function () {
-            var table = $('#add_members_tbl').DataTable();
-        })
+        // $(function () {
+        //     var table = $('#add_members_tbl').DataTable();
+        // })
     </script>
 @endsection
 @section('form_area')
@@ -121,7 +121,7 @@
                                         </thead>
                                         <tbody>
                                         @foreach($users as $user)
-                                            @if(in_array($user->id, $non_members))
+                                            @if(in_array($user->id, $non_members) && $user->id != Auth::id())
                                                 <tr>
                                                     <td>
                                                         <img src="{{$user->photo}}" class="img-circle " width="45"

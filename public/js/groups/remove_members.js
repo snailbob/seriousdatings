@@ -11,6 +11,7 @@ $(document).ready(function()
     {
         var	data = {
             id: $(this).closest('tr').children('td:last-child').attr('id'),
+            name: $(this).closest('tr').children('td:first-child').text(),
             groupName: $('.groupName').text(),
         };
         console.log(data);
@@ -22,7 +23,7 @@ $(document).ready(function()
             success: function(value)
             {
                 console.log(value);
-                toastr.info(value.username.toUpperCase() + " has been remove.");
+                toastr.info(data.name + " has been remove.");
                 $('td#' + value.id).parent().remove();
             },
             error: function(value)

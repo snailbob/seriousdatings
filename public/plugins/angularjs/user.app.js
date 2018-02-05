@@ -426,7 +426,7 @@ ngApp.controller('bodyController', [
                     console.log(AppointmentData.appStatus);
                     $scoped.declineAppointment = function (appID) {
                         // $scope.actionDeclineAppointment(appID, AppointmentData, self, grandParent);
-                        $scope.saveAppointmentAction('Sorry mate maybe next time.', appID, 'R', self, grandParent);
+                        $scope.saveAppointmentAction('Sorry mate maybe next time.', id, 'R', self, grandParent);
                     };
                     $scoped.acceptAppointment = function (appId) {
 

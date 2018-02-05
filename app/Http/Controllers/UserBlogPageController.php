@@ -40,24 +40,18 @@ class UserBlogPageController extends Controller
         $data = UserBlog::find($id);
         $data->load('blogStatus');
         $blog = $data->toArray();
+        $blog = UserBlog::getBlogData($id);
+        $comments = BlogComment::getBlogComment($id);
         if (Auth::check()) {
             if ($blog['blog_status']['name'] == "Published" || (Auth::user()->role == "admin" || Auth::id() == $blog->user_id)) {
-                $blog = UserBlog::getBlogData($id);
-                $comments = BlogComment::getBlogComment($id);
                 return \View::make('user.blog_page.blog_page')->with(['blog' => $blog, 'comments' => $comments]);
-            } else {
-                return \Redirect::to('bloglist');
             }
         } else {
             if ($blog['blog_status']['name'] == "Published") {
-                $blog = UserBlog::getBlogData($id);
-                $comments = BlogComment::getBlogComment($id);
                 return \View::make('user.blog_page.blog_page')->with(['blog' => $blog, 'comments' => $comments]);
-            } else {
-                return \Redirect::to('bloglist');
             }
         }
-
+        return \Redirect::to('bloglist');
     }
 
     static function getBlogData($id)
