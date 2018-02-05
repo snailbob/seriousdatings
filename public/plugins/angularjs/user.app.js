@@ -833,6 +833,146 @@ ngApp.controller('bodyController', [
         /*================================================================*/
         /*END  added by MARK 2017*/
 
+
+        /*
+            'ADD APPOINTMENT TO USER-PROFILE'
+        */
+
+        $scope.newAppointment = function(userInfos){
+
+            myHttpService.getWithParams('getTimeAvailability',{'ids':userInfos.id}).then(function (res) {
+
+                        $scope.viewLayoutAppoinment(res.data,userInfos);    
+                });
+
+
+        }
+
+        $scope.viewLayoutAppoinment = function (dataAvialable,userData) {
+
+            $ngConfirm({
+                title:'',
+                contentUrl:base_url+'/public/js/appointment/appointment-layout.html',
+                boxWidth: '450px',
+                useBootstrap: false,
+                animation: 'zoom',
+                backgroundDismiss: true,
+                backgroundDismissAnimation: 'glow',
+                theme: 'material',
+                type:'purple',
+                lazyOpen: true,
+                 onScopeReady: function ($scoped) {
+                    var self = this;
+                    var counter = 0;
+                       $scoped.incrementingData =counter;
+                       $scoped.allAvailTimelength = dataAvialable.avail.length;
+                       $scoped.allAvailTime = dataAvialable;
+                       $scoped.userInfo = userData;
+                       $scoped.previous = function () {
+                            counter--;
+                                if (counter < 0) {
+                                        counter = 0;
+                                    return false;
+                                }
+                                console.log(counter);
+                             $scoped.incrementingData = counter;
+                        
+                       };
+                       $scoped.next = function () {
+                            counter++;
+                            if (counter >= dataAvialable.avail.length) {
+                                counter = dataAvialable.avail.length;
+                                return false;
+                            }
+                            console.log(counter);
+                             $scoped.incrementingData = counter;
+                       };
+                       $scoped.getTimes = function(times,index){
+                                
+                                $(".list-times").css("background-color","#c6c6c6");
+                                $(".act-"+index).css("background-color","red");
+                            
+                                $scoped.fetchTime =  times.Usertime;
+                               
+                       }
+                       $scoped.saveData = function(){
+                        var formDatas = $("#appointment-form").serialize();
+                        console.log(formDatas);
+
+                                $.ajax({
+                                    url: base_url+'/api/saveAppointmentNew',
+                                    dataType: 'json',
+                                    data:formDatas,
+                                    method: 'POST',
+                            
+                                }).done(function (response) {
+                                
+                                    $ngConfirm({
+                                                title: 'Hi',
+                                                icon: 'fa fa-smile-o',
+                                                theme: 'modern',
+                                                type: 'blue',
+                                                content: 'Appointment successfully send to.'+userData.firstName,
+                                                animation: 'scale',
+                                                closeAnimation: 'scale',
+                                                buttons: {
+                                                   
+                                                    close: function () {
+                                                        self.close();
+                                                    }
+                                                },
+                                            })
+
+                                }).fail(function () {
+                                    alert('Something went wrong.');
+                                });
+                            
+                       }
+
+                // http://localhost/seriousdatings/online_chat?user_id=163&action_type=voice
+
+                        $scoped.callMeNow = function(user_id,action_type){
+                                    var UrLs = '/online_chat'
+                                        UrLs +='?user_id='+user_id;
+                                        UrLs +='&action_type='+action_type
+                                    var win = window.open(base_url+UrLs, '_blank');
+                                    win.focus();
+                        }
+                        $scoped.blockUser = function(u){
+                            console.log(u);
+                            var fullName = u.firstName+' '+u.lastName;
+                            myHttpService.post('speedBlock', u).then(function(res){
+                                console.log(res);
+                                if(res.data.trans){
+
+                                    $ngConfirm({
+                                                title: fullName,
+                                                icon: 'fa fa-check-circle',
+                                                theme: 'modern',
+                                                type: 'red',
+                                                content: res.data.message,
+                                                animation: 'scale',
+                                                closeAnimation: 'scale',
+                                                buttons: {
+                                                   
+                                                    close: function () {
+                                                        self.close();
+                                                    }
+                                                },
+                                           });
+
+                                  
+                                }
+                            });
+                        }
+
+
+
+                 }
+            });
+
+        };
+
         init();
 
 
