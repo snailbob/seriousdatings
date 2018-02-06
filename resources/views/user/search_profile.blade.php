@@ -51,7 +51,7 @@
                                                 <i class="fa fa-envelope fa-fw"></i> Send Message
                                             </a>
 
-                                            <a class="btn btn-danger" ng-click="createSMS(data.id,data.firstName)">
+                                            <a class="btn btn-danger" ng-click="blockUser(data.id,data.firstName)">
                                                 <i class="fa fa-ban fa-fw"></i> Block
                                             </a>
                                         </p>

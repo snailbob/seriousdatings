@@ -167,8 +167,14 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     }
 
     $scope.boxStartCall = function(type, user, i){
-        $scope.callStarted = true;
-        $scope.startCall(type, user, i);
+        if(type == 'voice'){
+            $scope.newAppointment(user);
+        }
+        else{
+            $scope.callStarted = true;
+            $scope.startCall(type, user, i);
+        }
+
     };
 
     $scope.startCall = function(type, user, i){

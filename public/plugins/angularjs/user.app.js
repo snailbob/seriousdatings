@@ -44,6 +44,20 @@ ngApp.run(['$rootScope', 'ngToast', function ($rootScope, ngToast) {
 
     };
 
+    $rootScope.showNotiToast = function (content = 'Cool', classname = 'success alert-noti') {
+        console.log(content);
+        ngToast.settings.horizontalPosition = 'right';
+        ngToast.settings.verticalPosition = 'bottom';
+
+        ngToast.create({
+            className: classname,
+            content: content
+        });
+
+    };
+
+    $rootScope.showNotiToast();
+
     $rootScope.heightOptions = function () {
         var arr = [];
         for (var i = 2; i < 9; i++) {

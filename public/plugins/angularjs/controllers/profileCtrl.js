@@ -181,7 +181,7 @@ ngApp.controller('profileCtrl', [
 				id: $scope.matchUsers[index].id
 			}).then(function (res) {
 				// console.log(res);
-				var mess = 'User successfully picked up.';
+				var mess = 'User successfully added as friend.';
 				$scope.showToast(mess);
 			});
 			$scope.matchUsers.splice(index, 1);
@@ -191,17 +191,20 @@ ngApp.controller('profileCtrl', [
 				id: user_id
 			}).then(function (res) {
 				// console.log(res);
-				var mess = 'User successfully picked up.';
+				var mess = 'User successfully added as friend.';
 				$scope.showToast(mess);
 			});
 			angular.forEach($scope.matchUsers, function (value, key) {
-				if ($scope.matchUsersData[key].id === user_id) {
+				if(typeof($scope.matchUsersData[key]) !== 'undefined'){
+					if ($scope.matchUsersData[key].id === user_id) {
 
-					$scope.matchUsers.splice(key, 1);
-					$scope.matchUsersData.splice(key, 1);
-
-					return false;
+						$scope.matchUsers.splice(key, 1);
+						$scope.matchUsersData.splice(key, 1);
+	
+						return false;
+					}
 				}
+
 			});
 
 			// $scope.matchUsers.splice(index, 1);

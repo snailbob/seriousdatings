@@ -60,6 +60,7 @@ ngApp.controller('signupController', ['$scope', '$filter', 'myHttpService', '$ti
                 $scope.user.zipcode = res.data.address.postcode;
                 $scope.user.city = city;
                 $scope.user.country = res.data.address.country;
+                $scope.user.country_shortname = res.data.address.country_code.toUpperCase();
 
             });
 

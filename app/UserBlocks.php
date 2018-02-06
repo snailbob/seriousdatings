@@ -28,4 +28,8 @@ class UserBlocks extends Model
      */
     //protected $hidden = ['password', 'remember_token'];
 
+    public function userBlocked()
+    {
+        return $this->belongsTo('App\User', 'user_blocked_id', 'id');
+    }
 }
