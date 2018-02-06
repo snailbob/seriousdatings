@@ -27,13 +27,13 @@
 
 
           <!-- Map box -->
-          <div class="box box-solid bg-light-blue-gradient">
+          <div class="box box-solid bg-light-blue-gradient" >
             <div class="box-header">
               <!-- tools box -->
               <div class="pull-right box-tools">
-                <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip"
+                <!-- <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip"
                         title="Date range">
-                  <i class="fa fa-calendar"></i></button>
+                  <i class="fa fa-calendar"></i></button> -->
                 <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse"
                         data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
                   <i class="fa fa-minus"></i></button>
@@ -46,8 +46,8 @@
                 Visitors
               </h3>  --}}
             </div>
-            <div class="box-body">
-              <div id="world-map" style="height: 250px; width: 100%;"></div>
+            <div class="box-body" style="height: 800px;">
+              <div id="world-map" style="height: 100%; width: 500px%;"></div>
             </div>
             <!-- /.box-body-->
             {{--  <div class="box-footer no-border">
