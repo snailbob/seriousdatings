@@ -161,10 +161,12 @@
 </head>
 <body class="hidden" ng-controller="bodyController" id="plain-code" ng-cloak>
 
+    @if(Auth::check())
     <div class="back-btn hidden text-center">
         <i class="fa fa-arrow-left" aria-hidden="true"></i>
         <br><span class="small">BACK</span>
     </div>
+    @endif
 
     <toast></toast>
     @include('user.shared.fb_script')

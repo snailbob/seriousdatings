@@ -1,5 +1,4 @@
 ngApp.controller('paymentController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer) {
-    $scope.echeckData = {};
 
     $scope.myImage = '';
     $scope.myCroppedImage = '';
@@ -7,6 +6,14 @@ ngApp.controller('paymentController', ['$scope', '$filter', 'myHttpService', '$t
     $scope.imgDone = {
         done: false
     };
+
+    $scope.echeckData = {
+        ip: window.for_zip,
+        price: window.uri_get_params.price,
+        description: window.uri_get_params.type,
+        date: new Date()
+    };
+
     $scope.params = window.uri_get_params;
     $scope.base_url = window.base_url;
 
@@ -44,27 +51,30 @@ ngApp.controller('paymentController', ['$scope', '$filter', 'myHttpService', '$t
         }
     };
 
-    $scope.submitForm = function (registerform) {
+    $scope.submitForm = function (formData) {
 
-        if (registerform.validate()) {
-            $scope.echeckData.image = $scope.myCroppedImage;
-            console.log($scope.echeckData, 'sdfsdfdsf');
-            if ($scope.imgEdit) {
-                $scope.showToast('Please upload an image banner.', 'danger');
-                return false;
-            }
+        if (formData.validate()) {
+            // $scope.echeckData.image = $scope.myCroppedImage;
+            // console.log($scope.echeckData, 'sdfsdfdsf');
+            // if ($scope.imgEdit) {
+            //     $scope.showToast('Please upload an image banner.', 'danger');
+            //     return false;
+            // }
 
             $scope.echeckData.submitting = true;
+            $scope.echeckData.id = $scope.params.id;
+            $scope.echeckData.price = $scope.params.price;
+            $scope.echeckData.type = $scope.params.type;
 
 
-            myHttpService.post('save_advertisement', $scope.echeckData)
+            myHttpService.post('save_echeck', $scope.echeckData)
                 .then(function (res) {
                     console.log(res);
                     $scope.echeckData.submitting = false;
-                    $scope.showToast('Your advertisement successfully submitted.');
-                    $timeout(function () {
-                        window.location.href = base_url + '/profile';
-                    }, 1500);
+                    $scope.showToast('Your e-check successfully submitted.');
+                    // $timeout(function () {
+                    //     window.location.href = base_url + '/profile';
+                    // }, 1500);
                 }, function (err) {
                     console.log(err);
                     $scope.showToast('Something went wrong. Please try again.', 'danger');

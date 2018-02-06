@@ -121,33 +121,6 @@ Route::get('travels', 'TravelController@viewTravelPage');
 /* end travel page */
 
 
-/* blog page */
-Route::get('bloglist', 'UserBlogPageController@ListBlog');
-Route::get('user/blog_page/{id}', 'UserBlogPageController@blogPageView');
-Route::get('blogs/create', 'UserBlogPageController@createBlog');
-Route::post('commentInBlog', 'UserBlogPageController@commentInBlog');
-Route::post('saveBlog', 'UserBlogPageController@saveBlog');
-/* end blog page */
-
-/* delete comment */
-Route::post('deleteComment', 'UserBlogPageController@deleteComment');
-/* end delete comment */
-
-/* news page */
-Route::get('pages/news', 'UserNewsPageController@ListNews');
-Route::get('/user/news_page/{id}', 'UserNewsPageController@newsPageView');
-Route::post('commentInNews', 'UserNewsPageController@commentInNews');
-/* end news page */
-
-/* subscribe */
-Route::post('subscribeEmail', 'UserNewsPageController@subscribeEmail');
-/* end subscribe */
-
-/* travel page */
-Route::get('travels', 'TravelController@viewTravelPage');
-/* end travel page */
-
-
 Route::group(['middleware' => 'auth'], function () {
     Route::get('users/{username}/about_your_date', 'AboutYourDateController@index');
     Route::get('users/{username}/select_mates', 'AboutYourDateController@selectMates');
@@ -202,6 +175,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('delete_friend', 'UserFriendshipController@destroy');
     Route::post('block_user', 'UserBlockController@store');
     Route::post('speedBlock', 'UserBlockController@speedBlock');
+
 
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
     Route::post('send_gift', 'GiftCardController@sendGiftCards');
@@ -281,8 +255,12 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('saveappointment', 'AppointmentController@saveAppointment');
     Route::get('getAppoinment', 'AppointmentController@getAppointment');
     Route::post('saveAppResponse', 'AppointmentController@saveAppResponse');
-    Route::get('getTimeAvailability', 'AppointmentController@getTimeAvailability');
+<<<<<<< HEAD
+    Route::get('getTimeAvailability','AppointmentController@getTimeAvailability');
     Route::post('saveTimeAvailabity','AppointmentController@saveTimeAvailabity');
+=======
+    Route::get('getTimeAvailability', 'AppointmentController@getTimeAvailability');
+>>>>>>> origin/group-page-020218
 
 
 });
@@ -405,7 +383,6 @@ Route::group(array('before' => 'admin'), function () {
 
     /* Group Management */
     Route::get('admin/group_management/group_lists', 'GroupManagementController@showGroupList');
-    Route::get('admin/group_management/create_group', 'GroupManagementController@createGroup');
     Route::get('admin/group_management/group/{id}', 'GroupManagementController@showGroupMembers')->name('group_page');
     Route::get('admin/group_management/group/{id}/add_members', 'GroupManagementController@nonMemberLists');
     Route::post('addGroupNames', 'GroupManagementController@addGroupName');
@@ -536,7 +513,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('groups/{groupID}/removeMember', 'MyGroupController@removeMemberForm');
     Route::post('createGroup', 'MyGroupController@createGroup');
     Route::post('deleteMembersInGroup', 'MyGroupController@deleteMembersInGroup');
-    Route::post('userAddMembersInGroup', 'GroupManagementController@addMembersInGroup');
 
 
     Route::get('datingPlan/{planId}', 'DatingPlanController@subscribe');

@@ -30,7 +30,7 @@ class AdsSpaceController extends Controller
 
         if(!empty($ads)){
             foreach($ads as $r=>$value){
-                $price = AdsPricing::find($value->id);
+                $price = AdsPricing::find($value->days);
                 //calculate remaining days
                 $now = time(); // or your date as well
                 $start_date = strtotime($value->created_at);

@@ -401,12 +401,12 @@ function  NextPreviousValue(id,element) {
         '<div class="plug-menu-option">'+
         '<ul class="option-menus">'+
 
-        '<li class="fa fa-microphone" title="Voice call" onclick="actionViVo(\''+resultObjectInfo.id+'\',\''+'voice'+'\')"></li>'+
+        // '<li class="fa fa-microphone" title="Voice call" onclick="actionViVo(\''+resultObjectInfo.id+'\',\''+'voice'+'\')"></li>'+
         '<li class="fa fa-fast-forward" title="Speed dating video chat" onclick="actionViVo(\''+resultObjectInfo.id+'\',\''+'video'+'\')"></li>'+
         '<li class="fa fa-gift" title="Virtual Gift"></li>'+
         '<li class="fa fa-eye" title="wink"></li>'+
         '<li class="fa fa-user-plus" title="Add User"></li>'+
-        '<li class="fa fa-calendar-check-o" title="Appointment" onclick="getAppointmentFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
+        '<li class="fa fa-microphone" title="Appointment" onclick="getAppointmentFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
         '</ul>'+
         '</div>';
 

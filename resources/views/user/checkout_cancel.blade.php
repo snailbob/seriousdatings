@@ -3,7 +3,7 @@
 
 @section('form_area')
 
-<div ng-controller="eventDetailsController" ng-cloak>
+<div>
 
     <div class="inner-header calendar-event-banner">
         <div class="container">

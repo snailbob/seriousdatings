@@ -131,9 +131,9 @@
 
         @if(!isset($currentUser) || $currentUser==0)
         <div class="travel-option profile-managment">
-
+                <!-- @{{userProfileData}} -->
             <div class="connect-with-left">
-                <a ng-href="@{{ base_url+'/online_chat?user_id='+userProfileData.id+'&action_type=text' }}">
+                <a ng-click="newAppointment(userProfileData)">
                     <div class="serious-icons">
                         {!! HTML::Image("public/images/phone-chat-icon.png" ,"") !!}
                     </div>
