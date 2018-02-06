@@ -93,33 +93,6 @@ Route::get('/start', function () {
     return 'Woohoo!';
 });
 
-<?php
-
-/*
-  |--------------------------------------------------------------------------
-  | Application Routes
-  |--------------------------------------------------------------------------
-  |
-  | Here is where you can register all of the routes for an application.
-  | It's a breeze. Simply tell Laravel the URIs it should respond to
-  | and give it the controller to call when that URI is requested.
-  |
- */
-
-use Illuminate\Support\Facades\App;
-use App\Http\Controllers\SubscriptionCheckController;
-use App\User;
-use App\AboutYourDate;
-
-/* Route::get('test', function () {
-
-
-
-  $ip = $_SERVER['REMOTE_ADDR'];
-  $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}"));
-  dd($details);
-
-}); */
 
 //Route::get('checkemail','UsersController@checkEmail');
 Route::resource('users', 'UsersController');
@@ -265,17 +238,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     
 
-    
-<<<<<<<<< Temporary merge branch 1
-    
-    
-    
-=========
-
-    
->>>>>>>>> Temporary merge branch 2
-});
-
 Route::get('search', 'SearchController@index');
 Route::get('search/profile/{id}', 'SearchController@searchProfile');
 Route::post('search_side', 'SearchController@xpostIndex');
@@ -311,9 +273,6 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::post('save_echeck', 'PaymentMethodController@postSaveEcheck');
 
-=========
-
->>>>>>>>> Temporary merge branch 2
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
     Route::post('send_gift', 'GiftCardController@sendGiftCards');
 
