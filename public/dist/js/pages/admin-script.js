@@ -287,7 +287,8 @@ $(function () {
   });
 
   //video page
-  $(document).find('.video-primary-btn').on('click', function(){
+  $('body').on('click', '.video-primary-btn', function(){
+    console.log('')
     var $self = $(this);
     var id = $(this).data('id');
     $.post(

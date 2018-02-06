@@ -60,7 +60,7 @@
               </span>
             </button>
 
-            <button class="btn btn-default pull-right" onclick="window.history.back()">
+            <button class="btn btn-default pull-right" ng-if="event.showMembers" ng-click="event.showMembers = !event.showMembers">
               <i class="fa fa-angle-double-left" aria-hidden="true"></i> Back
             </button>
           </div>
@@ -75,7 +75,7 @@
 
               <div class="row">
                 <div class="col-md-12">
-                  <div class="padding">
+                  <div class="padding" ng-show="!event.showMembers">
                     <h4 class="text-danger">Event by Serious Datings</h4>
                     
                     <div class="padding-top-15">
@@ -130,6 +130,37 @@
                       </div>
                     </div>
                     @endif
+                    <div class="padding-top-15">
+                      <div class="text-centerx">
+                        <p>
+                          <button class="btn btn-sm btn-success pull-right" ng-click="joinEvent({{$events['event']->max_members}})">
+                            <span ng-if="event.joined" uib-tooltip="Leave Event">
+                              <i class="fa fa-fw fa-check" aria-hidden="true"></i> Member
+                            </span>
+                            <span ng-if="!event.joined" uib-tooltip="Join Event">
+                              <i class="fa fa-fw fa-user" aria-hidden="true"></i> Join
+                            </span>
+                          </button>
+
+                          <strong class="text-danger">
+                            Event Members                             
+                          </strong>
+                        </p>
+
+                        <p class="text-muted">
+                            <span ng-if="event.members.length"> (@{{event.members.length}} member/s) <a  ng-click="event.showMembers = !event.showMembers"> View all members</a></span>
+
+                            <span ng-if="!event.members.length">No members yet</span>
+                        </p>
+                      </div>
+                    </div>
+
+
+
+                  </div>
+
+
+                  <div class="members_view padding" ng-show="event.showMembers">
 
                     <div class="padding-top-15">
                       <p>
@@ -163,6 +194,7 @@
                     </div>
 
                   </div>
+
 
                 </div>
               </div>

@@ -93,6 +93,101 @@ Route::get('/start', function () {
     return 'Woohoo!';
 });
 
+<?php
+
+/*
+  |--------------------------------------------------------------------------
+  | Application Routes
+  |--------------------------------------------------------------------------
+  |
+  | Here is where you can register all of the routes for an application.
+  | It's a breeze. Simply tell Laravel the URIs it should respond to
+  | and give it the controller to call when that URI is requested.
+  |
+ */
+
+use Illuminate\Support\Facades\App;
+use App\Http\Controllers\SubscriptionCheckController;
+use App\User;
+use App\AboutYourDate;
+
+/* Route::get('test', function () {
+
+
+
+  $ip = $_SERVER['REMOTE_ADDR'];
+  $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}"));
+  dd($details);
+
+}); */
+
+//Route::get('checkemail','UsersController@checkEmail');
+Route::resource('users', 'UsersController');
+Route::post('ajaxLogin', 'HomeController@ajaxLogin');
+Route::post('submitAboutDate', 'UsersController@submitAboutDate');
+
+// Route::get('auth/facebook', 'FacebookController@redirectToProvider')->name('facebook.login');
+// Route::get('auth/facebook/callback', 'FacebookController@handleProviderCallback');
+
+Route::get('user/paginate', 'HomeController@paginateUser');
+
+
+Route::get('users/{username}/verify/{key}', 'VerifyController@getVerify');
+
+Route::get('username/check', function () {
+
+    $username = Input::get('username');
+    $id = DB::table('users')->where('username', $username)->pluck('id');
+
+    if ($id == null) {
+        return '1';
+    } else {
+        return '0';
+    }
+});
+
+Route::get('/start', function () {
+    $verified = new Role();
+    $verified->name = 'Verified';
+    $verified->save();
+
+    $admin = new Role();
+    $admin->name = 'Admin';
+    $admin->save();
+
+    $user = new Role();
+    $user->name = 'User';
+    $user->save();
+
+    $read = new Permission();
+    $read->name = 'can_see';
+    $read->display_name = 'Can See User Profiles';
+    $read->save();
+
+    $edit = new Permission();
+    $edit->name = 'can_see_compatability';
+    $edit->display_name = 'Can See Compatability';
+    $edit->save();
+
+    $admin_p = new Permission();
+    $admin_p->name = 'admin';
+    $admin_p->display_name = 'Can Control Anything';
+    $admin_p->save();
+
+    $admin->attachPermission($admin_p);
+
+    $verified->attachPermission($read);
+    $verified->attachPermission($edit);
+
+    $user1 = \User::find(1);
+    $user2 = \User::find(2);
+
+    $user1->attachRole($admin);
+    $user2->attachRole($verified);
+
+    return 'Woohoo!';
+});
+
 
 /* blog page */
 Route::get('bloglist', 'UserBlogPageController@ListBlog');
@@ -139,8 +234,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('privacy_settings', 'UsersController@privacySettings');
     Route::get('payment_gateway', 'PaymentMethodController@paymentGateway');
     Route::post('square_payment', 'PaymentMethodController@squarePayment');
+    
 
-
+    
+    
 });
 
 Route::get('search', 'SearchController@index');
@@ -176,6 +273,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('block_user', 'UserBlockController@store');
     Route::post('speedBlock', 'UserBlockController@speedBlock');
 
+    Route::post('save_echeck', 'PaymentMethodController@postSaveEcheck');
 
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
     Route::post('send_gift', 'GiftCardController@sendGiftCards');
@@ -387,6 +485,7 @@ Route::group(array('before' => 'admin'), function () {
     Route::post('blockGroupName', 'GroupManagementController@blockGroupName');
     Route::post('blockMemberInGroup', 'GroupManagementController@blockMemberInGroup');
     Route::post('addMembersInGroup', 'GroupManagementController@addMembersInGroup');
+
     /* End Group Management */
 
     /* Premium Features */
@@ -445,6 +544,7 @@ Route::post('deleteUser', 'AdminUserListController@deleteUser');
 /* End of Manage User Actions */
 
 
+
 Route::get('/test', 'AdminDashboardController@getTest');
 
 Route::get('ajax', 'AjaxRequestController@getSearchType');
@@ -471,6 +571,8 @@ Route::get('test_coords', function () {
     // $location = $details->results[0]->formatted_address;
     // return json_encode(count($details->results));
 });
+
+
 
 
 Route::get('adminlogin', 'AdminLoginController@getIndex');

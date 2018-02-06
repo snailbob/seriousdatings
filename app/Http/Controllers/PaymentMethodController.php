@@ -282,6 +282,21 @@ class PaymentMethodController extends Controller
     }
 
 
+    public function postSaveEcheck(Request $request){
+        $details = $request->input();
+        $id = $request->input('id');
+        $arr = [
+            'user_id'=>Auth::user()->id,
+            'plan_id'=>$id,
+            'gateway'=>'echeck',
+            'details'=>serialize($details),
+            'payment_details'=>serialize([])
+        ];
+        PaymentMethod::create($arr);
+
+        return response()->json($arr);
+    }
+
     /**
      * Display a listing of the resource.
      *
