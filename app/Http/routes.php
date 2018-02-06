@@ -261,10 +261,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('privacy_settings', 'UsersController@privacySettings');
     Route::get('payment_gateway', 'PaymentMethodController@paymentGateway');
     Route::post('square_payment', 'PaymentMethodController@squarePayment');
+
+
     
 
     
+<<<<<<<<< Temporary merge branch 1
     
+    
+    
+=========
+
+    
+>>>>>>>>> Temporary merge branch 2
 });
 
 Route::get('search', 'SearchController@index');
@@ -302,6 +311,9 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::post('save_echeck', 'PaymentMethodController@postSaveEcheck');
 
+=========
+
+>>>>>>>>> Temporary merge branch 2
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
     Route::post('send_gift', 'GiftCardController@sendGiftCards');
 
@@ -638,6 +650,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('groups/{groupID}/removeMember', 'MyGroupController@removeMemberForm');
     Route::post('createGroup', 'MyGroupController@createGroup');
     Route::post('deleteMembersInGroup', 'MyGroupController@deleteMembersInGroup');
+    Route::post('userAddMembersInGroup', 'GroupManagementController@addMembersInGroup');
 
 
     Route::get('datingPlan/{planId}', 'DatingPlanController@subscribe');

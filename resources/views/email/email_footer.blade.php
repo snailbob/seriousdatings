@@ -75,7 +75,7 @@
                                             <div align="center" class="img-container center  autowidth " style="padding-right: 0px;  padding-left: 0px;">
                                                 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px;" align="center"><![endif]-->
                                                 <div style="line-height:10px;font-size:1px">&#160;</div>
-                                                <img class="center  autowidth " align="center" border="0" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAQAAAAngNWGAAAAzElEQVQoz43SWXHEMAwAUEEIhIVgCIFQCIFgCIFQCIFQCIFgCIZgBm8/cjSbY1rrx+N5lmWNIk5LbzJcTi8H36iYHqFs9INmVFCMRt0J6t2v/g72l0Ju4PQAy/K4A7uHK7Wzp4xZU3QiDMjPNUqYRBhR5UPhrwP8UjAvsGpbjZKKKq2waeoGZ52CLGmaQdUkCU0y7zBipW39Y6esuVLEB4yQf7u2X8wRJ2g4spVOGD6g4Tovhw7vsN2zfez29izbp2hbwzvjn/ES4Z/xBu/zjWxgItiOAAAAAElFTkSuQmCC"
+                                                <img class="center  autowidth " align="center" border="0" src="{{url().'/public/images/email/icon_mail_white.png'}}"
                                                     alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: 0;height: auto;float: none;width: 100%;max-width: 20px"
                                                     width="20">
                                                 <!--[if mso]></td></tr></table><![endif]-->

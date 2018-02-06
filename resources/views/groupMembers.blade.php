@@ -1,6 +1,6 @@
 @extends('master')
 @section('form_area')
-{{--    {{dd($group)}}--}}
+    {{--{{dd($group)}}--}}
     <div id="myModal" class="reveal-modal" style="background: none;">
 
         <div class="popup-bg">

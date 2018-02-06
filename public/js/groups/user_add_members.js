@@ -7,24 +7,23 @@ $(document).ready(function()
         }
     });
 
-    $(document).on('click', '.deleteBtn', function()
+    $(document).on('click', '.addBtn', function()
     {
         var	data = {
             id: $(this).closest('tr').children('td:last-child').attr('id'),
-            name: $(this).closest('tr').children('td:first-child').text(),
             groupName: $('.groupName').text(),
         };
         console.log(data);
         $.ajax({
             type: "POST",
-            url: base_url + '/deleteMembersInGroup',
+            url: base_url + '/userAddMembersInGroup',
             data: data,
             cache: false,
             success: function(value)
             {
                 console.log(value);
-                toastr.info(data.name + " has been remove.");
-                $('td#' + value.id).parent().remove();
+                toastr.info(value.users.username.toUpperCase() + " is add on the group");
+                $('td#' + value.users.id).parent().remove();
             },
             error: function(value)
             {

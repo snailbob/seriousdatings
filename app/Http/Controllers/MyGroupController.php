@@ -28,19 +28,23 @@ class MyGroupController extends Controller
     public function index()
     {
 
-        $logged_in = 0;
-        if (Auth::check()) {
-            $logged_in = Auth::user()->id;
+        $groups = Group::all();
+        $data = array();
+        $created_by = array();
+        foreach ($groups as $key) {
+            $data[$key->id]['population'] = DB::table('groups_users')
+                ->where('group_id', $key->id)
+                ->count();
+            $created_by[] = User::find($key->created_by_id);
         }
-        $groups = DB::table('user_groups')
-            ->where('user_id', '=', $logged_in)
-            ->get();
-        foreach ($groups as $group) {
+        $creator = array();
 
-            $group->logged_in = $logged_in;
-
+        foreach ($groups->toArray() as $key => $value) {
+            $creator[] = $value;
+            $creator[$key]['created_by_id'] = $created_by[$key]->firstName . " " . $created_by[$key]->lastName;
         }
-        return View::make('groups')->withGroups($groups);
+
+        return View::make('groups')->with(['groups' => $groups, 'data' => $data, 'created' => $creator]);
     }
 
     public function create()
@@ -69,7 +73,6 @@ class MyGroupController extends Controller
 
     public function createGroup(Request $request)
     {
-//        dd($request->all());
         $validate = Validator::make($request->all(), [
             'groupType' => 'required',
             'groupName' => 'required|max:200',
@@ -87,6 +90,16 @@ class MyGroupController extends Controller
                 'block' => 0,
                 'isPrivate' => Input::get('groupType')
             ]);
+
+            GroupUser::create([
+                'user_id' => Auth::id(),
+                'group_id' => $group->id,
+                'role_id' => 2,
+                'block' => 0,
+                'isJoin' => 1
+            ]);
+
+
             Input::file('photo')->move(base_path() . '/public/images/groups/' . $group->id . '/', $filname);
 
             return redirect('groups/' . $group->id);

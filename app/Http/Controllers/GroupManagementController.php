@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\GroupUser;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -24,16 +25,15 @@ class GroupManagementController extends Controller
         $created_by = array();
         foreach ($groups as $key) {
             $data[$key->id]['population'] = DB::table('groups_users')
-            ->where('group_id', $key->id)
-            ->count();
+                ->where('group_id', $key->id)
+                ->count();
             $created_by[] = User::find($key->created_by_id);
         }
         $creator = array();
 
-        foreach ($groups->toArray() as $key => $value)
-        {
-            $creator[] = $value ;
-            $creator[$key]['created_by_id'] =  $created_by[$key]->firstName . " " . $created_by[$key]->lastName;
+        foreach ($groups->toArray() as $key => $value) {
+            $creator[] = $value;
+            $creator[$key]['created_by_id'] = $created_by[$key]->firstName . " " . $created_by[$key]->lastName;
         }
 
         return \View::make('admin.group_management.group_list')->with(['groups' => $groups, 'data' => $data, 'created' => $creator]);
@@ -43,17 +43,17 @@ class GroupManagementController extends Controller
     {
         // check first if the group has already members
         $check = DB::table('groups_users')
-        ->where('group_id', $id)
-        ->count();
+            ->where('group_id', $id)
+            ->count();
         $group = Group::find($id);
 
         $members = DB::table('groups_users')
-        ->join('users', 'groups_users.user_id', '=', 'users.id')
-        ->join('groups', 'groups_users.group_id', '=', 'groups.id')
-        ->select('groups_users.block', 'groups.name', 'groups.id as groupId', 'users.id', 'users.firstName', 'users.lastName', 'users.email', 'users.verified', 'users.username', 'users.photo')
-        ->where('users.deleted_at', NULL)
-        ->where('groups_users.group_id' , $id)
-        ->get();
+            ->join('users', 'groups_users.user_id', '=', 'users.id')
+            ->join('groups', 'groups_users.group_id', '=', 'groups.id')
+            ->select('groups_users.block', 'groups.name', 'groups.id as groupId', 'users.id', 'users.firstName', 'users.lastName', 'users.email', 'users.verified', 'users.username', 'users.photo')
+            ->where('users.deleted_at', NULL)
+            ->where('groups_users.group_id', $id)
+            ->get();
 
         return \View::make('admin.group_management.view_group')->with(['members' => $members, 'group' => $group]);
     }
@@ -63,37 +63,34 @@ class GroupManagementController extends Controller
         $group = Group::find($id);
         $users = User::all();
         $members = DB::table('groups_users')
-        ->join('users', 'groups_users.user_id', '=', 'users.id')
-        ->join('groups', 'groups_users.group_id', '=', 'groups.id')
-        ->select('groups_users.block', 'groups.name', 'groups.id as groupId', 'users.id', 'users.firstName', 'users.lastName', 'users.email', 'users.verified', 'users.username', 'users.photo')
-        ->where('users.deleted_at', NULL)
-        ->where('groups_users.group_id' , $id)
-        ->get();
+            ->join('users', 'groups_users.user_id', '=', 'users.id')
+            ->join('groups', 'groups_users.group_id', '=', 'groups.id')
+            ->select('groups_users.block', 'groups.name', 'groups.id as groupId', 'users.id', 'users.firstName', 'users.lastName', 'users.email', 'users.verified', 'users.username', 'users.photo')
+            ->where('users.deleted_at', NULL)
+            ->where('groups_users.group_id', $id)
+            ->get();
 
         $non_members = DB::table('groups_users')
-        ->rightJoin('users', 'groups_users.user_id', '=', 'users.id')
-        ->select('groups_users.group_id as groupId', 'users.id', 'users.firstName', 'users.lastName', 'users.email', 'users.verified', 'users.username', 'users.photo')
-        ->where('users.deleted_at', NULL)
-        ->where('groups_users.group_id' , '!=' , $id)
-        ->orWhere('groups_users.group_id', NULL)
-        ->get();
+            ->rightJoin('users', 'groups_users.user_id', '=', 'users.id')
+            ->select('groups_users.group_id as groupId', 'users.id', 'users.firstName', 'users.lastName', 'users.email', 'users.verified', 'users.username', 'users.photo')
+            ->where('users.deleted_at', NULL)
+            ->where('groups_users.group_id', '!=', $id)
+            ->orWhere('groups_users.group_id', NULL)
+            ->get();
 
         $members_id = array();
-        foreach ($members as $member) 
-        {
+        foreach ($members as $member) {
             $members_id[] = $member->id;
         }
 
-        foreach ($non_members as $non_member) 
-        {
+        foreach ($non_members as $non_member) {
             $non_unique_members[] = $non_member->id;
         }
 
-        $non_members = array_unique($non_unique_members); 
+        $non_members = array_unique($non_unique_members);
 
-        foreach ( $non_members as $key => $value) {
-            if(!in_array($value, $members_id))
-            {
+        foreach ($non_members as $key => $value) {
+            if (!in_array($value, $members_id)) {
                 $non_members_id[] = $value;
             }
         }
@@ -110,13 +107,12 @@ class GroupManagementController extends Controller
         $group = Group::create([
             'name' => $request->name,
             'created_by_id' => Auth::user()->id,
-            'role_id' => '2'
         ]);
 
         $group->load('role');
         $group['population'] = DB::table('groups_users')
-        ->where('group_id', $group->id)  
-        ->count(); 
+            ->where('group_id', $group->id)
+            ->count();
         return response()->json($group);
     }
 
@@ -127,10 +123,10 @@ class GroupManagementController extends Controller
         ]);
 
         Group::where('id', $request->id)
-        ->update(['name' => $request->name]);
+            ->update(['name' => $request->name]);
 
         $group = Group::find($request->id);
-        return response()->json($group);   
+        return response()->json($group);
     }
 
     public function deleteGroupName(Request $request)
@@ -145,7 +141,7 @@ class GroupManagementController extends Controller
     public function blockGroupName(Request $request)
     {
         $group = Group::find($request->id);
-        $group->block = ($group->block) ? 0 : 1 ;
+        $group->block = ($group->block) ? 0 : 1;
         $group->save();
         $group['text'] = ($group->block) ? "Unblock" : "Block";
         $group['message'] = ($group->block) ? "blocked." : "unblocked.";
@@ -161,19 +157,19 @@ class GroupManagementController extends Controller
         $group = Group::where('name', $request->groupName)->first();
 
         DB::table('groups_users')
-        ->where('group_id', $group->id)
-        ->where('user_id', $request->userId)
-        ->update(['block' => $request->action]);
+            ->where('group_id', $group->id)
+            ->where('user_id', $request->userId)
+            ->update(['block' => $request->action]);
 
         $users = DB::table('groups_users')
-        ->join('users', 'groups_users.user_id', '=', 'users.id')
-        ->join('groups', 'groups_users.group_id', '=', 'groups.id')
-        ->select('groups_users.block',  'groups.name', 'groups.id as groupId', 'users.id', 'users.firstName', 'users.lastName', 'users.email', 'users.verified', 'users.username', 'users.photo')
-        ->where('groups_users.group_id', $group->id)
-        ->where('groups_users.user_id', $request->userId)
-        ->first();
+            ->join('users', 'groups_users.user_id', '=', 'users.id')
+            ->join('groups', 'groups_users.group_id', '=', 'groups.id')
+            ->select('groups_users.block', 'groups.name', 'groups.id as groupId', 'users.id', 'users.firstName', 'users.lastName', 'users.email', 'users.verified', 'users.username', 'users.photo')
+            ->where('groups_users.group_id', $group->id)
+            ->where('groups_users.user_id', $request->userId)
+            ->first();
 
-        $data['users'] = $users; 
+        $data['users'] = $users;
         $data['attr']['classname'] = ($users->block) ? 'unBlockBtn' : 'blockBtn';
         $data['attr']['notif'] = ($users->block) ? 'blocked.' : 'unblocked.';
         $data['attr']['text'] = ($users->block) ? 'Unblock' : 'Block';
@@ -183,15 +179,19 @@ class GroupManagementController extends Controller
     }
 
     public function addMembersInGroup(Request $request)
-    { 
+    {
         $errors = $this->validate($request, [
             'groupName' => 'required|max:255|exists:groups,name',
         ]);
 
         $group = Group::where('name', $request->groupName)->first();
 
-        $group_user = DB::table('groups_users')->insert([
-            ['user_id' => $request->id, 'group_id' => $group->id]
+        GroupUser::create([
+            'user_id' => $request->id,
+            'group_id' => $group->id,
+            'role_id' => 3,
+            'block' => 0,
+            'isJoin' => 1
         ]);
 
         $member = User::find($request->id);

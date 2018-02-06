@@ -117,7 +117,7 @@
                     <!-- CREDIT CARD FORM ENDS HERE -->
                     
                     
-                    <hr>
+                    {{--  <hr>
                         <div class="text-center">or</div>
                     <hr>
 
@@ -127,15 +127,62 @@
                         </div>
                         <div class="panel-body">
                             <form name="echeck_form" ng-submit="submitForm(echeck_form)" ng-validate="validationOptions" class="echeck_form" novalidate>
+                                
+                                <div class="summary">
+                                    <div class="row">
+                                        <div class="padding">
+                                            <h3>Order Summary</h3>
 
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label for="">Amount</label>
-                                            <input required type="number" name="amount" ng-model="echeckData.amount" id="" class="form-control form-control-number">
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Order Date</label>
+                                                <input disabled type="text" name="amount" ng-model="echeckData.date" id="" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Customer IP</label>
+                                                <input disabled type="text" name="amount" ng-model="echeckData.ip" id="" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Description</label>
+                                                <input disabled type="text" name="amount" ng-model="echeckData.description" id="" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Order Amount</label>
+                                                <input disabled type="text" name="amount" ng-model="echeckData.price" id="" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <img src="{{url().'/public/images/mail/check-img.png'}}" class="img-full" alt="">
+
+
+                                <div class="row">
+                                    <div class="padding">
+                                        <h3>Checking Account Information</h3>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="">Account Holder Name</label>
+                                            <input required type="number" name="name" ng-model="echeckData.name" id="" class="form-control form-control-number">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="">Account Type</label>
                                             <select required name="account_type" ng-model="echeckData.account_type" id="" class="form-control">
@@ -143,56 +190,48 @@
                                                 <option value="Checking">Checking</option>
                                                 <option value="Savings">Savings</option>
                                             </select>
-                                            {{--  <input required type="text" name="amount" ng-model="echeckData.amount" id="" class="form-control">  --}}
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="">Routing No.</label>
-                                            <input required type="number" name="routing" ng-model="echeckData.routing" id="" class="form-control form-control-number">
+                                            <input required type="number" name="routing_number" ng-model="echeckData.routing_number" id="" class="form-control form-control-number">
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="">Bank</label>
-                                            <input required type="text" name="bank" ng-model="echeckData.bank" id="" class="form-control">
+                                            <label for="">Check No.</label>
+                                            <input required type="text" name="check_number" ng-model="echeckData.check_number" id="" class="form-control">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="">Account No.</label>
                                             <input required type="number" name="account_no" ng-model="echeckData.account_no" id="" class="form-control form-control-number">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="">Confirm Account No.</label>
-                                            <input required type="number" name="confirm_ccount" ng-model="echeckData.confirm_ccount" id="" class="form-control form-control-number">
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="">First Name</label>
-                                            <input required type="text" name="first_name" ng-model="echeckData.first_name" id="" class="form-control">
+                                            <label for="">Social Security Number</label>
+                                            <input required type="number" name="social_number" ng-model="echeckData.social_number" id="" class="form-control form-control-number">
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="">Last Name</label>
-                                            <input required type="text" name="last_name" ng-model="echeckData.last_name" id="" class="form-control">
+                                            <label for="">Driver's License Number</label>
+                                            <input required type="number" name="drivers_license" ng-model="echeckData.drivers_license" id="" class="form-control form-control-number">
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="">Phone</label>
-                                            <input required type="number" name="phone" ng-model="echeckData.phone" id="" class="form-control form-control-number">
-
+                                            <label for="">Driver's License State</label>
+                                            <input required type="number" name="drivers_state" ng-model="echeckData.drivers_state" id="" class="form-control form-control-number">
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +278,7 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div>  --}}
 
                 </div>
             </div>

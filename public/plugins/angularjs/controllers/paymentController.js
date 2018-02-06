@@ -1,5 +1,4 @@
 ngApp.controller('paymentController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$httpParamSerializer', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $httpParamSerializer) {
-    $scope.echeckData = {};
 
     $scope.myImage = '';
     $scope.myCroppedImage = '';
@@ -7,6 +6,14 @@ ngApp.controller('paymentController', ['$scope', '$filter', 'myHttpService', '$t
     $scope.imgDone = {
         done: false
     };
+
+    $scope.echeckData = {
+        ip: window.for_zip,
+        price: window.uri_get_params.price,
+        description: window.uri_get_params.type,
+        date: new Date()
+    };
+
     $scope.params = window.uri_get_params;
     $scope.base_url = window.base_url;
 
