@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\GroupUser;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\Validator;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\GroupUser;
 use App\Group;
 use App\User;
-use DB;
 use Auth;
+use DB;
+use Redirect;
+use Input;
+use View;
 
 
 class GroupManagementController extends Controller
@@ -37,6 +40,12 @@ class GroupManagementController extends Controller
         }
 
         return \View::make('admin.group_management.group_list')->with(['groups' => $groups, 'data' => $data, 'created' => $creator]);
+    }
+
+    public function createGroup()
+    {
+            $user_id = Auth::user()->id;
+            return \View::make('admin.group_management.admin_create_group')->withData($user_id);
     }
 
     public function showGroupMembers($id)
@@ -100,20 +109,30 @@ class GroupManagementController extends Controller
 
     public function addGroupName(Request $request)
     {
-        $errors = $this->validate($request, [
-            'name' => 'required|max:255|unique:groups,name',
-        ]);
 
-        $group = Group::create([
-            'name' => $request->name,
-            'created_by_id' => Auth::user()->id,
-        ]);
+            $filname = Input::file('photo')->getClientOriginalName();
+            $group = Group::create([
+                'name' => Input::get('groupName'),
+                'created_by_id' => Input::get('userId'),
+                'description' => Input::get('description'),
+                'image' => $filname,
+                'block' => 0,
+                'isPrivate' => Input::get('groupType')
+            ]);
 
-        $group->load('role');
-        $group['population'] = DB::table('groups_users')
-            ->where('group_id', $group->id)
-            ->count();
-        return response()->json($group);
+            GroupUser::create([
+                'user_id' => Auth::id(),
+                'group_id' => $group->id,
+                'role_id' => 2,
+                'block' => 0,
+                'isJoin' => 1
+            ]);
+
+
+            Input::file('photo')->move(base_path() . '/public/images/groups/' . $group->id . '/', $filname);
+
+            return redirect('admin/group_management/group_lists');
+
     }
 
     public function editGroupName(Request $request)

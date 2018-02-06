@@ -63,15 +63,22 @@ class MyGroupController extends Controller
         $group = GroupUser::where('group_id', $id)->get();
         $group->load('user', 'group');
         $group_details = Group::find($id);
-        $members_id = array();
         $created_by = User::find($group_details->created_by_id);
+
+        $request_users = array();
+        $members_id = array();
         foreach ($group as $group_mem) {
+            if(!$group_mem->isJoin){
+                $request_users[] = $group_mem->user_id;
+                continue;
+            }
             $members_id[] = $group_mem->user_id;
         }
-        return View::make('groupMembers')->with(['group' => $group, 'created' => $created_by, 'group_details' => $group_details, 'members' => $members_id]);
+        return View::make('groupMembers')->with(['group' => $group, 'created' => $created_by, 'group_details' => $group_details, 'members' => $members_id, 'request' => $request_users]);
     }
 
-    public function createGroup(Request $request)
+    public
+    function createGroup(Request $request)
     {
         $validate = Validator::make($request->all(), [
             'groupType' => 'required',
@@ -108,7 +115,8 @@ class MyGroupController extends Controller
         }
     }
 
-    public function showGroups()
+    public
+    function showGroups()
     {
 
         $logged_in = 0;
@@ -127,7 +135,8 @@ class MyGroupController extends Controller
     }
 
 
-    public function addMemberForm($id)
+    public
+    function addMemberForm($id)
     {
         $group = Group::find($id);
         $created_by = User::find($group->created_by_id);
@@ -168,7 +177,8 @@ class MyGroupController extends Controller
         return View::make('addMember')->with(['members' => $members, 'non_members' => $non_members_id, 'users' => $users, 'created' => $created_by, 'group' => $group]);
     }
 
-    public function addMemberPost(Request $request)
+    public
+    function addMemberPost(Request $request)
     {
         foreach (Input::get('members') as $member_id) {
             $id = DB::table('groups_users')->insertGetId(
@@ -179,7 +189,8 @@ class MyGroupController extends Controller
     }
 
 
-    public function removeMemberForm($id)
+    public
+    function removeMemberForm($id)
     {
         $group = GroupUser::where('group_id', $id)->get();
         $group->load('user', 'group');
@@ -192,7 +203,8 @@ class MyGroupController extends Controller
         return View::make('removeMember')->with(['groups' => $group, 'created' => $created_by, 'group_details' => $group_details, 'members' => $members_id]);
     }
 
-    public function removeMemberPost(Request $request)
+    public
+    function removeMemberPost(Request $request)
     {
         foreach (Input::get('members') as $member_id) {
             $matchThese = ['group_id' => Input::get('groupID'), 'user_id' => $member_id];
@@ -201,7 +213,8 @@ class MyGroupController extends Controller
         return redirect('groups/' . Input::get('groupID'));
     }
 
-    public function deleteMembersInGroup(Request $request)
+    public
+    function deleteMembersInGroup(Request $request)
     {
         $group_member = GroupUser::find($request->id);
         $group_member->delete();

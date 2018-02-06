@@ -375,6 +375,8 @@
                     <ul class="treeview-menu">
                         <li><a href="{{ url('admin/group_management/group_lists') }}"><i class="fa fa-circle-o"></i>
                                 <span>Group list</span></a></li>
+                        <li><a href="{{ url('admin/group_management/create_group') }}"><i class="fa fa-circle-o"></i>
+                                <span>Create Group</span></a></li>
                     <!-- <li><a href="{{ url('admin/blog_management/create_post') }}"><i class="fa fa-circle-o"></i> <span>Create Post</span></a></li>
           <li><a href="{{ url('admin/blog_management/category') }}"><i class="fa fa-circle-o"></i> <span>Category Lists</span></a></li> -->
                     </ul>

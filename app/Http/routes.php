@@ -406,6 +406,7 @@ Route::group(array('before' => 'admin'), function () {
 
     /* Group Management */
     Route::get('admin/group_management/group_lists', 'GroupManagementController@showGroupList');
+    Route::get('admin/group_management/create_group', 'GroupManagementController@createGroup');
     Route::get('admin/group_management/group/{id}', 'GroupManagementController@showGroupMembers')->name('group_page');
     Route::get('admin/group_management/group/{id}/add_members', 'GroupManagementController@nonMemberLists');
     Route::post('addGroupNames', 'GroupManagementController@addGroupName');

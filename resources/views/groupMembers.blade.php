@@ -1,4 +1,9 @@
 @extends('master')
+
+@section('javascript')
+    {!! HTML::script('public/js/groups/join_group.js') !!}
+@endsection
+
 @section('form_area')
     {{--{{dd($group)}}--}}
     <div id="myModal" class="reveal-modal" style="background: none;">
@@ -119,16 +124,33 @@
                                     </div>
                                     <div style="margin:15px 0px;">
                                         @if($group_details->created_by_id == Auth::id())
-                                            <a class="btn btn-default btn_link1"
-                                               href="{!! url() !!}/groups/{!! $group_details->id !!}/addMember"
-                                               role="button"
-                                               id="addMember">
-                                                <span class="glyphicon glyphicon-plus"></span>&nbsp;Add Members</a>
-                                            <a class="btn btn-default btn_link1"
-                                               href="{!! url() !!}/groups/{!! $group_details->id !!}/removeMember"
-                                               role="button"
-                                               id="addMember">
-                                                <span class="glyphicon glyphicon-remove"></span>&nbsp;Remove Members</a>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <a class="btn btn-default btn_link1 btn-sm"
+                                                       href="{!! url() !!}/groups/{!! $group_details->id !!}/addMember"
+                                                       role="button"
+                                                       id="addMember">
+                                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Add Members</a>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <a class="btn btn-default btn_link1 btn-sm"
+                                                       href="{!! url() !!}/groups/{!! $group_details->id !!}/removeMember"
+                                                       role="button"
+                                                       id="addMember">
+                                                        <span class="glyphicon glyphicon-remove"></span>&nbsp;Remove
+                                                        Members</a>
+                                                </div>
+                                                @if(count($request))
+                                                    <div class="col-md-4">
+                                                        <a class="btn btn-default btn_link1 btn-sm"
+                                                           href="#"
+                                                           role="button"
+                                                           id="addMember">
+                                                            <span class="fa fa-user-plus"></span>&nbsp;Join
+                                                            Requests <span class="badge">{{count($request)}}</span></a>
+                                                    </div>
+                                                @endif
+                                            </div>
 
                                         @else
                                             @if(!in_array(Auth::id(), $members))
@@ -138,6 +160,13 @@
                                                           aria-hidden="true"></span>&nbsp;Join
                                                     Group</a>
                                             @else
+                                                @if( in_array( Auth::id(), $request) )
+                                                    <a class="btn btn-default btn_link1" href="#" role="button"
+                                                       id="requestBtn">
+                                                    <span class="glyphicon glyphicon-check"
+                                                          aria-hidden="true"></span>&nbsp;Request sent
+                                                        Group</a>
+                                                @endif
                                                 <a class="btn btn-default btn_link1" href="#" role="button"
                                                    id="unJoin">
                                                     <span class="glyphicon glyphicon-remove"
@@ -158,25 +187,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--group_inner_box-->
                         </div>
                         <div class="group_inner_box" style="padding-top:15px; padding-bottom:15px;">
                             <div class="row">
                                 @if(!$group_details->isPrivate)
                                     @foreach($group as $group_member)
-                                        <div class="col-md-3">
-                                            <a href="{{url().'user/profile/'.$group_member->user->username}}">
-                                                <div class="grup_member">
-                                                    <div>
-                                                        <img src="{{$group_member ->user->photo}}"
-                                                        class="img-responsive" alt="group member image"/>
+                                        @if($group_member->isJoin)
+                                            <div class="col-md-3">
+                                                <a href="{{url().'user/profile/'.$group_member->user->username}}">
+                                                    <div class="grup_member">
+                                                        <div>
+                                                            <img src="{{$group_member ->user->photo}}"
+                                                                 class="img-responsive" alt="group member image"/>
+                                                        </div>
+                                                        <div class="member_name">
+                                                            {!! $group_member->user-> firstName!!} {!! $group_member->user->lastName !!}
+                                                        </div>
                                                     </div>
-                                                    <div class="member_name">
-                                                        {!! $group_member->user-> firstName!!} {!! $group_member->user->lastName !!}
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
+                                                </a>
+                                            </div>
+                                        @endif
                                     @endforeach
                                 @else
                                     @if(in_array(Auth::id(), $members) || Auth::user()->role == "admin")
@@ -209,15 +239,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        <?php
-        //        $php_array = $groups['0'];
-        //        $js_array = json_encode($php_array);
-        //        echo "var group_info = ". $js_array . ";\n";
-        ?>
-    </script>
-
 @endsection
 
 

@@ -99,7 +99,7 @@
                                         <b>Group Name: </b> <span
                                                 class="groupName">{!! strtoupper($group_details->name) !!}</span></p>
                                     <p>
-                                        <b>Members in Group: </b>{!! count($members) !!}</p>
+                                        <b>Members in Group: </b>{!! count($members)-1 !!}</p>
                                     <p>
                                         <b>Group Description: </b>{!! $group_details->description !!}</p>
                                 </div>
@@ -109,7 +109,7 @@
                             <div class="row">
                                 <hr>
                                 <div>
-                                    @if(count($groups))
+                                    @if(count($groups)-1)
                                     <h3 class="text-center">Remove Members </h3>
                                     <table id="add_members_tbl" class="table table-bordered table-striped">
                                         <thead>
@@ -122,6 +122,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach($groups as $group)
+                                            @if($group->role_id != 2)
                                                 <tr>
                                                     <td>
                                                         <img src="{{ $group->user->photo}}" class="img-circle "
@@ -149,6 +150,7 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                @endif
                                             @endforeach
                                         @else
                                             <h3> &nbsp; <small class="text-danger"> No members yet.</small></h3>
