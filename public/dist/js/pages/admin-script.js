@@ -133,9 +133,21 @@ $(function () {
     // GB: 320, // Great Britain
     // RU: 3000 // Russia
   };
+  var coordsData = {"coords": [
+              [
+                33.9783241,
+                -84.4783064
+              ],
+              [
+                30.51220349999999,
+                -97.67312530000001
+              ] 
+          ]
+        };
   // World map by jvectormap
   $('#world-map').vectorMap({
         map: 'world_mill_en',
+        markers: coordsData.coords,
         series: {
           regions: [{
             values: visitorsData,
@@ -144,7 +156,7 @@ $(function () {
           }]
         },
         onRegionTipShow: function(e, el, code){
-          el.html(el.html()+' (GDP - '+visitorsData[code]+')');
+          el.html(el.html()+' (Visitors - '+visitorsData[code]+')');
         }
   });
 
