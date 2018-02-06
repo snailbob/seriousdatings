@@ -223,7 +223,7 @@ $(function () {
 
   // Sparkline charts
 
-  myvalues = [515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921];
+var  myvalues = [515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921];
   $('#sparkline-2').sparkline(myvalues, {
     type     : 'line',
     lineColor: '#92c1dc',
