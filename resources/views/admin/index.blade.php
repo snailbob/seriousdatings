@@ -394,33 +394,15 @@
               <i class="fa fa-map-marker"></i>
 
               <h3 class="box-title">
-                Visitors
+                Active Users
               </h3>
             </div>
             <div class="box-body">
               <div id="world-map" style="height: 250px; width: 100%;"></div>
             </div>
             <!-- /.box-body-->
-            <div class="box-footer no-border">
-              <div class="row">
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <div id="sparkline-1"></div>
-                  <div class="knob-label">Visitors</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <div id="sparkline-2"></div>
-                  <div class="knob-label">Online</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center">
-                  <div id="sparkline-3"></div>
-                  <div class="knob-label">Exists</div>
-                </div>
-                <!-- ./col -->
-              </div>
-              <!-- /.row -->
-            </div>
+        <!--     <div class="box-footer no-border">
+            </div> -->
           </div>
           <!-- /.box -->
 

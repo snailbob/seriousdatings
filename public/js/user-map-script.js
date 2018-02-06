@@ -406,7 +406,7 @@ function  NextPreviousValue(id,element) {
         '<li class="fa fa-gift" title="Virtual Gift"></li>'+
         '<li class="fa fa-eye" title="wink"></li>'+
         '<li class="fa fa-user-plus" title="Add User"></li>'+
-        '<li class="fa fa-microphone" title="Appointment" onclick="getAppointmentFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
+        '<li class="fa fa-phone" title="Appointment" onclick="getAppointmentFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
         '</ul>'+
         '</div>';
 

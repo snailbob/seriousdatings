@@ -117,60 +117,112 @@ $(function () {
   // jvectormap data
  
 
-    var visitorsData = {
-     "AF": 16.63,
-     "AL": 11.58,
-     "DZ": 158.97,
-    //  US: 398, // USA
-    // SA: 400, // Saudi Arabia
-    // CA: 1000, // Canada
-    // DE: 500, // Germany
-    // FR: 760, // France
-    // CN: 300, // China
-    // AU: 700, // Australia
-    // BR: 600, // Brazil
-    // IN: 800, // India
-    // GB: 320, // Great Britain
-    // RU: 3000 // Russia
-  };
-  var coordsData = {"coords": [
-              [
-                33.9783241,
-                -84.4783064
-              ],
-              [
-                30.51220349999999,
-                -97.67312530000001
-              ] 
-          ]
-        };
-  // World map by jvectormap
-  $('#world-map').vectorMap({
-        map: 'world_mill_en',
-        markers: coordsData.coords,
-        series: {
-          regions: [{
-            values: visitorsData,
-            scale: ['#C8EEFF', '#0071A4'],
-            normalizeFunction: 'polynomial'
-          }]
-        },
-        onRegionTipShow: function(e, el, code){
-          el.html(el.html()+' (Visitors - '+visitorsData[code]+')');
-        }
-  });
+
+    // alert(csrf_token);
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': csrf_token
+          }
+      });
+        var activeUsers = [];
+        var TotalactiveUsers = [];
+        var values = {};
+       $.ajax({
+
+            url: base_url+"/api/activeUserDemograph",
+            type: "GET",
+            contentType: false,
+            cache: false,
+            processData: false,
+            respond: 'json',
+            success: function (data) {
+       
+              $.each(data,function(i,k){
+                  activeUsers.push(data[i].state);
+                  TotalactiveUsers.push(data[i].counts);
+              });
+
+                  $.each(activeUsers, function(idx, value){
+                      values[value] = TotalactiveUsers[idx];
+                   
+                  })
+                  console.log(values);
+
+                    var myvalues = TotalactiveUsers;
+                    $('#sparkline-1').sparkline(myvalues, {
+                      type     : 'line',
+                      lineColor: '#92c1dc',
+                      fillColor: '#ebf4f9',
+                      height   : '50',
+                      width    : '80'
+                    });
+
+                  $('#world-map').vectorMap({
+                    map              : 'world_mill_en',
+                    normalizeFunction: 'polynomial',
+                    hoverOpacity     : 0.7,
+                    hoverColor       : false,
+                    backgroundColor  : 'transparent',
+                    regionStyle      : {
+                      initial      : {
+                        fill            : 'rgba(210, 214, 222, 1)',
+                        'fill-opacity'  : 1,
+                        stroke          : 'none',
+                        'stroke-width'  : 0,
+                        'stroke-opacity': 1
+                      },
+                      hover        : {
+                        'fill-opacity': 0.7,
+                        cursor        : 'pointer'
+                      },
+                      selected     : {
+                        fill: 'yellow'
+                      },
+                      selectedHover: {}
+                    },
+                       series           : {
+                      regions: [
+                        {
+                          values           : values,
+                          scale            : ['#b71031', '#ef1c46'],
+                          normalizeFunction: 'polynomial'
+                        }
+                      ]
+                    },
+                    onRegionLabelShow: function (e, el, code) {
+                      if (typeof values[code] != 'undefined')
+                        el.html(el.html() + ': ' + values[code] + ' active users');
+                    },
+                 /*   markerStyle      : {
+                      initial: {
+                        fill  : '#00a65a',
+                        stroke: '#111'
+                      }
+                    },*/
+                /*    onMarkerTipShow: function(event, label, index){
+                       console.log(markersData[index].name);
+                        label.html(
+                          '<b>'+markersData[index].name+'</b><br/>'+
+                          '<b>Population: </b>'+markersData[index].name+'</br>'+
+                          '<b>Unemployment rate: </b>'+markersData[index].name+'%'
+                        );
+                      },
+                    markers          : markersData*/
+                  });
+                         
+            },
+            error: function (err) {
+                console.log(err);
+                
+            }
+        });
+        
+      
 
 
 
   // Sparkline charts
-  var myvalues = [1000, 1200, 920, 927, 931, 1027, 819, 930, 1021];
-  $('#sparkline-1').sparkline(myvalues, {
-    type     : 'line',
-    lineColor: '#92c1dc',
-    fillColor: '#ebf4f9',
-    height   : '50',
-    width    : '80'
-  });
+
   myvalues = [515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921];
   $('#sparkline-2').sparkline(myvalues, {
     type     : 'line',
