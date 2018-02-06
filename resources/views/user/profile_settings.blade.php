@@ -899,8 +899,12 @@
                                 <i class="fa fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook Connected
                             </a>
                             @endif
-                            <a href="#" ng-click="timeAvailability();" class="list-group-item">
+                            <a ng-click="timeAvailability();" class="list-group-item">
                                 <i class="fa fa-fw fa-book" aria-hidden="true"></i> Appointment Availability
+                            </a>
+
+                            <a href="{{url().'/myfriends'}}" class="list-group-item">
+                                <i class="fa fa-fw fa-users" aria-hidden="true"></i> My Friends
                             </a>
 
                             <a class="list-group-item" ng-click="deleteAccount()">

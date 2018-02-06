@@ -11,6 +11,17 @@ use App\UserBlocks;
 
 class UserBlockController extends Controller
 {
+
+
+    public function myUserBlocksGet(Request $request){
+        $id = (!empty($request->input('id'))) ? $request->input('id') : Auth::id();
+
+        $user_blocks = UserBlocks::where('user_id', $id)->get();
+        $user_blocks->load('userBlocked');
+
+        return response()->json($user_blocks);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -110,8 +121,11 @@ class UserBlockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id = Auth::user()->id;
+        $u = UserBlocks::where('user_id',$id)->where('user_blocked_id',$request->input('id'))->delete();
+        return response()->json(['id'=>$id]);
+
     }
 }

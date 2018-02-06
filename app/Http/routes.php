@@ -167,6 +167,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('payment_gateway', 'PaymentMethodController@paymentGateway');
     Route::post('square_payment', 'PaymentMethodController@squarePayment');
 
+    Route::get('myfriends', 'UserFriendshipController@myfriendsPage');
+
 
 });
 
@@ -195,13 +197,17 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('get_private_chat_id', 'GroupChatController@get_private_chat_id');
     Route::resource('group_chat', 'GroupChatController');
     Route::resource('group_chat_participants', 'GroupChatParticipantsController');
-    Route::resource('group_chat_messages', 'GroupChatMessagesController');
-
+    Route::resource('group_chat_messages', 'GroupChatMessagesController');  
+    
     Route::get('usermates/{username}', 'UsersController@selectmates');
     Route::post('add_friend', 'UserFriendshipController@store');
     Route::post('delete_friend', 'UserFriendshipController@destroy');
+    Route::get('get_my_friends', 'UserFriendshipController@myfriendsGet');
+
     Route::post('block_user', 'UserBlockController@store');
+    Route::post('unblock_user', 'UserBlockController@destroy');
     Route::post('speedBlock', 'UserBlockController@speedBlock');
+    Route::get('get_my_userblocks', 'UserBlockController@myUserBlocksGet');
 
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
     Route::post('send_gift', 'GiftCardController@sendGiftCards');

@@ -104,7 +104,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'admin_pause',
         'birthdate',
         'wouldBirthFatherAndMotherAre',
-        'fb_id'
+        'fb_id',
+        'country_shortname'
     ];
 
     protected $dates = ['deleted_at', 'create_at', 'updated_at'];

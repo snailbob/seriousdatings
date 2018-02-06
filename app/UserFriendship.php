@@ -25,4 +25,9 @@ class UserFriendship extends Model
     protected $hidden = [];
 
 
+    public function userFriend()
+    {
+        return $this->belongsTo('App\User', 'friend_id', 'id');
+    }
+
 }
