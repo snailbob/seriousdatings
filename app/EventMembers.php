@@ -20,7 +20,7 @@ class EventMembers extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'event_id', 'type'];
+    protected $fillable = ['user_id', 'event_id', 'type', 'paid'];
 
     /**
      * The attributes excluded from the model's JSON form.

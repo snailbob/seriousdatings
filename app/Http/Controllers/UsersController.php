@@ -33,7 +33,7 @@ use Mail;
 use App\Http\Controllers\DatingPlanController;
 use App\Http\Controllers\AdsSpaceController;
 use App\Http\Controllers\NotiFierLogsController;
-use App\Http\Controllers\MapCodeController;
+
 
 class UsersController extends Controller {
 
@@ -1446,25 +1446,7 @@ class UsersController extends Controller {
 
     }
 
-    public function activeUserDemograph(){
-        $users = DB::table('users')->select('country_shortname', DB::raw('count(country_shortname) as total_count'))->groupBy('country_shortname')->get();;
-
-        return response()->json(self::UserLatLngFormat($users));
-    }
-    public static function UserLatLngFormat($variable){
-        $state = array();
-        $format = array();
-        foreach ($variable as $key => $value) {
-                // dd($value);
-            if (array_key_exists($value->country_shortname,MapCodeController::CodeMapper())) {
-                
-                $state['state'] = $value->country_shortname;
-                $state['counts'] = $value->total_count;
-                $format[] = $state;
-            }
-        }
-        return $format;
-    }
+    
 
 
 
