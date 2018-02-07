@@ -59,7 +59,7 @@
                             </a>
 
                             <a class="btn btn-success btn-block" ng-if="!user.user_friend.is_friend" ng-click="addUser(user.user_friend)">
-                                <i class="fa fa-user fa-fw"></i> Friends
+                                <i class="fa fa-user fa-fw"></i> Remove Friend
                             </a>
 
                             <a class="btn btn-default btn-block" ng-href="@{{ base_url + '/search/profile/' + user.user_friend.id}}" target="_blank">

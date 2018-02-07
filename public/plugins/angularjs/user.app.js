@@ -1,4 +1,4 @@
-var ngApp = angular.module('seriousDatingApp', ['ngValidate', 'checklist-model', 'ngImgCrop', 'ngBootbox', 'ngToast', 'ui.bootstrap', 'cp.ngConfirm', 'ui.calendar', 'angularMoment']);
+var ngApp = angular.module('seriousDatingApp', ['ngValidate', 'checklist-model', 'ngImgCrop', 'ngBootbox', 'ngToast', 'ui.bootstrap', 'cp.ngConfirm', 'ui.calendar', 'angularMoment', 'toaster']);
 
 ngApp.config(['ngToastProvider', function (ngToastProvider) {
     ngToastProvider.configure({
@@ -33,30 +33,39 @@ ngApp.filter('slice', function () {
     };
 });
 
-ngApp.run(['$rootScope', 'ngToast', function ($rootScope, ngToast) {
+ngApp.run(['$rootScope', 'ngToast', 'toaster', function ($rootScope, ngToast, toaster) {
 
     $rootScope.showToast = function (content = 'Cool', classname = 'success') {
         console.log(content);
-        ngToast.create({
-            className: classname,
-            content: content
+        // ngToast.create({
+        //     className: classname,
+        //     content: content
+        // });
+        classname = (classname == 'danger') ? 'error' : classname;
+        toaster.pop({
+            type: classname,
+            // title: 'Title text',
+            body: content,
+            toasterId: 2
+            // showCloseButton: true
         });
 
     };
 
-    $rootScope.showNotiToast = function (content = 'Cool', classname = 'success alert-noti') {
-        console.log(content);
-        ngToast.settings.horizontalPosition = 'right';
-        ngToast.settings.verticalPosition = 'bottom';
-
-        ngToast.create({
-            className: classname,
-            content: content
+    $rootScope.pop = function(){
+        console.log('tasotere');
+        toaster.pop({
+            type: 'error',
+            title: 'Title text',
+            body: 'Body text',
+            showCloseButton: true,
+            toasterId: 1
         });
-
     };
 
-    $rootScope.showNotiToast();
+    // setTimeout(function(){
+    //     $rootScope.pop();
+    // },  5500);
 
     $rootScope.heightOptions = function () {
         var arr = [];

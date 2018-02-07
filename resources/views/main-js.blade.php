@@ -38,6 +38,8 @@
   <script src="{{ url() }}/public/plugins/flipster.jquery/jquery.flipster.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.6.6/angular-sanitize.min.js"></script>
+  <script src="https://code.angularjs.org/1.2.0/angular-animate.min.js" ></script>
+
 
   <script src="{{ url() }}/public/plugins/angularjs/plugins/angular-ui-calendar/src/calendar.js"></script>
   <script src="{{ url() }}/public/plugins/fullcalendar/fullcalendar.js"></script> 
@@ -54,7 +56,8 @@
   <script src="{{ url() }}/public/js/jquery-confirm/dist/jquery-confirm.min.js"></script>
   <script src="{{ url() }}/public/js/jquery.time.ago.js"></script>
   <script src="{{ url() }}/public/js/toaster/jquery.toast.min.js"></script>
-      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
+
 
 
   <script src="{{ url() }}/public/plugins/angularjs/user.app.js"></script>

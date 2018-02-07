@@ -11,7 +11,7 @@ ngApp.controller('paymentController', ['$scope', '$filter', 'myHttpService', '$t
         ip: window.for_zip,
         price: window.uri_get_params.price,
         description: window.uri_get_params.type,
-        date: new Date()
+        date: $filter('date')(new Date(), "dd/MM/yyyy")
     };
 
     $scope.params = window.uri_get_params;
@@ -52,14 +52,15 @@ ngApp.controller('paymentController', ['$scope', '$filter', 'myHttpService', '$t
     };
 
     $scope.submitForm = function (formData) {
+        console.log($scope.echeckData, 'echeckData');
 
         if (formData.validate()) {
-            // $scope.echeckData.image = $scope.myCroppedImage;
-            // console.log($scope.echeckData, 'sdfsdfdsf');
-            // if ($scope.imgEdit) {
-            //     $scope.showToast('Please upload an image banner.', 'danger');
-            //     return false;
-            // }
+            $scope.echeckData.image = $scope.myCroppedImage;
+            console.log($scope.echeckData, 'sdfsdfdsf');
+            if ($scope.imgEdit) {
+                $scope.showToast('Please upload your e-check image.', 'danger');
+                return false;
+            }
 
             $scope.echeckData.submitting = true;
             $scope.echeckData.id = $scope.params.id;

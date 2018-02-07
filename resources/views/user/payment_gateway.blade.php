@@ -117,7 +117,7 @@
                     <!-- CREDIT CARD FORM ENDS HERE -->
                     
                     
-                    {{--  <hr>
+                    <hr>
                         <div class="text-center">or</div>
                     <hr>
 
@@ -130,6 +130,45 @@
                                 
                                 <div class="summary">
                                     <div class="row">
+                                        <div class="col-sm-12">
+
+                                            <div class="row">
+                                                <div class="col-sm-6 col-sm-offset-3 crop-col" ng-show="!imgDone.done">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="cropArea">
+                                                                <img-crop image="myImage" result-image="myCroppedImage" on-load-done="imgEdit = false" result-image-quality="0.8" area-type="square"></img-crop>
+                                                            </div>
+                                                            <div>
+                                                                <div class="hidden">
+                                                                    <input type="file" id="fileInput" accept="image/*" />
+                                                                </div>
+                                                                <button type="button" class="btn btn-primary btn-block" onclick="$('#fileInput').click()">
+                                                                    Upload E-Check
+                                                                </button>
+                                                                <button type="button" class="btn btn-success btn-block" ng-if="!imgEdit" ng-click="imgDone.done = !imgDone.done">
+                                                                    Done
+                                                                </button>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6 col-sm-offset-3 text-center crop-col" ng-if="imgDone.done">
+                                                    <div><img class="img-thumbnail img-responsive" ng-src="@{{myCroppedImage}}" /></div>
+                                                    <div class="padding-top">
+                                                        <button class="btn btn-default" ng-if="!imgEdit" ng-click="imgDone.done = !imgDone.done; imgEdit = !imgEdit">
+                                                            Update
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            
+
+                                        </div>
                                         <div class="padding">
                                             <h3>Order Summary</h3>
 
@@ -179,7 +218,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="">Account Holder Name</label>
-                                            <input required type="number" name="name" ng-model="echeckData.name" id="" class="form-control form-control-number">
+                                            <input required type="text" name="name" ng-model="echeckData.name" id="" class="form-control form-control-number">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -260,7 +299,7 @@
                         </div>
                     </div>
 
-                    <hr>
+                    {{--  <hr>
                         <div class="text-center">or</div>
                     <hr>
 
