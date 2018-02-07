@@ -206,10 +206,9 @@ $(function () {
                     var payDate = data.datingSales[index].payDate;
                     var gateWayMethod = data.datingSales[index].gateWayMethod;
 ;
-                      dataReveneu.push({ year: payDate, value: parseFloat(moneyValue), labelsPay:gateWayMethod });
+                      dataReveneu.push({ year: payDate, item: parseFloat(moneyValue)});
                   });
 
-                  console.log(dataReveneu);    
                     area = new Morris.Area({
                     element   : 'revenue-chart',
                     resize    : true,
@@ -219,10 +218,10 @@ $(function () {
                             // The name of the data record attribute that contains x-values.
                             xkey: 'year',
                             // A list of names of data record attributes that contain y-values.
-                            ykeys: ['value'],
+                            ykeys: ['item'],
                             // Labels for the ykeys -- will be displayed when you hover over the
                             // chart.
-                            labels: ['Value','labelsPay'],
+                            labels: ['Value'],
                             hideHover: 'auto',
                             pointSize:2,
 
@@ -232,15 +231,14 @@ $(function () {
                     var moneyValue = data.eventsSales[index].price.eventPrice;
                     var payDate = data.eventsSales[index].payDate;
 
-                      eventsReveneu.push({ y: payDate, item: parseFloat(moneyValue) });
+                      eventsReveneu.push({ year: payDate, item: parseFloat(moneyValue) });
                   });
-
-                  console.log(eventsReveneu);    
+    
                     area = new Morris.Area({
                               element          : 'events-chart',
                               resize           : true,
                               data             : eventsReveneu,
-                              xkey             : 'y',
+                              xkey             : 'year',
                               ykeys            : ['item'],
                               labels           : ['Value'],
                               lineColors       : ['#71dbdb'],
@@ -262,15 +260,14 @@ $(function () {
                     var moneyValue = data.virtualSales[index].price;
                     var payDate = data.virtualSales[index].payDate;
 
-                      virtualReveneu.push({ y: payDate, item: parseFloat(moneyValue) });
+                      virtualReveneu.push({ year: payDate, item: parseFloat(moneyValue) });
                   });
-
-                  console.log(virtualReveneu);    
+ 
                     area = new Morris.Area({
                               element          : 'virtual-chart',
                               resize           : true,
                               data             : virtualReveneu,
-                              xkey             : 'y',
+                              xkey             : 'year',
                               ykeys            : ['item'],
                               labels           : ['Value'],
                               lineColors       : ['#7ddd2e'],
@@ -287,18 +284,60 @@ $(function () {
 
                   });
 
-                    // 
+                        var adsReveneu = [];
+                  $.each(data.adsReveneu,function(index,key){
+                    var moneyValue = data.adsReveneu[index].price;
+                    var payDate = data.adsReveneu[index].payDate;
 
-              // console.log(data.demoGraph);    
-              // console.log(data.datingSales);         
-              console.log(data.eventsSales);         
+                      adsReveneu.push({ year: payDate, item: parseFloat(moneyValue) });
+                  });
+ 
+                    area = new Morris.Area({
+                              element          : 'ads-chart',
+                              resize           : true,
+                              data             : adsReveneu,
+                              xkey             : 'year',
+                              ykeys            : ['item'],
+                              labels           : ['Value'],
+                              lineColors       : ['#e8ce09'],
+                              lineWidth        : 2,
+                              hideHover        : 'auto',
+                              gridTextColor    : '#000000',
+                              gridStrokeWidth  : 0.4,
+                              pointSize        : 4,
+                              pointStrokeColors: ['#efefef'],
+                              gridLineColor    : '#d71818',
+                              gridTextFamily   : 'Open Sans',
+                              gridTextSize     : 10
+
+
+                  });
+
+
+                  var totatlReveneu = [];
+                  $.each(dataReveneu,function(index,key){
+                      totatlReveneu.push(key.item);   
+                  });
+                   $.each(eventsReveneu,function(index,key){
+                      totatlReveneu.push(key.item);       
+                  });
+                    $.each(virtualReveneu,function(index,key){
+                      totatlReveneu.push(key.item);       
+                  });
+                    $.each(adsReveneu,function(index,key){
+                      totatlReveneu.push(key.item);       
+                  });
+                    $(".total-reveneu").html(totatlReveneu.reduce(add, 0));
+                         
             },
             error: function (err) {
                 console.log(err);
                 
             }
         });
-        
+        function add(a, b) {
+            return a + b;
+        }
       
 
 
@@ -333,74 +372,6 @@ var  myvalues = [515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921];
 
   if(uri_2 == ''){
 
-    /* Morris.js Charts */
-    // Sales chart
-    // var area = new Morris.Area({
-    //   element   : 'revenue-chart',
-    //   resize    : true,
-    //   data      : 
-    //   // [
-    //   //   { y: '2011 Q1', item1: 2666, item2: 2666 },
-    //   //   { y: '2011 Q2', item1: 2778, item2: 2294 },
-    //   //   { y: '2011 Q3', item1: 4912, item2: 1969 },
-    //   //   { y: '2011 Q4', item1: 3767, item2: 3597 },
-    //   //   { y: '2012 Q1', item1: 6810, item2: 1914 },
-    //   //   { y: '2012 Q2', item1: 5670, item2: 4293 },
-    //   //   { y: '2012 Q3', item1: 4820, item2: 3795 },
-    //   //   { y: '2012 Q4', item1: 15073, item2: 5967 },
-    //   //   { y: '2013 Q1', item1: 10687, item2: 4460 },
-    //   //   { y: '2013 Q2', item1: 8432, item2: 5713 }
-    //   // ],
-    //   xkey      : 'y',
-    //   ykeys     : ['item1', 'item2'],
-    //   labels    : ['Item 1', 'Item 2'],
-    //   lineColors: ['#a0d0e0', '#3c8dbc'],
-    //   hideHover : 'auto'
-    // });
-
-    var line = new Morris.Line({
-      element          : 'line-chart',
-      resize           : true,
-      data             : [{ y: '2011 Q1', item1: 2666 }],
-      // [
-      //   { y: '2011 Q1', item1: 2666 },
-      //   { y: '2011 Q2', item1: 2778 },
-      //   { y: '2011 Q3', item1: 4912 },
-      //   { y: '2011 Q4', item1: 3767 },
-      //   { y: '2012 Q1', item1: 6810 },
-      //   { y: '2012 Q2', item1: 5670 },
-      //   { y: '2012 Q3', item1: 4820 },
-      //   { y: '2012 Q4', item1: 15073 },
-      //   { y: '2013 Q1', item1: 10687 },
-      //   { y: '2013 Q2', item1: 8432 }
-      // ],
-      xkey             : 'y',
-      ykeys            : ['item1'],
-      labels           : ['Item 1'],
-      lineColors       : ['#efefef'],
-      lineWidth        : 2,
-      hideHover        : 'auto',
-      gridTextColor    : '#fff',
-      gridStrokeWidth  : 0.4,
-      pointSize        : 4,
-      pointStrokeColors: ['#efefef'],
-      gridLineColor    : '#efefef',
-      gridTextFamily   : 'Open Sans',
-      gridTextSize     : 10
-    });
-
-    // Donut Chart
-    // var donut = new Morris.Donut({
-    //   element  : 'sales-chart',
-    //   resize   : true,
-    //   colors   : ['#3c8dbc', '#f56954', '#00a65a'],
-    //   data     : [
-    //     { label: 'Download Sales', value: 12 },
-    //     { label: 'In-Store Sales', value: 30 },
-    //     { label: 'Mail-Order Sales', value: 20 }
-    //   ],
-    //   hideHover: 'auto'
-    // });
 
   }
 
