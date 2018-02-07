@@ -11,6 +11,7 @@
     <div class="inner-header upcoming-banner">
         <div class="container">
             <h1>
+            <h1>
             <!--<i class="calendar-event-icon"><img src="{!! url() !!}/images/upcoming-event-icon.png"  alt=""></i>-->
                 Create Group</h1>
         </div>

@@ -9,7 +9,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{url()}}/admin"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Group Management</a>
+        <li class="active">Group Management</li>
       </ol>
     </section>
 
@@ -18,9 +18,6 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
-            <div class="box box-header">
-              <button id="addBtn" class="btn btn-success pull-left"><i class="fa fa-plus-square"></i> Add Group</button>
-            </div>
             <div class="box-body">
               <table id="groups_tbl" class="table table-bordered table-striped">
                 <thead>
@@ -47,8 +44,8 @@
                           <a href='#'> <i class="fa fa-edit"></i> Edit</a>
                         </li>
                         <li class="blockBtn">
-                          <a href='#' class="blockTxt"> 
-                            <i class="fa fa-user-times"></i> 
+                          <a href='#' class="blockTxt">
+                            <i class="fa fa-user-times"></i>
                             @if($group['block'])
                             Unblock
                             @else
@@ -57,7 +54,7 @@
                           </a>
                         </li>
                         <li class="deleteBtn">
-                          <a href='#'><i class="fa fa-trash-o"></i> Delete</a>  
+                          <a href='#'><i class="fa fa-trash-o"></i> Delete</a>
                         </li>
                       </ul>
                     </div>

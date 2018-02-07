@@ -204,4 +204,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\BlogComment', 'user_id');
     }
 
+    public function groupMemberPost()
+    {
+        return $this->hasMany('App\GroupMemberPost', 'user_id');
+    }
+
+
 }

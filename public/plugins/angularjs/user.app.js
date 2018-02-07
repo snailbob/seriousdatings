@@ -438,13 +438,14 @@ ngApp.controller('bodyController', [
 
                     $scoped.AppointmentDetail = AppointmentData;
                     console.log(AppointmentData.appStatus);
-                    $scoped.declineAppointment = function (appID) {
+                    $scoped.declineAppointment = function (appId) {
                         // $scope.actionDeclineAppointment(appID, AppointmentData, self, grandParent);
-                        $scope.saveAppointmentAction('Sorry mate maybe next time.', id, 'R', self, grandParent);
+                        $scope.saveAppointmentAction('Sorry mate, maybe next time.', appId, 'R', self, grandParent);
                     };
                     $scoped.acceptAppointment = function (appId) {
 
-                        $scope.actionAcceptAppointment(appId, AppointmentData, self, grandParent);
+                        // $scope.actionAcceptAppointment(appId, AppointmentData, self, grandParent);
+                        $scope.saveAppointmentAction('I\'m happy to fuck you!', appId, 'A', self, grandParent);
 
                     };
                 }, {});

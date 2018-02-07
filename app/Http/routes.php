@@ -412,6 +412,7 @@ Route::group(array('before' => 'admin'), function () {
 
     /* Group Management */
     Route::get('admin/group_management/group_lists', 'GroupManagementController@showGroupList');
+    Route::get('admin/group_management/create_group', 'GroupManagementController@createGroup');
     Route::get('admin/group_management/group/{id}', 'GroupManagementController@showGroupMembers')->name('group_page');
     Route::get('admin/group_management/group/{id}/add_members', 'GroupManagementController@nonMemberLists');
     Route::post('addGroupNames', 'GroupManagementController@addGroupName');
@@ -540,9 +541,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profiles/groups/create', 'MyGroupController@create');
     Route::get('groups/{groupID}/addMember', 'MyGroupController@addMemberForm');
     Route::get('groups/{groupID}/removeMember', 'MyGroupController@removeMemberForm');
+    Route::get('groups/{groupID}/groupUserRequest', 'MyGroupController@userGroupRequest');
     Route::post('createGroup', 'MyGroupController@createGroup');
     Route::post('deleteMembersInGroup', 'MyGroupController@deleteMembersInGroup');
     Route::post('userAddMembersInGroup', 'GroupManagementController@addMembersInGroup');
+    Route::post('userJoinRequest', 'MyGroupController@userJoinRequest');
+    Route::post('cancelJoinRequest', 'MyGroupController@cancelJoinRequest');
+    Route::post('rejectUserRequest', 'MyGroupController@rejectUserRequest');
+    Route::post('acceptUserRequest', 'MyGroupController@acceptUserRequest');
+    Route::post('userLeaveGroup', 'MyGroupController@userLeaveGroup');
+    Route::post('groupMemberPostImg', 'MyGroupController@groupMemberPostImg');
+    Route::post('groupMemberPostTxt', 'MyGroupController@groupMemberPostTxt');
+    Route::post('groupMemberPostVideo', 'MyGroupController@groupMemberPostVideo');
 
 
     Route::get('datingPlan/{planId}', 'DatingPlanController@subscribe');
