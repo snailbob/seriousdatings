@@ -30,11 +30,77 @@ $(document).ready(function () {
         $('#image').hide();
     });
 
-    $(document).on('click', '#txtSaveBtn', function()
-    {
-        message['editor1'] = CKEDITOR.instances['editor1'].getData();
-        console.log(message);
-    })
+    $(document).on('click', '#vidSaveBtn', function () {
+        var message = {
+            type_id: 3,
+            group_name: $('.groupName').text(),
+            link: $('#videoLink').val()
+        };
+
+
+        $.ajax({
+            type: 'POST',
+            url: base_url + '/groupMemberPostVideo',
+            data: message,
+            cache: false,
+            success: function (value) {
+                if (value.status) {
+                    $.each(value.message, function (key, value) {
+                        toastr.error(value);
+                    });
+                } else {
+                    toastr.info('Success!');
+                    setTimeout(
+                        function()
+                        {
+                            location.reload();
+                        }, 2500);
+                }
+
+            },
+            error: function (data) {
+                $.each(data.responseJSON, function (key, value) {
+                    toastr.error(value);
+                });
+            }
+        });
+    });
+
+
+    $(document).on('click', '#txtSaveBtn', function () {
+        var message = {
+            type_id: 1,
+            group_name: $('.groupName').text()
+        };
+
+        message['post'] = $.trim(CKEDITOR.instances['editor1'].getData());
+
+        if (!message.post) {
+            toastr.error('Your post is empty.');
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: base_url + '/groupMemberPostTxt',
+                data: message,
+                cache: false,
+                success: function (value) {
+                    console.log(value);
+                    toastr.info('Success!');
+                    setTimeout(
+                        function()
+                        {
+                            location.reload();
+                        }, 2500);
+                },
+                error: function (data) {
+                    $.each(data.responseJSON, function (key, value) {
+                        toastr.error(value);
+                    });
+                }
+            });
+        }
+
+    });
 
     /* POST IMAGE */
     // Variable to store your files
@@ -47,6 +113,7 @@ $(document).ready(function () {
         files = event.target.files;
         $('#imgSaveBtn').prop('disabled', false);
     }
+
     // Grab the files and set them to our variable
     $(document).on('click', '#imgSaveBtn', uploadFiles);
 
@@ -60,6 +127,9 @@ $(document).ready(function () {
             data.append('image', value);
         });
         data.append('groupName', $('.groupName').text());
+        data.append('type_id', 2);
+
+        console.log(data)
         $.ajax({
             type: 'POST',
             url: base_url + '/groupMemberPostImg',
@@ -69,8 +139,12 @@ $(document).ready(function () {
             processData: false, // Don't process the files
             contentType: false, // Set content type to false as jQuery will tell the server its a query string request
             success: function (data) {
-                console.log(data);
-
+                toastr.info('Success!');
+                setTimeout(
+                    function()
+                    {
+                        location.reload();
+                    }, 2500);
             },
             error: function (value) {
                 $.each(value.responseJSON, function (key, value) {
@@ -92,7 +166,7 @@ $(document).ready(function () {
             "onclick": null,
             "showDuration": "300",
             "hideDuration": "1000",
-            "timeOut": "5000",
+            "timeOut": "2500",
             "extendedTimeOut": "1000",
             "showEasing": "swing",
             "hideEasing": "linear",

@@ -544,6 +544,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('acceptUserRequest', 'MyGroupController@acceptUserRequest');
     Route::post('userLeaveGroup', 'MyGroupController@userLeaveGroup');
     Route::post('groupMemberPostImg', 'MyGroupController@groupMemberPostImg');
+    Route::post('groupMemberPostTxt', 'MyGroupController@groupMemberPostTxt');
+    Route::post('groupMemberPostVideo', 'MyGroupController@groupMemberPostVideo');
 
 
     Route::get('datingPlan/{planId}', 'DatingPlanController@subscribe');

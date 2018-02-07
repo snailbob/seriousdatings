@@ -20,8 +20,12 @@
     </script>
 @endsection
 
+@section('css-scripts')
+    {!! HTML::style('public/css/group/group_page.css') !!}
+@endsection
+
 @section('form_area')
-    {{--{{dd($group)}}--}}
+    {{--{{dd($posts)}}--}}
     <div id="myModal" class="reveal-modal" style="background: none;">
 
         <div class="popup-bg">
@@ -237,36 +241,81 @@
                             </div>
                             {{--display members--}}
                             <hr>
-                            {{--member publish post--}}
-                            <div class="row text-center">
-                                <div class="col-md-12">
-                                    <h4 class="text-center">Post</h4>
+                            @if(in_array(Auth::id(), $members) || Auth::user()->role == "admin")
+                                {{--member publish post--}}
+                                <div class="row text-center">
+                                    <div class="col-md-12">
+                                        <h4 class="text-center">Post</h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button id="imgBtn" class="btn btn-secondary">Image</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button id="txtBtn" class="btn btn-secondary">Text</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button id="vidBtn" class="btn btn-secondary">Video</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <button id="imgBtn" class="btn btn-secondary">Image</button>
+                                <div class="user-post" style="margin-top: 24px;">
+                                    <div id="image" class="form-group" style=" display: none;">
+                                        <input id="post-image" type="file" class="form-control">
+                                        <button id="imgSaveBtn" class="btn btn-primary pull-right"
+                                                style="margin-top: 12px;"
+                                                disabled>Post
+                                        </button>
+                                    </div>
+                                    <div id="text" class="form-group" style="display: none;">
+                                        <textarea name="editor1" rows="10" cols="80" value="" required></textarea>
+                                        <button id="txtSaveBtn" class="btn btn-primary pull-right"
+                                                style="margin-top: 12px;">Post
+                                        </button>
+                                    </div>
+                                    <div id="video" class="form-group" style="display: none;">
+                                        <input id="videoLink" type="text" class="form-control"
+                                               placeholder="Enter Embeded Youtube link only...">
+                                        <button id="vidSaveBtn" class="btn btn-primary pull-right"
+                                                style="margin-top: 12px;">Post
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <button id="txtBtn" class="btn btn-secondary">Text</button>
-                                </div>
-                                <div class="col-md-4">
-                                    <button id="vidBtn" class="btn btn-secondary">Video</button>
-                                </div>
-                            </div>
-                            <div class="user-post" style="margin-top: 24px;">
-                                <div id="image" class="form-group" style=" display: none;">
-                                    <input id="post-image" type="file" class="form-control">
-                                    <button id="imgSaveBtn" class="btn btn-primary pull-right" style="margin-top: 12px;" disabled>Post</button>
-                                </div>
-                                <div id="text" class="form-group" style="display: none;">
-                                    <textarea name="editor1" rows="10" cols="80" value="" required></textarea>
-                                    <button id="txtSaveBtn" class="btn btn-primary pull-right" style="margin-top: 12px;">Post</button>
-                                </div>
-                                <div id="video" class="form-group" style="display: none;">
-                                    <input type="text" class="form-control" placeholder="Enter Youtube link only...">
-                                    <button id="vidSaveBtn" class="btn btn-primary pull-right" style="margin-top: 12px;">Post</button>
-                                </div>
-                            </div>
-                            {{--member publish post--}}
+                                {{--member publish post--}}
+                                <hr>
+                                {{--POST DISPLAY--}}
+                                {{--                            {{dd($posts)}}--}}
+                                @foreach($posts as $post)
+                                    <div class="post-display" style="border: 1px #f2f2f2 solid; margin: 8px 0">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <img src="{{$post['user']['photo']}}" class="img-circle " width="45"
+                                                     alt="">
+                                                {{ ' '.$post['user']['username'] }}
+                                                <small class="pull-right">{{$post['created_at']}}</small>
+                                            </div>
+                                            @if($post['post_type']['type'] == 'video')
+                                                <div class="col-md-12 text-center">
+                                                    <iframe
+                                                            src="{{$post['post']}}">
+                                                    </iframe>
+                                                </div>
+                                            @endif
+                                            @if($post['post_type']['type'] == 'image')
+                                                <div class="col-md-12 text-center">
+                                                    <img src="{{url()}}/public/images/group_post/{{$group_details->id }}/{{$post['post']}}"
+                                                         alt="{{$post['user']['username']}}'s image post">
+                                                </div>
+                                            @endif
+                                            @if($post['post_type']['type'] == 'text')
+                                                <div class="col-md-2"></div>
+                                                <div class="col-md-10">
+                                                    {!! $post['post']  !!}
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                                {{--END POST DISPLAY--}}
+                            @endif
                         </div>
                     </div>
                 </div>

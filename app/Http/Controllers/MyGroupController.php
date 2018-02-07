@@ -18,6 +18,7 @@ use App\Group;
 use App\GroupUser;
 use App\User;
 use App\GroupMemberPost;
+use App\UserBlog;
 
 class MyGroupController extends Controller
 {
@@ -66,6 +67,16 @@ class MyGroupController extends Controller
         $group_details = Group::find($id);
         $created_by = User::find($group_details->created_by_id);
 
+        $posts = array();
+        $data = GroupMemberPost::where('group_id', $id)->orderBy('id', 'desc')->get();
+        $data->load('user', 'postType', 'group');
+
+        foreach ($data->toArray() as $key => $value)
+        {
+            $posts[$key] = $value;
+            $posts[$key]['created_at'] = UserBlog::time_elapsed_string($value['created_at']);
+        }
+
         $request_users = array();
         $members_id = array();
         foreach ($group as $group_mem) {
@@ -75,7 +86,7 @@ class MyGroupController extends Controller
             }
             $members_id[] = $group_mem->user_id;
         }
-        return View::make('groupMembers')->with(['group' => $group, 'created' => $created_by, 'group_details' => $group_details, 'members' => $members_id, 'request' => $request_users]);
+        return View::make('groupMembers')->with(['group' => $group, 'created' => $created_by, 'group_details' => $group_details, 'members' => $members_id, 'request' => $request_users, 'posts' => $posts]);
     }
 
     public function createGroup(Request $request)
@@ -319,10 +330,58 @@ class MyGroupController extends Controller
             $post = GroupMemberPost::create([
                 'group_id' => $group->id,
                 'user_id' => Auth::id(),
+                'type_post_id' => $request->type_id,
                 'post' => $filname
             ]);
 
             return response()->json($filname);
         }
     }
+
+    public function groupMemberPostTxt(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'post' => 'required|max:1000',
+            'type_id' => 'required|exists:group_type_post,id',
+            'group_name' => 'required|exists:groups,name'
+        ]);
+
+        $group = Group::where('name', $request->group_name)->first();
+
+        $post = GroupMemberPost::create([
+            'group_id' => $group->id,
+            'user_id' => Auth::id(),
+            'type_post_id' => $request->type_id,
+            'post' => $request->post
+        ]);
+
+        return response()->json($post);
+    }
+
+    public function groupMemberPostVideo(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'link' => 'required|url',
+            'type_id' => 'required|exists:group_type_post,id',
+            'group_name' => 'required|exists:groups,name'
+        ]);
+        if (strpos($request->link, 'youtube.com') ) {
+            $link=  preg_replace("/\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i",
+                "//www.youtube.com/embed/$1", $request->link);
+            $group = Group::where('name', $request->group_name)->first();
+
+            $post = GroupMemberPost::create([
+                'group_id' => $group->id,
+                'user_id' => Auth::id(),
+                'type_post_id' => $request->type_id,
+                'post' => $link
+            ]);
+            return response()->json($post);
+        } else {
+            $data['status'] = 'invalid';
+            $data['message'] = ['It\'s not a youtube link'];
+            return response()->json($data);
+        }
+    }
+
 }
