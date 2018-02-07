@@ -268,7 +268,7 @@
 
 
 
-<script src="http://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyClo2KBtLJTc1kfEtm82iRq9cKE2R8dEXY"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyClo2KBtLJTc1kfEtm82iRq9cKE2R8dEXY"></script>
 <script src="{{ url() }}/public/plugins/jquery.geocomplete/jquery.geocomplete.js"></script>
 
 <div class="geo-details hidden">
