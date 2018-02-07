@@ -16,6 +16,8 @@ use App\GroupChatMessages;
 use App\PaymentMethod;
 use App\DatingPlan;
 use App\EventMembers;
+use App\AdsSpace;
+use App\AdsPricing;
 use App\Event;
 use DB;
 use Auth;
@@ -30,7 +32,8 @@ class StatisticsDataController extends Controller
         return response()->json(['demoGraph'=>self::UserLatLngFormat(),
                                 'datingSales'=>self::SalesGraph(),
                             	'eventsSales'=>self::SalesGraphEvents(),
-                            	'virtualSales'=>self::SalesVirtual()]);
+                            	'virtualSales'=>self::SalesVirtual(),
+                            	'adsReveneu'=>self::SalesAdsSapce()]);
     }
 
     public static function UserLatLngFormat(){
@@ -100,6 +103,23 @@ class StatisticsDataController extends Controller
          return $format;    
     }
     
+
+    public static function SalesAdsSapce(){
+    	    $sales = array();
+	        $format = array();
+	        $allPayment = AdsSpace::where('paid','=',1)->get();
+    	    
+        foreach ($allPayment as $key => $value) {
+        	
+        	$sales['payDate'] = date("Y-m-d", strtotime($value->created_at));
+        	$sales['price'] =  AdsPricing::find($value->days)->price;
+        	$format[] = $sales;
+
+        }
+
+         return $format;    
+
+    }
 
     public static function unserializeData($trans = array()){
     		switch ($trans['gateWayMethod']) {
