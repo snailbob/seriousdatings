@@ -54,6 +54,7 @@
         
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,700,600' rel='stylesheet' type='text/css'>
         <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Open+Sans:400,400i,700,700i" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.css" rel="stylesheet" />
 
         {!! HTML::script('public/css/font-awesome/font-awesome.min.css') !!}
 
@@ -160,6 +161,9 @@
  
 </head>
 <body class="hidden" ng-controller="bodyController" id="plain-code" ng-cloak>
+    {{--  <toast></toast>  --}}
+    <toaster-container toaster-options="{'time-out': 7000, 'position-class' : 'toast-bottom-right', 'toaster-id': 1, 'limit': 5}"></toaster-container>
+    <toaster-container toaster-options="{'time-out': 5000, 'position-class' : 'toast-top-center', 'toaster-id': 2, 'limit': 1}"></toaster-container>
 
     @if(Auth::check())
     <div class="back-btn hidden text-center">
@@ -168,7 +172,6 @@
     </div>
     @endif
 
-    <toast></toast>
     @include('user.shared.fb_script')
 
     <div class="hidden">

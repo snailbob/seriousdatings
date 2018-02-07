@@ -209,6 +209,9 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('speedBlock', 'UserBlockController@speedBlock');
     Route::get('get_my_userblocks', 'UserBlockController@myUserBlocksGet');
 
+    
+    Route::post('save_echeck', 'PaymentMethodController@postSaveEcheck');
+
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
     Route::post('send_gift', 'GiftCardController@sendGiftCards');
 
