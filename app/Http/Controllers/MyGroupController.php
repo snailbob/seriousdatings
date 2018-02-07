@@ -17,6 +17,7 @@ use View;
 use App\Group;
 use App\GroupUser;
 use App\User;
+use App\GroupMemberPost;
 
 class MyGroupController extends Controller
 {
@@ -68,7 +69,7 @@ class MyGroupController extends Controller
         $request_users = array();
         $members_id = array();
         foreach ($group as $group_mem) {
-            if(!$group_mem->isJoin){
+            if (!$group_mem->isJoin) {
                 $request_users[] = $group_mem->user_id;
                 continue;
             }
@@ -77,8 +78,7 @@ class MyGroupController extends Controller
         return View::make('groupMembers')->with(['group' => $group, 'created' => $created_by, 'group_details' => $group_details, 'members' => $members_id, 'request' => $request_users]);
     }
 
-    public
-    function createGroup(Request $request)
+    public function createGroup(Request $request)
     {
         $validate = Validator::make($request->all(), [
             'groupType' => 'required',
@@ -115,8 +115,7 @@ class MyGroupController extends Controller
         }
     }
 
-    public
-    function showGroups()
+    public function showGroups()
     {
 
         $logged_in = 0;
@@ -135,8 +134,7 @@ class MyGroupController extends Controller
     }
 
 
-    public
-    function addMemberForm($id)
+    public function addMemberForm($id)
     {
         $group = Group::find($id);
         $created_by = User::find($group->created_by_id);
@@ -177,8 +175,21 @@ class MyGroupController extends Controller
         return View::make('addMember')->with(['members' => $members, 'non_members' => $non_members_id, 'users' => $users, 'created' => $created_by, 'group' => $group]);
     }
 
-    public
-    function addMemberPost(Request $request)
+    public function userGroupRequest($id)
+    {
+        $requests = GroupUser::where(['group_id' => $id, 'isJoin' => 0])->get();
+        $requests->load('user', 'group');
+        $group = Group::find($id);
+
+        if ($group->created_by_id == Auth::id()) {
+            if (count($requests)) {
+                return View::make('group_user_request')->with(['requests' => $requests, 'group' => $group]);
+            }
+        }
+        return redirect('groups/' . $id);
+    }
+
+    public function addMemberPost(Request $request)
     {
         foreach (Input::get('members') as $member_id) {
             $id = DB::table('groups_users')->insertGetId(
@@ -188,9 +199,7 @@ class MyGroupController extends Controller
         return redirect('groups/' . Input::get('groupID'));
     }
 
-
-    public
-    function removeMemberForm($id)
+    public function removeMemberForm($id)
     {
         $group = GroupUser::where('group_id', $id)->get();
         $group->load('user', 'group');
@@ -203,8 +212,7 @@ class MyGroupController extends Controller
         return View::make('removeMember')->with(['groups' => $group, 'created' => $created_by, 'group_details' => $group_details, 'members' => $members_id]);
     }
 
-    public
-    function removeMemberPost(Request $request)
+    public function removeMemberPost(Request $request)
     {
         foreach (Input::get('members') as $member_id) {
             $matchThese = ['group_id' => Input::get('groupID'), 'user_id' => $member_id];
@@ -213,11 +221,108 @@ class MyGroupController extends Controller
         return redirect('groups/' . Input::get('groupID'));
     }
 
-    public
-    function deleteMembersInGroup(Request $request)
+    public function deleteMembersInGroup(Request $request)
     {
         $group_member = GroupUser::find($request->id);
         $group_member->delete();
         return response()->json($group_member);
+    }
+
+    public function userJoinRequest(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'id' => 'required|exists:groups_users,group_id',
+        ]);
+
+        $requested = GroupUser::create([
+            'user_id' => Auth::id(),
+            'group_id' => $request->id,
+            'role_id' => 3,
+            'block' => 0,
+            'isJoin' => 0
+        ]);
+
+        return \response()->json($requested);
+    }
+
+    public function cancelJoinRequest(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'id' => 'required|exists:groups_users,group_id',
+        ]);
+
+        $requested = GroupUser::where(['user_id' => Auth::id(), 'group_id' => $request->id])->first();
+        $requested->delete();
+
+        return \response()->json($requested);
+    }
+
+    public function userLeaveGroup(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'id' => 'required|exists:groups_users,group_id',
+        ]);
+
+        $requested = GroupUser::where(['user_id' => Auth::id(), 'group_id' => $request->id])->first();
+        $requested->delete();
+
+        return \response()->json($requested);
+    }
+
+    public function rejectUserRequest(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'id' => 'required|unique:groups_users,id',
+        ]);
+
+        $requested = GroupUser::find($request->id);
+        $requested->delete();
+        return \response()->json($requested);
+    }
+
+    public function acceptUserRequest(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'id' => 'required|unique:groups_users,id',
+            'group_id' => 'required|exists:group_users,group_id',
+            'email' => 'required|exists:users,email',
+        ]);
+
+        $user = User::where(['email' => $request->email])->first();
+
+        GroupUser::where('id', $request->id)
+            ->update([
+                'user_id' => $user->id,
+                'group_id' => $request->group_id,
+                'role_id' => 3,
+                'block' => 0,
+                'isJoin' => 1
+            ]);
+
+        $requested = GroupUser::find($request->id);
+
+        return \response()->json($requested);
+    }
+
+    public function groupMemberPostImg(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'image' => 'required',
+        ]);
+
+        $group = Group::where('name', $request->groupName)->first();
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filname = $file->getClientOriginalName();
+            $file->move(base_path() . '/public/images/group_post/' . $group->id . '/', $filname);
+
+            $post = GroupMemberPost::create([
+                'group_id' => $group->id,
+                'user_id' => Auth::id(),
+                'post' => $filname
+            ]);
+
+            return response()->json($filname);
+        }
     }
 }

@@ -534,9 +534,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profiles/groups/create', 'MyGroupController@create');
     Route::get('groups/{groupID}/addMember', 'MyGroupController@addMemberForm');
     Route::get('groups/{groupID}/removeMember', 'MyGroupController@removeMemberForm');
+    Route::get('groups/{groupID}/groupUserRequest', 'MyGroupController@userGroupRequest');
     Route::post('createGroup', 'MyGroupController@createGroup');
     Route::post('deleteMembersInGroup', 'MyGroupController@deleteMembersInGroup');
     Route::post('userAddMembersInGroup', 'GroupManagementController@addMembersInGroup');
+    Route::post('userJoinRequest', 'MyGroupController@userJoinRequest');
+    Route::post('cancelJoinRequest', 'MyGroupController@cancelJoinRequest');
+    Route::post('rejectUserRequest', 'MyGroupController@rejectUserRequest');
+    Route::post('acceptUserRequest', 'MyGroupController@acceptUserRequest');
+    Route::post('userLeaveGroup', 'MyGroupController@userLeaveGroup');
+    Route::post('groupMemberPostImg', 'MyGroupController@groupMemberPostImg');
 
 
     Route::get('datingPlan/{planId}', 'DatingPlanController@subscribe');
