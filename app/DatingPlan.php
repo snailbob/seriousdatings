@@ -37,4 +37,11 @@ class DatingPlan extends Model implements AuthenticatableContract, CanResetPassw
      * @var array
      */
     //protected $hidden = ['password', 'remember_token'];
+
+
+    public function paymentMethod()
+    {
+        return $this->hasMany('App\PaymentMethod', 'plan_id', 'id');
+    }
+
 }
