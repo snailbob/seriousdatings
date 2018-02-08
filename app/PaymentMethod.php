@@ -36,4 +36,20 @@ class PaymentMethod extends Model
          */
         //protected $hidden = ['password', 'remember_token'];
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function datingPlan()
+    {
+        return $this->belongsTo('App\DatingPlan', 'plan_id', 'id');
+    }
+
+
+    public function getDetailsAttribute($value)
+    {
+        return unserialize($value);
+    }
+
 }

@@ -18,13 +18,13 @@ use App\PaymentMethod;
 class PaymentMethodController extends Controller
 {
     private $_apiContext;
-    
+
     public function __construct()
     {
         $this->_apiContext = PayPal::ApiContext(
             config('services.paypal.client_id'),
             config('services.paypal.secret'));
-        
+
         $this->_apiContext->setConfig(array(
             'mode' => 'sandbox',
             'service.EndPoint' => 'https://api.sandbox.paypal.com',
@@ -36,116 +36,116 @@ class PaymentMethodController extends Controller
 
     }
 
-    public function getCheckout($planID){
+    public function getCheckout($planID)
+    {
 
-        $plan = DB::table('dating_plan')->where('id','=',$planID)->first();
+        $plan = DB::table('dating_plan')->where('id', '=', $planID)->first();
 
         //dd($plan);
 
 
         $cycle = 'Y';
 
-        $total_cycle = $plan -> noOfDay;
-        $discountPrice = ($plan -> discountPercentage / 100 ) * $plan -> price;
-        $cycle_amount = round(($plan -> price - $discountPrice),2);; //round(($plan -> price - $discountPrice) / $total_cycle,2);
+        $total_cycle = $plan->noOfDay;
+        $discountPrice = ($plan->discountPercentage / 100) * $plan->price;
+        $cycle_amount = round(($plan->price - $discountPrice), 2);; //round(($plan -> price - $discountPrice) / $total_cycle,2);
 
 
-        if($plan -> type == "Daily"){
+        if ($plan->type == "Daily") {
 
             $cycle = 'D';
-            $total_cycle = $plan -> noOfDay;
-            $discountPrice = ($plan -> discountPercentage / 100 ) * $plan -> price;
-            $cycle_amount = round(($plan -> price - $discountPrice),2); //round(($plan -> price - $discountPrice) / $total_cycle,2);
-        }
-
-        else if($plan -> type == "Monthly"){
+            $total_cycle = $plan->noOfDay;
+            $discountPrice = ($plan->discountPercentage / 100) * $plan->price;
+            $cycle_amount = round(($plan->price - $discountPrice), 2); //round(($plan -> price - $discountPrice) / $total_cycle,2);
+        } else if ($plan->type == "Monthly") {
             $cycle = 'M';
-            $total_cycle = $plan -> noOfDay;
-            $discountPrice = ($plan -> discountPercentage / 100 ) * $plan -> price;
-            $cycle_amount = round(($plan -> price - $discountPrice),2); // round(($plan -> price - $discountPrice) / $total_cycle,2);
+            $total_cycle = $plan->noOfDay;
+            $discountPrice = ($plan->discountPercentage / 100) * $plan->price;
+            $cycle_amount = round(($plan->price - $discountPrice), 2); // round(($plan -> price - $discountPrice) / $total_cycle,2);
         }
 
 
-        $product_name = $plan -> name;
+        $product_name = $plan->name;
         $product_currency = 'USD';
-       
 
 
         $payer = PayPal::Payer();
         $payer->setPaymentMethod('paypal');
-    
+
         $amount = PayPal::Amount();
         $amount->setCurrency($product_currency);
         $amount->setTotal($cycle_amount); // This is the simple way,
         // you can alternatively describe everything in the order separately;
         // Reference the PayPal PHP REST SDK for details.
-    
+
         $transaction = PayPal::Transaction();
         $transaction->setAmount($amount);
-        $transaction->setDescription('SeriousDatings Dating Plan -'.$product_name);
-    
+        $transaction->setDescription('SeriousDatings Dating Plan -' . $product_name);
+
         $redirectUrls = PayPal::RedirectUrls();
-        $redirectUrls->setReturnUrl(url().'/getdone/'.$planID); //action('PaymentMethodController@getDone'));
-        $redirectUrls->setCancelUrl(url().'/getcancel'); //action('PaymentMethodController@getCancel'));
-    
+        $redirectUrls->setReturnUrl(url() . '/getdone/' . $planID); //action('PaymentMethodController@getDone'));
+        $redirectUrls->setCancelUrl(url() . '/getcancel'); //action('PaymentMethodController@getCancel'));
+
         $payment = PayPal::Payment();
         $payment->setIntent('sale');
         $payment->setPayer($payer);
         $payment->setRedirectUrls($redirectUrls);
         $payment->setTransactions(array($transaction));
-    
+
         $response = $payment->create($this->_apiContext);
         $redirectUrl = $response->links[1]->href;
-        
-        return Redirect::to( $redirectUrl );
+
+        return Redirect::to($redirectUrl);
     }
-    
+
     public function getDone(Request $request, $plan_id)
     {
         $id = $request->get('paymentId');
         $token = $request->get('token');
         $payer_id = $request->get('PayerID');
-        
+
         $payment = PayPal::getById($id, $this->_apiContext);
-    
+
         $paymentExecution = PayPal::PaymentExecution();
-    
+
         $paymentExecution->setPayerId($payer_id);
         $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
 
         $resp = json_decode($executePayment, true, 512);
-        
+
         PaymentMethod::create([
-            'user_id'=>Auth::user()->id,
-            'plan_id'=>$plan_id,
-            'gateway'=>'paypal',
-            'details'=>serialize($request->all()),
-            'payment_details'=>serialize($resp)
+            'user_id' => Auth::user()->id,
+            'plan_id' => $plan_id,
+            'gateway' => 'paypal',
+            'details' => serialize($request->all()),
+            'payment_details' => serialize($resp)
         ]);
         // dd($executePayment);
-        
+
         // return response()->json($executePayment);
-    
+
         // Clear the shopping cart, write to database, send notifications, etc.
-    
+
         // Thank the user for the purchase
         return view('user.checkout_done');
     }
-    
+
     public function getCancel()
     {
         // Curse and humiliate the user for cancelling this most sacred payment (yours)
         return view('user.checkout_cancel');
     }
 
-    public function paymentGateway(){
+    public function paymentGateway()
+    {
         $user = Auth::user();
         return View::make('user.payment_gateway')->withUser($user);
-        
+
     }
 
 
-    public function squarePayment(Request $request){
+    public function squarePayment(Request $request)
+    {
 
         # Replace these values. You probably want to start with your Sandbox credentials
         # to start: https://docs.connect.squareup.com/articles/using-sandbox/
@@ -164,15 +164,15 @@ class PaymentMethodController extends Controller
 
         // # Fail if the card form didn't send a value for `nonce` to the server
         $nonce = $request->input('nonce');
-        $price = (int) $request->input('price');
+        $price = (int)$request->input('price');
         $id = $request->input('id');
         $type = $request->input('type');
         // return response()->json($request->input());
 
         if (empty($nonce)) {
             $arr = [
-                'result'=> 'error',
-                'message'=> "Invalid card data"
+                'result' => 'error',
+                'message' => "Invalid card data"
             ];
             // http_response_code(422);
             return response()->json($arr);
@@ -187,17 +187,17 @@ class PaymentMethodController extends Controller
         try {
             $locations = $locations_api->listLocations();
             # We look for a location that can process payments
-            $location = current(array_filter($locations->getLocations(), function($location) {
+            $location = current(array_filter($locations->getLocations(), function ($location) {
                 $capabilities = $location->getCapabilities();
                 return is_array($capabilities) &&
-                in_array('CREDIT_CARD_PROCESSING', $capabilities);
+                    in_array('CREDIT_CARD_PROCESSING', $capabilities);
             }));
 
         } catch (\SquareConnect\ApiException $e) {
             $arr = [
-                'result'=> 'error',
-                'message'=> "Caught exception!",
-                'details'=> json_encode($e->getResponseBody())
+                'result' => 'error',
+                'message' => "Caught exception!",
+                'details' => json_encode($e->getResponseBody())
             ];
             return response()->json($arr);
 
@@ -214,13 +214,13 @@ class PaymentMethodController extends Controller
         # To learn more about splitting transactions with additional recipients,
         # see the Transactions API documentation on our [developer site]
         # (https://docs.connect.squareup.com/payments/transactions/overview#mpt-overview).
-        $request_body = array (
+        $request_body = array(
 
             "card_nonce" => $nonce,
 
             # Monetary amounts are specified in the smallest unit of the applicable currency.
             # This amount is in cents. It's also hard-coded for $1.00, which isn't very useful.
-            "amount_money" => array (
+            "amount_money" => array(
                 "amount" => $price,
                 "currency" => "USD"
             ),
@@ -240,35 +240,32 @@ class PaymentMethodController extends Controller
             // print_r($result);
             // echo "</pre>";
 
-            if($type == 'plan'){
+            if ($type == 'plan') {
                 PaymentMethod::create([
-                    'user_id'=>Auth::user()->id,
-                    'plan_id'=>$id,
-                    'gateway'=>'square',
-                    'details'=>serialize($request->input()),
-                    'payment_details'=>serialize([])
+                    'user_id' => Auth::user()->id,
+                    'plan_id' => $id,
+                    'gateway' => 'square',
+                    'details' => serialize($request->input()),
+                    'payment_details' => serialize([])
                 ]);
             }
 
 
-            
-
             $arr = [
-                'result'=> 'success',
-                'message'=> json_encode($result)
+                'result' => 'success',
+                'message' => json_encode($result)
             ];
-
 
 
             return response()->json($arr);
 
 
         } catch (\SquareConnect\ApiException $e) {
-            
+
             $arr = [
-                'result'=> 'error',
-                'message'=> "Caught exception!",
-                'details'=> json_encode($e->getResponseBody())
+                'result' => 'error',
+                'message' => "Caught exception!",
+                'details' => json_encode($e->getResponseBody())
             ];
             return response()->json($arr);
 
@@ -282,15 +279,16 @@ class PaymentMethodController extends Controller
     }
 
 
-    public function postSaveEcheck(Request $request){
+    public function postSaveEcheck(Request $request)
+    {
         $details = $request->input();
         $id = $request->input('id');
         $arr = [
-            'user_id'=>Auth::user()->id,
-            'plan_id'=>$id,
-            'gateway'=>'echeck',
-            'details'=>serialize($details),
-            'payment_details'=>serialize([])
+            'user_id' => Auth::user()->id,
+            'plan_id' => $id,
+            'gateway' => 'echeck',
+            'details' => serialize($details),
+            'payment_details' => serialize([])
         ];
         PaymentMethod::create($arr);
 
@@ -311,75 +309,44 @@ class PaymentMethodController extends Controller
         //     'gateway'=>'paypal',
         //     'details'=>serialize(array('aw'=>'yeah'))
         // ]);
-        
+
         return response()->json(json_decode($all, true, 512));
         // return response()->json($all);
-        
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function echeckPaymentList()
     {
-        //
+        $data = PaymentMethod::where('gateway', 'echeck')->get();
+        $data->load('user', 'datingPlan');
+        return View::make('admin.echeck_payment.echeck_payment_list')->with('echecks', $data->toArray());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function acceptEcheckPayment(Request $request)
     {
-        //
+        PaymentMethod::where('id', $request->id)
+            ->update(['status' => 1]);
+        $echeck = PaymentMethod::find($request->id);
+        $echeck->load('user');
+        return response()->json($echeck);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function rejectEcheckPayment(Request $request)
     {
-        //
+        PaymentMethod::where('id', $request->id)
+            ->update(['status' => 0]);
+        $echeck = PaymentMethod::find($request->id);
+        $echeck->load('user');
+        return response()->json($echeck);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function pauseEcheckPayment(Request $request)
     {
-        //
+        PaymentMethod::where('id', $request->id)
+            ->update(['status' => 0]);
+        $echeck = PaymentMethod::find($request->id);
+        $echeck->load('user');
+        return response()->json($echeck);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

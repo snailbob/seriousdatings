@@ -197,8 +197,8 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('get_private_chat_id', 'GroupChatController@get_private_chat_id');
     Route::resource('group_chat', 'GroupChatController');
     Route::resource('group_chat_participants', 'GroupChatParticipantsController');
-    Route::resource('group_chat_messages', 'GroupChatMessagesController');  
-    
+    Route::resource('group_chat_messages', 'GroupChatMessagesController');
+
     Route::get('usermates/{username}', 'UsersController@selectmates');
     Route::post('add_friend', 'UserFriendshipController@store');
     Route::post('delete_friend', 'UserFriendshipController@destroy');
@@ -209,7 +209,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('speedBlock', 'UserBlockController@speedBlock');
     Route::get('get_my_userblocks', 'UserBlockController@myUserBlocksGet');
 
-    
+
     Route::post('save_echeck', 'PaymentMethodController@postSaveEcheck');
 
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
@@ -291,8 +291,8 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('getAppoinment', 'AppointmentController@getAppointment');
     Route::post('saveAppResponse', 'AppointmentController@saveAppResponse');
     Route::get('getTimeAvailability', 'AppointmentController@getTimeAvailability');
-    Route::post('saveTimeAvailabity','AppointmentController@saveTimeAvailabity');
-    Route::get('populateStatisticsReport','StatisticsDataController@populateStatisticsReport');
+    Route::post('saveTimeAvailabity', 'AppointmentController@saveTimeAvailabity');
+    Route::get('populateStatisticsReport', 'StatisticsDataController@populateStatisticsReport');
 
 
 });
@@ -459,6 +459,7 @@ Route::group(array('before' => 'admin'), function () {
     Route::resource('admin/users', 'UserManagementController');
     Route::get('admin/demographic', 'UserManagementController@demographic');
     Route::get('admin/monthlypayment', 'UserManagementController@monthlypayment');
+    Route::get('admin/echeckpayment', 'PaymentMethodController@echeckPaymentList');
     Route::resource('admin/nonusers', 'NonUserManagementController');
     Route::resource('admin/videos', 'VideoManagementController');
     Route::resource('admin/banners', 'BannerManagementController');
@@ -466,13 +467,12 @@ Route::group(array('before' => 'admin'), function () {
     Route::resource('admin/pages', 'ContentManagementController');
     Route::controller('admin', 'AdminDashboardController');
 
-    /** Admin New Section* */
-    //Route::resource('admin_new', 'AdminDashboardController@admin_new');
-    // Route::resource('admin_new/slide/new', 'NSlideManagementController');
-    // Route::get('admin_new/slide/create', 'NSlideManagementController@create');
-    //Route::resource('admin_new/slide/{id}/edit_new', 'NSlideManagementController@edit_new');
 
-    /** Admin New Section* */
+    /* Echeck Payment Actions*/
+    Route::post('acceptEcheckPayment', 'PaymentMethodController@acceptEcheckPayment');
+    Route::post('rejectEcheckPayment', 'PaymentMethodController@rejectEcheckPayment');
+    Route::post('pauseEcheckPayment', 'PaymentMethodController@pauseEcheckPayment');
+    /* End Echeck Payment Actions*/
 });
 
 /* Manage User Actions */
