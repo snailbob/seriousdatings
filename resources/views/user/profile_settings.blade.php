@@ -138,7 +138,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="">Username</label>
-                                            <input type="text" class="form-control" name="username" ng-model="logged_user_info.username" ng-change="usernameChange(logged_user_info.username)" placeholder="Username" required />
+                                            <input type="text" class="form-control" name="username" ng-model="logged_user_info.username" ng-change="usernameChange(logged_user_info.username)" placeholder="Username" required readonly/>
                                             <span class="text-danger" ng-if="usernameInUse">Username already taken.</span>
                                         </div>
                                     </div>
@@ -206,6 +206,7 @@
                                     </div>  --}}
                                 </div>
                             </div>
+
                             <div class="row single-line-label">
 
 
@@ -224,116 +225,116 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Your Occupation:</label>
-                                        <select class="form-control" required name="occupation" ng-model="logged_user_info.occupation">
-                                            <option value="" selected="selected" disabled="disabled">--Select--</option>
-                                            <optgroup label="Healthcare Practitioners and Technical Occupations:">
-                                                <option value="Chiropractor">- Chiropractor</option>
-                                                <option value="Dentist">- Dentist</option>
-                                                <option value="Dietitian or Nutritionist">- Dietitian or Nutritionist</option>
-                                                <option value="Optometrist">- Optometrist</option>
-                                                <option value="Pharmacist">- Pharmacist</option>
-                                                <option value="Physician">- Physician</option>
-                                                <option value="Physician Assistant">- Physician Assistant</option>
-                                                <option value="Podiatrist">- Podiatrist</option>
-                                                <option value="Registered Nurse">- Registered Nurse</option>
-                                                <option value="Therapist">- Therapist</option>
-                                                <option value="Veterinarian">- Veterinarian</option>
-                                                <option value="Health Technologist or Technician">- Health Technologist or Technician</option>
-                                                <option value="Other Healthcare Practitioners and Technical Occupation">- Other Healthcare Practitioners and Technical Occupation</option>
-                                            </optgroup>
-                                            <optgroup label="Healthcare Support Occupations:">
-                                                <option value="Nursing, Psychiatric, or Home Health Aide">- Nursing, Psychiatric, or Home Health Aide</option>
-                                                <option value="Occupational and Physical Therapist Assistant or Aide">- Occupational and Physical Therapist Assistant or Aide</option>
-                                                <option value="Other Healthcare Support Occupation">- Other Healthcare Support Occupation</option>
-                                            </optgroup>
-                                            <optgroup label="Business, Executive, Management, and Financial Occupations:">
-                                                <option value="Chief Executive">- Chief Executive</option>
-                                                <option value="General and Operations Manager">- General and Operations Manager</option>
-                                                <option value="Advertising, Marketing, Promotions, Public Relations, and Sales Manager">- Advertising, Marketing, Promotions, Public Relations, and Sales Manager</option>
-                                                <option value="Operations Specialties Manager (e.g., IT or HR Manager)">- Operations Specialties Manager (e.g., IT or HR Manager)</option>
-                                                <option value="Construction Manager">- Construction Manager</option>
-                                                <option value="Engineering Manage">- Engineering Manager</option>
-                                                <option value="Accountant, Auditor">- Accountant, Auditor</option>
-                                                <option value="Business Operations or Financial Specialis">- Business Operations or Financial Specialist</option>
-                                                <option value="Business Owner">- Business Owner</option>
-                                                <option value="Other Business, Executive, Management, Financial Occupation">- Other Business, Executive, Management, Financial Occupation</option>
-                                            </optgroup>
-                                            <optgroup label="Architecture and Engineering Occupations:">
-                                                <option value="Architect, Surveyor, or Cartographer">- Architect, Surveyor, or Cartographer</option>
-                                                <option value="Enginee">- Engineer</option>
-                                                <option value="Other Architecture and Engineering Occupation">- Other Architecture and Engineering Occupation</option>
-                                            </optgroup>
-                                            <optgroup label="Education, Training, and Library Occupations:">
-                                                <option value="Postsecondary Teacher (e.g., College Professor)">- Postsecondary Teacher (e.g., College Professor)</option>
-                                                <option value="Primary, Secondary, or Special Education School Teacher">- Primary, Secondary, or Special Education School Teacher</option>
-                                                <option value="Other Teacher or Instructor">- Other Teacher or Instructor</option>
-                                                <option value="Other Education, Training, and Library Occupation">- Other Education, Training, and Library Occupation</option>
-                                            </optgroup>
-                                            <optgroup label="Other Professional Occupations:">
-                                                <option value="Arts, Design, Entertainment, Sports, and Media Occupations">- Arts, Design, Entertainment, Sports, and Media Occupations</option>
-                                                <option value="Computer Specialist, Mathematical Science">- Computer Specialist, Mathematical Science</option>
-                                                <option value="Counselor, Social Worker, or Other Community and Social Service Specialist">- Counselor, Social Worker, or Other Community and Social Service Specialist</option>
-                                                <option value="Lawyer, Judge">- Lawyer, Judge</option>
-                                                <option value="Life Scientist (e.g., Animal, Food, Soil, or Biological Scientist, Zoologist)">- Life Scientist (e.g., Animal, Food, Soil, or Biological Scientist, Zoologist)</option>
-                                                <option value="Physical Scientist (e.g., Astronomer, Physicist, Chemist, Hydrologist)">- Physical Scientist (e.g., Astronomer, Physicist, Chemist, Hydrologist)</option>
-                                                <option value="Religious Worker (e.g., Clergy, Director of Religious Activities or Education)">- Religious Worker (e.g., Clergy, Director of Religious Activities or Education)</option>
-                                                <option value="Social Scientist and Related Worker">- Social Scientist and Related Worker</option>
-                                                <option value="Other Professional Occupation">- Other Professional Occupation</option>
-                                            </optgroup>
-                                            <optgroup label="Office and Administrative Support Occupations:">
-                                                <option value="Supervisor of Administrative Support Workers">- Supervisor of Administrative Support Workers</option>
-                                                <option value="Financial Clerk">- Financial Clerk</option>
-                                                <option value="Secretary or Administrative Assistant">- Secretary or Administrative Assistant</option>
-                                                <option value="Material Recording, Scheduling, and Dispatching Worker">- Material Recording, Scheduling, and Dispatching Worker</option>
-                                                <option value="Other Office and Administrative Support Occupation">- Other Office and Administrative Support Occupation</option>
-                                            </optgroup>
-                                            <optgroup label="Services Occupations:">
-                                                <option value="Protective Service (e.g., Fire Fighting, Police Officer, Correctional Officer)">- Protective Service (e.g., Fire Fighting, Police Officer, Correctional Officer)</option>
-                                                <option value="Chef or Head Cook">- Chef or Head Cook</option>
-                                                <option value="Cook or Food Preparation Worker">- Cook or Food Preparation Worker</option>
-                                                <option value="Food and Beverage Serving Worker (e.g., Bartender, Waiter, Waitress)">- Food and Beverage Serving Worker (e.g., Bartender, Waiter, Waitress)</option>
-                                                <option value="Building and Grounds Cleaning and Maintenance">- Building and Grounds Cleaning and Maintenance</option>
-                                                <option value="Personal Care and Service (e.g., Hairdresser, Flight Attendant, Concierge)">- Personal Care and Service (e.g., Hairdresser, Flight Attendant, Concierge)</option>
-                                                <option value="Sales Supervisor, Retail Sales">- Sales Supervisor, Retail Sales</option>
-                                                <option value="Retail Sales Worker">- Retail Sales Worker</option>
-                                                <option value="Insurance Sales Agent">- Insurance Sales Agent</option>
-                                                <option value="Sales Representative">- Sales Representative</option>
-                                                <option value="Real Estate Sales Agent">- Real Estate Sales Agent</option>
-                                                <option value="Other Services Occupation">- Other Services Occupation</option>
-                                            </optgroup>
-                                            <optgroup label="Agriculture, Maintenance, Repair, and Skilled Crafts Occupations:">
-                                                <option value="Construction and Extraction (e.g., Construction Laborer, Electrician)">- Construction and Extraction (e.g., Construction Laborer, Electrician)</option>
-                                                <option value="Farming, Fishing, and Forestry">- Farming, Fishing, and Forestry</option>
-                                                <option value="Installation, Maintenance, and Repair">- Installation, Maintenance, and Repair</option>
-                                                <option value="Production Occupations">- Production Occupations</option>
-                                                <option value="Other Agriculture, Maintenance, Repair, and Skilled Crafts Occupation">- Other Agriculture, Maintenance, Repair, and Skilled Crafts Occupation</option>
-                                            </optgroup>
-                                            <optgroup label="Transportation Occupations:">
-                                                <option value="Aircraft Pilot or Flight Engineer">- Aircraft Pilot or Flight Engineer</option>
-                                                <option value="Motor Vehicle Operator (e.g., Ambulance, Bus, Taxi, or Truck Driver)">- Motor Vehicle Operator (e.g., Ambulance, Bus, Taxi, or Truck Driver)</option>
-                                                <option value="Other Transportation Occupation">- Other Transportation Occupation</option>
-                                            </optgroup>
-                                            <optgroup label="Other Occupations:">
-                                                <option value="Military">- Military</option>
-                                                <option value="Homemaker">- Homemaker</option>
-                                                <option value="Other Occupation">- Other Occupation</option>
-                                                <option value="Don't Know">- Don't Know</option>
-                                                <option value="Not Applicable">- Not Applicable</option>
-                                            </optgroup>
-                                        </select>
-
-
-                                        {{--
-                                        <select class="form-control" required name="occupation" ng-model="logged_user_info.occupation">
+                                            <select class="form-control" required name="occupation" ng-model="logged_user_info.occupation">
+                                                <option value="" selected="selected" disabled="disabled">--Select--</option>
+                                                <optgroup label="Healthcare Practitioners and Technical Occupations:">
+                                                <option value="Chiropractor">-  Chiropractor</option>
+                                                <option value="Dentist">-  Dentist</option>
+                                                <option value="Dietitian or Nutritionist">-  Dietitian or Nutritionist</option>
+                                                <option value="Optometrist">-  Optometrist</option>
+                                                <option value="Pharmacist">-  Pharmacist</option>
+                                                <option value="Physician">-  Physician</option>
+                                                <option value="Physician Assistant">-  Physician Assistant</option>
+                                                <option value="Podiatrist">-  Podiatrist</option>
+                                                <option value="Registered Nurse">-  Registered Nurse</option>
+                                                <option value="Therapist">-  Therapist</option>
+                                                <option value="Veterinarian">-  Veterinarian</option>
+                                                <option value="Health Technologist or Technician">-  Health Technologist or Technician</option>
+                                                <option value="Other Healthcare Practitioners and Technical Occupation">-  Other Healthcare Practitioners and Technical Occupation</option>
+                                                </optgroup>
+                                                <optgroup label="Healthcare Support Occupations:">
+                                                <option value="Nursing, Psychiatric, or Home Health Aide">-  Nursing, Psychiatric, or Home Health Aide</option>
+                                                <option value="Occupational and Physical Therapist Assistant or Aide">-  Occupational and Physical Therapist Assistant or Aide</option>
+                                                <option value="Other Healthcare Support Occupation">-  Other Healthcare Support Occupation</option>
+                                                </optgroup>
+                                                <optgroup label="Business, Executive, Management, and Financial Occupations:">
+                                                <option value="Chief Executive">-  Chief Executive</option>
+                                                <option value="General and Operations Manager">-  General and Operations Manager</option>
+                                                <option value="Advertising, Marketing, Promotions, Public Relations, and Sales Manager">-  Advertising, Marketing, Promotions, Public Relations, and Sales Manager</option>
+                                                <option value="Operations Specialties Manager (e.g., IT or HR Manager)">-  Operations Specialties Manager (e.g., IT or HR Manager)</option>
+                                                <option value="Construction Manager">-  Construction Manager</option>
+                                                <option value="Engineering Manage">-  Engineering Manager</option>
+                                                <option value="Accountant, Auditor">-  Accountant, Auditor</option>
+                                                <option value="Business Operations or Financial Specialis">-  Business Operations or Financial Specialist</option>
+                                                <option value="Business Owner">-  Business Owner</option>
+                                                <option value="Other Business, Executive, Management, Financial Occupation">-  Other Business, Executive, Management, Financial Occupation</option>
+                                                </optgroup>
+                                                <optgroup label="Architecture and Engineering Occupations:">
+                                                <option value="Architect, Surveyor, or Cartographer">-  Architect, Surveyor, or Cartographer</option>
+                                                <option value="Enginee">-  Engineer</option>
+                                                <option value="Other Architecture and Engineering Occupation">-  Other Architecture and Engineering Occupation</option>
+                                                </optgroup>
+                                                <optgroup label="Education, Training, and Library Occupations:">
+                                                <option value="Postsecondary Teacher (e.g., College Professor)">-  Postsecondary Teacher (e.g., College Professor)</option>
+                                                <option value="Primary, Secondary, or Special Education School Teacher">-  Primary, Secondary, or Special Education School Teacher</option>
+                                                <option value="Other Teacher or Instructor">-  Other Teacher or Instructor</option>
+                                                <option value="Other Education, Training, and Library Occupation">-  Other Education, Training, and Library Occupation</option>
+                                                </optgroup>
+                                                <optgroup label="Other Professional Occupations:">
+                                                <option value="Arts, Design, Entertainment, Sports, and Media Occupations">-  Arts, Design, Entertainment, Sports, and Media Occupations</option>
+                                                <option value="Computer Specialist, Mathematical Science">-  Computer Specialist, Mathematical Science</option>
+                                                <option value="Counselor, Social Worker, or Other Community and Social Service Specialist">-  Counselor, Social Worker, or Other Community and Social Service Specialist</option>
+                                                <option value="Lawyer, Judge">-  Lawyer, Judge</option>
+                                                <option value="Life Scientist (e.g., Animal, Food, Soil, or Biological Scientist, Zoologist)">-  Life Scientist (e.g., Animal, Food, Soil, or Biological Scientist, Zoologist)</option>
+                                                <option value="Physical Scientist (e.g., Astronomer, Physicist, Chemist, Hydrologist)">-  Physical Scientist (e.g., Astronomer, Physicist, Chemist, Hydrologist)</option>
+                                                <option value="Religious Worker (e.g., Clergy, Director of Religious Activities or Education)">-  Religious Worker (e.g., Clergy, Director of Religious Activities or Education)</option>
+                                                <option value="Social Scientist and Related Worker">-  Social Scientist and Related Worker</option>
+                                                <option value="Other Professional Occupation">-  Other Professional Occupation</option>
+                                                </optgroup>
+                                                <optgroup label="Office and Administrative Support Occupations:">
+                                                <option value="Supervisor of Administrative Support Workers">-  Supervisor of Administrative Support Workers</option>
+                                                <option value="Financial Clerk">-  Financial Clerk</option>
+                                                <option value="Secretary or Administrative Assistant">-  Secretary or Administrative Assistant</option>
+                                                <option value="Material Recording, Scheduling, and Dispatching Worker">-  Material Recording, Scheduling, and Dispatching Worker</option>
+                                                <option value="Other Office and Administrative Support Occupation">-  Other Office and Administrative Support Occupation</option>
+                                                </optgroup>
+                                                <optgroup label="Services Occupations:">
+                                                <option value="Protective Service (e.g., Fire Fighting, Police Officer, Correctional Officer)">-  Protective Service (e.g., Fire Fighting, Police Officer, Correctional Officer)</option>
+                                                <option value="Chef or Head Cook">-  Chef or Head Cook</option>
+                                                <option value="Cook or Food Preparation Worker">-  Cook or Food Preparation Worker</option>
+                                                <option value="Food and Beverage Serving Worker (e.g., Bartender, Waiter, Waitress)">-  Food and Beverage Serving Worker (e.g., Bartender, Waiter, Waitress)</option>
+                                                <option value="Building and Grounds Cleaning and Maintenance">-  Building and Grounds Cleaning and Maintenance</option>
+                                                <option value="Personal Care and Service (e.g., Hairdresser, Flight Attendant, Concierge)">-  Personal Care and Service (e.g., Hairdresser, Flight Attendant, Concierge)</option>
+                                                <option value="Sales Supervisor, Retail Sales">-  Sales Supervisor, Retail Sales</option>
+                                                <option value="Retail Sales Worker">-  Retail Sales Worker</option>
+                                                <option value="Insurance Sales Agent">-  Insurance Sales Agent</option>
+                                                <option value="Sales Representative">-  Sales Representative</option>
+                                                <option value="Real Estate Sales Agent">-  Real Estate Sales Agent</option>
+                                                <option value="Other Services Occupation">-  Other Services Occupation</option>
+                                                </optgroup>
+                                                <optgroup label="Agriculture, Maintenance, Repair, and Skilled Crafts Occupations:">
+                                                <option value="Construction and Extraction (e.g., Construction Laborer, Electrician)">-  Construction and Extraction (e.g., Construction Laborer, Electrician)</option>
+                                                <option value="Farming, Fishing, and Forestry">-  Farming, Fishing, and Forestry</option>
+                                                <option value="Installation, Maintenance, and Repair">-  Installation, Maintenance, and Repair</option>
+                                                <option value="Production Occupations">-  Production Occupations</option>
+                                                <option value="Other Agriculture, Maintenance, Repair, and Skilled Crafts Occupation">-  Other Agriculture, Maintenance, Repair, and Skilled Crafts Occupation</option>
+                                                </optgroup>
+                                                <optgroup label="Transportation Occupations:">
+                                                <option value="Aircraft Pilot or Flight Engineer">-  Aircraft Pilot or Flight Engineer</option>
+                                                <option value="Motor Vehicle Operator (e.g., Ambulance, Bus, Taxi, or Truck Driver)">-  Motor Vehicle Operator (e.g., Ambulance, Bus, Taxi, or Truck Driver)</option>
+                                                <option value="Other Transportation Occupation">-  Other Transportation Occupation</option>
+                                                </optgroup>
+                                                <optgroup label="Other Occupations:">
+                                                <option value="Military">-  Military</option>
+                                                <option value="Homemaker">-  Homemaker</option>
+                                                <option value="Other Occupation">-  Other Occupation</option>
+                                                <option value="Don't Know">-  Don't Know</option>
+                                                <option value="N/A">-  N/A</option>
+                                                </optgroup>
+                                            </select>
+                
+                
+                                        {{--  <select class="form-control" required name="occupation" ng-model="logged_user_info.occupation">
                                             <option value="">--Select--</option>
                                             <option value="IT">IT</option>
                                             <option value="Business">Business</option>
                                             <option value="Self-employed">Self-employed</option>
                                             <option value="Constraction">Constraction</option>
-                                        </select> --}}
+                                            <option value="N/A">N/A</option>
+                                            </select>  --}}
                                     </div>
                                 </div>
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Your Income:</label>
@@ -351,16 +352,16 @@
                                         </select>
                                     </div>
                                 </div>
-
+                
                             </div>
-
+                
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Tell us more about your job and your job schedule:</label>
-                                        <textarea class="form-control" required rows="8" maxlength="300" name="jobAndJobSchedule" ng-model="logged_user_info.jobAndJobSchedule"></textarea>
+                                        <textarea class="form-control" required rows="8"maxlength="300" name="jobAndJobSchedule" ng-model="logged_user_info.jobAndJobSchedule"></textarea>
                                         <div class="textarea-detail">
-                                            <div class="max-cahracter">@{{300 - logged_user_info.jobAndJobSchedule.length}} Characters left.
+                                            <div class="max-cahracter">@{{300 - user.jobAndJobSchedule.length}} Characters left.
                                             </div>
                                         </div>
                                     </div>
@@ -368,21 +369,23 @@
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label>Your social situation:</label>
+                
+                
+                                        @{{checklistss.length}}
                                         <div class="checkbox-container">
                                             <div class="cell" ng-repeat="chlist in checklist">
-                                                <input type="checkbox" ng-attr-id="check-@{{$index}}" name="yourSocialSituation[]" checklist-value="$index" checklist-model="logged_user_info.yourSocialSituation"
-                                                    required>
+                                                <input type="checkbox" ng-attr-id="check-@{{$index}}" name="yourSocialSituation[]" checklist-value="$index" checklist-model="user.yourSocialSituation" required>
                                                 <label ng-attr-for="check-@{{$index}}">
                                                     <span></span> @{{chlist}}</label>
                                             </div>
-
+                
                                         </div>
                                     </div>
-
+                
                                 </div>
                             </div>
-
-
+                
+                
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
@@ -391,26 +394,27 @@
                                             <option value="">--Select--</option>
                                             <option value="Yes">Yes</option>
                                             <option value="No">No</option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>If You have many?</label>
-                                        <input class="form-control" type="text" name="howMany" ng-model="logged_user_info.howMany" required>
+                                        <input class="form-control form-control-number" type="tel" name="howMany" ng-model="logged_user_info.howMany" required>
                                         <!-- <select class="form-control" required name="howMany" ng-model="logged_user_info.howMany">
-                                                                                <option value="">--Select--</option>
-                                                                                <option value="N/A">N/A</option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option>
-                                                                                <option value="5">5</option>
-                                                                                <option value="6">6</option>
-                                                                                <option value="7">7</option>
-                                                                            </select> -->
+                                            <option value="">--Select--</option>
+                                            <option value="N/A">N/A</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                        </select> -->
                                     </div>
                                 </div>
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Do you own a car?</label>
@@ -421,9 +425,9 @@
                                         </select>
                                     </div>
                                 </div>
-
+                
                             </div>
-
+                
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
@@ -434,42 +438,39 @@
                                             <option value="No">No</option>
                                         </select>
                                     </div>
-
+                
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label>Where your father and mother born?</label>
-                                        <!-- <select class="form-control" required name="wouldBirthFatherAndMotherAre" ng-model="logged_user_info.wouldBirthFatherAndMotherAre">
-                                                                                <option value="">--Select--</option>
-                                                                                <option value="21">21</option>
-                                                                                <option value="22">22</option>
-                                                                                <option value="23">23</option>
-                                                                                <option value="24">24</option>
-                                                                            </select> -->
-                                        <select class="form-control" required name="wouldBirthFatherAndMotherAre" ng-model="logged_user_info.wouldBirthFatherAndMotherAre">
+                                        <label>Father birth place</label>
+                
+                                        <select class="form-control" required name="fatherBorn" ng-model="logged_user_info.fatherBorn">
                                             <option value="">--Select--</option>
                                             @foreach ($countries as $country)
                                             <option value="{{$country->short_name}}">{{$country->short_name}}</option>
                                             @endforeach
-                                            <option value="Not Applicable">Not Applicable</option>
-
+                                            <option value="N/A">N/A</option>
+                
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label>How ambitious are you?</label>
-                                        <select class="form-control" required name="howAmbitiousAreYou" ng-model="logged_user_info.howAmbitiousAreYou">
+                                        <label>Mother birth place</label>
+                
+                                        <select class="form-control" required name="motherBorn" ng-model="logged_user_info.motherBorn">
                                             <option value="">--Select--</option>
-                                            <option value="Very Important">Very Important</option>
-                                            <option value="Important">Important</option>
-                                            <option value="Somewhat Important">Somewhat Important</option>
+                                            @foreach ($countries as $country)
+                                            <option value="{{$country->short_name}}">{{$country->short_name}}</option>
+                                            @endforeach
+                                            <option value="N/A">N/A</option>
+                
                                         </select>
                                     </div>
                                 </div>
-
+                
                             </div>
-
+                
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
@@ -480,13 +481,14 @@
                                             <option value="2 years">2 Years</option>
                                             <option value="3-6 years">3-6 Years</option>
                                             <option value="longer">Longer</option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label>What are your religiouse you do beliefs? </label>
+                                        <label>Religion</label>
                                         <select class="form-control" required name="religiousBeliefs" ng-model="logged_user_info.religiousBeliefs">
                                             <option value="">--Select--</option>
                                             <option value="Christians">Christians</option>
@@ -495,10 +497,11 @@
                                             <option value="Judaism">Judaism</option>
                                             <option value="Buddhists">Buddhists</option>
                                             <option value="Jews">Jews</option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>How important in a relationship is my partner's dependability?</label>
@@ -508,13 +511,14 @@
                                             <option value="Somewhat Important">Somewhat Important</option>
                                             <option value="What every happen">What every happen</option>
                                             <option value="Unsure">Unsure</option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
-
+                
                             </div>
                             <div class="row">
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>How important in a relationship is sexual compatibility</label>
@@ -524,10 +528,11 @@
                                             <option value="What is that">What is that</option>
                                             <option value="Very Important">Very Important</option>
                                             <option value="Important">Important</option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>How important in a relationship is the friendship between partners?</label>
@@ -536,10 +541,11 @@
                                             <option value="Very Important">Very Important</option>
                                             <option value="Important">Important</option>
                                             <option value="Somewhat Important">Somewhat Important</option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Do you do drugs?</label>
@@ -551,10 +557,10 @@
                                         </select>
                                     </div>
                                 </div>
-
+                
                             </div>
                             <div class="row">
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>What's your hair color?</label>
@@ -578,10 +584,11 @@
                                             <option value="Red Hot Cinnamon">Red Hot Cinnamon</option>
                                             <option value="Expresso">Expresso</option>
                                             <option value="Jet Black">Jet Black</option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>What's your hair style</label>
@@ -607,10 +614,11 @@
                                             <option value="Natural">Natural</option>
                                             <option value="Straight">Straight</option>
                                             <option value="Curly and Wavy">Curly and Wavy</option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>What's your eye color?</label>
@@ -624,13 +632,14 @@
                                             <option value="Blue">Blue</option>
                                             <option value="Amber">Amber</option>
                                             <option value="Chestnut brown">Chestnut brown</option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
-
+                
                             </div>
                             <div class="row">
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>How tall are you?</label>
@@ -642,7 +651,7 @@
                                         </select>
                                     </div>
                                 </div>
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>What's your body type?</label>
@@ -663,11 +672,15 @@
                                             <option value="Excellent Posture">Excellent Posture</option>
                                             <option value="Gains Muscle Easily">Gains Muscle Easily</option>
                                             <option value="Fat">Fat</option>
+                                            <option value="Curves">Curves</option>
+                                            <option value="Petite">Petite</option>
+                                            <option value="Skinny ">Skinny </option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
-
-
+                
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>What's your zodiac sign?</label>
@@ -682,62 +695,62 @@
                                             </option>
                                             <option value="Gemini">
                                                 Gemini - The Twins May 21 - June 20 Flexibility, balance and adaptability are the keywords for the Gemini.
-
+                
                                             </option>
-
+                
                                             <option value="Cancer">
                                                 Cancer - The Crab June 21 - July 22 Cancerians love home-life, family and domestic settings. They are traditionalists, and
                                                 enjoy operating on a fundamental level.
-
+                
                                             </option>
                                             <option value="Leo">
                                                 Leo - The Lion July 23 - August 22 The zodiac signs and meanings of Leo is about expanse, power and exuberance.
-
+                
                                             </option>
                                             <option value="Virgo">
                                                 Virgo - The Virgin August 23 - September22 Virgo's have keen minds, and are delightful to chat with, often convincing others
                                                 of outlandish tales with ease and charm.
-
+                
                                             </option>
                                             <option value="Libra">
                                                 Libra - The Scales September 23 - October 22 As their zodiac signs and meanings would indicate, Libra's are all about balance,
                                                 justice, equanimity and stability.
-
+                
                                             </option>
                                             <option value="Scorpio">
                                                 Scorpio - The Scorpion October 23 - November 21 The Scorpio is often misunderstood.
-
+                
                                             </option>
                                             <option value="Sagittarius">
                                                 Sagittarius - The Centaur November 22 - December 21 Here we have the philosopher among the zodiac signs and meanings. Like
                                                 the Scorpio, they have great ability for focus, and can be very intense.
-
+                
                                             </option>
                                             <option value="Capricorn">
                                                 Capricorn - The Goat December 22 - January 19 Capricorn's are also philosophical signs and are highly intelligent too.
-
+                
                                             </option>
                                             <option value="Aquarius">
                                                 Aquarius - The Water Bearer January 20 - February 18 Often simple and unassuming, the Aquarian goes about accomplishing goals
                                                 in a quiet, often unorthodox ways
-
+                
                                             </option>
-
+                
                                             <option value="Pisces">
                                                 Pisces - The Fish February 19 - March 20 Also unassuming, the Pisces zodiac signs and meanings deal with acquiring vast amounts
                                                 of knowledge,
-
+                
                                             </option>
-                                            <option value="Not Applicable">Not Applicable</option>
-
-
+                                            <option value="N/A">N/A</option>
+                
+                
                                         </select>
                                     </div>
                                 </div>
-
+                
                             </div>
                             <div class="row">
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Do you smoke?</label>
@@ -750,8 +763,8 @@
                                         </select>
                                     </div>
                                 </div>
-
-
+                
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>Do you drink?</label>
@@ -765,8 +778,8 @@
                                         </select>
                                     </div>
                                 </div>
-
-
+                
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>How often do you excercise?</label>
@@ -779,10 +792,10 @@
                                         </select>
                                     </div>
                                 </div>
-
+                
                             </div>
                             <div class="row">
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>What excercise you do regularly</label>
@@ -798,10 +811,11 @@
                                             <option value="jogging">jogging</option>
                                             <option value="gym">gym</option>
                                             <option value="swimming">swimming</option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
-
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>What's your education level?</label>
@@ -814,11 +828,12 @@
                                             <option value="Level 7- Masters ">Level 7- Masters </option>
                                             <option value="Level 8- Doctorate  ">Level 8- Doctorate </option>
                                             <option value="Level AA">Level AA</option>
+                                            <option value="N/A">N/A</option>
                                         </select>
                                     </div>
                                 </div>
-
-
+                
+                
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>What language do you speak?</label>
@@ -833,14 +848,26 @@
                                             <option value="Japanese">Japanese</option>
                                             <option value="German">German</option>
                                             <option value="French">French</option>
-
+                
                                         </select>
                                     </div>
                                 </div>
-
+                
                             </div>
                             <div class="row">
-
+                
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>How ambitious are you?</label>
+                                        <select class="form-control" required name="howAmbitiousAreYou" ng-model="logged_user_info.howAmbitiousAreYou">
+                                            <option value="">--Select--</option>
+                                            <option value="Very Important">Very Important</option>
+                                            <option value="Important">Important</option>
+                                            <option value="Somewhat Important">Somewhat Important</option>
+                                            <option value="N/A">N/A</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label>What is your ethnicity? </label>
@@ -858,8 +885,10 @@
                                         </select>
                                     </div>
                                 </div>
-
+                
                             </div>
+                
+
 
                             <div class="form-group padding-top text-right">
                                 <button class="btn btn-danger" type="submit">Save</button>

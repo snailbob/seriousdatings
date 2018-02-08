@@ -106,7 +106,7 @@ class DatingPlanController extends Controller
 
 
             if(isset($my_subscription->id)){
-                $my_subscription->details = (@unserialize($my_subscription->details)) ? unserialize($my_subscription->details) : array();
+                // $my_subscription->details = (@unserialize($my_subscription->details)) ? unserialize($my_subscription->details) : array();
                 $my_subscription->payment_details = (@unserialize($my_subscription->payment_details)) ? unserialize($my_subscription->payment_details) : array();
 
                 //for square/and not paypal
