@@ -137,7 +137,7 @@
                                                     <div class="row">
                                                         <div class="col-sm-12">
                                                             <div class="cropArea">
-                                                                <img-crop image="myImage" result-image="myCroppedImage" on-load-done="imgEdit = false" result-image-quality="0.8" area-type="square"></img-crop>
+                                                                <ui-cropper image="myImage" result-image="myCroppedImage" on-load-done="imgEdit = false" result-image-quality="0.8" area-type="rectangle"></ui-cropper>
                                                             </div>
                                                             <div>
                                                                 <div class="hidden">
@@ -240,7 +240,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="">Check No.</label>
-                                            <input required type="text" name="check_number" ng-model="echeckData.check_number" id="" class="form-control">
+                                            <input required type="tel" name="check_number" ng-model="echeckData.check_number" id="" class="form-control  form-control-number">
                                         </div>
                                     </div>
                                 </div>
@@ -250,6 +250,15 @@
                                         <div class="form-group">
                                             <label for="">Account No.</label>
                                             <input required type="tel" name="account_no" ng-model="echeckData.account_no" id="" class="form-control form-control-number">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="">Phone No.</label>
+                                            <input required type="tel" name="phone" ng-model="echeckData.phone" id="" class="form-control form-control-number">
                                         </div>
                                     </div>
                                 </div>

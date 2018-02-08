@@ -136,6 +136,21 @@ class DatingPlanController extends Controller
                 $my_subscription->is_expired = (empty($my_subscription->remaining_days)) ? true : false;
                 $my_subscription->status_text = ($my_subscription->is_expired) ? 'Expired' : 'Active';
 
+
+                //filter if echeck and not approved
+                if($my_subscription->gateway == 'echeck'){
+                    if($my_subscription->status == null){
+                        $my_subscription->mode = 'pending_echeck';
+                        $my_subscription->is_expired = true;
+
+                    }
+                    else if($my_subscription->status == 0){
+                        $my_subscription->mode = 'rejected_echeck';
+                        $my_subscription->is_expired = true;
+
+                    }
+                }
+
             }
             else{
                 $timeActivated = Auth::user()->timeActivated;

@@ -8652,3 +8652,9 @@ nav.video-menu:hover>ul a li {
 #bs-example-navbar-collapse-3{
 	overflow: visible;
 }
+
+.appointment-form .clean-gray{
+	position: absolute;
+	top: 65px;
+	right: 30px;
+}

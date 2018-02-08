@@ -1,4 +1,4 @@
-var ngApp = angular.module('seriousDatingApp', ['ngValidate', 'checklist-model', 'ngImgCrop', 'ngBootbox', 'ngToast', 'ui.bootstrap', 'cp.ngConfirm', 'ui.calendar', 'angularMoment', 'toaster']);
+var ngApp = angular.module('seriousDatingApp', ['ngValidate', 'checklist-model', 'uiCropper', 'ngBootbox', 'ngToast', 'ui.bootstrap', 'cp.ngConfirm', 'ui.calendar', 'angularMoment', 'toaster']); //'ngImgCrop', 
 
 ngApp.config(['ngToastProvider', function (ngToastProvider) {
     ngToastProvider.configure({
@@ -2259,10 +2259,12 @@ ngApp.controller('profileSettingsController', ['$scope', '$filter', 'myHttpServi
         // console.log(registerform, $scope.logged_user_info);
         if (registerform.validate() && !$scope.emailInUse && !$scope.logged_user_infonameInUse) {
             // $scope.logged_user_info.photo = $scope.myCroppedImage;
-            if ($scope.imgEdit) {
-                $scope.showToast('Please upload an image.', 'danger');
-                return false;
-            }
+            // if ($scope.imgEdit) {
+            //     $scope.showToast('Please upload an image.', 'danger');
+            //     return false;
+            // }
+
+
             // $ngBootbox.customDialog(loadingModalOpt);
 
             // myHttpService.post('signup', $scope.user)

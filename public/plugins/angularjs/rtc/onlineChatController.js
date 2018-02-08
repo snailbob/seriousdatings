@@ -178,6 +178,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
     };
 
     $scope.startCall = function(type, user, i){
+        $scope.callStarted = true;
+
         if(type != 'text'){
             $scope.callType = type;
         }
@@ -381,7 +383,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                 $scope.activeIndex = $scope.params.user_index;
                 $scope.activeUser = res.data.users[$scope.activeIndex];
                 var _action = (typeof($scope.params.action_type) !== 'undefined') ? $scope.params.action_type : 'text';
-                $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
+                $scope.startCall(_action, $scope.activeUser, $scope.activeIndex);
             }
             else if(typeof($scope.params.user_id) !== 'undefined'){
                 $scope.callStarted = true;
@@ -393,7 +395,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                     $.alert('Opps! Cannot start a call to an offline user. Send a message instead.');
                     _action = 'text';
                     $timeout(function(){
-                        $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
+                        $scope.startCall(_action, $scope.activeUser, $scope.activeIndex);
                     }, 250);
 
                 }
@@ -410,7 +412,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                                     btnClass: 'btn-danger',
                                     action: function(scope, button){
                                         $timeout(function(){
-                                            $scope.boxStartCall(_action, $scope.activeUser, $scope.activeIndex);
+                                            $scope.startCall(_action, $scope.activeUser, $scope.activeIndex);
                                         }, 250);
                                     }
                                 },

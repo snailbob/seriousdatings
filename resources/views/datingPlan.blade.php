@@ -40,6 +40,18 @@
         </div>  
       </div>
 
+      <div class="col-sm-12" ng-if="subscription_validity.mode == 'pending_echeck'">
+        <div class="alert alert-success">
+          Admin is reviewing your echeck. It may take upto 5 working days.
+        </div> 
+      </div>
+      <div class="col-sm-12" ng-if="subscription_validity.mode == 'rejected_echeck'">
+        <div class="alert alert-success">
+          Admin is rejected your echeck. Please try other payment gateway.
+        </div> 
+      </div>
+      
+
 
       <div class="col-md-12">
         <div class="padding-top-15 padding-bottom plan-banner">

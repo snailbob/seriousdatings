@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="cropArea">
-                            <img-crop image="myImage" result-image="myCroppedImage" on-load-done="imgEdit = false" result-image-quality="0.5" area-type="square"></img-crop>
+                            <ui-cropper image="myImage" result-image="myCroppedImage" on-load-done="imgEdit = false" result-image-quality="0.5" area-type="square"></ui-cropper>
                         </div>
                         <div>
                             <div class="hidden">

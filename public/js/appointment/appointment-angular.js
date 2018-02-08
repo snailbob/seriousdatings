@@ -160,7 +160,7 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,myHttpService,$httpParamS
 
 			$ngConfirm({
 				title:'',
-				contentUrl:base_url+'/public/js/appointment/appointment-layout.html',
+				contentUrl:base_url+'/public/js/appointment/appointment2-layout.html',
                 boxWidth: '450px',
     			useBootstrap: false,
                 animation: 'zoom',
