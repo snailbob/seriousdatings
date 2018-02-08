@@ -125,6 +125,7 @@ $(function () {
         var TotalactiveUsers = [];
         var values = {};
         var area;
+        var markersData =  [];
        $.ajax({
 
             url: base_url+"/api/populateStatisticsReport",
@@ -144,6 +145,9 @@ $(function () {
                    
                   })
 
+                  $.each(data.demoGraphMarkers,function(i,k){
+                       markersData.push({latLng: [data.demoGraphMarkers[i].lat,data.demoGraphMarkers[i].long], name:data.demoGraphMarkers[i].nameFull ,style: {fill: 'yellow'}});
+                  })
               
 
                   $('#world-map').vectorMap({
@@ -176,19 +180,32 @@ $(function () {
                           scale            : ['#b71031', '#ef1c46'],
                           normalizeFunction: 'polynomial'
                         }
-                      ]
+                      ],
+                       markers: [{
+                              attribute: 'fill',
+                              min: 125,
+                              max: 400
+                            },{
+                              attribute: 'r',
+                              scale: [25, 35],
+                              values:markersData,
+                              min: 5,
+                              max: 15
+                            }]
                     },
                     onRegionLabelShow: function (e, el, code) {
                       if (typeof values[code] != 'undefined')
                         el.html(el.html() + ': ' + values[code] + ' active users');
                     },
-                 /*   markerStyle      : {
+                    markerStyle      : {
                       initial: {
-                        fill  : '#00a65a',
-                        stroke: '#111'
+                         fill  : '#00a65a',
+                         stroke: '#111',
+                         min: 25,
+                         max: 45,
                       }
-                    },*/
-                /*    onMarkerTipShow: function(event, label, index){
+                    },
+                    onMarkerTipShow: function(event, label, index){
                        console.log(markersData[index].name);
                         label.html(
                           '<b>'+markersData[index].name+'</b><br/>'+
@@ -196,7 +213,8 @@ $(function () {
                           '<b>Unemployment rate: </b>'+markersData[index].name+'%'
                         );
                       },
-                    markers          : markersData*/
+                    markers          : markersData,
+
                   });
 
                

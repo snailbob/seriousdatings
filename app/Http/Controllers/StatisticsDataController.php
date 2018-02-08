@@ -19,6 +19,7 @@ use App\EventMembers;
 use App\AdsSpace;
 use App\AdsPricing;
 use App\Event;
+use App\User;
 use DB;
 use Auth;
 
@@ -30,6 +31,7 @@ class StatisticsDataController extends Controller
 	
 	public function populateStatisticsReport(){
         return response()->json(['demoGraph'=>self::UserLatLngFormat(),
+        						 'demoGraphMarkers'=>self::UserLatLngMarkers(),
                                 'datingSales'=>self::SalesGraph(),
                             	'eventsSales'=>self::SalesGraphEvents(),
                             	'virtualSales'=>self::SalesVirtual(),
@@ -51,7 +53,20 @@ class StatisticsDataController extends Controller
         }
         return $format;
     }
-
+    public static function UserLatLngMarkers(){
+	    $state = array();
+	    $format = array();
+	    $users = User::all();
+	    foreach ($users as $key => $value) {
+	           
+	            $state['lat'] = $value->latitude;
+	            $state['long'] = $value->longitude;
+	            $state['nameFull'] = $value->firstName.' '.$value->lastName;
+	            $format[] = $state;
+	     
+	    }
+        return $format;
+    }
      public static function SalesGraph(){
         $sales = array();
         $format = array();
