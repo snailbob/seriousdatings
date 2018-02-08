@@ -142,7 +142,7 @@
                                                                                 class="fa fa-trash"></i>
                                                                         Remove</a></li>
                                                                 <li>
-                                                                    <a href='{{ url() }}/admin/users/{!! $group->user->id !!}'>
+                                                                    <a href='{{ url() }}/user/profile/{!! $group->user->username !!}'>
                                                                         <i
                                                                                 class="fa fa-eye"></i> View</a>
                                                                 </li>

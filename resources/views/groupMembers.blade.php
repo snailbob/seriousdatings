@@ -203,7 +203,7 @@
                                     @foreach($group as $group_member)
                                         @if($group_member->isJoin)
                                             <div class="col-md-3">
-                                                <a href="{{url().'user/profile/'.$group_member->user->username}}">
+                                                <a href="{{url().'/user/profile/'.$group_member->user->username}}">
                                                     <div class="grup_member">
                                                         <div>
                                                             <img src="{{$group_member ->user->photo}}"
@@ -221,7 +221,7 @@
                                     @if(in_array(Auth::id(), $members) || Auth::user()->role == "admin")
                                         @foreach($group as $group_member)
                                             <div class="col-md-3">
-                                                <a href="{{url().'user/profile/'.$group_member->user->username}}">
+                                                <a href="{{url().'/user/profile/'.$group_member->user->username}}">
                                                     <div class="grup_member">
                                                         <div>
                                                             <img src="{{$group_member ->user->photo}}"

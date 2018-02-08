@@ -7,6 +7,11 @@
         // })
     </script>
 @endsection
+
+@section('css-scripts')
+    {!! HTML::style('public/css/group/members_action.css') !!}
+@endsection
+
 @section('form_area')
     {{--{{dd($users)}}--}}
     <div id="myModal" class="reveal-modal" style="background: none;">
@@ -140,7 +145,7 @@
                                                                                 class="fa fa-plus"></i>
                                                                         Add</a></li>
                                                                 <li>
-                                                                    <a href='{{ url() }}/admin/users/{!! $user->id !!}'>
+                                                                    <a href='{{url().'/user/profile/'.$user->username}}'>
                                                                         <i
                                                                                 class="fa fa-eye"></i> View</a>
                                                                 </li>
