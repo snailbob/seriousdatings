@@ -37,9 +37,24 @@ function HIdeAllFemale(){
     $('.Female').each(function(i, obj) {
         $(this).css("display","none");
     });
+
+
     $('.Male').each(function(i, obj) {
         $(this).css("display","");
     });
+
+    $('.rowg-Female').each(function(i,obj){
+          // $(this).css("display","none");
+           $(this).slideUp('slow');
+  
+    });
+
+     $('.rowg-Male').each(function(i, obj) {
+        $(this).css("display","");
+
+    });
+
+
     menuDialog.close();
 }
 
@@ -51,6 +66,16 @@ function HIdeAllMale(){
     $('.Female').each(function(i, obj) {
         $(this).css("display","");
     });
+
+
+    $('.rowg-Female').each(function(i,obj){
+          $(this).css("display","");  
+    });
+
+     $('.rowg-Male').each(function(i, obj) {
+        // $(this).css("display","none");
+          $(this).slideUp('slow');
+    });
     menuDialog.close();
 }
 
@@ -60,6 +85,14 @@ function showBothGender(){
     });
     $('.Female').each(function(i, obj) {
         $(this).css("display","");
+    });
+     $('.rowg-Male').each(function(i, obj) {
+        // $(this).css("display","");
+        $(this).slideDown('slow');
+    });
+      $('.rowg-Female').each(function(i, obj) {
+        // $(this).css("display","");
+        $(this).slideDown('slow');
     });
     menuDialog.close();
 }

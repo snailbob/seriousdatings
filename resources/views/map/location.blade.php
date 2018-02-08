@@ -1,5 +1,6 @@
 
 @include('map.script-css')
+
 {!! Form::hidden('invisible', $userInfo->latitude, array('id' => 'latitude')) !!}
 {!! Form::hidden('invisible', $userInfo->longitude, array('id' => 'longitude')) !!}
 {!! Form::hidden('invisible', $userInfo->id, array('id' => 'user_id')) !!}
@@ -9,6 +10,9 @@
 {!! Form::hidden('invisible', url(), array('id' => 'base_url')) !!}
 <div ng-app="mapDatings">
     <div ng-controller="mapCtrl">
+      @include('user.shared.virtual_gift_modal')
+
+      
         <div id="map" class="map-class"></div>
 
         <div id="floating-panel"><a href="javascript:getMenus();" class="toggle-menus-data">MENU</a>

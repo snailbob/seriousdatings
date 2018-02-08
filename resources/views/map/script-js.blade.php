@@ -15,7 +15,7 @@
    {!! HTML::script('public/plugins/angular-confirm/js/angular-confirm.js') !!}
    {!! HTML::script('public/js/appointment/appointment.js') !!}
    {!! HTML::script('public/js/appointment/appointment-angular.js') !!}
-
+   {!! HTML::script('public/plugins/angularjs/controllers/profileCtrl.js') !!}
 
  <!-- start google map API -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcM5pCF6msEQY1ReH6H4550cspLSKJsvY&callback=initMap"
