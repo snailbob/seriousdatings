@@ -120,7 +120,7 @@
                   <i class="fa fa-user-plus" ng-click="addFriendByUserID(userSelected.id)" uib-tooltip="Add as Friend"></i>
                   <!-- new  menu add -->
                   <i class="fa fa-gift" uib-tooltip="Send Gift" ng-click="virtualGiftModal('', userSelected)"></i>
-                  <i class="fa fa-fast-forward" ng-click="gotoliveChat(userSelected.id)" uib-tooltip="Speed Dating"></i>
+                  <i class="fa fa-map" ng-click="gotoliveChat(userSelected.id)" uib-tooltip="Are We Nearby"></i>
                   <i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>
                 </div>
                 <h2>
@@ -328,7 +328,7 @@
                     <span class="u-icon"><i class="fa fa-facebook-square"></i></span> -->
                   <i class="fa fa-user-plus" ng-click="addFriend($index)" uib-tooltip="Add as Friend"></i>
                   <i class="fa fa-gift" uib-tooltip="Send Gift" ng-click="virtualGiftModal('', match)"></i>
-                  <i class="fa fa-fast-forward" ng-click="gotoliveChat(match.id)" uib-tooltip="Speed Dating"></i>
+                  <i class="fa fa-map" ng-click="gotoliveChat(match.id)" uib-tooltip="Are We Nearby"></i>
                   <i class="fa fa-comments" ng-click="createSMS(match.id,match.firstName)" uib-tooltip="Message"></i>
                 </div>
                 <h2>

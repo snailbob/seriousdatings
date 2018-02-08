@@ -161,7 +161,7 @@
     
  
 </head>
-<body class="hiddenx" ng-controller="bodyController" id="plain-code" ng-cloak>
+<body class="hiddenx" ng-controller="bodyController" id="plain-code">
     {{--  <toast></toast>  --}}
     <toaster-container toaster-options="{'time-out': 7000, 'position-class' : 'toast-bottom-right', 'toaster-id': 1, 'limit': 5}"></toaster-container>
     <toaster-container toaster-options="{'time-out': 5000, 'position-class' : 'toast-top-center', 'toaster-id': 2, 'limit': 1}"></toaster-container>

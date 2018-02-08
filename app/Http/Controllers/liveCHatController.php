@@ -29,7 +29,7 @@ class liveCHatController extends Controller
 {
   
 	public function initializeData($id){
-		// dd($this->getUserData($id));
+		// return response()->json($this->getUserData($id));
 		return View::make('livechat',['userInfo' => $this->getUserData($id)]);
 	}
 	public function getUserLocation($id){

@@ -3,8 +3,7 @@
 
 <div class="inner-header upcoming-banner">
 	<div class="container">
-		<h1>
-			<!--<i class="calendar-event-icon"><img src="{!! url() !!}/images/upcoming-event-icon.png"  alt=""></i>-->Speed Dating</h1>
+		<h1>Speed Dating</h1>
 	</div>
 </div>
 <div class="inner-contendbg">
@@ -37,7 +36,14 @@
 										<input type="hidden" id="chatterIDcheck" value="{!!$userInfo->id !!}">
 									</div>
 									<div>
-									 Status (<i class="fa fa-circle {!! $userInfo->id !!}-stateicon " aria-hidden="true" id="status-online"></i><font id="status-label" class="{!! $userInfo->id !!}-stateL">offline</font>)
+									 Status (
+										@if($userInfo->is_online)
+											<i class="fa fa-circle text-success" aria-hidden="true"></i> Online
+										@else
+											<i class="fa fa-circle text-muted" aria-hidden="true"></i> Offline
+
+										@endif
+									 )
 									</div>
 								</div>
 								</center>
@@ -55,7 +61,7 @@
 											<button type="button" onclick="actionViVoNearbyPage('{!! $userInfo->id !!}','text')" class="btn btn-danger" uib-tooltip="Chat with {!!$userInfo->firstName !!} "><i class="fa fa-comments"></i></button>
 
 
-											<button type="button" onclick="actionViVoNearbyPage('{!! $userInfo->id !!}','voice')" class="btn btn-danger" uib-tooltip="Call {!!$userInfo->firstName !!} "><i class="fa fa-phone"></i></button>
+											{{--  <button type="button" onclick="actionViVoNearbyPage('{!! $userInfo->id !!}','voice')" class="btn btn-danger" uib-tooltip="Call {!!$userInfo->firstName !!} "><i class="fa fa-phone"></i></button>  --}}
 
 
 <!-- 									
