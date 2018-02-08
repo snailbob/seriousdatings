@@ -239,4 +239,8 @@
                                 });
 
             }
-            
+/*
+
+redirect to video chat
+*/
+

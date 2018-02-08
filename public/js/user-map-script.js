@@ -121,7 +121,7 @@ function getAllUserLocation(map){
             }).done(function (response) {
             	
             	$.each(response,function(val,key){
-            	    console.log(key);
+            	    // console.log(key);
             		all_data.push(key);
             		new CustomMarker(
 					new google.maps.LatLng(key.latitude,key.longitude), 
@@ -140,6 +140,7 @@ var menuDialog;
 var ifClicked = false;
 var eahIndexForLoop = [];
 var parentCOnfirm;
+var globalIndex;
 function getMenus(){
 
 	if (ifClicked) {
@@ -164,11 +165,10 @@ function getMenus(){
 
             eahIndexForLoop.push({"NewIndex": index, "NewID": all_data[index].id});
 
-
              $("#listOFdata").slideUp(1000, function(){ 
                   
-                $("#listOFdata").append('<div class="upcoming-event-people removable-'+all_data[index].id+'">'+
-                          '<div class="upcoming-people-row">'+
+                $("#listOFdata").append('<div class="upcoming-event-people removable-'+all_data[index].id+'  ">'+
+                          '<div class="upcoming-people-row rowg-'+all_data[index].gender+'">'+
                             '<div class="left-upcoming-user"><a href="#" ><img src="'+all_data[index].photo+'"  alt=""></a></div>'+
                             '<div class="upcoming-user-list">'+
                               '<div class="upcoming-user-icon">'+
@@ -372,6 +372,20 @@ function getAppointmentFromAngular(dataID){
       var scope = angular.element(document.getElementById('map')).scope();
             scope.addAppointMentNew(SearhValueOFdata(dataID));
 }
+function addUserCallFromAngular(dataID){
+    
+     var scope = angular.element(document.getElementById('map')).scope();
+            scope.addUser(SearhValueOFdata(dataID));
+}
+
+function sendUserVirtualGitFromAngular(dataID){
+
+     var scope = angular.element(document.getElementById('map')).scope();
+            scope.getMyDataSendVirtual(SearhValueOFdata(dataID));
+
+
+}
+
 function actionViVo(user_id,action){
     var UrLs = '/online_chat'
         UrLs +='?user_id='+user_id;
@@ -402,10 +416,10 @@ function  NextPreviousValue(id,element) {
         '<ul class="option-menus">'+
 
         // '<li class="fa fa-microphone" title="Voice call" onclick="actionViVo(\''+resultObjectInfo.id+'\',\''+'voice'+'\')"></li>'+
-        '<li class="fa fa-fast-forward" title="Speed dating video chat" onclick="actionViVo(\''+resultObjectInfo.id+'\',\''+'video'+'\')"></li>'+
-        '<li class="fa fa-gift" title="Virtual Gift"></li>'+
+        '<li class="fa fa-video-camera" title="Video chat" onclick="actionViVo(\''+resultObjectInfo.id+'\',\''+'video'+'\')"></li>'+
+        '<li class="fa fa-gift" title="Virtual Gift" onclick="sendUserVirtualGitFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
         '<li class="fa fa-eye" title="wink"></li>'+
-        '<li class="fa fa-user-plus" title="Add User"></li>'+
+        '<li class="fa fa-user-plus" id="userChangeState" title="Add User" onclick="addUserCallFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
         '<li class="fa fa-phone" title="Appointment" onclick="getAppointmentFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
         '</ul>'+
         '</div>';
@@ -459,6 +473,8 @@ var setTitleLastFirstName = function (id) {
 
  function functionMoreInfoUser(id,index){
     var counter = index;
+        globalIndex = index;
+    
 
 	 parentCOnfirm = $.confirm({
 		    title: '<div id="title-item-dialog">'+setTitleLastFirstName(id)+'</div>',
@@ -485,6 +501,7 @@ var setTitleLastFirstName = function (id) {
                         $("#list-item-dialog").html(NextPreviousValue(nextValueData(counter),'hide-previous'));
                         $("#title-item-dialog").html(setTitleLastFirstName(nextValueData(counter)));
 						$(".hide-next").css("display","");
+                        globalIndex = counter;
                     return false;
                     }
                 },
@@ -496,6 +513,7 @@ var setTitleLastFirstName = function (id) {
                         $("#list-item-dialog").html(NextPreviousValue(nextValueData(counter),'hide-next'));
                         $("#title-item-dialog").html(setTitleLastFirstName(nextValueData(counter)));
                         $(".hide-previous").css("display","");
+                        globalIndex = counter;
                     return false;
                     }
                 },
@@ -503,7 +521,7 @@ var setTitleLastFirstName = function (id) {
 		});
     parentCOnfirm.open();
 
-
+    console.log(globalIndex);
 }
 function SearhValueOFdata(searchKey){
 		

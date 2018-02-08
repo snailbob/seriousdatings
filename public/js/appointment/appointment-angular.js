@@ -12,7 +12,7 @@ Object.toparams = function ObjecttoParams(obj) {
 };
 
 
-ngApp.service('httServices', ['$http', 'CSRF_TOKEN', function ($http, CSRF_TOKEN) {
+ngApp.service('myHttpService', ['$http', 'CSRF_TOKEN', function ($http, CSRF_TOKEN) {
 
 	    this.url = window.base_url;
 
@@ -54,17 +54,106 @@ ngApp.service('httServices', ['$http', 'CSRF_TOKEN', function ($http, CSRF_TOKEN
    
 }]);
 
-ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSerializerJQLike){
+ngApp.controller('mapCtrl', function($scope,$ngConfirm,myHttpService,$httpParamSerializerJQLike,$uibModal,$log){
 
 	$scope.availableTime = [];
+	$scope.myDataProfile = [];
 
 	$scope.addAppointMentNew = function(userInfos) {
 				// console.log(userInfos);
-				httServices.getWithParams('getTimeAvailability',{'ids':userInfos.id}).then(function (res) {
+				
+				myHttpService.getWithParams('getTimeAvailability',{'ids':userInfos.id}).then(function (res) {
 				
 						$scope.viewLayoutAppoinment(res.data,userInfos);	
 				});
 	};
+
+
+	$scope.addUser = function(u) {
+				
+		        u.is_friend = !u.is_friend;
+
+		        if(!u.is_friend){
+		            var action = myHttpService.post('delete_friend', {id: u.id}).then(function(res){
+		                console.log(res);
+		                $("#userChangeState").removeClass('fa-user-plus');
+		                $("#userChangeState").addClass('fa-user-times');
+		                var mess = 'User successfully removed.';
+		                  $.alert({
+			                title: 'Message!',
+			                content: mess,
+			            });
+		            });
+		        }
+		        else{
+		            myHttpService.post('add_friend', {id: u.id}).then(function(res){
+		                console.log(res);
+		                $("#userChangeState").removeClass('fa-user-times');
+		                 $("#userChangeState").addClass('fa-user-plus');
+		                var mess = 'User successfully picked up.';
+		                 $.alert({
+			                title: 'Message!',
+			                content: mess,
+			            });
+
+
+		            });
+		        }
+	};
+
+	$scope.getMyDataSendVirtual = function(currUser){
+		if ($scope.myDataProfile.length === 0) {
+			myHttpService.get('current_user').then(function (res) {
+				$scope.myDataProfile = res.data;
+				$scope.virtualGiftModal(currUser,res.data);			
+		     });
+		}else{
+
+				$scope.virtualGiftModal(currUser,$scope.myDataProfile);		
+
+		}
+	}
+	$scope.virtualGiftModal = function (currUser,loggedUser) {
+			console.log("currUser",currUser);
+			console.log("loggedUser",loggedUser);
+            var _toItem = {
+				username: currUser.username,
+				logged_user:  loggedUser,
+				user:  currUser
+            };
+            console.log("loggedUser",_toItem);
+
+            // console.log(items, 'wow');
+            // var parentElem = parentSelector ?
+                // angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'virtualGiftModal.html',
+                controller: 'virtualGiftModalCtrl',
+                // controllerAs: '$scope',
+                // size: '',
+                windowClass: 'compatible-modal',
+                // appendTo: parentElem,
+                resolve: {
+                    items: function () {
+                        return _toItem; //items ? items : {}; // 
+                    }
+                }
+            });
+            parentCOnfirm.close();
+            modalInstance.result.then(function (res) {
+				$log.info(res);
+				$.alert('Gift successfully sent to '+_toItem.user.firstName);
+                // $scope.activeUser.invitedToChat = res;
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+                // parentCOnfirm.open();
+                functionMoreInfoUser(_toItem.user.id,);
+            });
+        };
 
 
 	$scope.viewLayoutAppoinment = function (dataAvialable,userData) {
@@ -119,7 +208,7 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 						console.log(formDatas);
 
 								$.ajax({
-									url: httServices.pathURL+'saveAppointmentNew',
+									url: myHttpService.pathURL+'saveAppointmentNew',
 									dataType: 'json',
 									data:formDatas,
 									method: 'POST',
@@ -154,13 +243,13 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 									var UrLs = '/online_chat'
 										UrLs +='?user_id='+user_id;
 										UrLs +='&action_type='+action_type
-									var win = window.open(httServices.url+UrLs, '_blank');
+									var win = window.open(myHttpService.url+UrLs, '_blank');
 									win.focus();
 						}
 						$scoped.blockUser = function(u){
 							console.log(u);
 							var fullName = u.firstName+' '+u.lastName;
-					        httServices.post('speedBlock', u).then(function(res){
+					        myHttpService.post('speedBlock', u).then(function(res){
 					            console.log(res);
 					            if(res.data.trans){
 
@@ -195,7 +284,9 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,httServices,$httpParamSer
 
 	};
 	
-})
+});
+
+
 $(document).ready(function () {
 	$.ajaxSetup({
 		headers: {

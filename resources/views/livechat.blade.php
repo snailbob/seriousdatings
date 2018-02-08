@@ -23,7 +23,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<h3 style="color: #FFF; background: #E21D24;font-weight:600;font-size: 22px;width: 100%;padding:7px 10px;margin:0; line-height:28px;">
-								Speed Dating  <i class="fa fa-fast-forward"></i> 
+								Are we nearby ?  <i class="fa fa-map-marker"></i> 
 							</h3>
 						</div>
 						<div class="col-md-12">
@@ -50,16 +50,21 @@
 										<div class="form-group">
 										<center>
 										<div class="btn-group">
-											<button type="button" class="btn btn-danger" uib-tooltip="Video Chat"><i class="fa fa-video-camera"></i></button>
+											<button type="button" onclick="actionViVoNearbyPage('{!! $userInfo->id !!}','video')" class="btn btn-danger" uib-tooltip="Video Chat {!!$userInfo->firstName !!}"><i class="fa fa-video-camera"></i></button>
 
-											<button type="button" onclick="register_popup('{!! $userInfo->id !!}','{!! $userInfo->firstName  !!}')" class="btn btn-danger" uib-tooltip="Chat with {!!$userInfo->firstName !!} "><i class="fa fa-comments"></i></button>
+											<button type="button" onclick="actionViVoNearbyPage('{!! $userInfo->id !!}','text')" class="btn btn-danger" uib-tooltip="Chat with {!!$userInfo->firstName !!} "><i class="fa fa-comments"></i></button>
 
+
+											<button type="button" onclick="actionViVoNearbyPage('{!! $userInfo->id !!}','voice')" class="btn btn-danger" uib-tooltip="Call {!!$userInfo->firstName !!} "><i class="fa fa-phone"></i></button>
+
+
+<!-- 									
 											<button type="button" class="btn btn-danger" uib-tooltip="View  {!!$userInfo->firstName !!} Facebook"><i class="fa fa-facebook-official"></i></button>
 
 											<button type="button" class="btn btn-danger"  uib-tooltip="View  {!!$userInfo->firstName !!} Twitter ">  <i class="fa fa-twitter"></i></button>
 
 
-											<button type="button" class="btn btn-danger"  uib-tooltip="View  {!!$userInfo->firstName !!} Instagram">  <i class="fa fa-instagram"></i></button>
+											<button type="button" class="btn btn-danger"  uib-tooltip="View  {!!$userInfo->firstName !!} Instagram">  <i class="fa fa-instagram"></i></button> -->
 
 											<button type="button" class="btn btn-danger" ng-click="moreInfoModal()" uib-tooltip="More About  {!!$userInfo->firstName !!} ">  <i class="fa fa-info-circle"></i></button>
 
@@ -102,6 +107,7 @@
 		</div>
 	</div>
 </div>
+
 
 
     <script type="text/ng-template" id="moreInfoModal.html">

@@ -422,3 +422,10 @@ function parentCreatSMS(user_id,user_FirstName){
     scope.createSMS(user_id,user_FirstName);
 }
 
+function actionViVoNearbyPage(user_id,action){
+    var UrLs = '/online_chat'
+        UrLs +='?user_id='+user_id;
+        UrLs +='&action_type='+action;
+    var win = window.open(base_url+UrLs, '_blank');
+    win.focus();
+}
