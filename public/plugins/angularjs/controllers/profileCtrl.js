@@ -226,7 +226,7 @@ ngApp.controller('profileCtrl', [
 				$scope.right();
 			}
 
-		}, 4000);
+		}, 8000);
 
 		$(".next-carousel").mouseover(function () {
 			boolCour = false;

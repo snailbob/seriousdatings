@@ -138,7 +138,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="">Username</label>
-                                            <input type="text" class="form-control" name="username" ng-model="logged_user_info.username" ng-change="usernameChange(logged_user_info.username)" placeholder="Username" required readonly />
+                                            <input type="text" class="form-control" name="username" ng-model="logged_user_info.username" ng-change="usernameChange(logged_user_info.username)" placeholder="Username" required />
                                             <span class="text-danger" ng-if="usernameInUse">Username already taken.</span>
                                         </div>
                                     </div>
@@ -159,7 +159,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="">Email</label>
-                                            <input class="form-control" type="email" name="email" ng-model="logged_user_info.email" ng-change="emailChange(logged_user_info.email)" placeholder="Email" required readonly/>
+                                            <input class="form-control" type="email" name="email" ng-model="logged_user_info.email" ng-change="emailChange(logged_user_info.email)" placeholder="Email" required/>
                                             <span class="text-danger" ng-if="emailInUse">Email already taken.</span>
 
                                         </div>

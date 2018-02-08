@@ -7,6 +7,7 @@ Homestead.json
 /.idea/*
 /public/images/events/*
 /public/images/groups/*
+/public/images/group_post/*
 /public/assets/*.jpg
 /public/assets/*.png
 /public/assets/*.gif

@@ -106,53 +106,65 @@
 
                             @else
 
-                            <ul class=" navbar-right login-right-nav">
-                                <li class="dropdown">
-                                    <a class="btn btn-danger dropdown-toggle btn-login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <b>Login</b>
-                                        <span class="caret"></span>
-                                    </a>
-                                    <ul id="login-dp" class="dropdown-menu">
-                                        <li>
-                                            <div class="row">
-                                                <div id="errorMessageLog"></div>
-                                                <div class="col-md-12">
-                                                    {!! Form::open(array('url' => 'login', 'class' => 'form', 'id' => 'login-nav')) !!}
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="username">Username</label>
-                                                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="sr-only" for="password">Password</label>
-                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                                                        <!-- <div class="help-block text-right"><a href="{!! url() !!}/forgotPassword">Forget the password ?</a></div> -->
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" id="remember" name="check" checked> keep me logged-in
+                            <div class="login-btn-xscollapse">
+                                <button class="btn btn-default btn-sm visible-xs" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3">
+                                    <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+                                </button>
+                            </div>
 
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                                        <div class="help-block text-right">
-                                                            <a href="{!! url() !!}/forgotPassword">Forget the password ?</a>
+
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
+
+                                <ul class=" navbar-right login-right-nav">
+                                    <li class="dropdown">
+                                        <a class="btn btn-danger dropdown-toggle btn-login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <b>Login</b>
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul id="login-dp" class="dropdown-menu">
+                                            <li>
+                                                <div class="row">
+                                                    <div id="errorMessageLog"></div>
+                                                    <div class="col-md-12">
+                                                        {!! Form::open(array('url' => 'login', 'class' => 'form', 'id' => 'login-nav')) !!}
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="username">Username</label>
+                                                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
                                                         </div>
+                                                        <div class="form-group">
+                                                            <label class="sr-only" for="password">Password</label>
+                                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                                            <!-- <div class="help-block text-right"><a href="{!! url() !!}/forgotPassword">Forget the password ?</a></div> -->
+                                                        </div>
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" id="remember" name="check" checked> keep me logged-in
+    
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                                                            <div class="help-block text-right">
+                                                                <a href="{!! url() !!}/forgotPassword">Forget the password ?</a>
+                                                            </div>
+                                                        </div>
+                                                        {!! Form::close() !!}
                                                     </div>
-                                                    {!! Form::close() !!}
                                                 </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a class="btn btn-success" href="{{ url() }}/users/create">Join Now</a>
-                                </li>
-                                <li>
-                                    <a class="btn btn-info btn-fb" aria-label="Left Align" onclick="checkLoginState()">
-                                        <span class="fa fa-facebook-f"></span> Login with Facebook</a>
-                                </li>
-                            </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-success" href="{{ url() }}/users/create">Join Now</a>
+                                    </li>
+                                    <li>
+                                        <a class="btn btn-info btn-fb" aria-label="Left Align" onclick="checkLoginState()">
+                                            <span class="fa fa-facebook-f"></span> Login with Facebook</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+
 
                             {{-- @include('login_form') --}} @endif
                         

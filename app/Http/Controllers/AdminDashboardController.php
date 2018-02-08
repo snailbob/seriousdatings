@@ -8,7 +8,7 @@ use App\User;
 use App\Event;
 use App\UserVideo;
 use App\UserPhoto;
-// use Mail;
+use Mail;
 use DB;
 use Illuminate\Support\Facades\View;
 
@@ -105,15 +105,17 @@ GROUP BY DATE_FORMAT(act_date, "%m-%Y") */
         if(!empty($data['subject']) && $data['message']){
             $filter_user = DB::table('users')->get(); //$this->paying_user_group($data['type']);
             $data['filter_user'] = count($filter_user);
-    
+            $data['email_content'] = $data['message'];
+
             if(!empty($filter_user)){
                 foreach($filter_user as $r=>$value){
-    
+                    $data['name'] = $value->firstName;
                     $email_to_send = $value->email; 
+                    $subject = $data['subject']; 
                     // return View::make('email.admindash_mass_email')->with($data);
                     
-                    Mail::send('email.admindash_mass_email', $data, function($message) use ($email_to_send) {
-                        $message->to($email_to_send, 'ID')->subject($data['subject']);
+                    Mail::send('email.admindash_mass_email', $data, function($message) use ($email_to_send, $subject) {
+                        $message->to($email_to_send, 'ID')->subject($subject);
                     });
                     
                 }

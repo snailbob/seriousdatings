@@ -4,8 +4,6 @@
 
 <div ng-controller="signupController" ng-cloak>
 
-    <toast></toast>
-
     <div class="inner-header aboutyour-header">
         <div class="container">
             <h1>

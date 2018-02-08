@@ -65,7 +65,7 @@
 
     <div ng-if="active_ads.length < 3" onclick="window.location.href = base_url+'/advertise'">
     
-      <div class="advertise-here" ng-repeat="ads in [0, 1]">
+      <div class="advertise-here" ng-repeat="ads in [0, 1, 2, 3]">
           <h2>Advertise here</h2>
           <div class="container-fluid">
             <div class="row no-gutter">

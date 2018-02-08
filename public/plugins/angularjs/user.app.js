@@ -41,7 +41,7 @@ ngApp.run(['$rootScope', 'ngToast', 'toaster', function ($rootScope, ngToast, to
         //     className: classname,
         //     content: content
         // });
-        classname = (classname == 'danger') ? 'error' : classname;
+        var classname = (classname == 'danger') ? 'error' : classname;
         toaster.pop({
             type: classname,
             // title: 'Title text',
@@ -52,12 +52,14 @@ ngApp.run(['$rootScope', 'ngToast', 'toaster', function ($rootScope, ngToast, to
 
     };
 
-    $rootScope.pop = function(){
+    $rootScope.showNoti = function(content = 'Cool', classname = 'success'){
+        var classname = (classname == 'danger') ? 'error' : classname;
+
         console.log('tasotere');
         toaster.pop({
-            type: 'error',
-            title: 'Title text',
-            body: 'Body text',
+            type: classname,
+            // title: 'Title text',
+            body: content,
             showCloseButton: true,
             toasterId: 1
         });
@@ -3047,19 +3049,19 @@ ngApp.controller('searchController', ['$scope', '$filter', 'myHttpService', '$ti
         $scope.formData.search_type = ($scope.search.advance) ? 'advance' : '';
         myHttpService.getWithParams('search_user', $scope.formData).then(function (res) {
             $scope.isLoading = false;
+            console.log(res.data, 'search_user');
 
             if (!res.data.users.length) {
                 $scope.isEnd = true;
                 $scope.offset -= $scope.perPage;
 
-                if ($scope.data.users.length) {
+                if (typeof($scope.data.users) !== 'undefined' && $scope.data.users.length) {
                     $scope.showToast('Nothing more to show.', 'warning');
                 }
             }
             else {
                 $scope.data = res.data;
             }
-            console.log(res.data, 'search_user');
         });
     }
 

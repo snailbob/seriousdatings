@@ -90,7 +90,6 @@ onLoad: onLinkedInLoad
 
     <div>
         <div ng-controller="homePageController" ng-cloak>
-            <toast></toast>
 
             <div class="middle">
                 <div class="top-banner">

@@ -218,7 +218,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="">Account Holder Name</label>
-                                            <input required type="text" name="name" ng-model="echeckData.name" id="" class="form-control form-control-number">
+                                            <input required type="text" name="name" ng-model="echeckData.name" id="" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -234,7 +234,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="">Routing No.</label>
-                                            <input required type="number" name="routing_number" ng-model="echeckData.routing_number" id="" class="form-control form-control-number">
+                                            <input required type="tel" name="routing_number" ng-model="echeckData.routing_number" id="" class="form-control form-control-number">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -249,31 +249,11 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="">Account No.</label>
-                                            <input required type="number" name="account_no" ng-model="echeckData.account_no" id="" class="form-control form-control-number">
+                                            <input required type="tel" name="account_no" ng-model="echeckData.account_no" id="" class="form-control form-control-number">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="">Social Security Number</label>
-                                            <input required type="number" name="social_number" ng-model="echeckData.social_number" id="" class="form-control form-control-number">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="">Driver's License Number</label>
-                                            <input required type="number" name="drivers_license" ng-model="echeckData.drivers_license" id="" class="form-control form-control-number">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="">Driver's License State</label>
-                                            <input required type="number" name="drivers_state" ng-model="echeckData.drivers_state" id="" class="form-control form-control-number">
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="form-group">
                                     <label for="">Do you have signed authorization?</label>

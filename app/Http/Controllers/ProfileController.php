@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\View;
 use \App\User;
 use \App\Notification;
+use \App\UserBlocks;
+
 use Auth;
 use DB;
 use App\Http\Controllers\NotiFierLogsController;
@@ -116,55 +118,82 @@ class ProfileController extends Controller
         return $newLoc;
     }
 
+    public function filter_blocked_friend($arr){
+        $data = [];
+        if(!empty($arr)){
+            
+            foreach ($arr as $value) {
+                $is_blocked = UserBlocks::where('user_id', Auth::id())->where('user_blocked_id', $value->id)->count();
+                // $data[] = $is_blocked;
+
+                if(empty($is_blocked)){
+                    $data[] = $value;
+                }
+
+            }
+        }
+
+        return $data;
+    }
+
     public function getUserFriend(){
 
         $logged_in = Auth::user()->id;
         // $res_friend = DB::select('SELECT * FROM user_friendships WHERE user_id=:id', ['id' => $logged_in]); 
         $current_user_data = DB::table('users')->where('id', '=', $logged_in)->first();
         $top_friend = User::orderByRaw("RAND()")->where('gender', '!=', $current_user_data->gender)->get(); //orderByRaw("RAND()")->
+        $filter_top_friend = $this->filter_blocked_friend($top_friend);
 
-        $random_friend = User::orderByRaw("RAND()")->where('gender', '!=', $current_user_data->gender)->limit(8)->get();
+        $random_friend = User::orderByRaw("RAND()")->where('gender', '!=', $current_user_data->gender)->get();
+        $filter_random = $this->filter_blocked_friend($random_friend);
 
         // $res_friend = DB::table('users')->where('gender', '!=', $current_user_data[0]->gender)->limit(8)->get();
         // dd($res_friend);
         $friends = array();
         $inc = 0;
 
-        foreach ($top_friend as $data) {
-            $res_data = DB::table('users')->where('id', '=', $data->id)->get();
-            $percent = $this->getPercentage(array($current_user_data), $res_data);
 
-            if($percent >= 70){
-                if(count($friends) < 9){
-                    $friends[$inc] = $res_data[0];
+        if(!empty($filter_top_friend)){
+            foreach ($filter_top_friend as $r=>$data) {
+                $res_data = DB::table('users')->where('id', '=', $data->id)->get();
+                $percent = $this->getPercentage(array($current_user_data), $res_data);
 
-                    $friends[$inc]->location = $this->format_location($friends[$inc]->location);
+                if($percent >= 70){
+                    if(count($friends) < 9){
+                        $friends[$inc] = $res_data[0];
 
-                    $friends[$inc]->percent = $this->getPercentage(array($current_user_data), $res_data);
-                    $friends[$inc]->favorite = $this->getMatchFavorite(array($current_user_data), $res_data);
+                        $friends[$inc]->location = $this->format_location($friends[$inc]->location);
+
+                        $friends[$inc]->percent = $this->getPercentage(array($current_user_data), $res_data);
+                        $friends[$inc]->favorite = $this->getMatchFavorite(array($current_user_data), $res_data);
+                    }
                 }
+                $inc++;
+                
             }
-            $inc++;
-            
         }
 
         //get random user if top match is less 8 people
         if(count($friends) < 8){
             $friends = array();
             $inc = 0;
-            
-            foreach ($random_friend as $data) {
-                $res_data = DB::table('users')->where('id', '=', $data->id)->get();
 
-                $friends[$inc] = $res_data[0];
-                
-                $friends[$inc]->location = $this->format_location($friends[$inc]->location);
-                $friends[$inc]->is_online = \DB::table('user_online')->where('user_id', $data->id)->count();
+            foreach ($random_friend as $r=>$data) {
+                if(count($friends) < 9){
 
-                $friends[$inc]->percent = $this->getPercentage(array($current_user_data), $res_data);
-                $friends[$inc]->favorite = $this->getMatchFavorite(array($current_user_data), $res_data);
+                    $res_data = DB::table('users')->where('id', '=', $data->id)->get();
 
-                $inc++;
+                    $friends[$inc] = $res_data[0];
+                    
+                    $friends[$inc]->location = $this->format_location($friends[$inc]->location);
+                    $friends[$inc]->is_online = \DB::table('user_online')->where('user_id', $data->id)->count();
+    
+                    $friends[$inc]->percent = $this->getPercentage(array($current_user_data), $res_data);
+                    $friends[$inc]->favorite = $this->getMatchFavorite(array($current_user_data), $res_data);
+    
+                    $inc++;
+                }
+
                 
             }
         }
@@ -263,8 +292,9 @@ class ProfileController extends Controller
             $user_data = DB::table('users')->where('username', '=', $user->username)->get();
 
             $res_friend = DB::select('SELECT * FROM user_friendships WHERE user_id = ? AND friend_id = ?', [$current_user_id,$user_data[0]->id]);
+            $is_blocked = UserBlocks::where('user_id', Auth::id())->where('user_blocked_id', $user_data[0]->id)->count();
 
-            if(!$res_friend){
+            if(!$res_friend && empty($is_blocked)){
 
                 $user_data_age = $this->getUserAge($user_data[0]->birthdate);
                 $new_user[$i] = $user_data[0]; 

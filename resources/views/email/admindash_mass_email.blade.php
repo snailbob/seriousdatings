@@ -17,7 +17,7 @@
                 </strong>
             </p>
             <div style="margin: 0;font-size: 14px;line-height: 17px">
-                {!! $message !!}
+                {!! $email_content !!}
             </div>
         </div>
     </div>

@@ -8641,3 +8641,14 @@ nav.video-menu:hover>ul a li {
 }
 
 /*form-control text-center ng-pristine ng-untouched ng-valid ng-valid-hours ng-not-empty ng-valid-maxlength*/
+
+
+.login-btn-xscollapse{
+    position: absolute;
+    right: 15px;
+    top: 0px;	
+}
+
+#bs-example-navbar-collapse-3{
+	overflow: visible;
+}
