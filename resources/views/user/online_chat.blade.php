@@ -427,7 +427,7 @@
                                         <div class="direct-chat-msg" ng-class="{'right' : logged_user_info.id == chat.user_id}">
                                             <div class="direct-chat-info clearfix">
                                                 <span class="direct-chat-name" ng-class="{'pull-left' : logged_user_info.id != chat.user_id, 'pull-right' : logged_user_info.id == chat.user_id}">@{{chat.user_info.firstName}}</span>
-                                                <span class="direct-chat-timestamp" ng-class="{'pull-right' : logged_user_info.id != chat.user_id, 'pull-left' : logged_user_info.id == chat.user_id}" am-time-ago="chat.created_at | amParse:'YYYY-MM-DD HH:mm:ss'"></span>
+                                                <span class="direct-chat-timestamp" ng-class="{'pull-right' : logged_user_info.id != chat.user_id, 'pull-left' : logged_user_info.id == chat.user_id}" am-time-ago="chat.created_at | amUtc | amParse:'YYYY-MM-DD HH:mm:ss'"></span>
                                             </div>
                                             <!-- /.direct-chat-info -->
                                             <img class="direct-chat-img" ng-src="@{{chat.user_info.photo}}" alt="Message User Image">
