@@ -337,27 +337,52 @@ ngApp.controller('bodyController', [
                 }
             });
 
-            modalInstance.result.then(function (userAction) {
+            modalInstance.result.then(function (user) {
 
-                console.log(userAction, 'Are we compitable?');
-                if (userAction.id) {
-                    $scope.createSMS(userAction.id, userAction.firstName);
+                console.log(user, 'Are we compitable?');
+
+                if (user.userAction == 'flirt') {
+                    $scope.flirtEmojiModal(user, $scope.logged_user_info);
                 }
-                else if (userAction == 'add') {
-                    $scope.addUserAsFriend(res.user);
-                }
-                else if (userAction == 'flirt') {
-
-                }
-                else if (userAction == 'message') {
-
-
+                else if (user.userAction == 'message') {
+                    $scope.createSMS(user.id, user.firstName);
                 }
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
 
+
+        $scope.flirtEmojiModal = function (currUser, loggedUser) {
+            var _toItem = {
+				username: window.uri_3,
+				logged_user: loggedUser,
+				user: currUser
+            };
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'flirtEmojiModal.html',
+                controller: 'flirtEmojiModalCtrl',
+                // controllerAs: '$scope',
+                size: '', //'lg',
+                windowClass: 'compatible-modal',
+                // appendTo: parentElem,
+                resolve: {
+                    items: function () {
+                        return _toItem;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (userAction) {
+                console.log(userAction, 'flirtEmojiModal');
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
         $scope.viewNoti = function (noti) {
 
@@ -1095,6 +1120,8 @@ ngApp.controller('ModalRandomCompatibleCtrl', ['$scope', '$uibModalInstance', 'i
     console.log(items);
 
     $scope.userAction = function (userAction = 'close') {
+        $scope.items.user.userAction = userAction;
+
         if (userAction == 'add') {
             $scope.addUserAsFriend($scope.items.user);
         }

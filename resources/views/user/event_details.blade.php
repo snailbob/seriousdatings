@@ -143,18 +143,26 @@
                           </button>
 
                           <strong class="text-danger">
-                            Event Members                             
+                            Event Members <span class="text-muted">(@{{event.members.length}} member/s)</span>                         
                           </strong>
                         </p>
 
-                        <p class="text-muted">
-                            <span ng-if="event.members.length"> (@{{event.members.length}} member/s) <a  ng-click="event.showMembers = !event.showMembers"> View all members</a></span>
 
+                        <div class="row">
+                          <div class="col-xs-4 col-sm-3 col-md-2 text-center text-muted padding-top-15" ng-repeat="member in event.members | limitTo:6">
+                            <img ng-src="@{{member.photo}}" alt="" class="img-responsive img-thumbnail">
+                            <br> <span class="small">@{{member.firstName}} @{{member.lastName}}</span>
+                          </div>
+                        </div>
+
+                        
+                        <p class="text-muted text-center">
+                            <span ng-if="event.members.length > 6"><a  ng-click="event.showMembers = !event.showMembers"> View all members</a></span>
                             <span ng-if="!event.members.length">No members yet</span>
                         </p>
+
                       </div>
                     </div>
-
 
 
                   </div>

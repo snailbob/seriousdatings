@@ -214,6 +214,7 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
     Route::post('send_gift', 'GiftCardController@sendGiftCards');
+    Route::post('send_flirt_emoji', 'GiftCardController@sendEmoji');
 
     Route::post('save_advertisement', 'AdsSpaceController@store');
 

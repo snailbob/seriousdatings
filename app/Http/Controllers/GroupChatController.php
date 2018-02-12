@@ -53,6 +53,11 @@ class GroupChatController extends Controller
                     $gifts = explode(',', $value->message);
                     $value->gifts = $this->format_gift_cards($gifts);
                 }
+                //format_message for emoji
+                if($value->type == 'emoji'){
+                    $gifts = explode(',', $value->message);
+                    $value->emoji = $this->format_emoji($gifts);
+                }
 
                 $format_data[] = $value;
             }
@@ -60,6 +65,17 @@ class GroupChatController extends Controller
         return $format_data;
     }
 
+
+    public function format_emoji($cards){
+        $format_data = [];
+
+        if(!empty($cards)){
+            foreach($cards as $r=>$value){
+                $format_data[] = url().'/public/images/emoji/'.$value;
+            }
+        }
+        return $format_data;
+    }
     public function format_gift_cards($cards){
         $format_data = [];
 

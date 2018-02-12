@@ -27,26 +27,29 @@
 						</div>
 						<div class="col-md-12">
 							<div class="group_inner_box">
-								<center>
+									<div class="upload-profilex text-center" style="margin-top:30px;">
+										<h2 class="font-styling"><i class="fa fa-user-circle"></i>I'm {!!$userInfo->lastName !!}, {!!$userInfo->firstName !!} </h2>
+										<div class="image-border">
+											<img class="img-thumbnail" ng-src="{!! $userInfo->photo !!}">
+											<input type="hidden" id="chatterIDcheck" value="{!!$userInfo->id !!}">
+										</div>
+										<div>
+										
+											@if($userInfo->is_online)
+												<i class="fa fa-circle text-success" aria-hidden="true"></i> Online
+											@else
+												<i class="fa fa-circle text-muted" aria-hidden="true"></i> Offline
+											@endif
+										</div>
 
-								<div class="upload-profile" style="margin-top:30px; margin-left:0px;">
-									<h2 class="font-styling"><i class="fa fa-user-circle"></i>I'm {!!$userInfo->lastName !!}, {!!$userInfo->firstName !!} </h2>
-									<div class="image-border">
-										<img ng-src="{!! $userInfo->photo !!}">
-										<input type="hidden" id="chatterIDcheck" value="{!!$userInfo->id !!}">
+										<div class="padding">
+											<p class="lead">
+												<span class="label label-danger">
+													<i class="fa fa-map-marker" aria-hidden="true"></i> We are {{ $userInfo->distance }}mi. away
+												</span>
+											</p>
+										</div>
 									</div>
-									<div>
-									 Status (
-										@if($userInfo->is_online)
-											<i class="fa fa-circle text-success" aria-hidden="true"></i> Online
-										@else
-											<i class="fa fa-circle text-muted" aria-hidden="true"></i> Offline
-
-										@endif
-									 )
-									</div>
-								</div>
-								</center>
 								<div class="profile-img-styling" style="float:none;">
 
 									<div class="three-blocks" style="width:100%;float:left; margin-right:0px;">

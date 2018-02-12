@@ -441,6 +441,13 @@
                                                         </li>
                                                     </ul>
                                                 </div>
+                                                <div ng-if="chat.type == 'emoji'">
+                                                    <ul class="list-inline">
+                                                        <li ng-repeat="emoji in chat.emoji">
+                                                            <img ng-src="@{{emoji}}" title="emoji" class="img-thumbnail" alt="emoji" style="height: 90px; margin-bottom: 5px;">
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                             <!-- /.direct-chat-text -->
                                         </div>

@@ -200,4 +200,6 @@
 
     @include('user.shared.virtual_gift_modal')
 
+    @include('user.shared.flirt_emoji')
+
 
