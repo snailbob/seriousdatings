@@ -126,12 +126,6 @@ class UserManagementController extends Controller
             $user->role = $role;
         }
 
-        // foreach($users as $key=>$val){
-        //   foreach($val as $k=>$v){
-        //     echo $k." , ";
-        //   }
-        // }
-        
         if ($users === null) {
             $users = null;
         }
@@ -140,37 +134,6 @@ class UserManagementController extends Controller
 
     }
 
-
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
 
@@ -188,54 +151,5 @@ class UserManagementController extends Controller
         return \View::make('admin.user.view_user')->withUser($user);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        // $user = User::find($id);
-        // //dd($user);
-
-        // DB::table('friends')
-        // ->where('friend_one','=',$id)
-        // ->orWhere('friend_two','=',$id)
-        // ->delete();        
-        // DB::table('role_user')->where('user_id','=',$id)->delete();
-        // $username = DB::table('users')->where('id','=',$id)->pluck('username');
-        // DB::table('about_your_date')->where('user_id','=',$username)->delete();
-        // DB::table('compatability')->where('user_id','=',$id)->delete();
-        // DB::table('user_online')->where('user_id','=',$id)->delete();
-        // DB::table('subscription')->where('user_id','=',$id)->delete();
-        // $user->delete();
-        // // redirect
-        // \Session::flash('message', 'Successfully deleted!!');
-        // return \Redirect::to('admin');
-    }
 }
 

@@ -367,7 +367,9 @@ Route::group(array('before' => 'admin'), function () {
     Route::post('getTemplateById', 'EditableEmailController@getTemplateById');
     Route::post('updateTemplate', 'EditableEmailController@updateTemplate');
     Route::post('deleteTemplate', 'EditableEmailController@deleteTemplate');
+    Route::post('sendTemplateToUsers', 'EditableEmailController@sendTemplateToUsers');
 
+    Route::get('admin/send_template_emails/{id}', 'EditableEmailController@userListForTemplate');
     Route::get('admin/email_template_lists', 'EditableEmailController@showTemplateLists');
     Route::get('admin/add_email_template', 'EditableEmailController@showAddForm');
     /* END Editable Email Section */
@@ -508,7 +510,6 @@ Route::get('test_coords', function () {
     // $location = $details->results[0]->formatted_address;
     // return json_encode(count($details->results));
 });
-
 
 Route::get('adminlogin', 'AdminLoginController@getIndex');
 //Route::get('calendar', 'CalendarController');

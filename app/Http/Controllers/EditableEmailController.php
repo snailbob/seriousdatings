@@ -12,6 +12,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Template;
 use App\UserBlog;
+use App\User;
+use Mail;
 
 class EditableEmailController extends Controller
 {
@@ -23,12 +25,12 @@ class EditableEmailController extends Controller
     public function showTemplateLists()
     {
         $templates = Template::all();
-        foreach ($templates as $key => $value) 
-        {
+        $users = User::all();
+        foreach ($templates as $key => $value) {
             $templates[$key]['ellipse'] = self::setContentToEllipse($value->template_content);
         }
 
-        return \View::make('admin.email_template.template_lists')->with('templates', $templates );
+        return \View::make('admin.email_template.template_lists')->with(['templates' => $templates, 'users' => $users]);
     }
 
     public function saveTemplate(Request $request)
@@ -43,7 +45,7 @@ class EditableEmailController extends Controller
             'template_name' => $request->Name,
             'template_subject' => $request->Subject,
             'template_content' => $request->Content
-        ]);       
+        ]);
         return response()->json($template);
     }
 
@@ -55,7 +57,7 @@ class EditableEmailController extends Controller
 
     public function updateTemplate(Request $request)
     {
-        /* Validation Process Befor Updating */ 
+        /* Validation Process Befor Updating */
         $errors = $this->validate($request, [
             'Name' => 'required|max:255',
             'Subject' => 'required|max:255',
@@ -64,8 +66,7 @@ class EditableEmailController extends Controller
 
         $template = Template::find($request->id);
 
-        if(strtolower($template->template_name) != trim(strtolower($request->Name)))
-        {
+        if (strtolower($template->template_name) != trim(strtolower($request->Name))) {
             $this->validate($request, [
                 'Name' => 'unique:templates,template_name'
             ]);
@@ -73,13 +74,13 @@ class EditableEmailController extends Controller
         /* End of Validation Process Befor Updating */
 
         Template::where('id', $request->id)
-        ->update([
-            'template_name' => trim($request->Name),
-            'template_subject' => trim($request->Subject),
-            'template_content' => $request->Content
-        ]);
+            ->update([
+                'template_name' => trim($request->Name),
+                'template_subject' => trim($request->Subject),
+                'template_content' => $request->Content
+            ]);
 
-        /* returning the updated data */ 
+        /* returning the updated data */
         $template = Template::find($request->id);
         $template['ellipse'] = self::setContentToEllipse($template->template_content);
 
@@ -98,26 +99,37 @@ class EditableEmailController extends Controller
 
     public static function setContentToEllipse($text)
     {
-        $text = str_replace("\r\n",'', UserBlog::convertApostrophe(strip_tags($text)));
+        $text = str_replace("\r\n", '', UserBlog::convertApostrophe(strip_tags($text)));
         $intro_str = substr($text, 0, 150) . "...";
         return $intro_str;
-    }  
-
-    public function send(Request $request)
-    {
-        $title = $request->input('title');
-        $content = $request->input('content');
-
-        Mail::send('emails.send', ['title' => $title, 'content' => $content], function ($message)
-        {
-
-            $message->from('me@gmail.com', 'Christian Nwamba');
-
-            $message->to('chrisn@scotch.io');
-
-        });
-
-        return response()->json(['message' => 'Request completed']);
     }
+
+    public function userListForTemplate($id)
+    {
+        $users = User::all();
+        $template = Template::find($id);
+        return \View::make('admin.email_template.send_template')->with(['template' => $template, 'users' => $users]);
+    }
+
+    public function sendTemplateToUsers(Request $request)
+    {
+        $errors = $this->validate($request, [
+            'template' => 'required',
+            'users' => 'required'
+        ]);
+
+
+        $template = Template::where('template_name', $request->template)->first();
+
+        foreach ($request->users as $key => $value) {
+            $user = User::find($value);
+            Mail::send('email.email_blast_template', ['user' => $user, 'title' => $template['template_subject'], 'content' => $template['template_content']], function ($message) use ($user, $template) {
+                $message->to($user->email, 'ID')->subject($template['template_content']);
+            });
+        }
+
+        return response()->json(['message' => 'Template sent.']);
+    }
+
 
 }
