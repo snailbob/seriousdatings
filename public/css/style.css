@@ -8652,3 +8652,40 @@ nav.video-menu:hover>ul a li {
 #bs-example-navbar-collapse-3{
 	overflow: visible;
 }
+
+/*Toaster */
+
+.alert-minimalist {
+	background-color: rgb(241, 242, 240);
+	border-color: rgba(149, 149, 149, 0.3);
+	border-radius: 3px;
+	color: rgb(149, 149, 149);
+	padding: 10px;
+	z-index: 100;
+}
+.alert-minimalist > [data-notify="icon"] {
+	height: 50px;
+	margin-right: 12px;
+}
+.alert-minimalist > [data-notify="title"] {
+	color: rgb(51, 51, 51);
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.alert-minimalist > [data-notify="message"] {
+	font-size: 80%;
+}
+.alert{
+	margin-top: 5px;
+}
+.noti-clickme{
+
+	color: blue;
+	cursor: pointer;
+	text-decoration: underline;
+
+}
+.inside-notif{
+	margin-left: 5px;
+}

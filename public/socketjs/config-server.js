@@ -1,11 +1,22 @@
+function getUUID() {
+        return Math.round(Math.random() * 999999999) + 9995000;
+    }
 
-$(document).ready(function(){
-  
-        var wsUri = "ws://192.168.0.138:9000/demo/server.php";  
-        websocket = new WebSocket(wsUri); 
-        
-        websocket.onopen = function(ev) { // connection is open 
-	        console.log("config connected :",ev);
-	}
 
-});
+    
+    var SIGNALING_SERVER = 'http://localhost:8888/';
+    var channel = 'channel-name';
+    var sender = getUUID();
+    var username =  $("#myID").val();
+
+    io.connect(SIGNALING_SERVER).emit('new-channel', {
+        channel: channel,
+        sender: sender
+    });
+
+    var socket = io.connect(SIGNALING_SERVER + channel);
+        socket.on('connect', function () {
+                     socket.send(username + ' is online');
+    });
+
+   

@@ -329,6 +329,7 @@
                   <i class="fa fa-user-plus" ng-click="addFriend($index)" uib-tooltip="Add as Friend"></i>
                   <i class="fa fa-gift" uib-tooltip="Send Gift" ng-click="virtualGiftModal('', match)"></i>
                   <i class="fa fa-map" ng-click="gotoliveChat(match.id)" uib-tooltip="Are We Nearby"></i>
+                  <i class="fa fa-eye" ng-click="winkuser(match)" uib-tooltip="Wink"></i>
                   <i class="fa fa-comments" ng-click="createSMS(match.id,match.firstName)" uib-tooltip="Message"></i>
                 </div>
                 <h2>

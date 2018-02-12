@@ -62,5 +62,7 @@
 <input type="hidden" id="myName" value="{{ Auth::user()->lastName}},{{ Auth::user()->firstName}}">
 <input type="hidden" id="myPhoto" value="{{ Auth::user()->photo}}">
 <input type="hidden" id="myIP" value="{{ Request::ip() }}">
+<input type="hidden" id="myUserName" value="{{ Auth::user()->username }}">
 
 @endif
+@include('audiobase.audio')

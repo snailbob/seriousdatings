@@ -385,6 +385,13 @@ function sendUserVirtualGitFromAngular(dataID){
 
 
 }
+function sendUserWinkEmoji(dataID){
+        var paramData = SearhValueOFdata(dataID),
+                 myID = $("#user_id").val(),
+                 myFullName = $("#firstName").val();
+            window.parent.sendNotification(myID,myFullName,paramData.id,'wink');
+
+}
 
 function actionViVo(user_id,action){
     var UrLs = '/online_chat'
@@ -418,7 +425,7 @@ function  NextPreviousValue(id,element) {
         // '<li class="fa fa-microphone" title="Voice call" onclick="actionViVo(\''+resultObjectInfo.id+'\',\''+'voice'+'\')"></li>'+
         '<li class="fa fa-video-camera" title="Video chat" onclick="actionViVo(\''+resultObjectInfo.id+'\',\''+'video'+'\')"></li>'+
         '<li class="fa fa-gift" title="Virtual Gift" onclick="sendUserVirtualGitFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
-        '<li class="fa fa-eye" title="wink"></li>'+
+        '<li class="fa fa-eye" title="wink" onclick="sendUserWinkEmoji(\''+resultObjectInfo.id+'\')"></li>'+
         '<li class="fa fa-user-plus" id="userChangeState" title="Add User" onclick="addUserCallFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
         '<li class="fa fa-phone" title="Appointment" onclick="getAppointmentFromAngular(\''+resultObjectInfo.id+'\')"></li>'+
         '</ul>'+

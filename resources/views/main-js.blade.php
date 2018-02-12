@@ -57,7 +57,7 @@
   <script src="{{ url() }}/public/js/jquery.time.ago.js"></script>
   <script src="{{ url() }}/public/js/toaster/jquery.toast.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
-
+  
 
 
   <script src="{{ url() }}/public/plugins/angularjs/user.app.js"></script>
@@ -79,7 +79,7 @@
 
   <script src="{{ url() }}/public/js/user-script.js"></script>
 
-  
+    
   @if(request()->segment(1) == 'online_chat')
 
     <script src="https://cdn.webrtc-experiment.com/socket.io.js"> </script>
@@ -97,11 +97,16 @@
   @endif
 
 
+  @if(Auth::check())
 
-  {{--  <script src="{{ url() }}/public/socketjs/new-chatbox.js"></script>
-  <script src="{{ url() }}/public/socketjs/config-server.js"></script>
-  <script src="{{ url() }}/public/socketjs/server.js"></script>  --}}
-  <!-- <script src="{{ url() }}/public/socketjs/check-status.js"></script> -->
+    <script src="{{ url() }}/public/toaster-notifier/bootstrap-notify.min.js"></script>
+    <script src="{{ url() }}/public/socketjs/socketio.js"></script>
+    <script src="{{ url() }}/public/socketjs/config-server.js"></script>
+    <script src="{{ url() }}/public/socketjs/socketsend.js"></script>
+
+  @endif
+     
+
   <script>
     angular.module("seriousDatingApp").constant("CSRF_TOKEN", '{{ csrf_token() }}');
   </script>

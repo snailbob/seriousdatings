@@ -858,6 +858,12 @@ ngApp.controller('bodyController', [
             window.location.href = base_url + '/speeddating/' + id;
         }
 
+        $scope.winkuser = function(data){
+                sendNotification($scope.logged_user_info.id,
+                                $scope.logged_user_info.firstName,
+                                data.id,'wink');
+        }
+
         $scope.moreInfoModal = function () {
 
             var modalInstance = $uibModal.open({
