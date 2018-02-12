@@ -14,6 +14,7 @@ use DB;
 use Auth;
 
 use App\PaymentMethod;
+use App\AdsSpace;
 
 class PaymentMethodController extends Controller
 {
@@ -36,12 +37,13 @@ class PaymentMethodController extends Controller
 
     }
 
-    public function getCheckout($planID)
+    public function getCheckout($planID, Request $request)
     {
+        $req = $request->input();
 
         $plan = DB::table('dating_plan')->where('id', '=', $planID)->first();
 
-        //dd($plan);
+        // return response()->json($req);
 
 
         $cycle = 'Y';
@@ -66,7 +68,15 @@ class PaymentMethodController extends Controller
 
 
         $product_name = $plan->name;
+        $the_description = 'SeriousDatings Dating Plan -' . $product_name;
         $product_currency = 'USD';
+
+        //check if ads type
+        if($req['type'] == 'ads'){
+            $the_description = 'Payment for SeriousDatings Ads';
+            $cycle_amount = round(($req['price']), 2);
+        }
+
 
 
         $payer = PayPal::Payer();
@@ -78,12 +88,17 @@ class PaymentMethodController extends Controller
         // you can alternatively describe everything in the order separately;
         // Reference the PayPal PHP REST SDK for details.
 
+
+
         $transaction = PayPal::Transaction();
         $transaction->setAmount($amount);
-        $transaction->setDescription('SeriousDatings Dating Plan -' . $product_name);
+        $transaction->setDescription($the_description);
 
         $redirectUrls = PayPal::RedirectUrls();
-        $redirectUrls->setReturnUrl(url() . '/getdone/' . $planID); //action('PaymentMethodController@getDone'));
+
+        $done_url = (isset($req['id'])) ? url() . '/getdone/' . $planID.'?id='.$req['id'].'&type='.$req['type'].'&price='.$req['price'] : url() . '/getdone/' . $planID;
+
+        $redirectUrls->setReturnUrl($done_url); //action('PaymentMethodController@getDone'));
         $redirectUrls->setCancelUrl(url() . '/getcancel'); //action('PaymentMethodController@getCancel'));
 
         $payment = PayPal::Payment();
@@ -100,34 +115,55 @@ class PaymentMethodController extends Controller
 
     public function getDone(Request $request, $plan_id)
     {
+        $req = $request->input();
+        
         $id = $request->get('paymentId');
         $token = $request->get('token');
         $payer_id = $request->get('PayerID');
 
-        $payment = PayPal::getById($id, $this->_apiContext);
+        $message = 'You have succesfully paid the plan. You can now enjoy SeriousDatings services.';
 
-        $paymentExecution = PayPal::PaymentExecution();
+        if(!isset($req['type'])){
+            // $payment = PayPal::getById($id, $this->_apiContext);
 
-        $paymentExecution->setPayerId($payer_id);
-        $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
+            // $paymentExecution = PayPal::PaymentExecution();
+    
+            // $paymentExecution->setPayerId($payer_id);
+            // $executePayment = $payment->execute($paymentExecution, $this->_apiContext);
+    
+            // $resp = json_decode($executePayment, true, 512);
+    
+            // PaymentMethod::create([
+            //     'user_id' => Auth::user()->id,
+            //     'plan_id' => $plan_id,
+            //     'gateway' => 'paypal',
+            //     'details' => serialize($request->all()),
+            //     'payment_details' => serialize($resp)
+            // ]);
 
-        $resp = json_decode($executePayment, true, 512);
 
-        PaymentMethod::create([
-            'user_id' => Auth::user()->id,
-            'plan_id' => $plan_id,
-            'gateway' => 'paypal',
-            'details' => serialize($request->all()),
-            'payment_details' => serialize($resp)
-        ]);
-        // dd($executePayment);
-
-        // return response()->json($executePayment);
-
-        // Clear the shopping cart, write to database, send notifications, etc.
+            // dd($executePayment);
+    
+            // return response()->json($executePayment);
+    
+            // Clear the shopping cart, write to database, send notifications, etc.
+    
+        }
+        else{
+            if($req['type'] == 'ads'){
+                $message = 'You have succesfully paid the ads and we placed it to the site.';
+                AdsSpace::where('id', $req['id'])
+                ->update(['paid' => 1]);
+            }
+            else if($req['type'] == 'ads'){
+                $message = 'You have succesfully paid the ads and we placed it to the site.';
+                AdsSpace::where('id', $req['id'])
+                ->update(['paid' => 1]);
+            }
+        }
 
         // Thank the user for the purchase
-        return view('user.checkout_done');
+        return view('user.checkout_done')->withMessage($message);
     }
 
     public function getCancel()
@@ -221,7 +257,7 @@ class PaymentMethodController extends Controller
             # Monetary amounts are specified in the smallest unit of the applicable currency.
             # This amount is in cents. It's also hard-coded for $1.00, which isn't very useful.
             "amount_money" => array(
-                "amount" => $price,
+                "amount" => $price  * 100,
                 "currency" => "USD"
             ),
 
@@ -250,6 +286,10 @@ class PaymentMethodController extends Controller
                 ]);
             }
 
+            if ($type == 'ads') {
+                AdsSpace::where('id', $id)
+                    ->update(['paid' => 1]);
+            }
 
             $arr = [
                 'result' => 'success',

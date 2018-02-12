@@ -1318,7 +1318,7 @@ ngApp.controller('ModalSearchByNameCtrl', ['$scope', '$uibModalInstance', 'items
     };
 
     $scope.viewProfile = function (u) {
-        var link = base_url + '/search/profile/' + u.id;
+        var link = base_url + '/user/profile/' + u.username;
         console.log(link);
         return link;
     }
@@ -3198,12 +3198,29 @@ ngApp.controller('advertiseController', ['$scope', '$filter', 'myHttpService', '
 
             myHttpService.post('save_advertisement', $scope.user)
                 .then(function (res) {
-                    console.log(res);
+                    var _price = $('.ads_price').find('option:selected').data('price');
+
+                    var _data = {
+                        type: 'ads',
+                        id: res.data.id,
+                        price: _price
+                    };
+                    console.log(res, _data);
+
                     $scope.user.submitting = false;
                     $scope.showToast('Your advertisement successfully submitted.');
-                    $timeout(function () {
-                        window.location.href = base_url + '/profile';
-                    }, 1500);
+
+                    if(res.data.paid == 1){
+                        $timeout(function () {
+                            window.location.href = base_url + '/profile';
+                        }, 1000);
+                    }
+                    else{
+                        $timeout(function () {
+                            window.location.href = base_url + '/payment_gateway?' + $.param(_data);
+                        }, 1000);
+                    }
+
                 }, function (err) {
                     console.log(err);
                     $scope.showToast('Something went wrong. Please try again.', 'danger');

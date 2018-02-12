@@ -23,7 +23,7 @@
                     </div>
                 </uib-accordion-heading>
 
-                <div class="row">
+                <div class="row" style="height: 400px; overflow: auto;">
                     <div class="col-xs-6 col-sm-3 text-center" ng-repeat="card in cards" ng-click="selectCard(card)">
                         <div class="form-group">
                             <img ng-src="@{{base_url + '/public/images/emoji/'+ card.file_name}}" title="@{{card.file_name}}" class="img-thumbnail" alt="gift card" style="height: 90px" />

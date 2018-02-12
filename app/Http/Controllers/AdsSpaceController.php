@@ -24,7 +24,7 @@ class AdsSpaceController extends Controller
     }
 
     public function active_ads(){
-        $ads = AdsSpace::all();
+        $ads = AdsSpace::where('paid', 1)->get();
 
         $arr = array();
 
@@ -74,12 +74,18 @@ class AdsSpaceController extends Controller
      */
     public function store(Request $request)
     {
-        $user_id = Auth::user()->id;
+        $user = Auth::user();
+        $user_id = $user->id;
         $data = $request->input();
         $data['user_id'] = $user_id;
+
+        $data['paid'] = 1;
+        if($user->hasRole('User') || $user->hasRole('Verified')){
+            $data['paid'] = 0;
+        }
         
-        AdsSpace::create($data);
-        return response()->json($data);
+        $ads = AdsSpace::create($data);
+        return response()->json($ads);
     }
 
     /**

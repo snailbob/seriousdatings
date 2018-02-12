@@ -26,7 +26,7 @@
 
                 <div class="col-md-6 col-md-offset-3">
                     <div class="alert alert-success">
-                        <i class="fa fa-check-circle" aria-hidden="true"></i> You have succesfully paid the plan. You can now enjoy SeriousDatings services.
+                        <i class="fa fa-check-circle" aria-hidden="true"></i> {{$message}}
                     </div>
                 </div>
             </div>

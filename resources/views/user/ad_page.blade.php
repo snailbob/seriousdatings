@@ -83,10 +83,10 @@
                         </div>
                         <div class="form-group">
                             <label for="">Select Days</label>
-                            <select name="days" id="" class="form-control" ng-model="user.days" required>
+                            <select name="days" id="" class="form-control ads_price" ng-model="user.days" required>
                                 <option value="">--Select--</option>
                                 @foreach($pricing as $price)
-                                    <option value="{{$price->id}}">{{$price->days}} days for ${{$price->price}}</option>
+                                    <option value="{{$price->id}}" data-price="{{$price->price}}">{{$price->days}} days for ${{$price->price}}</option>
                                 @endforeach
                             </select>
                         </div>
