@@ -174,33 +174,22 @@ $(document).ready(function () {
             $('#active_user_email_tbl').hide();
             $('#inactive_user_email_tbl').hide();
 
-            $('#inactive_user_email_tbl').dataTable().fnDestroy();
-            $("#all_user_email_tbl").DataTable();
-            $("#active_user_email_tbl").dataTable().fnDestroy()
         }else if(tbl == 'active_user_email_tbl'){
             $('#all_user_email_tbl').hide();
             $('#active_user_email_tbl').show();
             $('#inactive_user_email_tbl').hide();
 
-            $('#active_user_email_tbl').DataTable();
-            $("#all_user_email_tbl").dataTable().fnDestroy()
-            $("#inactive_user_email_tbl").dataTable().fnDestroy()
         }else{
             $('#all_user_email_tbl').hide();
             $('#active_user_email_tbl').hide();
             $('#inactive_user_email_tbl').show();
 
-            $('#inactive_user_email_tbl').DataTable();
-            $("#all_user_email_tbl").dataTable().fnDestroy()
-            $("#active_user_email_tbl").dataTable().fnDestroy()
         }
 
     });
 
     /* END POST SEND EMAIL */
 
-
-    $('#all_user_email_tbl').DataTable();
 
 
     toastr.options = {
