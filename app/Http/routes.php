@@ -457,7 +457,7 @@ Route::group(array('before' => 'admin'), function () {
     Route::resource('admin/events', 'EventManagementController');
     Route::resource('admin/templates', 'TemplateController');
     Route::resource('admin/gift_cards', 'GiftCardController');
-    // Route::get('admin/users/cat/{cat}', 'UserManagementController@showUserbyCat');
+    Route::get('admin/users/non_users', 'UserManagementController@non_member_user');
     Route::get('admin/users/cat/{cat}', 'UserManagementController@userbyCat');
     Route::resource('admin/users', 'UserManagementController');
     Route::get('admin/demographic', 'UserManagementController@demographic');
@@ -482,6 +482,7 @@ Route::group(array('before' => 'admin'), function () {
 Route::post('blockUser', 'AdminUserListController@blockUser');
 Route::post('pauseUser', 'AdminUserListController@pauseUser');
 Route::post('deleteUser', 'AdminUserListController@deleteUser');
+Route::post('setToNonUser', 'UserManagementController@setToNonUser');
 /* End of Manage User Actions */
 
 

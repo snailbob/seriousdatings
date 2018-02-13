@@ -166,7 +166,7 @@
                         <li><a href="{{ url('admin/users/cat/notverified') }}">
                                 <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Inactive Users Management</span></a>
                         </li>
-                        <li><a href="{{ url('admin/users/cat/men') }}">
+                        <li><a href="{{ url('admin/users/non_users') }}">
                                 <i class="fa fa-circle-o"></i> <span>Non-User Management</span></a>
                         </li>
                     </ul>
@@ -351,7 +351,7 @@
                         <i class="fa fa-newspaper-o"></i>
                         <span>Blog Management</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-left pull--*+6right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">

@@ -77,6 +77,34 @@ $(document).ready(function()
 		});	
 	}
 
+	$(document).on('click', '.non_memberBtn', function()
+	{
+		var data = {
+			email: $(this).closest('tr').find('.user_email_cell').text()
+		}
+
+		console.log(data);
+		$.ajax({
+			type: "POST",
+			url: base_url + "/setToNonUser",
+			data: data,
+			cache: false,
+			success: function(value)
+			{
+				toastr.info('You\'ve just set one member to non-user.' );
+				setTimeout(
+					function() 
+					{
+						window.location.replace("http://localhost/seriousdatings/admin/users/non_users");
+					}, 3000);
+			},
+			error: function(value)
+			{
+				console.log(value);
+			}
+		})
+	});
+
 
 	toastr.options = {
 		"closeButton": false,

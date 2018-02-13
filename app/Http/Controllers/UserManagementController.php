@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use DB;
 use Auth;
+use App\RoleUser;
 
 use App\Http\Controllers\UsersController;
 
@@ -91,6 +92,39 @@ class UserManagementController extends Controller
         return \View::make('admin.user.manage_user')->withUsers($users);
     }
 
+    public function non_member_user()
+    {   
+        $non_users = RoleUser::where('role_id', 5)->get();
+        $data = array();
+        foreach ($non_users as $non_user) {
+            $data[] = $non_user->user_id;
+        }
+
+        $users = User::find($data);
+        foreach ($users as $user) {
+            $user->role = 5;
+        }
+        return \View::make('admin.user.manage_user')->withUsers($users);
+    }
+
+    public function setToNonUser(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        $count = RoleUser::where('user_id', $user->id)->count();
+        if($count)
+        {
+            RoleUser::where('user_id', $user->id)
+            ->update(['role_id' => 5]);
+        }else
+        {
+            RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => 5
+            ]);            
+        }
+        return "Success";
+    }
+
     public function userbyCat($cat){
 
         switch($cat){
@@ -120,7 +154,6 @@ class UserManagementController extends Controller
         $users = DB::select($sql, [$val]);
 
         foreach ($users as $user) {
-
             $user_id = $user -> id;
             $role = DB::table('role_user')->where('user_id','=',$user_id)->pluck('role_id');
             $user->role = $role;
