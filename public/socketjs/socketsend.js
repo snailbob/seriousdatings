@@ -43,6 +43,9 @@ var getMyFullName = function (){
 	return $("#myName").val();
 }
 
+var scopeEmoji = angular.element(document.getElementById('emojiPlainCOde')).scope();
+
+
 var fireNotification = function(message){
 	   var 		sendID = message.sender,
 		  messeageNoti = message.message,
@@ -56,6 +59,10 @@ var fireNotification = function(message){
 	    	texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+' wink at you!<br/> &nbsp;<span  class="noti-clickme ">reply with</span></div>.';
 	        typeheading = '<img src="'+base_url+'/public/images/GIF-NOTI/gif-wink.gif" style="width:60px;height:60px;" class="img-circle pull-left">';
 	        break;
+	     case 'hear':
+	    	texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+' wink at you!<br/> &nbsp;<span  class="noti-clickme ">reply with</span></div>.';
+	        typeheading = '<img src="'+base_url+'/public/images/GIF-NOTI/gif-wink.gif" style="width:60px;height:60px;" class="img-circle pull-left">';
+	        break;   
 	    default:
 	       return null;
 	}

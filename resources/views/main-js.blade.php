@@ -105,7 +105,10 @@
     <script src="{{ url() }}/public/socketjs/socketsend.js"></script>
 
   @endif
-     
+    <script src="{{ url() }}/public/reply-emojis/emojisController.js"></script>   
+
+
+
 
   <script>
     angular.module("seriousDatingApp").constant("CSRF_TOKEN", '{{ csrf_token() }}');
