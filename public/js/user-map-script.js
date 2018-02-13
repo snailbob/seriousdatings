@@ -389,7 +389,7 @@ function sendUserWinkEmoji(dataID){
         var paramData = SearhValueOFdata(dataID),
                  myID = $("#user_id").val(),
                  myFullName = $("#firstName").val();
-            window.parent.sendNotification(myID,myFullName,paramData.id,'wink');
+            window.parent.sendNotification(myID,myFullName,paramData.id,'wink',{});
 
 }
 
