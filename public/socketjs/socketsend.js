@@ -19,6 +19,7 @@ socket.on('message', function (message) {
 
     
 		if (getMyId() == message.message.to) {
+			console.log(message.message);
 				fireNotification(message.message);
 
 		}
@@ -26,15 +27,17 @@ socket.on('message', function (message) {
 
 });
 
-var sendNotification = function (sender,message,to,type){
+var sendNotification = function (sender,message,to,type,files = {}){
   socket.send({
              sender: username,
              message: message,
              to: to,
              type: type,
+             files:files, 
         });
 
 }
+
 
 var getMyId = function(){
 	return username;
@@ -43,25 +46,37 @@ var getMyFullName = function (){
 	return $("#myName").val();
 }
 
-var scopeEmoji = angular.element(document.getElementById('emojiPlainCOde')).scope();
+var actionsType = function(type,sendeIDs){
+				switch(type){
+					case 'wink':
+					 	emojisReply(sendeIDs);
+					 break;
+				    default:
+	       			return null;
 
+				}
+				
+}
 
 var fireNotification = function(message){
-	   var 		sendID = message.sender,
+	var 		sendID = message.sender,
 		  messeageNoti = message.message,
-		      typeNoti = message.type;
+		      typeNoti = message.type,
+		      src = message.files.src,
+		      descNoti = message.files.desc;
 
 		var texttype = "",typeheading="";
-
+		console.log(message);
 
 	switch(typeNoti) {
 	    case 'wink':
-	    	texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+' wink at you!<br/> &nbsp;<span  class="noti-clickme ">reply with</span></div>.';
+	    	texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+' wink at you!<br/>'+
+	    			   '&nbsp;<span  class="noti-clickme" onclick="actionsType(\''+'wink'+'\',\''+sendID+'\')">reply with</span></div>.';
 	        typeheading = '<img src="'+base_url+'/public/images/GIF-NOTI/gif-wink.gif" style="width:60px;height:60px;" class="img-circle pull-left">';
 	        break;
-	     case 'hear':
-	    	texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+' wink at you!<br/> &nbsp;<span  class="noti-clickme ">reply with</span></div>.';
-	        typeheading = '<img src="'+base_url+'/public/images/GIF-NOTI/gif-wink.gif" style="width:60px;height:60px;" class="img-circle pull-left">';
+	     case 'replyemoji':
+	    	texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+' '+descNoti+' at you!<br/> &nbsp;<span  class="noti-clickme ">reply with</span></div>.';
+	        typeheading = '<img src="'+base_url+'/public/images/GIF-NOTI/'+src+'" style="width:60px;height:60px;" class="img-circle pull-left">';
 	        break;   
 	    default:
 	       return null;

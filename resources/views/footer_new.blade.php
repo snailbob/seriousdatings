@@ -66,4 +66,3 @@
 
 @endif
 @include('audiobase.audio')
-@include('audiobase.emojis')

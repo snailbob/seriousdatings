@@ -103,14 +103,16 @@
     <script src="{{ url() }}/public/socketjs/socketio.js"></script>
     <script src="{{ url() }}/public/socketjs/config-server.js"></script>
     <script src="{{ url() }}/public/socketjs/socketsend.js"></script>
+    <script src="{{ url() }}/public/reply-emojis/emojis.js"></script>
 
   @endif
-    <script src="{{ url() }}/public/reply-emojis/emojisController.js"></script>   
+     
 
 
 
 
   <script>
+    
     angular.module("seriousDatingApp").constant("CSRF_TOKEN", '{{ csrf_token() }}');
   </script>
  {{--comment for updated master v1.1.1.1--}}
