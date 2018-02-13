@@ -274,7 +274,7 @@ class UsersController extends Controller {
     }
 
      
-    public function distance($lat1, $lon1, $lat2, $lon2, $unit = 'K') {
+    public function distance($lat1, $lon1, $lat2, $lon2, $unit = 'M') {
 
         $theta = $lon1 - $lon2;
         $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
@@ -580,6 +580,12 @@ class UsersController extends Controller {
         $user['my_movies'] = $this->my_movies($user->id);
         $user['my_places'] = $this->my_places($user->id);
         $user['location'] = $this->format_location($user->location);
+
+        $user['distance'] = 'N/A';
+        if(!empty($user_id)){
+            $user_info = Auth::user();
+            $user['distance'] = $this->distance($user_info->latitude,$user_info->longitude,$user['latitude'],$user['longitude']);
+        }
 
         return $user;
     }

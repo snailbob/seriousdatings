@@ -148,7 +148,7 @@
                                         Location: <span class="text-muted">@{{ user.location }}</span>
                                     </p>
                                     <p>
-                                        <span class="text-warning small"><i class="fa fa-map-marker" aria-hidden="true"></i> You are @{{ user.distance }}km away</span>
+                                        <span class="text-warning small"><i class="fa fa-map-marker" aria-hidden="true"></i> You are @{{ user.distance }}mi. away</span>
                                     </p>
 
                                     <p class="padding-top-15">

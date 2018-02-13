@@ -91,6 +91,9 @@ ngApp.controller('paymentController', ['$scope', '$filter', 'myHttpService', '$t
         if($scope.params.type == 'plan'){
             window.location.href = $scope.base_url+'/payment_checkout/'+$scope.params.id;
         }
+        if($scope.params.type == 'ads'){
+            window.location.href = $scope.base_url+'/payment_checkout/?'+$para.id;
+        }
     }
     
 }]);

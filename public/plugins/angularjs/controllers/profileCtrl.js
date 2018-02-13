@@ -361,3 +361,107 @@ ngApp.controller('virtualGiftModalCtrl', ['$scope', '$uibModalInstance', 'items'
     }
     init();
 }]);
+
+
+ngApp.controller('flirtEmojiModalCtrl', ['$scope', '$uibModalInstance', 'items', 'myHttpService', '$ngConfirm', function ($scope, $uibModalInstance, items, myHttpService, $ngConfirm) {
+    $scope.items = items;
+	$scope.user = items.user;
+	$scope.logged_user = items.logged_user;
+	
+    $scope.cards = [];
+    $scope.isLoading = false;
+    $scope.selectedCount = 0;
+    $scope.selectedCard = [];
+    $scope.totalPrice = 0;
+	$scope.base_url = window.base_url;
+	
+	$scope.arrayGenerator = function(num){
+		var length = (num) ? num : 38;
+		var arr = [];
+		for(var i = 1; i <= length; i ++){
+			var _d = {
+				file_name: 'icons_flirt ('+i+')',
+				selected: false
+			};
+			arr.push(_d);
+		}
+		return arr;
+	}
+
+
+
+    console.log(items, 'items');
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+    $scope.submit = function () {
+		var _data = {
+			cards: $scope.selectedCard,
+			to_id: $scope.user.id,
+			from_id: $scope.logged_user.id,
+			price: '0'
+		}
+
+		myHttpService.post('send_flirt_emoji', _data).then(function(res){
+			console.log(res.data, '');
+			$scope.showToast('Flirt Emoji sent successfully.');
+			$uibModalInstance.close($scope.selectedCard);
+
+		});
+
+    };
+
+    $scope.selectCard = function (u) {
+
+        if (u.selected) {
+            u.selected = false;
+			$scope.selectedCount--;
+
+			$scope.totalPrice = $scope.totalPrice - u.price;
+
+			// $scope.selectedCard = $scope.selectedCard.filter(function(a){
+			// 	return a !== u.id;
+			// });
+
+            return false;
+        }
+        else if (!u.selected) {
+
+        }
+
+        if (!u.selected) {
+			u.selected = true;
+			$scope.selectedCount++;
+			// if(!$scope.selectedCard.includes(u.id)) {
+			// 	$scope.totalPrice = $scope.totalPrice + u.price;
+			// 	$scope.selectedCard.push(u.id);     
+            // }
+		}
+
+		$scope.selectedCard = [];
+
+		$scope.cards.forEach(function(a){
+			// console.log(a);
+			if(a.selected){
+				$scope.selectedCard.push(a.file_name);
+			}
+		});
+		
+
+
+        console.log($scope.totalPrice, $scope.selectedCard);
+
+    }
+
+    $scope.getData = function () {
+		$scope.cards = $scope.arrayGenerator();
+		console.log($scope.cards);
+    }
+
+    var init = function () {
+        $scope.getData();
+    }
+    init();
+}]);

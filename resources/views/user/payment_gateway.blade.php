@@ -116,7 +116,7 @@
                     </div>            
                     <!-- CREDIT CARD FORM ENDS HERE -->
                     
-                    
+                    @if(isset($_GET['type']) && $_GET['type'] == 'plan')
                     <hr>
                         <div class="text-center">or</div>
                     <hr>
@@ -287,6 +287,7 @@
 
                         </div>
                     </div>
+                    @endif
 
                     {{--  <hr>
                         <div class="text-center">or</div>

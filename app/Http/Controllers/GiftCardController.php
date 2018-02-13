@@ -254,4 +254,26 @@ class GiftCardController extends Controller
         return $room->id;
     }
 
+    public function sendEmoji(Request $request){
+        $cards = $request->input('cards');
+        $from_id = (int) $request->input('from_id');
+        $to_id = (int) $request->input('to_id');
+        $price = $request->input('price');
+
+        $private_id = $from_id * $to_id;
+        $room_id = $this->get_private_chat_id($private_id, $from_id, $to_id);
+
+        $newChat = [
+            'group_id'=>$room_id,
+            'user_id'=>$from_id,
+            'message'=>$cards,
+            'type'=>'emoji',
+            'price'=>$price,
+        ];
+
+        $data = GroupChatMessages::create($newChat);
+
+        return response()->json($data);
+    }
+
 }

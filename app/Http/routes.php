@@ -159,7 +159,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('browse', 'SearchController@browseUsers');
     Route::get('payment_method', 'PaymentMethodController@index');
     Route::get('payment_checkout/{plan_id}', 'PaymentMethodController@getCheckout');
-    Route::get('getdone/{plan_id}', 'PaymentMe\thodController@getDone');
+    Route::get('getdone/{plan_id}', 'PaymentMethodController@getDone');
     Route::get('getcancel', 'PaymentMethodController@getCancel');
 
     Route::get('profile_settings', 'UsersController@profileSettings');
@@ -214,6 +214,7 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::get('get_gift_cards', 'GiftCardController@getGiftCards');
     Route::post('send_gift', 'GiftCardController@sendGiftCards');
+    Route::post('send_flirt_emoji', 'GiftCardController@sendEmoji');
 
     Route::post('save_advertisement', 'AdsSpaceController@store');
 
