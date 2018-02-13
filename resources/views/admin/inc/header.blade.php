@@ -172,7 +172,7 @@
                     </ul>
                 </li>
 
-                <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+                <li class="treeview {{(request()->segment(2) == 'user_contents') ? 'active menu-open' : ''}}">
                     <a href="#">
                         <i class="fa fa-address-book"></i>
                         <small><span>User Contents Management</span></small>
@@ -202,7 +202,7 @@
                 <li><a href="{{ url('admin/premium') }}"><i class="fa fa-trophy"></i>
                         <span>Premium Features</span></a></li>
 
-                <li class="treeview {{(request()->segment(2) == 'videos') ? 'active menu-open' : ''}}">
+                <li class="treeview {{(request()->segment(2) == 'ads_management') ? 'active menu-open' : ''}}">
                     <a href="#">
                         <i class="fa fa-buysellads"></i>
                         <span>Ads Management</span>
@@ -316,7 +316,7 @@
                                 Copyright Attribute </a></li>
                     </ul>
                 </li>
-                <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+                <li class="treeview {{(request()->segment(2) == 'email_template_lists' || request()->segment(2) == 'add_email_template') ? 'active menu-open' : ''}}">
                     <a href="#">
                         <i class="fa fa-envelope"></i>
                         <span>Email Templates</span>

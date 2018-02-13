@@ -132,7 +132,7 @@
                     @endif
                     <div class="padding-top-15">
                       <div class="text-centerx">
-                        <p>
+                        <p style="margin-bottom: 25px;">
                           <button class="btn btn-sm btn-success pull-right" ng-click="joinEvent({{$events['event']->max_members}})">
                             <span ng-if="event.joined" uib-tooltip="Leave Event">
                               <i class="fa fa-fw fa-check" aria-hidden="true"></i> Member
