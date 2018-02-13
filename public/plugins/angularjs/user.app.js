@@ -184,7 +184,10 @@ ngApp.controller('bodyController', [
                 myHttpService.shareData = res.data;
                 $scope.unread_noti_count = res.data.unread_noti_count;
                 $scope.logged_user_info = res.data.logged_user_info;
-                $scope.logged_user_info.birthdateObj = new Date(res.data.logged_user_info.birthdate);
+
+                if(res.data.logged_user_info){
+                    $scope.logged_user_info.birthdateObj = new Date(res.data.logged_user_info.birthdate);
+                }
 
                 console.log(res.data, 'body_contents');
                 //check if subscription valid or expired
