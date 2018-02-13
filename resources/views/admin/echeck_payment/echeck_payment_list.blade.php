@@ -24,7 +24,9 @@
                             <thead>
                             <tr>
                                 <th>Username</th>
-                                <th>Email</th>
+                                <th>Amount</th>
+                                <th>Account number</th>
+                                <th>Routing number</th>
                                 <th>Dating Plan</th>
                                 <th>Status</th>
                                 <th>Image</th>
@@ -32,14 +34,15 @@
                             </tr>
                             </thead>
                             <tbody>
-
                             @foreach($echecks as $echeck)
                                 <tr>
                                     <td>
                                         <img src="{{$echeck['user']['photo']}}" class="img-circle " width="45" alt="">
                                         {{ ' '. $echeck['user']['username'] }}
                                     </td>
-                                    <td class="">{{ $echeck['user']['email'] }}</td>
+                                    <td class="">{{ $echeck['details']['price'] }}</td>
+                                    <td class="">{{ $echeck['details']['account_no'] }}</td>
+                                    <td class="">{{ $echeck['details']['routing_number'] }}</td>
                                     <td class="">{{ $echeck['dating_plan']['name'] }}</td>
                                     <td class="">
                                         @if(is_numeric($echeck['status']))
@@ -84,7 +87,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-
                             </tbody>
                         </table>
 

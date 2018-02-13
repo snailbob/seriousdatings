@@ -30,7 +30,7 @@
                     <i class="fa fa-users fa-2x" aria-hidden="true"></i> <br>
                     No user blocks yet.
                 </p>
-                <div class="col-md-3 col-sm-4 browse-profile-bgx" ng-repeat="user in userblocks">
+                <div class="col-md-3 col-sm-4 browse-profile-bgx" ng-repeat="user in userblocks | unique: 'user_blocked_id'">
                     <div class="profile-images-bgx">
                         <a ng-href="@{{ base_url + '/search/profile/' + user.user_blocked.id}}" target="_blank">
                             <img ng-src="@{{ user.user_blocked.photo }}" class="img-thumbnail img-full" alt="">

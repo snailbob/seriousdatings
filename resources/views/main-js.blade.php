@@ -51,6 +51,7 @@
   <script src="{{ url() }}/public/plugins/angularjs/plugins/ngToast/ngToast.js"></script>
   <script src="{{ url() }}/public/plugins/angularjs/plugins/ng-img-crop/unminified/ng-img-crop.js"></script>
   <script src="{{ url() }}/public/plugins/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+  <script src="{{ url() }}/public/plugins/angularjs/plugins/ui-cropper/ui-cropper.js"></script>
 
   <script src="{{ url() }}/public/plugins/angular-confirm/js/angular-confirm.js"></script>
   <script src="{{ url() }}/public/js/jquery-confirm/dist/jquery-confirm.min.js"></script>
