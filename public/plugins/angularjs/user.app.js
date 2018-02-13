@@ -192,7 +192,7 @@ ngApp.controller('bodyController', [
                 console.log(res.data, 'body_contents');
                 //check if subscription valid or expired
                 if ($scope.subscription_validity) {
-                    if ($scope.subscription_validity.is_expired && uri_1 != 'datingPlan') {
+                    if ($scope.subscription_validity.is_expired && (uri_1 != 'datingPlan' || uri_1 != 'payment_checkout')) {
                         $scope.SubscriptionInfo('');
                     }
                 }

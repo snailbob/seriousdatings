@@ -72,9 +72,11 @@ class PaymentMethodController extends Controller
         $product_currency = 'USD';
 
         //check if ads type
-        if($req['type'] == 'ads'){
-            $the_description = 'Payment for SeriousDatings Ads';
-            $cycle_amount = round(($req['price']), 2);
+        if(isset($req['type'])){
+            if($req['type'] == 'ads'){
+                $the_description = 'Payment for SeriousDatings Ads';
+                $cycle_amount = round(($req['price']), 2);
+            }
         }
 
 
