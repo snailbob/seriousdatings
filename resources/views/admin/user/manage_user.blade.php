@@ -52,6 +52,11 @@
                         <li>
                           <a href='{{ url() }}/admin/users/{!! $user->id !!}'> <i class="fa fa-eye"></i> View</a>
                         </li>
+                        @if($user->role != 5)
+                        <li class="non_memberBtn">
+                          <a href='#'> <i class="fa fa-user-secret"></i> Set to non-user</a>
+                        </li>
+                        @endif
                         @if($user->username != "admin")
                         <li class="pauseBtn">
                           <a href='#' class="pauseTxt"> 
