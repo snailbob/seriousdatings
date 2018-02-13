@@ -75,7 +75,7 @@ var fireNotification = function(message){
 	        typeheading = '<img src="'+base_url+'/public/images/GIF-NOTI/gif-wink.gif" style="width:60px;height:60px;" class="img-circle pull-left">';
 	        break;
 	     case 'replyemoji':
-	    	texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+' '+descNoti+' at you!<br/> &nbsp;<span  class="noti-clickme ">reply with</span></div>.';
+	    	texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+' '+descNoti+' at you!<br/> &nbsp;<span  class="noti-clickme " onclick="actionsType(\''+'wink'+'\',\''+sendID+'\')">reply with</span></div>.';
 	        typeheading = '<img src="'+base_url+'/public/images/GIF-NOTI/'+src+'" style="width:60px;height:60px;" class="img-circle pull-left">';
 	        break;   
 	    default:
