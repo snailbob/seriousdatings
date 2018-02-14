@@ -73,8 +73,8 @@ var broadcast = function(config) {
             },
             onRemoteStream: function(stream) {
                 if (!stream) return;
-
-                audio[moz ? 'mozSrcObject' : 'src'] = moz ? stream : webkitURL.createObjectURL(stream);
+                 var URL = window.URL || window.webkitURL;
+                audio[moz ? 'mozSrcObject' : 'src'] = moz ? stream : URL.createObjectURL(stream);
                 audio.play();
 
                 _config.stream = stream;

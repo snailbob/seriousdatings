@@ -22,6 +22,7 @@ use DB;
 use Redirect;
 use Input;
 use App\User;
+use App\ChatNew;
 use App\Http\Controllers\UsersController;
 use App\UserBlocks;
 
@@ -50,6 +51,23 @@ class liveCHatController extends Controller
 		$user = User::find($id);
 		$format_users = $user_ctrl->format_user($user);
 		return $user;
+	}
+
+	public function messageChatnew(Request $request){
+		$chatRoomID1 = $request->input('chatRoomID1');/*segment ID*/
+		$chatRoomID2 = $request->input('chatRoomID2');/*segment ID*/
+		$myID = Auth::user()->id;
+		$toID = $request->input('toID');/*segment ID*/
+       	$sql_view = "SELECT 
+					  * ,
+					  (SELECT photo FROM users WHERE id = cll.c_from) AS pixtures,
+					  (SELECT CONCAT(firstName,' ',lastName) FROM users WHERE id = cll.c_from) AS fullName
+					FROM
+					  chat_logs AS cll 
+					WHERE `c_chatroom` IN ('$chatRoomID1', '$chatRoomID2')";
+		$chatDatas = DB::select($sql_view);
+		
+		return  response()->json(['chatDatas'=>$chatDatas]);
 	}
 
 

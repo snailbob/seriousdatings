@@ -80,6 +80,18 @@
 
   <script src="{{ url() }}/public/js/user-script.js"></script>
 
+     @if(Auth::check())
+
+    <script src="{{ url() }}/public/toaster-notifier/bootstrap-notify.min.js"></script>
+    <script src="{{ url() }}/public/socketjs/socketio.js"></script>
+    <script src="{{ url() }}/public/socketjs/config-server.js"></script>
+    <script src="{{ url() }}/public/socketjs/socketsend.js"></script>
+    <script src="{{ url() }}/public/reply-emojis/emojis.js"></script>
+
+  @endif
+     
+ 
+
     
   @if(request()->segment(1) == 'online_chat')
 
@@ -98,16 +110,6 @@
   @endif
 
 
-  @if(Auth::check())
-
-    <script src="{{ url() }}/public/toaster-notifier/bootstrap-notify.min.js"></script>
-    <script src="{{ url() }}/public/socketjs/socketio.js"></script>
-    <script src="{{ url() }}/public/socketjs/config-server.js"></script>
-    <script src="{{ url() }}/public/socketjs/socketsend.js"></script>
-    <script src="{{ url() }}/public/reply-emojis/emojis.js"></script>
-
-  @endif
-     
 
 
 

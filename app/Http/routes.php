@@ -294,6 +294,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('getTimeAvailability', 'AppointmentController@getTimeAvailability');
     Route::post('saveTimeAvailabity', 'AppointmentController@saveTimeAvailabity');
     Route::get('populateStatisticsReport', 'StatisticsDataController@populateStatisticsReport');
+    Route::get('messageChatnew', 'liveCHatController@messageChatnew');
 
 
 });

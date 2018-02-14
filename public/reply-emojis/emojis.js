@@ -11,7 +11,6 @@ var emojisReply = function (SenderID) {
 
         var self = this;
             $.each(listOFimg,function(i){
-                console.log(i);
                 var imgSrc = base_urlPath+listOFimg[i];
                 var emojiSrc = listOFimg[i];
                    self.$content.find('#listOfemojis').append('<img class="img-thumbnail gif-emojis" style="height: 90px"'+

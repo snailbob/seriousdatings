@@ -368,53 +368,57 @@ $(document).ready(function(){
 /*view all messages info */
 
 function viewFullMessages(id, m_id) {
-    $('.remove-'+m_id).removeClass('animate-container');
 
-    var data_link = base_url + '/api/messagesview';
-    var user_FirstName,user_id;
-    $.confirm({
-        content: function () {
-            var self = this;
-            return $.ajax({
-                url: data_link,
-                dataType: 'json',
-                data: {
-                    'id': m_id
-                },
-                method: 'get'
-            }).done(function (response) {
-                console.log("view: SMS", response);
-                self.setContent('Subject:<b> ' + response[0].m_subject + '</b>');
-                self.setContentAppend('<br>Message: ' + response[0].m_message);
-                self.setTitle("From: " + response[0].firstName);
-                user_FirstName = response[0].firstName;
-                user_id = response[0].m_from_id;
-            }).fail(function () {
-                self.setContent('Something went wrong.');
-            });
-        },
-        icon: 'fa fa-user',
-        theme: 'material',
-        animation: 'rotateY',
-        type: 'red',
-        buttons: {
-                 heyThere: {
-                        text: 'Reply', // text for button
-                        btnClass: 'btn-blue', // class for the button
-                        keys: ['enter', 'a'], // keyboard event for button
-                        isHidden: false, // initially not hidden
-                        isDisabled: false, // initially not disabled
-                        action: function(heyThereButton){
+  var scope = angular.element(document.getElementById('plain-code')).scope();
+                                    scope.crearSMSnew(id,m_id);
+    
+    // $('.remove-'+m_id).removeClass('animate-container');
+
+    // var data_link = base_url + '/api/messagesview';
+    // var user_FirstName,user_id;
+    // $.confirm({
+    //     content: function () {
+    //         var self = this;
+    //         return $.ajax({
+    //             url: data_link,
+    //             dataType: 'json',
+    //             data: {
+    //                 'id': m_id
+    //             },
+    //             method: 'get'
+    //         }).done(function (response) {
+    //             console.log("view: SMS", response);
+    //             self.setContent('Subject:<b> ' + response[0].m_subject + '</b>');
+    //             self.setContentAppend('<br>Message: ' + response[0].m_message);
+    //             self.setTitle("From: " + response[0].firstName);
+    //             user_FirstName = response[0].firstName;
+    //             user_id = response[0].m_from_id;
+    //         }).fail(function () {
+    //             self.setContent('Something went wrong.');
+    //         });
+    //     },
+    //     icon: 'fa fa-user',
+    //     theme: 'material',
+    //     animation: 'rotateY',
+    //     type: 'red',
+    //     buttons: {
+    //              heyThere: {
+    //                     text: 'Reply', // text for button
+    //                     btnClass: 'btn-blue', // class for the button
+    //                     keys: ['enter', 'a'], // keyboard event for button
+    //                     isHidden: false, // initially not hidden
+    //                     isDisabled: false, // initially not disabled
+    //                     action: function(heyThereButton){
                             
-                            var scope = angular.element(document.getElementById('plain-code')).scope();
-                                    scope.createSMS(user_id,user_FirstName);
-                        }
-                    },
-                close: function () {
+    //                         var scope = angular.element(document.getElementById('plain-code')).scope();
+    //                                 scope.createSMS(user_id,user_FirstName);
+    //                     }
+    //                 },
+    //             close: function () {
 
-                }
-            },
-    });
+    //             }
+    //         },
+    // });
 }
 
 function parentCreatSMS(user_id,user_FirstName){
@@ -428,4 +432,9 @@ function actionViVoNearbyPage(user_id,action){
         UrLs +='&action_type='+action;
     var win = window.open(base_url+UrLs, '_blank');
     win.focus();
+}
+function callFunctionScopeEmoji(){
+     var scope = angular.element(document.getElementById('plain-code')).scope();
+     // scope.alertStuff();
+     console.log(scope);
 }

@@ -405,8 +405,13 @@ ngApp.controller('flirtEmojiModalCtrl', ['$scope', '$uibModalInstance', 'items',
 		}
 
 		myHttpService.post('send_flirt_emoji', _data).then(function(res){
-			console.log(res.data, '');
+			console.log(res.data.notifInfo, 'notifInfoss');
 			$scope.showToast('Flirt Emoji sent successfully.');
+				var toID  = res.data.notifInfo.toId;
+				var cardsD  = res.data.notifInfo.cards;
+				var urlCard  = res.data.notifInfo.url;
+		    sendNotification(getMyId(),getMyFullName(),toID,'flirt',{ src: $scope.selectedCard });
+
 			$uibModalInstance.close($scope.selectedCard);
 
 		});

@@ -357,6 +357,8 @@ ngApp.controller('bodyController', [
 
 
         $scope.flirtEmojiModal = function (currUser, loggedUser) {
+                console.log('modallcurrUser',currUser);
+                console.log('modalloggedUser',loggedUser);
             var _toItem = {
 				username: window.uri_3,
 				logged_user: loggedUser,
@@ -485,7 +487,7 @@ ngApp.controller('bodyController', [
                     $scoped.acceptAppointment = function (appId) {
 
                         // $scope.actionAcceptAppointment(appId, AppointmentData, self, grandParent);
-                        $scope.saveAppointmentAction('I\'m happy to fuck you!', appId, 'A', self, grandParent);
+                        $scope.saveAppointmentAction('I\'m happy to ignore you!', appId, 'A', self, grandParent);
 
                     };
                 }, {});
@@ -709,6 +711,78 @@ ngApp.controller('bodyController', [
 
         };
 
+        $scope.crearSMSnew = function(id,messageID){
+            $scope.messageChatdata = "";
+          
+            var segmentChat1 =  $scope.logged_user_info.id+''+id;
+            var segmentChat2 =  id+''+$scope.logged_user_info.id;
+            var pleaseWait  =  $ngConfirm({
+                            icon: 'fa fa-spinner fa-spin',
+                            title: 'Working!',
+                            content: 'Processing your request!',
+                            animation: 'zoom',
+                            backgroundDismiss: true,
+                            backgroundDismissAnimation: 'glow',
+                            theme: 'material',
+                            lazyOpen: true,
+                            onClose: function () {
+                                // before the modal is hidden.
+                                 $scope.smsViewDataChatNew($scope.messageChatdata,
+                                                           segmentChat1,
+                                                           segmentChat2,
+                                                           id,
+                                                           $scope.logged_user_info.id);
+                            },
+
+                        })
+             pleaseWait.open();
+
+             myHttpService.getWithParams('messageChatnew', {
+                    chatRoomID1:segmentChat1,
+                    chatRoomID2:segmentChat2,
+                    toID:id,
+                }).then(function (res) {
+                    console.log(res);
+                    $scope.messageChatdata = res.data.chatDatas;
+                    pleaseWait.close();
+            });
+
+        
+
+        }
+
+        $scope.smsViewDataChatNew = function(data,sender,receiver,userID,myID){
+
+                $ngConfirm({
+                title: 'MESSAGES',
+                contentUrl: base_url + '/public/js/new-sms/sms-layout.html',
+                columnClass: 'medium', // to make the width wider.
+                animation: 'zoom',
+                backgroundDismiss: true,
+                backgroundDismissAnimation: 'glow',
+                theme: 'material',
+                lazyOpen: true,
+                onScopeReady: function($scoped){
+
+                    $scoped.getMessagesData = data;
+                    $scoped.sender = sender;
+                    $scoped.receiver = receiver;
+
+                    $scoped.userID = userID;
+                    $scoped.myID = myID;
+                    $('#userIDtext').val(userID);
+                    $('#currentStateChatBox').val(1);
+
+                },
+                onClose: function(){
+                    $('#currentStateChatBox').val('');
+                },
+
+            })
+        }
+
+
+
 
         /*====================START MESSAGE============================================*/
         /*Start added by MARK 2017*/
@@ -781,7 +855,7 @@ ngApp.controller('bodyController', [
                     row: 'row',
                 },
 
-                title: 'Messages',
+                title: 'Mail Box',
                 closeIcon: true,
                 draggable: true,
                 icon: 'fa fa-envelope',
@@ -797,6 +871,9 @@ ngApp.controller('bodyController', [
                 },
             })
         }
+
+
+
 
         var data_link = base_url + '/profile';
         $scope.createSMS = function (recipient_id, name) {

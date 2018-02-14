@@ -58,11 +58,15 @@
     <a class="buttons-fab" tooltip="Messages" href="#" onclick="viewOrCreateChat('{{ Auth::user()->id }}')"></a>
 </nav> 
 
+<input type="hidden" id="userIDtext" value="">
 <input type="hidden" id="myID" value="{{ Auth::user()->id }}">
 <input type="hidden" id="myName" value="{{ Auth::user()->lastName}},{{ Auth::user()->firstName}}">
-<input type="hidden" id="myPhoto" value="{{ Auth::user()->photo}}">
+<input type="hidden" id="myPhoto" class="myPhoto-{{ Auth::user()->id }}" value="{{ Auth::user()->photo}}">
 <input type="hidden" id="myIP" value="{{ Request::ip() }}">
 <input type="hidden" id="myUserName" value="{{ Auth::user()->username }}">
 
 @endif
+<input type="text" value="" id="currentStateChatBox">
+
+
 @include('audiobase.audio')

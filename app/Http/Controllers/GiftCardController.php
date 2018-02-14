@@ -272,8 +272,14 @@ class GiftCardController extends Controller
         ];
 
         $data = GroupChatMessages::create($newChat);
-
-        return response()->json($data);
+        $url = url().'/public/images/emoji/';
+        $notifInfo = [
+                'toId'=>$to_id,
+                'from_id'=>$from_id,
+                'cards'=>$cards,
+                'url'=>$url
+        ];
+        return response()->json(['dataS'=>$data,'notifInfo'=>$notifInfo]);
     }
 
 }

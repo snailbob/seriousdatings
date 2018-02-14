@@ -16,8 +16,8 @@ socket.send = function (message) {
 
 
 socket.on('message', function (message) {
+	console.log('notifcation',message);
 
-    
 		if (getMyId() == message.message.to) {
 			console.log(message.message);
 				fireNotification(message.message);
@@ -58,6 +58,8 @@ var actionsType = function(type,sendeIDs){
 				
 }
 
+
+
 var fireNotification = function(message){
 	var 		sendID = message.sender,
 		  messeageNoti = message.message,
@@ -77,7 +79,10 @@ var fireNotification = function(message){
 	     case 'replyemoji':
 	    	texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+' '+descNoti+' at you!<br/> &nbsp;<span  class="noti-clickme " onclick="actionsType(\''+'wink'+'\',\''+sendID+'\')">reply with</span></div>.';
 	        typeheading = '<img src="'+base_url+'/public/images/GIF-NOTI/'+src+'" style="width:60px;height:60px;" class="img-circle pull-left">';
-	        break;   
+	        break;
+	     case 'flirt':
+	     		flirtToast(message);
+	    	  break;    
 	    default:
 	       return null;
 	}
@@ -107,9 +112,78 @@ var fireNotification = function(message){
 }
 
 
+var flirtToast = function(message){
+	var 		sendID = message.sender,
+		  messeageNoti = message.message,
+		      typeNoti = message.type;
+
+		var texttype = "",typeheading="";
+		$.each(message.files.src,function(i){
+			texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+'is flirting at you!<br/> &nbsp;<span  class="noti-clickme " onclick="actionsType(\''+'wink'+'\',\''+sendID+'\')">reply with</span></div>.';
+	        typeheading = '<img src="'+base_url+'/public/images/emoji/'+message.files.src[i]+'" style="width:60px;height:60px;" class="img-thumbnail pull-left">';
+	        extendFlirtToast(texttype,typeheading);
+		});
+
+	
+
+}
+
+var chatNotification = function(message){
+	var 		sendID = message.message.sender,
+		  messeageNoti = message.message.message,
+		      typeNoti = message.message.type
+		      typeName = message.message.name;
+		      console.log(message);
+		var texttype = "",typeheading="";
+			
+			texttype = '<div class="inside-notif">&nbsp;Message from: '+typeName+'!'+
+						'<br/>'+messeageNoti+'<br/> '	+
+						'&nbsp;<span  class="noti-clickme " onclick="viewFullMessages(\''+sendID+'\',\''+'10'+'\')">view</span></div>.';
+	        typeheading = '<img src="'+message.message.files.src+'" style="width:60px;height:60px;" class="img-thumbnail pull-left">';
+	        extendFlirtToast(texttype,typeheading);
 		
 
-	 
+}			
+
+var extendFlirtToast = function(texttype,typeheading){
+		document.getElementById('chat-sound').play();
+	
+		$.toast({
+			    text: texttype, // Text that is to be shown in the toast
+			    heading: typeheading, // Optional heading to be shown on the toast
+			    
+			    showHideTransition: 'slide', // fade, slide or plain
+			    allowToastClose: true, // Boolean value true or false
+			    hideAfter: false, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
+			    stack: 15, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
+			    position: 'bottom-right', // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+			    
+			    bgColor: '#ebebeb',  // Background color of the toast
+			    textColor: '#000000',  // Text color of the toast
+			    textAlign: 'left',  // Text alignment i.e. left, right or center
+			    loader: true,  // Whether to show loader or not. True by default
+			    loaderBg: '#9EC600',  // Background color of the toast loader
+			    beforeShow: function () {}, // will be triggered before the toast is shown
+			    afterShown: function () {}, // will be triggered after the toat has been shown
+			    beforeHide: function () {}, // will be triggered before the toast gets hidden
+			    afterHidden: function () {}  // will be triggered after the toast has been hidden
+			});      
+
+}
+
+if ($('#currentStateChatBox').val() !==1) {
+	socket.on('chat', function (message) {
+		console.log('chat',message);
+			if (!message.message.typing) {
+				if (getMyId() == message.message.to && message.message.type =='chat') {
+					chatNotification(message);
+				}
+			}
+		 	
+
+
+	});
+}	 
     // if(message.message.typing) {
     //     appendDIV({
     //         sender: message.sender,
