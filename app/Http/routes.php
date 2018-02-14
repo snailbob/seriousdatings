@@ -324,6 +324,10 @@ Route::group(array('before' => 'admin'), function () {
         return redirect(url() . '/admin/users/' . $id);
     });
 
+    /* Email Extractor */
+    Route::get('admin/emailExtractor', 'EditableEmailController@extractEmails');
+    /* END Email Extractor */ 
+
     /* Ads Mangement */
     Route::get('admin/ads_management/pricing_lists', 'AdsPricingController@getPricelist');
     Route::get('admin/ads_management/pricing_spaces', 'AdsPricingController@getPriceSpace');
