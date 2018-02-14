@@ -142,6 +142,7 @@ ngApp.service('myHttpService', ['$http', 'CSRF_TOKEN', function ($http, CSRF_TOK
 
 ngApp.controller('bodyController', [
     '$scope',
+    '$rootScope',
     '$filter',
     'myHttpService',
     '$timeout',
@@ -152,7 +153,7 @@ ngApp.controller('bodyController', [
     '$ngConfirm',
     '$interval',
     '$location',
-    function ($scope, $filter, myHttpService, $timeout, $ngBootbox, $uibModal, $log, $document, $ngConfirm, $interval, $location) {
+    function ($scope, $rootScope, $filter, myHttpService, $timeout, $ngBootbox, $uibModal, $log, $document, $ngConfirm, $interval, $location) {
 
         $scope.notifications = [];
         $scope.subscription_validity = {};
@@ -184,9 +185,11 @@ ngApp.controller('bodyController', [
                 myHttpService.shareData = res.data;
                 $scope.unread_noti_count = res.data.unread_noti_count;
                 $scope.logged_user_info = res.data.logged_user_info;
+                $rootScope.logged_user_info = res.data.logged_user_info;
 
                 if(res.data.logged_user_info){
                     $scope.logged_user_info.birthdateObj = new Date(res.data.logged_user_info.birthdate);
+                    $rootScope.logged_user_info.birthdateObj = new Date(res.data.logged_user_info.birthdate);
                 }
 
                 console.log(res.data, 'body_contents');
@@ -345,7 +348,7 @@ ngApp.controller('bodyController', [
                 console.log(user, 'Are we compitable?');
 
                 if (user.userAction == 'flirt') {
-                    $scope.flirtEmojiModal(user, $scope.logged_user_info);
+                    $rootScope.flirtEmojiModal(user, $scope.logged_user_info);
                 }
                 else if (user.userAction == 'message') {
                     $scope.createSMS(user.id, user.firstName);
@@ -356,7 +359,7 @@ ngApp.controller('bodyController', [
         };
 
 
-        $scope.flirtEmojiModal = function (currUser, loggedUser) {
+        $rootScope.flirtEmojiModal = function (currUser, loggedUser) {
             var _toItem = {
 				username: window.uri_3,
 				logged_user: loggedUser,
@@ -2037,6 +2040,10 @@ ngApp.controller('browseMemberController', ['$scope', '$filter', 'myHttpService'
     };
 
 
+    $scope.sendMessage = function(i, u){
+        window.location.href = window.base_url+'/online_chat?user_id='+u.id+'&action_type=text';
+    }
+
     $scope.submitForm = function (form) {
         console.log(form.validate(), $scope.formData);
         if (form.validate()) {
@@ -2901,12 +2908,40 @@ ngApp.controller('ModalCompatibleCtrl', ['$scope', '$uibModalInstance', 'items',
     };
 }]);
 
-ngApp.controller('searchProfileController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngBootbox', '$httpParamSerializer', '$uibModal', '$log', '$document', function ($scope, $filter, myHttpService, $timeout, $ngBootbox, $httpParamSerializer, $uibModal, $log, $document) {
+ngApp.controller('searchProfileController', ['$scope', '$rootScope', '$filter', 'myHttpService', '$timeout', '$ngBootbox', '$httpParamSerializer', '$uibModal', '$log', '$document', function ($scope, $rootScope, $filter, myHttpService, $timeout, $ngBootbox, $httpParamSerializer, $uibModal, $log, $document) {
     $scope.allData = {};
     $scope.data = {};
     $scope.logged_id = '';
     $scope.user_id = window.uri_3;
     $scope.isLoading = false;
+
+
+    $scope.blockUser = function (u) {
+        console.log(u);
+
+        console.log(u, 'asfasd');
+        u.is_blocked = !u.is_blocked;
+
+        if (!u.is_blocked) {
+            var action = myHttpService.post('unblock_user', {
+                id: u.id
+            }).then(function (res) {
+                console.log(res);
+                var mess = 'User successfully unblocked.';
+                $scope.showToast(mess);
+            });
+        }
+        else {
+            myHttpService.post('block_user', {
+                id: u.id
+            }).then(function (res) {
+                console.log(res);
+                var mess = 'User successfully blocked.';
+                $scope.showToast(mess);
+            });
+        }
+
+    }
 
     $scope.openCompatibilityModal = function (size, parentSelector) {
         var parentElem = parentSelector ?
@@ -2930,19 +2965,17 @@ ngApp.controller('searchProfileController', ['$scope', '$filter', 'myHttpService
 
         modalInstance.result.then(function (userAction) {
             console.log(userAction, 'userAction');
-            if (userAction.id) {
-                $scope.createSMS(userAction.id, userAction.firstName);
-            }
-            else if (userAction == 'add') {
+            // if (userAction.id) {
+            //     $scope.createSMS(userAction.id, userAction.firstName);
+            // }
+            if (userAction == 'add') {
                 $scope.addUser($scope.data);
             }
             else if (userAction == 'flirt') {
-
+                $rootScope.flirtEmojiModal($scope.data, $rootScope.logged_user_info);
             }
             else if (userAction == 'message') {
-
                 $scope.createSMS($scope.data.id, $scope.data.firstName);
-
             }
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
@@ -3030,6 +3063,18 @@ ngApp.controller('searchController', ['$scope', '$filter', 'myHttpService', '$ti
         advance: ($scope.formData.search_type) ? true : false,
         byName: false
     };
+
+    
+    $scope.blockUser = function (i, u) {
+        console.log(i, u);
+        $scope.showToast('You have successfully blocked user.');
+        $scope.data.users.splice(i, 1);
+
+        myHttpService.post('block_user', u).then(function (res) {
+            console.log()
+        });
+    }
+
 
     //accordion
     $scope.oneAtATime = true;

@@ -16,7 +16,7 @@
         </p>
         <p style="margin: 0;font-size: 14px;line-height: 17px">
                 <span style="font-size: 14px; line-height: 16px;">
-                    <span style="line-height: 16px; font-size: 14px;">$content
+                    <span style="line-height: 16px; font-size: 14px;"> {!! $content !!} yeahhhboy
                     </span>
                 </span>
         </p>

@@ -124,7 +124,7 @@ class EditableEmailController extends Controller
         foreach ($request->users as $key => $value) {
             $user = User::find($value);
             Mail::send('email.email_blast_template', ['user' => $user, 'title' => $template['template_subject'], 'content' => $template['template_content']], function ($message) use ($user, $template) {
-                $message->to($user->email, 'ID')->subject($template['template_content']);
+                $message->to($user->email, 'ID')->subject($template['template_subject']);
             });
         }
 

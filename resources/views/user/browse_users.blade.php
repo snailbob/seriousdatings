@@ -140,12 +140,13 @@
                                     </a>
                                 </div>
 
-                                <div class="browse-profile-details">
+                                <div class="browse-profile-details with-message">
                                     <p>
-                                        Name: <span class="text-muted">@{{ user.firstName }} @{{ user.lastName }}</span>
+                                        <i class="fa fa-circle fa-fw new-state" ng-class="{'text-success' : user.is_online, 'text-danger' : !user.is_online}" aria-hidden="true"></i>
+                                        <span>@{{ user.firstName }} @{{ user.lastName }}</span>
                                     </p>
                                     <p>
-                                        Location: <span class="text-muted">@{{ user.location }}</span>
+                                        <span class="text-muted">@{{ user.location }}</span>
                                     </p>
                                     <p>
                                         <span class="text-warning small"><i class="fa fa-map-marker" aria-hidden="true"></i> You are @{{ user.distance }}mi. away</span>
@@ -170,6 +171,10 @@
 
                                         <a class="btn btn-danger btn-block" ng-click="blockUser($index, user)">
                                             <span class="fa fa-ban fa-fw" aria-hidden="true"></span> Block
+                                        </a>
+
+                                        <a class="btn btn-success btn-block" ng-click="sendMessage($index, user)">
+                                            <span class="fa fa-envelope fa-fw" aria-hidden="true"></span> Message
                                         </a>
 
                                     </div>
