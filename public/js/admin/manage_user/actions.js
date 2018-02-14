@@ -96,7 +96,35 @@ $(document).ready(function()
 					function() 
 					{
 						window.location.replace("http://localhost/seriousdatings/admin/users/non_users");
-					}, 3000);
+					}, 2000);
+			},
+			error: function(value)
+			{
+				console.log(value);
+			}
+		})
+	});
+
+	$(document).on('click', '.user_memberBtn', function()
+	{
+		var data = {
+			email: $(this).closest('tr').find('.user_email_cell').text()
+		}
+
+		console.log(data);
+		$.ajax({
+			type: "POST",
+			url: base_url + "/setToUser",
+			data: data,
+			cache: false,
+			success: function(value)
+			{
+				toastr.info('You\'ve just set one member to user.' );
+				setTimeout(
+					function() 
+					{
+						window.location.replace("http://localhost/seriousdatings/admin/users");
+					}, 2000);
 			},
 			error: function(value)
 			{
@@ -125,7 +153,7 @@ $(document).ready(function()
 					function() 
 					{
 						location.reload();
-					}, 3000);
+					}, 2000);
 			},
 			error: function(value)
 			{
@@ -175,7 +203,7 @@ $(document).ready(function()
 								function() 
 								{
 									location.reload();
-								}, 3000);
+								}, 2000);
 						},
 						error: function(value)
 						{
