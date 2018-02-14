@@ -360,13 +360,9 @@ ngApp.controller('bodyController', [
         };
 
 
-<<<<<<< HEAD
         $scope.flirtEmojiModal = function (currUser, loggedUser) {
                 console.log('modallcurrUser',currUser);
                 console.log('modalloggedUser',loggedUser);
-=======
-        $rootScope.flirtEmojiModal = function (currUser, loggedUser) {
->>>>>>> approved-disapproved-fix
             var _toItem = {
 				username: window.uri_3,
 				logged_user: loggedUser,
