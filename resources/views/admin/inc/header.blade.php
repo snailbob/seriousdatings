@@ -195,6 +195,8 @@
 
                 <li><a href="{{ url('admin/demographic') }}"><i class="fa fa-map"></i>
                         <span>Demographic Report</span></a></li>
+                <li><a href="{{ url('admin/emailExtractor') }}"><i class="fa fa-envelope-open"></i>
+                        <span>Email Extractor</span></a></li>        
                 <li><a href="{{ url('admin/echeckpayment') }}"><i class="fa fa-credit-card"></i>
                         <span>E-check Payments</span></a></li>
                 <li><a href="{{ url('admin/monthlypayment') }}"><i class="fa fa-usd"></i>

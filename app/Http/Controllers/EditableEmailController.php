@@ -74,11 +74,11 @@ class EditableEmailController extends Controller
         /* End of Validation Process Befor Updating */
 
         Template::where('id', $request->id)
-            ->update([
-                'template_name' => trim($request->Name),
-                'template_subject' => trim($request->Subject),
-                'template_content' => $request->Content
-            ]);
+        ->update([
+            'template_name' => trim($request->Name),
+            'template_subject' => trim($request->Subject),
+            'template_content' => $request->Content
+        ]);
 
         /* returning the updated data */
         $template = Template::find($request->id);
@@ -131,5 +131,9 @@ class EditableEmailController extends Controller
         return response()->json(['message' => 'Template sent.']);
     }
 
-
+    public function extractEmails()
+    {
+        $users = User::all();
+        return \View::make('email.extract_email')->with(['users' => $users]);
+    }
 }
