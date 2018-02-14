@@ -166,7 +166,7 @@
                         <li><a href="{{ url('admin/users/cat/notverified') }}">
                                 <i class="fa fa-circle-o" aria-hidden="true"></i> <span>Inactive Users Management</span></a>
                         </li>
-                        <li><a href="{{ url('admin/users/cat/men') }}">
+                        <li><a href="{{ url('admin/users/non_users') }}">
                                 <i class="fa fa-circle-o"></i> <span>Non-User Management</span></a>
                         </li>
                     </ul>
@@ -175,7 +175,7 @@
                 <li class="treeview {{(request()->segment(2) == 'user_contents') ? 'active menu-open' : ''}}">
                     <a href="#">
                         <i class="fa fa-address-book"></i>
-                        <small><span>User Contents Management</span></small>
+                        <span class="small">User Contents Management</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -331,7 +331,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+                <li class="treeview {{(request()->segment(2) == 'definable_flirt_list' || request()->segment(2) == 'add_flirt_message') ? 'active menu-open' : ''}}">
                     <a href="#">
                         <i class="fa fa-commenting"></i>
                         <span>Definable Flirt Message</span>
@@ -346,12 +346,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+                <li class="treeview {{(request()->segment(2) == 'blog_management') ? 'active menu-open' : ''}}">
                     <a href="#">
                         <i class="fa fa-newspaper-o"></i>
                         <span>Blog Management</span>
                         <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-left pull--*+6right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
@@ -366,7 +366,7 @@
                         <li><a href="{{ url('admin/blog_management/spam_control') }}"><i class="fa fa-circle-o"></i> <span>Spam Control</span></a></li>
                     </ul>
                 </li>
-                <li class="treeview {{(request()->segment(2) == 'users') ? 'active menu-open' : ''}}">
+                <li class="treeview {{(request()->segment(2) == 'group_management') ? 'active menu-open' : ''}}">
                     <a href="#">
                         <i class="fa fa-group"></i>
                         <span>Group Management</span>

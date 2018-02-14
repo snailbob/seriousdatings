@@ -5,18 +5,12 @@
             <strong>
                     <span style="font-size: 20px; line-height: 28px;">Hello
 
-                        @if(isset($user))
-                            {{$user->username}},
-                        @else
-                            there,
-                        @endif
-
                     </span>
             </strong>
         </p>
         <p style="margin: 0;font-size: 14px;line-height: 17px">
                 <span style="font-size: 14px; line-height: 16px;">
-                    <span style="line-height: 16px; font-size: 14px;"> {!! $content !!} yeahhhboy
+                    <span style="line-height: 16px; font-size: 14px;">$content
                     </span>
                 </span>
         </p>

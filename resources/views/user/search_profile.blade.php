@@ -51,8 +51,11 @@
                                                 <i class="fa fa-envelope fa-fw"></i> Send Message
                                             </a>
 
-                                            <a class="btn btn-danger" ng-click="blockUser(data.id,data.firstName)">
-                                                <i class="fa fa-ban fa-fw"></i> Block
+                                            <a class="btn btn-danger" ng-if="!data.is_blocked" ng-click="blockUser(data)">
+                                                <span class="fa fa-ban fa-fw" aria-hidden="true"></span> Block
+                                            </a>
+                                            <a class="btn btn-success" ng-if="data.is_blocked" ng-click="blockUser(data)">
+                                                <span class="fa fa-ban fa-fw" aria-hidden="true"></span> Un-block
                                             </a>
                                         </p>
 
@@ -198,7 +201,7 @@
                                     <i class="fa fa-angle-double-right pull-right" aria-hidden="true"></i>
                                     View Profile
                                 </a>
-                                <a ng-click="userAction('message')" class="list-group-item">
+                                <a ng-click="userAction('flirt')" class="list-group-item">
                                     <i class="fa fa-angle-double-right pull-right" aria-hidden="true"></i>
                                     Flirt FREE
                                 </a>

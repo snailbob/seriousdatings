@@ -77,6 +77,115 @@ $(document).ready(function()
 		});	
 	}
 
+	$(document).on('click', '.non_memberBtn', function()
+	{
+		var data = {
+			email: $(this).closest('tr').find('.user_email_cell').text()
+		}
+
+		console.log(data);
+		$.ajax({
+			type: "POST",
+			url: base_url + "/setToNonUser",
+			data: data,
+			cache: false,
+			success: function(value)
+			{
+				toastr.info('You\'ve just set one member to non-user.' );
+				setTimeout(
+					function() 
+					{
+						window.location.replace(base_url+"/admin/users/non_users");
+					}, 3000);
+			},
+			error: function(value)
+			{
+				console.log(value);
+			}
+		})
+	});
+
+	$(document).on('click', '.approveBtn', function()
+	{
+		var data = {
+			email: $(this).closest('tr').find('.user_email_cell').text(),
+			name: $(this).closest('tr').find('.realName').text()
+		};	
+
+		console.log(data);
+		$.ajax({
+			type: "POST",
+			url: base_url + "/approveUser",
+			data: data,
+			cache: false,
+			success: function(value)
+			{
+				toastr.info( data.name + ' was approved.' );
+				setTimeout(
+					function() 
+					{
+						location.reload();
+					}, 3000);
+			},
+			error: function(value)
+			{
+				console.log(value);
+			}
+		});
+	});
+
+	$(document).on('click', '.disapproveBtn', function()
+	{
+		var data = {
+			email: $(this).closest('tr').find('.user_email_cell').text(),
+			name: $(this).closest('tr').find('.realName').text()
+		};
+
+		bootbox.confirm({
+			message: 
+			"<div class='form-group'>\
+			<label for='comment'>Reason for disapprove user:</label>\
+			<textarea class='form-control' rows='5' id='comment'></textarea>\
+			</div>",
+			buttons: {
+				confirm: {
+					label: 'Send',
+					className: 'btn-primary'
+				},
+				cancel: {
+					label: 'Cancel',
+					className: 'btn-secondary'
+				}
+			},
+			callback: function (result) {
+				if (result) 
+				{
+					data['content'] = $('#comment').val();
+					console.log(data);
+					$.ajax({
+						type: "POST",
+						url: base_url + "/disapproveUser",
+						data: data,
+						cache: false,
+						success: function(value)
+						{
+							console.log(value)
+							toastr.info( data.name + ' was disapproved.' );
+							setTimeout(
+								function() 
+								{
+									location.reload();
+								}, 3000);
+						},
+						error: function(value)
+						{
+							console.log(value);
+						}
+					});
+				}
+			}
+		});
+	});
 
 	toastr.options = {
 		"closeButton": false,

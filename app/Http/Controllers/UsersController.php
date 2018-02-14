@@ -567,6 +567,7 @@ class UsersController extends Controller {
         // $value['aboutdate'] = $aboutdate;
         $user['is_friend'] = ($relation + $relation2) ? true : false;
         $user['is_online'] = \DB::table('user_online')->where('user_id', $user->id)->count();
+        $user['is_blocked'] = \DB::table('user_blocks')->where('user_id', $user_id)->where('user_blocked_id', $user->id)->count();
 
         //get percentage
         $current_user_data = DB::table('users')->where('id', '=', $user_id)->get();

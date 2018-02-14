@@ -4514,7 +4514,10 @@ body {
 	background: #474747;
 	padding: 15px;
 	color: #fff;
-	min-height: 265px;
+	min-height: 235px;
+}
+.browse-profile-details.with-message {
+	min-height: 310px;
 }
 
 .inner-contendbg .browse-profile-bg:nth-child(4n+4) {

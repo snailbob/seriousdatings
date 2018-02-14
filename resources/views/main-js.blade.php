@@ -71,6 +71,7 @@
   <script src="{{ url() }}/public/plugins/angularjs/controllers/signupController.js"> </script>
   <script src="{{ url() }}/public/plugins/angularjs/controllers/myFriendsController.js"> </script>
   <script src="{{ url() }}/public/plugins/angularjs/controllers/privacySettingsController.js"> </script>
+  <script src="{{ url() }}/public/plugins/angularjs/controllers/areWeNearbyController.js"> </script>
   
   <script src="{{ url() }}/public/plugins/angularjs/services/profileService.js"></script>
 

@@ -659,10 +659,11 @@
 
                                 <div class="browse-profile-details">
                                     <p>
-                                        Name: <span class="text-muted">@{{ user.firstName }} @{{ user.lastName }}</span>
+                                        <i class="fa fa-circle fa-fw new-state" ng-class="{'text-success' : user.is_online, 'text-danger' : !user.is_online}" aria-hidden="true"></i>
+                                        <span>@{{ user.firstName }} @{{ user.lastName }}</span>
                                     </p>
                                     <p>
-                                        Location: <span class="text-muted">@{{ user.location }}</span>
+                                        <span class="text-muted">@{{ user.location }}</span>
                                     </p>
                                     <p>
                                         <span class="text-warning small"><i class="fa fa-map-marker" aria-hidden="true"></i> You are @{{ user.distance }}mi. away</span>
@@ -680,8 +681,11 @@
                                             <i class="fa fa-user fa-fw"></i> Friends
                                         </a>
 
-                                        <a class="btn btn-link btn-block" ng-href="@{{ base_url + '/search/profile/' + user.id}}" target="_blank">
+                                        <a ng-if="data.user_id" class="btn btn-default btn-block" ng-href="@{{ base_url + '/search/profile/' + user.id}}">
                                             <span class="fa fa-link fa-fw" aria-hidden="true"></span> Profile
+                                        </a>
+                                        <a ng-if="data.user_id" class="btn btn-danger btn-block" ng-click="blockUser($index, user)">
+                                            <span class="fa fa-ban fa-fw" aria-hidden="true"></span> Block
                                         </a>
 
                                     </div>

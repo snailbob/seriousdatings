@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use Mail;
 use DB;
 use Auth;
+use App\RoleUser;
 
 use App\Http\Controllers\UsersController;
 
@@ -91,6 +93,69 @@ class UserManagementController extends Controller
         return \View::make('admin.user.manage_user')->withUsers($users);
     }
 
+    public function non_member_user()
+    {   
+        $non_users = RoleUser::where('role_id', 5)->get();
+        $data = array();
+        foreach ($non_users as $non_user) {
+            $data[] = $non_user->user_id;
+        }
+
+        $users = User::find($data);
+        foreach ($users as $user) {
+            $user->role = 5;
+        }
+        return \View::make('admin.user.manage_user')->withUsers($users);
+    }
+
+    public function setToNonUser(Request $request)
+    {
+        $user = User::where('email', $request->email)->first();
+        $count = RoleUser::where('user_id', $user->id)->count();
+        if($count)
+        {
+            RoleUser::where('user_id', $user->id)
+            ->update(['role_id' => 5]);
+        }else
+        {
+            RoleUser::create([
+                'user_id' => $user->id,
+                'role_id' => 5
+            ]);            
+        }
+        return "Success";
+    }
+
+    public function approveUser(Request $request)
+    {
+        User::where('email', $request->email)
+        ->update(['isApproved' => 1]);
+
+        $user = User::where('email', $request->email)->get();        
+        return response()->json($user);
+    }
+
+    public function disapproveUser(Request $request)
+    {
+        User::where('email', $request->email)
+        ->update(['isApproved' => 0]);
+
+
+        // Mail::send('email.disapproved_user', $user, function($message) use ($user) {
+        //     $message->to($user->email);
+        //     $message->subject('Reject User');
+        // });
+        $user = User::where('email', $request->email)->first();
+        // var_dump($user->email);
+        $email = $user->email;
+        // var_dump($email);
+        Mail::send('email.disapproved_user', ['content' => $request->content, 'user' => $user], function ($message) use ($email) {
+            $message->to($email, 'ID')->subject('Request Rejected');
+        });
+        
+        return response()->json($user);
+    }
+
     public function userbyCat($cat){
 
         switch($cat){
@@ -113,14 +178,13 @@ class UserManagementController extends Controller
             $sql = 'select * from users where verified = ?';
             $field = 'verified';
             $val = 1;
-            break;
+            break;  
         }
 
         // $users = User::where($field,$val)->get();
         $users = DB::select($sql, [$val]);
 
         foreach ($users as $user) {
-
             $user_id = $user -> id;
             $role = DB::table('role_user')->where('user_id','=',$user_id)->pluck('role_id');
             $user->role = $role;

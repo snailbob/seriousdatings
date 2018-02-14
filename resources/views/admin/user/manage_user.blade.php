@@ -52,6 +52,11 @@
                         <li>
                           <a href='{{ url() }}/admin/users/{!! $user->id !!}'> <i class="fa fa-eye"></i> View</a>
                         </li>
+                        @if($user->role != 5)
+                        <li class="non_memberBtn">
+                          <a href='#'> <i class="fa fa-user-secret"></i> Set to non-user</a>
+                        </li>
+                        @endif
                         @if($user->username != "admin")
                         <li class="pauseBtn">
                           <a href='#' class="pauseTxt"> 
@@ -77,6 +82,24 @@
                           <a href='#'><i class="fa fa-trash-o"></i> Delete</a>
                         </li>
                         @endif
+                        @if(!is_numeric($user->isApproved))
+                        <li class="approveBtn">
+                          <a href='#'> <i class="fa fa-check"></i> Approve</a>
+                        </li>
+                        <li class="disapproveBtn">
+                          <a href='#'> <i class="fa fa-close"></i> Disapprove</a>
+                        </li>
+                        @else
+                        @if($user->isApproved)
+                        <li class="disapproveBtn">
+                          <a href='#'> <i class="fa fa-close"></i> Disapprove</a>
+                        </li>
+                        @else
+                        <li class="approveBtn">
+                          <a href='#'> <i class="fa fa-check"></i> Approve</a>
+                        </li>
+                        @endif                   
+                        @endif
                       </ul>
                     </div>
                   </td>
@@ -97,7 +120,7 @@
 @include('admin.inc.footer')
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+{!! HTML::script('public/js/toastr/toastr.min.js') !!}
 {!! HTML::script('public/js/admin/manage_user/actions.js') !!}
 </body>
 </html>
