@@ -95,7 +95,7 @@ $(document).ready(function()
 				setTimeout(
 					function() 
 					{
-						window.location.replace("http://localhost/seriousdatings/admin/users/non_users");
+						window.location.replace(base_url+"/admin/users/non_users");
 					}, 3000);
 			},
 			error: function(value)
