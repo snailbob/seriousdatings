@@ -298,6 +298,12 @@ class UsersController extends Controller {
         
 
 
+
+    public function postUpdateUser(Request $request){
+        $the_user = User::where('id', $request->input('id'))->update($request->input());
+        return response()->json($request->input());
+    }
+
     public function signup(Request $request){
         $user_details = $request->input(); //Input::all();
         // $user_details['password'] = \Hash::make($user_details['password']);
@@ -586,6 +592,7 @@ class UsersController extends Controller {
         if(!empty($user_id)){
             $user_info = Auth::user();
             $user['distance'] = $this->distance($user_info->latitude,$user_info->longitude,$user['latitude'],$user['longitude']);
+            $user['distance'] = (is_numeric($user['distance'])) ? $user['distance'] : 0;
         }
 
         return $user;

@@ -130,49 +130,51 @@
 
 
         @if(!isset($currentUser) || $currentUser==0)
-        <div class="travel-option profile-managment">
-                <!-- @{{userProfileData}} -->
-            <div class="connect-with-left">
-                <a ng-click="newAppointment(userProfileData)">
-                    <div class="serious-icons">
-                        {!! HTML::Image("public/images/phone-chat-icon.png" ,"") !!}
+            @if(request()->segment(1) == 'speeddating' || (request()->segment(1) == 'profile' && request()->segment(3) != ''))
+                <div class="travel-option profile-managment">
+                        <!-- @{{userProfileData}} -->
+                    <div class="connect-with-left">
+                        <a ng-click="newAppointment(userProfileData)">
+                            <div class="serious-icons">
+                                {!! HTML::Image("public/images/phone-chat-icon.png" ,"") !!}
+                            </div>
+                            <h2>Phone Chat</h2>
+                        </a> 
                     </div>
-                    <h2>Phone Chat</h2>
-                </a> 
-            </div>
-            <div class="connect-with-left float-right"> 
-                <a ng-href="@{{ base_url+'/online_chat?user_id='+userProfileData.id+'&action_type=video' }}">
-                    <div class="serious-icons">
-                        {!! HTML::Image("public/images/video-chat-icon.png" ,"") !!}
-                        </div>
-                    <h2>Video Chat</h2>
-                </a> 
-            </div>
-            <div class="connect-with-left"> 
-                <a ng-click="areYouReadyToDate(true)">
-                    <div class="serious-icons">{!! HTML::Image("public/images/serious-dating-icon.png" ,"") !!}</div>
-                    <h2>Serious Dating</h2>
-                </a> 
-            </div>
-            <div class="connect-with-left float-right" ng-click="virtualGiftModal()"> 
-                <a href="#">
-                    <div class="serious-icons">{!! HTML::Image("public/images/vi-iconrtual-gift.png" ,"") !!}</div>
-                    <h2>Virtual Gift</h2>
-                </a> 
-            </div>
-            <div class="connect-with-left"> 
-                <a href="{{ url().'/travels' }}" target="_blank">
-                    <div class="serious-icons">{!! HTML::Image("public/images/serious-vecation-icon.png" ,"") !!}</div>
-                    <h2>Serious Vacation</h2>
-                </a> 
-            </div>
-            <div class="connect-with-left float-right"> 
-                <a href="#">
-                    <div class="serious-icons">{!! HTML::Image("public/images/background-check-icon.png" ,"") !!}</div>
-                    <h2>background Check</h2>
-                </a> 
-            </div>
-        </div>
+                    <div class="connect-with-left float-right"> 
+                        <a ng-href="@{{ base_url+'/online_chat?user_id='+userProfileData.id+'&action_type=video' }}">
+                            <div class="serious-icons">
+                                {!! HTML::Image("public/images/video-chat-icon.png" ,"") !!}
+                                </div>
+                            <h2>Video Chat</h2>
+                        </a> 
+                    </div>
+                    <div class="connect-with-left"> 
+                        <a ng-click="areYouReadyToDate(true)">
+                            <div class="serious-icons">{!! HTML::Image("public/images/serious-dating-icon.png" ,"") !!}</div>
+                            <h2>Serious Dating</h2>
+                        </a> 
+                    </div>
+                    <div class="connect-with-left float-right" ng-click="virtualGiftModal()"> 
+                        <a href="#">
+                            <div class="serious-icons">{!! HTML::Image("public/images/vi-iconrtual-gift.png" ,"") !!}</div>
+                            <h2>Virtual Gift</h2>
+                        </a> 
+                    </div>
+                    <div class="connect-with-left"> 
+                        <a href="{{ url().'/travels' }}" target="_blank">
+                            <div class="serious-icons">{!! HTML::Image("public/images/serious-vecation-icon.png" ,"") !!}</div>
+                            <h2>Serious Vacation</h2>
+                        </a> 
+                    </div>
+                    <div class="connect-with-left float-right"> 
+                        <a href="#">
+                            <div class="serious-icons">{!! HTML::Image("public/images/background-check-icon.png" ,"") !!}</div>
+                            <h2>background Check</h2>
+                        </a> 
+                    </div>
+                </div>
+            @endif
         @endif
 
         <div class="travel-option profile-managment">

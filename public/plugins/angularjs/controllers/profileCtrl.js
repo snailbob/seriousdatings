@@ -2,6 +2,7 @@
 
 ngApp.controller('profileCtrl', [
 	'$scope',
+	'$rootScope',
 	'$uibModal',
 	'$interval',
 	'profileService',
@@ -9,7 +10,7 @@ ngApp.controller('profileCtrl', [
 	'$log',
 	'$ngConfirm',
 	'$timeout',
-	function ($scope, $uibModal, $interval, profileService, myHttpService, $log, $ngConfirm, $timeout) {
+	function ($scope, $rootScope, $uibModal, $interval, profileService, myHttpService, $log, $ngConfirm, $timeout) {
 
 		var ind = 0;
 		var count = 3;
@@ -45,6 +46,31 @@ ngApp.controller('profileCtrl', [
 		// 		})
 		// 	}
 		// }, 3000);
+
+
+		$scope.getCoords = function(){
+			
+			window.navigator.geolocation.getCurrentPosition(function (pos) {
+	
+				var coords = pos.coords;
+				var lat = coords.latitude;
+				var lng = coords.longitude;
+
+				var arr = {
+					latitude: lat,
+					longitude: lng,
+					id: $scope.currentUserData[0].id
+				};
+
+				myHttpService.post('update_user_info', arr).then(function(res){
+					console.log(res, 'update_user_info');
+				});
+
+
+				console.log(pos, arr);
+	
+			});
+		}
 
         $scope.virtualGiftModal = function (currUser, loggedUser) {
             var _toItem = {
@@ -86,11 +112,14 @@ ngApp.controller('profileCtrl', [
 
 
 
-		$scope.$watch('username', function (newValue, oldValue) {
+		$scope.$watch('username', function (newValue, oldValue) {	
 			if (newValue) {
 				profileService.getEachProfile(newValue).then(function (data) {
 					$scope.notifyCount = data[0].notify_visit;
 					$scope.currentUserData = data;
+					
+					$scope.getCoords();
+
 					console.log(data, 'current_user');
 				});
 				profileService.getUserFriend().then(function (data) {
