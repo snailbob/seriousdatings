@@ -119,6 +119,33 @@ class liveCHatController extends Controller
 		$count = DB::select($sql_view);
 		return  response()->json($count);
 	}
+	public function saveChatLogsNew(Request $request){
+		
+		$c_from = $request->input('c_from');
+		$c_to = $request->input('c_to');
+		$c_message = $request->input('c_message');
+		$c_chatroom = $request->input('c_chatroom');
+
+
+		$sender_id = (Auth::check()) ? Auth::user()->id : '';
+		$update = DB::table('chat_logs')->insert([
+				    [
+				        'c_from' =>$c_from ,
+				        'c_to' => $c_to,
+				        'c_message' => $c_message,
+				        'c_chatroom' => $c_chatroom
+				     ]
+				]);
+
+		
+		if ($update) {
+			$message_response['message'] = true;
+		}else{
+			$message_response['message'] =false;
+		}
+
+		return  response()->json($message_response);
+	}
 
 
 

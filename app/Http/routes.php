@@ -266,6 +266,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('friend/{username}', 'ProfileController@getMatchPercentage');
 
     /*START messages services ROUTING*/
+    Route::get('mailTO', 'userMessagesController@mailTO');
     Route::get('messages', 'userMessagesController@messages');
     Route::get('messagesview', 'userMessagesController@messagesview');
     Route::get('messagescount', 'userMessagesController@messagescount');
@@ -295,6 +296,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('saveTimeAvailabity', 'AppointmentController@saveTimeAvailabity');
     Route::get('populateStatisticsReport', 'StatisticsDataController@populateStatisticsReport');
     Route::get('messageChatnew', 'liveCHatController@messageChatnew');
+    Route::post('saveChatLogsNew', 'liveCHatController@saveChatLogsNew');
 
 
 });

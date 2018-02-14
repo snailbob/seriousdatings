@@ -66,7 +66,8 @@
 <input type="hidden" id="myUserName" value="{{ Auth::user()->username }}">
 
 @endif
-<input type="text" value="" id="currentStateChatBox">
+<input type="hidden" value="" id="currentStateChatBox">
+<input type="hidden" value="{{ request()->segment(1) }}" id="currentRoutes">
 
 
 @include('audiobase.audio')

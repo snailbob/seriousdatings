@@ -101,7 +101,7 @@ class ProfileController extends Controller
         Notification::create($arr);
 
         /*Added new NotificationLogs*/
-        NotiFierLogsController::createNotification($current_user[0]->id,'visit_profile','added you as friend. Click to visit their profile');
+        NotiFierLogsController::createNotification($current_user[0]->id,'visit_profile','visit your profile');
 
         return View::make('profile')->with(array('data'=>$data, 'data_new'=>$data_new,'username'=>$uname, 'currentUser'=>0));
 
@@ -222,16 +222,23 @@ class ProfileController extends Controller
         if($id){
             $notifyCount = DB::select('select COUNT(user_id) as count from notifications where user_id = ? and type = ?', [$id,'visit_profile']);
             $notify = DB::select('select * from notifications where user_id = ? and type = ? order by id desc limit 1', [$id,'visit_profile']);
-
-            $user = DB::table('users')->where('id','=',$notify[0]->user_id)->get();
-            $from = DB::table('users')->where('id','=',$notify[0]->from_id)->get();
-
+            if (!empty($notify) || count($notify) > 1) {
+                  $user = DB::table('users')->where('id','=',$notify[0]->user_id)->get();
+                    $from = DB::table('users')->where('id','=',$notify[0]->from_id)->get();
+         
             $data = array(
                 'details'  => $notify[0],
                 'users'   => $user[0],
                 'from'    => $from[0],
                 'count'   => $notifyCount[0]->count
-            );
+             );
+
+            }else{
+
+                $data = array();
+
+            }
+
 
             // dd($data);
             return $data;

@@ -28,23 +28,23 @@ ngApp.controller('profileCtrl', [
 			$scope.userSelected = data[ind];
 		}
 
-		//For checking the new Notification
-		// $interval(function () {
-		// 	if($scope.currentUserData[0].id){
-		// 		profileService.checkNotifyCount($scope.currentUserData[0].id).then(function(res) {
-		// 			// $scope.notifyData = res;
-		// 			if(res.count>$scope.notifyCount){
-		// 				$scope.notifyCount = res.count;
-		// 				// $scope.notifyData = res;
-		// 				$scope.launchModalNotification(res);
-		//    				myHttpService.get('body_contents').then(function(res){
-		//    					myHttpService.shareData = res.data;
-		//    				});
-		// 				console.log(res.details, 'you got new notification');
-		// 			}
-		// 		})
-		// 	}
-		// }, 3000);
+		// For checking the new Notification
+		$interval(function () {
+			if($scope.currentUserData[0].id){
+				profileService.checkNotifyCount($scope.currentUserData[0].id).then(function(res) {
+					// $scope.notifyData = res;
+					if(res.count>$scope.notifyCount){
+						$scope.notifyCount = res.count;
+						// $scope.notifyData = res;
+						$scope.launchModalNotification(res);
+		   				myHttpService.get('body_contents').then(function(res){
+		   					myHttpService.shareData = res.data;
+		   				});
+						console.log(res.details, 'you got new notification');
+					}
+				})
+			}
+		}, 3000);
 
         $scope.virtualGiftModal = function (currUser, loggedUser) {
             var _toItem = {

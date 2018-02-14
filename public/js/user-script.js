@@ -367,10 +367,10 @@ $(document).ready(function(){
 
 /*view all messages info */
 
-function viewFullMessages(id, m_id) {
+function viewFullMessages(id, m_id,fullname) {
 
   var scope = angular.element(document.getElementById('plain-code')).scope();
-                                    scope.crearSMSnew(id,m_id);
+                                    scope.crearSMSnew(id,m_id,fullname);
     
     // $('.remove-'+m_id).removeClass('animate-container');
 

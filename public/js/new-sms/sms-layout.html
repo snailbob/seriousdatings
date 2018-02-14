@@ -144,7 +144,7 @@ img {
                 <div class="panel-heading top-bar">
                     <div class="col-md-8 col-xs-8">
 
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Messages- {{newNames[0]}}</h3>
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Messages- {{fullname}}</h3>
                     </div>
                     <div class="col-md-4 col-xs-4" style="text-align: right;">
                         <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_minim">Back</span></a>
@@ -258,14 +258,20 @@ socket.on('chat', function (message) {
                                         '</div>'+
                                     '</div>');
                   $('.msg_container_base').animate({ scrollTop: $(".msg_container_base").height()}, 800);
+
+                 
+
                 }
+
+               
         }
         console.log(message.message.typing);
           if(message.message.typing && myID == message.message.totype) {
                 timeTyping(message.message.nametype);
-                 $('.msg_container_base').animate({ scrollTop: $(".msg_container_base").height()}, 800);
             return;
         }
+
+    $('.msg_container_base').animate({ scrollTop: $(".msg_container_base").height()}, 800);
      document.getElementById('chat-sound').play();
 
 });
@@ -307,7 +313,7 @@ var sendChatMessages = function(){
              files:{ src:myPhoto,desc:""}, 
         });
 
-   
+    
 
         $("#appendableMessage").append('<div class="row msg_container base_receive">'+
                             '<div class="col-md-2 col-xs-2 avatar">'+
@@ -322,6 +328,14 @@ var sendChatMessages = function(){
                         '</div>');
          $("#btn-input").val('');
          $('.msg_container_base').animate({ scrollTop: $(".msg_container_base").height()}, 800);
+
+           saveChatToLogs({
+                                c_from:myID,
+                                c_to:userID,
+                                c_message:messText,
+                                c_chatroom:myID+''+userID,
+                                
+                                });
 
 }
 
@@ -349,5 +363,19 @@ $( "#btn-input" ).keyup(function( event ) {
   }
 });
 
+var saveChatToLogs = function(data){
+      $.ajax({
+            url: base_url+'/api/saveChatLogsNew',
+            dataType: 'json',
+            data:data,
+            method: 'POST',
+    
+        }).done(function (response) {
+             console.log('success');
+
+        }).fail(function () {
+            console.log('fail');
+        });
+}
 
 </script>

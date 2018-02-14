@@ -174,6 +174,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
             $scope.callStarted = true;
             $scope.startCall(type, user, i);
         }
+        sendNotification(getMyId(),getMyFullName(),user.id,type,{ src: getmyPhoto() });
 
     };
 

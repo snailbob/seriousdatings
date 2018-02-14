@@ -30,6 +30,20 @@ class userMessagesController extends Controller
 		$messages = DB::select($sql);
 		return  response()->json($messages);
 	}
+
+	public function mailTO(){
+		$myID = Auth::user()->id;
+
+       	$sql_view = "SELECT 
+					  * 
+					FROM
+					  users 
+					WHERE id !='$myID'";
+		$chatDatas = DB::select($sql_view);
+		
+		return  response()->json(['usersTomailData'=>$chatDatas]);
+
+	}
 	public function messagesview(){
 
 		$id = $_GET['id'];

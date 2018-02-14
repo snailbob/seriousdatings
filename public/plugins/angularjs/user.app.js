@@ -715,7 +715,7 @@ ngApp.controller('bodyController', [
 
         };
 
-        $scope.crearSMSnew = function(id,messageID){
+        $scope.crearSMSnew = function(id,messageID,fullname){
             $scope.messageChatdata = "";
           
             var segmentChat1 =  $scope.logged_user_info.id+''+id;
@@ -735,7 +735,8 @@ ngApp.controller('bodyController', [
                                                            segmentChat1,
                                                            segmentChat2,
                                                            id,
-                                                           $scope.logged_user_info.id);
+                                                           $scope.logged_user_info.id,
+                                                           fullname);
                             },
 
                         })
@@ -755,7 +756,7 @@ ngApp.controller('bodyController', [
 
         }
 
-        $scope.smsViewDataChatNew = function(data,sender,receiver,userID,myID){
+        $scope.smsViewDataChatNew = function(data,sender,receiver,userID,myID,fullname){
 
                 $ngConfirm({
                 title: 'MESSAGES',
@@ -774,8 +775,10 @@ ngApp.controller('bodyController', [
 
                     $scoped.userID = userID;
                     $scoped.myID = myID;
+                    $scoped.fullname = fullname;
                     $('#userIDtext').val(userID);
                     $('#currentStateChatBox').val(1);
+                    
 
                 },
                 onClose: function(){
@@ -793,7 +796,7 @@ ngApp.controller('bodyController', [
         $scope.emailContact = function (user_id) {
 
             var image_link = base_url + '/public/images/2.jpg';
-            var data_link = base_url + '/api/messages';
+            var data_link = base_url + '/api/mailTO';
             var count_even_odd = 0;
             var define_count_even_odd = "",
                 define_image_pull_cool = "";
@@ -817,10 +820,10 @@ ngApp.controller('bodyController', [
                         },
                         method: 'get'
                     }).done(function (response) {
-                        console.log(response);
-                        angular.forEach(response, function (value, key) {
+                        
+                        angular.forEach(response.usersTomailData, function (value, key) {
                             count_even_odd++;
-
+                            console.log(value,key);
                             // if (count_even_odd % 2 === 0) {
                             //     define_count_even_odd = "right";
                             //     define_image_pull = "darker";
@@ -834,16 +837,17 @@ ngApp.controller('bodyController', [
                             // }
 
                             var statuses = value.m_status == 0 ? 'animate-container' : '';
+                            var fullNameSms = value.firstName + ', ' + value.lastName;
 
                             /*      self.setContentAppend('<div class="sms-container  ' + define_image_pull + ' ' + statuses + ' remove-' + value.m_id + '" onclick="viewFullMessages(\'' + value.id + '\',\'' + value.m_id + '\')">' +
                                       '<img src="' + value.photo + '" alt="Avatar" ' + define_image_pull_cool + ' style="width:100%;">' +
                                       '<p>Subject: ' + value.m_subject + '<br>Message: ' + value.m_message.substr(0, 5) + '...</p>' +
                                       '<span class="time-' + define_count_even_odd + '">' + value.message_time + '</span>' +
                                       '</div>'*/
-                            self.setContentAppend('<div class="sms-container  ' + define_image_pull + ' ' + statuses + ' remove-' + value.m_id + '" onclick="viewFullMessages(\'' + value.id + '\',\'' + value.m_id + '\')">' +
-                                '<img src="' + value.photo + '" alt="Avatar" ' + define_image_pull_cool + ' style="width:100%;">' +
-                                '<p><br>' + value.firstName + ': ' + value.m_message + '</p>' +
-                                '<span class="time-' + define_count_even_odd + '">' + value.message_time + '</span>' +
+                            self.setContentAppend('<div class="sms-container  ' + define_image_pull + ' ' + statuses + ' remove-' + value.m_id + '" onclick="viewFullMessages(\'' + value.id + '\',\'' + value.m_id + '\',\''+fullNameSms+'\')">' +
+                                '<img src="' + response.usersTomailData[key].photo + '" alt="Avatar" ' + define_image_pull_cool + ' style="width:100%;">' +
+                                '<p><br>' + value.firstName + ', ' + value.lastName + '</p>' +
+                                '<span class="time-' + define_count_even_odd + '">' + value.gender + '</span>' +
                                 '</div>'
                             );
 
@@ -859,7 +863,7 @@ ngApp.controller('bodyController', [
                     row: 'row',
                 },
 
-                title: 'Mail Box',
+                title: 'Message To',
                 closeIcon: true,
                 draggable: true,
                 icon: 'fa fa-envelope',
@@ -872,6 +876,11 @@ ngApp.controller('bodyController', [
                     close: function () {
 
                     }
+                    // ,
+                //  mail: {
+                //     text: 'Creat new',
+                //     btnClass: 'btn-blue submit-load',
+                // }
                 },
             })
         }

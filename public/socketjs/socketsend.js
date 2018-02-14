@@ -45,6 +45,9 @@ var getMyId = function(){
 var getMyFullName = function (){
 	return $("#myName").val();
 }
+var getmyPhoto = function (){
+	return $("#myPhoto").val();
+}
 
 var actionsType = function(type,sendeIDs){
 				switch(type){
@@ -58,7 +61,7 @@ var actionsType = function(type,sendeIDs){
 				
 }
 
-
+var currentRoute = $("#currentRoutes").val(); 
 
 var fireNotification = function(message){
 	var 		sendID = message.sender,
@@ -68,7 +71,7 @@ var fireNotification = function(message){
 		      descNoti = message.files.desc;
 
 		var texttype = "",typeheading="";
-		console.log(message);
+		console.log("fireNotification",message);
 
 	switch(typeNoti) {
 	    case 'wink':
@@ -82,7 +85,16 @@ var fireNotification = function(message){
 	        break;
 	     case 'flirt':
 	     		flirtToast(message);
-	    	  break;    
+	    	  break;
+
+	     case 'video':
+	     		if (currentRoute !=='online_chat') {
+     				texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+' trying to video chat!<br/> &nbsp;<span  class="noti-clickme " onclick="redirectVideo();">proceed</span></div>.';
+	        		typeheading = '<img src="'+src+'" style="width:60px;height:60px;" class="img-circle pull-left">';
+	      		}else{
+	      			return false;
+	      		}
+	    	  break;  	      
 	    default:
 	       return null;
 	}
@@ -138,7 +150,7 @@ var chatNotification = function(message){
 			
 			texttype = '<div class="inside-notif">&nbsp;Message from: '+typeName+'!'+
 						'<br/>'+messeageNoti+'<br/> '	+
-						'&nbsp;<span  class="noti-clickme " onclick="viewFullMessages(\''+sendID+'\',\''+'10'+'\')">view</span></div>.';
+						'&nbsp;<span  class="noti-clickme " onclick="viewFullMessages(\''+sendID+'\',\''+'10'+'\',\''+typeName+'\')">view</span></div>.';
 	        typeheading = '<img src="'+message.message.files.src+'" style="width:60px;height:60px;" class="img-thumbnail pull-left">';
 	        extendFlirtToast(texttype,typeheading);
 		
@@ -183,7 +195,12 @@ if ($('#currentStateChatBox').val() !==1) {
 
 
 	});
-}	 
+}
+
+var redirectVideo = function(){
+	window.location.href = base_url+'/online_chat';
+}
+	 
     // if(message.message.typing) {
     //     appendDIV({
     //         sender: message.sender,

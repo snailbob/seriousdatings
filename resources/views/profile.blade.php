@@ -52,7 +52,7 @@
     </h1>
   </div>
 </div>
-<div class="inner-contendbg" ng-controller="profileCtrl">
+<div class="inner-contendbg" ng-controller="profileCtrl" id="plainProfileCode">
 
   <div class="container" ng-init="username='{{$username}}'">
     <div class="row" ng-init="getMatchData({!! htmlspecialchars(json_encode($data['friends'])) !!})">
