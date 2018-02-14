@@ -195,8 +195,9 @@ ngApp.controller('bodyController', [
                 console.log(res.data, 'body_contents');
                 //check if subscription valid or expired
                 if ($scope.subscription_validity) {
-                    if ($scope.subscription_validity.is_expired && (uri_1 != 'datingPlan' || uri_1 != 'payment_gateway')) {
-                        $scope.SubscriptionInfo('');
+                    if ($scope.subscription_validity.is_expired && (uri_1 != 'datingPlan' && uri_1 != 'payment_gateway')) { 
+                        window.location.href = window.base_url+'/datingPlan';
+                        // $scope.SubscriptionInfo('');
                     }
                 }
 
