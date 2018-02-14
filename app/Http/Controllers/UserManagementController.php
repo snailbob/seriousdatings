@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use Mail;
 use DB;
 use Auth;
 use App\RoleUser;
@@ -125,6 +126,36 @@ class UserManagementController extends Controller
         return "Success";
     }
 
+    public function approveUser(Request $request)
+    {
+        User::where('email', $request->email)
+        ->update(['isApproved' => 1]);
+
+        $user = User::where('email', $request->email)->get();        
+        return response()->json($user);
+    }
+
+    public function disapproveUser(Request $request)
+    {
+        User::where('email', $request->email)
+        ->update(['isApproved' => 0]);
+
+
+        // Mail::send('email.disapproved_user', $user, function($message) use ($user) {
+        //     $message->to($user->email);
+        //     $message->subject('Reject User');
+        // });
+        $user = User::where('email', $request->email)->first();
+        // var_dump($user->email);
+        $email = $user->email;
+        // var_dump($email);
+        Mail::send('email.disapproved_user', ['content' => $request->content, 'user' => $user], function ($message) use ($email) {
+            $message->to($email, 'ID')->subject('Request Rejected');
+        });
+        
+        return response()->json($user);
+    }
+
     public function userbyCat($cat){
 
         switch($cat){
@@ -147,7 +178,7 @@ class UserManagementController extends Controller
             $sql = 'select * from users where verified = ?';
             $field = 'verified';
             $val = 1;
-            break;
+            break;  
         }
 
         // $users = User::where($field,$val)->get();

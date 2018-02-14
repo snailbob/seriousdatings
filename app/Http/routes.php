@@ -483,6 +483,8 @@ Route::post('blockUser', 'AdminUserListController@blockUser');
 Route::post('pauseUser', 'AdminUserListController@pauseUser');
 Route::post('deleteUser', 'AdminUserListController@deleteUser');
 Route::post('setToNonUser', 'UserManagementController@setToNonUser');
+Route::post('disapproveUser', 'UserManagementController@disapproveUser');
+Route::post('approveUser', 'UserManagementController@approveUser');
 /* End of Manage User Actions */
 
 
