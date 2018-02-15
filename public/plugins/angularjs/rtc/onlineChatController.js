@@ -486,7 +486,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         var config = {
             // via: https://github.com/muaz-khan/WebRTC-Experiment/tree/master/socketio-over-nodejs
             openSocket: function(config) {
-                var SIGNALING_SERVER = 'https://www.seriousdatings.com:8888/';//https://socketio-over-nodejs2.herokuapp.com:443/'; //https://webrtcweb.com:9559/';
+                var SIGNALING_SERVER = 'https://www.seriousdatings.com:8080/';//https://socketio-over-nodejs2.herokuapp.com:443/'; //https://webrtcweb.com:9559/';
 
                 config.channel = config.channel || location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
                 var sender = Math.round(Math.random() * 999999999) + 999999999;
