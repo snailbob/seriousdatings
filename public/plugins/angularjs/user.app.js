@@ -1147,7 +1147,7 @@ ngApp.controller('bodyController', [
                         console.log(formDatas);
 
                                 $.ajax({
-                                    url: myHttpService.pathURL+'saveAppointmentNew',
+                                    url: base_url+'/api/saveAppointmentNew',
                                     dataType: 'json',
                                     data:formDatas,
                                     method: 'POST',
