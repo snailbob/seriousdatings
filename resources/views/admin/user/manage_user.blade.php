@@ -57,6 +57,11 @@
                           <a href='#'> <i class="fa fa-user-secret"></i> Set to non-user</a>
                         </li>
                         @endif
+                        @if($user->role == 5)
+                        <li class="user_memberBtn">
+                          <a href='#'> <i class="fa fa-user-secret"></i> Set to user</a>
+                        </li>
+                        @endif
                         @if($user->username != "admin")
                         <li class="pauseBtn">
                           <a href='#' class="pauseTxt"> 
