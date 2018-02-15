@@ -11,3 +11,4 @@ Homestead.json
 /public/assets/*.jpg
 /public/assets/*.png
 /public/assets/*.gif
+/public/socketjs/config-server.js
