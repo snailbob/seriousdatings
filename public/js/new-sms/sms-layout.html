@@ -263,7 +263,7 @@ socket.on('chat', function (message) {
                                             '<img src="'+message.message.files.src+'" class=" img-responsive ">'+
                                         '</div>'+
                                     '</div>');
-                  $('.msg_container_base').animate({ scrollTop: $(".msg_container_base").height()}, 800);
+                  $('.msg_container_base').animate({ scrollTop: $(".msg_container_base").height()}, 'slow');
 
                  
 
@@ -277,7 +277,7 @@ socket.on('chat', function (message) {
             return;
         }
 
-    $('.msg_container_base').animate({ scrollTop: $(".msg_container_base").height()}, 800);
+   
      document.getElementById('chat-sound').play();
 
 });
