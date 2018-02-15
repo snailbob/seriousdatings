@@ -95,7 +95,11 @@ $(document).ready(function()
 				setTimeout(
 					function() 
 					{
+<<<<<<< HEAD
 						window.location.replace(base_url+"/admin/users/non_users");
+					}, 3000);
+=======
+						window.location.replace("http://localhost/seriousdatings/admin/users/non_users");
 					}, 2000);
 			},
 			error: function(value)
@@ -125,6 +129,7 @@ $(document).ready(function()
 					{
 						window.location.replace("http://localhost/seriousdatings/admin/users");
 					}, 2000);
+>>>>>>> origin/set-to-user-action
 			},
 			error: function(value)
 			{
