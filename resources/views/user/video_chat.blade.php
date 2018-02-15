@@ -46,7 +46,29 @@
                     </div>
                 </div>
             </div>
-            <div ng-class="{'col-sm-9' : callStatus.leftSizeLarge, 'col-sm-3' : !callStatus.leftSizeLarge}">
+
+            <!-- local/remote videos container -->
+            <div id="videos-container" class="row">
+                <div ng-class="{'col-sm-9' : callStatus.leftSizeLarge, 'col-sm-3' : !callStatus.leftSizeLarge}" id="myMedia">
+                    <div class="padding-top">
+                        <img ng-src="@{{logged_user_info.photo}}" class="img-thumbnail" style="width: 100%; margin:auto;">
+                    </div>
+                    <button class="btn btn-default btn-block" ng-if="!callStatus.leftSizeLarge" ng-click="switchSize()">
+                        Switch Size
+                    </button>
+                </div>
+                <div ng-class="{'col-sm-9' : !callStatus.leftSizeLarge, 'col-sm-3' : callStatus.leftSizeLarge}" id="othersMedia">
+                    
+                    <div class="padding-top">
+                        <img ng-src="@{{currentUser.photo}}" class="img-thumbnail" style="width: 100%; margin:auto;">
+                    </div>
+                    <button class="btn btn-default btn-block" ng-if="callStatus.leftSizeLarge" ng-click="switchSize()">
+                        Switch Size
+                    </button>
+                </div>
+            </div>
+            
+            {{--  <div ng-class="{'col-sm-9' : callStatus.leftSizeLarge, 'col-sm-3' : !callStatus.leftSizeLarge}">
                 <div class="padding-top">
                     <img ng-src="@{{logged_user_info.photo}}" class="img-thumbnail" style="width: 100%; margin:auto;">
 
@@ -66,9 +88,21 @@
                 <button class="btn btn-default btn-block" ng-if="callStatus.leftSizeLarge" ng-click="switchSize()">
                     Switch Size
                 </button>
-            </div>
+            </div>  --}}
         </div>
+        <section class="hidden">
+            <span>
+                Private ??
+                <a href="/video-conferencing/" target="_blank" title="Open this link in new tab. Then your conference room will be private!">
+                    {{--  <code>
+                        <strong id="unique-token">#123456789</strong>
+                    </code>  --}}
+                </a>
+            </span>
 
+            <input type="text" value="room_yeah12531" id="conference-name">
+            <button id="setup-new-room" class="setup">Setup New Conference</button>
+        </section>
     </div>
 
     <div class="inner-contendbgx" ng-if="!callStatus.onCall">

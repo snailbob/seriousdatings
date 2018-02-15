@@ -410,7 +410,7 @@ class UsersController extends Controller {
         return $data;
 
     }
-
+    
     public function send_verification_mail($user){
 
         $data = [

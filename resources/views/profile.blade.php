@@ -90,25 +90,25 @@
 
               @foreach($data['friends'] as $ind=>$single_user)
 
-              <li class="item" style="background: url('{{ $single_user->photo }}') no-repeat center"></li>
+              <li class="item" style="cursor: pointer; background: url('{{ $single_user->photo }}') no-repeat center" ng-click="visitProfile(userSelected)"></li>
 
               @endforeach
             </ul>
           </div>
         </div>
         <div class="controls hidden-xs">
-          <a href="#" class="previous btn btn-danger" ng-click="left()">
+          <a href="#" class="previous btn btn-danger">
             <span class="fa fa-chevron-left"></span>
           </a>
           <a onclick="window.location.reload(true)" class="btn btn-danger reload">
             <span class="fa fa-refresh"></span> Refresh</a>
-          <a href="#" class="next btn btn-danger" ng-click="right()">
+          <a href="#" class="next btn btn-danger">
             <span class="fa fa-chevron-right"></span>
           </a>
         </div>
 
         <div ng-class="{ 'hide-me' : userSelected==null || '{!! $currentUser !!}'=='0' }">
-          <div class="upcoming-event-people">
+          <div class="upcoming-event-people carousel-current-user">
             <div class="upcoming-people-row">
               <div class="left-upcoming-user">
                 <a href="{!! url('user/profile') !!}/@{{ userSelected.username }}">
@@ -121,6 +121,7 @@
                   <!-- new  menu add -->
                   <i class="fa fa-gift" uib-tooltip="Send Gift" ng-click="virtualGiftModal('', userSelected)"></i>
                   <i class="fa fa-map" ng-click="gotoliveChat(userSelected.id)" uib-tooltip="Are We Nearby"></i>
+                  <i class="fa fa-eye" ng-click="winkuser(userSelected)" uib-tooltip="Wink"></i>
                   <i class="fa fa-comments" ng-click=createSMS(userSelected.id,userSelected.firstName) uib-tooltip="Message"></i>
                 </div>
                 <h2>
@@ -357,7 +358,7 @@
             </div>
           </div>
         </div>
-
+        
         <button class="btn btn-danger match" ng-click="next()" ng-hide="nextButton" ng-class="{ 'hide-me' : '{!! $currentUser !!}'=='0' }">Next
           <span class="fa fa-angle-double-right"></span>
         </button>
