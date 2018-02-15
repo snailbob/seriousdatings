@@ -169,6 +169,9 @@
                         <li><a href="{{ url('admin/users/non_users') }}">
                                 <i class="fa fa-circle-o"></i> <span>Non-User Management</span></a>
                         </li>
+                        <li><a href="{{ url('admin/users/seo_users') }}">
+                                <i class="fa fa-circle-o"></i> <span>SEO-User Management</span></a>
+                        </li>
                     </ul>
                 </li>
 

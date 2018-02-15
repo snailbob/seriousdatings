@@ -41,7 +41,7 @@
                                     </td>
                                     <td class="user_email_cell">{{$picture->user['email']}} </td>
                                     <td class="">
-                                        <img src="{{ url().'/public/images/users/admin/pictures/'.$picture->image}}" class="img-circle " width="45" alt=""></img>
+                                        <img src="{{$picture->image}}" width="45" alt=""></img>
                                     </td>
                                     <td>
                                         @if(is_numeric($picture->status))

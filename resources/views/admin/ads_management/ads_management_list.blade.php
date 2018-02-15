@@ -70,7 +70,7 @@
 @include('admin.inc.footer')
 
 <meta name="csrf-token" content="{{ csrf_token() }}">
-{!! HTML::script('public/js/toaster/jquery.toast.min.js') !!}
+{!! HTML::script('public/js/toastr/toastr.min.js') !!}
 {!! HTML::script('public/js/admin/ads_management/ads_lists.js') !!}
 </body>
 </html>
