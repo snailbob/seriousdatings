@@ -192,6 +192,8 @@ Route::group(['prefix' => 'api'], function () {
     Route::post('aboutdate', 'UsersController@postAboutdate');
     Route::get('selectmates', 'UsersController@selectmates');
     Route::post('delete_account', 'UsersController@delete_account');
+    Route::post('update_user_info', 'UsersController@postUpdateUser');
+    
 
     Route::get('online_chat', 'UsersController@get_online_chat');
     Route::get('get_private_chat_id', 'GroupChatController@get_private_chat_id');

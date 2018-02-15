@@ -123,7 +123,7 @@ $(document).ready(function()
 				setTimeout(
 					function() 
 					{
-						window.location.replace("http://localhost/seriousdatings/admin/users");
+						window.location.replace(base_url+"/admin/users");
 					}, 2000);
 			},
 			error: function(value)

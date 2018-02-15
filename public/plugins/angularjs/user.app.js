@@ -360,7 +360,7 @@ ngApp.controller('bodyController', [
         };
 
 
-        $scope.flirtEmojiModal = function (currUser, loggedUser) {
+        $rootScope.flirtEmojiModal = function (currUser, loggedUser) {
                 console.log('modallcurrUser',currUser);
                 console.log('modalloggedUser',loggedUser);
             var _toItem = {
