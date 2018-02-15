@@ -130,7 +130,7 @@
 
 
         @if(!isset($currentUser) || $currentUser==0)
-            @if(request()->segment(1) == 'speeddating' || (request()->segment(1) == 'profile' && request()->segment(3) != ''))
+            @if(request()->segment(1) == 'speeddating' || (request()->segment(2) == 'profile' && request()->segment(3) != ''))
                 <div class="travel-option profile-managment">
                         <!-- @{{userProfileData}} -->
                     <div class="connect-with-left">
