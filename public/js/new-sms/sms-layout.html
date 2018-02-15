@@ -23,7 +23,7 @@
   margin: 0;
   padding: 0 10px 10px;
   max-height:400px;
-  height: 250px;
+  height: 350px;
   overflow-x:hidden;
 }
 .top-bar {
@@ -61,7 +61,7 @@
     overflow: hidden;
     display: flex;
 }
-img {
+.avatar > img {
     display: block;
     width: 100%;
 }
@@ -127,12 +127,46 @@ img {
 .containernew-messaging{
   width: 100%;
   margin-left: 10px;
-  height: 400px;
+  height: 450px;
 }
 .bg-colog-panel{
   background-color: #67b0d3;
 }
+/*
+.clean-gray{
 
+                background-color: #eeeeee;
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+                background-image: -webkit-linear-gradient(top, #5895b0, #4185a4);
+                background-image: -moz-linear-gradient(top, #5895b0, #4185a4);
+                background-image: -ms-linear-gradient(top, #5895b0, #4185a4);
+                background-image: -o-linear-gradient(top, #5895b0, #4185a4);
+                background-image: linear-gradient(top, #5895b0, #4185a4);
+                border: 1px solid #3d9bc3;
+                border-bottom: 1px solid #2a4f60;
+                border-radius: 3px;
+                color: #333;
+                font:11px/1 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+                padding: 8px 0;
+                text-align: center;
+                text-shadow: 0 1px 0 #eee;
+                 display: inline-block;
+                 color: #fff;
+
+            }*/
+            .top-bar{
+                background-image: url("public/images/buttons/background.png");
+                background-repeat: repeat;
+                 background-size: 300% 55px;
+                 height: 55px;
+            }
+        /*    .btn-down{
+                 position: absolute;
+                width: 40px;
+                height: 35px;
+                margin-top: -22px;
+                margin-left: 55px;
+            }*/
     </style>
 </head>
 <body>
@@ -150,16 +184,26 @@ img {
     <div class="row chat-window col-xs-12" id="chat_window_1">
         <div class="col-xs-12 col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading top-bar" style="background-color: #67b0d3;">
+                <div class="panel-heading top-bar">
                     <div class="col-md-8 col-xs-8">
+                      
+                        <img src="public/images/buttons/backbuttons.png" style="width: 60px; height: 35px;" ng-click="backClose()" />
 
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Messages- {{fullname}}</h3>
-                    </div>
+                       
+                      <!-- <button type="button" class="clean-gray call-me-btnNew" style="width: 150px;">Back</button> -->
+                      <!--   <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Messages- {{fullname}}</h3> -->
+                    </div>`
                     <div class="col-md-4 col-xs-4" style="text-align: right;">
-                        <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_minim">Back</span></a>
+                      
+                             <img  src="public/images/buttons/downnew.png" style="
+                                  width: 40px;
+                                  height: 30px;
+                                  margin-top: -30px;
+                                  margin-left: 55px;display: none;" />
+                   
                      </div>
                 </div>
-                <div class="panel-body msg_container_base">
+                <div class="panel-body msg_container_base" >
 
                     <div ng-repeat="geMessage in getMessagesData">
 
