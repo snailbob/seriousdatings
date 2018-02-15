@@ -57,9 +57,11 @@ class liveCHatController extends Controller
 		$chatRoomID1 = $request->input('chatRoomID1');/*segment ID*/
 		$chatRoomID2 = $request->input('chatRoomID2');/*segment ID*/
 		$myID = Auth::user()->id;
-		$toID = $request->input('toID');/*segment ID*/
+		$toID = $request->input('toID');/*segment ID*/ 
+		/*formatter date : %W %M %e, %Y  %r*/
        	$sql_view = "SELECT 
 					  * ,
+       				  DATE_FORMAT(c_send_dt, '%M %e, %Y  %r') AS formattedDate,	
 					  (SELECT photo FROM users WHERE id = cll.c_from) AS pixtures,
 					  (SELECT CONCAT(firstName,' ',lastName) FROM users WHERE id = cll.c_from) AS fullName
 					FROM

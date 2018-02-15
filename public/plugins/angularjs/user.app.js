@@ -725,7 +725,7 @@ ngApp.controller('bodyController', [
                             title: 'Working!',
                             content: 'Processing your request!',
                             animation: 'zoom',
-                            backgroundDismiss: true,
+                            // backgroundDismiss: true,
                             backgroundDismissAnimation: 'glow',
                             theme: 'material',
                             lazyOpen: true,
@@ -757,15 +757,16 @@ ngApp.controller('bodyController', [
         }
 
         $scope.smsViewDataChatNew = function(data,sender,receiver,userID,myID,fullname){
-
+            console.log(data);
                 $ngConfirm({
                 title: 'MESSAGES',
                 contentUrl: base_url + '/public/js/new-sms/sms-layout.html',
                 columnClass: 'medium', // to make the width wider.
                 animation: 'zoom',
-                backgroundDismiss: true,
+                // backgroundDismiss: true,
+                boxWidth: '500px',
+                useBootstrap: false,
                 backgroundDismissAnimation: 'glow',
-                theme: 'material',
                 lazyOpen: true,
                 onScopeReady: function($scoped){
 
@@ -783,6 +784,11 @@ ngApp.controller('bodyController', [
                 },
                 onClose: function(){
                     $('#currentStateChatBox').val('');
+                },
+                  buttons: {
+                   
+                    close: function () {
+                    }
                 },
 
             })
@@ -889,83 +895,83 @@ ngApp.controller('bodyController', [
 
         var data_link = base_url + '/profile';
         $scope.createSMS = function (recipient_id, name) {
+                $scope.crearSMSnew(recipient_id,0,name);
+            // $.confirm({
+            //     title: 'Send Messages to: <b>' + name + '</b>',
+            //     content: '' +
+            //     '<form action="" class="SMS_INFO">' +
+            //     '<div class="form-group">' +
+            //     '<label>Enter your subject here</label>' +
+            //     '<input type="text" placeholder="Subject" class="subject form-control" required />' +
+            //     '</div>' +
+            //     '<div class="form-group">' +
+            //     '<label>Enter your message here</label>' +
+            //     '<textarea  placeholder="Message" class="messagecontent form-control" required></textarea>' +
+            //     '</div>' +
+            //     '</form>',
+            //     closeIcon: true,
+            //     draggable: true,
+            //     icon: 'fa fa-envelope',
+            //     theme: 'material',
+            //     animation: 'scalex',
+            //     type: 'red',
+            //     closeAnimation: 'scale',
+            //     buttons: {
+            //         formSubmit: {
+            //             text: 'Submit',
+            //             btnClass: 'btn-blue submit-load',
+            //             action: function () {
+            //                 var subject = this.$content.find('.subject').val();
+            //                 var message = this.$content.find('.messagecontent').val();
+            //                 if (!subject) {
+            //                     $.alert('provide a valid subject ');
+            //                     return false;
+            //                 }
+            //                 if (!message) {
+            //                     $.alert('provide a valid message ');
+            //                     return false;
+            //                 }
 
-            $.confirm({
-                title: 'Send Messages to: <b>' + name + '</b>',
-                content: '' +
-                '<form action="" class="SMS_INFO">' +
-                '<div class="form-group">' +
-                '<label>Enter your subject here</label>' +
-                '<input type="text" placeholder="Subject" class="subject form-control" required />' +
-                '</div>' +
-                '<div class="form-group">' +
-                '<label>Enter your message here</label>' +
-                '<textarea  placeholder="Message" class="messagecontent form-control" required></textarea>' +
-                '</div>' +
-                '</form>',
-                closeIcon: true,
-                draggable: true,
-                icon: 'fa fa-envelope',
-                theme: 'material',
-                animation: 'scalex',
-                type: 'red',
-                closeAnimation: 'scale',
-                buttons: {
-                    formSubmit: {
-                        text: 'Submit',
-                        btnClass: 'btn-blue submit-load',
-                        action: function () {
-                            var subject = this.$content.find('.subject').val();
-                            var message = this.$content.find('.messagecontent').val();
-                            if (!subject) {
-                                $.alert('provide a valid subject ');
-                                return false;
-                            }
-                            if (!message) {
-                                $.alert('provide a valid message ');
-                                return false;
-                            }
+            //                 var form_data = {
+            //                     subject: subject,
+            //                     message: message,
+            //                     recipient_id: recipient_id
+            //                 };
+            //                 $.confirm({
+            //                     content: function () {
+            //                         var self = this;
+            //                         return myHttpService.post('sendmessage', form_data).then(function (res) {
+            //                             if (res.data.message_r) {
+            //                                 self.setContentAppend('Sent successfully!');
+            //                                 self.setTitle('Message');
+            //                             }
+            //                         });
+            //                     },
+            //                     icon: 'fa fa-check',
+            //                     theme: 'material',
+            //                     animation: 'scalex',
+            //                     buttons: {
+            //                         close: function () {
+            //                         },
+            //                     }
+            //                 });
 
-                            var form_data = {
-                                subject: subject,
-                                message: message,
-                                recipient_id: recipient_id
-                            };
-                            $.confirm({
-                                content: function () {
-                                    var self = this;
-                                    return myHttpService.post('sendmessage', form_data).then(function (res) {
-                                        if (res.data.message_r) {
-                                            self.setContentAppend('Sent successfully!');
-                                            self.setTitle('Message');
-                                        }
-                                    });
-                                },
-                                icon: 'fa fa-check',
-                                theme: 'material',
-                                animation: 'scalex',
-                                buttons: {
-                                    close: function () {
-                                    },
-                                }
-                            });
-
-                        }
-                    },
-                    cancel: function () {
-                        //close
-                    },
-                },
-                onContentReady: function () {
-                    // bind to events
-                    var jc = this;
-                    this.$content.find('form').on('submit', function (e) {
-                        // if the user submits the form by pressing enter in the field.
-                        e.preventDefault();
-                        jc.$$formSubmit.trigger('click'); // reference the button and click it
-                    });
-                }
-            });
+            //             }
+            //         },
+            //         cancel: function () {
+            //             //close
+            //         },
+            //     },
+            //     onContentReady: function () {
+            //         // bind to events
+            //         var jc = this;
+            //         this.$content.find('form').on('submit', function (e) {
+            //             // if the user submits the form by pressing enter in the field.
+            //             e.preventDefault();
+            //             jc.$$formSubmit.trigger('click'); // reference the button and click it
+            //         });
+            //     }
+            // });
 
 
         }
