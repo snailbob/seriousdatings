@@ -205,6 +205,11 @@ class UserManagementController extends Controller
                 'role_id' => 6
             ]);
         }
+        $email = $user->email;
+
+        Mail::send('email.seo_notification', ['user' => $user], function ($message) use ($email) {
+            $message->to($email, 'ID')->subject('SEO PROMOTION!');
+        });
         return "Success";
     }
 
