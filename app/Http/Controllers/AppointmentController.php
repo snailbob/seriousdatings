@@ -14,6 +14,7 @@ use App\User;
 use App\Http\Controllers\NotiFierLogsController;
 use Illuminate\Support\Facades\View;
 use App\AvailabilityApp;
+use App\DefaultAvailTime;
 class AppointmentController extends Controller
 {
     /**
@@ -166,9 +167,27 @@ class AppointmentController extends Controller
 
     public function getTimeAvailability(Request $request){
         $data = AvailabilityApp::where('av_user_id',$request->input('ids'))->where('av_status','=',null)->get();
-         return  response()->json(['avail'=>self::AvailabilityAppFormat($data)]);
+        $defaultTime = DefaultAvailTime::all();
+
+         return  response()->json(['avail'=>self::AvailabilityAppFormat($data),
+                                   'defaultTime' => self::getUserDefaultTime($defaultTime)]);
     }
 
+    public static function getUserDefaultTime($data){
+         
+         $new_value = array();
+         $format = array();
+        foreach ($data as $key => $value) {
+
+             $new_value['def_id'] = $value->def_id;
+             $new_value['def_timeFrom'] = date('Y-m-d',strtotime($value->def_timeFrom));
+             $new_value['def_timeTo'] = date('Y-m-d',strtotime($value->def_timeTo));
+             $new_value['def_time'] = self::sliceUserTime($value->def_time);
+             $format[] = $new_value;
+
+        }
+        return $format;
+    }
 
     public static function AvailabilityAppFormat ($data){
 

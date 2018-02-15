@@ -63,8 +63,8 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,myHttpService,$httpParamS
 				// console.log(userInfos);
 				
 				myHttpService.getWithParams('getTimeAvailability',{'ids':userInfos.id}).then(function (res) {
-				
-						$scope.viewLayoutAppoinment(res.data,userInfos);	
+								
+						$scope.viewLayoutAppoinment(res.data,userInfos,res.data.defaultTime);	
 				});
 	};
 
@@ -156,7 +156,25 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,myHttpService,$httpParamS
         };
 
 
-	$scope.viewLayoutAppoinment = function (dataAvialable,userData) {
+	$scope.viewLayoutAppoinment = function (dataAvialable,userData,defaultTime) {
+		 var itr = moment.twix(new Date(defaultTime[0].def_timeFrom),
+		   						new Date(defaultTime[0].def_timeTo)).iterate("days");
+
+		 var itr2 = moment.twix(new Date(defaultTime[0].def_timeFrom),
+		   						new Date(defaultTime[0].def_timeTo)).iterate("days");
+                var range=[];
+                var fullDay=[];
+                while(itr.hasNext()){
+
+                    range.push(itr.next().format("D-MMM-YYYY"));
+                   
+                	
+                }
+	              while(itr2.hasNext()){
+
+	              	 fullDay.push(itr2.next().format("dddd"));
+	              }
+
 
 			$ngConfirm({
 				title:'',
@@ -176,6 +194,27 @@ ngApp.controller('mapCtrl', function($scope,$ngConfirm,myHttpService,$httpParamS
                        $scoped.allAvailTimelength = dataAvialable.avail.length;
                        $scoped.allAvailTime = dataAvialable;
                        $scoped.userInfo = userData;
+
+                       $scoped.defaultDay = fullDay;
+                       $scoped.defaultDate = range;
+                       $scoped.defaultTime = defaultTime[0].def_time;
+
+
+
+                       /*DefaultTime*/
+                        $scoped.Defnext = function () {
+                       		counter++;
+                       		if (counter >= range.length) {
+                       			counter = range.length;
+                       			return false;
+                       		}
+                       		 $scoped.incrementingData = counter;
+                       };
+
+                       /*end DefaultTime*/
+
+
+
                        $scoped.previous = function () {
                        		counter--;
                        			if (counter < 0) {
@@ -294,5 +333,4 @@ $(document).ready(function () {
 		}
 	});
 
-		console.log(window.parent.$('meta[name="csrf-token"]').attr('content'));
 });

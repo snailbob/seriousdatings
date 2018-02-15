@@ -57,6 +57,12 @@
   <script src="{{ url() }}/public/js/jquery-confirm/dist/jquery-confirm.min.js"></script>
   <script src="{{ url() }}/public/js/jquery.time.ago.js"></script>
   <script src="{{ url() }}/public/js/toaster/jquery.toast.min.js"></script>
+
+  <script src="{{ url() }}/public/plugins/momentjs/moment.min.js"></script> 
+  <script src="{{ url() }}/public/plugins/momentjs/twix.min.js"></script> 
+
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/1.1.0/toaster.min.js"></script>
   
 
@@ -75,7 +81,7 @@
   
   <script src="{{ url() }}/public/plugins/angularjs/services/profileService.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.3/moment.min.js"></script> 
+
   <script src="{{ url() }}/public/plugins/angularjs/plugins/angular-moment/angular-moment.js"></script>
 
 

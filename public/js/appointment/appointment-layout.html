@@ -143,7 +143,7 @@
                         <button type="button" class="clean-gray mid-btn"> {{allAvailTime.avail[incrementingData].avDate}} </button>
                         <button type="button" ng-click="next();"- class="clean-gray side-btn"><span> > </span></button> 
                     </div>  
-
+                    
                     <div class="row" style="margin-top: 5px;">
                         <button class="clean-gray very-mid">{{allAvailTime.avail[incrementingData].avDay}}</button>
                     </div> 
@@ -159,19 +159,49 @@
                         <!-- </div> -->
                 </div>
             </div>
+
+
             <div ng-if="allAvailTimelength == 0" style="text-align: center;">
-                <h2>No avaible Schedule.</h2>
+
+                  <div class="row" >
+
+                        <button type="button" ng-click="previous();" class="clean-gray side-btn"><span> < </span></button>
+                        <button type="button" class="clean-gray mid-btn"> {{defaultDate[incrementingData]}} </button>
+                        <button type="button" ng-click="Defnext();"- class="clean-gray side-btn"><span> > </span></button> 
+                    </div> 
+                     <div class="row" style="margin-top: 5px;">
+                        <button class="clean-gray very-mid">{{defaultDay[incrementingData]}}</button>
+                    </div> 
+
+                 <label style="margin-left: -240px">Select time :</label>
+                <br/>
+                <div class="row list-times-inside">
+                        <!-- <div > -->
+                               <button type="button" ng-repeat="Deftimes in defaultTime track by $index" class="list-times act-{{$index}}" ng-click="getTimes(Deftimes,$index)">{{Deftimes.Usertime}}
+                               </button>       
+
+                        <!-- </div> -->
+                </div>
+
             </div>
 
         <hr/>
 
 
+        <div ng-if="allAvailTimelength != 0">
+            <input type="hidden" value="{{ userInfo.id }}" name="appToid"/ >
+            <input type="hidden" value="{{fetchTime}}" name="availTime" id="availTimed">
+            <input type="hidden" value="{{allAvailTime.avail[incrementingData].avDate}}" name="availDate" id="appAvailDay">
+            <input type="hidden" value="{{allAvailTime.avail[incrementingData].avDid}}" name="availDid" id="availDid">
+        </div>
 
+        <div ng-if="allAvailTimelength == 0">
+            <input type="hidden" value="{{ userInfo.id }}" name="appToid"/ >
+            <input type="hidden" value="{{fetchTime}}" name="availTime" id="availTimed">
+            <input type="hidden" value="{{defaultDay[incrementingData]}}" name="availDate" id="appAvailDay">
+            <input type="hidden" value="100" name="availDid" id="availDid">
+        </div>
 
-        <input type="hidden" value="{{ userInfo.id }}" name="appToid"/ >
-        <input type="hidden" value="{{fetchTime}}" name="availTime" id="availTimed">
-        <input type="hidden" value="{{allAvailTime.avail[incrementingData].avDate}}" name="availDate" id="appAvailDay">
-        <input type="hidden" value="{{allAvailTime.avail[incrementingData].avDid}}" name="availDid" id="availDid">
 <!-- 
         <div class="form-group has-warning">
             <label class="control-label" for="inputWarning"><i class="fa fa-map-marker"></i>
@@ -352,7 +382,7 @@
             <span class="help-block"><small>Details of appointment here</small></span>
         </div> -->
 
-        <div ng-if="allAvailTimelength != 0" class="form-group" style="text-align: center;">
+        <div class="form-group" style="text-align: center;">
                 <button type="button" ng-click="saveData();" class="clean-gray" style="width: 150px; "><span> Save Appointment </span></button>
         </div>
         </div>       

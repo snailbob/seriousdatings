@@ -823,7 +823,6 @@ ngApp.controller('bodyController', [
                         
                         angular.forEach(response.usersTomailData, function (value, key) {
                             count_even_odd++;
-                            console.log(value,key);
                             // if (count_even_odd % 2 === 0) {
                             //     define_count_even_odd = "right";
                             //     define_image_pull = "darker";
@@ -1044,14 +1043,32 @@ ngApp.controller('bodyController', [
         $scope.newAppointment = function(userInfos){
 
             myHttpService.getWithParams('getTimeAvailability',{'ids':userInfos.id}).then(function (res) {
-
-                        $scope.viewLayoutAppoinment(res.data,userInfos);    
+                    $scope.viewLayoutAppoinment(res.data,userInfos,res.data.defaultTime);     
                 });
 
 
         }
 
-        $scope.viewLayoutAppoinment = function (dataAvialable,userData) {
+        
+    $scope.viewLayoutAppoinment = function (dataAvialable,userData,defaultTime) {
+         var itr = moment.twix(new Date(defaultTime[0].def_timeFrom),
+                                new Date(defaultTime[0].def_timeTo)).iterate("days");
+
+         var itr2 = moment.twix(new Date(defaultTime[0].def_timeFrom),
+                                new Date(defaultTime[0].def_timeTo)).iterate("days");
+                var range=[];
+                var fullDay=[];
+                while(itr.hasNext()){
+
+                    range.push(itr.next().format("D-MMM-YYYY"));
+                   
+                    
+                }
+                  while(itr2.hasNext()){
+
+                     fullDay.push(itr2.next().format("dddd"));
+                  }
+
 
             $ngConfirm({
                 title:'',
@@ -1071,6 +1088,27 @@ ngApp.controller('bodyController', [
                        $scoped.allAvailTimelength = dataAvialable.avail.length;
                        $scoped.allAvailTime = dataAvialable;
                        $scoped.userInfo = userData;
+
+                       $scoped.defaultDay = fullDay;
+                       $scoped.defaultDate = range;
+                       $scoped.defaultTime = defaultTime[0].def_time;
+
+
+
+                       /*DefaultTime*/
+                        $scoped.Defnext = function () {
+                            counter++;
+                            if (counter >= range.length) {
+                                counter = range.length;
+                                return false;
+                            }
+                             $scoped.incrementingData = counter;
+                       };
+
+                       /*end DefaultTime*/
+
+
+
                        $scoped.previous = function () {
                             counter--;
                                 if (counter < 0) {
@@ -1103,7 +1141,7 @@ ngApp.controller('bodyController', [
                         console.log(formDatas);
 
                                 $.ajax({
-                                    url: base_url+'/api/saveAppointmentNew',
+                                    url: myHttpService.pathURL+'saveAppointmentNew',
                                     dataType: 'json',
                                     data:formDatas,
                                     method: 'POST',
@@ -1138,7 +1176,7 @@ ngApp.controller('bodyController', [
                                     var UrLs = '/online_chat'
                                         UrLs +='?user_id='+user_id;
                                         UrLs +='&action_type='+action_type
-                                    var win = window.open(base_url+UrLs, '_blank');
+                                    var win = window.open(myHttpService.url+UrLs, '_blank');
                                     win.focus();
                         }
                         $scoped.blockUser = function(u){
@@ -1160,6 +1198,9 @@ ngApp.controller('bodyController', [
                                                    
                                                     close: function () {
                                                         self.close();
+                                                         $(".removable-"+u.id).slideUp(3000);
+                                                         $(".markerID-"+u.id).css("display","none");
+                                                          parentCOnfirm.close();
                                                     }
                                                 },
                                            });
@@ -1174,7 +1215,7 @@ ngApp.controller('bodyController', [
                  }
             });
 
-        };
+    };
 
         init();
 
