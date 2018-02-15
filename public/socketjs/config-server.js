@@ -4,7 +4,7 @@ function getUUID() {
 
 
     
-    var SIGNALING_SERVER = 'https://www.seriousdatings.com:8888/';
+    var SIGNALING_SERVER = 'https://www.seriousdatings.com:8080/';
     var channel = 'channel-name';
     var sender = getUUID();
     var username =  $("#myID").val();
