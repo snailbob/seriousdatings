@@ -86,7 +86,9 @@
         var uri_4 = "{{ request()->segment(4) }}";
         var csrf_token = "{{ csrf_token() }}";
         var user_logged_info = "{{ Auth::user() }}";
-
+        var session_to_call_id = "{{ session()->get('session_to_call_id') }}";        
+        var session_callaction_type = "{{ session()->get('session_callaction_type') }}";        
+        
         <?php
             if (!empty($_SERVER['HTTP_CLIENT_IP'])){   //check ip from share internet
                 $ip = $_SERVER['HTTP_CLIENT_IP'];

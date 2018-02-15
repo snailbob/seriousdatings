@@ -263,7 +263,7 @@
                                     </a>
                                 </span>
 
-                                <input type="text" value="@{{activeUser.room_id}}__@{{data.me.firstName}}__@{{activeUser.private_id}}__@{{activeUser.id}}__@{{callType}}" id="conference-name">
+                                <input type="text" value="@{{activeUser.room_id}}__@{{data.me.firstName}}__@{{activeUser.private_id}}__@{{activeUser.id}}__@{{callType}}__@{{data.me.id}}" id="conference-name">
                                 <button id="setup-new-room" class="setup">Setup New Conference</button>
                             </section>
 
