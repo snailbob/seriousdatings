@@ -177,12 +177,12 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
             $scope.callStarted = true;
             $scope.startCall(type, user, i);
         }
-        sendNotification(getMyId(),getMyFullName(),user.id,type,{ src: getmyPhoto() });
 
     };
 
     $scope.startCall = function(type, user, i){
         $scope.callStarted = true;
+        sendNotification(getMyId(),getMyFullName(),user.id,type,{ src: getmyPhoto() });
 
         if(type != 'text'){
             $scope.callType = type;

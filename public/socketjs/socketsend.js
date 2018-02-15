@@ -94,7 +94,16 @@ var fireNotification = function(message){
 	      		}else{
 	      			return false;
 	      		}
-	    	  break;  	      
+			  break;  	 
+			       
+	     case 'voice':
+		 if (currentRoute !=='online_chat') {
+			 texttype = '<div class="inside-notif">&nbsp;'+messeageNoti+' trying to voice chat!<br/> &nbsp;<span  class="noti-clickme " onclick="redirectVideo();">proceed</span></div>.';
+			typeheading = '<img src="'+src+'" style="width:60px;height:60px;" class="img-circle pull-left">';
+		  }else{
+			  return false;
+		  }
+			break;  
 	    default:
 	       return null;
 	}
