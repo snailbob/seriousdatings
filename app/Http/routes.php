@@ -467,6 +467,7 @@ Route::group(array('before' => 'admin'), function () {
     Route::resource('admin/templates', 'TemplateController');
     Route::resource('admin/gift_cards', 'GiftCardController');
     Route::get('admin/users/non_users', 'UserManagementController@non_member_user');
+    Route::get('admin/users/seo_users', 'UserManagementController@seo_members');
     Route::get('admin/users/cat/{cat}', 'UserManagementController@userbyCat');
     Route::resource('admin/users', 'UserManagementController');
     Route::get('admin/demographic', 'UserManagementController@demographic');
@@ -493,6 +494,9 @@ Route::post('pauseUser', 'AdminUserListController@pauseUser');
 Route::post('deleteUser', 'AdminUserListController@deleteUser');
 Route::post('setToNonUser', 'UserManagementController@setToNonUser');
 Route::post('setToUser', 'UserManagementController@setToUser');
+Route::post('setToVerified', 'UserManagementController@setToVerified');
+Route::post('setToSubscriber', 'UserManagementController@setToSubscriber');
+Route::post('setToSeo', 'UserManagementController@setToSeo');
 Route::post('disapproveUser', 'UserManagementController@disapproveUser');
 Route::post('approveUser', 'UserManagementController@approveUser');
 /* End of Manage User Actions */
