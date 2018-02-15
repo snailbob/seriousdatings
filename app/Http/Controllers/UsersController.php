@@ -182,7 +182,18 @@ class UsersController extends Controller {
         return View::make('user.video_chat');
     }
     
-    public function onlineChatPage(){
+    public function onlineChatPage(Request $request){
+        $user_id = $request->input('user_id');
+        $action_type = $request->input('action_type');
+
+        if(!empty($user_id)){
+            $request->session()->flash('session_to_call_id', $user_id);
+            $request->session()->flash('session_callaction_type', $action_type);
+            return redirect(url().'/online_chat');
+        }
+
+        // return $request->session()->get('session_to_call_id');
+
         $gender  = Auth::user()->gender;
         $online = User::where('gender', 'not like', $gender)->get();
         $me = User::where('gender', 'not like', $gender)->get();
@@ -209,6 +220,8 @@ class UsersController extends Controller {
     public function get_online_chat(Request $request){
         $user_id = $request->input('user_id');
         $action_type = $request->input('action_type');
+        $private_id = $request->input('private_id');
+
 
         $logged_id  = Auth::user()->id;
         $gender  = Auth::user()->gender;
@@ -220,13 +233,20 @@ class UsersController extends Controller {
 
         $flirt_messages = \DB::table('definable_flirt')->get();
 
-        $soloUserCount = User::where('id', $user_id)->count();
 
-        if(!empty($user_id) && $soloUserCount){
+        $online = User::where('gender', 'not like', $gender)->limit(20)->get();
+
+        //check private room to get direct contact
+        if(!empty($user_id)){
+
             $online = User::where('id', $user_id)->get();
-        }
-        else{
-            $online = User::where('gender', 'not like', $gender)->limit(20)->get();
+
+            if($user_id == $logged_id && !empty($private_id)){
+                $other_id = $private_id / $user_id;
+                $online = User::where('id', $other_id)->get();
+
+            }
+
         }
 
         $me = User::find($logged_id);
@@ -242,7 +262,7 @@ class UsersController extends Controller {
             'me'=>$me,
             'flirt_messages'=>$flirt_messages,
             'count'=>$count,
-            // 'user_id'=>$logged_id
+            'logged_id'=>$logged_id
         );
 
         return response()->json($arr);

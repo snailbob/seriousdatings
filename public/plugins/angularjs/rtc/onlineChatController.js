@@ -83,13 +83,16 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         $scope.nowCalling.user_unavailable = false;
         $scope.stopRinging();
 
-        if(typeof($scope.params.user_id) !== 'undefined'){
-            $scope.params.action_type = 'text';
-            window.location.href = $scope.base_url+'/online_chat?'+$.param($scope.params);
-        }else{
-            $scope.params.user_index = $scope.activeIndex;
-            window.location.href = $scope.base_url+'/online_chat?'+$.param($scope.params);
-        }
+        var _params = 'user_id='+$scope.activeUser.id+'&action_type=text';
+        window.location.href = $scope.base_url+'/online_chat?'+_params;
+
+        // if(typeof($scope.params.user_id) !== 'undefined'){
+        //     $scope.params.action_type = 'text';
+        //     window.location.href = $scope.base_url+'/online_chat?'+$.param($scope.params);
+        // }else{
+        //     $scope.params.user_index = $scope.activeIndex;
+        //     window.location.href = $scope.base_url+'/online_chat?'+$.param($scope.params);
+        // }
 
     }
 
@@ -379,67 +382,88 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
             $scope.flirtPopover.content = res.data.flirt_messages;
             console.log(res.data, 'online_chat');
 
-            if(typeof($scope.params.user_index) !== 'undefined'){
-                $scope.activeIndex = $scope.params.user_index;
+            var _session_callaction_type = window.session_callaction_type;
+            var session_to_call_id = window.session_to_call_id;
+
+            if(window.session_to_call_id){
+                var _theIndex = $scope.data.users.findIndex(x => x.id == window.session_to_call_id);
+                $scope.activeIndex = _theIndex;
                 $scope.activeUser = res.data.users[$scope.activeIndex];
-                var _action = (typeof($scope.params.action_type) !== 'undefined') ? $scope.params.action_type : 'text';
-                $scope.startCall(_action, $scope.activeUser, $scope.activeIndex);
-            }
-            else if(typeof($scope.params.user_id) !== 'undefined'){
+
                 $scope.callStarted = true;
-                $scope.activeUser = res.data.users[0];
-                $scope.activeIndex = 0;
-                var _action = (typeof($scope.params.action_type) !== 'undefined') ? $scope.params.action_type : 'text';
 
-                if(!$scope.activeUser.is_online && _action != 'text'){
-                    $.alert('Opps! Cannot start a call to an offline user. Send a message instead.');
-                    _action = 'text';
-                    $timeout(function(){
-                        $scope.startCall(_action, $scope.activeUser, $scope.activeIndex);
-                    }, 250);
+                var _action = (_session_callaction_type) ? _session_callaction_type : 'text';
 
-                }
+                //check if user is the current logged user, if not, prompt to call
+                if(res.data.logged_id != res.data.user_id){
 
-                else{
-                    if(_action != 'text'){
-                        var jc = $ngConfirm({
-                            title: 'Start Call',
-                            content: 'Do you want to start the call now?',
-                            scope: $scope,
-                            buttons: {
-                                Calling: {
-                                    text: 'Call Now',
-                                    btnClass: 'btn-danger',
-                                    action: function(scope, button){
-                                        $timeout(function(){
-                                            $scope.startCall(_action, $scope.activeUser, $scope.activeIndex);
-                                        }, 250);
-                                    }
-                                },
-                                dropCall: {
-                                    text: 'Later',
-                                    btnClass: 'btn-default',
-                                    action: function(scope, button){
-                                        $timeout(function(){
-                                            $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
-                                        }, 250);
+                    if(!$scope.activeUser.is_online && _action != 'text'){
+                        $.alert('Opps! Cannot start a call to an offline user. Send a message instead.');
+                        _action = 'text';
+                        $timeout(function(){
+                            $scope.startCall(_action, $scope.activeUser, $scope.activeIndex);
+                        }, 250);
 
+                    }
+
+                    else{
+                        if(_action != 'text'){
+                            var jc = $ngConfirm({
+                                title: 'Start Call',
+                                content: 'Do you want to start the call now?',
+                                scope: $scope,
+                                buttons: {
+                                    Calling: {
+                                        text: 'Call Now',
+                                        btnClass: 'btn-danger',
+                                        action: function(scope, button){
+                                            $timeout(function(){
+                                                $scope.startCall(_action, $scope.activeUser, $scope.activeIndex);
+                                            }, 250);
+                                        }
+                                    },
+                                    dropCall: {
+                                        text: 'Later',
+                                        btnClass: 'btn-default',
+                                        action: function(scope, button){
+                                            $timeout(function(){
+                                                $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
+                                            }, 250);
+
+                                        }
                                     }
                                 }
-                            }
-    
-                        });
         
-                    }
-                    else{
-                        $timeout(function(){
-                            $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
-                        }, 250);
-                    }
+                            });
+            
+                        }
+                        else{
+                            $timeout(function(){
+                                $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
+                            }, 250);
+                        }
 
+                    }
+                }
+                else{
+                    $scope.startCall('text', $scope.activeUser, $scope.activeIndex);
                 }
 
+
+
             }
+
+            // if(typeof($scope.params.user_index) !== 'undefined'){
+            //     $scope.activeIndex = $scope.params.user_index;
+            //     $scope.activeUser = res.data.users[$scope.activeIndex];
+            //     var _action = (typeof($scope.params.action_type) !== 'undefined') ? $scope.params.action_type : 'text';
+            //     $scope.startCall(_action, $scope.activeUser, $scope.activeIndex);
+            // }
+            // else if(typeof($scope.params.user_id) !== 'undefined'){
+            //     $scope.callStarted = true;
+            //     $scope.activeUser = res.data.users[0];
+            //     $scope.activeIndex = 0;
+            // }
         });
     }
 
@@ -529,6 +553,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                 var _callingPrivateID = callingNameId[2];
                 var _callingUserID = callingNameId[3];
                 $scope.callType = callingNameId[4];
+                var _callingCallerID = callingNameId[5];
+
                 console.log($scope.callType,'ctype');
 
                 if(_callingUserID == $scope.data.me.id){
@@ -563,7 +589,13 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
                         this.disabled = true;
                         $scope.videoShown = true;
                         $scope.callStarted = true;
-    
+
+                        //set active user by finding caller id on users array
+                        var _theIndex = $scope.data.users.findIndex(x => x.id == _callingCallerID);
+                        $scope.activeIndex = _theIndex;
+                        $scope.activeUser = $scope.data.users[$scope.activeIndex];
+
+                        
                         console.log(joinRoomButton);
                         $(joinRoomButton).closest('tr').hide();
     
