@@ -769,7 +769,7 @@ ngApp.controller('bodyController', [
                 backgroundDismissAnimation: 'glow',
                 lazyOpen: true,
                 onScopeReady: function($scoped){
-
+                    var self = this;
                     $scoped.getMessagesData = data;
                     $scoped.sender = sender;
                     $scoped.receiver = receiver;
@@ -779,17 +779,15 @@ ngApp.controller('bodyController', [
                     $scoped.fullname = fullname;
                     $('#userIDtext').val(userID);
                     $('#currentStateChatBox').val(1);
+                    $scoped.backClose = function(){
+                        self.close();
+                    }
                     
 
                 },
                 onClose: function(){
                     $('#currentStateChatBox').val('');
-                },
-                  buttons: {
-                   
-                    close: function () {
-                    }
-                },
+                }
 
             })
         }
