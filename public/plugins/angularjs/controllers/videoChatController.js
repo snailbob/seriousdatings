@@ -1,4 +1,4 @@
-ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$compile', 'uiCalendarConfig', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $compile,uiCalendarConfig) {
+ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '$timeout', '$ngConfirm', '$compile', 'uiCalendarConfig', '$interval', function ($scope, $filter, myHttpService, $timeout, $ngConfirm, $compile,uiCalendarConfig, $interval) {
     $scope.myInterval = 3000;
     $scope.noWrapSlides = false;
     $scope.active = 0;
@@ -7,34 +7,63 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
     $scope.callStatus = {
         onCall: false,
         isRinging: false,
+        isAnswered: false,
         leftSizeLarge: true 
     };
     $scope.isLoading = false;
+    $scope.data = {};
+
+    $scope.timeleft = 45;
+    $scope.downloadTimer = function(){
+
+        var downloadTimer = $interval(function () {
+            $scope.timeleft--;
+            console.log($scope.timeleft, 'timeleft');
+
+            if ($scope.timeleft <= 0){
+                clearInterval(downloadTimer);
+                $scope.dropCall();
+            }
+
+        }, 1000);
+
+    }
+
+
 
     var slides = $scope.slides = [];
     var currIndex = 0;
 
-    // $scope.addSlide = function () {
-    //     var newWidth = 600 + slides.length + 1;
-    //     slides.push({
-    //         image: 'http://unsplash.it/' + newWidth + '/300',
-    //         text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
-    //         id: currIndex++
-    //     });
-    // };
-
-    // for (var i = 0; i < 4; i++) {
-    //     $scope.addSlide();
-    // }
 
     $scope.switchSize = function(){
         $scope.callStatus.leftSizeLarge = !$scope.callStatus.leftSizeLarge; 
+        $scope.scaleVideo();
     }
 
     $scope.playAudio = function() {
         var audio = new Audio(base_url+'/public/assets/audio/phone_ringing.mp3');
         audio.play();
     };
+
+    $scope.exitPage = function(){
+        window.location.href = window.base_url;
+    }
+
+    $scope.startReshuffle = function(){
+        window.location.href = window.base_url+'/video_chat?shuffle=yes';
+    }
+
+    
+    $scope.blockUser = function (u) {
+        console.log(u);
+        $scope.showToast('You have successfully blocked user.');
+
+        myHttpService.post('block_user', u).then(function (res) {
+            console.log();
+            window.location.href = window.base_url+'/video_chat';
+        });
+    }
+
     
     $scope.startVideoCall = function(i, user){
         $scope.currentUser = user;
@@ -46,13 +75,13 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
         $scope.myInterval = 0;
 
         var vidlength = angular.element(document).find('video').length;
-        // angular.element(document).find('.experiment-rtc').removeClass('hidden');
-        $scope.videoShown = true;
 
         if(vidlength == 0){
+            sendNotification(getMyId(),getMyFullName(),user.id,'video_shuffle',{ src: getmyPhoto() });
+
             $timeout(function(){
                 angular.element(document).find('#setup-new-room').click();
-            });
+            }, 5);
         }
         
         $scope.callAudio.onended = function(){
@@ -63,6 +92,7 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
 
 
     $scope.stopRinging = function(){
+        $scope.callStatus.isAnswered = true;
         $scope.callAudio.pause();
         $scope.callAudio.currentTime = 0;
     }
@@ -73,26 +103,53 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
 
         $scope.stopRinging();
 
+        if($('video').length){
+            window.location.reload(true);
+        }
     }
     
+    /**
+     * Returns a random integer between min (inclusive) and max (inclusive)
+     * Using Math.round() will give you a non-uniform distribution!
+     */
+    $scope.getRandomInt = function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
     $scope.getData = function(){
         $scope.isLoading = true;
 
         myHttpService.get('get_video_shuffle').then(function(res){
             // slides = res.data.online;
+            $scope.data = res.data;
+            console.log(slides, res.data, 'get_video_shuffle');
+
             $scope.isLoading = false;
             $scope.conferenceScript();
+
+            //start random 
+            if(session_to_call_id != ''){
+                var _onlineusers = res.data.online;
+                var _random = $scope.getRandomInt(0, _onlineusers.length);
+                $scope.startVideoCall(_random, _onlineusers[_random]);
+            }
 
             res.data.online.forEach(function(d){
                 d.slideIndex = currIndex++; 
                 slides.push(d);
                 console.log(d);
             });
-            console.log(slides, res.data, 'get_video_shuffle');
             
         });
     }
 
+
+    $scope.playRinging = function(){
+        //play ringing
+        $scope.callAudio.play();
+        $scope.myInterval = 0;
+    }
 
     $scope.conferenceScript = function(){
 
@@ -110,7 +167,7 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
         var config = {
             // via: https://github.com/muaz-khan/WebRTC-Experiment/tree/master/socketio-over-nodejs
             openSocket: function(config) {
-                var SIGNALING_SERVER = 'https://www.seriousdatings.com:8888/';//https://socketio-over-nodejs2.herokuapp.com:443/'; //https://webrtcweb.com:9559/';
+                var SIGNALING_SERVER = 'https://www.seriousdatings.com:8080/';//https://socketio-over-nodejs2.herokuapp.com:443/'; //https://webrtcweb.com:9559/';
 
                 config.channel = config.channel || location.href.replace(/\/|:|#|%|\.|\[|\]/g, '');
                 var sender = Math.round(Math.random() * 999999999) + 999999999;
@@ -138,27 +195,23 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
             onRemoteStream: function(media) {
                 var $othersMedia = $('#othersMedia');
                 console.log($scope.callType, 'scope.callType');
-                if($scope.callType == 'voice'){
-                    var mediaElement = getMediaElement(media.video, {
-                        width: ($othersMedia.width()) - 15, //(videosContainer.clientWidth / 2) - 15,
-                        height: 50,
-                        buttons: ['mute-audio', 'volume-slider', 'stop' ] //'mute-video', 'full-screen', 
-                    });
-                    mediaElement.id = media.streamid;
-                }
-                else{
-                    var mediaElement = getMediaElement(media.video, {
-                        width: ($othersMedia.width() / 2) - 15, //(videosContainer.clientWidth / 2) - 15,
-                        buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider', 'stop']
-                    });
-                    mediaElement.id = media.streamid;
-                }
 
-                $othersMedia.append(mediaElement);
+                var mediaElement = getMediaElement(media.video, {
+                    width: ($othersMedia.width()) - 15, //(videosContainer.clientWidth / 2) - 15,
+                    buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider', 'stop']
+                });
+                mediaElement.id = media.streamid;
+
+                $timeout(function(){
+                    $othersMedia.append(mediaElement);
+                    $scope.scaleVideo();
+                    $scope.downloadTimer();
+                }, 5);
                 // videosContainer.parentNode.insertBefore(mediaElement, videosContainer.nextSibling);
 
                 // videosContainer.insertBefore(mediaElement, videosContainer.firstChild);
                 $scope.stopRinging();
+                $scope.callStatus.isAnswered = true;
 
             },
             onRemoteStreamEnded: function(stream, video) {
@@ -173,14 +226,14 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
                 if (typeof roomsList === 'undefined') roomsList = document.body;
                 
                 var callingNameId = room.roomName.split("__");
-                var _callingRoomID = callingNameId[0];
-                var _callingName = callingNameId[1];
-                var _callingPrivateID = callingNameId[2];
-                var _callingUserID = callingNameId[3];
-                $scope.callType = callingNameId[4];
-                console.log($scope.callType,'ctype');
+                var callerName = callingNameId[0];
+                var callerID = callingNameId[1];
+                var callingName = callingNameId[2];
+                var callingID = callingNameId[3];
 
-                if(_callingUserID == $scope.data.me.id){
+                console.log(callingNameId,'callingNameId');
+
+                if(callingID == $scope.data.logged_info.id){
                     $scope.playRinging();
 
                     var tr = document.createElement('tr');
@@ -190,7 +243,7 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
                             '<button class="btn btn-success join" style="margin-right: 5px;">Answer</button>' + 
                             '<button class="btn btn-danger reject">Reject</button>' +
                         '</div>'+
-                        '<strong>' + _callingName + '</strong> is inviting you to join '+$scope.callType+' call..' +
+                        '<strong>' + callerName + '</strong> is inviting you to join video chat..' +
                         '</div>'
                     +'</td>';
                     roomsList.insertBefore(tr, roomsList.firstChild);
@@ -210,9 +263,12 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
                     joinRoomButton.setAttribute('data-roomToken', room.roomToken);
                     joinRoomButton.onclick = function() {
                         this.disabled = true;
-                        $scope.videoShown = true;
-                        $scope.callStarted = true;
-    
+                        // $scope.videoShown = true;
+                        // $scope.callStarted = true;
+                        $scope.stopRinging();
+                        $scope.callStatus.onCall = true;
+                        $scope.callStatus.isRinging = true;
+
                         console.log(joinRoomButton);
                         $(joinRoomButton).closest('tr').hide();
     
@@ -232,6 +288,7 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
             },
             onRoomClosed: function(room) {
                 var joinButton = document.querySelector('button[data-roomToken="' + room.roomToken + '"]');
+                $scope.dropCall();
                 if (joinButton) {
                     // joinButton.parentNode === <li>
                     // joinButton.parentNode.parentNode === <td>
@@ -256,65 +313,31 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
 
         function captureUserMedia(callback, failure_callback) {
             var $myMedia = $('#myMedia');
-            if($scope.callType == 'voice'){
-                var audio = document.createElement('video');
-                audio.setAttribute('autoplay', true);
-                audio.setAttribute('controls', true);
-                // participants.insertBefore(audio, participants.firstChild);
-    
-                getUserMedia({
-                    video: audio,
-                    constraints: { audio: true, video: false },
-                    onsuccess: function(stream) {
-                        config.attachStream = stream;
-                        callback && callback();
-    
-                        audio.setAttribute('muted', true);
-    
-                        var mediaElement = getMediaElement(audio, {
-                            width: $myMedia.width() - 15, //(videosContainer.clientWidth / 2) - 15,
-                            height: 50,
-                            buttons: ['mute-audio', 'volume-slider', 'stop'] //'mute-video', 'full-screen', 
-                        });
-                        mediaElement.toggle('mute-audio');
-                        // videosContainer.insertBefore(mediaElement, videosContainer.firstChild);
+            
+            var video = document.createElement('video');
 
-                        $myMedia.append(mediaElement);
+            getUserMedia({
+                video: video,
+                onsuccess: function(stream) {
+                    config.attachStream = stream;
+                    callback && callback();
 
-                    },
-                    onerror: function() {
-                        $.alert('Unable to get access to your mic.');
-                        // callback && callback();
-                    }
-                });
-            }
-            else{
-                var video = document.createElement('video');
+                    video.setAttribute('muted', true);
 
-                getUserMedia({
-                    video: video,
-                    onsuccess: function(stream) {
-                        config.attachStream = stream;
-                        callback && callback();
-    
-                        video.setAttribute('muted', true);
-    
-                        var mediaElement = getMediaElement(video, {
-                            width: $myMedia.width() - 15, //(videosContainer.clientWidth / 2) - 15,
-                            buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider', 'stop']
-                        });
-                        mediaElement.toggle('mute-audio');
-                        $myMedia.append(mediaElement);
+                    var mediaElement = getMediaElement(video, {
+                        width: $myMedia.width() - 15, //(videosContainer.clientWidth / 2) - 15,
+                        buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider', 'stop']
+                    });
+                    mediaElement.toggle('mute-audio');
+                    $myMedia.append(mediaElement);
 
-                        // videosContainer.insertBefore(mediaElement, videosContainer.firstChild);
-                    },
-                    onerror: function() {
-                        $.alert('Unable to get access to your webcam');
-                        // callback && callback();
-                    }
-                });
-            }
-
+                    // videosContainer.insertBefore(mediaElement, videosContainer.firstChild);
+                },
+                onerror: function() {
+                    $.alert('Unable to get access to your webcam');
+                    // callback && callback();
+                }
+            });
 
         }
 
@@ -367,6 +390,14 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
 
         window.onresize = scaleVideos;
 
+
+    }
+
+    $scope.scaleVideo = function(){
+        $timeout(function(){
+            $('.media-container').css('width', '100%');
+
+        }, 500);
 
     }
 

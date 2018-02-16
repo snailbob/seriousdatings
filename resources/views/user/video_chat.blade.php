@@ -8,12 +8,12 @@
     <nav class="video-menu" ng-class="{ 'hidden' : !callStatus.onCall }">
         <a href="#">&#9776;</a>
         <ul>
-            <a href="#" ng-click="window.location.href = window.base_url"><li>Exit page </li></a>
+            <a href="#" ng-click="exitPage()"><li>Exit page </li></a>
+            <a href="#" ng-click="startReshuffle()"><li>Shuffle</li></a>
+            <a href="#" ng-click="blockUser(currentUser)"><li>Block</li></a>
+
             <a href="#"><li>Hang up</li></a>
-            <a href="#"><li>Answer</li></a>
-            <a href="#"><li>Shuffle</li></a>
             <a href="#"><li>Mute</li></a>
-            <a href="#"><li>Block</li></a>
             <a href="#"><li>Report</li></a>
         </ul>
     </nav>
@@ -29,44 +29,44 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-dark" ng-if="callStatus.onCall">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- list of all available conferencing rooms -->
+                <table style="width: 100%;" id="rooms-list"></table>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-dark" ng-hide="!callStatus.onCall">
+
+
         <div class="row">
             <div class="container">
                 <div class="row no-gutter">
                     <div class="col-sm-12">
                         <div class="padding-top">
-                            <div class="alert alert-info">
+                            <div class="alert alert-info" ng-if="!callStatus.isAnswered">
                                 <button class="btn btn-danger btn-sm pull-right" ng-click="dropCall()">
                                     Drop
                                 </button>
                                 <p class="lead">Waiting for @{{currentUser.firstName}} ..</p>
                             </div>
+
+                            <div class="alert alert-info" ng-if="callStatus.isAnswered">
+                                <button class="btn btn-danger btn-sm pull-right" ng-click="dropCall()">
+                                    Drop
+                                </button>
+                                <p class="lead">You only now have @{{ timeleft }} seconds for the next re-shuffle ..</p>
+                            </div>
+
                         </div>
 
                     </div>
                 </div>
             </div>
 
-            <!-- local/remote videos container -->
-            <div id="videos-container" class="row">
-                <div ng-class="{'col-sm-9' : callStatus.leftSizeLarge, 'col-sm-3' : !callStatus.leftSizeLarge}" id="myMedia">
-                    <div class="padding-top">
-                        <img ng-src="@{{logged_user_info.photo}}" class="img-thumbnail" style="width: 100%; margin:auto;">
-                    </div>
-                    <button class="btn btn-default btn-block" ng-if="!callStatus.leftSizeLarge" ng-click="switchSize()">
-                        Switch Size
-                    </button>
-                </div>
-                <div ng-class="{'col-sm-9' : !callStatus.leftSizeLarge, 'col-sm-3' : callStatus.leftSizeLarge}" id="othersMedia">
-                    
-                    <div class="padding-top">
-                        <img ng-src="@{{currentUser.photo}}" class="img-thumbnail" style="width: 100%; margin:auto;">
-                    </div>
-                    <button class="btn btn-default btn-block" ng-if="callStatus.leftSizeLarge" ng-click="switchSize()">
-                        Switch Size
-                    </button>
-                </div>
-            </div>
             
             {{--  <div ng-class="{'col-sm-9' : callStatus.leftSizeLarge, 'col-sm-3' : !callStatus.leftSizeLarge}">
                 <div class="padding-top">
@@ -90,6 +90,26 @@
                 </button>
             </div>  --}}
         </div>
+
+        <!-- local/remote videos container -->
+        <div id="videos-container" class="row">
+                <div ng-class="{'col-sm-9' : callStatus.leftSizeLarge, 'col-sm-3' : !callStatus.leftSizeLarge}" id="myMedia">
+                    <button class="btn btn-default btn-block" ng-if="!callStatus.leftSizeLarge" ng-click="switchSize()">
+                        Switch Size
+                    </button>
+                </div>
+                <div ng-class="{'col-sm-9' : !callStatus.leftSizeLarge, 'col-sm-3' : callStatus.leftSizeLarge}" id="othersMedia">
+                    
+                    <div class="padding-top calling_image" ng-if="!callStatus.isAnswered">
+                        <img ng-src="@{{currentUser.photo}}" class="img-thumbnail" ng-if="!callStatus.isAnswered" style="width: 100%; margin:auto;">
+                    </div>
+                    <button class="btn btn-default btn-block" ng-if="callStatus.leftSizeLarge" ng-click="switchSize()">
+                        Switch Size
+                    </button>
+                </div>
+            </div>
+
+
         <section class="hidden">
             <span>
                 Private ??
@@ -100,12 +120,12 @@
                 </a>
             </span>
 
-            <input type="text" value="room_yeah12531" id="conference-name">
+            <input type="text" value="@{{data.logged_info.firstName}}__@{{data.logged_info.id}}__@{{currentUser.firstName}}__@{{currentUser.id}}" id="conference-name">
             <button id="setup-new-room" class="setup">Setup New Conference</button>
         </section>
     </div>
 
-    <div class="inner-contendbgx" ng-if="!callStatus.onCall">
+    <div class="inner-contendbgx" ng-hide="callStatus.onCall">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

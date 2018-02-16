@@ -84,7 +84,10 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         $scope.stopRinging();
 
         var _params = 'user_id='+$scope.activeUser.id+'&action_type=text';
-        window.location.href = $scope.base_url+'/online_chat?'+_params;
+
+        if($('video').length){
+            window.location.href = $scope.base_url+'/online_chat?'+_params;
+        }
 
         // if(typeof($scope.params.user_id) !== 'undefined'){
         //     $scope.params.action_type = 'text';
@@ -616,6 +619,7 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
             },
             onRoomClosed: function(room) {
                 var joinButton = document.querySelector('button[data-roomToken="' + room.roomToken + '"]');
+                $scope.dropCall();
                 if (joinButton) {
                     // joinButton.parentNode === <li>
                     // joinButton.parentNode.parentNode === <td>

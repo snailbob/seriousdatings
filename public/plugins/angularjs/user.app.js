@@ -158,6 +158,7 @@ ngApp.controller('bodyController', [
         $scope.notifications = [];
         $scope.subscription_validity = {};
         $scope.active_ads = [];
+        $scope.adsPlaceholder =  [0, 1, 2, 3 , 4];
         $scope.logged_user_info = null;
         $scope.logged_id = 0;
         $scope.isReadyToDate = {
@@ -180,7 +181,7 @@ ngApp.controller('bodyController', [
             myHttpService.get('body_contents').then(function (res) {
                 $scope.notifications = res.data.notifications;
                 $scope.subscription_validity = res.data.subscription_validity;
-                $scope.active_ads = res.data.active_ads;
+                // $scope.active_ads = res.data.active_ads;
                 $scope.logged_id = res.data.logged_id;
                 myHttpService.shareData = res.data;
                 $scope.unread_noti_count = res.data.unread_noti_count;
@@ -192,6 +193,23 @@ ngApp.controller('bodyController', [
                     $rootScope.logged_user_info.birthdateObj = new Date(res.data.logged_user_info.birthdate);
                 }
 
+                //add placeholder length base on active ad
+                if($scope.active_ads.length){
+
+                    if($scope.active_ads.length < 3){
+                        $scope.adsPlaceholder = [0, 1, 2, 3];
+                    }
+                    else if($scope.active_ads.length < 5){
+                        $scope.adsPlaceholder = [0, 1, 2];
+                    }
+                    else if($scope.active_ads.length < 7){
+                        $scope.adsPlaceholder = [0, 1];
+                    }
+                    else if($scope.active_ads.length < 9){
+                        $scope.adsPlaceholder = [0];
+                    }
+    
+                }
                 console.log(res.data, 'body_contents');
                 //check if subscription valid or expired
                 if ($scope.subscription_validity) {
