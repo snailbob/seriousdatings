@@ -193,6 +193,8 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('selectmates', 'UsersController@selectmates');
     Route::post('delete_account', 'UsersController@delete_account');
     Route::post('update_user_info', 'UsersController@postUpdateUser');
+    Route::get('send_email_notification', 'EmailNotificationController@sendEmailNotification');
+    
     
 
     Route::get('online_chat', 'UsersController@get_online_chat');

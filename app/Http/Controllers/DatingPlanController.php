@@ -110,9 +110,12 @@ class DatingPlanController extends Controller
 
 
             $is_nonuser = RoleUser::where('user_id', $user_id)->where('role_id', 5)->count();
+            $is_admin = RoleUser::where('user_id', $user_id)->where('role_id', 2)->count();
+            $subscription_valid = $is_nonuser + $is_admin;
+
             // return $is_nonuser; 
 
-            if(!empty($is_nonuser)){
+            if(!empty($subscription_valid)){
 
                 $timeActivated = Auth::user()->timeActivated;
                 $my_subscription['gateway'] = 'non_user';
