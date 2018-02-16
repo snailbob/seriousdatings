@@ -63,9 +63,9 @@
 
     </div>
 
-    <div ng-if="active_ads.length < 6" onclick="window.location.href = base_url+'/advertise'">
+    <div onclick="window.location.href = base_url+'/advertise'">
     
-      <div class="advertise-here" ng-repeat="ads in [0, 1, 2]">
+      <div class="advertise-here" ng-repeat="ads in adsPlaceholder">
           <h2>Advertise here</h2>
           <div class="container-fluid">
             <div class="row no-gutter">
@@ -109,6 +109,8 @@
       </div>
     
     </div>
+
+    
 
     
 </div>         

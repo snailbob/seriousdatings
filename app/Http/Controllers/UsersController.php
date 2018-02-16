@@ -178,7 +178,12 @@ class UsersController extends Controller {
         return view('user.video_room')->with($data);
     }
 
-    public function videoChatPage(){
+    public function videoChatPage(Request $request){
+
+        if($request->has('shuffle')){
+            $request->session()->flash('session_to_call_id', 'random');
+            return redirect(url().'/video_chat');
+        }
         return View::make('user.video_chat');
     }
     
@@ -277,7 +282,7 @@ class UsersController extends Controller {
             foreach($users as $r=>$value){
                 $is_blocked = DB::table('user_blocks')->where('user_id', $logged_id)->where('user_blocked_id', $value->id)->count();
                 if(empty($is_blocked)){
-                    $value['chat'] = array();
+                    $value->chat = array();
                     $filtered_users[] = $value;
                 }
             }
@@ -781,9 +786,11 @@ class UsersController extends Controller {
         $nearby = \DB::table('users')->where('zipcode',$zipcode)->where('id', 'not like', $user_id)->get();
         $logged_info = \DB::table('users')->find($user_id);
         
+        $filter_blocked = $this->filter_blocked($online);
+
         $data = array(
             'logged_info'=>$logged_info,
-            'online'=>$online,
+            'online'=>$filter_blocked,
             'nearby'=>$nearby
         );
 
