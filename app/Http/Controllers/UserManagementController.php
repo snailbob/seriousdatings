@@ -144,24 +144,6 @@ class UserManagementController extends Controller
         return "Success";
     }
 
-    public function setToUser(Request $request)
-    {
-        $user = User::where('email', $request->email)->first();
-        $count = RoleUser::where('user_id', $user->id)->count();
-        if($count)
-        {
-            RoleUser::where('user_id', $user->id)
-            ->update(['role_id' => 3]);
-        }else
-        {
-            RoleUser::create([
-                'user_id' => $user->id,
-                'role_id' => 3
-            ]);            
-        }
-        return "Success";
-    }
-
     public function setToNonUser(Request $request)
     {
         $user = User::where('email', $request->email)->first();

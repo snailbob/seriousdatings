@@ -64,10 +64,6 @@
                                                             </li>
                                                         @endif
                                                     @endforeach
-                        <li class="user_memberBtn">
-                          <a href='#'> <i class="fa fa-user-secret"></i> Set to user</a>
-                        </li>
-                        @endif
                                                     <li class="pauseBtn">
                                                         <a href='#' class="pauseTxt">
                                                             <i class="fa fa-pause-circle" aria-hidden="true"></i>
@@ -114,53 +110,6 @@
                                         </div>
                                     </td>
                                 </tr>
-                        @if($user->username != "admin")
-                        <li class="pauseBtn">
-                          <a href='#' class="pauseTxt"> 
-                            <i class="fa fa-pause-circle" aria-hidden="true"></i> 
-                            @if($user->admin_pause)
-                            Unpause
-                            @else
-                            Pause
-                            @endif
-                          </a>
-                        </li>
-                        <li class="blockBtn">
-                          <a href='#' class="blockTxt"> 
-                            <i class="fa fa-user-times"></i> 
-                            @if($user->admin_blocked)
-                            Unblock
-                            @else
-                            Block
-                            @endif
-                          </a>
-                        </li>
-                        <li class="deleteBtn">
-                          <a href='#'><i class="fa fa-trash-o"></i> Delete</a>
-                        </li>
-                        @endif
-                        @if(!is_numeric($user->isApproved))
-                        <li class="approveBtn">
-                          <a href='#'> <i class="fa fa-check"></i> Approve</a>
-                        </li>
-                        <li class="disapproveBtn">
-                          <a href='#'> <i class="fa fa-close"></i> Disapprove</a>
-                        </li>
-                        @else
-                        @if($user->isApproved)
-                        <li class="disapproveBtn">
-                          <a href='#'> <i class="fa fa-close"></i> Disapprove</a>
-                        </li>
-                        @else
-                        <li class="approveBtn">
-                          <a href='#'> <i class="fa fa-check"></i> Approve</a>
-                        </li>
-                        @endif                   
-                        @endif
-                      </ul>
-                    </div>
-                  </td>
-                </tr>
 
                             @endforeach
 
