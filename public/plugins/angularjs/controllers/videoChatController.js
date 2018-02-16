@@ -131,7 +131,7 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
             //start random 
             if(session_to_call_id != ''){
                 var _onlineusers = res.data.online;
-                var _random = $scope.getRandomInt(0, _onlineusers.length);
+                var _random = $scope.getRandomInt(0, (_onlineusers.length - 1));
                 $scope.startVideoCall(_random, _onlineusers[_random]);
             }
 
