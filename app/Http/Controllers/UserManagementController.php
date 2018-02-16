@@ -230,7 +230,7 @@ class UserManagementController extends Controller
         $user = User::where('email', $request->email)->first();
         $email = $user->email;
 
-        Mail::send('email.disapproved_user', ['content' => $request->content, 'user' => $user], function ($message) use ($email) {
+        Mail::send('email.disapproved_user', ['content' => $request->contents, 'user' => $user], function ($message) use ($email) {
             $message->to($email, 'ID')->subject('Request Rejected');
         });
 

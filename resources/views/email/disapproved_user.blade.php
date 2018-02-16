@@ -10,7 +10,12 @@
         </p>
         <p style="margin: 0;font-size: 14px;line-height: 17px">
                 <span style="font-size: 14px; line-height: 16px;">
-                    <span style="line-height: 16px; font-size: 14px;">$content
+                    <span style="line-height: 16px; font-size: 14px;">
+                        @if(isset($content))
+                            $content
+                        @else
+                            You've been disapproved by the admin.
+                        @endif
                     </span>
                 </span>
         </p>
