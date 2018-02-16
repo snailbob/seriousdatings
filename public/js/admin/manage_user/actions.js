@@ -188,7 +188,7 @@ $(document).ready(function()
 			callback: function (result) {
 				if (result) 
 				{
-					data['content'] = $('#comment').val();
+					data['contents'] = $('#comment').val();
 					console.log(data);
 					$.ajax({
 						type: "POST",

@@ -609,12 +609,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('maplocationSppeed/{id}', 'liveCHatController@getUserLocationSpeed');
     Route::get('speeddatingnew', 'liveCHatController@speeddatingInitialize');
 
+    Route::get('SEO', 'SeoContentController@seoPage');
+    Route::get('seo/edit/{type}', 'SeoContentController@edit');
+
     Route::resource('profile/photo', 'UserPhotoController');
     Route::resource('profile/music', 'UserMusicController');
     Route::resource('profile/video', 'UserVideoController');
     Route::resource('profile/group', 'UserGroupController');
     Route::controller('profile', 'ProfileController');
     // Route::get('profile', 'ProfileController@userProfile');
+
 
     Route::get('profile/logout', function () {
         $user_id = Auth::user()->id;
@@ -643,6 +647,16 @@ Route::filter('profile', function () {
     }
 });
 
+Route::filter('SEO', function () {
+    if (Auth::user()) {
+        $user = Auth::user();
+        if (!$user->hasRole('SEO')) {
+            return redirect(url());
+        }
+    } else {
+        return \Redirect::guest('adminlogin');
+    }
+});
 
 Route::filter('admin', function () {
     if (Auth::user()) {

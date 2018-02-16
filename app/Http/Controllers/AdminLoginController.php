@@ -71,14 +71,13 @@ class AdminLoginController extends Controller {
     }
 
     public function postLogin() {
-        //echo 'ddds';die;
         $remember = (Input::has('check')) ? true : false;
 
         $cred = array(
             'username' => Input::get('username'),
             'password' => Input::get('password')
         );
-        //dd($cred);
+
         if (\Auth::attempt($cred, $remember)) {
             $user_id = Auth::user()->id;
             $date_time = date("Y-m-d h:i:sa");
@@ -89,8 +88,7 @@ class AdminLoginController extends Controller {
                 );
             }
             $id = DB::table('role_user')->where('user_id', '=', $user_id)->first();
-          //  dd('fd--');
-        //dd($id);die;
+
             if ($id->role_id == 2) {
                 //return url() . '/admin';
                 // echo "admin login";
