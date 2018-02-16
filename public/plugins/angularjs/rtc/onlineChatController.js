@@ -150,25 +150,8 @@ ngApp.controller('onlineChatController', ['$scope', '$filter', 'myHttpService', 
         // });
 
         $scope.callAudio.onended = function(){
-            $scope.userUnavailable();
-            // jc.close();
+            // $scope.userUnavailable();
 
-            // $scope.dropCall();
-    
-            // $ngConfirm({
-            //     title: 'No Answer',
-            //     content: '<i class="fa fa-video-camera"></i> No answer from {{currentUser.firstName}}',
-            //     scope: $scope,
-            //     buttons: {
-            //         dropCall: {
-            //             text: 'OK',
-            //             btnClass: 'btn-default',
-            //             action: function(scope, button){
-
-            //             }
-            //         }
-            //     }
-            // });
         }
     }
 
