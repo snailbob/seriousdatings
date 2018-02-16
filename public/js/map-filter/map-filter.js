@@ -1,5 +1,5 @@
 function filterMapOption() {
-
+    NumberAtonly();
 
 
     menuDialog = $.confirm({
@@ -19,7 +19,10 @@ function filterMapOption() {
                 btnClass: 'btn-blue',
                 keys: ['enter', 'shift'],
                 action: function(){
+                     var toHideNumber = this.$content.find('#toHideNumber').val();
+                     if (toHideNumber !=="") {
 
+                     }
                 }
             },
             cancel: function () {
@@ -95,4 +98,21 @@ function showBothGender(){
         $(this).slideDown('slow');
     });
     menuDialog.close();
+}
+var manyPeopleAtatime = [];
+
+var NumberAtonly = function(){
+
+ $.each($('#listOFdata').children().get().reverse(), function( key, value ) {
+       console.log(key);
+       manyPeopleAtatime.push(value.id);
+  });
+
+}
+
+var manyPeopleAtatimeClick = function(){
+
+    for (var i =0; i < 3; i++) {
+       $('.'+arr[i]).hide();
+   }
 }

@@ -167,7 +167,7 @@ function getMenus(){
 
              $("#listOFdata").slideUp(1000, function(){ 
                   
-                $("#listOFdata").append('<div class="upcoming-event-people removable-'+all_data[index].id+'  ">'+
+                $("#listOFdata").append('<div id="tohide-'+all_data[index].id+'" class="upcoming-event-people removable-'+all_data[index].id+'  ">'+
                           '<div class="upcoming-people-row rowg-'+all_data[index].gender+'">'+
                             '<div class="left-upcoming-user"><a href="#" ><img src="'+all_data[index].photo+'"  alt=""></a></div>'+
                             '<div class="upcoming-user-list">'+

@@ -764,6 +764,7 @@ ngApp.controller('bodyController', [
                 columnClass: 'medium', // to make the width wider.
                 animation: 'zoom',
                 // backgroundDismiss: true,
+                closeIcon: false,
                 boxWidth: '500px',
                 useBootstrap: false,
                 backgroundDismissAnimation: 'glow',
