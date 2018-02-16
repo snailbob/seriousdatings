@@ -23,6 +23,7 @@ ngApp.controller('profileCtrl', [
 		$scope.matchUsersData = null;
 		$scope.notifyCount = 0;
 		$scope.base_url = window.base_url;
+		$scope.userCurrenIndex = 0;
 
 		$scope.getMatchData = function (data) {
 			$scope.matchUsersData = data;
@@ -57,8 +58,8 @@ ngApp.controller('profileCtrl', [
 				var lng = coords.longitude;
 
 				var arr = {
-					latitude: lat,
-					longitude: lng,
+					latitude: Number(Math.round(lat+'e5')+'e-5'),
+					longitude: Number(Math.round(lng+'e5')+'e-5'),
 					id: $scope.currentUserData[0].id
 				};
 
@@ -239,46 +240,140 @@ ngApp.controller('profileCtrl', [
 			// $scope.matchUsers.splice(index, 1);
 		}
 
-		$scope.left = function () {
-			if (ind == 0) {
-				ind = $scope.matchUsersData.length - 1;
-			} else {
-				ind = ind - 1;
+
+
+		$scope.startCarousel = function(){
+			var options = {
+				ovalWidth: 200,
+				ovalHeight: 50,
+				offsetX: 50,
+				offsetY: 160,
+				angle: 0,
+				activeItem: 0,
+				duration: 400,
+				className: 'item'
 			}
-			$scope.userSelected = $scope.matchUsersData[ind];
-			$scope.userSelectedPercent = $scope.matchUsersData[ind].percent;
+	
+			var carousel = $('.carousel-profile').CircularCarousel(options);
+	
+			/* Fires when an item is about to start it's activate animation */
+			carousel.on('itemBeforeActive', function(e, item) {
+				// console.log(e, item, 'itemBeforeActive');
+				$scope.userCurrenIndex  = $(item).index();
+				$scope.followCarouselIndex();	
+			});
+	
+			/* Fires after an item finishes it's activate animation */
+			carousel.on('itemActive', function(e, item) {
+				// console.log(e, $(item).index(), 'itemActive');
+				$scope.userCurrenIndex  = $(item).index();
+				$scope.followCarouselIndex();	
+			});
+	
+			/* Fires when an active item starts it's de-activate animation */
+			carousel.on('itemBeforeDeactivate', function(e, item) {
+				$(item).css('box-shadow', '0 0 20px yellow');
+			})
+	
+			/* Fires after an active item has finished it's de-activate animation */
+			carousel.on('itemAfterDeactivate', function(e, item) {
+				$(item).css('box-shadow', '');
+			})
+	
+			
+			/* Previous button */
+			$('.controls .previous').click(function(e) {
+				carousel.cycleActive('previous');
+				e.preventDefault();
+			});
+	
+			/* Next button */
+			$('.controls .next').click(function(e) {
+				carousel.cycleActive('next');
+				e.preventDefault();
+			});
+
+
+			var boolCour = true;
+			setInterval(function () {
+				if (boolCour) {
+					carousel.cycleActive('next');
+				}
+			}, 5000);
+
+			
+			$('.next-carousel').mouseover(function () {
+				boolCour = false;
+			}).mouseout(function () {
+				boolCour = true;
+			});
+			
+			$('.carousel-current-user').mouseover(function () {
+				boolCour = false;
+			}).mouseout(function () {
+				boolCour = true;
+			});
+			
+			$('.controls .previous').mouseover(function () {
+				boolCour = false;
+			}).mouseout(function () {
+				boolCour = true;
+			});
+			
+			$('.controls .next').mouseover(function () {
+				boolCour = false;
+			}).mouseout(function () {
+				boolCour = true;
+			});
+
+
 		}
 
-		var boolCour = true;
-		setInterval(function () {
-			if (boolCour) {
-				$scope.right();
-			}
-
-		}, 8000);
-
-		$(".next-carousel").mouseover(function () {
-			boolCour = false;
-		}).mouseout(function () {
-			boolCour = true;
-		});
-		$scope.userCurrenIndex;
-		$scope.right = function () {
-			if (ind == $scope.matchUsersData.length - 1) {
-				ind = 0;
-			} else {
-				ind = ind + 1;
-			}
+		$scope.startCarousel();
+		
+		$scope.followCarouselIndex = function(){
+			var ind = $scope.userCurrenIndex;
 			$scope.userSelected = $scope.matchUsersData[ind];
-			$scope.userCurrenIndex = ind;
 			$scope.userSelectedPercent = $scope.matchUsersData[ind].percent;
+				
 		}
+
+		$scope.visitProfile = function(u){
+			window.location.href = window.base_url+'/user/profile/'+u.username;
+		}
+
+		// $scope.left = function () {
+		// 	if (ind == 0) {
+		// 		ind = $scope.matchUsersData.length - 1;
+		// 	} else {
+		// 		ind = ind - 1;
+		// 	}
+		// 	$scope.userSelected = $scope.matchUsersData[ind];
+		// 	$scope.userSelectedPercent = $scope.matchUsersData[ind].percent;
+		// }
+
+
+		// $scope.right = function () {
+		// 	if (ind == $scope.matchUsersData.length - 1) {
+		// 		ind = 0;
+		// 	} else {
+		// 		ind = ind + 1;
+		// 	}
+		// 	$scope.userSelected = $scope.matchUsersData[ind];
+		// 	$scope.userCurrenIndex = ind;
+		// 	$scope.userSelectedPercent = $scope.matchUsersData[ind].percent;
+		// }
 
 		$scope.next = function () {
 			if ($scope.currentPage < total_data) {
+				// if ($scope.currentPage >= total_data){
+				// 	$scope.nextButton = true;
+				// }
 				$scope.currentPage = $scope.currentPage + 1;
-				if ($scope.currentPage == total_data)
-					$scope.nextButton = true;
+
+			}
+			else{
+				$scope.currentPage = 1;
 			}
 		}
 

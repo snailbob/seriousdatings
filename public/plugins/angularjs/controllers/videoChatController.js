@@ -44,6 +44,16 @@ ngApp.controller('videoChatController', ['$scope', '$filter', 'myHttpService', '
         $scope.callAudio.play();
 
         $scope.myInterval = 0;
+
+        var vidlength = angular.element(document).find('video').length;
+        // angular.element(document).find('.experiment-rtc').removeClass('hidden');
+        $scope.videoShown = true;
+
+        if(vidlength == 0){
+            $timeout(function(){
+                angular.element(document).find('#setup-new-room').click();
+            });
+        }
         
         $scope.callAudio.onended = function(){
             // alert("The audio has ended");

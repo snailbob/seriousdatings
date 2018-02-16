@@ -100,7 +100,7 @@
  
 
     
-  @if(request()->segment(1) == 'online_chat')
+  @if(request()->segment(1) == 'online_chat' || request()->segment(1) == 'video_chat')
 
     <script src="https://cdn.webrtc-experiment.com/socket.io.js"> </script>
     <script src="https://cdn.webrtc-experiment.com/RTCPeerConnection-v1.5.js"> </script>

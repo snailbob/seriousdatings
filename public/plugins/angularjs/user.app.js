@@ -195,9 +195,12 @@ ngApp.controller('bodyController', [
                 console.log(res.data, 'body_contents');
                 //check if subscription valid or expired
                 if ($scope.subscription_validity) {
-                    if ($scope.subscription_validity.is_expired && (uri_1 != 'datingPlan' && uri_1 != 'payment_gateway')) { 
-                        window.location.href = window.base_url+'/datingPlan';
-                        // $scope.SubscriptionInfo('');
+                    if ($scope.subscription_validity.is_expired && (uri_1 != 'datingPlan' && uri_1 != 'payment_gateway' && uri_1 != '')) { 
+                        $scope.SubscriptionInfo('');
+
+                        setTimeout(function(){
+                            window.location.href = window.base_url+'/datingPlan';
+                        }, 3500);
                     }
                 }
 
@@ -981,6 +984,8 @@ ngApp.controller('bodyController', [
         }
 
         $scope.winkuser = function(data){
+            $scope.showToast('You sent a wink to ' + data.firstName);
+
                 sendNotification($scope.logged_user_info.id,
                                 $scope.logged_user_info.firstName,
                                 data.id,'wink');
@@ -1205,7 +1210,9 @@ ngApp.controller('bodyController', [
                                                         self.close();
                                                          $(".removable-"+u.id).slideUp(3000);
                                                          $(".markerID-"+u.id).css("display","none");
-                                                          parentCOnfirm.close();
+                                                         if(typeof(parentCOnfirm) !== 'undefined'){
+                                                            parentCOnfirm.close();
+                                                         } 
                                                     }
                                                 },
                                            });
