@@ -126,13 +126,27 @@ function getAllUserLocation(map){
             		new CustomMarker(
 					new google.maps.LatLng(key.latitude,key.longitude), 
 					map, 
-					key.photo,key.id,key.gender+' markerID-'+key.id)
+					key.photo,key.id,key.gender+' markerID-'+key.id+' tohide-'+key.id+' zip-'+key.zipcode+' zipme')
             	
 
             	});
             	
             }).fail(function () {
-                	alert('Something went wrong.');
+                	$.confirm({
+                            title: 'Proble load map data!',
+                            content: 'Reload Page!',
+                            buttons: {
+                                somethingElse: {
+                                    text: 'Reload',
+                                    btnClass: 'btn-blue',
+                                    action: function(){
+                                       location.reload();
+
+                                    }
+                                }
+                            }
+                        });
+     
             });
 
 }
@@ -167,7 +181,7 @@ function getMenus(){
 
              $("#listOFdata").slideUp(1000, function(){ 
                   
-                $("#listOFdata").append('<div id="tohide-'+all_data[index].id+'" class="upcoming-event-people removable-'+all_data[index].id+'  ">'+
+                $("#listOFdata").append('<div id="tohide-'+all_data[index].id+'" class="upcoming-event-people removable-'+all_data[index].id+ ' nzipcode-'+all_data[index].zipcode+' zipme">'+
                           '<div class="upcoming-people-row rowg-'+all_data[index].gender+'">'+
                             '<div class="left-upcoming-user"><a href="#" ><img src="'+all_data[index].photo+'"  alt=""></a></div>'+
                             '<div class="upcoming-user-list">'+
@@ -209,74 +223,6 @@ $("#filtering-btn-map").click(function () {
 
 
 
-// down vote
-// accepted
-// To find distance between 2 points (Haversine formula):
-
-function getNearestLocation(){
-	var position1 = 
-	[
-                {
-                    latitude: lat,
-                    longitude: long
-                }
-            ]
-            var locations = [];
-	
-
-            for (var i=0; i < all_data.length; i++) {
-
-            	locations.push({
-            		 latitude: all_data[i].latitude,
-                    		longitude: all_data[i].longitude
-
-            	});
-
-	 }
-
-
-
-
-	var closest=position1[0];
-	var closest_distance=distance(closest,locations);
-	
-	for(var i=1;i<locations.length;i++){
-	
-	    if(distance(locations[i],closest)<closest_distance){
-	         closest_distance=distance(closest,locations[i]);
-	         closest=locations[i];
-	    }
-	
-	}
-}
-
-
-
-function distance(position1,position2){
-	 console.log("p1",position1);
-	 console.log("p2",position2);
-    var lat1=position1.latitude;
-    var lat2=position2.latitude;
-    var lon1=position1.longitude;
-    var lon2=position2.longitude;
-    var R = 6371000; // metres
-    var φ1 = toRad(lat1);
-    var φ2 = toRad(lat2);
-    var Δφ = toRad((lat2-lat1));
-    var Δλ = toRad((lon2-lon1));
-
-    var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-        Math.cos(φ1) * Math.cos(φ2) *
-        Math.sin(Δλ/2) * Math.sin(Δλ/2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-    var d = R * c;
-    console.log("nearest",d);
-    return d;
-}
-function toRad(degrees){
-    return degrees * Math.PI / 180;
-}
 
 
 
