@@ -12,6 +12,7 @@ use DB;
 use App\AppointMent;
 use App\User;
 use App\Http\Controllers\NotiFierLogsController;
+use App\Http\Controllers\EmailNotificationController;
 use Illuminate\Support\Facades\View;
 use App\AvailabilityApp;
 use App\DefaultAvailTime;
@@ -68,8 +69,19 @@ class AppointmentController extends Controller
             'app_availID' => $request->input('availDid'),
         ]);
         $trans = false;
+        $dataEmail = array();
         if ($data) {
             $trans = true;
+            $sendEmail = new EmailNotificationController;
+            $dataUser = User::find($to_notify);
+            
+            $dataEmail['name'] = $dataUser->firstName.' '.$dataUser->lastName;
+            $dataEmail['message'] = 'Request an Appointment';
+            $dataEmail['email'] = $dataUser->email;
+         
+            $sendEmail->sendEmailNotificationPassArray($dataEmail);
+            
+
         }
         return  response()->json(['trans'=>$trans]);
 
