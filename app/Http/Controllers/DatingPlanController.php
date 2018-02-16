@@ -111,7 +111,8 @@ class DatingPlanController extends Controller
 
             $is_nonuser = RoleUser::where('user_id', $user_id)->where('role_id', 5)->count();
             $is_admin = RoleUser::where('user_id', $user_id)->where('role_id', 2)->count();
-            $subscription_valid = $is_nonuser + $is_admin;
+            $is_seo = RoleUser::where('user_id', $user_id)->where('role_id', 6)->count();
+            $subscription_valid = $is_nonuser + $is_admin + $is_seo;
 
             // return $is_nonuser; 
 
